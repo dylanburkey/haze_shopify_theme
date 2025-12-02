@@ -1,4 +1,20 @@
-<header class="header" data-header>
+{%- liquid
+  assign header_style = section.settings.header_style
+  assign is_industrial = false
+  if header_style == 'industrial-dark' or header_style == 'industrial-light'
+    assign is_industrial = true
+  endif
+-%}
+
+<header
+  class="header header--{{ header_style }}"
+  data-header
+  style="
+    --header-bg: {{ section.settings.header_background }};
+    --header-text: {{ section.settings.header_text_color }};
+    --header-border-width: {{ section.settings.accent_border_width }}px;
+  "
+>
   <div class="header__wrapper container">
     <div class="header__left">
       <button
@@ -239,8 +255,59 @@
     position: sticky;
     top: 0;
     z-index: var(--z-sticky);
-    background-color: var(--color-background);
+    background-color: var(--header-bg, var(--color-background));
+    color: var(--header-text, var(--color-text));
     border-block-end: 1px solid var(--color-border);
+  }
+
+  /* Industrial Dark Header Style */
+  .header--industrial-dark {
+    background-color: var(--header-bg, #111111);
+    color: var(--header-text, #ffffff);
+    border-block-end: var(--header-border-width, 5px) solid var(--color-primary);
+  }
+
+  .header--industrial-dark .header__logo--text {
+    color: var(--header-text, #ffffff);
+  }
+
+  .header--industrial-dark .header__logo--text span {
+    color: var(--color-primary);
+  }
+
+  .header--industrial-dark .header__menu-link {
+    color: #cccccc;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+  }
+
+  .header--industrial-dark .header__menu-link:hover {
+    color: var(--color-primary);
+  }
+
+  .header--industrial-dark .header__action {
+    color: var(--header-text, #ffffff);
+  }
+
+  .header--industrial-dark .header__action:hover {
+    color: var(--color-primary);
+  }
+
+  /* Industrial Light Header Style */
+  .header--industrial-light {
+    background-color: var(--header-bg, #ffffff);
+    color: var(--header-text, #0f172a);
+    border-block-end: var(--header-border-width, 5px) solid var(--color-primary);
+  }
+
+  .header--industrial-light .header__menu-link {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .header__wrapper {
@@ -794,6 +861,48 @@
   "name": "t:sections.header.name",
   "class": "section-header",
   "settings": [
+    {
+      "type": "header",
+      "content": "Header style"
+    },
+    {
+      "type": "select",
+      "id": "header_style",
+      "label": "Header style",
+      "default": "default",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "industrial-dark", "label": "Industrial dark (Machinist/Welder)" },
+        { "value": "industrial-light", "label": "Industrial light (Precision)" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "header_background",
+      "label": "Background color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "accent_border_width",
+      "label": "Accent border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "px",
+      "info": "Bottom border accent line"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
     {
       "type": "image_picker",
       "id": "logo",

@@ -1,0 +1,466 @@
+{%- comment -%}
+  Hero Industrial Section
+  Industrial-style hero with boxed content area featuring accent border-left.
+  Supports both Welder (light box) and Machinist (dark with grid overlay) styles.
+{%- endcomment -%}
+
+{%- liquid
+  assign style = section.settings.style
+  assign is_machinist = false
+  if style == 'machinist'
+    assign is_machinist = true
+  endif
+-%}
+
+<section
+  class="hero-industrial hero-industrial--{{ style }}"
+  style="
+    --hero-height: {{ section.settings.height }};
+    --hero-box-bg: {{ section.settings.box_background }};
+    --hero-box-text: {{ section.settings.box_text_color }};
+    --hero-accent-width: {{ section.settings.accent_border_width }}px;
+    --hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  "
+>
+  <div class="hero-industrial__media">
+    {%- if section.settings.video != blank -%}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hero-industrial__video' }}
+    {%- elsif section.settings.image != blank -%}
+      {% render 'image',
+        image: section.settings.image,
+        sizes: '100vw',
+        class: 'hero-industrial__image',
+        loading: 'eager'
+      %}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'hero-industrial__placeholder' }}
+    {%- endif -%}
+
+    <div class="hero-industrial__overlay"></div>
+    {%- if is_machinist -%}
+      <div class="hero-industrial__grid-pattern"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="hero-industrial__container container">
+    <div class="hero-industrial__box">
+      {%- if section.settings.status_text != blank -%}
+        <p class="hero-industrial__status">{{ section.settings.status_text }}</p>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            {%- if block.settings.heading != blank -%}
+              <h1
+                class="hero-industrial__heading"
+                style="
+                  --heading-size: {{ block.settings.heading_size }}px;
+                  --heading-size-mobile: {{ block.settings.heading_size_mobile }}px;
+                "
+                {{ block.shopify_attributes }}
+              >
+                {{- block.settings.heading | newline_to_br -}}
+              </h1>
+            {%- endif -%}
+
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              <p
+                class="hero-industrial__text"
+                style="--text-max-width: {{ block.settings.max_width }}px;"
+                {{ block.shopify_attributes }}
+              >
+                {{- block.settings.text -}}
+              </p>
+            {%- endif -%}
+
+          {%- when 'button' -%}
+            <div class="hero-industrial__buttons" {{ block.shopify_attributes }}>
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  href="{{ block.settings.button_link }}"
+                  class="hero-industrial__btn{% if is_machinist %} hero-industrial__btn--machinist{% endif %}"
+                >
+                  {{- block.settings.button_label -}}
+                </a>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if is_machinist and section.settings.figure_label != blank -%}
+      <p class="hero-industrial__figure-label">{{ section.settings.figure_label }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero-industrial {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: var(--hero-height);
+    overflow: hidden;
+  }
+
+  .hero-industrial__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-industrial__image,
+  .hero-industrial__video,
+  .hero-industrial__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Machinist style: grayscale + contrast */
+  .hero-industrial--machinist .hero-industrial__image,
+  .hero-industrial--machinist .hero-industrial__video {
+    filter: grayscale(100%) contrast(120%) brightness(60%);
+  }
+
+  .hero-industrial__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, var(--hero-overlay-opacity)) 100%
+    );
+  }
+
+  /* Machinist diagonal grid pattern */
+  .hero-industrial__grid-pattern {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.5) 0,
+      rgba(0, 0, 0, 0.5) 1px,
+      transparent 0,
+      transparent 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-industrial__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-block: var(--space-12);
+  }
+
+  .hero-industrial__box {
+    background: var(--hero-box-bg);
+    color: var(--hero-box-text);
+    padding: 2rem;
+    max-width: 600px;
+    border-left: var(--hero-accent-width) solid var(--color-primary);
+  }
+
+  @media (min-width: 48rem) {
+    .hero-industrial__box {
+      padding: 2.5rem;
+    }
+  }
+
+  /* Machinist style box */
+  .hero-industrial--machinist .hero-industrial__box {
+    background: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-left: var(--hero-accent-width) solid var(--color-primary);
+  }
+
+  .hero-industrial__status {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-industrial__heading {
+    font-family: var(--font-heading);
+    font-size: var(--heading-size-mobile);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.5px;
+    margin: 0 0 1.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .hero-industrial__heading {
+      font-size: var(--heading-size);
+    }
+  }
+
+  .hero-industrial__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+    max-width: var(--text-max-width);
+    opacity: 0.85;
+  }
+
+  .hero-industrial__buttons {
+    margin-top: 2rem;
+  }
+
+  .hero-industrial__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+  }
+
+  .hero-industrial__btn:hover {
+    filter: brightness(0.9);
+  }
+
+  .hero-industrial__btn:active {
+    transform: translateY(1px);
+  }
+
+  /* Machinist button style - outlined with accent */
+  .hero-industrial__btn--machinist {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-family: var(--font-mono, monospace);
+    transition: none; /* Mechanical feel */
+  }
+
+  .hero-industrial__btn--machinist:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+    filter: none;
+  }
+
+  /* Figure label (Machinist style) */
+  .hero-industrial__figure-label {
+    position: absolute;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    background: var(--color-background);
+    padding: 2px 8px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Hero industrial",
+  "tag": "section",
+  "class": "section-hero-industrial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Design style",
+      "default": "welder",
+      "options": [
+        { "value": "welder", "label": "The Welder (light box)" },
+        { "value": "machinist", "label": "The Machinist (dark tech)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video",
+      "info": "Video will override background image"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section height",
+      "default": "600px",
+      "options": [
+        { "value": "500px", "label": "Small (500px)" },
+        { "value": "600px", "label": "Medium (600px)" },
+        { "value": "85vh", "label": "Large (85vh)" },
+        { "value": "100vh", "label": "Full screen" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Content box"
+    },
+    {
+      "type": "color",
+      "id": "box_background",
+      "label": "Box background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "box_text_color",
+      "label": "Box text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "accent_border_width",
+      "label": "Accent border width",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Machinist options"
+    },
+    {
+      "type": "text",
+      "id": "status_text",
+      "label": "Status text",
+      "default": "// SYSTEM_STATUS: ONLINE",
+      "info": "Displays above heading (Machinist style)"
+    },
+    {
+      "type": "text",
+      "id": "figure_label",
+      "label": "Figure label",
+      "default": "FIG. 01 // AUTONOMOUS_ASSEMBLY",
+      "info": "Displays in bottom right corner (Machinist style)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading text",
+          "default": "Precision Welding Systems",
+          "info": "Use line breaks for multi-line headings"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "label": "Heading size (desktop)",
+          "min": 32,
+          "max": 96,
+          "step": 4,
+          "default": 48,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "label": "Heading size (mobile)",
+          "min": 24,
+          "max": 56,
+          "step": 4,
+          "default": 32,
+          "unit": "px"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field."
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "label": "Maximum width",
+          "min": 300,
+          "max": 600,
+          "step": 50,
+          "default": 450,
+          "unit": "px"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "EXPLORE EQUIPMENT"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero industrial",
+      "blocks": [
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}
