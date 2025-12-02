@@ -1,0 +1,426 @@
+{%- comment -%}
+  Collection Main - Forge Industrial Theme
+  Collection page with sidebar filters matching CodePen mockup
+{%- endcomment -%}
+
+{%- comment -%} Collection Header {%- endcomment -%}
+<div class="collection-header">
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p>{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<div class="container">
+  <div class="collection-layout">
+    {%- comment -%} Sidebar Filters {%- endcomment -%}
+    <aside class="filter-sidebar">
+      <div class="filter-group filter-title">
+        <h4>Filter By</h4>
+      </div>
+
+      {%- for filter in collection.filters -%}
+        <details class="filter-group" {% if forloop.index <= 2 %}open{% endif %}>
+          <summary>{{ filter.label }}</summary>
+          <div class="filter-options">
+            {%- case filter.type -%}
+              {%- when 'list' -%}
+                {%- for value in filter.values -%}
+                  <label class="filter-label">
+                    <input 
+                      type="checkbox" 
+                      class="filter-checkbox"
+                      name="{{ value.param_name }}"
+                      value="{{ value.value }}"
+                      {% if value.active %}checked{% endif %}
+                      {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                    >
+                    {{ value.label }} ({{ value.count }})
+                  </label>
+                {%- endfor -%}
+
+              {%- when 'price_range' -%}
+                <div class="filter-price-range">
+                  <div class="filter-price-inputs">
+                    <label>
+                      <span class="visually-hidden">Min price</span>
+                      {{ cart.currency.symbol }}
+                      <input 
+                        type="number"
+                        name="{{ filter.min_value.param_name }}"
+                        value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                        min="0"
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        placeholder="0"
+                        class="filter-price-input"
+                      >
+                    </label>
+                    <span class="filter-price-divider">–</span>
+                    <label>
+                      <span class="visually-hidden">Max price</span>
+                      {{ cart.currency.symbol }}
+                      <input 
+                        type="number"
+                        name="{{ filter.max_value.param_name }}"
+                        value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                        min="0"
+                        max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                        placeholder="{{ filter.range_max | money_without_currency }}"
+                        class="filter-price-input"
+                      >
+                    </label>
+                  </div>
+                </div>
+            {%- endcase -%}
+          </div>
+        </details>
+      {%- endfor -%}
+    </aside>
+
+    {%- comment -%} Product Grid {%- endcomment -%}
+    <div class="collection-main">
+      {%- if collection.products.size > 0 -%}
+        <div class="collection-grid">
+          {%- for product in collection.products -%}
+            <article class="industrial-card product-card">
+              <a href="{{ product.url }}" class="product-card__link">
+                {%- if product.featured_image -%}
+                  <img 
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="industrial-card__image product-card__image"
+                    loading="lazy"
+                    width="600"
+                    height="400"
+                  >
+                {%- else -%}
+                  <div class="industrial-card__image product-card__placeholder">
+                    <span>IMG</span>
+                  </div>
+                {%- endif -%}
+                
+                <div class="industrial-card__content product-card__content">
+                  <h4 class="product-card__title">{{ product.title }}</h4>
+                  <p class="product-card__price">{{ product.price | money }}</p>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} Pagination {%- endcomment -%}
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" role="navigation" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="pagination-btn">Previous</a>
+            {%- endif -%}
+            
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="pagination-number">{{ part.title }}</a>
+              {%- else -%}
+                <span class="pagination-number current">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="pagination-btn">Next</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="collection-empty">No products found in this collection.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Bottom CTA Grid {%- endcomment -%}
+{%- if section.settings.show_cta_grid -%}
+  <section class="section section-smart-grid">
+    <div class="container">
+      <div class="smart-grid smart-grid--cols-3">
+        {%- for block in section.blocks -%}
+          <div class="grid-item-wrapper" {{ block.shopify_attributes }}>
+            <div class="industrial-card">
+              <div class="industrial-card__content">
+                <h3>{{ block.settings.heading }}</h3>
+                {%- if block.settings.text != blank -%}
+                  <p>{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .collection-header {
+    padding: 60px 0;
+    background: var(--color-surface);
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .collection-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .collection-header p {
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .collection-layout {
+    display: grid;
+    gap: 40px;
+    padding-bottom: 60px;
+  }
+
+  /* Sidebar */
+  .filter-sidebar {
+    display: none;
+  }
+
+  .filter-title {
+    margin-bottom: 15px;
+  }
+
+  .filter-title h4 {
+    margin: 0;
+  }
+
+  .filter-group {
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 0;
+  }
+
+  .filter-group:first-child {
+    padding-top: 0;
+    border-bottom: none;
+  }
+
+  .filter-group summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+
+  .filter-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .filter-group summary::after {
+    content: "+";
+    font-size: 1.2em;
+    color: var(--color-primary);
+  }
+
+  .filter-group[open] summary::after {
+    content: "−";
+  }
+
+  .filter-options {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .filter-checkbox {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-border);
+    background: var(--color-background);
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .filter-checkbox:checked {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .filter-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+  }
+
+  .filter-price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filter-price-input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+
+  .filter-price-divider {
+    opacity: 0.5;
+  }
+
+  /* Product Grid */
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--grid-gap);
+  }
+
+  .product-card__link {
+    display: block;
+    height: 100%;
+  }
+
+  .product-card__image {
+    height: 200px;
+  }
+
+  .product-card__placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-border);
+    color: var(--color-text);
+    opacity: 0.5;
+    font-weight: bold;
+  }
+
+  .product-card__title {
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card__price {
+    margin: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pagination-btn,
+  .pagination-number {
+    padding: 10px 15px;
+    border: 1px solid var(--color-border);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+
+  .pagination-number.current {
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    border-color: var(--color-primary);
+  }
+
+  .collection-empty {
+    text-align: center;
+    padding: 60px 0;
+    opacity: 0.6;
+  }
+
+  @media (min-width: 900px) {
+    .collection-layout {
+      grid-template-columns: 250px 1fr;
+    }
+
+    .filter-sidebar {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection Main",
+  "tag": "section",
+  "class": "section-collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta_grid",
+      "label": "Show CTA Grid",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cta_card",
+      "name": "CTA Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Size Guide"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Main",
+      "blocks": [
+        { "type": "cta_card", "settings": { "heading": "Size Guide" } },
+        { "type": "cta_card", "settings": { "heading": "OSHA Compliance" } },
+        { "type": "cta_card", "settings": { "heading": "Bulk Quotes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

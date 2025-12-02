@@ -1,0 +1,711 @@
+{%- comment -%}
+  Header Industrial Section
+  Industrial-style navigation bar matching The Machinist design.
+  Features bracket notation links [01], mono fonts, and instant transitions.
+{%- endcomment -%}
+
+{%- liquid
+  assign style = section.settings.style
+  assign logo_text = section.settings.logo_text | default: shop.name
+  assign logo_suffix = section.settings.logo_suffix
+-%}
+
+<header
+  class="header-industrial header-industrial--{{ style }}"
+  style="
+    --header-height: {{ section.settings.header_height }}px;
+    --header-bg: {{ section.settings.background_color }};
+    --header-text: {{ section.settings.text_color }};
+    --header-border: {{ section.settings.border_color }};
+  "
+>
+  <div class="header-industrial__inner">
+    {%- comment -%} Logo {%- endcomment -%}
+    <a href="{{ routes.root_url }}" class="header-industrial__logo">
+      {%- if section.settings.logo -%}
+        {% render 'image',
+          image: section.settings.logo,
+          width: section.settings.logo_width,
+          class: 'header-industrial__logo-img'
+        %}
+      {%- else -%}
+        <span class="header-industrial__logo-text">
+          {{ logo_text }}
+          {%- if logo_suffix != blank -%}
+            <span class="header-industrial__logo-suffix">{{ logo_suffix }}</span>
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+    </a>
+
+    {%- comment -%} Desktop Navigation {%- endcomment -%}
+    <nav class="header-industrial__nav" aria-label="Main navigation">
+      <ul class="header-industrial__menu" role="menubar">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'menu_item' -%}
+              <li class="header-industrial__menu-item" role="none">
+                <a
+                  href="{{ block.settings.link }}"
+                  class="header-industrial__link"
+                  role="menuitem"
+                  {% if block.settings.link == request.path %}aria-current="page"{% endif %}
+                >
+                  {%- if section.settings.show_numbers -%}
+                    <span class="header-industrial__link-num">[{{ forloop.index | prepend: '0' | slice: -2, 2 }}]</span>
+                  {%- endif -%}
+                  <span class="header-industrial__link-text">{{ block.settings.label }}</span>
+                </a>
+              </li>
+          {%- endcase -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    {%- comment -%} Actions {%- endcomment -%}
+    <div class="header-industrial__actions">
+      {%- if section.settings.show_search -%}
+        <button
+          type="button"
+          class="header-industrial__action-btn"
+          data-search-toggle
+          aria-label="Search"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
+        <a
+          href="{{ routes.account_url }}"
+          class="header-industrial__action-btn"
+          aria-label="{{ 'customer.account.title' | t | default: 'Account' }}"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <a
+        href="{{ routes.cart_url }}"
+        class="header-industrial__cart"
+        aria-label="{{ 'cart.title' | t | default: 'Cart' }} ({{ cart.item_count }})"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="header-industrial__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button
+        type="button"
+        class="header-industrial__menu-toggle"
+        data-menu-toggle
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span class="header-industrial__hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile Navigation Drawer {%- endcomment -%}
+  <div class="header-industrial__drawer" data-menu-drawer aria-hidden="true">
+    <nav class="header-industrial__drawer-nav">
+      <ul class="header-industrial__drawer-menu">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'menu_item' -%}
+              <li>
+                <a href="{{ block.settings.link }}" class="header-industrial__drawer-link">
+                  {%- if section.settings.show_numbers -%}
+                    <span class="header-industrial__link-num">[{{ forloop.index | prepend: '0' | slice: -2, 2 }}]</span>
+                  {%- endif -%}
+                  {{ block.settings.label }}
+                </a>
+              </li>
+          {%- endcase -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{%- comment -%} Search Modal {%- endcomment -%}
+{%- if section.settings.show_search -%}
+  <div class="header-industrial__search-modal" data-search-modal aria-hidden="true">
+    <div class="header-industrial__search-inner">
+      <form action="{{ routes.search_url }}" method="get" class="header-industrial__search-form">
+        <label for="search-input" class="visually-hidden">Search</label>
+        <input
+          type="search"
+          id="search-input"
+          name="q"
+          class="header-industrial__search-input"
+          placeholder="SEARCH_QUERY..."
+          autocomplete="off"
+        >
+        <button type="submit" class="header-industrial__search-submit">
+          SEARCH [ → ]
+        </button>
+      </form>
+      <button type="button" class="header-industrial__search-close" data-search-close>
+        CLOSE [ X ]
+      </button>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .header-industrial {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: var(--header-bg);
+    border-bottom: 2px solid var(--header-border);
+  }
+
+  .header-industrial__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 1.5rem;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  /* Logo */
+  .header-industrial__logo {
+    text-decoration: none;
+    color: var(--header-text);
+  }
+
+  .header-industrial__logo-img {
+    height: auto;
+    max-height: calc(var(--header-height) - 24px);
+  }
+
+  .header-industrial__logo-text {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .header-industrial__logo-suffix {
+    color: var(--color-primary);
+  }
+
+  /* Desktop Navigation */
+  .header-industrial__nav {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .header-industrial__nav {
+      display: block;
+    }
+  }
+
+  .header-industrial__menu {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-industrial__link {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--header-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: none;
+  }
+
+  .header-industrial__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform 0s;
+  }
+
+  .header-industrial__link:hover,
+  .header-industrial__link[aria-current="page"] {
+    color: var(--color-primary);
+  }
+
+  .header-industrial__link:hover::after,
+  .header-industrial__link[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  .header-industrial__link-num {
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+
+  .header-industrial__link:hover .header-industrial__link-num {
+    color: var(--color-primary);
+  }
+
+  /* Actions */
+  .header-industrial__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header-industrial__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--header-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: none;
+  }
+
+  .header-industrial__action-btn:hover {
+    color: var(--color-primary);
+  }
+
+  /* Cart */
+  .header-industrial__cart {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--header-text);
+    text-decoration: none;
+    border: 2px solid var(--header-border);
+    transition: none;
+  }
+
+  .header-industrial__cart:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .header-industrial__cart-count {
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    background: var(--color-primary);
+    color: var(--header-bg);
+  }
+
+  /* Mobile Menu Toggle */
+  .header-industrial__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 64rem) {
+    .header-industrial__menu-toggle {
+      display: none;
+    }
+  }
+
+  .header-industrial__hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 24px;
+  }
+
+  .header-industrial__hamburger span {
+    display: block;
+    height: 2px;
+    background: var(--header-text);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .header-industrial__menu-toggle[aria-expanded="true"] .header-industrial__hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .header-industrial__menu-toggle[aria-expanded="true"] .header-industrial__hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header-industrial__menu-toggle[aria-expanded="true"] .header-industrial__hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile Drawer */
+  .header-industrial__drawer {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--header-bg);
+    border-top: 2px solid var(--header-border);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    z-index: 99;
+  }
+
+  .header-industrial__drawer[aria-hidden="false"] {
+    transform: translateX(0);
+  }
+
+  @media (min-width: 64rem) {
+    .header-industrial__drawer {
+      display: none;
+    }
+  }
+
+  .header-industrial__drawer-nav {
+    padding: 1.5rem;
+  }
+
+  .header-industrial__drawer-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-industrial__drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--header-text);
+    border-bottom: 2px solid var(--header-border);
+  }
+
+  .header-industrial__drawer-link:hover {
+    color: var(--color-primary);
+  }
+
+  /* Search Modal */
+  .header-industrial__search-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 200;
+  }
+
+  .header-industrial__search-modal[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header-industrial__search-inner {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  .header-industrial__search-form {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .header-industrial__search-input {
+    flex: 1;
+    padding: 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    background: var(--color-background);
+    border: 2px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .header-industrial__search-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .header-industrial__search-submit {
+    padding: 1rem 1.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: var(--color-primary);
+    border: none;
+    color: var(--color-background);
+    cursor: pointer;
+    transition: none;
+  }
+
+  .header-industrial__search-submit:hover {
+    background: var(--color-text);
+  }
+
+  .header-industrial__search-close {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    background: transparent;
+    border: 2px solid var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .header-industrial__search-close:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class HeaderIndustrial {
+    constructor() {
+      this.menuToggle = document.querySelector('[data-menu-toggle]');
+      this.menuDrawer = document.querySelector('[data-menu-drawer]');
+      this.searchToggle = document.querySelector('[data-search-toggle]');
+      this.searchModal = document.querySelector('[data-search-modal]');
+      this.searchClose = document.querySelector('[data-search-close]');
+      this.searchInput = document.querySelector('.header-industrial__search-input');
+
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      this.menuToggle?.addEventListener('click', () => this.toggleMenu());
+      this.searchToggle?.addEventListener('click', () => this.openSearch());
+      this.searchClose?.addEventListener('click', () => this.closeSearch());
+
+      this.searchModal?.addEventListener('click', (e) => {
+        if (e.target === this.searchModal) this.closeSearch();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeSearch();
+          this.closeMenu();
+        }
+      });
+    }
+
+    toggleMenu() {
+      const isOpen = this.menuToggle.getAttribute('aria-expanded') === 'true';
+      this.menuToggle.setAttribute('aria-expanded', !isOpen);
+      this.menuDrawer.setAttribute('aria-hidden', isOpen);
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    }
+
+    closeMenu() {
+      this.menuToggle?.setAttribute('aria-expanded', 'false');
+      this.menuDrawer?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openSearch() {
+      this.searchModal?.setAttribute('aria-hidden', 'false');
+      this.searchInput?.focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    closeSearch() {
+      this.searchModal?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  new HeaderIndustrial();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Header industrial",
+  "tag": "section",
+  "class": "section-header-industrial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Design style",
+      "default": "machinist",
+      "options": [
+        { "value": "welder", "label": "The Welder (light)" },
+        { "value": "machinist", "label": "The Machinist (dark)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "header_height",
+      "label": "Header height",
+      "min": 60,
+      "max": 100,
+      "step": 4,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "default": 150,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "FORGE"
+    },
+    {
+      "type": "text",
+      "id": "logo_suffix",
+      "label": "Logo suffix (accent color)",
+      "default": "IND."
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_numbers",
+      "label": "Show bracket numbers [01]",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "Menu item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Products"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header industrial",
+      "blocks": [
+        { "type": "menu_item", "settings": { "label": "PRODUCTS", "link": "/collections/all" } },
+        { "type": "menu_item", "settings": { "label": "CATALOG", "link": "/collections" } },
+        { "type": "menu_item", "settings": { "label": "ABOUT", "link": "/pages/about" } },
+        { "type": "menu_item", "settings": { "label": "CONTACT", "link": "/pages/contact" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

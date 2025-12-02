@@ -1,0 +1,746 @@
+{%- comment -%}
+  Product Industrial Section
+  Industrial-style product detail page with gallery, specs accordion,
+  and quantity selector matching The Machinist design system.
+{%- endcomment -%}
+
+{%- liquid
+  assign style = section.settings.style
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<section
+  class="product-industrial product-industrial--{{ style }}"
+  style="
+    --gallery-height: {{ section.settings.gallery_height }}px;
+    --thumb-height: {{ section.settings.thumbnail_height }}px;
+  "
+>
+  <div class="product-industrial__layout">
+    {%- comment -%} Gallery Panel {%- endcomment -%}
+    <div class="product-industrial__gallery">
+      <div class="product-industrial__main-image" data-main-image>
+        {%- if product.featured_media -%}
+          {% render 'image',
+            image: product.featured_media,
+            class: 'product-industrial__image',
+            loading: 'eager'
+          %}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'product-industrial__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <div class="product-industrial__thumbs">
+          {%- for media in product.media -%}
+            <button
+              type="button"
+              class="product-industrial__thumb{% if forloop.first %} is-active{% endif %}"
+              data-thumb
+              data-media-src="{{ media | image_url: width: 1200 }}"
+              aria-label="View image {{ forloop.index }}"
+            >
+              {% render 'image',
+                image: media.preview_image,
+                width: 150,
+                class: 'product-industrial__thumb-img'
+              %}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Details Panel {%- endcomment -%}
+    <div class="product-industrial__details">
+      {%- comment -%} Breadcrumbs {%- endcomment -%}
+      <nav class="product-industrial__breadcrumbs" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t | default: 'Home' }}</a>
+        <span class="product-industrial__breadcrumb-sep">/</span>
+        {%- if collection -%}
+          <a href="{{ collection.url }}">{{ collection.title }}</a>
+          <span class="product-industrial__breadcrumb-sep">/</span>
+        {%- endif -%}
+        <span class="product-industrial__breadcrumb-current">{{ product.title }}</span>
+      </nav>
+
+      {%- comment -%} Product Meta {%- endcomment -%}
+      <div class="product-industrial__meta-row">
+        <span class="product-industrial__sku">
+          SKU: {{ current_variant.sku | default: product.id | slice: 0, 8 }}
+        </span>
+        <span class="product-industrial__stock {% if product.available %}product-industrial__stock--in{% else %}product-industrial__stock--out{% endif %}">
+          {%- if product.available -%}[IN_STOCK]{%- else -%}[OUT_OF_STOCK]{%- endif -%}
+        </span>
+      </div>
+
+      <h1 class="product-industrial__title">{{ product.title }}</h1>
+
+      {%- if product.vendor -%}
+        <p class="product-industrial__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <p class="product-industrial__price">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="product-industrial__price-sale">{{ product.price | money }}</span>
+          <del class="product-industrial__price-compare">{{ product.compare_at_price | money }}</del>
+        {%- else -%}
+          {{ product.price | money }}
+        {%- endif -%}
+      </p>
+
+      {%- if product.description != blank -%}
+        <div class="product-industrial__description">
+          {{ product.description | strip_html | truncatewords: 30 }}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Product Form {%- endcomment -%}
+      {%- form 'product', product, id: 'product-industrial-form', class: 'product-industrial__form', data-product-form: '' -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="product-industrial__option">
+              <label class="product-industrial__option-label">{{ option.name }}</label>
+              <div class="product-industrial__option-values">
+                {%- for value in option.values -%}
+                  <label class="product-industrial__option-pill{% if option.selected_value == value %} is-active{% endif %}">
+                    <input
+                      type="radio"
+                      name="options[{{ option.name }}]"
+                      value="{{ value }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                      class="visually-hidden"
+                      data-option-input
+                    >
+                    {{ value }}
+                  </label>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        {%- comment -%} Quantity Selector {%- endcomment -%}
+        <div class="product-industrial__quantity-row">
+          <span class="product-industrial__quantity-label">QTY:</span>
+          <div class="product-industrial__quantity">
+            <button type="button" class="product-industrial__qty-btn" data-qty-minus aria-label="Decrease">−</button>
+            <input
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              class="product-industrial__qty-input"
+              data-qty-input
+            >
+            <button type="button" class="product-industrial__qty-btn" data-qty-plus aria-label="Increase">+</button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="product-industrial__add-btn"
+          {% unless product.available %}disabled{% endunless %}
+        >
+          {%- if product.available -%}
+            ADD_TO_CART [ + ]
+          {%- else -%}
+            SOLD_OUT [ X ]
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+
+      {%- comment -%} Specs Accordion {%- endcomment -%}
+      <div class="product-industrial__specs">
+        <details class="product-industrial__accordion" open>
+          <summary class="product-industrial__accordion-header">
+            <span>TECHNICAL_SPECIFICATIONS</span>
+            <span class="product-industrial__accordion-toggle" data-toggle-icon>[ − ]</span>
+          </summary>
+          <div class="product-industrial__accordion-content">
+            <table class="product-industrial__specs-table">
+              <tbody>
+                {%- if product.type != blank -%}
+                  <tr>
+                    <td class="product-industrial__spec-key">TYPE</td>
+                    <td class="product-industrial__spec-value">{{ product.type }}</td>
+                  </tr>
+                {%- endif -%}
+                {%- if product.vendor != blank -%}
+                  <tr>
+                    <td class="product-industrial__spec-key">MANUFACTURER</td>
+                    <td class="product-industrial__spec-value">{{ product.vendor }}</td>
+                  </tr>
+                {%- endif -%}
+                {%- if current_variant.sku != blank -%}
+                  <tr>
+                    <td class="product-industrial__spec-key">SKU</td>
+                    <td class="product-industrial__spec-value">{{ current_variant.sku }}</td>
+                  </tr>
+                {%- endif -%}
+                {%- if current_variant.barcode != blank -%}
+                  <tr>
+                    <td class="product-industrial__spec-key">BARCODE</td>
+                    <td class="product-industrial__spec-value">{{ current_variant.barcode }}</td>
+                  </tr>
+                {%- endif -%}
+                {%- if current_variant.weight > 0 -%}
+                  <tr>
+                    <td class="product-industrial__spec-key">WEIGHT</td>
+                    <td class="product-industrial__spec-value">{{ current_variant.weight | weight_with_unit }}</td>
+                  </tr>
+                {%- endif -%}
+                {%- for tag in product.tags -%}
+                  {%- if tag contains ':' -%}
+                    {%- assign tag_parts = tag | split: ':' -%}
+                    <tr>
+                      <td class="product-industrial__spec-key">{{ tag_parts[0] | upcase | replace: '-', '_' }}</td>
+                      <td class="product-industrial__spec-value">{{ tag_parts[1] | strip }}</td>
+                    </tr>
+                  {%- endif -%}
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        {%- if product.description != blank -%}
+          <details class="product-industrial__accordion">
+            <summary class="product-industrial__accordion-header">
+              <span>FULL_DESCRIPTION</span>
+              <span class="product-industrial__accordion-toggle" data-toggle-icon>[ + ]</span>
+            </summary>
+            <div class="product-industrial__accordion-content">
+              <div class="product-industrial__full-desc">
+                {{ product.description }}
+              </div>
+            </div>
+          </details>
+        {%- endif -%}
+
+        <details class="product-industrial__accordion">
+          <summary class="product-industrial__accordion-header">
+            <span>SHIPPING_INFO</span>
+            <span class="product-industrial__accordion-toggle" data-toggle-icon>[ + ]</span>
+          </summary>
+          <div class="product-industrial__accordion-content">
+            <p>{{ section.settings.shipping_text | default: 'Standard shipping available. Contact for expedited options.' }}</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" data-product-json>
+  {{ product | json }}
+</script>
+
+{% stylesheet %}
+  .product-industrial {
+    background: var(--color-background);
+  }
+
+  .product-industrial__layout {
+    display: grid;
+    gap: 2px;
+    background: var(--color-border);
+  }
+
+  @media (min-width: 64rem) {
+    .product-industrial__layout {
+      grid-template-columns: 1.5fr 1fr;
+    }
+  }
+
+  /* Gallery Panel */
+  .product-industrial__gallery {
+    background: var(--color-background-secondary);
+    padding: 2rem;
+    border-right: 2px solid var(--color-border);
+  }
+
+  .product-industrial__main-image {
+    height: var(--gallery-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .product-industrial__image,
+  .product-industrial__placeholder {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .product-industrial--machinist .product-industrial__image {
+    filter: grayscale(20%);
+    transition: filter 0.3s;
+  }
+
+  .product-industrial--machinist .product-industrial__gallery:hover .product-industrial__image {
+    filter: grayscale(0%);
+  }
+
+  .product-industrial__thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--color-border);
+  }
+
+  .product-industrial__thumb {
+    height: var(--thumb-height);
+    padding: 0;
+    border: none;
+    background: var(--color-background);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0s;
+  }
+
+  .product-industrial__thumb.is-active {
+    opacity: 1;
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+
+  .product-industrial__thumb:hover {
+    opacity: 1;
+  }
+
+  .product-industrial__thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Details Panel */
+  .product-industrial__details {
+    background: var(--color-background);
+    padding: 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  @media (min-width: 64rem) {
+    .product-industrial__details {
+      position: sticky;
+      top: 0;
+    }
+  }
+
+  /* Breadcrumbs */
+  .product-industrial__breadcrumbs {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-industrial__breadcrumbs a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .product-industrial__breadcrumbs a:hover {
+    color: var(--color-primary);
+  }
+
+  .product-industrial__breadcrumb-sep {
+    margin: 0 0.5rem;
+    color: var(--color-text-secondary);
+  }
+
+  .product-industrial__breadcrumb-current {
+    color: var(--color-primary);
+  }
+
+  /* Meta Row */
+  .product-industrial__meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .product-industrial__stock--in {
+    color: var(--color-success);
+  }
+
+  .product-industrial__stock--out {
+    color: var(--color-error);
+  }
+
+  /* Title & Price */
+  .product-industrial__title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    margin: 0 0 0.5rem;
+  }
+
+  .product-industrial__vendor {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+  }
+
+  .product-industrial__price {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+  }
+
+  .product-industrial__price-sale {
+    margin-right: 0.5rem;
+  }
+
+  .product-industrial__price-compare {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+
+  .product-industrial__description {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Form */
+  .product-industrial__form {
+    margin-bottom: 2rem;
+  }
+
+  .product-industrial__option {
+    margin-bottom: 1rem;
+  }
+
+  .product-industrial__option-label {
+    display: block;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-industrial__option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .product-industrial__option-pill {
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    background: var(--color-background-secondary);
+    border: 2px solid var(--color-border);
+    cursor: pointer;
+    transition: none;
+  }
+
+  .product-industrial__option-pill:hover {
+    border-color: var(--color-primary);
+  }
+
+  .product-industrial__option-pill.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  /* Quantity */
+  .product-industrial__quantity-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-industrial__quantity-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .product-industrial__quantity {
+    display: flex;
+    border: 2px solid var(--color-border);
+  }
+
+  .product-industrial__qty-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 1.2rem;
+    background: var(--color-background-secondary);
+    border: none;
+    cursor: pointer;
+    transition: none;
+  }
+
+  .product-industrial__qty-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .product-industrial__qty-input {
+    width: 60px;
+    height: 44px;
+    text-align: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    border: none;
+    border-left: 2px solid var(--color-border);
+    border-right: 2px solid var(--color-border);
+    background: var(--color-background);
+    -moz-appearance: textfield;
+  }
+
+  .product-industrial__qty-input::-webkit-inner-spin-button,
+  .product-industrial__qty-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Add Button */
+  .product-industrial__add-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: none;
+  }
+
+  .product-industrial__add-btn:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .product-industrial__add-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Specs Accordion */
+  .product-industrial__specs {
+    border: 2px solid var(--color-border);
+  }
+
+  .product-industrial__accordion {
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .product-industrial__accordion:last-child {
+    border-bottom: none;
+  }
+
+  .product-industrial__accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: var(--color-background-secondary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .product-industrial__accordion-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .product-industrial__accordion-toggle {
+    color: var(--color-primary);
+  }
+
+  .product-industrial__accordion-content {
+    padding: 1rem;
+  }
+
+  .product-industrial__specs-table {
+    width: 100%;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    border-collapse: collapse;
+  }
+
+  .product-industrial__specs-table tr {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .product-industrial__specs-table tr:last-child {
+    border-bottom: none;
+  }
+
+  .product-industrial__spec-key,
+  .product-industrial__spec-value {
+    padding: 0.75rem 0;
+  }
+
+  .product-industrial__spec-key {
+    width: 40%;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .product-industrial__spec-value {
+    text-align: right;
+    font-weight: 600;
+  }
+
+  .product-industrial__full-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class ProductIndustrial {
+    constructor() {
+      this.thumbs = document.querySelectorAll('[data-thumb]');
+      this.mainImage = document.querySelector('[data-main-image]');
+      this.qtyInput = document.querySelector('[data-qty-input]');
+      this.accordions = document.querySelectorAll('.product-industrial__accordion');
+      this.optionInputs = document.querySelectorAll('[data-option-input]');
+
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      this.thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => this.switchImage(thumb));
+      });
+
+      document.querySelector('[data-qty-minus]')?.addEventListener('click', () => this.updateQty(-1));
+      document.querySelector('[data-qty-plus]')?.addEventListener('click', () => this.updateQty(1));
+
+      this.accordions.forEach(accordion => {
+        accordion.addEventListener('toggle', () => this.updateToggleIcon(accordion));
+      });
+
+      this.optionInputs.forEach(input => {
+        input.addEventListener('change', () => this.updateOptionPills());
+      });
+    }
+
+    switchImage(thumb) {
+      const src = thumb.dataset.mediaSrc;
+      if (this.mainImage && src) {
+        const img = this.mainImage.querySelector('img');
+        if (img) {
+          img.src = src;
+        }
+      }
+
+      this.thumbs.forEach(t => t.classList.remove('is-active'));
+      thumb.classList.add('is-active');
+    }
+
+    updateQty(delta) {
+      if (this.qtyInput) {
+        const newValue = Math.max(1, parseInt(this.qtyInput.value) + delta);
+        this.qtyInput.value = newValue;
+      }
+    }
+
+    updateToggleIcon(accordion) {
+      const icon = accordion.querySelector('[data-toggle-icon]');
+      if (icon) {
+        icon.textContent = accordion.open ? '[ − ]' : '[ + ]';
+      }
+    }
+
+    updateOptionPills() {
+      document.querySelectorAll('.product-industrial__option-pill').forEach(pill => {
+        const input = pill.querySelector('input');
+        pill.classList.toggle('is-active', input?.checked);
+      });
+    }
+  }
+
+  new ProductIndustrial();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product industrial",
+  "tag": "section",
+  "class": "section-product-industrial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Design style",
+      "default": "welder",
+      "options": [
+        { "value": "welder", "label": "The Welder" },
+        { "value": "machinist", "label": "The Machinist" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Gallery"
+    },
+    {
+      "type": "range",
+      "id": "gallery_height",
+      "label": "Main image height",
+      "min": 400,
+      "max": 700,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_height",
+      "label": "Thumbnail height",
+      "min": 80,
+      "max": 150,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "shipping_text",
+      "label": "Shipping info text",
+      "default": "Standard ground shipping: 5-7 business days. Express shipping available at checkout. International shipping rates calculated at checkout."
+    }
+  ]
+}
+{% endschema %}

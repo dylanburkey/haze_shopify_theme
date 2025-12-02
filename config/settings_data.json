@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "current": {
     "enable_speculation_rules": true,
@@ -17,9 +8,11 @@
     "color_background_secondary": "#f4f4f4",
     "color_text": "#1a1a1a",
     "color_text_secondary": "#6b7280",
+    "color_border": "#e5e5e5",
+    "color_header_bg": "#111111",
+    "color_header_text": "#ffffff",
     "color_button_background": "#d71920",
     "color_button_text": "#ffffff",
-    "color_border": "#e5e5e5",
     "color_success": "#16a34a",
     "color_warning": "#f59e0b",
     "color_error": "#dc2626",
@@ -39,10 +32,12 @@
     "card_show_secondary_image": true,
     "cart_type": "drawer",
     "cart_show_vendor": false,
+    "logo_text": "FORGE",
+    "logo_suffix": ".IND",
     "content_for_index": []
   },
   "presets": {
-    "Industry 4": {
+    "The Welder": {
       "color_primary": "#d71920",
       "color_secondary": "#334FB4",
       "color_accent": "#D97706",
@@ -51,6 +46,8 @@
       "color_text": "#1a1a1a",
       "color_text_secondary": "#6B7280",
       "color_border": "#e5e5e5",
+      "color_header_bg": "#111111",
+      "color_header_text": "#ffffff",
       "color_button_background": "#d71920",
       "color_button_text": "#ffffff",
       "color_success": "#16A34A",
@@ -69,7 +66,9 @@
       "card_style": "standard",
       "card_border_radius": 8,
       "card_image_ratio": "portrait",
-      "card_show_secondary_image": true
+      "card_show_secondary_image": true,
+      "logo_text": "FORGE",
+      "logo_suffix": ".IND"
     },
     "Site Ops": {
       "color_primary": "#ffb400",
@@ -80,6 +79,8 @@
       "color_text": "#333333",
       "color_text_secondary": "#666666",
       "color_border": "#dddddd",
+      "color_header_bg": "#232323",
+      "color_header_text": "#ffffff",
       "color_button_background": "#ffb400",
       "color_button_text": "#000000",
       "color_success": "#16A34A",
@@ -98,7 +99,9 @@
       "card_style": "elevated",
       "card_border_radius": 8,
       "card_image_ratio": "portrait",
-      "card_show_secondary_image": true
+      "card_show_secondary_image": true,
+      "logo_text": "SITE",
+      "logo_suffix": ".OPS"
     },
     "Midnight Shift": {
       "color_primary": "#ff5722",
@@ -109,6 +112,8 @@
       "color_text": "#e0e0e0",
       "color_text_secondary": "#9e9e9e",
       "color_border": "#333333",
+      "color_header_bg": "#000000",
+      "color_header_text": "#ffffff",
       "color_button_background": "#ff5722",
       "color_button_text": "#ffffff",
       "color_success": "#4caf50",
@@ -127,7 +132,9 @@
       "card_style": "elevated",
       "card_border_radius": 12,
       "card_image_ratio": "square",
-      "card_show_secondary_image": true
+      "card_show_secondary_image": true,
+      "logo_text": "NIGHT",
+      "logo_suffix": ".SHIFT"
     },
     "Precision": {
       "color_primary": "#007ac9",
@@ -138,6 +145,8 @@
       "color_text": "#0f172a",
       "color_text_secondary": "#64748b",
       "color_border": "#cbd5e1",
+      "color_header_bg": "#ffffff",
+      "color_header_text": "#0f172a",
       "color_button_background": "#007ac9",
       "color_button_text": "#ffffff",
       "color_success": "#22c55e",
@@ -156,7 +165,9 @@
       "card_style": "outlined",
       "card_border_radius": 4,
       "card_image_ratio": "landscape",
-      "card_show_secondary_image": false
+      "card_show_secondary_image": false,
+      "logo_text": "PRECISION",
+      "logo_suffix": ".LAB"
     },
     "Tactical": {
       "color_primary": "#689f38",
@@ -167,6 +178,8 @@
       "color_text": "#dcedc8",
       "color_text_secondary": "#aed581",
       "color_border": "#4a4a4a",
+      "color_header_bg": "#1a1a1a",
+      "color_header_text": "#dcedc8",
       "color_button_background": "#689f38",
       "color_button_text": "#ffffff",
       "color_success": "#8bc34a",
@@ -185,7 +198,9 @@
       "card_style": "standard",
       "card_border_radius": 0,
       "card_image_ratio": "portrait",
-      "card_show_secondary_image": true
+      "card_show_secondary_image": true,
+      "logo_text": "TACTICAL",
+      "logo_suffix": ".GEAR"
     },
     "Monolith": {
       "color_primary": "#000000",
@@ -196,6 +211,8 @@
       "color_text": "#ffffff",
       "color_text_secondary": "#a0a0a0",
       "color_border": "#2a2a2a",
+      "color_header_bg": "#000000",
+      "color_header_text": "#ffffff",
       "color_button_background": "#ffffff",
       "color_button_text": "#000000",
       "color_success": "#00ff88",
@@ -214,7 +231,9 @@
       "card_style": "standard",
       "card_border_radius": 0,
       "card_image_ratio": "square",
-      "card_show_secondary_image": false
+      "card_show_secondary_image": false,
+      "logo_text": "MONOLITH",
+      "logo_suffix": ""
     }
   }
 }

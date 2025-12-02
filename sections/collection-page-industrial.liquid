@@ -1,0 +1,762 @@
+{%- comment -%}
+  Collection Page Industrial Section
+  Full collection page with sidebar filters matching The Machinist design.
+  Features industrial-style checkboxes, accordion filters, and grid layout.
+{%- endcomment -%}
+
+{%- liquid
+  assign style = section.settings.style
+  assign columns = section.settings.columns
+  assign products_per_page = section.settings.products_per_page
+-%}
+
+<section class="collection-page-industrial collection-page-industrial--{{ style }}">
+  <div class="collection-page-industrial__layout">
+    {%- comment -%} Sidebar Filters {%- endcomment -%}
+    <aside class="collection-page-industrial__sidebar">
+      <div class="collection-page-industrial__sidebar-header">
+        <span class="collection-page-industrial__filter-title">FILTER_OPTIONS</span>
+      </div>
+
+      {%- comment -%} Availability Filter {%- endcomment -%}
+      <details class="collection-page-industrial__filter-group" open>
+        <summary class="collection-page-industrial__filter-header">
+          <span>AVAILABILITY</span>
+          <span class="collection-page-industrial__filter-toggle">[ − ]</span>
+        </summary>
+        <div class="collection-page-industrial__filter-content">
+          <label class="collection-page-industrial__checkbox">
+            <input type="checkbox" name="availability" value="in_stock" checked>
+            <span class="collection-page-industrial__checkbox-box"></span>
+            <span class="collection-page-industrial__checkbox-label">IN_STOCK</span>
+          </label>
+          <label class="collection-page-industrial__checkbox">
+            <input type="checkbox" name="availability" value="out_of_stock">
+            <span class="collection-page-industrial__checkbox-box"></span>
+            <span class="collection-page-industrial__checkbox-label">OUT_OF_STOCK</span>
+          </label>
+        </div>
+      </details>
+
+      {%- comment -%} Price Range Filter {%- endcomment -%}
+      <details class="collection-page-industrial__filter-group" open>
+        <summary class="collection-page-industrial__filter-header">
+          <span>PRICE_RANGE</span>
+          <span class="collection-page-industrial__filter-toggle">[ − ]</span>
+        </summary>
+        <div class="collection-page-industrial__filter-content">
+          <div class="collection-page-industrial__price-inputs">
+            <div class="collection-page-industrial__price-field">
+              <label>MIN:</label>
+              <input type="number" placeholder="0" min="0">
+            </div>
+            <span class="collection-page-industrial__price-sep">—</span>
+            <div class="collection-page-industrial__price-field">
+              <label>MAX:</label>
+              <input type="number" placeholder="999" min="0">
+            </div>
+          </div>
+        </div>
+      </details>
+
+      {%- comment -%} Product Type Filter {%- endcomment -%}
+      {%- if collection.all_types.size > 0 -%}
+        <details class="collection-page-industrial__filter-group">
+          <summary class="collection-page-industrial__filter-header">
+            <span>PRODUCT_TYPE</span>
+            <span class="collection-page-industrial__filter-toggle">[ + ]</span>
+          </summary>
+          <div class="collection-page-industrial__filter-content">
+            {%- for type in collection.all_types -%}
+              {%- if type != blank -%}
+                <label class="collection-page-industrial__checkbox">
+                  <input type="checkbox" name="type" value="{{ type | handleize }}">
+                  <span class="collection-page-industrial__checkbox-box"></span>
+                  <span class="collection-page-industrial__checkbox-label">{{ type | upcase | replace: ' ', '_' }}</span>
+                </label>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- comment -%} Vendor Filter {%- endcomment -%}
+      {%- if collection.all_vendors.size > 0 -%}
+        <details class="collection-page-industrial__filter-group">
+          <summary class="collection-page-industrial__filter-header">
+            <span>MANUFACTURER</span>
+            <span class="collection-page-industrial__filter-toggle">[ + ]</span>
+          </summary>
+          <div class="collection-page-industrial__filter-content">
+            {%- for vendor in collection.all_vendors -%}
+              {%- if vendor != blank -%}
+                <label class="collection-page-industrial__checkbox">
+                  <input type="checkbox" name="vendor" value="{{ vendor | handleize }}">
+                  <span class="collection-page-industrial__checkbox-box"></span>
+                  <span class="collection-page-industrial__checkbox-label">{{ vendor | upcase | truncate: 20 }}</span>
+                </label>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- comment -%} Tags Filter {%- endcomment -%}
+      {%- if collection.all_tags.size > 0 -%}
+        <details class="collection-page-industrial__filter-group">
+          <summary class="collection-page-industrial__filter-header">
+            <span>CATEGORIES</span>
+            <span class="collection-page-industrial__filter-toggle">[ + ]</span>
+          </summary>
+          <div class="collection-page-industrial__filter-content">
+            {%- for tag in collection.all_tags limit: 10 -%}
+              {%- unless tag contains ':' -%}
+                <label class="collection-page-industrial__checkbox">
+                  <input type="checkbox" name="tag" value="{{ tag | handleize }}">
+                  <span class="collection-page-industrial__checkbox-box"></span>
+                  <span class="collection-page-industrial__checkbox-label">{{ tag | upcase | replace: ' ', '_' }}</span>
+                </label>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        </details>
+      {%- endif -%}
+
+      <button type="button" class="collection-page-industrial__clear-btn">
+        CLEAR_ALL [ X ]
+      </button>
+    </aside>
+
+    {%- comment -%} Main Content {%- endcomment -%}
+    <main class="collection-page-industrial__main">
+      {%- comment -%} Collection Header {%- endcomment -%}
+      <header class="collection-page-industrial__header">
+        <div class="collection-page-industrial__header-info">
+          <h1 class="collection-page-industrial__title">{{ collection.title | upcase }}</h1>
+          <span class="collection-page-industrial__count">
+            [{{ collection.products_count }} ITEMS]
+          </span>
+        </div>
+
+        <div class="collection-page-industrial__sort">
+          <label class="collection-page-industrial__sort-label">SORT_BY:</label>
+          <select class="collection-page-industrial__sort-select" data-sort-select>
+            <option value="manual">FEATURED</option>
+            <option value="best-selling">BEST_SELLING</option>
+            <option value="title-ascending">NAME_A-Z</option>
+            <option value="title-descending">NAME_Z-A</option>
+            <option value="price-ascending">PRICE_LOW</option>
+            <option value="price-descending">PRICE_HIGH</option>
+            <option value="created-descending">NEWEST</option>
+          </select>
+        </div>
+      </header>
+
+      {%- comment -%} Product Grid {%- endcomment -%}
+      {%- paginate collection.products by products_per_page -%}
+        <div
+          class="collection-page-industrial__grid"
+          style="--columns: {{ columns }};"
+        >
+          {%- for product in collection.products -%}
+            <article class="collection-page-industrial__card">
+              {%- if product.available == false -%}
+                <span class="collection-page-industrial__badge collection-page-industrial__badge--sold">SOLD_OUT</span>
+              {%- elsif product.compare_at_price > product.price -%}
+                <span class="collection-page-industrial__badge collection-page-industrial__badge--sale">SALE</span>
+              {%- endif -%}
+
+              <a href="{{ product.url }}" class="collection-page-industrial__card-link">
+                <div class="collection-page-industrial__card-image">
+                  {%- if product.featured_media -%}
+                    {% render 'image',
+                      image: product.featured_media,
+                      sizes: '(min-width: 64rem) 400px, (min-width: 48rem) 50vw, 100vw',
+                      class: 'collection-page-industrial__image',
+                      loading: 'lazy'
+                    %}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'collection-page-industrial__placeholder' }}
+                  {%- endif -%}
+                </div>
+
+                <div class="collection-page-industrial__card-content">
+                  <div class="collection-page-industrial__card-meta">
+                    <span class="collection-page-industrial__card-sku">
+                      SKU: {{ product.variants.first.sku | default: product.id | slice: 0, 6 }}
+                    </span>
+                    <span class="collection-page-industrial__card-stock {% if product.available %}is-in{% endif %}">
+                      {%- if product.available -%}[AVAIL]{%- else -%}[N/A]{%- endif -%}
+                    </span>
+                  </div>
+
+                  <h2 class="collection-page-industrial__card-title">{{ product.title }}</h2>
+
+                  <p class="collection-page-industrial__card-desc">
+                    {{ product.description | strip_html | truncatewords: 12 }}
+                  </p>
+
+                  <div class="collection-page-industrial__card-footer">
+                    <span class="collection-page-industrial__card-price">
+                      {{ product.price | money }}
+                    </span>
+                    <span class="collection-page-industrial__card-btn">VIEW +</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {%- else -%}
+            {%- for i in (1..6) -%}
+              <article class="collection-page-industrial__card">
+                <div class="collection-page-industrial__card-image">
+                  {{ 'product-1' | placeholder_svg_tag: 'collection-page-industrial__placeholder' }}
+                </div>
+                <div class="collection-page-industrial__card-content">
+                  <div class="collection-page-industrial__card-meta">
+                    <span class="collection-page-industrial__card-sku">SKU: XXXXX</span>
+                    <span class="collection-page-industrial__card-stock is-in">[AVAIL]</span>
+                  </div>
+                  <h2 class="collection-page-industrial__card-title">Product Title</h2>
+                  <p class="collection-page-industrial__card-desc">Product description text here.</p>
+                  <div class="collection-page-industrial__card-footer">
+                    <span class="collection-page-industrial__card-price">$0.00</span>
+                    <span class="collection-page-industrial__card-btn">VIEW +</span>
+                  </div>
+                </div>
+              </article>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="collection-page-industrial__pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="collection-page-industrial__page-btn">
+                &lt; PREV
+              </a>
+            {%- endif -%}
+
+            <div class="collection-page-industrial__page-numbers">
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}" class="collection-page-industrial__page-num">
+                    {{ part.title }}
+                  </a>
+                {%- else -%}
+                  <span class="collection-page-industrial__page-num {% if part.title == paginate.current_page %}is-current{% endif %}">
+                    {{ part.title }}
+                  </span>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="collection-page-industrial__page-btn">
+                NEXT &gt;
+              </a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </main>
+  </div>
+</section>
+
+{% stylesheet %}
+  .collection-page-industrial {
+    background: var(--color-background);
+  }
+
+  .collection-page-industrial__layout {
+    display: grid;
+    gap: 2px;
+    background: var(--color-border);
+  }
+
+  @media (min-width: 64rem) {
+    .collection-page-industrial__layout {
+      grid-template-columns: 280px 1fr;
+    }
+  }
+
+  /* Sidebar */
+  .collection-page-industrial__sidebar {
+    background: var(--color-background-secondary);
+    padding: 0;
+    border-right: 2px solid var(--color-border);
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .collection-page-industrial__sidebar {
+      display: block;
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+  }
+
+  .collection-page-industrial__sidebar-header {
+    padding: 1.25rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .collection-page-industrial__filter-title {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  /* Filter Groups */
+  .collection-page-industrial__filter-group {
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .collection-page-industrial__filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    background: var(--color-background-secondary);
+  }
+
+  .collection-page-industrial__filter-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .collection-page-industrial__filter-toggle {
+    color: var(--color-primary);
+  }
+
+  .collection-page-industrial__filter-content {
+    padding: 0 1.25rem 1.25rem;
+    background: var(--color-background);
+  }
+
+  /* Checkboxes */
+  .collection-page-industrial__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    cursor: pointer;
+  }
+
+  .collection-page-industrial__checkbox input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .collection-page-industrial__checkbox-box {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-border);
+    background: var(--color-background);
+    position: relative;
+    transition: none;
+  }
+
+  .collection-page-industrial__checkbox:hover .collection-page-industrial__checkbox-box {
+    border-color: var(--color-primary);
+  }
+
+  .collection-page-industrial__checkbox input:checked + .collection-page-industrial__checkbox-box {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .collection-page-industrial__checkbox input:checked + .collection-page-industrial__checkbox-box::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid var(--color-background);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .collection-page-industrial__checkbox-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Price Inputs */
+  .collection-page-industrial__price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .collection-page-industrial__price-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .collection-page-industrial__price-field label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .collection-page-industrial__price-field input {
+    padding: 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    border: 2px solid var(--color-border);
+    background: var(--color-background);
+    width: 100%;
+  }
+
+  .collection-page-industrial__price-sep {
+    color: var(--color-text-secondary);
+    padding-top: 1rem;
+  }
+
+  /* Clear Button */
+  .collection-page-industrial__clear-btn {
+    width: 100%;
+    padding: 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: var(--color-background);
+    border: none;
+    border-top: 2px solid var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: none;
+  }
+
+  .collection-page-industrial__clear-btn:hover {
+    color: var(--color-primary);
+  }
+
+  /* Main Content */
+  .collection-page-industrial__main {
+    background: var(--color-background);
+  }
+
+  /* Header */
+  .collection-page-industrial__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .collection-page-industrial__header-info {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .collection-page-industrial__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  .collection-page-industrial__count {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Sort */
+  .collection-page-industrial__sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .collection-page-industrial__sort-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  .collection-page-industrial__sort-select {
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    border: 2px solid var(--color-border);
+    background: var(--color-background);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+  }
+
+  /* Product Grid */
+  .collection-page-industrial__grid {
+    display: grid;
+    gap: 2px;
+    background: var(--color-border);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 48rem) {
+    .collection-page-industrial__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .collection-page-industrial__grid {
+      grid-template-columns: repeat(var(--columns, 3), 1fr);
+    }
+  }
+
+  /* Product Card */
+  .collection-page-industrial__card {
+    position: relative;
+    background: var(--color-background);
+    transition: background 0s;
+  }
+
+  .collection-page-industrial__card:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .collection-page-industrial__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    padding: 4px 8px;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .collection-page-industrial__badge--sale {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .collection-page-industrial__badge--sold {
+    background: var(--color-text-secondary);
+    color: var(--color-background);
+  }
+
+  .collection-page-industrial__card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .collection-page-industrial__card-image {
+    height: 300px;
+    background: var(--color-background-secondary);
+    border-bottom: 2px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .collection-page-industrial__image,
+  .collection-page-industrial__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collection-page-industrial--machinist .collection-page-industrial__image {
+    filter: grayscale(100%);
+    transition: filter 0s;
+  }
+
+  .collection-page-industrial--machinist .collection-page-industrial__card:hover .collection-page-industrial__image {
+    filter: grayscale(0%);
+  }
+
+  .collection-page-industrial__card-content {
+    padding: 1.25rem;
+  }
+
+  .collection-page-industrial__card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .collection-page-industrial__card-stock.is-in {
+    color: var(--color-success);
+  }
+
+  .collection-page-industrial__card-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin: 0 0 0.5rem;
+  }
+
+  .collection-page-industrial__card-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0 0 1rem;
+    min-height: 2.7rem;
+  }
+
+  .collection-page-industrial__card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 2px solid var(--color-border);
+  }
+
+  .collection-page-industrial__card-price {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .collection-page-industrial__card-btn {
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    transition: none;
+  }
+
+  .collection-page-industrial__card:hover .collection-page-industrial__card-btn {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  /* Pagination */
+  .collection-page-industrial__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    border-top: 2px solid var(--color-border);
+  }
+
+  .collection-page-industrial__page-btn {
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .collection-page-industrial__page-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .collection-page-industrial__page-numbers {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .collection-page-industrial__page-num {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    border: 2px solid transparent;
+  }
+
+  .collection-page-industrial__page-num:hover {
+    border-color: var(--color-border);
+  }
+
+  .collection-page-industrial__page-num.is-current {
+    background: var(--color-primary);
+    color: var(--color-background);
+    font-weight: 700;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  // Filter toggle icons
+  document.querySelectorAll('.collection-page-industrial__filter-group').forEach(group => {
+    group.addEventListener('toggle', () => {
+      const toggle = group.querySelector('.collection-page-industrial__filter-toggle');
+      if (toggle) {
+        toggle.textContent = group.open ? '[ − ]' : '[ + ]';
+      }
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Collection industrial",
+  "tag": "section",
+  "class": "section-collection-page-industrial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Design style",
+      "default": "welder",
+      "options": [
+        { "value": "welder", "label": "The Welder" },
+        { "value": "machinist", "label": "The Machinist (grayscale)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

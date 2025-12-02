@@ -1,9 +1,49 @@
 {
   "sections": {
+    "header": {
+      "type": "collection-header",
+      "settings": {
+        "show_title": true,
+        "show_description": true
+      }
+    },
     "main": {
-      "type": "main-collection",
-      "settings": {}
+      "type": "collection-grid",
+      "settings": {
+        "products_per_page": 12,
+        "columns": "3",
+        "show_filters": true
+      }
+    },
+    "cta": {
+      "type": "smart-grid",
+      "settings": {
+        "heading": "",
+        "layout": "cols-3",
+        "use_surface_bg": false
+      },
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "heading": "Size Guide"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "heading": "OSHA Compliance"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "heading": "Bulk Quotes"
+          }
+        }
+      },
+      "block_order": ["card-1", "card-2", "card-3"]
     }
   },
-  "order": ["main"]
+  "order": ["header", "main", "cta"]
 }

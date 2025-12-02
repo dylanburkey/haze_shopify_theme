@@ -1,55 +1,40 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "product-main",
       "settings": {
-        "variant_style": "pills",
-        "show_sku": true,
-        "show_barcode": false
+        "show_specs": true
       }
     },
-    "specs": {
-      "type": "product-specs",
+    "related": {
+      "type": "smart-grid",
       "settings": {
-        "heading": "Technical Specifications",
-        "open_by_default": true,
-        "use_metafields": true
+        "heading": "Related Gear",
+        "layout": "cols-3",
+        "use_surface_bg": true
       },
       "blocks": {
-        "weight": {
-          "type": "spec",
+        "card-1": {
+          "type": "card",
           "settings": {
-            "label": "Weight",
-            "value": "",
-            "use_metafield": true,
-            "metafield_key": "weight"
+            "heading": "Consumables Kit"
           }
         },
-        "dimensions": {
-          "type": "spec",
+        "card-2": {
+          "type": "card",
           "settings": {
-            "label": "Dimensions",
-            "value": "",
-            "use_metafield": true,
-            "metafield_key": "dimensions"
+            "heading": "Welding Jacket"
           }
         },
-        "material": {
-          "type": "spec",
+        "card-3": {
+          "type": "card",
           "settings": {
-            "label": "Material",
-            "value": "",
-            "use_metafield": true,
-            "metafield_key": "material"
+            "heading": "Fume Extractor"
           }
         }
       },
-      "block_order": ["weight", "dimensions", "material"]
-    },
-    "attachments": {
-      "type": "product-attachments",
-      "settings": {}
+      "block_order": ["card-1", "card-2", "card-3"]
     }
   },
-  "order": ["main", "specs", "attachments"]
+  "order": ["main", "related"]
 }

@@ -1,63 +1,34 @@
 {%- comment -%}
-  Smart Grid Section - "The Money Maker"
-  Container Query-based layout system with intelligent card reshaping
+  Smart Grid / Featured Cards - Forge Industrial Theme
+  Container query enabled cards with multiple layout options
 {%- endcomment -%}
 
-{{ 'section-smart-grid.css' | asset_url | stylesheet_tag }}
-
-{%- liquid
-  assign layout_class = 'layout--' | append: section.settings.layout
-  assign gap = section.settings.gap | default: 24
--%}
-
-<div class="smart-grid-section color-{{ section.settings.color_scheme }}">
-  <div class="page-width">
+<section class="section-smart-grid {% if section.settings.use_surface_bg %}section--surface{% endif %}" data-section-id="{{ section.id }}">
+  <div class="container">
     {%- if section.settings.heading != blank -%}
-      <div class="smart-grid__header">
-        <h2 class="smart-grid__heading {{ section.settings.heading_size }}">
-          {{ section.settings.heading }}
-        </h2>
-        {%- if section.settings.subheading != blank -%}
-          <p class="smart-grid__subheading">{{ section.settings.subheading }}</p>
-        {%- endif -%}
-      </div>
+      <h2 class="smart-grid-heading">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
-    <div class="smart-grid {{ layout_class }}" style="--grid-gap: {{ gap }}px;">
+    <div class="smart-grid layout--{{ section.settings.layout }}">
       {%- for block in section.blocks -%}
-        {%- liquid
-          assign span_class = ''
-          if block.settings.size == 'span-2'
-            assign span_class = 'grid-item--span-2'
-          elsif block.settings.size == 'span-3'
-            assign span_class = 'grid-item--span-3'
-          elsif block.settings.size == 'tall'
-            assign span_class = 'grid-item--tall'
-          endif
-        -%}
-
-        <div class="grid-item-wrapper {{ span_class }}" {{ block.shopify_attributes }}>
+        <div class="grid-item-wrapper" {{ block.shopify_attributes }}>
           {%- case block.type -%}
-            {%- when 'feature_card' -%}
-              <article class="industrial-card">
-                {%- if block.settings.image != blank -%}
+            {%- when 'card' -%}
+              <div class="industrial-card">
+                {%- if block.settings.image -%}
                   <img
-                    class="card-img"
                     src="{{ block.settings.image | image_url: width: 800 }}"
                     alt="{{ block.settings.image.alt | default: block.settings.heading }}"
+                    class="card-img"
                     loading="lazy"
-                    width="800"
-                    height="{{ 800 | divided_by: block.settings.image.aspect_ratio | round }}"
                   >
-                {%- else -%}
-                  <div class="card-img card-img--placeholder">
-                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                  </div>
+                {%- elsif block.settings.show_placeholder -%}
+                  <div class="card-img card-img--placeholder">IMG</div>
                 {%- endif -%}
 
                 <div class="card-content">
-                  {%- if block.settings.badge != blank -%}
-                    <span class="card-badge">{{ block.settings.badge }}</span>
+                  {%- if block.settings.tag != blank -%}
+                    <span class="card-tag">{{ block.settings.tag }}</span>
                   {%- endif -%}
 
                   {%- if block.settings.heading != blank -%}
@@ -65,296 +36,273 @@
                   {%- endif -%}
 
                   {%- if block.settings.text != blank -%}
-                    <div class="card-text rte">{{ block.settings.text }}</div>
+                    <p class="card-text">{{ block.settings.text }}</p>
                   {%- endif -%}
 
                   {%- if block.settings.button_label != blank -%}
-                    <a href="{{ block.settings.button_link }}" class="btn btn--{{ block.settings.button_style }}">
+                    <a href="{{ block.settings.button_link }}" class="btn card-btn">
                       {{ block.settings.button_label }}
                     </a>
                   {%- endif -%}
                 </div>
-              </article>
-
-            {%- when 'product_card' -%}
-              {%- if block.settings.product != blank -%}
-                {%- assign card_product = block.settings.product -%}
-                <article class="industrial-card industrial-card--product">
-                  <a href="{{ card_product.url }}" class="card-link">
-                    {%- if card_product.featured_image != blank -%}
-                      <img
-                        class="card-img"
-                        src="{{ card_product.featured_image | image_url: width: 800 }}"
-                        alt="{{ card_product.featured_image.alt | default: card_product.title }}"
-                        loading="lazy"
-                        width="800"
-                        height="{{ 800 | divided_by: card_product.featured_image.aspect_ratio | round }}"
-                      >
-                    {%- endif -%}
-
-                    <div class="card-content">
-                      <h3 class="card-heading">{{ card_product.title }}</h3>
-                      <p class="card-price">{{ card_product.price | money }}</p>
-
-                      {%- if block.settings.show_quick_add -%}
-                        <button type="button" class="btn btn--primary quick-add-btn" data-product-id="{{ card_product.id }}">
-                          {{ 'products.product.add_to_cart' | t | default: 'Add to Cart' }}
-                        </button>
-                      {%- endif -%}
-                    </div>
-                  </a>
-                </article>
-              {%- endif -%}
-
-            {%- when 'collection_card' -%}
-              {%- if block.settings.collection != blank -%}
-                {%- assign card_collection = block.settings.collection -%}
-                <article class="industrial-card industrial-card--collection">
-                  <a href="{{ card_collection.url }}" class="card-link">
-                    {%- if card_collection.image != blank -%}
-                      <img
-                        class="card-img"
-                        src="{{ card_collection.image | image_url: width: 800 }}"
-                        alt="{{ card_collection.image.alt | default: card_collection.title }}"
-                        loading="lazy"
-                        width="800"
-                        height="{{ 800 | divided_by: card_collection.image.aspect_ratio | round }}"
-                      >
-                    {%- elsif card_collection.products.first.featured_image != blank -%}
-                      <img
-                        class="card-img"
-                        src="{{ card_collection.products.first.featured_image | image_url: width: 800 }}"
-                        alt="{{ card_collection.title }}"
-                        loading="lazy"
-                      >
-                    {%- endif -%}
-
-                    <div class="card-content">
-                      <h3 class="card-heading">{{ card_collection.title }}</h3>
-                      <p class="card-count">{{ card_collection.products_count }} {{ 'collections.general.items' | t | default: 'products' }}</p>
-                    </div>
-                  </a>
-                </article>
-              {%- endif -%}
-
-            {%- when 'testimonial_card' -%}
-              <article class="industrial-card industrial-card--testimonial">
-                <div class="card-content">
-                  {%- if block.settings.rating > 0 -%}
-                    <div class="card-rating" aria-label="{{ block.settings.rating }} out of 5 stars">
-                      {%- for i in (1..5) -%}
-                        <svg class="star {% if i <= block.settings.rating %}star--filled{% endif %}" width="20" height="20" viewBox="0 0 24 24" fill="{% if i <= block.settings.rating %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="2">
-                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
-                      {%- endfor -%}
-                    </div>
-                  {%- endif -%}
-
-                  {%- if block.settings.quote != blank -%}
-                    <blockquote class="card-quote">"{{ block.settings.quote }}"</blockquote>
-                  {%- endif -%}
-
-                  {%- if block.settings.author != blank -%}
-                    <cite class="card-author">
-                      {%- if block.settings.author_image != blank -%}
-                        <img
-                          class="author-avatar"
-                          src="{{ block.settings.author_image | image_url: width: 80 }}"
-                          alt="{{ block.settings.author }}"
-                          width="40"
-                          height="40"
-                          loading="lazy"
-                        >
-                      {%- endif -%}
-                      <span class="author-name">{{ block.settings.author }}</span>
-                      {%- if block.settings.author_title != blank -%}
-                        <span class="author-title">{{ block.settings.author_title }}</span>
-                      {%- endif -%}
-                    </cite>
-                  {%- endif -%}
-                </div>
-              </article>
-
-            {%- when 'stats_card' -%}
-              <article class="industrial-card industrial-card--stats">
-                <div class="card-content">
-                  {%- if block.settings.icon != 'none' -%}
-                    <div class="card-icon">
-                      {% render 'icon', icon: block.settings.icon %}
-                    </div>
-                  {%- endif -%}
-
-                  {%- if block.settings.number != blank -%}
-                    <div class="stats-number">{{ block.settings.number }}</div>
-                  {%- endif -%}
-
-                  {%- if block.settings.label != blank -%}
-                    <div class="stats-label">{{ block.settings.label }}</div>
-                  {%- endif -%}
-                </div>
-              </article>
-
-            {%- when 'video_card' -%}
-              <article class="industrial-card industrial-card--video">
-                {%- if block.settings.video != blank -%}
-                  <div class="card-video">
-                    {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, muted: true, controls: block.settings.controls }}
-                  </div>
-                {%- elsif block.settings.video_url != blank -%}
-                  <div class="card-video card-video--external">
-                    {{ block.settings.video_url | external_video_tag }}
-                  </div>
-                {%- endif -%}
-
-                {%- if block.settings.heading != blank or block.settings.text != blank -%}
-                  <div class="card-content">
-                    {%- if block.settings.heading != blank -%}
-                      <h3 class="card-heading">{{ block.settings.heading }}</h3>
-                    {%- endif -%}
-                    {%- if block.settings.text != blank -%}
-                      <div class="card-text rte">{{ block.settings.text }}</div>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-              </article>
-
-            {%- when 'custom_html' -%}
-              <div class="industrial-card industrial-card--custom">
-                {{ block.settings.html }}
               </div>
 
+            {%- when 'product' -%}
+              {%- assign card_product = block.settings.product -%}
+              {%- if card_product != blank -%}
+                <a href="{{ card_product.url }}" class="industrial-card industrial-card--product">
+                  {%- if card_product.featured_image -%}
+                    <img
+                      src="{{ card_product.featured_image | image_url: width: 800 }}"
+                      alt="{{ card_product.featured_image.alt | default: card_product.title }}"
+                      class="card-img"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="card-img card-img--placeholder">IMG</div>
+                  {%- endif -%}
+
+                  <div class="card-content">
+                    {%- if block.settings.show_vendor and card_product.vendor -%}
+                      <span class="card-tag">{{ card_product.vendor }}</span>
+                    {%- endif -%}
+
+                    <h3 class="card-heading">{{ card_product.title }}</h3>
+
+                    <p class="card-price">{{ card_product.price | money }}</p>
+
+                    <span class="btn card-btn">View Specs</span>
+                  </div>
+                </a>
+              {%- endif -%}
+
+            {%- when 'collection' -%}
+              {%- assign card_collection = block.settings.collection -%}
+              {%- if card_collection != blank -%}
+                <a href="{{ card_collection.url }}" class="industrial-card industrial-card--collection">
+                  {%- if card_collection.featured_image -%}
+                    <img
+                      src="{{ card_collection.featured_image | image_url: width: 800 }}"
+                      alt="{{ card_collection.featured_image.alt | default: card_collection.title }}"
+                      class="card-img"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="card-img card-img--placeholder">IMG</div>
+                  {%- endif -%}
+
+                  <div class="card-content">
+                    <h3 class="card-heading">{{ card_collection.title }}</h3>
+                    {%- if card_collection.description != blank -%}
+                      <p class="card-text">{{ card_collection.description | strip_html | truncate: 100 }}</p>
+                    {%- endif -%}
+                  </div>
+                </a>
+              {%- endif -%}
           {%- endcase -%}
         </div>
       {%- endfor -%}
     </div>
-
-    {%- if section.settings.button_label != blank -%}
-      <div class="smart-grid__footer">
-        <a href="{{ section.settings.button_link }}" class="btn btn--{{ section.settings.button_style }}">
-          {{ section.settings.button_label }}
-        </a>
-      </div>
-    {%- endif -%}
   </div>
-</div>
+</section>
+
+<style>
+  .section-smart-grid {
+    padding: 60px 0;
+  }
+
+  .section--surface {
+    background: var(--color-surface);
+  }
+
+  .smart-grid-heading {
+    margin-bottom: 2rem;
+  }
+
+  /* Grid Layouts */
+  .smart-grid {
+    display: grid;
+    gap: var(--grid-gap);
+  }
+
+  .layout--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .layout--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .layout--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .layout--highlight {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 900px) {
+    .layout--highlight {
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .layout--highlight .grid-item-wrapper:first-child {
+      grid-row: span 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .layout--cols-2,
+    .layout--cols-3,
+    .layout--cols-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .layout--cols-3,
+    .layout--cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Container Query Wrapper */
+  .grid-item-wrapper {
+    container-type: inline-size;
+    height: 100%;
+  }
+
+  /* Industrial Card */
+  .industrial-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    height: 100%;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .industrial-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-bottom: 4px solid var(--color-primary);
+  }
+
+  /* Container Query: Switch to horizontal layout in wide containers */
+  @container (min-width: 500px) {
+    .industrial-card {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .industrial-card .card-img {
+      width: 50%;
+      height: 100%;
+      min-height: 300px;
+    }
+
+    .industrial-card .card-content {
+      width: 50%;
+      padding: 40px;
+    }
+  }
+
+  /* Card Image */
+  .card-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background: var(--color-border);
+  }
+
+  .card-img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    opacity: 0.7;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* Card Content */
+  .card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-tag {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .card-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .card-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .card-btn {
+    align-self: flex-start;
+  }
+</style>
 
 {% schema %}
 {
   "name": "Smart Grid",
   "tag": "section",
-  "class": "section-smart-grid",
+  "class": "section-grid",
   "settings": [
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "label": "Heading size",
-      "options": [
-        { "value": "h3", "label": "Small" },
-        { "value": "h2", "label": "Medium" },
-        { "value": "h1", "label": "Large" }
-      ],
-      "default": "h2"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading"
+      "label": "Heading",
+      "default": "Core Solutions"
     },
     {
       "type": "select",
       "id": "layout",
-      "label": "Layout pattern",
+      "label": "Layout",
       "options": [
         { "value": "cols-2", "label": "2 Columns" },
         { "value": "cols-3", "label": "3 Columns" },
         { "value": "cols-4", "label": "4 Columns" },
-        { "value": "highlight-left", "label": "Highlight Left (Bento)" },
-        { "value": "highlight-right", "label": "Highlight Right (Bento)" },
-        { "value": "magazine", "label": "Magazine (2/3 + 1/3)" },
-        { "value": "zigzag", "label": "Zig-zag" }
+        { "value": "highlight", "label": "Highlight (1 large + 2 small)" }
       ],
-      "default": "cols-3"
+      "default": "highlight"
     },
     {
-      "type": "range",
-      "id": "gap",
-      "label": "Grid gap",
-      "min": 8,
-      "max": 48,
-      "step": 4,
-      "default": 24,
-      "unit": "px"
-    },
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "options": [
-        { "value": "background-1", "label": "Background 1" },
-        { "value": "background-2", "label": "Background 2" },
-        { "value": "inverse", "label": "Inverse" }
-      ],
-      "default": "background-1"
-    },
-    {
-      "type": "header",
-      "content": "Section button"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "select",
-      "id": "button_style",
-      "label": "Button style",
-      "options": [
-        { "value": "primary", "label": "Primary" },
-        { "value": "secondary", "label": "Secondary" },
-        { "value": "outline", "label": "Outline" }
-      ],
-      "default": "primary"
-    },
-    {
-      "type": "header",
-      "content": "Section padding"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding top",
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding bottom",
-      "default": 60
+      "type": "checkbox",
+      "id": "use_surface_bg",
+      "label": "Use surface background",
+      "default": false
     }
   ],
   "blocks": [
     {
-      "type": "feature_card",
-      "name": "Feature Card",
+      "type": "card",
+      "name": "Card",
       "settings": [
         {
           "type": "image_picker",
@@ -362,60 +310,44 @@
           "label": "Image"
         },
         {
+          "type": "checkbox",
+          "id": "show_placeholder",
+          "label": "Show placeholder if no image",
+          "default": false
+        },
+        {
           "type": "text",
-          "id": "badge",
-          "label": "Badge text"
+          "id": "tag",
+          "label": "Tag / Category",
+          "default": "Category"
         },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Feature Title"
+          "default": "Card Title"
         },
         {
-          "type": "richtext",
+          "type": "textarea",
           "id": "text",
-          "label": "Text",
-          "default": "<p>Feature description goes here.</p>"
+          "label": "Description"
         },
         {
           "type": "text",
           "id": "button_label",
-          "label": "Button label"
+          "label": "Button label",
+          "default": "View Specs"
         },
         {
           "type": "url",
           "id": "button_link",
           "label": "Button link"
-        },
-        {
-          "type": "select",
-          "id": "button_style",
-          "label": "Button style",
-          "options": [
-            { "value": "primary", "label": "Primary" },
-            { "value": "secondary", "label": "Secondary" },
-            { "value": "outline", "label": "Outline" }
-          ],
-          "default": "primary"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" },
-            { "value": "span-3", "label": "Span 3 columns" },
-            { "value": "tall", "label": "Span 2 rows" }
-          ],
-          "default": "auto"
         }
       ]
     },
     {
-      "type": "product_card",
-      "name": "Product Card",
+      "type": "product",
+      "name": "Product",
       "settings": [
         {
           "type": "product",
@@ -424,209 +356,20 @@
         },
         {
           "type": "checkbox",
-          "id": "show_quick_add",
-          "label": "Show quick add button",
+          "id": "show_vendor",
+          "label": "Show vendor",
           "default": true
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" }
-          ],
-          "default": "auto"
         }
       ]
     },
     {
-      "type": "collection_card",
-      "name": "Collection Card",
+      "type": "collection",
+      "name": "Collection",
       "settings": [
         {
           "type": "collection",
           "id": "collection",
           "label": "Collection"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" }
-          ],
-          "default": "auto"
-        }
-      ]
-    },
-    {
-      "type": "testimonial_card",
-      "name": "Testimonial Card",
-      "settings": [
-        {
-          "type": "range",
-          "id": "rating",
-          "label": "Star rating",
-          "min": 0,
-          "max": 5,
-          "step": 1,
-          "default": 5
-        },
-        {
-          "type": "textarea",
-          "id": "quote",
-          "label": "Quote",
-          "default": "This product exceeded my expectations. Excellent quality and fast shipping."
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author name",
-          "default": "John D."
-        },
-        {
-          "type": "text",
-          "id": "author_title",
-          "label": "Author title",
-          "default": "Verified Buyer"
-        },
-        {
-          "type": "image_picker",
-          "id": "author_image",
-          "label": "Author image"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" }
-          ],
-          "default": "auto"
-        }
-      ]
-    },
-    {
-      "type": "stats_card",
-      "name": "Stats Card",
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "none", "label": "None" },
-            { "value": "truck", "label": "Truck" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "star", "label": "Star" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "users", "label": "Users" },
-            { "value": "award", "label": "Award" }
-          ],
-          "default": "none"
-        },
-        {
-          "type": "text",
-          "id": "number",
-          "label": "Number/Stat",
-          "default": "10K+"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Happy Customers"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" }
-          ],
-          "default": "auto"
-        }
-      ]
-    },
-    {
-      "type": "video_card",
-      "name": "Video Card",
-      "settings": [
-        {
-          "type": "video",
-          "id": "video",
-          "label": "Video"
-        },
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Or video URL (YouTube/Vimeo)",
-          "accept": ["youtube", "vimeo"]
-        },
-        {
-          "type": "checkbox",
-          "id": "autoplay",
-          "label": "Autoplay",
-          "default": false
-        },
-        {
-          "type": "checkbox",
-          "id": "loop",
-          "label": "Loop",
-          "default": false
-        },
-        {
-          "type": "checkbox",
-          "id": "controls",
-          "label": "Show controls",
-          "default": true
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" },
-            { "value": "span-3", "label": "Span 3 columns" }
-          ],
-          "default": "auto"
-        }
-      ]
-    },
-    {
-      "type": "custom_html",
-      "name": "Custom HTML",
-      "settings": [
-        {
-          "type": "html",
-          "id": "html",
-          "label": "Custom HTML"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "auto", "label": "Auto (use layout)" },
-            { "value": "span-2", "label": "Span 2 columns" },
-            { "value": "span-3", "label": "Span 3 columns" }
-          ],
-          "default": "auto"
         }
       ]
     }
@@ -635,9 +378,29 @@
     {
       "name": "Smart Grid",
       "blocks": [
-        { "type": "feature_card" },
-        { "type": "feature_card" },
-        { "type": "feature_card" }
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Heavy Equipment",
+            "heading": "MIG-250 Pro Series",
+            "text": "High performance welding for industrial fabrication.",
+            "button_label": "View Specs"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Safety Gear",
+            "text": "Helmets, gloves, and fume extraction."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "heading": "Automation",
+            "text": "Robotic cells and Cobot integration."
+          }
+        }
       ]
     }
   ]

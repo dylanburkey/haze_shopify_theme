@@ -1,0 +1,97 @@
+{%- comment -%}
+  Page Content - Forge Industrial Theme
+{%- endcomment -%}
+
+<section class="section-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <article class="page-content">
+      <header class="page-header">
+        <h1 class="page-title">{{ page.title }}</h1>
+      </header>
+
+      <div class="page-body rte">
+        {{ page.content }}
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .section-page {
+    padding: 60px 0;
+  }
+
+  .page-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+  }
+
+  /* Rich Text Editor Styles */
+  .rte {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .rte h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+  }
+
+  .rte h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .rte p {
+    margin-bottom: 1.25rem;
+  }
+
+  .rte ul, .rte ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .rte li {
+    margin-bottom: 0.5rem;
+  }
+
+  .rte a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .rte a:hover {
+    text-decoration: none;
+  }
+
+  .rte img {
+    margin: 2rem 0;
+    border: 1px solid var(--color-border);
+  }
+
+  .rte blockquote {
+    margin: 2rem 0;
+    padding: 20px 30px;
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-primary);
+    font-style: italic;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "settings": []
+}
+{% endschema %}

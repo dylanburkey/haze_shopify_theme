@@ -1,0 +1,62 @@
+{%- comment -%}
+  Collection Header - Forge Industrial Theme
+  Surface background, centered text with border
+{%- endcomment -%}
+
+<section class="collection-header" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- if section.settings.show_title -%}
+      <h1 class="collection-title">{{ collection.title }}</h1>
+    {%- endif -%}
+
+    {%- if section.settings.show_description and collection.description != blank -%}
+      <div class="collection-description">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .collection-header {
+    padding: 60px 0;
+    background: var(--color-surface);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .collection-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .collection-description {
+    font-size: 1rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .collection-description p {
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Header",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show collection title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show collection description",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

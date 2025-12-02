@@ -1,724 +1,165 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Industry 4",
+    "theme_name": "Forge Industrial",
     "theme_version": "1.0.0",
     "theme_author": "Dylan Burkey",
-    "theme_documentation_url": "https://github.com/dylanburkey/shopify-base",
-    "theme_support_url": "https://github.com/dylanburkey/shopify-base/issues"
+    "theme_documentation_url": "",
+    "theme_support_url": ""
   },
-
   {
-    "name": "SEO & Structured Data",
+    "name": "Colors",
     "settings": [
       {
         "type": "header",
-        "content": "Organization"
-      },
-      {
-        "type": "text",
-        "id": "seo_org_name",
-        "label": "Organization name"
-      },
-      {
-        "type": "image_picker",
-        "id": "seo_org_logo",
-        "label": "Organization logo"
-      },
-      {
-        "type": "text",
-        "id": "seo_org_phone",
-        "label": "Phone number"
-      },
-      {
-        "type": "text",
-        "id": "seo_org_email",
-        "label": "Email"
-      },
-      {
-        "type": "header",
-        "content": "Local Business (optional)"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_local_business",
-        "label": "Enable local business schema",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "seo_address_street",
-        "label": "Street address"
-      },
-      {
-        "type": "text",
-        "id": "seo_address_city",
-        "label": "City"
-      },
-      {
-        "type": "text",
-        "id": "seo_address_region",
-        "label": "State/Region"
-      },
-      {
-        "type": "text",
-        "id": "seo_address_postal",
-        "label": "Postal code"
-      },
-      {
-        "type": "text",
-        "id": "seo_address_country",
-        "label": "Country"
-      },
-      {
-        "type": "header",
-        "content": "Schema Options"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_organization_schema",
-        "label": "Organization schema",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_website_schema",
-        "label": "Website schema",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_product_schema",
-        "label": "Product schema",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_breadcrumb_schema",
-        "label": "Breadcrumb schema",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_faq_schema",
-        "label": "FAQ schema",
-        "default": true
-      }
-    ]
-  },
-  {
-    "name": "Progressive Web App",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "pwa_enabled",
-        "label": "Enable PWA features",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "pwa_name",
-        "label": "App name",
-        "info": "Defaults to shop name if empty"
-      },
-      {
-        "type": "image_picker",
-        "id": "pwa_icon",
-        "label": "App icon",
-        "info": "512x512 PNG recommended"
-      },
-      {
-        "type": "color",
-        "id": "pwa_theme_color",
-        "label": "Theme color",
-        "default": "#d71920"
-      },
-      {
-        "type": "color",
-        "id": "pwa_bg_color",
-        "label": "Background color",
-        "default": "#000000"
-      },
-      {
-        "type": "checkbox",
-        "id": "pwa_install_prompt",
-        "label": "Show install prompt",
-        "default": true,
-        "info": "Display a banner prompting users to install the app"
-      }
-    ]
-  },
-  {
-    "name": "Loyalty Program",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "loyalty_enabled",
-        "label": "Enable loyalty program",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Tier 1 (Entry)"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier1_name",
-        "label": "Tier name",
-        "default": "Apprentice"
-      },
-      {
-        "type": "color",
-        "id": "loyalty_tier1_color",
-        "label": "Tier color",
-        "default": "#999999"
-      },
-      {
-        "type": "header",
-        "content": "Tier 2"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier2_name",
-        "label": "Tier name",
-        "default": "Fabricator"
-      },
-      {
-        "type": "range",
-        "id": "loyalty_tier2_threshold",
-        "label": "Spend threshold",
-        "min": 100,
-        "max": 2000,
-        "step": 50,
-        "default": 500,
-        "unit": "$"
-      },
-      {
-        "type": "color",
-        "id": "loyalty_tier2_color",
-        "label": "Tier color",
-        "default": "#ffb400"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier2_code",
-        "label": "Discount code",
-        "default": "LOYALTY_FAB_5",
-        "info": "Create this code manually in Shopify Admin > Discounts"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier2_perk",
-        "label": "Perk description",
-        "default": "5% off every order"
-      },
-      {
-        "type": "header",
-        "content": "Tier 3 (Top)"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier3_name",
-        "label": "Tier name",
-        "default": "Master Welder"
-      },
-      {
-        "type": "range",
-        "id": "loyalty_tier3_threshold",
-        "label": "Spend threshold",
-        "min": 500,
-        "max": 5000,
-        "step": 100,
-        "default": 1500,
-        "unit": "$"
-      },
-      {
-        "type": "color",
-        "id": "loyalty_tier3_color",
-        "label": "Tier color",
-        "default": "#d71920"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier3_code",
-        "label": "Discount code",
-        "default": "LOYALTY_MASTER_10",
-        "info": "Create this code manually in Shopify Admin > Discounts"
-      },
-      {
-        "type": "text",
-        "id": "loyalty_tier3_perk",
-        "label": "Perk description",
-        "default": "10% off every order"
-      }
-    ]
-  },
-  {
-    "name": "AI Search (AutoRAG)",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "autorag_enabled",
-        "label": "Enable AI Search",
-        "default": false
-      },
-      {
-        "type": "text",
-        "id": "autorag_worker_url",
-        "label": "Cloudflare Worker URL",
-        "info": "The endpoint for your RAG Vector DB. Leave empty for standard Shopify search."
-      },
-      {
-        "type": "text",
-        "id": "autorag_placeholder",
-        "label": "Placeholder text",
-        "default": "Describe what you need..."
-      }
-    ]
-  },
-  {
-    "name": "Performance",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Critical CSS"
-      },
-      {
-        "type": "paragraph",
-        "content": "Critical CSS is automatically inlined in the head for faster rendering of above-the-fold content."
-      },
-      {
-        "type": "header",
-        "content": "Resource Hints"
-      },
-      {
-        "type": "paragraph",
-        "content": "Preconnect and DNS prefetch hints are automatically added for Shopify CDN, checkout, and other critical origins."
-      },
-      {
-        "type": "header",
-        "content": "Speculation Rules"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_speculation_rules",
-        "label": "Enable Speculation Rules",
-        "default": false,
-        "info": "Prerenders pages for instant navigation. Supported in Chromium browsers (Chrome, Edge). May increase bandwidth usage."
-      },
-      {
-        "type": "header",
-        "content": "Lazy Loading"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_native_lazy_loading",
-        "label": "Enable native lazy loading",
-        "default": true,
-        "info": "Uses browser-native loading=\"lazy\" for images below the fold"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.colors.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header_primary.content"
+        "content": "Primary colors"
       },
       {
         "type": "color",
         "id": "color_primary",
-        "label": "t:settings_schema.colors.settings.color_primary.label",
-        "default": "#121212"
-      },
-      {
-        "type": "color",
-        "id": "color_secondary",
-        "label": "t:settings_schema.colors.settings.color_secondary.label",
-        "default": "#334FB4"
-      },
-      {
-        "type": "color",
-        "id": "color_accent",
-        "label": "t:settings_schema.colors.settings.color_accent.label",
-        "default": "#D97706"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header_backgrounds.content"
-      },
-      {
-        "type": "color",
-        "id": "color_background",
-        "label": "t:settings_schema.colors.settings.color_background.label",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "color",
-        "id": "color_background_secondary",
-        "label": "t:settings_schema.colors.settings.color_background_secondary.label",
-        "default": "#F5F5F5"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header_text.content"
+        "label": "Primary / Accent",
+        "default": "#d71920"
       },
       {
         "type": "color",
         "id": "color_text",
-        "label": "t:settings_schema.colors.settings.color_text.label",
-        "default": "#121212"
+        "label": "Text",
+        "default": "#1a1a1a"
       },
       {
         "type": "color",
-        "id": "color_text_secondary",
-        "label": "t:settings_schema.colors.settings.color_text_secondary.label",
-        "default": "#6B7280"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header_buttons.content"
+        "id": "color_background",
+        "label": "Background",
+        "default": "#ffffff"
       },
       {
         "type": "color",
-        "id": "color_button_background",
-        "label": "t:settings_schema.colors.settings.color_button_background.label",
-        "default": "#121212"
-      },
-      {
-        "type": "color",
-        "id": "color_button_text",
-        "label": "t:settings_schema.colors.settings.color_button_text.label",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.colors.settings.header_borders.content"
+        "id": "color_surface",
+        "label": "Surface / Cards",
+        "default": "#f4f4f4"
       },
       {
         "type": "color",
         "id": "color_border",
-        "label": "t:settings_schema.colors.settings.color_border.label",
-        "default": "#E5E5E5"
+        "label": "Borders",
+        "default": "#e5e5e5"
       },
       {
         "type": "header",
-        "content": "t:settings_schema.colors.settings.header_status.content"
+        "content": "Header colors"
       },
       {
         "type": "color",
-        "id": "color_success",
-        "label": "t:settings_schema.colors.settings.color_success.label",
-        "default": "#16A34A"
+        "id": "color_header_bg",
+        "label": "Header background",
+        "default": "#111111"
       },
       {
         "type": "color",
-        "id": "color_warning",
-        "label": "t:settings_schema.colors.settings.color_warning.label",
-        "default": "#F59E0B"
+        "id": "color_header_text",
+        "label": "Header text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Button colors"
       },
       {
         "type": "color",
-        "id": "color_error",
-        "label": "t:settings_schema.colors.settings.color_error.label",
-        "default": "#DC2626"
+        "id": "color_button_text",
+        "label": "Button text",
+        "default": "#ffffff"
       }
     ]
   },
   {
-    "name": "t:settings_schema.typography.name",
+    "name": "Typography",
     "settings": [
       {
-        "type": "header",
-        "content": "t:settings_schema.typography.settings.header_headings.content"
-      },
-      {
-        "type": "font_picker",
+        "type": "select",
         "id": "font_heading",
-        "label": "t:settings_schema.typography.settings.font_heading.label",
-        "default": "assistant_n6"
+        "label": "Heading font",
+        "options": [
+          { "value": "Oswald", "label": "Oswald" },
+          { "value": "Teko", "label": "Teko" },
+          { "value": "Archivo Black", "label": "Archivo Black" },
+          { "value": "IBM Plex Sans Condensed", "label": "IBM Plex Sans Condensed" },
+          { "value": "Barlow Condensed", "label": "Barlow Condensed" },
+          { "value": "Bitter", "label": "Bitter" }
+        ],
+        "default": "Oswald"
       },
       {
-        "type": "range",
-        "id": "font_heading_scale",
-        "label": "t:settings_schema.typography.settings.font_heading_scale.label",
-        "min": 80,
-        "max": 150,
-        "step": 5,
-        "default": 100,
-        "unit": "%"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.typography.settings.header_body.content"
-      },
-      {
-        "type": "font_picker",
+        "type": "select",
         "id": "font_body",
-        "label": "t:settings_schema.typography.settings.font_body.label",
-        "default": "assistant_n4"
-      },
-      {
-        "type": "range",
-        "id": "font_body_scale",
-        "label": "t:settings_schema.typography.settings.font_body_scale.label",
-        "min": 80,
-        "max": 150,
-        "step": 5,
-        "default": 100,
-        "unit": "%"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.layout.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.layout.settings.header_page_width.content"
-      },
-      {
-        "type": "range",
-        "id": "page_width",
-        "label": "t:settings_schema.layout.settings.page_width.label",
-        "min": 1000,
-        "max": 1600,
-        "step": 50,
-        "default": 1200,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "spacing_sections",
-        "label": "t:settings_schema.layout.settings.spacing_sections.label",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "default": 40,
-        "unit": "px"
-      },
-      {
-        "type": "header",
-        "content": "t:settings_schema.layout.settings.header_grid.content"
-      },
-      {
-        "type": "range",
-        "id": "grid_gap",
-        "label": "t:settings_schema.layout.settings.grid_gap.label",
-        "min": 8,
-        "max": 48,
-        "step": 4,
-        "default": 24,
-        "unit": "px"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.buttons.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.buttons.settings.header_style.content"
-      },
-      {
-        "type": "range",
-        "id": "button_border_radius",
-        "label": "t:settings_schema.buttons.settings.button_border_radius.label",
-        "min": 0,
-        "max": 24,
-        "step": 2,
-        "default": 4,
-        "unit": "px"
-      },
-      {
-        "type": "select",
-        "id": "button_style",
-        "label": "t:settings_schema.buttons.settings.button_style.label",
-        "default": "solid",
+        "label": "Body font",
         "options": [
-          {
-            "value": "solid",
-            "label": "t:settings_schema.buttons.settings.button_style.options.solid"
-          },
-          {
-            "value": "outline",
-            "label": "t:settings_schema.buttons.settings.button_style.options.outline"
-          }
-        ]
+          { "value": "Roboto", "label": "Roboto" },
+          { "value": "Inter", "label": "Inter" },
+          { "value": "Work Sans", "label": "Work Sans" },
+          { "value": "IBM Plex Sans", "label": "IBM Plex Sans" },
+          { "value": "Barlow", "label": "Barlow" },
+          { "value": "Lato", "label": "Lato" }
+        ],
+        "default": "Roboto"
       }
     ]
   },
   {
-    "name": "t:settings_schema.inputs.name",
+    "name": "Logo",
     "settings": [
       {
-        "type": "range",
-        "id": "input_border_radius",
-        "label": "t:settings_schema.inputs.settings.input_border_radius.label",
-        "min": 0,
-        "max": 24,
-        "step": 2,
-        "default": 4,
-        "unit": "px"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.cards.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.cards.settings.header_product_cards.content"
-      },
-      {
-        "type": "select",
-        "id": "card_style",
-        "label": "t:settings_schema.cards.settings.card_style.label",
-        "default": "standard",
-        "options": [
-          {
-            "value": "standard",
-            "label": "t:settings_schema.cards.settings.card_style.options.standard"
-          },
-          {
-            "value": "elevated",
-            "label": "t:settings_schema.cards.settings.card_style.options.elevated"
-          },
-          {
-            "value": "outlined",
-            "label": "t:settings_schema.cards.settings.card_style.options.outlined"
-          }
-        ]
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
       },
       {
         "type": "range",
-        "id": "card_border_radius",
-        "label": "t:settings_schema.cards.settings.card_border_radius.label",
-        "min": 0,
-        "max": 24,
-        "step": 2,
-        "default": 8,
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 50,
+        "max": 250,
+        "step": 10,
+        "default": 120,
         "unit": "px"
       },
       {
-        "type": "select",
-        "id": "card_image_ratio",
-        "label": "t:settings_schema.cards.settings.card_image_ratio.label",
-        "default": "portrait",
-        "options": [
-          {
-            "value": "landscape",
-            "label": "t:settings_schema.cards.settings.card_image_ratio.options.landscape"
-          },
-          {
-            "value": "square",
-            "label": "t:settings_schema.cards.settings.card_image_ratio.options.square"
-          },
-          {
-            "value": "portrait",
-            "label": "t:settings_schema.cards.settings.card_image_ratio.options.portrait"
-          },
-          {
-            "value": "adapt",
-            "label": "t:settings_schema.cards.settings.card_image_ratio.options.adapt"
-          }
-        ]
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo text (if no image)",
+        "default": "FORGE"
       },
       {
-        "type": "checkbox",
-        "id": "card_show_secondary_image",
-        "label": "t:settings_schema.cards.settings.card_show_secondary_image.label",
-        "default": true
+        "type": "text",
+        "id": "logo_suffix",
+        "label": "Logo suffix (accent color)",
+        "default": ".IND"
       }
     ]
   },
   {
-    "name": "t:settings_schema.cart.name",
-    "settings": [
-      {
-        "type": "select",
-        "id": "cart_type",
-        "label": "t:settings_schema.cart.settings.cart_type.label",
-        "default": "drawer",
-        "options": [
-          {
-            "value": "page",
-            "label": "t:settings_schema.cart.settings.cart_type.options.page"
-          },
-          {
-            "value": "drawer",
-            "label": "t:settings_schema.cart.settings.cart_type.options.drawer"
-          }
-        ]
-      },
-      {
-        "type": "checkbox",
-        "id": "cart_show_vendor",
-        "label": "t:settings_schema.cart.settings.cart_show_vendor.label",
-        "default": false
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.social.name",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.social.settings.header_accounts.content"
-      },
-      {
-        "type": "text",
-        "id": "social_facebook",
-        "label": "Facebook",
-        "placeholder": "https://facebook.com/shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_instagram",
-        "label": "Instagram",
-        "placeholder": "https://instagram.com/shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_twitter",
-        "label": "X (Twitter)",
-        "placeholder": "https://twitter.com/shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_youtube",
-        "label": "YouTube",
-        "placeholder": "https://youtube.com/shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_tiktok",
-        "label": "TikTok",
-        "placeholder": "https://tiktok.com/@shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_pinterest",
-        "label": "Pinterest",
-        "placeholder": "https://pinterest.com/shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_linkedin",
-        "label": "LinkedIn",
-        "placeholder": "https://linkedin.com/company/shopify"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.favicon.name",
+    "name": "Favicon",
     "settings": [
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "t:settings_schema.favicon.settings.favicon.label",
-        "info": "t:settings_schema.favicon.settings.favicon.info"
+        "label": "Favicon",
+        "info": "32x32 pixels recommended"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
       }
     ]
   }

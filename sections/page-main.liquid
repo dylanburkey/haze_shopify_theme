@@ -1,0 +1,61 @@
+{%- comment -%}
+  Page Main - Forge Industrial Theme
+{%- endcomment -%}
+
+<section class="section-page">
+  <div class="container">
+    <h1>{{ page.title }}</h1>
+    <div class="page-content">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .section-page {
+    padding: 60px 0;
+  }
+
+  .section-page h1 {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .page-content {
+    max-width: 800px;
+    line-height: 1.8;
+  }
+
+  .page-content h2,
+  .page-content h3,
+  .page-content h4 {
+    margin-top: 2rem;
+  }
+
+  .page-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .page-content ul,
+  .page-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .page-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-content img {
+    margin: 2rem 0;
+    border: 1px solid var(--color-border);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page Main",
+  "settings": []
+}
+{% endschema %}

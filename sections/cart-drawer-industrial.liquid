@@ -1,0 +1,545 @@
+{%- comment -%}
+  Cart Drawer Industrial
+  Slide-out cart drawer matching The Machinist design system.
+  Features industrial styling, mono fonts, and instant transitions.
+{%- endcomment -%}
+
+<div
+  class="cart-drawer-industrial"
+  id="cart-drawer"
+  data-cart-drawer
+  aria-hidden="true"
+  aria-label="{{ 'cart.title' | t | default: 'Shopping cart' }}"
+>
+  <div class="cart-drawer-industrial__overlay" data-cart-close></div>
+
+  <div class="cart-drawer-industrial__content">
+    <header class="cart-drawer-industrial__header">
+      <h2 class="cart-drawer-industrial__title">CART_ITEMS</h2>
+      <span class="cart-drawer-industrial__count">[{{ cart.item_count }}]</span>
+      <button
+        type="button"
+        class="cart-drawer-industrial__close"
+        data-cart-close
+        aria-label="Close cart"
+      >
+        CLOSE [ X ]
+      </button>
+    </header>
+
+    <div class="cart-drawer-industrial__body" data-cart-body>
+      {%- if cart.item_count > 0 -%}
+        <ul class="cart-drawer-industrial__items">
+          {%- for item in cart.items -%}
+            <li class="cart-drawer-industrial__item" data-cart-item="{{ item.key }}">
+              <div class="cart-drawer-industrial__item-image">
+                {%- if item.image -%}
+                  {% render 'image',
+                    image: item.image,
+                    width: 120,
+                    class: 'cart-drawer-industrial__image'
+                  %}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'cart-drawer-industrial__placeholder' }}
+                {%- endif -%}
+              </div>
+
+              <div class="cart-drawer-industrial__item-details">
+                <div class="cart-drawer-industrial__item-meta">
+                  <span class="cart-drawer-industrial__item-sku">
+                    SKU: {{ item.sku | default: item.product_id | slice: 0, 6 }}
+                  </span>
+                </div>
+
+                <h3 class="cart-drawer-industrial__item-title">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h3>
+
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart-drawer-industrial__item-variant">
+                    {{ item.variant.title }}
+                  </p>
+                {%- endunless -%}
+
+                <div class="cart-drawer-industrial__item-row">
+                  <div class="cart-drawer-industrial__quantity">
+                    <button
+                      type="button"
+                      class="cart-drawer-industrial__qty-btn"
+                      data-qty-change="{{ item.key }}"
+                      data-qty-delta="-1"
+                      aria-label="Decrease"
+                    >−</button>
+                    <span class="cart-drawer-industrial__qty-value">{{ item.quantity }}</span>
+                    <button
+                      type="button"
+                      class="cart-drawer-industrial__qty-btn"
+                      data-qty-change="{{ item.key }}"
+                      data-qty-delta="1"
+                      aria-label="Increase"
+                    >+</button>
+                  </div>
+
+                  <span class="cart-drawer-industrial__item-price">
+                    {{ item.final_line_price | money }}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="cart-drawer-industrial__remove"
+                data-remove-item="{{ item.key }}"
+                aria-label="Remove {{ item.product.title }}"
+              >
+                [ DEL ]
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <div class="cart-drawer-industrial__empty">
+          <p>CART_EMPTY</p>
+          <p class="cart-drawer-industrial__empty-sub">No items in cart.</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <footer class="cart-drawer-industrial__footer">
+        {%- if section.settings.show_order_note -%}
+          <details class="cart-drawer-industrial__note-toggle">
+            <summary>ADD_ORDER_NOTE [ + ]</summary>
+            <div class="cart-drawer-industrial__note-content">
+              <textarea
+                name="note"
+                class="cart-drawer-industrial__note-input"
+                placeholder="Special instructions..."
+                data-cart-note
+              >{{ cart.note }}</textarea>
+            </div>
+          </details>
+        {%- endif -%}
+
+        <div class="cart-drawer-industrial__totals">
+          <div class="cart-drawer-industrial__total-row">
+            <span>SUBTOTAL:</span>
+            <span class="cart-drawer-industrial__subtotal" data-cart-subtotal>
+              {{ cart.total_price | money }}
+            </span>
+          </div>
+          <p class="cart-drawer-industrial__shipping-note">
+            Shipping & taxes calculated at checkout.
+          </p>
+        </div>
+
+        <a href="{{ routes.cart_url }}" class="cart-drawer-industrial__view-btn">
+          VIEW_FULL_CART [ → ]
+        </a>
+
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="cart-drawer-industrial__checkout-btn">
+            PROCEED_TO_CHECKOUT [ → ]
+          </button>
+        </form>
+      </footer>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cart-drawer-industrial {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    visibility: hidden;
+  }
+
+  .cart-drawer-industrial[aria-hidden="false"] {
+    visibility: visible;
+  }
+
+  .cart-drawer-industrial__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .cart-drawer-industrial[aria-hidden="false"] .cart-drawer-industrial__overlay {
+    opacity: 1;
+  }
+
+  .cart-drawer-industrial__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-background);
+    border-left: 2px solid var(--color-border);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .cart-drawer-industrial[aria-hidden="false"] .cart-drawer-industrial__content {
+    transform: translateX(0);
+  }
+
+  /* Header */
+  .cart-drawer-industrial__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .cart-drawer-industrial__title {
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .cart-drawer-industrial__count {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+    color: var(--color-primary);
+  }
+
+  .cart-drawer-industrial__close {
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    background: none;
+    border: 2px solid var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: none;
+  }
+
+  .cart-drawer-industrial__close:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  /* Body */
+  .cart-drawer-industrial__body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .cart-drawer-industrial__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cart-drawer-industrial__item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .cart-drawer-industrial__item-image {
+    width: 80px;
+    height: 80px;
+    background: var(--color-background-secondary);
+    border: 2px solid var(--color-border);
+  }
+
+  .cart-drawer-industrial__image,
+  .cart-drawer-industrial__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cart-drawer-industrial__item-details {
+    min-width: 0;
+  }
+
+  .cart-drawer-industrial__item-meta {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  .cart-drawer-industrial__item-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem;
+    line-height: 1.2;
+  }
+
+  .cart-drawer-industrial__item-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .cart-drawer-industrial__item-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .cart-drawer-industrial__item-variant {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 0.75rem;
+  }
+
+  .cart-drawer-industrial__item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cart-drawer-industrial__quantity {
+    display: flex;
+    border: 2px solid var(--color-border);
+  }
+
+  .cart-drawer-industrial__qty-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    background: var(--color-background-secondary);
+    border: none;
+    cursor: pointer;
+    transition: none;
+  }
+
+  .cart-drawer-industrial__qty-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .cart-drawer-industrial__qty-value {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+    border-left: 2px solid var(--color-border);
+    border-right: 2px solid var(--color-border);
+  }
+
+  .cart-drawer-industrial__item-price {
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .cart-drawer-industrial__remove {
+    padding: 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    align-self: start;
+    transition: none;
+  }
+
+  .cart-drawer-industrial__remove:hover {
+    color: var(--color-error);
+  }
+
+  /* Empty State */
+  .cart-drawer-industrial__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .cart-drawer-industrial__empty p {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .cart-drawer-industrial__empty-sub {
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem !important;
+  }
+
+  /* Footer */
+  .cart-drawer-industrial__footer {
+    padding: 1.25rem;
+    border-top: 2px solid var(--color-border);
+    background: var(--color-background-secondary);
+  }
+
+  .cart-drawer-industrial__note-toggle {
+    margin-bottom: 1rem;
+  }
+
+  .cart-drawer-industrial__note-toggle summary {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .cart-drawer-industrial__note-toggle summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cart-drawer-industrial__note-content {
+    margin-top: 0.75rem;
+  }
+
+  .cart-drawer-industrial__note-input {
+    width: 100%;
+    min-height: 80px;
+    padding: 0.75rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    border: 2px solid var(--color-border);
+    background: var(--color-background);
+    resize: vertical;
+  }
+
+  .cart-drawer-industrial__totals {
+    margin-bottom: 1rem;
+  }
+
+  .cart-drawer-industrial__total-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .cart-drawer-industrial__subtotal {
+    color: var(--color-primary);
+  }
+
+  .cart-drawer-industrial__shipping-note {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin: 0.5rem 0 0;
+  }
+
+  .cart-drawer-industrial__view-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid var(--color-border);
+    color: var(--color-text);
+    transition: none;
+  }
+
+  .cart-drawer-industrial__view-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .cart-drawer-industrial__checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 1rem;
+    font-weight: 700;
+    background: var(--color-primary);
+    border: none;
+    color: var(--color-background);
+    cursor: pointer;
+    transition: none;
+  }
+
+  .cart-drawer-industrial__checkout-btn:hover {
+    background: var(--color-text);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class CartDrawer {
+    constructor() {
+      this.drawer = document.querySelector('[data-cart-drawer]');
+      this.closeButtons = document.querySelectorAll('[data-cart-close]');
+
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      this.closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => this.close());
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.close();
+      });
+
+      // Cart button opens drawer
+      document.querySelectorAll('.header-industrial__cart, [data-cart-toggle]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.open();
+        });
+      });
+    }
+
+    open() {
+      this.drawer?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+      this.drawer?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  new CartDrawer();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Cart drawer industrial",
+  "tag": "section",
+  "class": "section-cart-drawer-industrial",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_order_note",
+      "label": "Show order note field",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,13 +1,85 @@
 {
   "sections": {
     "hero": {
-      "type": "hero",
-      "settings": {}
+      "type": "hero-industrial",
+      "settings": {
+        "overlay_opacity": 60,
+        "height": 600,
+        "heading": "Precision Welding Systems",
+        "text": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>",
+        "button_label": "Explore Equipment",
+        "button_link": "shopify://collections/all"
+      }
     },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {}
+    "search": {
+      "type": "ai-search",
+      "settings": {
+        "heading": "Find The Right Gear",
+        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
+        "button_label": "Search",
+        "show_suggestions": true
+      },
+      "blocks": {
+        "suggestion-1": {
+          "type": "suggestion",
+          "settings": {
+            "label": "MIG Welders",
+            "query": "MIG welder"
+          }
+        },
+        "suggestion-2": {
+          "type": "suggestion",
+          "settings": {
+            "label": "TIG Welders",
+            "query": "TIG welder"
+          }
+        },
+        "suggestion-3": {
+          "type": "suggestion",
+          "settings": {
+            "label": "Safety Gear",
+            "query": "safety equipment"
+          }
+        }
+      },
+      "block_order": ["suggestion-1", "suggestion-2", "suggestion-3"]
+    },
+    "featured": {
+      "type": "smart-grid",
+      "settings": {
+        "heading": "Core Solutions",
+        "layout": "highlight",
+        "use_surface_bg": false
+      },
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "show_placeholder": true,
+            "tag": "Heavy Equipment",
+            "heading": "MIG-250 Pro Series",
+            "text": "High performance welding for industrial fabrication. Container query active: horizontal layout.",
+            "button_label": "View Specs",
+            "button_link": ""
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "heading": "Safety Gear",
+            "text": "Helmets, gloves, and fume extraction."
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "heading": "Automation",
+            "text": "Robotic cells and Cobot integration."
+          }
+        }
+      },
+      "block_order": ["card-1", "card-2", "card-3"]
     }
   },
-  "order": ["hero", "featured-collection"]
+  "order": ["hero", "search", "featured"]
 }

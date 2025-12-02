@@ -1,0 +1,148 @@
+{%- comment -%}
+  Hero Industrial - Forge Industrial Theme
+  Full-width image with overlay, content box with left border accent
+{%- endcomment -%}
+
+<section class="hero-industrial" data-section-id="{{ section.id }}" style="
+  {%- if section.settings.image -%}
+    background-image: linear-gradient(rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }}), rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }})), url('{{ section.settings.image | image_url: width: 1920 }}');
+  {%- else -%}
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80');
+  {%- endif -%}
+  min-height: {{ section.settings.height }}px;
+">
+  <div class="container hero-container">
+    <div class="hero-box">
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero-heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="hero-text">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="btn hero-btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-industrial {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #333;
+    color: white;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-container {
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .hero-box {
+    background: var(--color-background);
+    color: var(--color-text);
+    padding: 40px;
+    max-width: 600px;
+    border-left: 8px solid var(--color-primary);
+  }
+
+  .hero-heading {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .hero-text p {
+    margin: 0;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+  }
+
+  @media (max-width: 768px) {
+    .hero-box {
+      padding: 30px;
+      margin: 0 -24px;
+      border-left-width: 5px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Industrial",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Section height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Precision Welding Systems"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Explore Equipment"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Industrial"
+    }
+  ]
+}
+{% endschema %}

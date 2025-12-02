@@ -1,0 +1,620 @@
+{%- comment -%}
+  Footer Industrial Section
+  Industrial-style footer matching The Machinist design system.
+  Features grid layout, mono fonts, and technical aesthetic.
+{%- endcomment -%}
+
+{%- liquid
+  assign style = section.settings.style
+  assign current_year = 'now' | date: '%Y'
+-%}
+
+<footer
+  class="footer-industrial footer-industrial--{{ style }}"
+  style="
+    --footer-bg: {{ section.settings.background_color }};
+    --footer-text: {{ section.settings.text_color }};
+    --footer-border: {{ section.settings.border_color }};
+  "
+>
+  {%- comment -%} Main Footer Content {%- endcomment -%}
+  <div class="footer-industrial__main">
+    <div class="footer-industrial__grid">
+      {%- comment -%} Brand Column {%- endcomment -%}
+      <div class="footer-industrial__brand">
+        <div class="footer-industrial__logo">
+          {%- if section.settings.logo -%}
+            {% render 'image',
+              image: section.settings.logo,
+              width: section.settings.logo_width,
+              class: 'footer-industrial__logo-img'
+            %}
+          {%- else -%}
+            <span class="footer-industrial__logo-text">
+              {{ section.settings.logo_text | default: shop.name }}
+              {%- if section.settings.logo_suffix != blank -%}
+                <span class="footer-industrial__logo-suffix">{{ section.settings.logo_suffix }}</span>
+              {%- endif -%}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.description != blank -%}
+          <p class="footer-industrial__description">
+            {{ section.settings.description }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.show_social -%}
+          <div class="footer-industrial__social">
+            <span class="footer-industrial__social-label">CONNECT:</span>
+            <div class="footer-industrial__social-links">
+              {%- if settings.social_twitter_link != blank -%}
+                <a href="{{ settings.social_twitter_link }}" class="footer-industrial__social-link" aria-label="Twitter">X</a>
+              {%- endif -%}
+              {%- if settings.social_facebook_link != blank -%}
+                <a href="{{ settings.social_facebook_link }}" class="footer-industrial__social-link" aria-label="Facebook">FB</a>
+              {%- endif -%}
+              {%- if settings.social_instagram_link != blank -%}
+                <a href="{{ settings.social_instagram_link }}" class="footer-industrial__social-link" aria-label="Instagram">IG</a>
+              {%- endif -%}
+              {%- if settings.social_youtube_link != blank -%}
+                <a href="{{ settings.social_youtube_link }}" class="footer-industrial__social-link" aria-label="YouTube">YT</a>
+              {%- endif -%}
+              {%- if settings.social_linkedin_link != blank -%}
+                <a href="{{ settings.social_linkedin_link }}" class="footer-industrial__social-link" aria-label="LinkedIn">LI</a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Menu Columns {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div class="footer-industrial__menu-col" {{ block.shopify_attributes }}>
+              <h3 class="footer-industrial__menu-title">{{ block.settings.title }}</h3>
+              {%- if block.settings.menu != blank -%}
+                <ul class="footer-industrial__menu">
+                  {%- for link in linklists[block.settings.menu].links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="footer-industrial__menu-link">
+                        {{ link.title | upcase | replace: ' ', '_' }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+
+          {%- when 'newsletter' -%}
+            <div class="footer-industrial__newsletter" {{ block.shopify_attributes }}>
+              <h3 class="footer-industrial__menu-title">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p class="footer-industrial__newsletter-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+
+              {%- form 'customer', id: 'footer-newsletter', class: 'footer-industrial__newsletter-form' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="footer-industrial__newsletter-row">
+                  <label for="newsletter-email" class="visually-hidden">Email</label>
+                  <input
+                    type="email"
+                    name="contact[email]"
+                    id="newsletter-email"
+                    class="footer-industrial__newsletter-input"
+                    placeholder="EMAIL_ADDRESS..."
+                    required
+                    autocomplete="email"
+                  >
+                  <button type="submit" class="footer-industrial__newsletter-btn">
+                    SUBMIT [ → ]
+                  </button>
+                </div>
+              {%- endform -%}
+            </div>
+
+          {%- when 'contact' -%}
+            <div class="footer-industrial__contact" {{ block.shopify_attributes }}>
+              <h3 class="footer-industrial__menu-title">{{ block.settings.title }}</h3>
+              <ul class="footer-industrial__contact-list">
+                {%- if block.settings.address != blank -%}
+                  <li>
+                    <span class="footer-industrial__contact-label">LOC:</span>
+                    {{ block.settings.address }}
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.phone != blank -%}
+                  <li>
+                    <span class="footer-industrial__contact-label">TEL:</span>
+                    <a href="tel:{{ block.settings.phone | remove: ' ' | remove: '-' }}">{{ block.settings.phone }}</a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.email != blank -%}
+                  <li>
+                    <span class="footer-industrial__contact-label">EMAIL:</span>
+                    <a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.hours != blank -%}
+                  <li>
+                    <span class="footer-industrial__contact-label">HRS:</span>
+                    {{ block.settings.hours }}
+                  </li>
+                {%- endif -%}
+              </ul>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} Bottom Bar {%- endcomment -%}
+  <div class="footer-industrial__bottom">
+    <div class="footer-industrial__bottom-inner">
+      <p class="footer-industrial__copyright">
+        © {{ current_year }} {{ shop.name | upcase }}. ALL_RIGHTS_RESERVED.
+      </p>
+
+      <div class="footer-industrial__bottom-links">
+        {%- if section.settings.show_payment_icons -%}
+          <div class="footer-industrial__payment">
+            {%- for type in shop.enabled_payment_types -%}
+              {{ type | payment_type_svg_tag: class: 'footer-industrial__payment-icon' }}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <nav class="footer-industrial__legal" aria-label="Legal">
+          <a href="{{ routes.policies_privacy_policy_url | default: '/policies/privacy-policy' }}">PRIVACY</a>
+          <a href="{{ routes.policies_terms_of_service_url | default: '/policies/terms-of-service' }}">TERMS</a>
+          <a href="{{ routes.policies_shipping_policy_url | default: '/policies/shipping-policy' }}">SHIPPING</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .footer-industrial {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    border-top: 2px solid var(--footer-border);
+  }
+
+  /* Main Content */
+  .footer-industrial__main {
+    padding: 3rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-industrial__grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 48rem) {
+    .footer-industrial__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .footer-industrial__grid {
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  /* Brand Column */
+  .footer-industrial__brand {
+    padding-right: 2rem;
+  }
+
+  .footer-industrial__logo {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-industrial__logo-text {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .footer-industrial__logo-suffix {
+    color: var(--color-primary);
+  }
+
+  .footer-industrial__description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Social */
+  .footer-industrial__social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-industrial__social-label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+  }
+
+  .footer-industrial__social-links {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .footer-industrial__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--footer-text);
+    border: 2px solid var(--footer-border);
+    transition: none;
+  }
+
+  .footer-industrial__social-link:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--footer-bg);
+  }
+
+  /* Menu Columns */
+  .footer-industrial__menu-title {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--footer-border);
+  }
+
+  .footer-industrial__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-industrial__menu li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-industrial__menu-link {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--footer-text);
+    transition: none;
+  }
+
+  .footer-industrial__menu-link:hover {
+    color: var(--color-primary);
+  }
+
+  /* Newsletter */
+  .footer-industrial__newsletter-text {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-industrial__newsletter-row {
+    display: flex;
+    gap: 2px;
+  }
+
+  .footer-industrial__newsletter-input {
+    flex: 1;
+    padding: 0.75rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    background: var(--color-background);
+    border: 2px solid var(--footer-border);
+    color: var(--color-text);
+  }
+
+  .footer-industrial__newsletter-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .footer-industrial__newsletter-btn {
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: var(--color-primary);
+    border: none;
+    color: var(--footer-bg);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: none;
+  }
+
+  .footer-industrial__newsletter-btn:hover {
+    background: var(--footer-text);
+  }
+
+  /* Contact */
+  .footer-industrial__contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-industrial__contact-list li {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .footer-industrial__contact-label {
+    color: var(--color-text-secondary);
+    margin-right: 0.5rem;
+  }
+
+  .footer-industrial__contact-list a {
+    color: var(--footer-text);
+    text-decoration: none;
+  }
+
+  .footer-industrial__contact-list a:hover {
+    color: var(--color-primary);
+  }
+
+  /* Bottom Bar */
+  .footer-industrial__bottom {
+    padding: 1.25rem 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 2px solid var(--footer-border);
+  }
+
+  .footer-industrial__bottom-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-industrial__copyright {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .footer-industrial__bottom-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-industrial__payment {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .footer-industrial__payment-icon {
+    width: 38px;
+    height: 24px;
+  }
+
+  .footer-industrial__legal {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-industrial__legal a {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    transition: none;
+  }
+
+  .footer-industrial__legal a:hover {
+    color: var(--color-primary);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer industrial",
+  "tag": "section",
+  "class": "section-footer-industrial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Design style",
+      "default": "machinist",
+      "options": [
+        { "value": "welder", "label": "The Welder" },
+        { "value": "machinist", "label": "The Machinist" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "FORGE"
+    },
+    {
+      "type": "text",
+      "id": "logo_suffix",
+      "label": "Logo suffix (accent color)",
+      "default": "IND."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Industrial-grade products built to perform. Precision engineering for demanding environments."
+    },
+    {
+      "type": "header",
+      "content": "Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "QUICK_LINKS"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "NEWSLETTER"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Subscribe for product updates and industry news."
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "CONTACT"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email"
+        },
+        {
+          "type": "text",
+          "id": "hours",
+          "label": "Hours",
+          "default": "Mon-Fri 9AM-5PM EST"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer industrial",
+      "blocks": [
+        { "type": "menu", "settings": { "title": "PRODUCTS" } },
+        { "type": "menu", "settings": { "title": "COMPANY" } },
+        { "type": "newsletter" }
+      ]
+    }
+  ]
+}
+{% endschema %}

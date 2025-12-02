@@ -1,0 +1,279 @@
+{%- comment -%}
+  AI Search / AutoRAG Section - Forge Industrial Theme
+  Surface background, centered search with AI-powered results
+{%- endcomment -%}
+
+<section class="section-autorag" data-section-id="{{ section.id }}">
+  <div class="container rag-container">
+    {%- if section.settings.heading != blank -%}
+      <h2>{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <form action="{{ routes.search_url }}" method="get" class="rag-input-wrapper" role="search">
+      <input
+        type="search"
+        name="q"
+        id="RagInput-{{ section.id }}"
+        class="rag-input"
+        placeholder="{{ section.settings.placeholder | default: 'Search for products...' }}"
+        autocomplete="off"
+        aria-label="Search"
+      >
+      <button type="submit" class="btn rag-submit">
+        {{ section.settings.button_label | default: 'Search' }}
+      </button>
+    </form>
+
+    {%- if section.settings.show_suggestions -%}
+      <div class="rag-suggestions">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'suggestion' -%}
+            <a href="{{ routes.search_url }}?q={{ block.settings.query | url_encode }}" class="rag-suggestion" {{ block.shopify_attributes }}>
+              {{ block.settings.label }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div id="RagResults-{{ section.id }}" class="rag-results" data-rag-results></div>
+  </div>
+</section>
+
+<style>
+  .section-autorag {
+    background: var(--color-surface);
+    padding: 80px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .rag-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .rag-container h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .rag-input-wrapper {
+    display: flex;
+    background: var(--color-background);
+    border: 2px solid var(--color-text);
+  }
+
+  .rag-input {
+    width: 100%;
+    border: none;
+    padding: 20px;
+    font-size: 1.2rem;
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-body);
+  }
+
+  .rag-input::placeholder {
+    color: var(--color-text);
+    opacity: 0.5;
+  }
+
+  .rag-submit {
+    border-radius: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Search Suggestions */
+  .rag-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .rag-suggestion {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    opacity: 0.7;
+    transition: all 0.2s;
+  }
+
+  .rag-suggestion:hover {
+    border-color: var(--color-primary);
+    opacity: 1;
+  }
+
+  /* Results */
+  .rag-results {
+    margin-top: 20px;
+    text-align: left;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    display: none;
+  }
+
+  .rag-results.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .rag-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .rag-item:last-child {
+    border-bottom: none;
+  }
+
+  .rag-item:hover {
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .rag-item-image {
+    width: 60px;
+    height: 60px;
+    background: var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--color-text);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .rag-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .rag-item-content {
+    flex: 1;
+  }
+
+  .rag-item-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .rag-score {
+    font-size: 0.75rem;
+    background: var(--color-border);
+    padding: 2px 6px;
+    font-weight: bold;
+    color: var(--color-text);
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  .rag-item-snippet {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .rag-input-wrapper {
+      flex-direction: column;
+    }
+
+    .rag-submit {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "AI Search",
+  "tag": "section",
+  "class": "section-search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find The Right Gear"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Search placeholder",
+      "default": "Ask AI: 'Which welder is best for aluminum?'"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_suggestions",
+      "label": "Show search suggestions",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "suggestion",
+      "name": "Search suggestion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "MIG Welders"
+        },
+        {
+          "type": "text",
+          "id": "query",
+          "label": "Search query",
+          "default": "MIG welder"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AI Search",
+      "blocks": [
+        {
+          "type": "suggestion",
+          "settings": {
+            "label": "MIG Welders",
+            "query": "MIG welder"
+          }
+        },
+        {
+          "type": "suggestion",
+          "settings": {
+            "label": "TIG Welders",
+            "query": "TIG welder"
+          }
+        },
+        {
+          "type": "suggestion",
+          "settings": {
+            "label": "Safety Gear",
+            "query": "safety"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

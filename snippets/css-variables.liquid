@@ -1,138 +1,28 @@
 {%- comment -%}
-  Renders CSS custom properties for the theme.
-  Colors and fonts are pulled directly from the current preset in settings_data.json
-  No need for manual preset switching - Shopify handles this automatically.
+  CSS Variables - Design System Core
+  Based on Forge Industrial Theme Presets
 {%- endcomment -%}
 
 <style>
-  {{ settings.font_heading | font_face: font_display: 'swap' }}
-  {{ settings.font_body | font_face: font_display: 'swap' }}
-</style>
-
-{% style %}
   :root {
-    /* Colors - Primary */
+    /* Layout */
+    --radius: 0px;
+    --container-width: 1200px;
+    --grid-gap: 24px;
+
+    /* Colors from settings */
     --color-primary: {{ settings.color_primary }};
-    --color-secondary: {{ settings.color_secondary }};
-    --color-accent: {{ settings.color_accent }};
-
-    /* Colors - Background */
-    --color-background: {{ settings.color_background }};
-    --color-background-secondary: {{ settings.color_background_secondary }};
-
-    /* Colors - Text */
     --color-text: {{ settings.color_text }};
-    --color-text-secondary: {{ settings.color_text_secondary }};
-
-    /* Colors - Buttons */
-    --color-button-background: {{ settings.color_button_background }};
+    --color-background: {{ settings.color_background }};
+    --color-surface: {{ settings.color_surface }};
+    --color-border: {{ settings.color_border }};
+    --color-header-bg: {{ settings.color_header_bg }};
+    --color-header-text: {{ settings.color_header_text }};
     --color-button-text: {{ settings.color_button_text }};
 
-    /* Colors - Border */
-    --color-border: {{ settings.color_border }};
-
-    /* Colors - Status */
-    --color-success: {{ settings.color_success }};
-    --color-warning: {{ settings.color_warning }};
-    --color-error: {{ settings.color_error }};
-
-    /* Typography - Fonts */
-    --font-heading-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-    --font-heading-style: {{ settings.font_heading.style }};
-    --font-heading-weight: {{ settings.font_heading.weight }};
-
-    --font-body-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-    --font-body-style: {{ settings.font_body.style }};
-    --font-body-weight: {{ settings.font_body.weight }};
-
-    /* Typography - Scale */
-    --font-heading-scale: {{ settings.font_heading_scale | default: 100 | divided_by: 100.0 }};
-    --font-body-scale: {{ settings.font_body_scale | default: 100 | divided_by: 100.0 }};
-
-    /* Typography - Sizes (using fluid typography) */
-    --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-    --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
-    --font-size-base: calc(clamp(1rem, 0.9rem + 0.5vw, 1.125rem) * var(--font-body-scale));
-    --font-size-lg: calc(clamp(1.125rem, 1rem + 0.625vw, 1.25rem) * var(--font-body-scale));
-    --font-size-xl: calc(clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem) * var(--font-heading-scale));
-    --font-size-2xl: calc(clamp(1.5rem, 1.3rem + 1vw, 2rem) * var(--font-heading-scale));
-    --font-size-3xl: calc(clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem) * var(--font-heading-scale));
-    --font-size-4xl: calc(clamp(2.25rem, 1.75rem + 2.5vw, 3rem) * var(--font-heading-scale));
-
-    /* Layout */
-    --page-width: {{ settings.page_width | default: 1200 }}px;
-    --spacing-sections: {{ settings.spacing_sections | default: 40 }}px;
-    --grid-gap: {{ settings.grid_gap | default: 24 }}px;
-
-    /* Spacing scale */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-20: 5rem;
-
-    /* Border radius */
-    --radius-button: {{ settings.button_border_radius | default: 4 }}px;
-    --radius-input: {{ settings.input_border_radius | default: 4 }}px;
-    --radius-card: {{ settings.card_border_radius | default: 8 }}px;
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 1rem;
-    --radius-full: 9999px;
-
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-
-    /* Transitions */
-    --duration-fast: 150ms;
-    --duration-normal: 250ms;
-    --duration-slow: 400ms;
-    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Z-index scale */
-    --z-dropdown: 100;
-    --z-sticky: 200;
-    --z-fixed: 300;
-    --z-modal-backdrop: 400;
-    --z-modal: 500;
-    --z-popover: 600;
-    --z-tooltip: 700;
-
-    /* Content grid for sections */
-    --content-grid:
-      [full-start] minmax(var(--grid-gap), 1fr)
-      [content-start] min(calc(var(--page-width) - var(--grid-gap) * 2), 100% - var(--grid-gap) * 2)
-      [content-end] minmax(var(--grid-gap), 1fr)
-      [full-end];
+    /* Typography */
+    --font-heading: {{ settings.font_heading }}, sans-serif;
+    --font-body: {{ settings.font_body }}, sans-serif;
+    --font-size-base: 16px;
   }
-
-  /* Apply base styles */
-  body {
-    font-family: var(--font-body-family);
-    font-style: var(--font-body-style);
-    font-weight: var(--font-body-weight);
-    font-size: var(--font-size-base);
-    line-height: 1.6;
-    color: var(--color-text);
-    background-color: var(--color-background);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading-family);
-    font-style: var(--font-heading-style);
-    font-weight: var(--font-heading-weight);
-    line-height: 1.2;
-  }
-{% endstyle %}
+</style>

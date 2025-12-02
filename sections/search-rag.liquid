@@ -1,0 +1,169 @@
+{%- comment -%}
+  Search RAG Section - Forge Industrial Theme
+  AI-powered search with industrial styling
+{%- endcomment -%}
+
+<section class="section-autorag">
+  <div class="container rag-container">
+    {%- if section.settings.heading != blank -%}
+      <h2>{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    
+    <form action="{{ routes.search_url }}" method="get" class="rag-input-wrapper" role="search">
+      <input 
+        type="search" 
+        name="q" 
+        class="rag-input" 
+        placeholder="{{ section.settings.placeholder }}"
+        autocomplete="off"
+        aria-label="Search"
+      >
+      <button type="submit" class="btn">{{ section.settings.button_text }}</button>
+    </form>
+
+    {%- if section.settings.show_popular -%}
+      <div class="rag-popular">
+        <span class="rag-popular-label">Popular:</span>
+        {%- assign popular_terms = section.settings.popular_terms | split: ',' -%}
+        {%- for term in popular_terms -%}
+          <a href="{{ routes.search_url }}?q={{ term | strip | url_encode }}" class="rag-popular-link">
+            {{ term | strip }}
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .section-autorag {
+    background: var(--color-surface);
+    padding: 80px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .rag-container {
+    max-width: 700px;
+  }
+
+  .rag-container h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .rag-input-wrapper {
+    display: flex;
+    background: var(--color-background);
+    border: 2px solid var(--color-text);
+  }
+
+  .rag-input {
+    flex: 1;
+    border: none;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .rag-input::placeholder {
+    color: var(--color-text);
+    opacity: 0.5;
+  }
+
+  .rag-input-wrapper .btn {
+    border-radius: 0;
+    padding: 20px 30px;
+  }
+
+  .rag-popular {
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+
+  .rag-popular-label {
+    opacity: 0.6;
+    margin-right: 10px;
+  }
+
+  .rag-popular-link {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 4px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .rag-popular-link:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .section-autorag {
+      padding: 60px 0;
+    }
+
+    .rag-input-wrapper {
+      flex-direction: column;
+    }
+
+    .rag-input {
+      padding: 16px;
+      font-size: 1rem;
+    }
+
+    .rag-input-wrapper .btn {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Search RAG",
+  "tag": "section",
+  "class": "section-search",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find The Right Gear"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Search Placeholder",
+      "default": "Ask AI: 'Which welder is best for aluminum?'"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "SEARCH"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popular",
+      "label": "Show Popular Searches",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "popular_terms",
+      "label": "Popular Search Terms",
+      "info": "Comma separated",
+      "default": "MIG Welder, TIG, Plasma Cutter, Safety Gear"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search RAG"
+    }
+  ]
+}
+{% endschema %}

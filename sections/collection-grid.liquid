@@ -1,0 +1,408 @@
+{%- comment -%}
+  Collection Grid - Forge Industrial Theme
+  Sidebar filters + product grid matching mockup
+{%- endcomment -%}
+
+{%- paginate collection.products by section.settings.products_per_page -%}
+<section class="section-collection" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="collection-layout">
+      {%- comment -%} Filter Sidebar {%- endcomment -%}
+      {%- if section.settings.show_filters -%}
+        <aside class="filter-sidebar">
+          <div class="filter-group filter-group--header">
+            <h4>Filter By</h4>
+          </div>
+
+          {%- comment -%} Price Filter {%- endcomment -%}
+          <details class="filter-group" open>
+            <summary>Price</summary>
+            <div class="filter-options">
+              <label class="filter-label">
+                <input type="checkbox" class="filter-checkbox" data-filter="price" value="0-500">
+                $0 - $500
+              </label>
+              <label class="filter-label">
+                <input type="checkbox" class="filter-checkbox" data-filter="price" value="500-1000">
+                $500 - $1,000
+              </label>
+              <label class="filter-label">
+                <input type="checkbox" class="filter-checkbox" data-filter="price" value="1000+">
+                $1,000+
+              </label>
+            </div>
+          </details>
+
+          {%- comment -%} Product Type Filter {%- endcomment -%}
+          {%- if collection.all_types.size > 0 -%}
+            <details class="filter-group" open>
+              <summary>Type</summary>
+              <div class="filter-options">
+                {%- for type in collection.all_types -%}
+                  {%- if type != blank -%}
+                    <label class="filter-label">
+                      <input type="checkbox" class="filter-checkbox" data-filter="type" value="{{ type | handleize }}">
+                      {{ type }}
+                    </label>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </details>
+          {%- endif -%}
+
+          {%- comment -%} Vendor Filter {%- endcomment -%}
+          {%- if collection.all_vendors.size > 0 -%}
+            <details class="filter-group">
+              <summary>Brand</summary>
+              <div class="filter-options">
+                {%- for vendor in collection.all_vendors -%}
+                  {%- if vendor != blank -%}
+                    <label class="filter-label">
+                      <input type="checkbox" class="filter-checkbox" data-filter="vendor" value="{{ vendor | handleize }}">
+                      {{ vendor }}
+                    </label>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </details>
+          {%- endif -%}
+        </aside>
+      {%- endif -%}
+
+      {%- comment -%} Product Grid {%- endcomment -%}
+      <div class="collection-main">
+        {%- if collection.products.size > 0 -%}
+          <div class="collection-grid columns-{{ section.settings.columns }}">
+            {%- for product in collection.products -%}
+              <a href="{{ product.url }}" class="industrial-card industrial-card--product">
+                {%- if product.featured_image -%}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | default: product.title }}"
+                    class="card-img"
+                    loading="lazy"
+                    width="600"
+                    height="400"
+                  >
+                {%- else -%}
+                  <div class="card-img card-img--placeholder">IMG</div>
+                {%- endif -%}
+
+                <div class="card-content">
+                  <h4 class="card-title">{{ product.title }}</h4>
+                  <p class="card-price">{{ product.price | money }}</p>
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+
+          {%- comment -%} Pagination {%- endcomment -%}
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="Pagination">
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" class="pagination-btn">← Prev</a>
+              {%- endif -%}
+
+              <div class="pagination-pages">
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}" class="pagination-page">{{ part.title }}</a>
+                  {%- else -%}
+                    <span class="pagination-page pagination-page--current">{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" class="pagination-btn">Next →</a>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- else -%}
+          <div class="collection-empty">
+            <p>No products found in this collection.</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endpaginate -%}
+
+<style>
+  .section-collection {
+    padding: 40px 0 60px;
+  }
+
+  .collection-layout {
+    display: grid;
+    gap: 40px;
+  }
+
+  @media (min-width: 900px) {
+    .collection-layout {
+      grid-template-columns: 250px 1fr;
+    }
+  }
+
+  /* Filter Sidebar */
+  .filter-sidebar {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .filter-sidebar {
+      display: block;
+    }
+  }
+
+  .filter-group {
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 0;
+  }
+
+  .filter-group:first-child {
+    padding-top: 0;
+  }
+
+  .filter-group--header h4 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .filter-group summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+
+  .filter-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .filter-group summary::after {
+    content: "+";
+    font-size: 1.2em;
+    color: var(--color-primary);
+  }
+
+  .filter-group[open] summary::after {
+    content: "−";
+  }
+
+  .filter-options {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .filter-checkbox {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-border);
+    background: var(--color-background);
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .filter-checkbox:checked {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .filter-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-button-text);
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* Product Grid */
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+  }
+
+  .collection-grid.columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .collection-grid.columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .collection-grid.columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    .collection-grid.columns-2,
+    .collection-grid.columns-3,
+    .collection-grid.columns-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Product Card */
+  .industrial-card--product {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .industrial-card--product:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-bottom: 4px solid var(--color-primary);
+  }
+
+  .industrial-card--product .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: var(--color-border);
+  }
+
+  .card-img--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    opacity: 0.5;
+    font-weight: bold;
+  }
+
+  .industrial-card--product .card-content {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+
+  .card-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  .pagination-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .pagination-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .pagination-pages {
+    display: flex;
+    gap: 5px;
+  }
+
+  .pagination-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .pagination-page:hover {
+    border-color: var(--color-primary);
+  }
+
+  .pagination-page--current {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-button-text);
+  }
+
+  /* Empty State */
+  .collection-empty {
+    text-align: center;
+    padding: 60px 0;
+    opacity: 0.7;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show filters sidebar",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

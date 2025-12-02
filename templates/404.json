@@ -60,8 +60,12 @@
       }
     },
     "main": {
-      "type": "main-404",
-      "settings": {}
+      "type": "404",
+      "settings": {
+        "heading": "Page Not Found",
+        "text": "The page you're looking for doesn't exist or has been moved.",
+        "button_label": "Back to Home"
+      }
     }
   },
   "order": [
