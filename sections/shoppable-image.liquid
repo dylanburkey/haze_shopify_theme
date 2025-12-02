@@ -1,0 +1,750 @@
+{% doc %}
+  Interactive shoppable image with product hotspots.
+  Users can click hotspots to view product details and add to cart.
+
+  @example
+  {% section 'shoppable-image' %}
+{% enddoc %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --hotspot-size: {{ section.settings.hotspot_size }}px;
+    --hotspot-color: {{ section.settings.hotspot_color }};
+    --hotspot-pulse-color: {{ section.settings.hotspot_pulse_color }};
+    --card-bg: {{ section.settings.card_background }};
+    --card-width: {{ section.settings.card_width }}px;
+  }
+{%- endstyle -%}
+
+<section class="shoppable-image section">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <header class="shoppable-image__header">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="shoppable-image__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+        <h2 class="shoppable-image__title">{{ section.settings.title }}</h2>
+      </header>
+    {%- endif -%}
+
+    <div class="shoppable-image__wrapper">
+      <div class="shoppable-image__container">
+        {%- if section.settings.image != blank -%}
+          {% render 'image',
+            image: section.settings.image,
+            class: 'shoppable-image__image',
+            loading: 'lazy'
+          %}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'shoppable-image__placeholder' }}
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+
+          <div
+            class="hotspot"
+            style="top: {{ block.settings.position_y }}%; left: {{ block.settings.position_x }}%;"
+            {{ block.shopify_attributes }}
+          >
+            <button
+              type="button"
+              class="hotspot__trigger"
+              aria-expanded="false"
+              aria-controls="hotspot-card-{{ block.id }}"
+              aria-label="{% if product != blank %}{{ product.title }}{% else %}Product details{% endif %}"
+              data-hotspot-trigger
+            >
+              <span class="hotspot__dot"></span>
+              <span class="hotspot__pulse"></span>
+            </button>
+
+            <div
+              id="hotspot-card-{{ block.id }}"
+              class="hotspot__card hotspot__card--{{ block.settings.card_position }}"
+              data-hotspot-card
+            >
+              {%- if product != blank -%}
+                <a href="{{ product.url }}" class="hotspot__product">
+                  {%- if product.featured_image != blank -%}
+                    <div class="hotspot__product-image">
+                      {% render 'image', image: product.featured_image, width: 200 %}
+                    </div>
+                  {%- endif -%}
+
+                  <div class="hotspot__product-info">
+                    <h4 class="hotspot__product-title">{{ product.title }}</h4>
+
+                    {%- if block.settings.show_vendor and product.vendor != blank -%}
+                      <p class="hotspot__product-vendor">{{ product.vendor }}</p>
+                    {%- endif -%}
+
+                    <div class="hotspot__product-price">
+                      {%- if product.compare_at_price > product.price -%}
+                        <span class="hotspot__price hotspot__price--sale">
+                          {{ product.price | money }}
+                        </span>
+                        <span class="hotspot__price hotspot__price--compare">
+                          {{ product.compare_at_price | money }}
+                        </span>
+                      {%- else -%}
+                        <span class="hotspot__price">{{ product.price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </a>
+
+                {%- if block.settings.show_quick_add and product.available -%}
+                  {%- if product.variants.size == 1 -%}
+                    <form action="{{ routes.cart_add_url }}" method="post" class="hotspot__form">
+                      <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+                      <button type="submit" class="button button--primary button--small hotspot__add-btn">
+                        {{ 'products.product.add_to_cart' | t }}
+                      </button>
+                    </form>
+                  {%- else -%}
+                    <a href="{{ product.url }}" class="button button--secondary button--small hotspot__add-btn">
+                      {{ 'products.card.view_product' | t }}
+                    </a>
+                  {%- endif -%}
+                {%- endif -%}
+
+              {%- else -%}
+                <div class="hotspot__empty">
+                  <p>Select a product</p>
+                </div>
+              {%- endif -%}
+
+              <button
+                type="button"
+                class="hotspot__close"
+                aria-label="{{ 'general.accessibility.close' | t }}"
+                data-hotspot-close
+              >
+                {% render 'icon', name: 'close', size: 16 %}
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_product_list -%}
+        <aside class="shoppable-image__sidebar">
+          <h3 class="shoppable-image__sidebar-title">{{ section.settings.sidebar_title | default: 'Featured products' }}</h3>
+          <ul class="shoppable-image__product-list" role="list">
+            {%- for block in section.blocks -%}
+              {%- assign product = block.settings.product -%}
+              {%- if product != blank -%}
+                <li class="shoppable-image__list-item">
+                  <a href="{{ product.url }}" class="shoppable-image__list-product">
+                    {%- if product.featured_image != blank -%}
+                      <div class="shoppable-image__list-image">
+                        {% render 'image', image: product.featured_image, width: 80 %}
+                      </div>
+                    {%- endif -%}
+                    <div class="shoppable-image__list-info">
+                      <span class="shoppable-image__list-title">{{ product.title }}</span>
+                      <span class="shoppable-image__list-price">{{ product.price | money }}</span>
+                    </div>
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </aside>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .shoppable-image__header {
+    text-align: center;
+    margin-block-end: var(--space-8);
+  }
+
+  .shoppable-image__subtitle {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-secondary);
+    margin-block-end: var(--space-2);
+  }
+
+  .shoppable-image__title {
+    font-size: var(--font-size-2xl);
+    margin: 0;
+  }
+
+  .shoppable-image__wrapper {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 64rem) {
+    .shoppable-image__wrapper {
+      grid-template-columns: 1fr 18rem;
+    }
+  }
+
+  .shoppable-image__container {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .shoppable-image__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .shoppable-image__placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-background-secondary);
+  }
+
+  /* Hotspot */
+  .hotspot {
+    position: absolute;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+  }
+
+  .hotspot__trigger {
+    position: relative;
+    width: var(--hotspot-size, 32px);
+    height: var(--hotspot-size, 32px);
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .hotspot__dot {
+    position: absolute;
+    inset: 0;
+    background-color: var(--hotspot-color, var(--color-secondary));
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform var(--duration-fast) var(--ease-default);
+  }
+
+  .hotspot__trigger:hover .hotspot__dot,
+  .hotspot__trigger[aria-expanded="true"] .hotspot__dot {
+    transform: scale(1.15);
+  }
+
+  .hotspot__pulse {
+    position: absolute;
+    inset: -6px;
+    background-color: var(--hotspot-pulse-color, var(--color-secondary));
+    border-radius: 50%;
+    opacity: 0;
+    animation: hotspot-pulse 2s infinite;
+  }
+
+  @keyframes hotspot-pulse {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+
+  .hotspot__trigger:hover .hotspot__pulse,
+  .hotspot__trigger[aria-expanded="true"] .hotspot__pulse {
+    animation: none;
+    opacity: 0;
+  }
+
+  /* Hotspot Card */
+  .hotspot__card {
+    position: absolute;
+    z-index: 20;
+    width: var(--card-width, 240px);
+    background-color: var(--card-bg, var(--color-background));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition:
+      opacity var(--duration-normal) var(--ease-default),
+      visibility var(--duration-normal) var(--ease-default),
+      transform var(--duration-normal) var(--ease-default);
+  }
+
+  .hotspot__card.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Card positioning */
+  .hotspot__card--bottom {
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+  }
+
+  .hotspot__card--bottom.is-open {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .hotspot__card--top {
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+  }
+
+  .hotspot__card--top.is-open {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .hotspot__card--left {
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-8px);
+  }
+
+  .hotspot__card--left.is-open {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .hotspot__card--right {
+    left: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+  }
+
+  .hotspot__card--right.is-open {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .hotspot__close {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    display: flex;
+    padding: var(--space-1);
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .hotspot__close:hover {
+    color: var(--color-text);
+  }
+
+  .hotspot__product {
+    display: block;
+    padding: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .hotspot__product-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    margin-block-end: var(--space-3);
+    background-color: var(--color-background-secondary);
+  }
+
+  .hotspot__product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hotspot__product-info {
+    text-align: center;
+  }
+
+  .hotspot__product-title {
+    margin: 0 0 var(--space-1);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .hotspot__product-vendor {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .hotspot__product-price {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+  }
+
+  .hotspot__price--sale {
+    color: var(--color-sale);
+    font-weight: 600;
+  }
+
+  .hotspot__price--compare {
+    color: var(--color-text-secondary);
+    text-decoration: line-through;
+  }
+
+  .hotspot__form {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+
+  .hotspot__add-btn {
+    width: 100%;
+  }
+
+  .hotspot__empty {
+    padding: var(--space-6);
+    text-align: center;
+    color: var(--color-text-secondary);
+  }
+
+  /* Sidebar Product List */
+  .shoppable-image__sidebar {
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+
+  .shoppable-image__sidebar-title {
+    font-size: var(--font-size-base);
+    margin: 0 0 var(--space-4);
+  }
+
+  .shoppable-image__product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .shoppable-image__list-item + .shoppable-image__list-item {
+    margin-block-start: var(--space-3);
+    padding-block-start: var(--space-3);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .shoppable-image__list-product {
+    display: flex;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .shoppable-image__list-image {
+    width: 4rem;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-background);
+  }
+
+  .shoppable-image__list-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .shoppable-image__list-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .shoppable-image__list-title {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .shoppable-image__list-price {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class ShoppableImage {
+    constructor() {
+      this.hotspots = document.querySelectorAll('.hotspot');
+      this.activeCard = null;
+
+      this.init();
+    }
+
+    init() {
+      this.hotspots.forEach(hotspot => {
+        const trigger = hotspot.querySelector('[data-hotspot-trigger]');
+        const card = hotspot.querySelector('[data-hotspot-card]');
+        const closeBtn = hotspot.querySelector('[data-hotspot-close]');
+
+        if (!trigger || !card) return;
+
+        // Toggle on click
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleCard(trigger, card);
+        });
+
+        // Close button
+        closeBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeCard(trigger, card);
+        });
+
+        // Keyboard navigation
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.toggleCard(trigger, card);
+          }
+          if (e.key === 'Escape') {
+            this.closeCard(trigger, card);
+          }
+        });
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.hotspot') && this.activeCard) {
+          this.closeAllCards();
+        }
+      });
+
+      // Close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.activeCard) {
+          this.closeAllCards();
+        }
+      });
+    }
+
+    toggleCard(trigger, card) {
+      const isOpen = card.classList.contains('is-open');
+
+      // Close any other open cards first
+      this.closeAllCards();
+
+      if (!isOpen) {
+        card.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        this.activeCard = card;
+
+        // Adjust position if card goes off-screen
+        this.adjustCardPosition(card);
+      }
+    }
+
+    closeCard(trigger, card) {
+      card.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      this.activeCard = null;
+    }
+
+    closeAllCards() {
+      this.hotspots.forEach(hotspot => {
+        const trigger = hotspot.querySelector('[data-hotspot-trigger]');
+        const card = hotspot.querySelector('[data-hotspot-card]');
+        if (trigger && card) {
+          this.closeCard(trigger, card);
+        }
+      });
+    }
+
+    adjustCardPosition(card) {
+      // Get card dimensions and position
+      const rect = card.getBoundingClientRect();
+      const container = card.closest('.shoppable-image__container').getBoundingClientRect();
+
+      // Check if card overflows container and adjust
+      if (rect.left < container.left) {
+        card.style.left = '0';
+        card.style.transform = card.style.transform.replace('translateX(-50%)', '');
+      }
+
+      if (rect.right > container.right) {
+        card.style.left = 'auto';
+        card.style.right = '0';
+        card.style.transform = card.style.transform.replace('translateX(-50%)', '');
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new ShoppableImage();
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Shoppable image",
+  "tag": "section",
+  "class": "section-shoppable-image",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop the look"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Product list"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_list",
+      "label": "Show product list sidebar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sidebar_title",
+      "label": "Sidebar title",
+      "default": "Featured products"
+    },
+    {
+      "type": "header",
+      "content": "Hotspot styling"
+    },
+    {
+      "type": "range",
+      "id": "hotspot_size",
+      "label": "Hotspot size",
+      "min": 24,
+      "max": 48,
+      "step": 4,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_color",
+      "label": "Hotspot color",
+      "default": "#334FB4"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_pulse_color",
+      "label": "Pulse animation color",
+      "default": "#334FB4"
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card width",
+      "min": 180,
+      "max": 320,
+      "step": 20,
+      "default": 240,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product hotspot",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "position_x",
+          "label": "Horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "label": "Vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "select",
+          "id": "card_position",
+          "label": "Card position",
+          "options": [
+            { "value": "bottom", "label": "Below" },
+            { "value": "top", "label": "Above" },
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "label": "Show vendor",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_quick_add",
+          "label": "Show add to cart button",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable image",
+      "blocks": [
+        { "type": "hotspot", "settings": { "position_x": 30, "position_y": 40 } },
+        { "type": "hotspot", "settings": { "position_x": 70, "position_y": 60 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

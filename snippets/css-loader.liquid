@@ -1,0 +1,8 @@
+{%- comment -%}
+  Non-blocking CSS Loader
+  Loads stylesheets without render-blocking for better performance
+  Usage: {% render 'css-loader', css: 'section-smart-grid.css' %}
+{%- endcomment -%}
+
+<link rel="stylesheet" href="{{ css | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ css | asset_url | stylesheet_tag }}</noscript>

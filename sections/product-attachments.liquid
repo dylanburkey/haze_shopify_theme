@@ -1,0 +1,65 @@
+{%- comment -%}
+  Product Attachments Section
+  Standalone section for displaying product documentation
+  Can be added to product pages via theme customizer
+{%- endcomment -%}
+
+{{ 'component-product-attachments.css' | asset_url | stylesheet_tag }}
+
+{%- if product -%}
+  <div class="section-product-attachments">
+    <div class="page-width">
+      <div class="product-attachments {% if section.settings.style == 'grid' %}product-attachments--grid{% endif %}">
+        {% render 'product-attachments', product: product %}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Attachments",
+  "class": "section-product-attachments",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Displays product documentation from metafields. Add files in the product admin under 'Attachments' metafields."
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Display style",
+      "options": [
+        { "value": "list", "label": "List (default)" },
+        { "value": "grid", "label": "Grid" }
+      ],
+      "default": "list"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}

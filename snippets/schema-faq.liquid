@@ -1,0 +1,28 @@
+{%- comment -%}
+  FAQPage Schema (JSON-LD)
+  Outputs FAQ structured data
+  Usage: {% render 'schema-faq', faqs: section.blocks %}
+{%- endcomment -%}
+
+{%- if faqs.size > 0 -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for faq in faqs -%}
+      {%- if faq.type == 'faq_item' or faq.settings.question != blank -%}
+      {
+        "@type": "Question",
+        "name": {{ faq.settings.question | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ faq.settings.answer | strip_html | json }}
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}

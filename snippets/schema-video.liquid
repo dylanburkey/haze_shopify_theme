@@ -1,0 +1,30 @@
+{%- comment -%}
+  VideoObject Schema (JSON-LD)
+  Outputs Video structured data
+  Usage: {% render 'schema-video', video: video, title: title, description: description %}
+{%- endcomment -%}
+
+{%- liquid
+  assign video_title = title | default: 'Video'
+  assign video_description = description | default: video_title
+-%}
+
+{%- if video != blank -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ video_title | json }},
+  "description": {{ video_description | json }}
+  {%- if video.preview_image -%}
+  ,"thumbnailUrl": {{ video.preview_image | image_url: width: 1280 | json }}
+  {%- endif -%}
+  {%- if video.duration -%}
+  ,"duration": "PT{{ video.duration | divided_by: 1000 }}S"
+  {%- endif -%}
+  ,"uploadDate": {{ 'now' | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "contentUrl": {{ video.sources.first.url | json }},
+  "embedUrl": {{ video.sources.first.url | json }}
+}
+</script>
+{%- endif -%}

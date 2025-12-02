@@ -1,0 +1,32 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      },
+      "blocks": {
+        "mega_menu_1": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Shop",
+            "featured_font_size": 14,
+            "featured_font_weight": "400",
+            "featured_text_color": "#121212",
+            "featured_link_color": "#334FB4",
+            "featured_padding": 16,
+            "featured_margin": 0
+          }
+        }
+      },
+      "block_order": ["mega_menu_1"]
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

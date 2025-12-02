@@ -1,0 +1,173 @@
+{% doc %}
+  Heading block - Displays a heading with configurable level and style
+  Can be used across multiple sections
+
+  @param {string} heading - The heading text
+  @param {string} heading_size - Visual size (h1, h2, h3, h4, h5, h6)
+  @param {string} heading_tag - HTML tag to use (h1-h6)
+  @param {string} heading_alignment - Text alignment
+{% enddoc %}
+
+{%- liquid
+  assign heading_size = block.settings.heading_size | default: 'h2'
+  assign heading_tag = block.settings.heading_tag | default: 'h2'
+  assign heading_alignment = block.settings.heading_alignment | default: 'left'
+-%}
+
+<div class="block-heading block-heading--align-{{ heading_alignment }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.heading != blank -%}
+    <{{ heading_tag }} class="block-heading__title block-heading--size-{{ heading_size }}">
+      {{ block.settings.heading }}
+    </{{ heading_tag }}>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .block-heading {
+    width: 100%;
+  }
+
+  .block-heading__title {
+    margin: 0;
+  }
+
+  .block-heading--align-left {
+    text-align: left;
+  }
+
+  .block-heading--align-center {
+    text-align: center;
+  }
+
+  .block-heading--align-right {
+    text-align: right;
+  }
+
+  .block-heading--size-h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  .block-heading--size-h2 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .block-heading--size-h3 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .block-heading--size-h4 {
+    font-size: var(--font-size-xl);
+  }
+
+  .block-heading--size-h5 {
+    font-size: var(--font-size-lg);
+  }
+
+  .block-heading--size-h6 {
+    font-size: var(--font-size-base);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.heading.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:blocks.heading.settings.heading.label",
+      "default": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:blocks.heading.settings.heading_size.label",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:blocks.heading.settings.heading_size.options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:blocks.heading.settings.heading_size.options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:blocks.heading.settings.heading_size.options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:blocks.heading.settings.heading_size.options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:blocks.heading.settings.heading_size.options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:blocks.heading.settings.heading_size.options.h6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:blocks.heading.settings.heading_tag.label",
+      "info": "t:blocks.heading.settings.heading_tag.info",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:blocks.heading.settings.heading_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:blocks.heading.settings.heading_alignment.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.heading.settings.heading_alignment.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:blocks.heading.settings.heading_alignment.options.right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.heading.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

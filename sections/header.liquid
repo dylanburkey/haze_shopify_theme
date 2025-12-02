@@ -1,0 +1,913 @@
+<header class="header" data-header>
+  <div class="header__wrapper container">
+    <div class="header__left">
+      <button
+        type="button"
+        class="header__menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="{{ 'header.menu' | t }}"
+        data-menu-toggle
+      >
+        {% render 'icon', name: 'menu' %}
+      </button>
+
+      {%- if section.settings.logo != blank -%}
+        <a href="{{ routes.root_url }}" class="header__logo">
+          {% render 'image',
+            image: section.settings.logo,
+            width: section.settings.logo_width,
+            class: 'header__logo-image',
+            loading: 'eager'
+          %}
+          <span class="visually-hidden">{{ shop.name }}</span>
+        </a>
+      {%- else -%}
+        <a href="{{ routes.root_url }}" class="header__logo header__logo--text">
+          {{ shop.name }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      {%- if section.settings.menu != blank -%}
+        <ul class="header__menu" role="list">
+          {%- for link in section.settings.menu.links -%}
+            {%- liquid
+              assign has_mega_menu = false
+              assign mega_menu_block = nil
+              for block in section.blocks
+                if block.type == 'mega_menu' and block.settings.menu_item == link.title
+                  assign has_mega_menu = true
+                  assign mega_menu_block = block
+                  break
+                endif
+              endfor
+            -%}
+
+            <li class="header__menu-item{% if link.links.size > 0 %} has-dropdown{% endif %}{% if has_mega_menu %} has-mega-menu{% endif %}">
+              {%- if has_mega_menu -%}
+                <button
+                  type="button"
+                  class="header__menu-link"
+                  aria-expanded="false"
+                  aria-controls="mega-menu-{{ forloop.index }}"
+                  data-mega-menu-trigger
+                >
+                  {{ link.title }}
+                  {% render 'icon', name: 'chevron-down', size: 16 %}
+                </button>
+
+                <div
+                  id="mega-menu-{{ forloop.index }}"
+                  class="mega-menu"
+                  data-mega-menu
+                  style="
+                    --mega-featured-font-size: {{ mega_menu_block.settings.featured_font_size }}px;
+                    --mega-featured-font-weight: {{ mega_menu_block.settings.featured_font_weight }};
+                    --mega-featured-color: {{ mega_menu_block.settings.featured_text_color }};
+                    --mega-featured-link-color: {{ mega_menu_block.settings.featured_link_color }};
+                    --mega-featured-padding: {{ mega_menu_block.settings.featured_padding }}px;
+                    --mega-featured-margin: {{ mega_menu_block.settings.featured_margin }}px;
+                  "
+                  {{ mega_menu_block.shopify_attributes }}
+                >
+                  <div class="mega-menu__inner container">
+                    <div class="mega-menu__columns">
+                      {%- for child_link in link.links -%}
+                        <div class="mega-menu__column">
+                          <a href="{{ child_link.url }}" class="mega-menu__heading">
+                            {{ child_link.title }}
+                          </a>
+                          {%- if child_link.links.size > 0 -%}
+                            <ul class="mega-menu__list" role="list">
+                              {%- for grandchild_link in child_link.links -%}
+                                <li>
+                                  <a href="{{ grandchild_link.url }}" class="mega-menu__link">
+                                    {{ grandchild_link.title }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
+                        </div>
+                      {%- endfor -%}
+
+                      {%- if mega_menu_block.settings.featured_image != blank or mega_menu_block.settings.featured_text != blank -%}
+                        <div class="mega-menu__featured">
+                          {%- if mega_menu_block.settings.featured_image != blank -%}
+                            <div class="mega-menu__featured-image">
+                              {%- if mega_menu_block.settings.featured_image_link != blank -%}
+                                <a href="{{ mega_menu_block.settings.featured_image_link }}">
+                                  {% render 'image', image: mega_menu_block.settings.featured_image, class: 'mega-menu__image' %}
+                                </a>
+                              {%- else -%}
+                                {% render 'image', image: mega_menu_block.settings.featured_image, class: 'mega-menu__image' %}
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+
+                          {%- if mega_menu_block.settings.featured_text != blank -%}
+                            <div class="mega-menu__featured-content">
+                              {{ mega_menu_block.settings.featured_text }}
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+
+              {%- elsif link.links.size > 0 -%}
+                <details class="header__dropdown">
+                  <summary class="header__menu-link">
+                    {{ link.title }}
+                    {% render 'icon', name: 'chevron-down', size: 16 %}
+                  </summary>
+                  <ul class="header__dropdown-menu" role="list">
+                    {%- for child_link in link.links -%}
+                      <li>
+                        <a href="{{ child_link.url }}" class="header__dropdown-link">
+                          {{ child_link.title }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </details>
+
+              {%- else -%}
+                <a href="{{ link.url }}" class="header__menu-link">
+                  {{ link.title }}
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </nav>
+
+    <div class="header__actions">
+      <button
+        type="button"
+        class="header__action"
+        aria-label="{{ 'header.search' | t }}"
+        data-search-toggle
+      >
+        {% render 'icon', name: 'search' %}
+      </button>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__action" aria-label="{{ 'header.account' | t }}">
+          {% render 'icon', name: 'user' %}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="header__action header__cart" aria-label="{{ 'header.cart' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" data-mobile-menu hidden>
+    <div class="mobile-menu__header">
+      <span class="mobile-menu__title">{{ 'header.menu' | t }}</span>
+      <button
+        type="button"
+        class="mobile-menu__close"
+        aria-label="{{ 'general.accessibility.close' | t }}"
+        data-menu-close
+      >
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+
+    {%- if section.settings.menu != blank -%}
+      <ul class="mobile-menu__list" role="list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="mobile-menu__item">
+            {%- if link.links.size > 0 -%}
+              <details class="mobile-menu__dropdown">
+                <summary class="mobile-menu__link">
+                  {{ link.title }}
+                  {% render 'icon', name: 'chevron-down', size: 20 %}
+                </summary>
+                <ul class="mobile-menu__sublist" role="list">
+                  {%- for child_link in link.links -%}
+                    <li>
+                      {%- if child_link.links.size > 0 -%}
+                        <details class="mobile-menu__dropdown mobile-menu__dropdown--nested">
+                          <summary class="mobile-menu__sublink">
+                            {{ child_link.title }}
+                            {% render 'icon', name: 'chevron-down', size: 16 %}
+                          </summary>
+                          <ul class="mobile-menu__sublist mobile-menu__sublist--nested" role="list">
+                            {%- for grandchild_link in child_link.links -%}
+                              <li>
+                                <a href="{{ grandchild_link.url }}" class="mobile-menu__sublink">
+                                  {{ grandchild_link.title }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- else -%}
+                        <a href="{{ child_link.url }}" class="mobile-menu__sublink">
+                          {{ child_link.title }}
+                        </a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a href="{{ link.url }}" class="mobile-menu__link">
+                {{ link.title }}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </nav>
+
+  <div class="mobile-menu__backdrop" data-menu-backdrop hidden></div>
+</header>
+
+{% stylesheet %}
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background-color: var(--color-background);
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 4rem;
+  }
+
+  .header__left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .header__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 64rem) {
+    .header__menu-toggle {
+      display: none;
+    }
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .header__logo--text {
+    font-family: var(--font-heading-family);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .header__logo-image {
+    max-height: 3rem;
+    width: auto;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .header__nav {
+      display: block;
+    }
+  }
+
+  .header__menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .header__menu-item {
+    position: static;
+  }
+
+  .header__menu-item.has-dropdown {
+    position: relative;
+  }
+
+  .header__menu-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) 0;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .header__menu-link:hover {
+    color: var(--color-secondary);
+  }
+
+  .header__dropdown {
+    position: relative;
+  }
+
+  .header__dropdown > summary {
+    list-style: none;
+  }
+
+  .header__dropdown > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .header__dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 12rem;
+    padding: var(--space-2) 0;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    list-style: none;
+    margin: 0;
+  }
+
+  .header__dropdown-link {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .header__dropdown-link:hover {
+    background-color: var(--color-background-secondary);
+    color: var(--color-text);
+  }
+
+  /* Mega Menu Styles */
+  .mega-menu {
+    position: fixed;
+    top: 4rem; /* header height */
+    left: 0;
+    right: 0;
+    z-index: var(--z-dropdown);
+    background-color: var(--color-background);
+    border-block-start: 1px solid var(--color-border);
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    pointer-events: none;
+    transition:
+      opacity var(--duration-normal) var(--ease-default),
+      visibility var(--duration-normal) var(--ease-default),
+      transform var(--duration-normal) var(--ease-default);
+  }
+
+  .header__menu-item.has-mega-menu:hover .mega-menu,
+  .header__menu-item.has-mega-menu .header__menu-link[aria-expanded="true"] + .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mega-menu__inner {
+    padding-block: var(--space-8);
+  }
+
+  .mega-menu__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-8);
+  }
+
+  .mega-menu__column {
+    min-width: 0;
+  }
+
+  .mega-menu__heading {
+    display: block;
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .mega-menu__heading:hover {
+    color: var(--color-secondary);
+  }
+
+  .mega-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mega-menu__list li + li {
+    margin-block-start: var(--space-2);
+  }
+
+  .mega-menu__link {
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .mega-menu__link:hover {
+    color: var(--color-secondary);
+  }
+
+  /* Mega Menu Featured Area */
+  .mega-menu__featured {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--mega-featured-padding, var(--space-4));
+    margin: var(--mega-featured-margin, 0);
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-md);
+  }
+
+  .mega-menu__featured-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+  }
+
+  .mega-menu__featured-image a {
+    display: block;
+    height: 100%;
+  }
+
+  .mega-menu__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-default);
+  }
+
+  .mega-menu__featured-image:hover .mega-menu__image {
+    transform: scale(1.05);
+  }
+
+  .mega-menu__featured-content {
+    font-size: var(--mega-featured-font-size, var(--font-size-sm));
+    font-weight: var(--mega-featured-font-weight, 400);
+    color: var(--mega-featured-color, var(--color-text));
+    line-height: 1.6;
+  }
+
+  .mega-menu__featured-content a {
+    color: var(--mega-featured-link-color, var(--color-secondary));
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .mega-menu__featured-content a:hover {
+    color: var(--color-primary);
+  }
+
+  .mega-menu__featured-content p {
+    margin: 0;
+  }
+
+  .mega-menu__featured-content p + p {
+    margin-block-start: var(--space-2);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .header__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    color: var(--color-text);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .header__action:hover {
+    color: var(--color-secondary);
+  }
+
+  .header__cart {
+    position: relative;
+  }
+
+  .header__cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 var(--space-1);
+    font-size: 0.625rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    text-align: center;
+    color: var(--color-button-text);
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-full);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-modal);
+    width: 100%;
+    max-width: 20rem;
+    height: 100vh;
+    background-color: var(--color-background);
+    transform: translateX(-100%);
+    transition: transform var(--duration-normal) var(--ease-default);
+    overflow-y: auto;
+  }
+
+  .mobile-menu[hidden] {
+    display: block;
+    visibility: hidden;
+  }
+
+  .mobile-menu:not([hidden]) {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .mobile-menu__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal-backdrop);
+    background-color: rgb(0 0 0 / 0.5);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-default);
+  }
+
+  .mobile-menu__backdrop[hidden] {
+    display: block;
+    visibility: hidden;
+  }
+
+  .mobile-menu__backdrop:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .mobile-menu__title {
+    font-weight: 600;
+  }
+
+  .mobile-menu__close {
+    display: flex;
+    padding: var(--space-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-menu__list {
+    list-style: none;
+    padding: var(--space-4);
+    margin: 0;
+  }
+
+  .mobile-menu__item {
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-4) 0;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-menu__dropdown > summary {
+    list-style: none;
+  }
+
+  .mobile-menu__dropdown > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-menu__sublist {
+    list-style: none;
+    padding: 0 0 var(--space-4) var(--space-4);
+    margin: 0;
+  }
+
+  .mobile-menu__sublist--nested {
+    padding-left: var(--space-4);
+  }
+
+  .mobile-menu__sublink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-2) 0;
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-menu__sublink:hover {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 64rem) {
+    .mobile-menu,
+    .mobile-menu__backdrop {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class Header {
+    constructor() {
+      this.header = document.querySelector('[data-header]');
+      this.menuToggle = document.querySelector('[data-menu-toggle]');
+      this.menuClose = document.querySelector('[data-menu-close]');
+      this.mobileMenu = document.querySelector('[data-mobile-menu]');
+      this.backdrop = document.querySelector('[data-menu-backdrop]');
+      this.megaMenuTriggers = document.querySelectorAll('[data-mega-menu-trigger]');
+
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      this.menuToggle?.addEventListener('click', () => this.openMenu());
+      this.menuClose?.addEventListener('click', () => this.closeMenu());
+      this.backdrop?.addEventListener('click', () => this.closeMenu());
+
+      // Mega menu hover behavior
+      this.megaMenuTriggers.forEach(trigger => {
+        const parent = trigger.closest('.header__menu-item');
+        const megaMenu = parent?.querySelector('[data-mega-menu]');
+
+        if (!megaMenu) return;
+
+        // Mouse enter/leave for desktop
+        parent.addEventListener('mouseenter', () => {
+          trigger.setAttribute('aria-expanded', 'true');
+        });
+
+        parent.addEventListener('mouseleave', () => {
+          trigger.setAttribute('aria-expanded', 'false');
+        });
+
+        // Click for accessibility
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Keyboard navigation
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+            trigger.setAttribute('aria-expanded', !isExpanded);
+          }
+
+          if (e.key === 'Escape') {
+            trigger.setAttribute('aria-expanded', 'false');
+            trigger.focus();
+          }
+        });
+
+        // Close on escape when focused inside mega menu
+        megaMenu.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            trigger.setAttribute('aria-expanded', 'false');
+            trigger.focus();
+          }
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !this.mobileMenu?.hidden) {
+          this.closeMenu();
+        }
+      });
+
+      // Close mega menus when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.has-mega-menu')) {
+          this.megaMenuTriggers.forEach(trigger => {
+            trigger.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+    }
+
+    openMenu() {
+      this.mobileMenu?.removeAttribute('hidden');
+      this.backdrop?.removeAttribute('hidden');
+      this.menuToggle?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    closeMenu() {
+      this.mobileMenu?.setAttribute('hidden', '');
+      this.backdrop?.setAttribute('hidden', '');
+      this.menuToggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  }
+
+  new Header();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Menu item title",
+          "info": "Enter the exact title of the menu item to attach the mega menu to."
+        },
+        {
+          "type": "header",
+          "content": "Featured area"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_image",
+          "label": "Featured image"
+        },
+        {
+          "type": "url",
+          "id": "featured_image_link",
+          "label": "Featured image link"
+        },
+        {
+          "type": "richtext",
+          "id": "featured_text",
+          "label": "Featured text",
+          "info": "Add text with links to promote featured content."
+        },
+        {
+          "type": "header",
+          "content": "Featured area styling"
+        },
+        {
+          "type": "range",
+          "id": "featured_font_size",
+          "label": "Font size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "default": 14,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "featured_font_weight",
+          "label": "Font weight",
+          "options": [
+            { "value": "300", "label": "Light" },
+            { "value": "400", "label": "Normal" },
+            { "value": "500", "label": "Medium" },
+            { "value": "600", "label": "Semibold" },
+            { "value": "700", "label": "Bold" }
+          ],
+          "default": "400"
+        },
+        {
+          "type": "color",
+          "id": "featured_text_color",
+          "label": "Text color",
+          "default": "#121212"
+        },
+        {
+          "type": "color",
+          "id": "featured_link_color",
+          "label": "Link color",
+          "default": "#334FB4"
+        },
+        {
+          "type": "range",
+          "id": "featured_padding",
+          "label": "Padding",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "default": 16,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "featured_margin",
+          "label": "Margin",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "default": 0,
+          "unit": "px"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

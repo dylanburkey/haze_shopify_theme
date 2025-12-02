@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "variant_style": "pills",
+        "show_sku": true,
+        "show_barcode": false
+      }
+    },
+    "specs": {
+      "type": "product-specs",
+      "settings": {
+        "heading": "Technical Specifications",
+        "open_by_default": true,
+        "use_metafields": true
+      },
+      "blocks": {
+        "weight": {
+          "type": "spec",
+          "settings": {
+            "label": "Weight",
+            "value": "",
+            "use_metafield": true,
+            "metafield_key": "weight"
+          }
+        },
+        "dimensions": {
+          "type": "spec",
+          "settings": {
+            "label": "Dimensions",
+            "value": "",
+            "use_metafield": true,
+            "metafield_key": "dimensions"
+          }
+        },
+        "material": {
+          "type": "spec",
+          "settings": {
+            "label": "Material",
+            "value": "",
+            "use_metafield": true,
+            "metafield_key": "material"
+          }
+        }
+      },
+      "block_order": ["weight", "dimensions", "material"]
+    },
+    "attachments": {
+      "type": "product-attachments",
+      "settings": {}
+    }
+  },
+  "order": ["main", "specs", "attachments"]
+}

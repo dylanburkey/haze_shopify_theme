@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Night Operations",
+        "subheading": "24/7 operations demand reliable equipment"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "smart-grid": {
+      "type": "smart-grid",
+      "settings": {
+        "layout_preset": "magazine"
+      }
+    }
+  },
+  "order": ["hero", "featured-collection", "smart-grid"]
+}

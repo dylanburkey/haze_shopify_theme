@@ -1,0 +1,319 @@
+{%- comment -%}
+  Sticky Add to Cart Bar
+  Shows when the main Add to Cart button scrolls out of view
+  Usage: {% render 'sticky-add-to-cart', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign show_image = show_image | default: true
+  assign show_quantity = show_quantity | default: false
+-%}
+
+<div id="sticky-atc-bar" class="sticky-atc" aria-hidden="true">
+  <div class="sticky-atc__container page-width">
+    {%- if show_image and product.featured_image -%}
+      <img
+        class="sticky-atc__image"
+        src="{{ product.featured_image | image_url: width: 100 }}"
+        alt="{{ product.featured_image.alt | default: product.title }}"
+        width="50"
+        height="50"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    <div class="sticky-atc__info">
+      <h3 class="sticky-atc__title">{{ product.title }}</h3>
+      <div class="sticky-atc__variant" id="sticky-atc-variant">
+        {%- if product.variants.size > 1 -%}
+          {{ current_variant.title }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="sticky-atc__price" id="sticky-atc-price">
+      {%- if current_variant.compare_at_price > current_variant.price -%}
+        <span class="sticky-atc__compare-price">{{ current_variant.compare_at_price | money }}</span>
+      {%- endif -%}
+      <span class="sticky-atc__current-price">{{ current_variant.price | money }}</span>
+    </div>
+
+    {%- if show_quantity -%}
+      <div class="sticky-atc__quantity">
+        <button type="button" class="sticky-atc__qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+        <input type="number" id="sticky-atc-qty" class="sticky-atc__qty-input" value="1" min="1" aria-label="Quantity">
+        <button type="button" class="sticky-atc__qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+      </div>
+    {%- endif -%}
+
+    <button
+      type="button"
+      id="sticky-atc-button"
+      class="sticky-atc__button btn btn--primary"
+      {% unless current_variant.available %}disabled{% endunless %}
+      data-variant-id="{{ current_variant.id }}"
+    >
+      {%- if current_variant.available -%}
+        {{ 'products.product.add_to_cart' | t | default: 'Add to Cart' }}
+      {%- else -%}
+        {{ 'products.product.sold_out' | t | default: 'Sold Out' }}
+      {%- endif -%}
+    </button>
+  </div>
+</div>
+
+<style>
+  .sticky-atc {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-background);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+  }
+
+  .sticky-atc.visible {
+    transform: translateY(0);
+  }
+
+  .sticky-atc__container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+  }
+
+  .sticky-atc__image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+
+  .sticky-atc__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sticky-atc__title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sticky-atc__variant {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .sticky-atc__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .sticky-atc__compare-price {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-decoration: line-through;
+  }
+
+  .sticky-atc__current-price {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .sticky-atc__quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+
+  .sticky-atc__qty-btn {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--color-text);
+  }
+
+  .sticky-atc__qty-btn:hover {
+    background: var(--color-surface);
+  }
+
+  .sticky-atc__qty-input {
+    width: 48px;
+    height: 36px;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+    -moz-appearance: textfield;
+  }
+
+  .sticky-atc__qty-input::-webkit-outer-spin-button,
+  .sticky-atc__qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .sticky-atc__button {
+    flex-shrink: 0;
+    min-width: 140px;
+  }
+
+  @media (max-width: 768px) {
+    .sticky-atc__info {
+      display: none;
+    }
+
+    .sticky-atc__container {
+      justify-content: space-between;
+    }
+
+    .sticky-atc__button {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sticky-atc__quantity {
+      display: none;
+    }
+
+    .sticky-atc__image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var stickyBar = document.getElementById('sticky-atc-bar');
+    var anchor = document.querySelector('.main-atc-anchor');
+    var stickyButton = document.getElementById('sticky-atc-button');
+
+    if (!anchor || !stickyBar) return;
+
+    // IntersectionObserver for showing/hiding
+    var observer = new IntersectionObserver(function(entries) {
+      var entry = entries[0];
+      if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+        stickyBar.classList.add('visible');
+        stickyBar.setAttribute('aria-hidden', 'false');
+      } else {
+        stickyBar.classList.remove('visible');
+        stickyBar.setAttribute('aria-hidden', 'true');
+      }
+    }, { threshold: 0 });
+
+    observer.observe(anchor);
+
+    // Quantity buttons
+    var qtyInput = document.getElementById('sticky-atc-qty');
+    if (qtyInput) {
+      document.querySelectorAll('.sticky-atc__qty-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var action = this.dataset.action;
+          var currentVal = parseInt(qtyInput.value, 10) || 1;
+
+          if (action === 'increase') {
+            qtyInput.value = currentVal + 1;
+          } else if (action === 'decrease' && currentVal > 1) {
+            qtyInput.value = currentVal - 1;
+          }
+
+          // Sync with main form
+          var mainQty = document.querySelector('[name="quantity"]');
+          if (mainQty) {
+            mainQty.value = qtyInput.value;
+          }
+        });
+      });
+    }
+
+    // Add to cart
+    stickyButton.addEventListener('click', function() {
+      var variantId = this.dataset.variantId;
+      var quantity = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+
+      // Try to click the main add to cart button first
+      var mainButton = document.querySelector('form[action*="/cart/add"] button[type="submit"]');
+      if (mainButton) {
+        mainButton.click();
+        return;
+      }
+
+      // Fallback: direct cart add
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: quantity
+        })
+      })
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        // Trigger cart update event
+        document.dispatchEvent(new CustomEvent('cart:updated', { detail: data }));
+
+        // Visual feedback
+        stickyButton.textContent = 'Added!';
+        setTimeout(function() {
+          stickyButton.textContent = '{{ "products.product.add_to_cart" | t | default: "Add to Cart" }}';
+        }, 2000);
+      })
+      .catch(function(error) {
+        console.error('Add to cart error:', error);
+      });
+    });
+
+    // Listen for variant changes on the main form
+    document.addEventListener('variant:changed', function(e) {
+      var variant = e.detail.variant;
+      if (!variant) return;
+
+      stickyButton.dataset.variantId = variant.id;
+
+      // Update price
+      var priceEl = document.getElementById('sticky-atc-price');
+      if (priceEl && variant.price) {
+        var priceHtml = '';
+        if (variant.compare_at_price > variant.price) {
+          priceHtml += '<span class="sticky-atc__compare-price">' + Shopify.formatMoney(variant.compare_at_price) + '</span>';
+        }
+        priceHtml += '<span class="sticky-atc__current-price">' + Shopify.formatMoney(variant.price) + '</span>';
+        priceEl.innerHTML = priceHtml;
+      }
+
+      // Update variant name
+      var variantEl = document.getElementById('sticky-atc-variant');
+      if (variantEl) {
+        variantEl.textContent = variant.title !== 'Default Title' ? variant.title : '';
+      }
+
+      // Update availability
+      stickyButton.disabled = !variant.available;
+      stickyButton.textContent = variant.available
+        ? '{{ "products.product.add_to_cart" | t | default: "Add to Cart" }}'
+        : '{{ "products.product.sold_out" | t | default: "Sold Out" }}';
+    });
+  })();
+</script>

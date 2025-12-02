@@ -1,0 +1,106 @@
+<section class="main-blog section">
+  <div class="container">
+    <h1 class="blog__title">{{ blog.title }}</h1>
+
+    {%- if blog.articles.size > 0 -%}
+      {%- paginate blog.articles by 12 -%}
+        <div class="blog-grid">
+          {%- for article in blog.articles -%}
+            <article class="article-card">
+              {%- if article.image -%}
+                <a href="{{ article.url }}" class="article-card__media">
+                  {% render 'image', image: article.image %}
+                </a>
+              {%- endif -%}
+              <div class="article-card__content">
+                <time class="article-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                  {{ article.published_at | date: format: 'abbreviated_date' }}
+                </time>
+                <h2 class="article-card__title">
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h2>
+                {%- if article.excerpt.size > 0 -%}
+                  <p class="article-card__excerpt">{{ article.excerpt | strip_html | truncate: 150 }}</p>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination">
+            {{ paginate | default_pagination }}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .blog__title {
+    margin-block-end: var(--space-8);
+    font-size: var(--font-size-3xl);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--grid-gap);
+  }
+
+  .article-card__media {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin-block-end: var(--space-4);
+  }
+
+  .article-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-default);
+  }
+
+  .article-card__media:hover img {
+    transform: scale(1.05);
+  }
+
+  .article-card__date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .article-card__title {
+    margin-block: var(--space-2);
+    font-size: var(--font-size-lg);
+  }
+
+  .article-card__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .article-card__title a:hover {
+    color: var(--color-secondary);
+  }
+
+  .article-card__excerpt {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .pagination {
+    margin-block-start: var(--space-12);
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

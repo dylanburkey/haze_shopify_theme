@@ -1,0 +1,72 @@
+{%- comment -%}
+  PWA CORE ENGINE
+  Generates a dynamic manifest.json via Blob URL to bypass Shopify CDN restrictions.
+  Include in theme.liquid <head> section: {% render 'pwa-head' %}
+{%- endcomment -%}
+
+{%- if settings.pwa_enabled -%}
+  {%- liquid
+    assign app_name = settings.pwa_name | default: shop.name
+    assign app_short_name = settings.pwa_name | default: shop.name | truncate: 12, ''
+    assign theme_color = settings.pwa_theme_color | default: settings.brand_red | default: '#d71920'
+    assign bg_color = settings.pwa_bg_color | default: '#000000'
+
+    if settings.pwa_icon
+      assign icon_192 = settings.pwa_icon | image_url: width: 192, height: 192
+      assign icon_512 = settings.pwa_icon | image_url: width: 512, height: 512
+    else
+      assign icon_192 = 'pwa-icon.png' | asset_url
+      assign icon_512 = 'pwa-icon.png' | asset_url
+    endif
+  -%}
+
+  <!-- iOS / Apple Support (Apple ignores the manifest) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="{{ app_name }}">
+  <link rel="apple-touch-icon" href="{{ icon_192 }}">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="{{ theme_color }}">
+
+  <!-- Dynamic Manifest Generator -->
+  <script id="pwa-manifest-data" type="application/json">
+  {
+    "name": {{ app_name | json }},
+    "short_name": {{ app_short_name | json }},
+    "start_url": "/?source=pwa",
+    "display": "standalone",
+    "background_color": {{ bg_color | json }},
+    "theme_color": {{ theme_color | json }},
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": {{ icon_192 | json }},
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": {{ icon_512 | json }},
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    (function() {
+      try {
+        var manifestData = document.getElementById('pwa-manifest-data').textContent;
+        var blob = new Blob([manifestData], {type: 'application/json'});
+        var manifestURL = URL.createObjectURL(blob);
+        var link = document.createElement('link');
+        link.rel = 'manifest';
+        link.href = manifestURL;
+        document.head.appendChild(link);
+      } catch (e) {
+        console.warn('PWA Manifest generation failed', e);
+      }
+    })();
+  </script>
+{%- endif -%}

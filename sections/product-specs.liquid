@@ -1,0 +1,383 @@
+{%- comment -%}
+  Product Technical Specifications Section
+  Can be added to product template to display specs
+  Uses blocks for editor-configurable specs OR metafields
+{%- endcomment -%}
+
+{%- liquid
+  assign has_metafield_specs = false
+  assign has_block_specs = false
+
+  if product.metafields.specs.weight or product.metafields.specs.dimensions or product.metafields.specs.material or product.metafields.specs.capacity or product.metafields.specs.voltage or product.metafields.specs.power or product.metafields.specs.pressure or product.metafields.specs.temperature_range or product.metafields.specs.certifications or product.metafields.specs.warranty_period or product.metafields.specs.country_of_origin or product.metafields.specs.custom
+    assign has_metafield_specs = true
+  endif
+
+  if section.blocks.size > 0
+    assign has_block_specs = true
+  endif
+
+  assign show_section = has_metafield_specs or has_block_specs
+-%}
+
+{%- if show_section -%}
+<div class="product-specs-section section" {{ section.shopify_attributes }}>
+  <div class="container">
+    <details class="product-specs__accordion"{% if section.settings.open_by_default %} open{% endif %}>
+      <summary class="product-specs__header">
+        <h3 class="product-specs__title">
+          <svg class="product-specs__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          {{ section.settings.heading | default: 'Technical Specifications' }}
+        </h3>
+        <svg class="product-specs__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </summary>
+
+      <div class="product-specs__content">
+        <table class="product-specs__table">
+          <tbody>
+            {%- comment -%} Metafield-based specs {%- endcomment -%}
+            {%- if section.settings.use_metafields -%}
+              {%- if product.metafields.specs.weight -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Weight</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.weight }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.dimensions -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Dimensions</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.dimensions }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.material -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Material</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.material }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.capacity -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Capacity</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.capacity }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.voltage -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Voltage</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.voltage }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.power -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Power</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.power }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.pressure -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Pressure Rating</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.pressure }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.temperature_range -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Temperature Range</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.temperature_range }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.certifications -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Certifications</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.certifications }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.warranty_period -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Warranty</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.warranty_period }}</td>
+                </tr>
+              {%- endif -%}
+              {%- if product.metafields.specs.country_of_origin -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">Country of Origin</th>
+                  <td class="product-specs__value">{{ product.metafields.specs.country_of_origin }}</td>
+                </tr>
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} Block-based specs (from theme editor) {%- endcomment -%}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'spec' -%}
+                  <tr class="product-specs__row" {{ block.shopify_attributes }}>
+                    <th class="product-specs__label">{{ block.settings.label }}</th>
+                    <td class="product-specs__value">
+                      {%- if block.settings.use_metafield and block.settings.metafield_key != blank -%}
+                        {{ product.metafields.specs[block.settings.metafield_key] | default: block.settings.value }}
+                      {%- else -%}
+                        {{ block.settings.value }}
+                      {%- endif -%}
+                    </td>
+                  </tr>
+                {%- when 'divider' -%}
+                  <tr class="product-specs__divider" {{ block.shopify_attributes }}>
+                    <td colspan="2">
+                      {%- if block.settings.label != blank -%}
+                        <span class="product-specs__divider-label">{{ block.settings.label }}</span>
+                      {%- endif -%}
+                    </td>
+                  </tr>
+              {%- endcase -%}
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+{%- endif -%}
+
+{% stylesheet %}
+  .product-specs-section {
+    padding-block: var(--spacing-sections);
+  }
+
+  .product-specs__accordion {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .product-specs__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    background: var(--color-background-secondary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .product-specs__header::-webkit-details-marker {
+    display: none;
+  }
+
+  .product-specs__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+  }
+
+  .product-specs__icon {
+    color: var(--color-primary);
+  }
+
+  .product-specs__chevron {
+    transition: transform var(--duration-fast) var(--ease-default);
+  }
+
+  .product-specs__accordion[open] .product-specs__chevron {
+    transform: rotate(180deg);
+  }
+
+  .product-specs__content {
+    padding: var(--space-4);
+  }
+
+  .product-specs__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .product-specs__row {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .product-specs__row:last-child {
+    border-bottom: none;
+  }
+
+  .product-specs__label,
+  .product-specs__value {
+    padding: var(--space-3) 0;
+    font-size: var(--font-size-sm);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .product-specs__label {
+    width: 40%;
+    font-weight: 600;
+    color: var(--color-text);
+    padding-right: var(--space-4);
+  }
+
+  .product-specs__value {
+    font-weight: 400;
+    color: var(--color-text-secondary);
+  }
+
+  .product-specs__divider td {
+    padding: var(--space-4) 0 var(--space-2);
+    border-bottom: none;
+  }
+
+  .product-specs__divider-label {
+    display: block;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  @media (max-width: 480px) {
+    .product-specs__row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-3) 0;
+    }
+
+    .product-specs__label,
+    .product-specs__value {
+      width: 100%;
+      padding: 0;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Specs",
+  "tag": "section",
+  "class": "section-product-specs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Technical Specifications"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "Open by default",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "use_metafields",
+      "label": "Show specs from metafields",
+      "default": true,
+      "info": "Display specs stored in product metafields (namespace: specs)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Specification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Specification"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_metafield",
+          "label": "Use metafield value",
+          "default": false,
+          "info": "Override with product metafield if available"
+        },
+        {
+          "type": "text",
+          "id": "metafield_key",
+          "label": "Metafield key",
+          "info": "Key from specs namespace (e.g., 'weight', 'dimensions')"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Section Divider",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Section label",
+          "info": "Optional label for grouping specs"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Specs",
+      "blocks": [
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Weight",
+            "value": "2.5 lbs"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Dimensions",
+            "value": "12\" x 8\" x 4\""
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Material",
+            "value": "Steel / Aluminum"
+          }
+        },
+        {
+          "type": "divider",
+          "settings": {
+            "label": "Electrical"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Voltage",
+            "value": "120V AC"
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "label": "Power",
+            "value": "500W"
+          }
+        }
+      ]
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}

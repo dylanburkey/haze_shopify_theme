@@ -1,0 +1,51 @@
+{%- comment -%}
+  Organization Schema (JSON-LD)
+  Outputs Organization or LocalBusiness structured data
+{%- endcomment -%}
+
+{%- liquid
+  assign org_name = settings.seo_org_name | default: shop.name
+  assign org_url = shop.url
+  assign org_logo = settings.seo_org_logo
+  assign org_phone = settings.seo_org_phone
+  assign org_email = settings.seo_org_email
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  {%- if settings.seo_local_business -%}
+  "@type": "LocalBusiness",
+  {%- else -%}
+  "@type": "Organization",
+  {%- endif -%}
+  "name": {{ org_name | json }},
+  "url": {{ org_url | json }}
+  {%- if org_logo -%}
+  ,"logo": {{ org_logo | image_url: width: 600 | json }}
+  {%- endif -%}
+  {%- if org_phone -%}
+  ,"telephone": {{ org_phone | json }}
+  {%- endif -%}
+  {%- if org_email -%}
+  ,"email": {{ org_email | json }}
+  {%- endif -%}
+  {%- if settings.seo_local_business and settings.seo_address_street -%}
+  ,"address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ settings.seo_address_street | json }},
+    "addressLocality": {{ settings.seo_address_city | json }},
+    "addressRegion": {{ settings.seo_address_region | json }},
+    "postalCode": {{ settings.seo_address_postal | json }},
+    "addressCountry": {{ settings.seo_address_country | json }}
+  }
+  {%- endif -%}
+  {%- if shop.brand.social_links.size > 0 -%}
+  ,"sameAs": [
+    {%- for link in shop.brand.social_links -%}
+      {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+  {%- endif -%}
+}
+</script>

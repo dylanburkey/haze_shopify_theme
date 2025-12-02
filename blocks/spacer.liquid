@@ -1,0 +1,43 @@
+{% doc %}
+  Spacer block - Adds vertical spacing between content
+  Can be used across multiple sections
+
+  @param {number} spacing - The amount of vertical space
+{% enddoc %}
+
+{%- liquid
+  assign spacing = block.settings.spacing | default: 24
+-%}
+
+<div class="block-spacer" style="--spacer-height: {{ spacing }}px;" {{ block.shopify_attributes }}>
+</div>
+
+{% stylesheet %}
+  .block-spacer {
+    width: 100%;
+    height: var(--spacer-height, 24px);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.spacer.name",
+  "settings": [
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "t:blocks.spacer.settings.spacing.label",
+      "min": 4,
+      "max": 120,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.spacer.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

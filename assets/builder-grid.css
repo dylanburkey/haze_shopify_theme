@@ -1,0 +1,238 @@
+/* ==========================================================================
+   BUILDER GRID - 12 Column Page Builder System
+   Replaces PageFly, Shogun, GemPages
+   ========================================================================== */
+
+.builder-grid-section {
+  padding-top: var(--padding-top, 60px);
+  padding-bottom: var(--padding-bottom, 60px);
+  margin-top: var(--margin-top, 0);
+  margin-bottom: var(--margin-bottom, 0);
+  background-color: var(--section-bg, transparent);
+  color: var(--section-text, inherit);
+}
+
+.builder-border-top,
+.builder-border-bottom {
+  background-color: var(--section-border, var(--color-border));
+}
+
+.builder-grid-container {
+  max-width: var(--container-max, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter, 20px);
+}
+
+/* --------------------------------------------------------------------------
+   12 Column Grid
+   -------------------------------------------------------------------------- */
+
+.builder-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap-desktop, 24px);
+}
+
+.builder-block {
+  grid-column: span var(--span, 12);
+}
+
+/* Force new row */
+.builder-block--break {
+  grid-column: 1 / -1;
+}
+
+.builder-block--break + .builder-block {
+  grid-column-start: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Block Types
+   -------------------------------------------------------------------------- */
+
+/* Heading */
+.builder-heading {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.builder-heading.text-sm { font-size: 1.25rem; }
+.builder-heading.text-base { font-size: 1.5rem; }
+.builder-heading.text-lg { font-size: 2rem; }
+.builder-heading.text-xl { font-size: 2.5rem; }
+
+/* Paragraph */
+.builder-paragraph {
+  margin: 0;
+}
+
+.builder-paragraph.text-sm { font-size: 0.875rem; }
+.builder-paragraph.text-base { font-size: 1rem; }
+.builder-paragraph.text-lg { font-size: 1.125rem; }
+
+.builder-paragraph p:last-child {
+  margin-bottom: 0;
+}
+
+/* Image */
+.builder-image {
+  display: block;
+}
+
+.builder-image__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius, 0);
+}
+
+.builder-image--card {
+  border-radius: var(--radius, 0);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.builder-image--card .builder-image__img {
+  border-radius: 0;
+}
+
+.builder-image__caption {
+  margin: var(--space-2) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.builder-image--placeholder {
+  aspect-ratio: 16 / 9;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.builder-image--placeholder .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-border);
+}
+
+/* Video */
+.builder-video {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius, 0);
+}
+
+.builder-video video,
+.builder-video iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Spacer */
+.builder-spacer {
+  width: 100%;
+}
+
+/* Divider */
+.builder-divider {
+  border: none;
+  border-top: 1px solid var(--section-border, var(--color-border));
+  margin: 0;
+  width: 100%;
+}
+
+/* Icon + Text */
+.builder-icon-text {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.builder-icon-text__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border-radius: var(--radius, 0);
+  color: var(--color-primary);
+}
+
+.builder-icon-text__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.builder-icon-text__content {
+  flex: 1;
+}
+
+.builder-icon-text__heading {
+  margin: 0 0 var(--space-2);
+  font-size: 1.125rem;
+}
+
+.builder-icon-text__text {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+/* Centered icon+text variation */
+[style*="text-align: center"] .builder-icon-text {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Button Sizes
+   -------------------------------------------------------------------------- */
+
+.btn--sm {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+.btn--md {
+  padding: 12px 24px;
+  font-size: 1rem;
+}
+
+.btn--lg {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .builder-grid {
+    gap: var(--gap-mobile, 16px);
+  }
+
+  /* All blocks go full width on mobile */
+  .builder-block {
+    grid-column: span 12;
+  }
+
+  .builder-heading.text-xl {
+    font-size: 1.75rem;
+  }
+
+  .builder-heading.text-lg {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* 25% blocks become 50% on tablet */
+  .builder-block[style*="--span: 3"] {
+    --span: 6;
+  }
+}

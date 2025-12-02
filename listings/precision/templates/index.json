@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Precision Engineered",
+        "subheading": "Laboratory and technical equipment solutions"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "smart-grid": {
+      "type": "smart-grid",
+      "settings": {
+        "layout_preset": "cols-2"
+      }
+    }
+  },
+  "order": ["hero", "featured-collection", "smart-grid"]
+}

@@ -1,0 +1,175 @@
+<section class="main-article section">
+  <div class="container">
+    <article class="article">
+      <header class="article__header">
+        <time class="article__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{ article.published_at | date: format: 'abbreviated_date' }}
+        </time>
+        <h1 class="article__title">{{ article.title }}</h1>
+        {%- if article.author -%}
+          <p class="article__author">{{ article.author }}</p>
+        {%- endif -%}
+      </header>
+
+      {%- if article.image -%}
+        <div class="article__image">
+          {% render 'image', image: article.image, loading: 'eager' %}
+        </div>
+      {%- endif -%}
+
+      <div class="article__content rte">
+        {{ article.content }}
+      </div>
+
+      {%- if article.tags.size > 0 -%}
+        <footer class="article__footer">
+          <div class="article__tags">
+            {%- for tag in article.tags -%}
+              <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="article__tag">
+                {{ tag }}
+              </a>
+            {%- endfor -%}
+          </div>
+        </footer>
+      {%- endif -%}
+
+      {%- if blog.comments_enabled? -%}
+        <div class="article__comments">
+          <h2>{{ 'blogs.comments.title' | t }}</h2>
+
+          {%- if article.comments_count > 0 -%}
+            <div class="comments">
+              {%- for comment in article.comments -%}
+                <div class="comment">
+                  <p class="comment__author">{{ comment.author }}</p>
+                  <time class="comment__date" datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">
+                    {{ comment.created_at | date: format: 'abbreviated_date' }}
+                  </time>
+                  <div class="comment__content">{{ comment.content }}</div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {% form 'new_comment', article, class: 'comment-form' %}
+            <div class="form-field">
+              <label for="CommentAuthor" class="form-label">Name</label>
+              <input type="text" id="CommentAuthor" name="comment[author]" class="form-input" required>
+            </div>
+            <div class="form-field">
+              <label for="CommentEmail" class="form-label">Email</label>
+              <input type="email" id="CommentEmail" name="comment[email]" class="form-input" required>
+            </div>
+            <div class="form-field">
+              <label for="CommentBody" class="form-label">Comment</label>
+              <textarea id="CommentBody" name="comment[body]" class="form-textarea" required></textarea>
+            </div>
+            <button type="submit" class="button button--primary">Post comment</button>
+          {% endform %}
+        </div>
+      {%- endif -%}
+    </article>
+  </div>
+</section>
+
+{% stylesheet %}
+  .article__header {
+    max-width: 65ch;
+    margin-block-end: var(--space-8);
+  }
+
+  .article__date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .article__title {
+    margin-block: var(--space-3);
+    font-size: var(--font-size-3xl);
+  }
+
+  .article__author {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .article__image {
+    margin-block-end: var(--space-8);
+  }
+
+  .article__image img {
+    border-radius: var(--radius-lg);
+  }
+
+  .article__content {
+    max-width: 65ch;
+  }
+
+  .article__footer {
+    margin-block-start: var(--space-8);
+    padding-block-start: var(--space-6);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .article__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .article__tag {
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .article__tag:hover {
+    background-color: var(--color-border);
+  }
+
+  .article__comments {
+    max-width: 65ch;
+    margin-block-start: var(--space-12);
+    padding-block-start: var(--space-8);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .comments {
+    margin-block: var(--space-6);
+  }
+
+  .comment {
+    padding: var(--space-4);
+    margin-block-end: var(--space-4);
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-md);
+  }
+
+  .comment__author {
+    font-weight: 600;
+    margin-block-end: var(--space-1);
+  }
+
+  .comment__date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-block-start: var(--space-6);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

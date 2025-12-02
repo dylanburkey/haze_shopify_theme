@@ -1,0 +1,42 @@
+<section class="main-404 section">
+  <div class="container">
+    <div class="main-404__content">
+      <h1 class="main-404__title">{{ '404.title' | t }}</h1>
+      <p class="main-404__text">{{ '404.subtext' | t }}</p>
+      <a href="{{ routes.root_url }}" class="button button--primary">
+        {{ '404.link' | t }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .main-404 {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .main-404__content {
+    text-align: center;
+    max-width: 30rem;
+    margin-inline: auto;
+  }
+
+  .main-404__title {
+    margin-block-end: var(--space-4);
+    font-size: var(--font-size-3xl);
+  }
+
+  .main-404__text {
+    margin-block-end: var(--space-8);
+    color: var(--color-text-secondary);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

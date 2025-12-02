@@ -1,0 +1,606 @@
+{% doc %}
+  Social sharing section with customizable icons.
+  Uses global social settings but allows per-section overrides.
+
+  @param {string} [title] - Optional section title
+  @param {string} [share_url] - URL to share (defaults to current page)
+  @param {string} [share_title] - Title for sharing (defaults to page title)
+
+  @example
+  {% section 'social-sharing' %}
+{% enddoc %}
+
+{%- liquid
+  assign share_url = share_url | default: request.origin | append: request.path
+  assign share_title = share_title | default: page_title
+  assign share_title_encoded = share_title | url_encode
+  assign share_url_encoded = share_url | url_encode
+-%}
+
+<section class="social-sharing section" style="
+  --social-icon-size: {{ section.settings.icon_size }}px;
+  --social-icon-color: {{ section.settings.icon_color }};
+  --social-icon-hover-color: {{ section.settings.icon_hover_color }};
+  --social-icon-bg: {{ section.settings.icon_background }};
+  --social-icon-hover-bg: {{ section.settings.icon_hover_background }};
+  --social-icon-spacing: {{ section.settings.icon_spacing }}px;
+  --social-icon-padding: {{ section.settings.icon_padding }}px;
+  --social-icon-radius: {{ section.settings.icon_border_radius }}px;
+">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="social-sharing__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="social-sharing__icons{% if section.settings.center_icons %} social-sharing__icons--centered{% endif %}">
+      {%- if section.settings.show_facebook -%}
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u={{ share_url_encoded }}"
+          class="social-sharing__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'social.share_on' | t }} Facebook"
+          data-social-share="facebook"
+        >
+          {% render 'social-icon', platform: 'facebook' %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_twitter -%}
+        <a
+          href="https://twitter.com/intent/tweet?text={{ share_title_encoded }}&url={{ share_url_encoded }}"
+          class="social-sharing__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'social.share_on' | t }} X (Twitter)"
+          data-social-share="twitter"
+        >
+          {% render 'social-icon', platform: 'twitter' %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_pinterest -%}
+        {%- liquid
+          assign pinterest_image = section.settings.pinterest_image | default: page_image
+          if pinterest_image
+            assign pinterest_media = pinterest_image | image_url: width: 1200
+          endif
+        -%}
+        <a
+          href="https://pinterest.com/pin/create/button/?url={{ share_url_encoded }}&description={{ share_title_encoded }}{% if pinterest_media %}&media={{ pinterest_media }}{% endif %}"
+          class="social-sharing__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'social.share_on' | t }} Pinterest"
+          data-social-share="pinterest"
+        >
+          {% render 'social-icon', platform: 'pinterest' %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_linkedin -%}
+        <a
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_url_encoded }}&title={{ share_title_encoded }}"
+          class="social-sharing__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'social.share_on' | t }} LinkedIn"
+          data-social-share="linkedin"
+        >
+          {% render 'social-icon', platform: 'linkedin' %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_email -%}
+        <a
+          href="mailto:?subject={{ share_title_encoded }}&body={{ share_url_encoded }}"
+          class="social-sharing__link"
+          aria-label="{{ 'social.share_via' | t }} Email"
+          data-social-share="email"
+        >
+          {% render 'social-icon', platform: 'email' %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_whatsapp -%}
+        <a
+          href="https://api.whatsapp.com/send?text={{ share_title_encoded }}%20{{ share_url_encoded }}"
+          class="social-sharing__link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'social.share_via' | t }} WhatsApp"
+          data-social-share="whatsapp"
+        >
+          {% render 'social-icon', platform: 'whatsapp' %}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.show_copy_link -%}
+        <button
+          type="button"
+          class="social-sharing__link social-sharing__copy"
+          aria-label="{{ 'social.copy_link' | t }}"
+          data-copy-link="{{ share_url }}"
+        >
+          {% render 'social-icon', platform: 'link' %}
+          <span class="social-sharing__tooltip" data-copy-tooltip>{{ 'social.copied' | t }}</span>
+        </button>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_follow_links -%}
+      {%- liquid
+        assign facebook_link = section.settings.facebook_link | default: settings.social_facebook_link
+        assign instagram_link = section.settings.instagram_link | default: settings.social_instagram_link
+        assign twitter_link = section.settings.twitter_link | default: settings.social_twitter_link
+        assign youtube_link = section.settings.youtube_link | default: settings.social_youtube_link
+        assign tiktok_link = section.settings.tiktok_link | default: settings.social_tiktok_link
+        assign pinterest_link = section.settings.pinterest_link | default: settings.social_pinterest_link
+        assign linkedin_link = section.settings.linkedin_link | default: settings.social_linkedin_link
+
+        assign has_social_links = false
+        if facebook_link != blank or instagram_link != blank or twitter_link != blank or youtube_link != blank or tiktok_link != blank or pinterest_link != blank or linkedin_link != blank
+          assign has_social_links = true
+        endif
+      -%}
+
+      {%- if has_social_links -%}
+        <div class="social-sharing__follow">
+          {%- if section.settings.follow_title != blank -%}
+            <h3 class="social-sharing__follow-title">{{ section.settings.follow_title }}</h3>
+          {%- endif -%}
+
+          <div class="social-sharing__icons{% if section.settings.center_icons %} social-sharing__icons--centered{% endif %}">
+            {%- if facebook_link != blank -%}
+              <a
+                href="{{ facebook_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
+                {% render 'social-icon', platform: 'facebook' %}
+              </a>
+            {%- endif -%}
+
+            {%- if instagram_link != blank -%}
+              <a
+                href="{{ instagram_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                {% render 'social-icon', platform: 'instagram' %}
+              </a>
+            {%- endif -%}
+
+            {%- if twitter_link != blank -%}
+              <a
+                href="{{ twitter_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+              >
+                {% render 'social-icon', platform: 'twitter' %}
+              </a>
+            {%- endif -%}
+
+            {%- if youtube_link != blank -%}
+              <a
+                href="{{ youtube_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
+                {% render 'social-icon', platform: 'youtube' %}
+              </a>
+            {%- endif -%}
+
+            {%- if tiktok_link != blank -%}
+              <a
+                href="{{ tiktok_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+              >
+                {% render 'social-icon', platform: 'tiktok' %}
+              </a>
+            {%- endif -%}
+
+            {%- if pinterest_link != blank -%}
+              <a
+                href="{{ pinterest_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Pinterest"
+              >
+                {% render 'social-icon', platform: 'pinterest' %}
+              </a>
+            {%- endif -%}
+
+            {%- if linkedin_link != blank -%}
+              <a
+                href="{{ linkedin_link }}"
+                class="social-sharing__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                {% render 'social-icon', platform: 'linkedin' %}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .social-sharing {
+    padding-block: var(--spacing-sections);
+  }
+
+  .social-sharing__title {
+    margin-block-end: var(--space-4);
+    font-size: var(--font-size-lg);
+  }
+
+  .social-sharing__icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--social-icon-spacing, var(--space-3));
+  }
+
+  .social-sharing__icons--centered {
+    justify-content: center;
+  }
+
+  .social-sharing__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--social-icon-size, 24px) + var(--social-icon-padding, 12px) * 2);
+    height: calc(var(--social-icon-size, 24px) + var(--social-icon-padding, 12px) * 2);
+    color: var(--social-icon-color, var(--color-text));
+    background-color: var(--social-icon-bg, transparent);
+    border: 1px solid var(--social-icon-color, var(--color-border));
+    border-radius: var(--social-icon-radius, var(--radius-full));
+    text-decoration: none;
+    transition:
+      color var(--duration-fast) var(--ease-default),
+      background-color var(--duration-fast) var(--ease-default),
+      border-color var(--duration-fast) var(--ease-default),
+      transform var(--duration-fast) var(--ease-default);
+  }
+
+  .social-sharing__link:hover {
+    color: var(--social-icon-hover-color, var(--color-background));
+    background-color: var(--social-icon-hover-bg, var(--color-text));
+    border-color: var(--social-icon-hover-bg, var(--color-text));
+    transform: translateY(-2px);
+  }
+
+  .social-sharing__link svg {
+    width: var(--social-icon-size, 24px);
+    height: var(--social-icon-size, 24px);
+  }
+
+  /* Copy link button */
+  .social-sharing__copy {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .social-sharing__tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--color-background);
+    background-color: var(--color-text);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--duration-fast) var(--ease-default),
+      visibility var(--duration-fast) var(--ease-default);
+    pointer-events: none;
+  }
+
+  .social-sharing__tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--color-text);
+  }
+
+  .social-sharing__copy.is-copied .social-sharing__tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Follow section */
+  .social-sharing__follow {
+    margin-block-start: var(--space-8);
+    padding-block-start: var(--space-8);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .social-sharing__follow-title {
+    margin-block-end: var(--space-4);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  // Copy link functionality
+  document.querySelectorAll('[data-copy-link]').forEach(button => {
+    button.addEventListener('click', async () => {
+      const url = button.dataset.copyLink;
+
+      try {
+        await navigator.clipboard.writeText(url);
+        button.classList.add('is-copied');
+
+        setTimeout(() => {
+          button.classList.remove('is-copied');
+        }, 2000);
+      } catch (err) {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        button.classList.add('is-copied');
+        setTimeout(() => {
+          button.classList.remove('is-copied');
+        }, 2000);
+      }
+    });
+  });
+
+  // Track social shares (optional analytics)
+  document.querySelectorAll('[data-social-share]').forEach(link => {
+    link.addEventListener('click', () => {
+      const platform = link.dataset.socialShare;
+
+      // Dispatch event for analytics integration
+      document.dispatchEvent(new CustomEvent('social:share', {
+        detail: {
+          platform,
+          url: window.location.href
+        }
+      }));
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Social sharing",
+  "class": "section-social-sharing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Share this"
+    },
+    {
+      "type": "header",
+      "content": "Sharing options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_facebook",
+      "label": "Show Facebook",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_twitter",
+      "label": "Show X (Twitter)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pinterest",
+      "label": "Show Pinterest",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_linkedin",
+      "label": "Show LinkedIn",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "Show Email",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_whatsapp",
+      "label": "Show WhatsApp",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_copy_link",
+      "label": "Show copy link",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "pinterest_image",
+      "label": "Pinterest image",
+      "info": "Used when sharing to Pinterest. Falls back to page image."
+    },
+    {
+      "type": "header",
+      "content": "Follow links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_follow_links",
+      "label": "Show follow links",
+      "default": false,
+      "info": "Display links to your social media profiles"
+    },
+    {
+      "type": "text",
+      "id": "follow_title",
+      "label": "Follow section title",
+      "default": "Follow us"
+    },
+    {
+      "type": "paragraph",
+      "content": "Social links use global settings by default. Override below if needed for this section."
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook link override"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram link override"
+    },
+    {
+      "type": "url",
+      "id": "twitter_link",
+      "label": "X (Twitter) link override"
+    },
+    {
+      "type": "url",
+      "id": "youtube_link",
+      "label": "YouTube link override"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_link",
+      "label": "TikTok link override"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_link",
+      "label": "Pinterest link override"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_link",
+      "label": "LinkedIn link override"
+    },
+    {
+      "type": "header",
+      "content": "Icon styling"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_padding",
+      "label": "Icon padding",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "label": "Spacing between icons",
+      "min": 4,
+      "max": 32,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 50,
+      "unit": "px",
+      "info": "50px = circle"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "icon_hover_color",
+      "label": "Icon hover color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "icon_hover_background",
+      "label": "Icon hover background",
+      "default": "#121212"
+    },
+    {
+      "type": "checkbox",
+      "id": "center_icons",
+      "label": "Center icons",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social sharing",
+      "settings": {
+        "title": "Share this",
+        "show_facebook": true,
+        "show_twitter": true,
+        "show_pinterest": true,
+        "show_email": true,
+        "show_copy_link": true
+      }
+    }
+  ]
+}
+{% endschema %}

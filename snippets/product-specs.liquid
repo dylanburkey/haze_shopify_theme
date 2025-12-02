@@ -1,0 +1,243 @@
+{%- comment -%}
+  Product Technical Specifications
+  Displays specs from product metafields in a clean table format
+
+  Usage: {% render 'product-specs', product: product %}
+
+  Metafield namespace: specs
+  Supported metafield keys:
+  - specs.weight
+  - specs.dimensions
+  - specs.material
+  - specs.capacity
+  - specs.voltage
+  - specs.power
+  - specs.pressure
+  - specs.temperature_range
+  - specs.certifications
+  - specs.warranty_period
+  - specs.country_of_origin
+  - specs.custom (JSON list for additional specs)
+{%- endcomment -%}
+
+{%- liquid
+  assign has_specs = false
+
+  if product.metafields.specs.weight or product.metafields.specs.dimensions or product.metafields.specs.material or product.metafields.specs.capacity or product.metafields.specs.voltage or product.metafields.specs.power or product.metafields.specs.pressure or product.metafields.specs.temperature_range or product.metafields.specs.certifications or product.metafields.specs.warranty_period or product.metafields.specs.country_of_origin or product.metafields.specs.custom
+    assign has_specs = true
+  endif
+-%}
+
+{%- if has_specs -%}
+  <div class="product-specs">
+    <details class="product-specs__accordion" open>
+      <summary class="product-specs__header">
+        <h3 class="product-specs__title">
+          <svg class="product-specs__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          {{ 'products.specs.heading' | t | default: 'Technical Specifications' }}
+        </h3>
+        <svg class="product-specs__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </summary>
+
+      <div class="product-specs__content">
+        <table class="product-specs__table">
+          <tbody>
+            {%- if product.metafields.specs.weight -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.weight' | t | default: 'Weight' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.weight }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.dimensions -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.dimensions' | t | default: 'Dimensions' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.dimensions }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.material -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.material' | t | default: 'Material' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.material }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.capacity -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.capacity' | t | default: 'Capacity' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.capacity }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.voltage -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.voltage' | t | default: 'Voltage' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.voltage }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.power -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.power' | t | default: 'Power' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.power }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.pressure -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.pressure' | t | default: 'Pressure Rating' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.pressure }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.temperature_range -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.temperature_range' | t | default: 'Temperature Range' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.temperature_range }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.certifications -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.certifications' | t | default: 'Certifications' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.certifications }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.warranty_period -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.warranty_period' | t | default: 'Warranty' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.warranty_period }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- if product.metafields.specs.country_of_origin -%}
+              <tr class="product-specs__row">
+                <th class="product-specs__label">{{ 'products.specs.country_of_origin' | t | default: 'Country of Origin' }}</th>
+                <td class="product-specs__value">{{ product.metafields.specs.country_of_origin }}</td>
+              </tr>
+            {%- endif -%}
+
+            {%- comment -%} Custom specs from JSON metafield {%- endcomment -%}
+            {%- if product.metafields.specs.custom.value -%}
+              {%- for spec in product.metafields.specs.custom.value -%}
+                <tr class="product-specs__row">
+                  <th class="product-specs__label">{{ spec.label }}</th>
+                  <td class="product-specs__value">{{ spec.value }}</td>
+                </tr>
+              {%- endfor -%}
+            {%- endif -%}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <style>
+    .product-specs {
+      margin-block: var(--space-6);
+    }
+
+    .product-specs__accordion {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .product-specs__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4);
+      background: var(--color-background-secondary);
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .product-specs__header::-webkit-details-marker {
+      display: none;
+    }
+
+    .product-specs__title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin: 0;
+      font-size: var(--font-size-base);
+      font-weight: 600;
+    }
+
+    .product-specs__icon {
+      color: var(--color-primary);
+    }
+
+    .product-specs__chevron {
+      transition: transform var(--duration-fast) var(--ease-default);
+    }
+
+    .product-specs__accordion[open] .product-specs__chevron {
+      transform: rotate(180deg);
+    }
+
+    .product-specs__content {
+      padding: var(--space-4);
+    }
+
+    .product-specs__table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .product-specs__row {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .product-specs__row:last-child {
+      border-bottom: none;
+    }
+
+    .product-specs__label,
+    .product-specs__value {
+      padding: var(--space-3) 0;
+      font-size: var(--font-size-sm);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .product-specs__label {
+      width: 40%;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      padding-right: var(--space-4);
+    }
+
+    .product-specs__value {
+      font-weight: 400;
+      color: var(--color-text);
+    }
+
+    @media (max-width: 480px) {
+      .product-specs__row {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        padding: var(--space-3) 0;
+      }
+
+      .product-specs__label,
+      .product-specs__value {
+        width: 100%;
+        padding: 0;
+      }
+    }
+  </style>
+{%- endif -%}

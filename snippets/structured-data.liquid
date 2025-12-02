@@ -1,0 +1,36 @@
+{%- comment -%}
+  Structured Data Orchestrator
+  Includes appropriate JSON-LD schemas based on template type
+  Usage: {% render 'structured-data' %}
+{%- endcomment -%}
+
+{%- if settings.seo_enable_organization_schema != false -%}
+  {% render 'schema-organization' %}
+{%- endif -%}
+
+{%- if settings.seo_enable_website_schema != false -%}
+  {% render 'schema-website' %}
+{%- endif -%}
+
+{%- if settings.seo_enable_breadcrumb_schema != false -%}
+  {% render 'schema-breadcrumb' %}
+{%- endif -%}
+
+{%- case template.name -%}
+  {%- when 'product' -%}
+    {%- if settings.seo_enable_product_schema != false -%}
+      {% render 'schema-product', product: product %}
+    {%- endif -%}
+
+  {%- when 'collection' -%}
+    {% render 'schema-collection', collection: collection %}
+
+  {%- when 'article' -%}
+    {% render 'schema-article', article: article %}
+
+  {%- when 'blog' -%}
+    {%- comment -%} Blog listing page - no specific schema needed {%- endcomment -%}
+
+  {%- when 'page' -%}
+    {%- comment -%} Check for FAQ section on page {%- endcomment -%}
+{%- endcase -%}

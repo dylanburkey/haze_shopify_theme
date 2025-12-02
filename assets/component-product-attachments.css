@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Product Attachments - Documentation Download Component
+   ========================================================================== */
+
+.product-attachments {
+  margin: var(--space-6, 24px) 0;
+  padding: var(--space-4, 16px);
+  background: var(--color-surface, #f9f9f9);
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: var(--radius, 0);
+}
+
+.attachments-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  margin: 0 0 var(--space-4, 16px);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.attachments-heading__icon {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.attachments-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+}
+
+.attachment-item {
+  margin: 0;
+}
+
+.attachment-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  padding: var(--space-3, 12px);
+  background: var(--color-background, #ffffff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: var(--radius, 0);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s ease;
+}
+
+.attachment-link:hover {
+  border-color: var(--color-primary, #d71920);
+  background: var(--color-surface, #f9f9f9);
+}
+
+.attachment-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--color-surface, #f9f9f9);
+  border-radius: var(--radius, 0);
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  transition: all 0.15s ease;
+}
+
+.attachment-link:hover .attachment-icon {
+  background: var(--color-primary, #d71920);
+  color: #fff;
+}
+
+.attachment-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.attachment-type {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  background: var(--color-surface, #f9f9f9);
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+/* Safety documents get special treatment */
+.attachment-item--safety .attachment-link {
+  border-left: 3px solid var(--color-warning, #f59e0b);
+}
+
+.attachment-item--safety .attachment-icon {
+  color: var(--color-warning, #f59e0b);
+}
+
+.attachment-item--safety .attachment-link:hover .attachment-icon {
+  background: var(--color-warning, #f59e0b);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   Section Wrapper Styles (for standalone section)
+   -------------------------------------------------------------------------- */
+
+.section-product-attachments {
+  padding: var(--space-8, 32px) 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .attachment-link {
+    flex-wrap: wrap;
+  }
+
+  .attachment-name {
+    order: 1;
+    width: calc(100% - 48px);
+  }
+
+  .attachment-type {
+    order: 2;
+    margin-left: 48px;
+    margin-top: var(--space-1, 4px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Grid Layout Option
+   -------------------------------------------------------------------------- */
+
+.product-attachments--grid .attachments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-3, 12px);
+}
+
+.product-attachments--grid .attachment-link {
+  flex-direction: column;
+  text-align: center;
+  padding: var(--space-4, 16px);
+}
+
+.product-attachments--grid .attachment-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-2, 8px);
+}
+
+.product-attachments--grid .attachment-name {
+  font-size: 0.875rem;
+}
+
+.product-attachments--grid .attachment-type {
+  margin-top: var(--space-2, 8px);
+}

@@ -1,0 +1,146 @@
+<section class="main-search section">
+  <div class="container">
+    <header class="search-header">
+      <h1 class="search-header__title">{{ 'general.search.submit' | t }}</h1>
+      <form action="{{ routes.search_url }}" method="get" class="search-form">
+        <div class="search-form__field">
+          <input
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'general.search.placeholder' | t }}"
+            class="form-input search-form__input"
+          >
+          <button type="submit" class="button button--primary">
+            {% render 'icon', name: 'search', size: 20 %}
+          </button>
+        </div>
+      </form>
+    </header>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="search-results__count">
+          {{ 'general.search.results_count' | t: count: search.results_count }}
+        </p>
+
+        {%- paginate search.results by 12 -%}
+          <div class="search-results__grid">
+            {%- for result in search.results -%}
+              {%- case result.object_type -%}
+                {%- when 'product' -%}
+                  {% render 'product-card', product: result %}
+
+                {%- when 'article' -%}
+                  <article class="article-card">
+                    {%- if result.image -%}
+                      <a href="{{ result.url }}" class="article-card__media">
+                        {% render 'image', image: result.image %}
+                      </a>
+                    {%- endif -%}
+                    <div class="article-card__content">
+                      <h2 class="article-card__title">
+                        <a href="{{ result.url }}">{{ result.title }}</a>
+                      </h2>
+                      {%- if result.excerpt.size > 0 -%}
+                        <p class="article-card__excerpt">{{ result.excerpt | strip_html | truncate: 150 }}</p>
+                      {%- endif -%}
+                    </div>
+                  </article>
+
+                {%- when 'page' -%}
+                  <article class="page-card">
+                    <h2 class="page-card__title">
+                      <a href="{{ result.url }}">{{ result.title }}</a>
+                    </h2>
+                    <p class="page-card__content">{{ result.content | strip_html | truncate: 150 }}</p>
+                  </article>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination">
+              {{ paginate | default_pagination }}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p class="search-results__empty">
+          {{ 'general.search.no_results' | t: terms: search.terms }}
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .search-header {
+    margin-block-end: var(--space-8);
+  }
+
+  .search-header__title {
+    margin-block-end: var(--space-6);
+    font-size: var(--font-size-3xl);
+  }
+
+  .search-form__field {
+    display: flex;
+    gap: var(--space-2);
+    max-width: 30rem;
+  }
+
+  .search-form__input {
+    flex: 1;
+  }
+
+  .search-results__count {
+    margin-block-end: var(--space-6);
+    color: var(--color-text-secondary);
+  }
+
+  .search-results__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--grid-gap);
+  }
+
+  .search-results__empty {
+    text-align: center;
+    padding: var(--space-16) 0;
+    color: var(--color-text-secondary);
+  }
+
+  .page-card {
+    padding: var(--space-4);
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-md);
+  }
+
+  .page-card__title {
+    margin-block-end: var(--space-2);
+    font-size: var(--font-size-lg);
+  }
+
+  .page-card__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .page-card__content {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .pagination {
+    margin-block-start: var(--space-12);
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": []
+}
+{% endschema %}

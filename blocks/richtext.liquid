@@ -1,0 +1,117 @@
+{% doc %}
+  Rich text block - Displays rich text content with formatting
+  Can be used across multiple sections
+
+  @param {richtext} richtext - The rich text content
+  @param {string} text_alignment - Text alignment
+{% enddoc %}
+
+{%- liquid
+  assign text_alignment = block.settings.text_alignment | default: 'left'
+-%}
+
+<div class="block-richtext block-richtext--align-{{ text_alignment }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.richtext != blank -%}
+    <div class="block-richtext__content rte">
+      {{ block.settings.richtext }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .block-richtext {
+    width: 100%;
+  }
+
+  .block-richtext--align-left {
+    text-align: left;
+  }
+
+  .block-richtext--align-center {
+    text-align: center;
+  }
+
+  .block-richtext--align-right {
+    text-align: right;
+  }
+
+  .block-richtext__content.rte h1,
+  .block-richtext__content.rte h2,
+  .block-richtext__content.rte h3,
+  .block-richtext__content.rte h4,
+  .block-richtext__content.rte h5,
+  .block-richtext__content.rte h6 {
+    margin-block-start: 1em;
+    margin-block-end: 0.5em;
+  }
+
+  .block-richtext__content.rte h1:first-child,
+  .block-richtext__content.rte h2:first-child,
+  .block-richtext__content.rte h3:first-child,
+  .block-richtext__content.rte h4:first-child,
+  .block-richtext__content.rte h5:first-child,
+  .block-richtext__content.rte h6:first-child {
+    margin-block-start: 0;
+  }
+
+  .block-richtext__content.rte p {
+    margin-block-end: 1em;
+  }
+
+  .block-richtext__content.rte p:last-child {
+    margin-block-end: 0;
+  }
+
+  .block-richtext__content.rte ul,
+  .block-richtext__content.rte ol {
+    margin-block: 1em;
+    padding-inline-start: 1.5em;
+  }
+
+  .block-richtext__content.rte a {
+    color: var(--color-secondary);
+  }
+
+  .block-richtext__content.rte a:hover {
+    color: var(--color-primary);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.richtext.name",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "richtext",
+      "label": "t:blocks.richtext.settings.richtext.label",
+      "default": "<p>Use this text block to add rich formatted content with <strong>bold</strong>, <em>italic</em>, and <a href=\"#\">links</a>.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:blocks.richtext.settings.text_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:blocks.richtext.settings.text_alignment.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.richtext.settings.text_alignment.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:blocks.richtext.settings.text_alignment.options.right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.richtext.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

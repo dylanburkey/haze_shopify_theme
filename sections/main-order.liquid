@@ -1,0 +1,98 @@
+<section class="main-order section">
+  <div class="container">
+    <h1>{{ 'customer.orders.title' | t }}: {{ order.name }}</h1>
+    <p>{{ order.created_at | date: format: 'abbreviated_date' }}</p>
+
+    <table class="order-items">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for line_item in order.line_items -%}
+          <tr>
+            <td>
+              {%- if line_item.image -%}
+                {% render 'image', image: line_item.image, width: 100 %}
+              {%- endif -%}
+            </td>
+            <td>
+              {{ line_item.title }}
+              {%- unless line_item.variant.title == 'Default Title' -%}
+                <br><small>{{ line_item.variant.title }}</small>
+              {%- endunless -%}
+            </td>
+            <td>{{ line_item.original_price | money }}</td>
+            <td>{{ line_item.quantity }}</td>
+            <td>{{ line_item.final_line_price | money }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">Subtotal</td>
+          <td>{{ order.line_items_subtotal_price | money }}</td>
+        </tr>
+        {%- for shipping_method in order.shipping_methods -%}
+          <tr>
+            <td colspan="4">Shipping ({{ shipping_method.title }})</td>
+            <td>{{ shipping_method.price | money }}</td>
+          </tr>
+        {%- endfor -%}
+        <tr>
+          <td colspan="4"><strong>Total</strong></td>
+          <td><strong>{{ order.total_price | money }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="order-addresses">
+      <div>
+        <h3>Billing address</h3>
+        {{ order.billing_address | format_address }}
+      </div>
+      <div>
+        <h3>Shipping address</h3>
+        {{ order.shipping_address | format_address }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .order-items {
+    width: 100%;
+    margin-block: var(--space-8);
+    border-collapse: collapse;
+  }
+
+  .order-items th,
+  .order-items td {
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  .order-addresses {
+    display: grid;
+    gap: var(--space-8);
+    margin-block-start: var(--space-8);
+  }
+
+  @media (min-width: 48rem) {
+    .order-addresses {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Order",
+  "settings": []
+}
+{% endschema %}

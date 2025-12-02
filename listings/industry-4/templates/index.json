@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Industrial Strength Solutions",
+        "subheading": "Professional grade equipment for demanding applications"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "smart-grid": {
+      "type": "smart-grid",
+      "settings": {
+        "layout_preset": "cols-3"
+      }
+    }
+  },
+  "order": ["hero", "featured-collection", "smart-grid"]
+}

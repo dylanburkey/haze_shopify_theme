@@ -1,0 +1,135 @@
+{% doc %}
+  Button block - Displays a configurable button/link
+  Can be used across multiple sections
+
+  @param {string} button_label - Button text
+  @param {string} button_link - URL the button links to
+  @param {string} button_style - Visual style (primary, secondary, text)
+  @param {string} button_size - Size variant (small, medium, large)
+{% enddoc %}
+
+{%- liquid
+  assign button_style = block.settings.button_style | default: 'primary'
+  assign button_size = block.settings.button_size | default: 'medium'
+  assign button_alignment = block.settings.button_alignment | default: 'left'
+-%}
+
+<div class="block-button block-button--align-{{ button_alignment }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.button_label != blank -%}
+    <a
+      href="{{ block.settings.button_link | default: '#' }}"
+      class="button button--{{ button_style }}{% if button_size == 'small' %} button--small{% elsif button_size == 'large' %} button--large{% endif %}"
+      {% if block.settings.open_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+    >
+      {{ block.settings.button_label }}
+    </a>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .block-button {
+    width: 100%;
+  }
+
+  .block-button--align-left {
+    text-align: left;
+  }
+
+  .block-button--align-center {
+    text-align: center;
+  }
+
+  .block-button--align-right {
+    text-align: right;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.button.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:blocks.button.settings.button_label.label",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:blocks.button.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_new_tab",
+      "label": "t:blocks.button.settings.open_new_tab.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:blocks.button.settings.button_style.label",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:blocks.button.settings.button_style.options.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:blocks.button.settings.button_style.options.secondary"
+        },
+        {
+          "value": "text",
+          "label": "t:blocks.button.settings.button_style.options.text"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "t:blocks.button.settings.button_size.label",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:blocks.button.settings.button_size.options.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:blocks.button.settings.button_size.options.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:blocks.button.settings.button_size.options.large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "label": "t:blocks.button.settings.button_alignment.label",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:blocks.button.settings.button_alignment.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.button.settings.button_alignment.options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:blocks.button.settings.button_alignment.options.right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.button.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

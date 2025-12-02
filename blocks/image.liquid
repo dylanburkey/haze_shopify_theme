@@ -1,0 +1,161 @@
+{% doc %}
+  Image block - Displays an image with optional link
+  Can be used across multiple sections
+
+  @param {image} image - The image to display
+  @param {string} image_link - Optional URL to link the image
+  @param {string} image_ratio - Aspect ratio (adapt, square, portrait, landscape)
+{% enddoc %}
+
+{%- liquid
+  assign image_ratio = block.settings.image_ratio | default: 'adapt'
+  assign image_width = block.settings.image_width | default: 100
+-%}
+
+<div class="block-image block-image--ratio-{{ image_ratio }}" style="--image-width: {{ image_width }}%;" {{ block.shopify_attributes }}>
+  {%- if block.settings.image_link != blank -%}
+    <a href="{{ block.settings.image_link }}" class="block-image__link">
+  {%- endif -%}
+
+  {%- if block.settings.image != blank -%}
+    <div class="block-image__wrapper">
+      {{
+        block.settings.image
+        | image_url: width: 1500
+        | image_tag:
+          loading: 'lazy',
+          widths: '165, 360, 535, 750, 1070, 1500',
+          sizes: '(min-width: 1200px) calc((var(--page-width) - var(--grid-gap)) * var(--image-width) / 100), (min-width: 750px) calc((100vw - var(--grid-gap) * 3) * var(--image-width) / 100), calc(100vw - var(--grid-gap) * 2)',
+          class: 'block-image__img'
+      }}
+    </div>
+  {%- else -%}
+    <div class="block-image__placeholder">
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.image_link != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .block-image {
+    width: var(--image-width, 100%);
+    max-width: 100%;
+  }
+
+  .block-image__wrapper,
+  .block-image__placeholder {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+  }
+
+  .block-image__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .block-image--ratio-square .block-image__wrapper,
+  .block-image--ratio-square .block-image__placeholder {
+    aspect-ratio: 1 / 1;
+  }
+
+  .block-image--ratio-portrait .block-image__wrapper,
+  .block-image--ratio-portrait .block-image__placeholder {
+    aspect-ratio: 3 / 4;
+  }
+
+  .block-image--ratio-landscape .block-image__wrapper,
+  .block-image--ratio-landscape .block-image__placeholder {
+    aspect-ratio: 16 / 9;
+  }
+
+  .block-image--ratio-square .block-image__img,
+  .block-image--ratio-portrait .block-image__img,
+  .block-image--ratio-landscape .block-image__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .block-image__placeholder {
+    background-color: var(--color-background-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+
+  .block-image__link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .block-image__link:hover .block-image__img {
+    opacity: 0.9;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:blocks.image.name",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:blocks.image.settings.image.label"
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "t:blocks.image.settings.image_link.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:blocks.image.settings.image_ratio.label",
+      "default": "adapt",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:blocks.image.settings.image_ratio.options.adapt"
+        },
+        {
+          "value": "square",
+          "label": "t:blocks.image.settings.image_ratio.options.square"
+        },
+        {
+          "value": "portrait",
+          "label": "t:blocks.image.settings.image_ratio.options.portrait"
+        },
+        {
+          "value": "landscape",
+          "label": "t:blocks.image.settings.image_ratio.options.landscape"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "t:blocks.image.settings.image_width.label",
+      "min": 25,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "%"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.image.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,319 @@
+{%- comment -%}
+  Loyalty Engine - Core Calculation and Card Display
+  Tier-based rewards system calculated from customer.total_spent
+  Usage: {% render 'loyalty-engine' %}
+{%- endcomment -%}
+
+{%- if settings.loyalty_enabled and customer -%}
+  {%- liquid
+    assign total_spent = customer.total_spent | divided_by: 100.0
+
+    assign tier1_name = settings.loyalty_tier1_name | default: 'Apprentice'
+    assign tier1_color = settings.loyalty_tier1_color | default: '#999999'
+
+    assign tier2_name = settings.loyalty_tier2_name | default: 'Fabricator'
+    assign tier2_threshold = settings.loyalty_tier2_threshold | default: 500
+    assign tier2_color = settings.loyalty_tier2_color | default: '#ffb400'
+    assign tier2_code = settings.loyalty_tier2_code | default: 'LOYALTY_FAB_5'
+    assign tier2_perk = settings.loyalty_tier2_perk | default: '5% off every order'
+
+    assign tier3_name = settings.loyalty_tier3_name | default: 'Master Welder'
+    assign tier3_threshold = settings.loyalty_tier3_threshold | default: 1500
+    assign tier3_color = settings.loyalty_tier3_color | default: '#d71920'
+    assign tier3_code = settings.loyalty_tier3_code | default: 'LOYALTY_MASTER_10'
+    assign tier3_perk = settings.loyalty_tier3_perk | default: '10% off every order'
+
+    assign current_tier = 1
+    assign current_tier_name = tier1_name
+    assign current_tier_color = tier1_color
+    assign current_code = ''
+    assign current_perk = 'Keep shopping to unlock rewards!'
+    assign next_tier_name = tier2_name
+    assign next_tier_threshold = tier2_threshold
+    assign progress_percent = 0
+    assign amount_to_next = tier2_threshold
+
+    if total_spent >= tier3_threshold
+      assign current_tier = 3
+      assign current_tier_name = tier3_name
+      assign current_tier_color = tier3_color
+      assign current_code = tier3_code
+      assign current_perk = tier3_perk
+      assign next_tier_name = ''
+      assign next_tier_threshold = 0
+      assign progress_percent = 100
+      assign amount_to_next = 0
+    elsif total_spent >= tier2_threshold
+      assign current_tier = 2
+      assign current_tier_name = tier2_name
+      assign current_tier_color = tier2_color
+      assign current_code = tier2_code
+      assign current_perk = tier2_perk
+      assign next_tier_name = tier3_name
+      assign next_tier_threshold = tier3_threshold
+      assign progress_percent = total_spent | minus: tier2_threshold | divided_by: tier3_threshold | minus: tier2_threshold | times: 100
+      assign amount_to_next = tier3_threshold | minus: total_spent
+    else
+      assign progress_percent = total_spent | divided_by: tier2_threshold | times: 100
+      assign amount_to_next = tier2_threshold | minus: total_spent
+    endif
+
+    if progress_percent > 100
+      assign progress_percent = 100
+    endif
+  -%}
+
+  <div class="loyalty-card" style="--tier-color: {{ current_tier_color }};">
+    <div class="loyalty-card__header">
+      <div class="loyalty-tier-badge" style="background-color: {{ current_tier_color }};">
+        <svg class="loyalty-tier-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        {{ current_tier_name }}
+      </div>
+      <span class="loyalty-member-since">Member since {{ customer.created_at | date: '%B %Y' }}</span>
+    </div>
+
+    <div class="loyalty-card__body">
+      <div class="loyalty-stats">
+        <div class="loyalty-stat">
+          <span class="loyalty-stat__value">{{ total_spent | money_without_trailing_zeros }}</span>
+          <span class="loyalty-stat__label">{{ 'customer.loyalty.total_spent' | t | default: 'Total Spent' }}</span>
+        </div>
+        <div class="loyalty-stat">
+          <span class="loyalty-stat__value">{{ customer.orders_count }}</span>
+          <span class="loyalty-stat__label">{{ 'customer.loyalty.orders' | t | default: 'Orders' }}</span>
+        </div>
+      </div>
+
+      {%- if current_code != blank -%}
+        <div class="loyalty-reward">
+          <div class="loyalty-reward__perk">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            {{ current_perk }}
+          </div>
+          <div class="loyalty-reward__code">
+            <span class="loyalty-code-label">{{ 'customer.loyalty.your_code' | t | default: 'Your Code' }}:</span>
+            <code class="loyalty-code" id="loyalty-discount-code">{{ current_code }}</code>
+            <button type="button" class="loyalty-copy-btn" onclick="copyLoyaltyCode()" aria-label="Copy code">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if next_tier_name != blank -%}
+        <div class="loyalty-progress">
+          <div class="loyalty-progress__header">
+            <span>{{ 'customer.loyalty.progress_to' | t | default: 'Progress to' }} {{ next_tier_name }}</span>
+            <span>{{ amount_to_next | money_without_trailing_zeros }} {{ 'customer.loyalty.to_go' | t | default: 'to go' }}</span>
+          </div>
+          <div class="loyalty-progress__bar">
+            <div class="loyalty-progress__fill" style="width: {{ progress_percent }}%;"></div>
+          </div>
+        </div>
+      {%- else -%}
+        <div class="loyalty-max-tier">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="7"></circle>
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+          </svg>
+          <span>{{ 'customer.loyalty.max_tier' | t | default: "You've reached the highest tier!" }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="loyalty-card__footer">
+      <a href="{{ routes.account_url }}" class="loyalty-link">
+        {{ 'customer.loyalty.view_benefits' | t | default: 'View All Benefits' }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function copyLoyaltyCode() {
+      var code = document.getElementById('loyalty-discount-code').textContent;
+      navigator.clipboard.writeText(code).then(function() {
+        var btn = document.querySelector('.loyalty-copy-btn');
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        setTimeout(function() {
+          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+        }, 2000);
+      });
+    }
+  </script>
+
+  <style>
+    .loyalty-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .loyalty-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: var(--tier-color);
+      color: #fff;
+    }
+
+    .loyalty-tier-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .loyalty-member-since {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .loyalty-card__body {
+      padding: 20px;
+    }
+
+    .loyalty-stats {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .loyalty-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .loyalty-stat__value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .loyalty-stat__label {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
+
+    .loyalty-reward {
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .loyalty-reward__perk {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--tier-color);
+      font-weight: 500;
+    }
+
+    .loyalty-reward__code {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loyalty-code-label {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
+
+    .loyalty-code {
+      background: var(--color-surface);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .loyalty-copy-btn {
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      transition: color 0.15s ease;
+    }
+
+    .loyalty-copy-btn:hover {
+      color: var(--tier-color);
+    }
+
+    .loyalty-progress {
+      margin-bottom: 0;
+    }
+
+    .loyalty-progress__header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 8px;
+    }
+
+    .loyalty-progress__bar {
+      height: 8px;
+      background: var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .loyalty-progress__fill {
+      height: 100%;
+      background: var(--tier-color);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .loyalty-max-tier {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      background: var(--tier-color);
+      color: #fff;
+      border-radius: var(--radius);
+      font-weight: 500;
+    }
+
+    .loyalty-card__footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .loyalty-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--tier-color);
+      font-weight: 500;
+    }
+
+    .loyalty-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+{%- endif -%}

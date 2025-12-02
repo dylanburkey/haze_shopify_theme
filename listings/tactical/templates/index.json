@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Tactical Gear",
+        "subheading": "Rugged outdoor and tactical equipment"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "smart-grid": {
+      "type": "smart-grid",
+      "settings": {
+        "layout_preset": "highlight-left"
+      }
+    }
+  },
+  "order": ["hero", "featured-collection", "smart-grid"]
+}

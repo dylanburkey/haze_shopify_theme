@@ -1,0 +1,51 @@
+{%- comment -%}
+  Renders a responsive image with lazy loading support.
+  Uses the image_url filter for optimal image delivery.
+
+  @param {image} image - The image object to render
+  @param {string} [alt] - Alt text override (defaults to image.alt)
+  @param {string} [class] - CSS class for the image element
+  @param {string} [sizes] - The sizes attribute for responsive images
+  @param {number} [width] - Maximum width to load
+  @param {number} [height] - Height constraint (maintains aspect ratio if width also set)
+  @param {string} [loading] - Loading strategy: 'lazy' (default) or 'eager'
+  @param {boolean} [preload] - Whether to add a preload link
+
+  @example
+  {% render 'image', image: product.featured_image %}
+  {% render 'image', image: section.settings.image, sizes: '(min-width: 750px) 50vw, 100vw' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign alt_text = alt | default: image.alt | escape
+  assign loading_attr = loading | default: 'lazy'
+  assign image_class = class | default: ''
+  assign widths = '165, 360, 535, 750, 940, 1100, 1500, 1780, 2000'
+
+  if width
+    assign max_width = width
+  else
+    assign max_width = image.width | default: 2000
+  endif
+
+  if sizes
+    assign sizes_attr = sizes
+  else
+    assign sizes_attr = '100vw'
+  endif
+-%}
+
+{%- if image != blank -%}
+  {{
+    image
+    | image_url: width: max_width, height: height
+    | image_tag:
+      alt: alt_text,
+      class: image_class,
+      loading: loading_attr,
+      widths: widths,
+      sizes: sizes_attr
+  }}
+{%- else -%}
+  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}

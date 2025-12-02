@@ -1,0 +1,209 @@
+{%- comment -%}
+  PWA Install Banner
+  Shows a branded install prompt when the browser supports PWA installation
+  Include at the bottom of theme.liquid before </body>
+{%- endcomment -%}
+
+{%- if settings.pwa_enabled and settings.pwa_install_prompt -%}
+  {%- liquid
+    assign app_name = settings.pwa_name | default: shop.name
+    if settings.pwa_icon
+      assign app_icon = settings.pwa_icon | image_url: width: 96, height: 96
+    else
+      assign app_icon = 'pwa-icon.png' | asset_url
+    endif
+  -%}
+
+  <div id="pwa-install-banner" class="pwa-banner" aria-hidden="true">
+    <div class="pwa-banner__content">
+      <img src="{{ app_icon }}" alt="{{ app_name }}" class="pwa-banner__icon" width="48" height="48">
+      <div class="pwa-banner__text">
+        <strong class="pwa-banner__title">{{ section.settings.title | default: 'Install Our App' }}</strong>
+        <p class="pwa-banner__description">{{ section.settings.description | default: 'Add to your home screen for quick access' }}</p>
+      </div>
+    </div>
+    <div class="pwa-banner__actions">
+      <button type="button" id="pwa-install-btn" class="btn btn--primary btn--sm">
+        {{ section.settings.install_label | default: 'Install' }}
+      </button>
+      <button type="button" id="pwa-dismiss-btn" class="btn btn--outline btn--sm" aria-label="Dismiss">
+        {{ section.settings.dismiss_label | default: 'Not Now' }}
+      </button>
+    </div>
+  </div>
+
+  <style>
+    .pwa-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--color-background);
+      border-top: 1px solid var(--color-border);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 9999;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+    }
+
+    .pwa-banner.visible {
+      transform: translateY(0);
+    }
+
+    .pwa-banner__content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .pwa-banner__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .pwa-banner__text {
+      min-width: 0;
+    }
+
+    .pwa-banner__title {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+
+    .pwa-banner__description {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pwa-banner__actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .pwa-banner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .pwa-banner__actions {
+        justify-content: stretch;
+      }
+
+      .pwa-banner__actions .btn {
+        flex: 1;
+      }
+
+      .pwa-banner__description {
+        white-space: normal;
+      }
+    }
+  </style>
+
+  <script>
+    (function() {
+      var banner = document.getElementById('pwa-install-banner');
+      var installBtn = document.getElementById('pwa-install-btn');
+      var dismissBtn = document.getElementById('pwa-dismiss-btn');
+      var deferredPrompt = null;
+
+      // Check if already installed or dismissed
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        return; // Already in standalone mode
+      }
+
+      if (localStorage.getItem('pwa-dismissed')) {
+        var dismissedTime = parseInt(localStorage.getItem('pwa-dismissed'), 10);
+        var daysSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
+        if (daysSinceDismissed < 7) {
+          return; // Don't show for 7 days after dismissal
+        }
+      }
+
+      // Listen for the beforeinstallprompt event
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show the banner
+        banner.classList.add('visible');
+        banner.setAttribute('aria-hidden', 'false');
+      });
+
+      // Install button click
+      installBtn.addEventListener('click', function() {
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(choiceResult) {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('PWA installed');
+          }
+          deferredPrompt = null;
+          banner.classList.remove('visible');
+          banner.setAttribute('aria-hidden', 'true');
+        });
+      });
+
+      // Dismiss button click
+      dismissBtn.addEventListener('click', function() {
+        localStorage.setItem('pwa-dismissed', Date.now().toString());
+        banner.classList.remove('visible');
+        banner.setAttribute('aria-hidden', 'true');
+      });
+
+      // Hide banner if app is installed
+      window.addEventListener('appinstalled', function() {
+        banner.classList.remove('visible');
+        banner.setAttribute('aria-hidden', 'true');
+        deferredPrompt = null;
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PWA Install Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Banner title",
+      "default": "Install Our App"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Banner description",
+      "default": "Add to your home screen for quick access"
+    },
+    {
+      "type": "text",
+      "id": "install_label",
+      "label": "Install button label",
+      "default": "Install"
+    },
+    {
+      "type": "text",
+      "id": "dismiss_label",
+      "label": "Dismiss button label",
+      "default": "Not Now"
+    }
+  ]
+}
+{% endschema %}

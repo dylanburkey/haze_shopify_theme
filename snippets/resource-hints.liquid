@@ -1,0 +1,152 @@
+{%- comment -%}
+  Resource Hints Snippet
+  Implements preconnect, prefetch, preload for optimal performance
+  Include this in theme.liquid <head> section, ideally early
+
+  Usage: {% render 'resource-hints' %}
+{%- endcomment -%}
+
+{%- comment -%} ============================================
+  PRECONNECT - Establish early connections to required origins
+  Critical for reducing connection time to external resources
+============================================ {%- endcomment -%}
+
+{%- comment -%} Shopify CDN - Always needed {%- endcomment -%}
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.shopify.com">
+
+{%- comment -%} Shopify Payments/Checkout {%- endcomment -%}
+<link rel="preconnect" href="https://checkout.shopify.com" crossorigin>
+
+{%- comment -%} Shopify Analytics {%- endcomment -%}
+<link rel="preconnect" href="https://monorail-edge.shopifysvc.com" crossorigin>
+
+{%- comment -%} Google Fonts - if using Google Fonts {%- endcomment -%}
+{%- if settings.type_header_font.system? == false or settings.type_body_font.system? == false -%}
+  <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
+{%- endif -%}
+
+{%- comment -%} YouTube embeds - preconnect if video content is common {%- endcomment -%}
+{%- if request.page_type == 'product' or request.page_type == 'article' -%}
+  <link rel="preconnect" href="https://www.youtube.com" crossorigin>
+  <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.youtube.com">
+{%- endif -%}
+
+{%- comment -%} AutoRAG AI Search - if enabled {%- endcomment -%}
+{%- if settings.autorag_enabled and settings.autorag_worker_url != blank -%}
+  {%- assign worker_url = settings.autorag_worker_url | split: '//' | last | split: '/' | first -%}
+  <link rel="preconnect" href="https://{{ worker_url }}" crossorigin>
+  <link rel="dns-prefetch" href="https://{{ worker_url }}">
+{%- endif -%}
+
+{%- comment -%} ============================================
+  PRELOAD - Load critical resources as early as possible
+  Use sparingly - only for above-the-fold assets
+============================================ {%- endcomment -%}
+
+{%- comment -%} Preload critical CSS files {%- endcomment -%}
+<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style">
+
+{%- comment -%} Preload logo if it exists {%- endcomment -%}
+{%- if settings.logo != blank -%}
+  <link rel="preload" href="{{ settings.logo | image_url: width: 500 }}" as="image" type="image/{{ settings.logo.src | split: '.' | last }}">
+{%- endif -%}
+
+{%- comment -%} Preload hero image on homepage {%- endcomment -%}
+{%- if request.page_type == 'index' -%}
+  {%- for section in content_for_header -%}
+    {%- comment -%} This is a simplified approach - actual implementation depends on theme structure {%- endcomment -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} Preload critical fonts - if using custom fonts {%- endcomment -%}
+{%- unless settings.type_header_font.system? -%}
+  {%- assign header_font_url = settings.type_header_font | font_url -%}
+  {%- if header_font_url != blank -%}
+    <link rel="preload" href="{{ header_font_url }}" as="font" type="font/woff2" crossorigin>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless settings.type_body_font.system? -%}
+  {%- assign body_font_url = settings.type_body_font | font_url -%}
+  {%- if body_font_url != blank -%}
+    <link rel="preload" href="{{ body_font_url }}" as="font" type="font/woff2" crossorigin>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- comment -%} ============================================
+  PREFETCH - Load resources needed for next navigation
+  Lower priority than preload, good for predicted navigation
+============================================ {%- endcomment -%}
+
+{%- comment -%} Prefetch cart page when on product page {%- endcomment -%}
+{%- if request.page_type == 'product' -%}
+  <link rel="prefetch" href="{{ routes.cart_url }}">
+{%- endif -%}
+
+{%- comment -%} Prefetch checkout on cart page {%- endcomment -%}
+{%- if request.page_type == 'cart' -%}
+  <link rel="dns-prefetch" href="https://checkout.shopify.com">
+{%- endif -%}
+
+{%- comment -%} Prefetch collection page CSS on collection pages {%- endcomment -%}
+{%- if request.page_type == 'collection' or request.page_type == 'list-collections' -%}
+  <link rel="prefetch" href="{{ 'component-card.css' | asset_url }}" as="style">
+{%- endif -%}
+
+{%- comment -%} Prefetch product page assets when hovering collection items (handled via JS) {%- endcomment -%}
+
+{%- comment -%} ============================================
+  MODULEPRELOAD - For JavaScript modules
+  Preloads JS modules more efficiently than preload
+============================================ {%- endcomment -%}
+
+{%- comment -%} Preload critical JavaScript {%- endcomment -%}
+{%- if request.page_type == 'product' -%}
+  <link rel="modulepreload" href="{{ 'product-form.js' | asset_url }}">
+{%- endif -%}
+
+{%- comment -%} ============================================
+  FETCH PRIORITY HINTS via fetchpriority attribute
+  Note: These are applied inline where images are rendered
+  This section documents the strategy for reference
+
+  High Priority:
+  - Logo
+  - Hero images
+  - First product image
+  - LCP (Largest Contentful Paint) elements
+
+  Low Priority:
+  - Below-the-fold images
+  - Decorative images
+  - Lazy-loaded content
+============================================ {%- endcomment -%}
+
+{%- comment -%} ============================================
+  SPECULATION RULES - Prerender pages for instant navigation
+  Modern alternative to prefetch, supported in Chromium browsers
+============================================ {%- endcomment -%}
+{%- if settings.enable_speculation_rules -%}
+<script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+        "href_matches": "/*"
+      },
+      "eagerness": "moderate"
+    }
+  ],
+  "prefetch": [
+    {
+      "where": {
+        "selector_matches": "a[href^='/products/'], a[href^='/collections/']"
+      },
+      "eagerness": "moderate"
+    }
+  ]
+}
+</script>
+{%- endif -%}

@@ -1,0 +1,231 @@
+<section class="main-cart section">
+  <div class="container">
+    <h1 class="cart__title">{{ 'cart.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" class="cart-form">
+        <div class="cart-form__content">
+          <table class="cart-items">
+            <thead class="visually-hidden">
+              <tr>
+                <th>{{ 'cart.title' | t }}</th>
+                <th>{{ 'products.product.quantity' | t }}</th>
+                <th>{{ 'cart.subtotal' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for item in cart.items -%}
+                <tr class="cart-item">
+                  <td class="cart-item__media">
+                    <a href="{{ item.url }}">
+                      {%- if item.image -%}
+                        {% render 'image', image: item.image, width: 150 %}
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag }}
+                      {%- endif -%}
+                    </a>
+                  </td>
+
+                  <td class="cart-item__info">
+                    <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                    {%- unless item.product.has_only_default_variant -%}
+                      <p class="cart-item__variant">{{ item.variant.title }}</p>
+                    {%- endunless -%}
+                    <p class="cart-item__price">{{ item.original_price | money }}</p>
+                  </td>
+
+                  <td class="cart-item__quantity">
+                    <label for="Quantity-{{ item.index }}" class="visually-hidden">
+                      {{ 'products.product.quantity' | t }}
+                    </label>
+                    <input
+                      type="number"
+                      id="Quantity-{{ item.index }}"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      class="form-input cart-item__quantity-input"
+                    >
+                  </td>
+
+                  <td class="cart-item__total">
+                    {{ item.final_line_price | money }}
+                  </td>
+
+                  <td class="cart-item__remove">
+                    <a
+                      href="{{ item.url_to_remove }}"
+                      class="cart-item__remove-link"
+                      aria-label="{{ 'cart.remove' | t }}"
+                    >
+                      {% render 'icon', name: 'trash', size: 18 %}
+                    </a>
+                  </td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+
+          <div class="cart-form__footer">
+            <div class="cart-form__note">
+              <label for="CartNote" class="form-label">{{ 'cart.note' | t }}</label>
+              <textarea
+                id="CartNote"
+                name="note"
+                class="form-textarea"
+                placeholder="{{ 'cart.note_placeholder' | t }}"
+              >{{ cart.note }}</textarea>
+            </div>
+
+            <div class="cart-form__totals">
+              <div class="cart-form__subtotal">
+                <span>{{ 'cart.subtotal' | t }}</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+              <p class="cart-form__taxes">{{ 'cart.taxes_and_shipping' | t }}</p>
+
+              <div class="cart-form__buttons">
+                <button type="submit" name="update" class="button button--secondary">
+                  {{ 'cart.update' | t }}
+                </button>
+                <button type="submit" name="checkout" class="button button--primary">
+                  {{ 'cart.checkout' | t }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <p>{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button button--primary">
+          {{ 'cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .cart__title {
+    margin-block-end: var(--space-8);
+    font-size: var(--font-size-2xl);
+  }
+
+  .cart-items {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .cart-item {
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .cart-item td {
+    padding: var(--space-4) var(--space-2);
+    vertical-align: top;
+  }
+
+  .cart-item__media {
+    width: 6rem;
+  }
+
+  .cart-item__media img {
+    border-radius: var(--radius-sm);
+  }
+
+  .cart-item__title {
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .cart-item__title:hover {
+    color: var(--color-secondary);
+  }
+
+  .cart-item__variant {
+    margin-block-start: var(--space-1);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .cart-item__price {
+    margin-block-start: var(--space-2);
+    font-size: var(--font-size-sm);
+  }
+
+  .cart-item__quantity-input {
+    width: 4rem;
+    text-align: center;
+  }
+
+  .cart-item__total {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .cart-item__remove-link {
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .cart-item__remove-link:hover {
+    color: var(--color-error);
+  }
+
+  .cart-form__footer {
+    display: grid;
+    gap: var(--space-8);
+    margin-block-start: var(--space-8);
+  }
+
+  @media (min-width: 48rem) {
+    .cart-form__footer {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .cart-form__totals {
+    text-align: right;
+  }
+
+  .cart-form__subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-block-end: var(--space-2);
+  }
+
+  .cart-form__taxes {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-block-end: var(--space-6);
+  }
+
+  .cart-form__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: flex-end;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: var(--space-16) 0;
+  }
+
+  .cart-empty p {
+    margin-block-end: var(--space-6);
+    color: var(--color-text-secondary);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

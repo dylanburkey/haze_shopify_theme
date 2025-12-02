@@ -1,0 +1,93 @@
+{%- comment -%}
+  Loyalty Progress Bar - Standalone progress indicator
+  Usage: {% render 'loyalty-progress' %}
+{%- endcomment -%}
+
+{%- if settings.loyalty_enabled and customer -%}
+  {%- liquid
+    assign total_spent = customer.total_spent | divided_by: 100.0
+
+    assign tier2_threshold = settings.loyalty_tier2_threshold | default: 500
+    assign tier3_threshold = settings.loyalty_tier3_threshold | default: 1500
+
+    assign tier2_name = settings.loyalty_tier2_name | default: 'Fabricator'
+    assign tier3_name = settings.loyalty_tier3_name | default: 'Master Welder'
+
+    if total_spent >= tier3_threshold
+      assign current_tier_color = settings.loyalty_tier3_color | default: '#d71920'
+      assign at_max = true
+    elsif total_spent >= tier2_threshold
+      assign current_tier_color = settings.loyalty_tier2_color | default: '#ffb400'
+      assign next_tier = tier3_name
+      assign next_threshold = tier3_threshold
+      assign progress = total_spent | minus: tier2_threshold | times: 100.0 | divided_by: tier3_threshold | minus: tier2_threshold
+      assign remaining = tier3_threshold | minus: total_spent
+    else
+      assign current_tier_color = settings.loyalty_tier1_color | default: '#999999'
+      assign next_tier = tier2_name
+      assign next_threshold = tier2_threshold
+      assign progress = total_spent | times: 100.0 | divided_by: tier2_threshold
+      assign remaining = tier2_threshold | minus: total_spent
+    endif
+
+    if progress > 100
+      assign progress = 100
+    endif
+  -%}
+
+  <div class="loyalty-progress-bar" style="--progress-color: {{ current_tier_color }};">
+    {%- if at_max -%}
+      <div class="loyalty-progress-bar__max">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        {{ 'customer.loyalty.max_reached' | t | default: 'Maximum tier reached!' }}
+      </div>
+    {%- else -%}
+      <div class="loyalty-progress-bar__info">
+        <span>{{ remaining | money_without_trailing_zeros }} to {{ next_tier }}</span>
+      </div>
+      <div class="loyalty-progress-bar__track">
+        <div class="loyalty-progress-bar__fill" style="width: {{ progress }}%;"></div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <style>
+    .loyalty-progress-bar {
+      padding: 12px 16px;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+    }
+
+    .loyalty-progress-bar__info {
+      font-size: 0.875rem;
+      margin-bottom: 8px;
+      color: var(--color-text-secondary);
+    }
+
+    .loyalty-progress-bar__track {
+      height: 6px;
+      background: var(--color-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .loyalty-progress-bar__fill {
+      height: 100%;
+      background: var(--progress-color);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .loyalty-progress-bar__max {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--progress-color);
+      font-weight: 500;
+    }
+  </style>
+{%- endif -%}

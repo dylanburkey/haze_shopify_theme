@@ -1,0 +1,77 @@
+<section class="main-list-collections section">
+  <div class="container">
+    <h1 class="collections__title">{{ 'collections.title' | t }}</h1>
+
+    <div class="collections-grid">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="collection-card">
+          <div class="collection-card__media">
+            {%- if collection.image -%}
+              {% render 'image', image: collection.image %}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag }}
+            {%- endif -%}
+          </div>
+          <h2 class="collection-card__title">{{ collection.title }}</h2>
+          <p class="collection-card__count">
+            {{ 'collections.products_count' | t: count: collection.products_count }}
+          </p>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .collections__title {
+    margin-block-end: var(--space-8);
+    font-size: var(--font-size-3xl);
+  }
+
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--grid-gap);
+  }
+
+  .collection-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .collection-card__media {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin-block-end: var(--space-4);
+    background-color: var(--color-background-secondary);
+  }
+
+  .collection-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-default);
+  }
+
+  .collection-card:hover .collection-card__media img {
+    transform: scale(1.05);
+  }
+
+  .collection-card__title {
+    margin-block-end: var(--space-1);
+    font-size: var(--font-size-lg);
+  }
+
+  .collection-card__count {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection list",
+  "settings": []
+}
+{% endschema %}

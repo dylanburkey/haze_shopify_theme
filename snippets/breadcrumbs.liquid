@@ -1,0 +1,162 @@
+{%- comment -%}
+  Visual Breadcrumb Navigation
+  Displays breadcrumb trail with integrated schema markup
+  Usage: {% render 'breadcrumbs' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign separator = separator | default: '/'
+  assign show_home_icon = show_home_icon | default: true
+-%}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list">
+    <li class="breadcrumbs__item">
+      <a href="{{ routes.root_url }}" class="breadcrumbs__link breadcrumbs__link--home">
+        {%- if show_home_icon -%}
+          <svg class="breadcrumbs__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="visually-hidden">{{ 'general.breadcrumbs.home' | t | default: 'Home' }}</span>
+        {%- else -%}
+          {{ 'general.breadcrumbs.home' | t | default: 'Home' }}
+        {%- endif -%}
+      </a>
+      <span class="breadcrumbs__separator" aria-hidden="true">{{ separator }}</span>
+    </li>
+
+    {%- case template.name -%}
+      {%- when 'product' -%}
+        {%- if product.collections.size > 0 -%}
+          <li class="breadcrumbs__item">
+            <a href="{{ product.collections.first.url }}" class="breadcrumbs__link">
+              {{ product.collections.first.title }}
+            </a>
+            <span class="breadcrumbs__separator" aria-hidden="true">{{ separator }}</span>
+          </li>
+        {%- endif -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">{{ product.title }}</span>
+        </li>
+
+      {%- when 'collection' -%}
+        {%- if current_tags -%}
+          <li class="breadcrumbs__item">
+            <a href="{{ collection.url }}" class="breadcrumbs__link">{{ collection.title }}</a>
+            <span class="breadcrumbs__separator" aria-hidden="true">{{ separator }}</span>
+          </li>
+          <li class="breadcrumbs__item">
+            <span class="breadcrumbs__current" aria-current="page">{{ current_tags | join: ' + ' }}</span>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <span class="breadcrumbs__current" aria-current="page">{{ collection.title }}</span>
+          </li>
+        {%- endif -%}
+
+      {%- when 'article' -%}
+        <li class="breadcrumbs__item">
+          <a href="{{ blog.url }}" class="breadcrumbs__link">{{ blog.title }}</a>
+          <span class="breadcrumbs__separator" aria-hidden="true">{{ separator }}</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">{{ article.title }}</span>
+        </li>
+
+      {%- when 'blog' -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">{{ blog.title }}</span>
+        </li>
+
+      {%- when 'page' -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">{{ page.title }}</span>
+        </li>
+
+      {%- when 'search' -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">
+            {{ 'general.search.title' | t | default: 'Search' }}
+            {%- if search.terms != blank -%}: "{{ search.terms }}"{%- endif -%}
+          </span>
+        </li>
+
+      {%- when 'cart' -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">{{ 'cart.general.title' | t | default: 'Cart' }}</span>
+        </li>
+
+      {%- when 'list-collections' -%}
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current" aria-current="page">{{ 'collections.general.title' | t | default: 'Collections' }}</span>
+        </li>
+
+    {%- endcase -%}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    padding: var(--space-3) 0;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-2);
+  }
+
+  .breadcrumbs__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .breadcrumbs__link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .breadcrumbs__link:hover {
+    color: var(--color-text);
+  }
+
+  .breadcrumbs__link--home {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumbs__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .breadcrumbs__separator {
+    color: var(--color-border);
+    user-select: none;
+  }
+
+  .breadcrumbs__current {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumbs {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .breadcrumbs__list {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+  }
+</style>

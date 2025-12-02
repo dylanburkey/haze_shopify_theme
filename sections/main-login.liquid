@@ -1,0 +1,87 @@
+<section class="main-login section">
+  <div class="container">
+    <div class="login-page">
+      <h1 class="login-page__title">{{ 'customer.login.title' | t }}</h1>
+
+      {% form 'customer_login', class: 'login-form' %}
+        {%- if form.errors -%}
+          <div class="form-error">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="form-field">
+          <label for="CustomerEmail" class="form-label">{{ 'customer.login.email' | t }}</label>
+          <input
+            type="email"
+            id="CustomerEmail"
+            name="customer[email]"
+            class="form-input"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="CustomerPassword" class="form-label">{{ 'customer.login.password' | t }}</label>
+          <input
+            type="password"
+            id="CustomerPassword"
+            name="customer[password]"
+            class="form-input"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button type="submit" class="button button--primary login-form__submit">
+          {{ 'customer.login.submit' | t }}
+        </button>
+
+        <div class="login-form__links">
+          <a href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot_password' | t }}</a>
+          <a href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .login-page {
+    max-width: 24rem;
+    margin-inline: auto;
+    padding-block: var(--space-8);
+  }
+
+  .login-page__title {
+    margin-block-end: var(--space-8);
+    text-align: center;
+    font-size: var(--font-size-2xl);
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .login-form__submit {
+    width: 100%;
+    margin-block-start: var(--space-4);
+  }
+
+  .login-form__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Login",
+  "settings": []
+}
+{% endschema %}

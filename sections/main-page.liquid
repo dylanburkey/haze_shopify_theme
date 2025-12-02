@@ -1,0 +1,61 @@
+<section class="main-page section">
+  <div class="container">
+    <article class="page">
+      <header class="page__header">
+        <h1 class="page__title">{{ page.title }}</h1>
+      </header>
+      <div class="page__content rte">
+        {{ page.content }}
+      </div>
+    </article>
+  </div>
+</section>
+
+{% stylesheet %}
+  .page__header {
+    margin-block-end: var(--space-8);
+  }
+
+  .page__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .page__content {
+    max-width: 65ch;
+  }
+
+  .rte h2 {
+    margin-block-start: var(--space-8);
+    margin-block-end: var(--space-4);
+  }
+
+  .rte h3 {
+    margin-block-start: var(--space-6);
+    margin-block-end: var(--space-3);
+  }
+
+  .rte p {
+    margin-block-end: var(--space-4);
+  }
+
+  .rte ul,
+  .rte ol {
+    margin-block-end: var(--space-4);
+  }
+
+  .rte img {
+    margin-block: var(--space-6);
+    border-radius: var(--radius-md);
+  }
+
+  .rte a {
+    color: var(--color-secondary);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}

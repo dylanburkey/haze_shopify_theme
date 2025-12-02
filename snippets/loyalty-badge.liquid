@@ -1,0 +1,68 @@
+{%- comment -%}
+  Loyalty Badge - Small tier indicator for header/account
+  Usage: {% render 'loyalty-badge' %}
+{%- endcomment -%}
+
+{%- if settings.loyalty_enabled and customer -%}
+  {%- liquid
+    assign total_spent = customer.total_spent | divided_by: 100.0
+
+    assign tier2_threshold = settings.loyalty_tier2_threshold | default: 500
+    assign tier3_threshold = settings.loyalty_tier3_threshold | default: 1500
+
+    if total_spent >= tier3_threshold
+      assign tier_name = settings.loyalty_tier3_name | default: 'Master Welder'
+      assign tier_color = settings.loyalty_tier3_color | default: '#d71920'
+      assign tier_level = 3
+    elsif total_spent >= tier2_threshold
+      assign tier_name = settings.loyalty_tier2_name | default: 'Fabricator'
+      assign tier_color = settings.loyalty_tier2_color | default: '#ffb400'
+      assign tier_level = 2
+    else
+      assign tier_name = settings.loyalty_tier1_name | default: 'Apprentice'
+      assign tier_color = settings.loyalty_tier1_color | default: '#999999'
+      assign tier_level = 1
+    endif
+  -%}
+
+  <span class="loyalty-badge loyalty-badge--tier-{{ tier_level }}" style="--badge-color: {{ tier_color }};" title="{{ tier_name }}">
+    <svg class="loyalty-badge__icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+    <span class="loyalty-badge__text">{{ tier_name }}</span>
+  </span>
+
+  <style>
+    .loyalty-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      background: var(--badge-color);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .loyalty-badge__icon {
+      flex-shrink: 0;
+    }
+
+    .loyalty-badge__text {
+      white-space: nowrap;
+    }
+
+    /* Compact version for tight spaces */
+    .loyalty-badge--compact .loyalty-badge__text {
+      display: none;
+    }
+
+    .loyalty-badge--compact {
+      padding: 4px;
+      border-radius: 50%;
+    }
+  </style>
+{%- endif -%}

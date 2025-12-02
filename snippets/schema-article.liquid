@@ -1,0 +1,45 @@
+{%- comment -%}
+  Article Schema (JSON-LD)
+  Outputs Article/BlogPosting structured data
+  Usage: {% render 'schema-article', article: article %}
+{%- endcomment -%}
+
+{%- liquid
+  assign article_image = article.image | default: settings.seo_org_logo
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ article.url | prepend: shop.url | json }}
+  },
+  "headline": {{ article.title | truncate: 110 | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncate: 200 | json }}
+  {%- if article_image -%}
+  ,"image": {{ article_image | image_url: width: 1200 | json }}
+  {%- endif -%}
+  ,"datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "dateModified": {{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }}
+    {%- if settings.seo_org_logo -%}
+    ,"logo": {
+      "@type": "ImageObject",
+      "url": {{ settings.seo_org_logo | image_url: width: 600 | json }}
+    }
+    {%- endif -%}
+  }
+  {%- if article.tags.size > 0 -%}
+  ,"keywords": {{ article.tags | join: ', ' | json }}
+  {%- endif -%}
+  ,"wordCount": {{ article.content | strip_html | split: ' ' | size | json }}
+}
+</script>
