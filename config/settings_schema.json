@@ -204,6 +204,120 @@
     ]
   },
   {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1800,
+        "step": 10,
+        "default": 1450,
+        "unit": "px",
+        "info": "Maximum width of the page content"
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "label": "Space between sections",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "default": 40,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "label": "Grid gap",
+        "min": 8,
+        "max": 48,
+        "step": 4,
+        "default": 24,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_border_radius",
+        "label": "Button border radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button style",
+        "options": [
+          { "value": "solid", "label": "Solid" },
+          { "value": "outline", "label": "Outline" }
+        ],
+        "default": "solid"
+      },
+      {
+        "type": "range",
+        "id": "input_border_radius",
+        "label": "Input border radius",
+        "min": 0,
+        "max": 20,
+        "step": 2,
+        "default": 4,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_style",
+        "label": "Card style",
+        "options": [
+          { "value": "standard", "label": "Standard" },
+          { "value": "elevated", "label": "Elevated" },
+          { "value": "outlined", "label": "Outlined" }
+        ],
+        "default": "standard"
+      },
+      {
+        "type": "range",
+        "id": "card_border_radius",
+        "label": "Card border radius",
+        "min": 0,
+        "max": 40,
+        "step": 4,
+        "default": 8,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Card image ratio",
+        "options": [
+          { "value": "portrait", "label": "Portrait (2:3)" },
+          { "value": "square", "label": "Square (1:1)" },
+          { "value": "landscape", "label": "Landscape (3:2)" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_secondary_image",
+        "label": "Show secondary image on hover",
+        "default": true
+      }
+    ]
+  },
+  {
     "name": "Cart",
     "settings": [
       {
