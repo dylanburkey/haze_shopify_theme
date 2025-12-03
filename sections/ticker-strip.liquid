@@ -1,0 +1,209 @@
+{%- comment -%}
+  Ticker Strip Section
+  A scrolling marquee-style announcement strip with industrial styling.
+  Inspired by The Machinist design system.
+{%- endcomment -%}
+
+{%- liquid
+  assign ticker_items = section.blocks | where: 'type', 'item'
+  assign item_count = ticker_items.size
+  assign separator = section.settings.separator
+-%}
+
+{%- if item_count > 0 -%}
+  <div
+    class="ticker-strip"
+    style="
+      --ticker-bg: {{ section.settings.background_color }};
+      --ticker-text: {{ section.settings.text_color }};
+      --ticker-speed: {{ section.settings.animation_speed }}s;
+      --ticker-direction: {{ section.settings.direction }};
+    "
+    role="marquee"
+    aria-live="off"
+  >
+    <div class="ticker-strip__track" aria-hidden="true">
+      {%- for i in (1..3) -%}
+        <div class="ticker-strip__content">
+          {%- for block in ticker_items -%}
+            <span class="ticker-strip__item" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <span class="ticker-strip__icon">{{ block.settings.icon }}</span>
+              {%- endif -%}
+              {{ block.settings.text }}
+            </span>
+            {%- unless forloop.last -%}
+              <span class="ticker-strip__separator" aria-hidden="true">{{ separator }}</span>
+            {%- endunless -%}
+          {%- endfor -%}
+          <span class="ticker-strip__separator" aria-hidden="true">{{ separator }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Accessible static version for screen readers {%- endcomment -%}
+    <div class="visually-hidden">
+      {%- for block in ticker_items -%}
+        {{ block.settings.text }}{% unless forloop.last %}, {% endunless %}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .ticker-strip {
+    background: var(--ticker-bg);
+    color: var(--ticker-text);
+    padding: 0.75rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-border);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+  }
+
+  .ticker-strip__track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll var(--ticker-speed) linear infinite;
+    animation-direction: var(--ticker-direction);
+  }
+
+  .ticker-strip:hover .ticker-strip__track {
+    animation-play-state: paused;
+  }
+
+  .ticker-strip__content {
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-strip__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+
+  .ticker-strip__icon {
+    font-size: 1em;
+  }
+
+  .ticker-strip__separator {
+    color: var(--color-primary);
+    padding: 0 0.5rem;
+    font-weight: 400;
+  }
+
+  @keyframes ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-strip__track {
+      animation: none;
+    }
+
+    .ticker-strip {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ticker strip",
+  "tag": "section",
+  "class": "section-ticker",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ff4d00"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "text",
+      "id": "separator",
+      "label": "Separator character",
+      "default": ">>>"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "s",
+      "info": "Lower = faster"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Left to right" },
+        { "value": "reverse", "label": "Right to left" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Ticker item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "ALERT: New products available"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or text)",
+          "info": "Optional icon before text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ticker strip",
+      "blocks": [
+        { "type": "item", "settings": { "text": "SERIES_X MOTORS RESTOCKED" } },
+        { "type": "item", "settings": { "text": "GLOBAL SHIPPING PROTOCOLS ACTIVE" } },
+        { "type": "item", "settings": { "text": "NEW FIRMWARE V2.4 AVAILABLE" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
