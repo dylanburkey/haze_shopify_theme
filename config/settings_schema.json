@@ -1,1 +1,308 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Forge Industrial",
+    "theme_version": "1.0.0",
+    "theme_author": "Dylan Burkey",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Theme Preset",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Select a preset to quickly change your store's look and feel. After selecting a preset, customize individual settings below."
+      },
+      {
+        "type": "select",
+        "id": "theme_preset",
+        "label": "Active Preset",
+        "options": [
+          { "value": "the-welder", "label": "The Welder (Industrial Red)" },
+          { "value": "site-ops", "label": "Site Ops (Safety Orange)" },
+          { "value": "midnight-shift", "label": "Midnight Shift (Dark Mode)" },
+          { "value": "precision", "label": "Precision (Corporate Blue)" },
+          { "value": "tactical", "label": "Tactical (Military Green)" },
+          { "value": "monolith", "label": "Monolith (Minimal Black)" },
+          {
+            "value": "zebra-skimmers",
+            "label": "Zebra Skimmers (Industrial B2B)"
+          },
+          { "value": "modern-minimal", "label": "Modern Minimal (Lifestyle)" },
+          { "value": "bold-impact", "label": "Bold Impact (Athletic)" },
+          { "value": "warm-artisan", "label": "Warm Artisan (Handmade)" },
+          { "value": "tech-forward", "label": "Tech Forward (Electronics)" },
+          { "value": "custom", "label": "Custom (Use settings below)" }
+        ],
+        "default": "the-welder",
+        "info": "Choose a preset or select 'Custom' to use your own settings"
+      },
+      {
+        "type": "header",
+        "content": "Landing Page Template"
+      },
+      {
+        "type": "select",
+        "id": "landing_page_style",
+        "label": "Homepage Style",
+        "options": [
+          { "value": "default", "label": "Default (Industrial)" },
+          { "value": "zebra-skimmers", "label": "Zebra Skimmers (B2B Focus)" },
+          { "value": "modern-minimal", "label": "Modern Minimal (Editorial)" },
+          { "value": "bold-impact", "label": "Bold Impact (Dynamic)" },
+          { "value": "warm-artisan", "label": "Warm Artisan (Storytelling)" },
+          { "value": "tech-forward", "label": "Tech Forward (Dark/Futuristic)" }
+        ],
+        "default": "default",
+        "info": "Select a landing page style. This determines which sections appear on your homepage."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary / Accent",
+        "default": "#d71920"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface / Cards",
+        "default": "#f4f4f4"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders",
+        "default": "#e5e5e5"
+      },
+      {
+        "type": "header",
+        "content": "Header colors"
+      },
+      {
+        "type": "color",
+        "id": "color_header_bg",
+        "label": "Header background",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_header_text",
+        "label": "Header text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Button colors"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Button text",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "font_heading",
+        "label": "Heading font",
+        "options": [
+          { "value": "Oswald", "label": "Oswald" },
+          { "value": "Teko", "label": "Teko" },
+          { "value": "Archivo Black", "label": "Archivo Black" },
+          {
+            "value": "IBM Plex Sans Condensed",
+            "label": "IBM Plex Sans Condensed"
+          },
+          { "value": "Barlow Condensed", "label": "Barlow Condensed" },
+          { "value": "Bitter", "label": "Bitter" }
+        ],
+        "default": "Oswald"
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Body font",
+        "options": [
+          { "value": "Roboto", "label": "Roboto" },
+          { "value": "Inter", "label": "Inter" },
+          { "value": "Work Sans", "label": "Work Sans" },
+          { "value": "IBM Plex Sans", "label": "IBM Plex Sans" },
+          { "value": "Barlow", "label": "Barlow" },
+          { "value": "Lato", "label": "Lato" }
+        ],
+        "default": "Roboto"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 50,
+        "max": 250,
+        "step": 10,
+        "default": 120,
+        "unit": "px"
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo text (if no image)",
+        "default": "FORGE"
+      },
+      {
+        "type": "text",
+        "id": "logo_suffix",
+        "label": "Logo suffix (accent color)",
+        "default": ".IND"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32x32 pixels recommended"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "PWA (Progressive Web App)",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Enable PWA"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_pwa",
+        "label": "Enable Progressive Web App",
+        "default": true,
+        "info": "Allows customers to install your store as an app on their device"
+      },
+      {
+        "type": "header",
+        "content": "App Icons"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_icon_192",
+        "label": "App icon (192x192)",
+        "info": "Required. Square PNG image, 192x192 pixels"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_icon_512",
+        "label": "App icon (512x512)",
+        "info": "Required for splash screen. Square PNG image, 512x512 pixels"
+      },
+      {
+        "type": "header",
+        "content": "Install Prompt"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_pwa_install_prompt",
+        "label": "Show install prompt banner",
+        "default": true,
+        "info": "Shows a banner prompting users to install the app"
+      },
+      {
+        "type": "text",
+        "id": "pwa_install_title",
+        "label": "Install prompt title",
+        "default": "Install our app"
+      },
+      {
+        "type": "text",
+        "id": "pwa_install_description",
+        "label": "Install prompt description",
+        "default": "Add to home screen for quick access"
+      },
+      {
+        "type": "text",
+        "id": "pwa_install_button",
+        "label": "Install button text",
+        "default": "Install"
+      },
+      {
+        "type": "header",
+        "content": "Screenshots (Optional)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_screenshot_wide",
+        "label": "Desktop screenshot",
+        "info": "1920x1080 pixels recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_screenshot_narrow",
+        "label": "Mobile screenshot",
+        "info": "750x1334 pixels recommended"
+      },
+      {
+        "type": "header",
+        "content": "iOS Splash Screen"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_splash_screen",
+        "label": "iOS splash screen",
+        "info": "Shown while app loads on iOS devices"
+      }
+    ]
+  }
+]
