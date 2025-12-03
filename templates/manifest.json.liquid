@@ -1,0 +1,107 @@
+{%- layout none -%}
+{
+  "name": "{{ shop.name }}",
+  "short_name": "{{ shop.name | truncate: 12, '' }}",
+  "description": "{{ shop.description | default: shop.name | strip_html | escape }}",
+  "start_url": "{{ shop.url }}/?utm_source=pwa&utm_medium=homescreen",
+  "scope": "{{ shop.url }}/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "{{ settings.color_background | default: '#ffffff' }}",
+  "theme_color": "{{ settings.color_primary | default: '#d71920' }}",
+  "categories": ["shopping", "business"],
+  "lang": "{{ request.locale.iso_code }}",
+  "dir": "{{ request.locale.text_direction | default: 'ltr' }}",
+  "icons": [
+    {%- if settings.pwa_icon_192 -%}
+    {
+      "src": "{{ settings.pwa_icon_192 | image_url: width: 192 }}",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "{{ settings.pwa_icon_192 | image_url: width: 192 }}",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {%- else -%}
+    {
+      "src": "{{ 'pwa-icon-192.png' | asset_url }}",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {%- endif -%}
+    {%- if settings.pwa_icon_512 -%}
+    {
+      "src": "{{ settings.pwa_icon_512 | image_url: width: 512 }}",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "{{ settings.pwa_icon_512 | image_url: width: 512 }}",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+    {%- else -%}
+    {
+      "src": "{{ 'pwa-icon-512.png' | asset_url }}",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+    {%- endif -%}
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop All Products",
+      "short_name": "Shop",
+      "url": "{{ shop.url }}/collections/all?utm_source=pwa",
+      "icons": [
+        {
+          "src": "{{ 'pwa-shortcut-shop.png' | asset_url }}",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "View Cart",
+      "short_name": "Cart",
+      "url": "{{ shop.url }}/cart?utm_source=pwa",
+      "icons": [
+        {
+          "src": "{{ 'pwa-shortcut-cart.png' | asset_url }}",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {%- if settings.pwa_screenshot_wide -%}
+    {
+      "src": "{{ settings.pwa_screenshot_wide | image_url: width: 1920 }}",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "{{ shop.name }} Desktop View"
+    },
+    {%- endif -%}
+    {%- if settings.pwa_screenshot_narrow -%}
+    {
+      "src": "{{ settings.pwa_screenshot_narrow | image_url: width: 750 }}",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "{{ shop.name }} Mobile View"
+    }
+    {%- endif -%}
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

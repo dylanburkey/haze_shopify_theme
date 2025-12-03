@@ -1,0 +1,163 @@
+{%- comment -%}
+  PWA Support Snippet
+  Include in theme.liquid head for Progressive Web App functionality
+
+  Features:
+  - Web App Manifest
+  - Service Worker registration
+  - Install prompt handling
+  - iOS Safari support
+  - Theme color meta tags
+{%- endcomment -%}
+
+{%- if settings.enable_pwa -%}
+  {%- comment -%} Web App Manifest {%- endcomment -%}
+  <link rel="manifest" href="{{ 'manifest.json' | asset_url | replace: 'assets/', '' | replace: '.json', '' }}">
+
+  {%- comment -%} Theme Color {%- endcomment -%}
+  <meta name="theme-color" content="{{ settings.color_primary | default: '#d71920' }}" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="{{ settings.color_header_bg | default: '#111111' }}" media="(prefers-color-scheme: dark)">
+
+  {%- comment -%} iOS Safari Support {%- endcomment -%}
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="{{ shop.name }}">
+
+  {%- comment -%} Apple Touch Icons {%- endcomment -%}
+  {%- if settings.pwa_icon_192 -%}
+    <link rel="apple-touch-icon" href="{{ settings.pwa_icon_192 | image_url: width: 180 }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ settings.pwa_icon_192 | image_url: width: 152 }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ settings.pwa_icon_192 | image_url: width: 167 }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.pwa_icon_192 | image_url: width: 180 }}">
+  {%- else -%}
+    <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
+  {%- endif -%}
+
+  {%- comment -%} iOS Splash Screens {%- endcomment -%}
+  {%- if settings.pwa_splash_screen -%}
+    <link rel="apple-touch-startup-image" href="{{ settings.pwa_splash_screen | image_url: width: 1284 }}">
+  {%- endif -%}
+
+  {%- comment -%} Microsoft Tiles {%- endcomment -%}
+  <meta name="msapplication-TileColor" content="{{ settings.color_primary | default: '#d71920' }}">
+  {%- if settings.pwa_icon_192 -%}
+    <meta name="msapplication-TileImage" content="{{ settings.pwa_icon_192 | image_url: width: 144 }}">
+  {%- endif -%}
+
+  {%- comment -%} Service Worker Registration & Install Prompt {%- endcomment -%}
+  <script>
+    (function() {
+      'use strict';
+
+      // Service Worker Registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/apps/sw.js', { scope: '/' })
+            .then(function(registration) {
+              console.log('[PWA] Service Worker registered:', registration.scope);
+
+              // Check for updates periodically
+              setInterval(function() {
+                registration.update();
+              }, 60 * 60 * 1000); // Every hour
+            })
+            .catch(function(error) {
+              console.error('[PWA] Service Worker registration failed:', error);
+            });
+        });
+      }
+
+      // Install Prompt Handling
+      let deferredPrompt = null;
+      const installBanner = document.getElementById('pwa-install-banner');
+      const installButton = document.getElementById('pwa-install-button');
+      const dismissButton = document.getElementById('pwa-dismiss-button');
+
+      // Check if already installed
+      function isInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches ||
+               window.navigator.standalone === true ||
+               localStorage.getItem('pwa-installed') === 'true';
+      }
+
+      // Check if user dismissed the prompt
+      function isDismissed() {
+        const dismissed = localStorage.getItem('pwa-dismissed');
+        if (!dismissed) return false;
+
+        // Allow prompt again after 7 days
+        const dismissedDate = new Date(dismissed);
+        const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
+        return daysSinceDismissed < 7;
+      }
+
+      // Show install banner
+      function showInstallBanner() {
+        if (installBanner && !isInstalled() && !isDismissed()) {
+          installBanner.hidden = false;
+          installBanner.classList.add('pwa-install-banner--visible');
+        }
+      }
+
+      // Hide install banner
+      function hideInstallBanner() {
+        if (installBanner) {
+          installBanner.classList.remove('pwa-install-banner--visible');
+          setTimeout(function() {
+            installBanner.hidden = true;
+          }, 300);
+        }
+      }
+
+      // Handle beforeinstallprompt event
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show custom install UI after a delay
+        setTimeout(showInstallBanner, 3000);
+      });
+
+      // Handle install button click
+      if (installButton) {
+        installButton.addEventListener('click', async function() {
+          if (!deferredPrompt) return;
+
+          deferredPrompt.prompt();
+
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log('[PWA] Install prompt outcome:', outcome);
+
+          if (outcome === 'accepted') {
+            localStorage.setItem('pwa-installed', 'true');
+          }
+
+          deferredPrompt = null;
+          hideInstallBanner();
+        });
+      }
+
+      // Handle dismiss button click
+      if (dismissButton) {
+        dismissButton.addEventListener('click', function() {
+          localStorage.setItem('pwa-dismissed', new Date().toISOString());
+          hideInstallBanner();
+        });
+      }
+
+      // Handle successful installation
+      window.addEventListener('appinstalled', function() {
+        console.log('[PWA] App installed successfully');
+        localStorage.setItem('pwa-installed', 'true');
+        deferredPrompt = null;
+        hideInstallBanner();
+      });
+
+      // Track standalone mode
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('[PWA] Running in standalone mode');
+        document.documentElement.classList.add('pwa-standalone');
+      }
+    })();
+  </script>
+{%- endif -%}

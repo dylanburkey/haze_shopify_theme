@@ -1,0 +1,243 @@
+{%- layout none -%}
+// Service Worker for {{ shop.name }}
+// Version: {{ 'now' | date: '%Y%m%d%H%M' }}
+
+const CACHE_NAME = '{{ shop.name | handleize }}-v{{ 'now' | date: '%Y%m%d' }}';
+const OFFLINE_URL = '/pages/offline';
+
+// Assets to cache immediately on install
+const PRECACHE_ASSETS = [
+  '/',
+  '/collections/all',
+  '/cart',
+  '{{ "theme.css" | asset_url }}',
+  '{{ "theme.js" | asset_url }}',
+  'https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&display=swap'
+];
+
+// Cache strategies
+const CACHE_STRATEGIES = {
+  // Cache first, then network (for static assets)
+  cacheFirst: [
+    /\.(?:css|js|woff2?|ttf|otf|eot)$/,
+    /fonts\.googleapis\.com/,
+    /fonts\.gstatic\.com/
+  ],
+  // Network first, then cache (for dynamic content)
+  networkFirst: [
+    /\/collections\//,
+    /\/products\//,
+    /\/cart/,
+    /\/account/
+  ],
+  // Stale while revalidate (for images)
+  staleWhileRevalidate: [
+    /\.(?:png|jpg|jpeg|gif|svg|webp|avif)$/,
+    /cdn\.shopify\.com/
+  ]
+};
+
+// Install event - precache assets
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('[SW] Precaching assets');
+        return cache.addAll(PRECACHE_ASSETS.filter(url => url && url.length > 0));
+      })
+      .then(() => self.skipWaiting())
+      .catch((error) => {
+        console.error('[SW] Precache failed:', error);
+      })
+  );
+});
+
+// Activate event - clean up old caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames
+            .filter((name) => name !== CACHE_NAME)
+            .map((name) => {
+              console.log('[SW] Deleting old cache:', name);
+              return caches.delete(name);
+            })
+        );
+      })
+      .then(() => self.clients.claim())
+  );
+});
+
+// Fetch event - handle requests with appropriate strategy
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Skip non-GET requests
+  if (request.method !== 'GET') return;
+
+  // Skip chrome-extension and other non-http(s) requests
+  if (!url.protocol.startsWith('http')) return;
+
+  // Skip admin and checkout
+  if (url.pathname.includes('/admin') || url.pathname.includes('/checkout')) return;
+
+  // Determine cache strategy
+  const strategy = getCacheStrategy(url);
+
+  switch (strategy) {
+    case 'cacheFirst':
+      event.respondWith(cacheFirst(request));
+      break;
+    case 'networkFirst':
+      event.respondWith(networkFirst(request));
+      break;
+    case 'staleWhileRevalidate':
+      event.respondWith(staleWhileRevalidate(request));
+      break;
+    default:
+      event.respondWith(networkFirst(request));
+  }
+});
+
+// Determine which cache strategy to use
+function getCacheStrategy(url) {
+  const urlString = url.href;
+
+  for (const pattern of CACHE_STRATEGIES.cacheFirst) {
+    if (pattern.test(urlString)) return 'cacheFirst';
+  }
+
+  for (const pattern of CACHE_STRATEGIES.networkFirst) {
+    if (pattern.test(urlString)) return 'networkFirst';
+  }
+
+  for (const pattern of CACHE_STRATEGIES.staleWhileRevalidate) {
+    if (pattern.test(urlString)) return 'staleWhileRevalidate';
+  }
+
+  return 'networkFirst';
+}
+
+// Cache First strategy
+async function cacheFirst(request) {
+  const cachedResponse = await caches.match(request);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    console.error('[SW] Cache first failed:', error);
+    return new Response('Offline', { status: 503 });
+  }
+}
+
+// Network First strategy
+async function networkFirst(request) {
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+
+    // Return offline page for navigation requests
+    if (request.mode === 'navigate') {
+      const offlinePage = await caches.match(OFFLINE_URL);
+      if (offlinePage) return offlinePage;
+    }
+
+    return new Response('Offline', {
+      status: 503,
+      headers: { 'Content-Type': 'text/plain' }
+    });
+  }
+}
+
+// Stale While Revalidate strategy
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await caches.match(request);
+
+  const fetchPromise = fetch(request)
+    .then((networkResponse) => {
+      if (networkResponse.ok) {
+        cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    })
+    .catch(() => cachedResponse);
+
+  return cachedResponse || fetchPromise;
+}
+
+// Handle push notifications (if enabled)
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+
+  const data = event.data.json();
+  const options = {
+    body: data.body || '',
+    icon: data.icon || '/pwa-icon-192.png',
+    badge: data.badge || '/pwa-badge.png',
+    vibrate: [100, 50, 100],
+    data: {
+      url: data.url || '/'
+    },
+    actions: data.actions || []
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title || '{{ shop.name }}', options)
+  );
+});
+
+// Handle notification clicks
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  const url = event.notification.data?.url || '/';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then((clientList) => {
+        // Focus existing window if available
+        for (const client of clientList) {
+          if (client.url === url && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        // Open new window
+        if (clients.openWindow) {
+          return clients.openWindow(url);
+        }
+      })
+  );
+});
+
+// Background sync for cart/wishlist (if supported)
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-cart') {
+    event.waitUntil(syncCart());
+  }
+});
+
+async function syncCart() {
+  // Implement cart sync logic here
+  console.log('[SW] Syncing cart...');
+}

@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
+  {%- comment -%} PWA Support {%- endcomment -%}
+  {%- render 'pwa-support' -%}
+
   <title>
     {{ page_title }}
     {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -123,6 +126,9 @@
 
 <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
   <a class="visually-hidden" href="#MainContent">Skip to content</a>
+
+  {%- comment -%} PWA Install Banner {%- endcomment -%}
+  {%- render 'pwa-install-banner' -%}
 
   {% section 'header' %}
 

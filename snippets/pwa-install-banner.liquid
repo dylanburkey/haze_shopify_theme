@@ -1,0 +1,176 @@
+{%- comment -%}
+  PWA Install Banner
+  Shows a customizable prompt to install the app
+{%- endcomment -%}
+
+{%- if settings.enable_pwa and settings.show_pwa_install_prompt -%}
+<div class="pwa-install-banner" id="pwa-install-banner" hidden>
+  <div class="pwa-install-banner__content">
+    <div class="pwa-install-banner__icon">
+      {%- if settings.pwa_icon_192 -%}
+        <img src="{{ settings.pwa_icon_192 | image_url: width: 48 }}" alt="{{ shop.name }}" width="48" height="48">
+      {%- else -%}
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="2" width="14" height="20" rx="2"/>
+          <path d="M12 18h.01"/>
+        </svg>
+      {%- endif -%}
+    </div>
+    <div class="pwa-install-banner__text">
+      <strong class="pwa-install-banner__title">
+        {{ settings.pwa_install_title | default: 'Install our app' }}
+      </strong>
+      <span class="pwa-install-banner__description">
+        {{ settings.pwa_install_description | default: 'Add to home screen for quick access' }}
+      </span>
+    </div>
+  </div>
+  <div class="pwa-install-banner__actions">
+    <button type="button" class="pwa-install-banner__button pwa-install-banner__button--install" id="pwa-install-button">
+      {{ settings.pwa_install_button | default: 'Install' }}
+    </button>
+    <button type="button" class="pwa-install-banner__button pwa-install-banner__button--dismiss" id="pwa-dismiss-button" aria-label="Dismiss">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .pwa-install-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--color-background, #fff);
+    border-top: 1px solid var(--color-border, #e5e5e5);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .pwa-install-banner--visible {
+    transform: translateY(0);
+  }
+
+  .pwa-install-banner__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pwa-install-banner__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface, #f4f4f4);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .pwa-install-banner__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pwa-install-banner__icon svg {
+    color: var(--color-primary, #d71920);
+  }
+
+  .pwa-install-banner__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .pwa-install-banner__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text, #1a1a1a);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pwa-install-banner__description {
+    font-size: 12px;
+    color: var(--color-text-secondary, #666);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pwa-install-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .pwa-install-banner__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .pwa-install-banner__button--install {
+    background: var(--color-primary, #d71920);
+    color: var(--color-button-text, #fff);
+  }
+
+  .pwa-install-banner__button--install:hover {
+    filter: brightness(0.9);
+  }
+
+  .pwa-install-banner__button--dismiss {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    color: var(--color-text-secondary, #666);
+  }
+
+  .pwa-install-banner__button--dismiss:hover {
+    background: var(--color-surface, #f4f4f4);
+    color: var(--color-text, #1a1a1a);
+  }
+
+  /* Hide on desktop if preferred */
+  @media (min-width: 1024px) {
+    .pwa-install-banner {
+      max-width: 400px;
+      left: auto;
+      right: 20px;
+      bottom: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--color-border, #e5e5e5);
+    }
+  }
+
+  /* Standalone mode - hide banner */
+  .pwa-standalone .pwa-install-banner {
+    display: none;
+  }
+</style>
+{%- endif -%}

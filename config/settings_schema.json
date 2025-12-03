@@ -83,7 +83,10 @@
           { "value": "Oswald", "label": "Oswald" },
           { "value": "Teko", "label": "Teko" },
           { "value": "Archivo Black", "label": "Archivo Black" },
-          { "value": "IBM Plex Sans Condensed", "label": "IBM Plex Sans Condensed" },
+          {
+            "value": "IBM Plex Sans Condensed",
+            "label": "IBM Plex Sans Condensed"
+          },
           { "value": "Barlow Condensed", "label": "Barlow Condensed" },
           { "value": "Bitter", "label": "Bitter" }
         ],
@@ -160,6 +163,93 @@
           { "value": "page", "label": "Page" }
         ],
         "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "PWA (Progressive Web App)",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Enable PWA"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_pwa",
+        "label": "Enable Progressive Web App",
+        "default": true,
+        "info": "Allows customers to install your store as an app on their device"
+      },
+      {
+        "type": "header",
+        "content": "App Icons"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_icon_192",
+        "label": "App icon (192x192)",
+        "info": "Required. Square PNG image, 192x192 pixels"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_icon_512",
+        "label": "App icon (512x512)",
+        "info": "Required for splash screen. Square PNG image, 512x512 pixels"
+      },
+      {
+        "type": "header",
+        "content": "Install Prompt"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_pwa_install_prompt",
+        "label": "Show install prompt banner",
+        "default": true,
+        "info": "Shows a banner prompting users to install the app"
+      },
+      {
+        "type": "text",
+        "id": "pwa_install_title",
+        "label": "Install prompt title",
+        "default": "Install our app"
+      },
+      {
+        "type": "text",
+        "id": "pwa_install_description",
+        "label": "Install prompt description",
+        "default": "Add to home screen for quick access"
+      },
+      {
+        "type": "text",
+        "id": "pwa_install_button",
+        "label": "Install button text",
+        "default": "Install"
+      },
+      {
+        "type": "header",
+        "content": "Screenshots (Optional)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_screenshot_wide",
+        "label": "Desktop screenshot",
+        "info": "1920x1080 pixels recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_screenshot_narrow",
+        "label": "Mobile screenshot",
+        "info": "750x1334 pixels recommended"
+      },
+      {
+        "type": "header",
+        "content": "iOS Splash Screen"
+      },
+      {
+        "type": "image_picker",
+        "id": "pwa_splash_screen",
+        "label": "iOS splash screen",
+        "info": "Shown while app loads on iOS devices"
       }
     ]
   }
