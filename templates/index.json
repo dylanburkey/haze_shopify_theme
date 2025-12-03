@@ -1,5 +1,34 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "announcement_bar_BKqVJn": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_BPVFPk": {
+          "type": "announcement",
+          "settings": {
+            "text": "Saa",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_BPVFPk"
+      ],
+      "name": "t:sections.announcement_bar.name",
+      "settings": {
+        "background_color": "#121212",
+        "text_color": "#FFFFFF"
+      }
+    },
     "hero": {
       "type": "hero-industrial",
       "settings": {
@@ -13,12 +42,6 @@
     },
     "search": {
       "type": "ai-search",
-      "settings": {
-        "heading": "Find The Right Gear",
-        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
-        "button_label": "Search",
-        "show_suggestions": true
-      },
       "blocks": {
         "suggestion-1": {
           "type": "suggestion",
@@ -42,15 +65,20 @@
           }
         }
       },
-      "block_order": ["suggestion-1", "suggestion-2", "suggestion-3"]
+      "block_order": [
+        "suggestion-1",
+        "suggestion-2",
+        "suggestion-3"
+      ],
+      "settings": {
+        "heading": "Find The Right Gear",
+        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
+        "button_label": "Search",
+        "show_suggestions": true
+      }
     },
     "featured": {
       "type": "smart-grid",
-      "settings": {
-        "heading": "Core Solutions",
-        "layout": "highlight",
-        "use_surface_bg": false
-      },
       "blocks": {
         "card-1": {
           "type": "card",
@@ -66,20 +94,42 @@
         "card-2": {
           "type": "card",
           "settings": {
+            "show_placeholder": false,
+            "tag": "Category",
             "heading": "Safety Gear",
-            "text": "Helmets, gloves, and fume extraction."
+            "text": "Helmets, gloves, and fume extraction.",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         },
         "card-3": {
           "type": "card",
           "settings": {
+            "show_placeholder": false,
+            "tag": "Category",
             "heading": "Automation",
-            "text": "Robotic cells and Cobot integration."
+            "text": "Robotic cells and Cobot integration.",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         }
       },
-      "block_order": ["card-1", "card-2", "card-3"]
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "heading": "Core Solutions",
+        "layout": "highlight",
+        "use_surface_bg": false
+      }
     }
   },
-  "order": ["hero", "search", "featured"]
+  "order": [
+    "announcement_bar_BKqVJn",
+    "hero",
+    "search",
+    "featured"
+  ]
 }
