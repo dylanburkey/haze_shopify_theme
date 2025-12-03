@@ -1,0 +1,941 @@
+{%- comment -%}
+  Corporate Header Section
+  Clean, professional header with:
+  - Logo (left)
+  - Main navigation (center/right)
+  - Search icon (right)
+  - Mobile hamburger menu
+
+  Based on Valero.com / Oregon Tool patterns
+{%- endcomment -%}
+
+{%- liquid
+  assign logo_width = section.settings.logo_width | default: 150
+-%}
+
+<header class="corp-header{% if section.settings.sticky %} corp-header--sticky{% endif %}" data-corp-header>
+  <div class="corp-header__container">
+    {%- comment -%} Logo {%- endcomment -%}
+    <a href="{{ routes.root_url }}" class="corp-header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: logo_width | times: 2 }}"
+          alt="{{ section.settings.logo.alt | default: shop.name }}"
+          width="{{ logo_width }}"
+          height="auto"
+          loading="eager"
+          class="corp-header__logo-img"
+        >
+      {%- elsif section.settings.logo_svg != blank -%}
+        {{ section.settings.logo_svg }}
+      {%- else -%}
+        <span class="corp-header__logo-text">
+          {{ settings.logo_text | default: shop.name }}<span class="corp-header__logo-accent">{{ settings.logo_suffix }}</span>
+        </span>
+      {%- endif -%}
+    </a>
+
+    {%- comment -%} Desktop Navigation {%- endcomment -%}
+    <nav class="corp-nav" aria-label="Main navigation" data-corp-nav>
+      <ul class="corp-nav__list">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'nav_item' -%}
+              {%- liquid
+                assign has_submenu = false
+                if block.settings.submenu_1_label != blank or block.settings.submenu_2_label != blank
+                  assign has_submenu = true
+                endif
+              -%}
+              <li class="corp-nav__item{% if has_submenu %} corp-nav__item--has-dropdown{% endif %}" {{ block.shopify_attributes }}>
+                {%- if has_submenu -%}
+                  <button
+                    type="button"
+                    class="corp-nav__link corp-nav__link--toggle"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    data-nav-toggle
+                  >
+                    {{ block.settings.label }}
+                    <svg class="corp-nav__chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                  </button>
+                  <div class="corp-nav__dropdown" data-nav-dropdown>
+                    <ul class="corp-nav__dropdown-list">
+                      {%- if block.settings.submenu_1_label != blank -%}
+                        <li><a href="{{ block.settings.submenu_1_link }}" class="corp-nav__dropdown-link">{{ block.settings.submenu_1_label }}</a></li>
+                      {%- endif -%}
+                      {%- if block.settings.submenu_2_label != blank -%}
+                        <li><a href="{{ block.settings.submenu_2_link }}" class="corp-nav__dropdown-link">{{ block.settings.submenu_2_label }}</a></li>
+                      {%- endif -%}
+                      {%- if block.settings.submenu_3_label != blank -%}
+                        <li><a href="{{ block.settings.submenu_3_link }}" class="corp-nav__dropdown-link">{{ block.settings.submenu_3_label }}</a></li>
+                      {%- endif -%}
+                      {%- if block.settings.submenu_4_label != blank -%}
+                        <li><a href="{{ block.settings.submenu_4_link }}" class="corp-nav__dropdown-link">{{ block.settings.submenu_4_label }}</a></li>
+                      {%- endif -%}
+                      {%- if block.settings.submenu_5_label != blank -%}
+                        <li><a href="{{ block.settings.submenu_5_link }}" class="corp-nav__dropdown-link">{{ block.settings.submenu_5_label }}</a></li>
+                      {%- endif -%}
+                    </ul>
+                  </div>
+                {%- else -%}
+                  <a href="{{ block.settings.link }}" class="corp-nav__link"{% if block.settings.new_tab %} target="_blank" rel="noopener"{% endif %}>
+                    {{ block.settings.label }}
+                  </a>
+                {%- endif -%}
+              </li>
+          {%- endcase -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    {%- comment -%} Header Actions {%- endcomment -%}
+    <div class="corp-header__actions">
+      {%- if section.settings.show_search -%}
+        <button
+          type="button"
+          class="corp-header__action corp-header__search-toggle"
+          aria-label="Search"
+          aria-expanded="false"
+          aria-controls="corp-search-panel"
+          data-search-toggle
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button
+        type="button"
+        class="corp-header__toggle"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="corp-mobile-menu"
+        data-mobile-toggle
+      >
+        <span class="corp-header__hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Search Panel {%- endcomment -%}
+  {%- if section.settings.show_search -%}
+    <div class="corp-search" id="corp-search-panel" data-search-panel hidden>
+      <div class="corp-search__container">
+        <form action="{{ routes.search_url }}" method="get" class="corp-search__form" role="search">
+          <input
+            type="search"
+            name="q"
+            class="corp-search__input"
+            placeholder="{{ section.settings.search_placeholder | default: 'Search...' }}"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+          >
+          <button type="submit" class="corp-search__submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <span class="visually-hidden">Search</span>
+          </button>
+          <button type="button" class="corp-search__close" data-search-close>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+            <span class="visually-hidden">Close</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  {%- endif -%}
+</header>
+
+{%- comment -%} Mobile Menu {%- endcomment -%}
+<div class="corp-mobile-menu" id="corp-mobile-menu" data-mobile-menu hidden>
+  <div class="corp-mobile-menu__inner">
+    {%- if section.settings.show_search -%}
+      <form action="{{ routes.search_url }}" method="get" class="corp-mobile-menu__search" role="search">
+        <input type="search" name="q" placeholder="{{ section.settings.search_placeholder | default: 'Search...' }}">
+        <button type="submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      </form>
+    {%- endif -%}
+
+    <nav class="corp-mobile-menu__nav">
+      <ul class="corp-mobile-menu__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_item' -%}
+            {%- liquid
+              assign has_submenu = false
+              if block.settings.submenu_1_label != blank or block.settings.submenu_2_label != blank
+                assign has_submenu = true
+              endif
+            -%}
+            <li class="corp-mobile-menu__item{% if has_submenu %} corp-mobile-menu__item--has-children{% endif %}">
+              {%- if has_submenu -%}
+                <button type="button" class="corp-mobile-menu__link" aria-expanded="false" data-mobile-submenu-toggle>
+                  {{ block.settings.label }}
+                  <svg class="corp-mobile-menu__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </button>
+                <ul class="corp-mobile-menu__submenu" hidden>
+                  {%- if block.settings.submenu_1_label != blank -%}
+                    <li><a href="{{ block.settings.submenu_1_link }}">{{ block.settings.submenu_1_label }}</a></li>
+                  {%- endif -%}
+                  {%- if block.settings.submenu_2_label != blank -%}
+                    <li><a href="{{ block.settings.submenu_2_link }}">{{ block.settings.submenu_2_label }}</a></li>
+                  {%- endif -%}
+                  {%- if block.settings.submenu_3_label != blank -%}
+                    <li><a href="{{ block.settings.submenu_3_link }}">{{ block.settings.submenu_3_label }}</a></li>
+                  {%- endif -%}
+                  {%- if block.settings.submenu_4_label != blank -%}
+                    <li><a href="{{ block.settings.submenu_4_link }}">{{ block.settings.submenu_4_label }}</a></li>
+                  {%- endif -%}
+                  {%- if block.settings.submenu_5_label != blank -%}
+                    <li><a href="{{ block.settings.submenu_5_link }}">{{ block.settings.submenu_5_label }}</a></li>
+                  {%- endif -%}
+                </ul>
+              {%- else -%}
+                <a href="{{ block.settings.link }}" class="corp-mobile-menu__link">{{ block.settings.label }}</a>
+              {%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .corp-header {
+    --header-bg: {{ section.settings.bg_color }};
+    --header-text: {{ section.settings.text_color }};
+    --header-hover: {{ section.settings.hover_color }};
+    --header-height: 80px;
+
+    position: relative;
+    z-index: 100;
+    background: var(--header-bg);
+    color: var(--header-text);
+  }
+
+  .corp-header--sticky {
+    position: sticky;
+    top: 0;
+  }
+
+  .corp-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: var(--header-height);
+  }
+
+  /* Logo */
+  .corp-header__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  .corp-header__logo-img {
+    display: block;
+    height: auto;
+    max-height: 50px;
+    width: auto;
+  }
+
+  .corp-header__logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-heading, sans-serif);
+  }
+
+  .corp-header__logo-accent {
+    color: var(--header-hover);
+  }
+
+  /* Desktop Navigation */
+  .corp-nav {
+    display: none;
+    flex: 1;
+    justify-content: center;
+    margin: 0 40px;
+  }
+
+  @media (min-width: 1024px) {
+    .corp-nav {
+      display: flex;
+    }
+  }
+
+  .corp-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .corp-nav__item {
+    position: relative;
+  }
+
+  .corp-nav__link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--header-text);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .corp-nav__link:hover,
+  .corp-nav__link:focus {
+    color: var(--header-hover);
+  }
+
+  .corp-nav__chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .corp-nav__item--has-dropdown[data-open] .corp-nav__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .corp-nav__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: var(--header-bg);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 101;
+  }
+
+  .corp-nav__item--has-dropdown[data-open] .corp-nav__dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .corp-nav__dropdown-list {
+    margin: 0;
+    padding: 12px 0;
+    list-style: none;
+  }
+
+  .corp-nav__dropdown-link {
+    display: block;
+    padding: 10px 24px;
+    font-size: 14px;
+    color: var(--header-text);
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .corp-nav__dropdown-link:hover {
+    background: rgba(0,0,0,0.03);
+    color: var(--header-hover);
+  }
+
+  /* Header Actions */
+  .corp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .corp-header__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    color: var(--header-text);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .corp-header__action:hover {
+    color: var(--header-hover);
+  }
+
+  /* Hamburger */
+  .corp-header__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 1024px) {
+    .corp-header__toggle {
+      display: none;
+    }
+  }
+
+  .corp-header__hamburger {
+    position: relative;
+    width: 24px;
+    height: 18px;
+  }
+
+  .corp-header__hamburger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--header-text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .corp-header__hamburger span:nth-child(1) { top: 0; }
+  .corp-header__hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .corp-header__hamburger span:nth-child(3) { bottom: 0; }
+
+  .corp-header__toggle[aria-expanded="true"] .corp-header__hamburger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .corp-header__toggle[aria-expanded="true"] .corp-header__hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .corp-header__toggle[aria-expanded="true"] .corp-header__hamburger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Search Panel */
+  .corp-search {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--header-bg);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    padding: 20px 0;
+    z-index: 100;
+  }
+
+  .corp-search[hidden] { display: none; }
+
+  .corp-search__container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .corp-search__form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .corp-search__input {
+    flex: 1;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 16px;
+    color: var(--header-text);
+    background: rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .corp-search__input:focus {
+    border-color: var(--header-hover);
+    box-shadow: 0 0 0 3px rgba(0,86,179,0.1);
+  }
+
+  .corp-search__submit,
+  .corp-search__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    color: var(--header-text);
+    cursor: pointer;
+  }
+
+  .corp-search__submit:hover,
+  .corp-search__close:hover {
+    color: var(--header-hover);
+  }
+
+  /* Mobile Menu */
+  .corp-mobile-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--header-bg, #fff);
+    z-index: 99;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .corp-mobile-menu[hidden] { display: block; }
+
+  .corp-mobile-menu[data-open] {
+    transform: translateX(0);
+  }
+
+  .corp-mobile-menu__inner {
+    padding: 24px;
+  }
+
+  .corp-mobile-menu__search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .corp-mobile-menu__search input {
+    flex: 1;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 16px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+  }
+
+  .corp-mobile-menu__search button {
+    width: 48px;
+    height: 48px;
+    background: var(--header-hover, #0056b3);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .corp-mobile-menu__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .corp-mobile-menu__item {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .corp-mobile-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: inherit;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+  }
+
+  .corp-mobile-menu__chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .corp-mobile-menu__link[aria-expanded="true"] .corp-mobile-menu__chevron {
+    transform: rotate(180deg);
+  }
+
+  .corp-mobile-menu__submenu {
+    margin: 0;
+    padding: 0 0 16px 16px;
+    list-style: none;
+  }
+
+  .corp-mobile-menu__submenu[hidden] { display: none; }
+
+  .corp-mobile-menu__submenu a {
+    display: block;
+    padding: 12px 0;
+    font-size: 16px;
+    color: rgba(0,0,0,0.7);
+    text-decoration: none;
+  }
+
+  .corp-mobile-menu__submenu a:hover {
+    color: var(--header-hover);
+  }
+
+  /* Utilities */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+  }
+
+  body.corp-menu-open {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+(function() {
+  const header = document.querySelector('[data-corp-header]');
+  if (!header) return;
+
+  // Desktop dropdowns
+  const dropdownItems = header.querySelectorAll('.corp-nav__item--has-dropdown');
+  let hoverTimeout;
+
+  dropdownItems.forEach(item => {
+    const toggle = item.querySelector('[data-nav-toggle]');
+
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(() => {
+        closeAllDropdowns();
+        item.setAttribute('data-open', '');
+        toggle?.setAttribute('aria-expanded', 'true');
+      }, 100);
+    });
+
+    item.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(() => {
+        item.removeAttribute('data-open');
+        toggle?.setAttribute('aria-expanded', 'false');
+      }, 200);
+    });
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = item.hasAttribute('data-open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        item.setAttribute('data-open', '');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  function closeAllDropdowns() {
+    dropdownItems.forEach(item => {
+      item.removeAttribute('data-open');
+      item.querySelector('[data-nav-toggle]')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  // Mobile menu
+  const mobileToggle = header.querySelector('[data-mobile-toggle]');
+  const mobileMenu = document.getElementById('corp-mobile-menu');
+
+  mobileToggle?.addEventListener('click', () => {
+    const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+    mobileToggle.setAttribute('aria-expanded', !isOpen);
+
+    if (isOpen) {
+      mobileMenu.removeAttribute('data-open');
+      document.body.classList.remove('corp-menu-open');
+    } else {
+      mobileMenu.setAttribute('data-open', '');
+      document.body.classList.add('corp-menu-open');
+    }
+  });
+
+  // Mobile submenus
+  const submenuToggles = mobileMenu?.querySelectorAll('[data-mobile-submenu-toggle]');
+  submenuToggles?.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      const submenu = toggle.nextElementSibling;
+      toggle.setAttribute('aria-expanded', !isOpen);
+      submenu.hidden = isOpen;
+    });
+  });
+
+  // Search panel
+  const searchToggle = header.querySelector('[data-search-toggle]');
+  const searchPanel = document.getElementById('corp-search-panel');
+  const searchClose = header.querySelector('[data-search-close]');
+
+  searchToggle?.addEventListener('click', () => {
+    const isOpen = searchToggle.getAttribute('aria-expanded') === 'true';
+    searchToggle.setAttribute('aria-expanded', !isOpen);
+    searchPanel.hidden = isOpen;
+    if (!isOpen) {
+      searchPanel.querySelector('input')?.focus();
+    }
+  });
+
+  searchClose?.addEventListener('click', () => {
+    searchToggle.setAttribute('aria-expanded', 'false');
+    searchPanel.hidden = true;
+  });
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeAllDropdowns();
+      if (searchPanel && !searchPanel.hidden) {
+        searchToggle.setAttribute('aria-expanded', 'false');
+        searchPanel.hidden = true;
+      }
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Corporate Header",
+  "tag": "div",
+  "class": "corporate-header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 150,
+      "unit": "px"
+    },
+    {
+      "type": "html",
+      "id": "logo_svg",
+      "label": "Logo SVG (optional)",
+      "info": "Paste SVG code for vector logo"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search..."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "hover_color",
+      "label": "Hover color",
+      "default": "#0056b3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Navigation Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "Open in new tab",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Dropdown Links (optional)"
+        },
+        {
+          "type": "text",
+          "id": "submenu_1_label",
+          "label": "Submenu 1 label"
+        },
+        {
+          "type": "url",
+          "id": "submenu_1_link",
+          "label": "Submenu 1 link"
+        },
+        {
+          "type": "text",
+          "id": "submenu_2_label",
+          "label": "Submenu 2 label"
+        },
+        {
+          "type": "url",
+          "id": "submenu_2_link",
+          "label": "Submenu 2 link"
+        },
+        {
+          "type": "text",
+          "id": "submenu_3_label",
+          "label": "Submenu 3 label"
+        },
+        {
+          "type": "url",
+          "id": "submenu_3_link",
+          "label": "Submenu 3 link"
+        },
+        {
+          "type": "text",
+          "id": "submenu_4_label",
+          "label": "Submenu 4 label"
+        },
+        {
+          "type": "url",
+          "id": "submenu_4_link",
+          "label": "Submenu 4 link"
+        },
+        {
+          "type": "text",
+          "id": "submenu_5_label",
+          "label": "Submenu 5 label"
+        },
+        {
+          "type": "url",
+          "id": "submenu_5_link",
+          "label": "Submenu 5 link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Header",
+      "blocks": [
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "About",
+            "submenu_1_label": "Our Story",
+            "submenu_1_link": "/pages/about",
+            "submenu_2_label": "Leadership",
+            "submenu_2_link": "/pages/team"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Products",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Solutions",
+            "submenu_1_label": "Industrial",
+            "submenu_1_link": "/pages/industrial",
+            "submenu_2_label": "Commercial",
+            "submenu_2_link": "/pages/commercial",
+            "submenu_3_label": "Residential",
+            "submenu_3_link": "/pages/residential"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Careers",
+            "link": "/pages/careers"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Contact",
+            "link": "/pages/contact"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

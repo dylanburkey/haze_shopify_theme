@@ -1,0 +1,655 @@
+{%- comment -%}
+  Mega Menu Header - Based on Valero.com navigation pattern
+
+  Features:
+  - Utility navigation bar (top)
+  - Main navigation with mega menu dropdowns
+  - Featured content cards in dropdowns
+  - Mobile responsive hamburger menu
+  - Sticky header option
+  - Full accessibility support (ARIA)
+{%- endcomment -%}
+
+{%- liquid
+  assign utility_menu = section.settings.utility_menu
+  assign main_menu = section.settings.main_menu
+-%}
+
+<a class="skip-to-content" href="#main-content">
+  {{ 'accessibility.skip_to_content' | t | default: 'Skip to main content' }}
+</a>
+
+<header
+  class="mega-header{% if section.settings.sticky_header %} mega-header--sticky{% endif %}"
+  data-mega-header
+  data-section-id="{{ section.id }}"
+>
+  {%- comment -%} Utility Navigation Bar {%- endcomment -%}
+  <div class="mega-header__utility">
+    <div class="mega-header__container">
+      <nav class="utility-nav" aria-label="Utility navigation">
+        <ul class="utility-nav__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'utility_link' -%}
+              <li class="utility-nav__item" {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link }}" class="utility-nav__link"
+                  {%- if block.settings.open_new_tab %} target="_blank" rel="noopener"{% endif -%}
+                >
+                  {%- if block.settings.icon != 'none' -%}
+                    <span class="utility-nav__icon">
+                      {%- render 'mega-menu-icon', icon: block.settings.icon -%}
+                    </span>
+                  {%- endif -%}
+                  {{ block.settings.label }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if section.settings.show_search -%}
+            <li class="utility-nav__item utility-nav__item--search">
+              <button
+                type="button"
+                class="utility-nav__search-toggle"
+                aria-expanded="false"
+                aria-controls="header-search"
+                data-search-toggle
+              >
+                {%- render 'mega-menu-icon', icon: 'search' -%}
+                <span class="visually-hidden">{{ 'general.search.search' | t | default: 'Search' }}</span>
+              </button>
+            </li>
+          {%- endif -%}
+
+          {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
+            <li class="utility-nav__item utility-nav__item--account">
+              <a
+                href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                class="utility-nav__link"
+              >
+                {%- render 'mega-menu-icon', icon: 'user' -%}
+                <span>
+                  {%- if customer -%}
+                    {{ 'customer.account.title' | t | default: 'Account' }}
+                  {%- else -%}
+                    {{ 'customer.login.sign_in' | t | default: 'Sign In' }}
+                  {%- endif -%}
+                </span>
+              </a>
+            </li>
+          {%- endif -%}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  {%- comment -%} Search Overlay {%- endcomment -%}
+  <div class="mega-header__search" id="header-search" data-search-panel hidden>
+    <div class="mega-header__container">
+      <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+        <label for="header-search-input" class="visually-hidden">
+          {{ 'general.search.search' | t | default: 'Search' }}
+        </label>
+        <input
+          type="search"
+          id="header-search-input"
+          name="q"
+          class="search-form__input"
+          placeholder="{{ section.settings.search_placeholder | default: 'Search...' }}"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+        <button type="submit" class="search-form__submit">
+          {%- render 'mega-menu-icon', icon: 'search' -%}
+          <span class="visually-hidden">{{ 'general.search.search' | t | default: 'Search' }}</span>
+        </button>
+        <button type="button" class="search-form__close" data-search-close>
+          {%- render 'mega-menu-icon', icon: 'close' -%}
+          <span class="visually-hidden">{{ 'general.search.close' | t | default: 'Close search' }}</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {%- comment -%} Main Navigation {%- endcomment -%}
+  <div class="mega-header__main">
+    <div class="mega-header__container">
+      {%- comment -%} Logo {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="mega-header__logo" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: section.settings.logo_width | times: 2 }}"
+            alt="{{ section.settings.logo.alt | default: shop.name }}"
+            width="{{ section.settings.logo_width }}"
+            height="auto"
+            loading="eager"
+            class="mega-header__logo-image"
+          >
+        {%- else -%}
+          <span class="mega-header__logo-text">
+            {{ settings.logo_text | default: shop.name }}<span class="mega-header__logo-suffix">{{ settings.logo_suffix }}</span>
+          </span>
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Desktop Navigation {%- endcomment -%}
+      <nav class="mega-nav" aria-label="Main navigation" data-mega-nav>
+        <ul class="mega-nav__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'menu_item' -%}
+              {%- liquid
+                assign has_dropdown = false
+                assign dropdown_blocks = ''
+
+                # Check if this menu item has associated dropdown content
+                for inner_block in section.blocks
+                  if inner_block.type == 'dropdown_link' or inner_block.type == 'dropdown_featured'
+                    if inner_block.settings.parent_menu == block.id
+                      assign has_dropdown = true
+                      break
+                    endif
+                  endif
+                endfor
+              -%}
+
+              <li
+                class="mega-nav__item{% if has_dropdown %} mega-nav__item--has-dropdown{% endif %}"
+                {{ block.shopify_attributes }}
+                {%- if has_dropdown %} data-mega-dropdown{% endif -%}
+              >
+                {%- if has_dropdown -%}
+                  <button
+                    type="button"
+                    class="mega-nav__link mega-nav__link--toggle"
+                    aria-expanded="false"
+                    aria-controls="mega-dropdown-{{ block.id }}"
+                    data-dropdown-toggle
+                  >
+                    {{ block.settings.label }}
+                    <span class="mega-nav__arrow">
+                      {%- render 'mega-menu-icon', icon: 'chevron-down' -%}
+                    </span>
+                  </button>
+
+                  {%- comment -%} Mega Dropdown Panel {%- endcomment -%}
+                  <div
+                    class="mega-dropdown"
+                    id="mega-dropdown-{{ block.id }}"
+                    data-dropdown-panel
+                    hidden
+                  >
+                    <div class="mega-dropdown__container">
+                      <div class="mega-dropdown__content">
+                        {%- comment -%} Links Column {%- endcomment -%}
+                        <div class="mega-dropdown__links">
+                          <ul class="mega-dropdown__list">
+                            {%- for inner_block in section.blocks -%}
+                              {%- if inner_block.type == 'dropdown_link' and inner_block.settings.parent_menu == block.id -%}
+                                <li class="mega-dropdown__item" {{ inner_block.shopify_attributes }}>
+                                  <a href="{{ inner_block.settings.link }}" class="mega-dropdown__link">
+                                    {{ inner_block.settings.label }}
+                                  </a>
+                                </li>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+
+                        {%- comment -%} Featured Content Card {%- endcomment -%}
+                        {%- for inner_block in section.blocks -%}
+                          {%- if inner_block.type == 'dropdown_featured' and inner_block.settings.parent_menu == block.id -%}
+                            <div class="mega-dropdown__featured" {{ inner_block.shopify_attributes }}>
+                              <a href="{{ inner_block.settings.link }}" class="featured-card">
+                                {%- if inner_block.settings.image != blank -%}
+                                  <div class="featured-card__image">
+                                    <img
+                                      src="{{ inner_block.settings.image | image_url: width: 760 }}"
+                                      alt="{{ inner_block.settings.image.alt | default: inner_block.settings.title }}"
+                                      width="380"
+                                      height="275"
+                                      loading="lazy"
+                                    >
+                                  </div>
+                                {%- else -%}
+                                  <div class="featured-card__image featured-card__image--placeholder">
+                                    {{ 'image' | placeholder_svg_tag: 'featured-card__placeholder' }}
+                                  </div>
+                                {%- endif -%}
+                                <div class="featured-card__body">
+                                  {%- if inner_block.settings.label != blank -%}
+                                    <span class="featured-card__label">{{ inner_block.settings.label }}</span>
+                                  {%- endif -%}
+                                  {%- if inner_block.settings.title != blank -%}
+                                    <h3 class="featured-card__title">{{ inner_block.settings.title }}</h3>
+                                  {%- endif -%}
+                                  {%- if inner_block.settings.description != blank -%}
+                                    <p class="featured-card__description">{{ inner_block.settings.description }}</p>
+                                  {%- endif -%}
+                                </div>
+                              </a>
+                            </div>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  </div>
+                {%- else -%}
+                  <a
+                    href="{{ block.settings.link }}"
+                    class="mega-nav__link"
+                    {%- if block.settings.open_new_tab %} target="_blank" rel="noopener"{% endif -%}
+                  >
+                    {{ block.settings.label }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+
+      {%- comment -%} Cart {%- endcomment -%}
+      {%- if section.settings.show_cart -%}
+        <a href="{{ routes.cart_url }}" class="mega-header__cart" aria-label="{{ 'cart.general.title' | t | default: 'Cart' }}">
+          {%- render 'mega-menu-icon', icon: 'cart' -%}
+          <span class="mega-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
+
+      {%- comment -%} Mobile Toggle {%- endcomment -%}
+      <button
+        type="button"
+        class="mega-header__toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="{{ 'header.toggle_menu' | t | default: 'Toggle navigation' }}"
+        data-mobile-toggle
+      >
+        <span class="mega-header__toggle-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile Menu {%- endcomment -%}
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <div class="mobile-menu__inner">
+      {%- comment -%} Mobile Search {%- endcomment -%}
+      {%- if section.settings.show_search -%}
+        <form action="{{ routes.search_url }}" method="get" class="mobile-menu__search" role="search">
+          <input
+            type="search"
+            name="q"
+            class="mobile-menu__search-input"
+            placeholder="{{ section.settings.search_placeholder | default: 'Search...' }}"
+          >
+          <button type="submit" class="mobile-menu__search-submit">
+            {%- render 'mega-menu-icon', icon: 'search' -%}
+          </button>
+        </form>
+      {%- endif -%}
+
+      {%- comment -%} Mobile Navigation {%- endcomment -%}
+      <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+        <ul class="mobile-menu__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'menu_item' -%}
+              {%- liquid
+                assign has_dropdown = false
+                for inner_block in section.blocks
+                  if inner_block.type == 'dropdown_link' or inner_block.type == 'dropdown_featured'
+                    if inner_block.settings.parent_menu == block.id
+                      assign has_dropdown = true
+                      break
+                    endif
+                  endif
+                endfor
+              -%}
+
+              <li class="mobile-menu__item{% if has_dropdown %} mobile-menu__item--has-children{% endif %}">
+                {%- if has_dropdown -%}
+                  <button
+                    type="button"
+                    class="mobile-menu__link mobile-menu__link--toggle"
+                    aria-expanded="false"
+                    data-mobile-submenu-toggle
+                  >
+                    {{ block.settings.label }}
+                    <span class="mobile-menu__arrow">
+                      {%- render 'mega-menu-icon', icon: 'chevron-down' -%}
+                    </span>
+                  </button>
+                  <ul class="mobile-menu__submenu" data-mobile-submenu hidden>
+                    {%- for inner_block in section.blocks -%}
+                      {%- if inner_block.type == 'dropdown_link' and inner_block.settings.parent_menu == block.id -%}
+                        <li class="mobile-menu__subitem">
+                          <a href="{{ inner_block.settings.link }}" class="mobile-menu__sublink">
+                            {{ inner_block.settings.label }}
+                          </a>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                {%- else -%}
+                  <a href="{{ block.settings.link }}" class="mobile-menu__link">
+                    {{ block.settings.label }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+
+      {%- comment -%} Mobile Utility Links {%- endcomment -%}
+      <div class="mobile-menu__utility">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'utility_link' -%}
+            <a href="{{ block.settings.link }}" class="mobile-menu__utility-link">
+              {%- if block.settings.icon != 'none' -%}
+                {%- render 'mega-menu-icon', icon: block.settings.icon -%}
+              {%- endif -%}
+              {{ block.settings.label }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Overlay for dropdowns {%- endcomment -%}
+<div class="mega-overlay" data-mega-overlay hidden></div>
+
+{% schema %}
+{
+  "name": "Mega Menu Header",
+  "tag": "div",
+  "class": "mega-menu-header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 150,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search..."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account link",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "utility_bg",
+      "label": "Utility bar background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "utility_text",
+      "label": "Utility bar text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "header_bg",
+      "label": "Header background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_text",
+      "label": "Header text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover",
+      "label": "Navigation hover color",
+      "default": "#0056b3"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_bg",
+      "label": "Dropdown background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_border",
+      "label": "Dropdown border",
+      "default": "#e5e5e5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "utility_link",
+      "name": "Utility Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "location", "label": "Location" },
+            { "value": "card", "label": "Card/Payment" },
+            { "value": "info", "label": "Info" },
+            { "value": "user", "label": "User" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "mail", "label": "Mail" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "menu_item",
+      "name": "Menu Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Menu Item"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Used when no dropdown items are assigned"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "dropdown_link",
+      "name": "Dropdown Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_menu",
+          "label": "Parent menu block ID",
+          "info": "Enter the block ID of the parent menu item"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Dropdown Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "dropdown_featured",
+      "name": "Featured Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_menu",
+          "label": "Parent menu block ID",
+          "info": "Enter the block ID of the parent menu item"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Featured"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Featured Content"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mega Menu Header",
+      "blocks": [
+        {
+          "type": "utility_link",
+          "settings": {
+            "label": "Find a Location",
+            "link": "/pages/locations",
+            "icon": "location"
+          }
+        },
+        {
+          "type": "utility_link",
+          "settings": {
+            "label": "Contact Us",
+            "link": "/pages/contact",
+            "icon": "phone"
+          }
+        },
+        {
+          "type": "menu_item",
+          "settings": {
+            "label": "Products"
+          }
+        },
+        {
+          "type": "menu_item",
+          "settings": {
+            "label": "Solutions"
+          }
+        },
+        {
+          "type": "menu_item",
+          "settings": {
+            "label": "About",
+            "link": "/pages/about"
+          }
+        },
+        {
+          "type": "menu_item",
+          "settings": {
+            "label": "Careers",
+            "link": "/pages/careers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
