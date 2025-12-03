@@ -1,0 +1,331 @@
+{% comment %}
+  Footer Section
+  Comprehensive footer with multiple link columns, contact info, and social links
+  
+  Features:
+  - Multi-column navigation
+  - Contact information
+  - Social media links
+  - Payment icons
+  - Copyright and legal links
+{% endcomment %}
+
+{{ 'preset-footer.css' | asset_url | stylesheet_tag }}
+
+<footer 
+  id="footer-{{ section.id }}"
+  class="footer"
+  role="contentinfo"
+  data-section-id="{{ section.id }}"
+  data-section-type="footer"
+>
+  {%- comment -%} Main Footer {%- endcomment -%}
+  <div class="footer__main">
+    <div class="footer__container container">
+      <div class="footer__grid">
+        {%- comment -%} Brand Column {%- endcomment -%}
+        <div class="footer__brand">
+          {%- if section.settings.logo != blank -%}
+            <a href="/" class="footer__logo">
+              {{ section.settings.logo | image_url: width: 200 | image_tag:
+                loading: 'lazy',
+                alt: shop.name
+              }}
+            </a>
+          {%- else -%}
+            <a href="/" class="footer__logo footer__logo--text">
+              {{ section.settings.logo_text | default: shop.name }}
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.tagline != blank -%}
+            <p class="footer__tagline">{{ section.settings.tagline }}</p>
+          {%- endif -%}
+
+          {%- comment -%} Contact Info {%- endcomment -%}
+          <div class="footer__contact">
+            {%- if section.settings.phone != blank -%}
+              <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" class="footer__contact-item">
+                {% render 'icon', icon: 'phone', size: 18 %}
+                {{ section.settings.phone }}
+              </a>
+            {%- endif -%}
+            
+            {%- if section.settings.email != blank -%}
+              <a href="mailto:{{ section.settings.email }}" class="footer__contact-item">
+                {% render 'icon', icon: 'mail', size: 18 %}
+                {{ section.settings.email }}
+              </a>
+            {%- endif -%}
+            
+            {%- if section.settings.address != blank -%}
+              <div class="footer__contact-item footer__contact-item--address">
+                {% render 'icon', icon: 'map-pin', size: 18 %}
+                <span>{{ section.settings.address }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Social Links {%- endcomment -%}
+          <div class="footer__social">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'social' -%}
+                <a 
+                  href="{{ block.settings.url }}" 
+                  class="footer__social-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="{{ block.settings.platform }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {% render 'icon-social', icon: block.settings.platform %}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- comment -%} Link Columns {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' -%}
+            <nav class="footer__nav" aria-labelledby="footer-nav-{{ forloop.index }}" {{ block.shopify_attributes }}>
+              <h3 id="footer-nav-{{ forloop.index }}" class="footer__nav-title">
+                {{ block.settings.title }}
+              </h3>
+              <ul class="footer__nav-list" role="list">
+                {%- for link in block.settings.menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}" class="footer__nav-link">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%} Custom Links Column (fallback if no menu blocks) {%- endcomment -%}
+        {%- assign has_menu = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' -%}
+            {%- assign has_menu = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- unless has_menu -%}
+          <nav class="footer__nav" aria-labelledby="footer-nav-products">
+            <h3 id="footer-nav-products" class="footer__nav-title">Products</h3>
+            <ul class="footer__nav-list" role="list">
+              <li><a href="#" class="footer__nav-link">Belt Skimmers</a></li>
+              <li><a href="#" class="footer__nav-link">Tube Skimmers</a></li>
+              <li><a href="#" class="footer__nav-link">Disk Skimmers</a></li>
+              <li><a href="#" class="footer__nav-link">Coolant Automation</a></li>
+              <li><a href="#" class="footer__nav-link">Accessories</a></li>
+            </ul>
+          </nav>
+
+          <nav class="footer__nav" aria-labelledby="footer-nav-resources">
+            <h3 id="footer-nav-resources" class="footer__nav-title">Resources</h3>
+            <ul class="footer__nav-list" role="list">
+              <li><a href="#" class="footer__nav-link">Installation Guides</a></li>
+              <li><a href="#" class="footer__nav-link">Technical Specs</a></li>
+              <li><a href="#" class="footer__nav-link">ROI Calculator</a></li>
+              <li><a href="#" class="footer__nav-link">Case Studies</a></li>
+              <li><a href="#" class="footer__nav-link">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="footer__nav" aria-labelledby="footer-nav-company">
+            <h3 id="footer-nav-company" class="footer__nav-title">Company</h3>
+            <ul class="footer__nav-list" role="list">
+              <li><a href="#" class="footer__nav-link">About Us</a></li>
+              <li><a href="#" class="footer__nav-link">Contact</a></li>
+              <li><a href="#" class="footer__nav-link">Careers</a></li>
+              <li><a href="#" class="footer__nav-link">Warranty</a></li>
+              <li><a href="#" class="footer__nav-link">Dealers</a></li>
+            </ul>
+          </nav>
+        {%- endunless -%}
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Bottom Bar {%- endcomment -%}
+  <div class="footer__bottom">
+    <div class="footer__container container">
+      <div class="footer__bottom-inner">
+        <p class="footer__copyright">
+          &copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_text | default: shop.name }}. All rights reserved.
+        </p>
+        
+        <nav class="footer__legal" aria-label="Legal links">
+          {%- if section.settings.legal_menu != blank -%}
+            {%- for link in section.settings.legal_menu.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          {%- else -%}
+            <a href="/policies/privacy-policy">Privacy Policy</a>
+            <a href="/policies/terms-of-service">Terms of Service</a>
+            <a href="/policies/shipping-policy">Shipping</a>
+            <a href="/policies/refund-policy">Returns</a>
+          {%- endif -%}
+        </nav>
+
+        {%- comment -%} Payment Icons {%- endcomment -%}
+        {%- if section.settings.show_payment_icons -%}
+          <div class="footer__payments">
+            {%- for type in shop.enabled_payment_types -%}
+              {{ type | payment_type_svg_tag: class: 'footer__payment-icon' }}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Preset: Footer",
+  "tag": "section",
+  "class": "footer-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text (if no image)",
+      "default": "Zebra Skimmers"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "American-made oil skimmers and coolant automation systems. Trusted by machinists worldwide since 1994."
+    },
+    {
+      "type": "header",
+      "content": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "1-888-249-4855"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "info@zebraskimmers.com"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "6632 Seville Drive, Canfield, OH 44406"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "Zebra Skimmers"
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Legal links menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Navigation Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Products"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Social Link",
+      "settings": [
+        {
+          "type": "select",
+          "id": "platform",
+          "label": "Platform",
+          "options": [
+            { "value": "facebook", "label": "Facebook" },
+            { "value": "twitter", "label": "Twitter/X" },
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "linkedin", "label": "LinkedIn" },
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "tiktok", "label": "TikTok" },
+            { "value": "pinterest", "label": "Pinterest" }
+          ],
+          "default": "facebook"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "social",
+        "settings": {
+          "platform": "facebook",
+          "url": "https://facebook.com"
+        }
+      },
+      {
+        "type": "social",
+        "settings": {
+          "platform": "linkedin",
+          "url": "https://linkedin.com"
+        }
+      },
+      {
+        "type": "social",
+        "settings": {
+          "platform": "youtube",
+          "url": "https://youtube.com"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

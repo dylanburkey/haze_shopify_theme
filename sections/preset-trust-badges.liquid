@@ -1,0 +1,172 @@
+{% comment %}
+  Trust Badges Section
+  Displays key value propositions and trust indicators
+  
+  Features:
+  - Animated icons on hover
+  - Responsive grid layout
+  - Optional background variations
+  - Theme editor customizable
+{% endcomment %}
+
+{{ 'preset-trust-badges.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign bg_style = section.settings.background_style
+  assign columns = section.settings.columns | default: 4
+-%}
+
+<section 
+  id="trust-badges-{{ section.id }}"
+  class="trust-badges trust-badges--{{ bg_style }}"
+  aria-labelledby="trust-badges-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="trust-badges"
+>
+  <div class="trust-badges__container container">
+    {%- if section.settings.title != blank -%}
+      <h2 id="trust-badges-title-{{ section.id }}" class="trust-badges__title visually-hidden">
+        {{ section.settings.title }}
+      </h2>
+    {%- endif -%}
+
+    <div class="trust-badges__grid trust-badges__grid--{{ columns }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' -%}
+          <div class="trust-badge" {{ block.shopify_attributes }}>
+            <div class="trust-badge__icon">
+              {% render 'icon', icon: block.settings.icon, size: 32 %}
+            </div>
+            <div class="trust-badge__content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="trust-badge__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.subtitle != blank -%}
+                <p class="trust-badge__subtitle">{{ block.settings.subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preset: Trust Badges",
+  "tag": "section",
+  "class": "trust-badges-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title (screen reader)",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background style",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "white", "label": "White" },
+        { "value": "gradient", "label": "Gradient" },
+        { "value": "dark", "label": "Dark" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield-check", "label": "Shield Check" },
+            { "value": "flag", "label": "Flag (USA)" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "award", "label": "Award" },
+            { "value": "star", "label": "Star" },
+            { "value": "check-circle", "label": "Check Circle" },
+            { "value": "tool", "label": "Tool" },
+            { "value": "cog", "label": "Cog" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "trending-up", "label": "Trending Up" }
+          ],
+          "default": "shield-check"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Lifetime Warranty"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "On all oil skimmers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Trust Badges",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "shield-check",
+            "title": "Free Lifetime Warranty",
+            "subtitle": "On all oil skimmers"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "flag",
+            "title": "Made in the USA",
+            "subtitle": "American quality since 1994"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Shipping",
+            "subtitle": "Most orders ship same day"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "phone",
+            "title": "Expert Support",
+            "subtitle": "Real engineers, real answers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

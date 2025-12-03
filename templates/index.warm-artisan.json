@@ -1,0 +1,223 @@
+{
+  "name": "Warm Artisan Homepage",
+  "sections": {
+    "hero": {
+      "type": "hero-editorial",
+      "settings": {
+        "layout": "split",
+        "content_position": "left",
+        "subtitle": "Handcrafted with Love",
+        "title": "Artisan Goods for Your Home & Table",
+        "description": "Every piece tells a story. Discover handmade ceramics, textiles, and home goods crafted by skilled artisans from around the world.",
+        "primary_button_text": "Explore the Collection",
+        "primary_button_link": "",
+        "secondary_button_text": "Meet Our Makers",
+        "secondary_button_link": ""
+      }
+    },
+    "welcome_message": {
+      "type": "rich-text",
+      "settings": {
+        "subtitle": "Welcome",
+        "title": "Made by Hand, Made with Heart",
+        "content": "<p>We partner with independent artisans and small workshops to bring you authentic, handcrafted goods that celebrate traditional craftsmanship. Each item is made with care, supporting sustainable practices and fair wages for makers.</p>",
+        "background": "secondary"
+      }
+    },
+    "collection_list": {
+      "type": "collection-list-cards",
+      "settings": {
+        "title": "Shop by Craft",
+        "columns": 3,
+        "card_style": "rounded"
+      },
+      "blocks": {
+        "collection_1": {
+          "type": "collection",
+          "settings": {
+            "title": "Ceramics & Pottery",
+            "description": "Handthrown vessels for everyday rituals",
+            "link": ""
+          }
+        },
+        "collection_2": {
+          "type": "collection",
+          "settings": {
+            "title": "Woven Textiles",
+            "description": "Traditional weaving techniques, modern designs",
+            "link": ""
+          }
+        },
+        "collection_3": {
+          "type": "collection",
+          "settings": {
+            "title": "Woodwork",
+            "description": "Carved and turned pieces for home",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["collection_1", "collection_2", "collection_3"]
+    },
+    "featured_collection": {
+      "type": "collection-grid-warm",
+      "settings": {
+        "subtitle": "Seasonal Favorites",
+        "title": "Autumn Collection",
+        "description": "Warm tones and cozy textures for the season ahead",
+        "columns": 4,
+        "products_to_show": 8
+      }
+    },
+    "maker_feature": {
+      "type": "image-with-text",
+      "settings": {
+        "image_position": "right",
+        "subtitle": "Meet the Maker",
+        "title": "Maria's Ceramics Studio",
+        "content": "<p>In her sun-filled studio in Oaxaca, Mexico, Maria continues a family tradition spanning four generations. Each piece is hand-formed using local clay and fired in a traditional wood kiln.</p><p>\"My grandmother taught me that clay has memory. It remembers every touch, every intention. That's why I take my time with each piece.\"</p>",
+        "button_text": "Shop Maria's Collection",
+        "button_link": "",
+        "background": "primary"
+      }
+    },
+    "process": {
+      "type": "process-steps",
+      "settings": {
+        "title": "From Hands to Home",
+        "description": "The journey of every artisan piece"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "title": "Sourced with Care",
+            "description": "We work directly with artisans, visiting their studios and understanding their craft"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "title": "Made by Hand",
+            "description": "Each piece is crafted using traditional techniques passed down through generations"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "title": "Delivered to You",
+            "description": "Carefully packaged and shipped directly to your door"
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3"]
+    },
+    "testimonials": {
+      "type": "testimonials-masonry",
+      "settings": {
+        "title": "From Our Community",
+        "columns": 2
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The quality is extraordinary. You can feel the love and skill in every piece. My ceramic bowl from Maria has become my most treasured possession.",
+            "name": "Rebecca",
+            "location": "Portland, OR"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I love knowing the story behind what I buy. These aren't just products—they're pieces of cultural heritage.",
+            "name": "James",
+            "location": "Austin, TX"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Beautiful craftsmanship and excellent customer service. The woven throw I ordered is even more stunning in person.",
+            "name": "Sofia",
+            "location": "Brooklyn, NY"
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"]
+    },
+    "values": {
+      "type": "values-grid",
+      "settings": {
+        "background": "secondary"
+      },
+      "blocks": {
+        "value_1": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "title": "Fair Trade",
+            "description": "Artisans receive fair compensation for their skilled work"
+          }
+        },
+        "value_2": {
+          "type": "value",
+          "settings": {
+            "icon": "leaf",
+            "title": "Sustainable",
+            "description": "Natural materials and traditional, low-impact methods"
+          }
+        },
+        "value_3": {
+          "type": "value",
+          "settings": {
+            "icon": "globe",
+            "title": "Cultural Heritage",
+            "description": "Preserving traditional crafts for future generations"
+          }
+        },
+        "value_4": {
+          "type": "value",
+          "settings": {
+            "icon": "gift",
+            "title": "Gift Ready",
+            "description": "Beautiful packaging included with every order"
+          }
+        }
+      },
+      "block_order": ["value_1", "value_2", "value_3", "value_4"]
+    },
+    "newsletter": {
+      "type": "newsletter-editorial",
+      "settings": {
+        "title": "Join Our Community",
+        "description": "Stories from our artisans, new arrivals, and exclusive offers delivered to your inbox.",
+        "placeholder_text": "Your email address",
+        "button_text": "Subscribe",
+        "note": "We send thoughtful emails, never spam."
+      }
+    },
+    "footer": {
+      "type": "preset-footer",
+      "settings": {
+        "logo_text": "Artisan Collective",
+        "tagline": "Handcrafted goods. Authentic stories. Meaningful connections."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "welcome_message",
+    "collection_list",
+    "featured_collection",
+    "maker_feature",
+    "process",
+    "testimonials",
+    "values",
+    "newsletter",
+    "footer"
+  ]
+}

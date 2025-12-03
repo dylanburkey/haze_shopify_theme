@@ -1,0 +1,244 @@
+{% comment %}
+  CSS Variables / Design Tokens
+  Generates CSS custom properties from theme settings
+  Include in theme.liquid: {% render 'css-variables' %}
+{% endcomment %}
+
+{% style %}
+  :root {
+    /* ==========================================================================
+       Color Tokens
+       ========================================================================== */
+    
+    /* Primary Colors */
+    --color-primary: {{ settings.color_primary }};
+    --color-primary-light: {{ settings.color_primary_light }};
+    --color-primary-dark: {{ settings.color_primary_dark }};
+    --color-primary-rgb: {{ settings.color_primary | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    
+    /* Accent Colors */
+    --color-accent: {{ settings.color_accent }};
+    --color-highlight: {{ settings.color_highlight }};
+    --color-accent-rgb: {{ settings.color_accent | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --color-highlight-rgb: {{ settings.color_highlight | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    
+    /* CTA Colors */
+    --color-cta: {{ settings.color_cta }};
+    --color-cta-hover: {{ settings.color_cta_hover }};
+    --color-cta-rgb: {{ settings.color_cta | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    
+    /* Semantic Colors */
+    --color-success: {{ settings.color_success }};
+    --color-warning: {{ settings.color_warning }};
+    --color-error: {{ settings.color_error }};
+    --color-star: {{ settings.color_star }};
+    
+    /* Background Colors */
+    --color-background: {{ settings.color_background }};
+    --color-background-secondary: {{ settings.color_background_secondary }};
+    --color-background-tertiary: {{ settings.color_background_tertiary }};
+    --color-background-rgb: {{ settings.color_background | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    
+    /* Text Colors */
+    --color-text: {{ settings.color_text }};
+    --color-text-secondary: {{ settings.color_text_secondary }};
+    --color-text-muted: {{ settings.color_text_muted }};
+    --color-text-light: {{ settings.color_text_light }};
+    
+    /* Border Colors */
+    --color-border: {{ settings.color_border }};
+    --color-border-light: {{ settings.color_border_light }};
+    
+    /* ==========================================================================
+       Typography Tokens
+       ========================================================================== */
+    
+    /* Font Families */
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+    
+    /* Font Weights */
+    --font-heading-weight: {{ settings.font_heading_weight }};
+    --font-body-weight: {{ settings.font_body_weight }};
+    
+    /* Font Styles */
+    --font-heading-style: {{ settings.font_heading_style }};
+    
+    /* Line Heights */
+    --font-heading-line-height: {{ settings.font_heading_line_height }};
+    --font-body-line-height: {{ settings.font_body_line_height }};
+    
+    /* Letter Spacing */
+    --font-heading-letter-spacing: {{ settings.font_heading_letter_spacing }}em;
+    
+    /* Base Font Size */
+    --font-size-base: {{ settings.font_size_base }}px;
+    
+    /* Type Scale */
+    --font-scale: {{ settings.font_scale }};
+    
+    /* Calculated Font Sizes (using type scale) */
+    {%- assign scale = settings.font_scale | times: 1.0 -%}
+    {%- assign base = settings.font_size_base | times: 1.0 -%}
+    --font-size-xs: {{ base | divided_by: scale | divided_by: scale | round: 2 }}px;
+    --font-size-sm: {{ base | divided_by: scale | round: 2 }}px;
+    --font-size-md: {{ base }}px;
+    --font-size-lg: {{ base | times: scale | round: 2 }}px;
+    --font-size-xl: {{ base | times: scale | times: scale | round: 2 }}px;
+    --font-size-2xl: {{ base | times: scale | times: scale | times: scale | round: 2 }}px;
+    --font-size-3xl: {{ base | times: scale | times: scale | times: scale | times: scale | round: 2 }}px;
+    --font-size-4xl: {{ base | times: scale | times: scale | times: scale | times: scale | times: scale | round: 2 }}px;
+    
+    /* ==========================================================================
+       Spacing Tokens
+       ========================================================================== */
+    
+    /* Container */
+    --container-max-width: {{ settings.container_max_width }}px;
+    --container-padding: {{ settings.container_padding }}px;
+    --container-padding-desktop: {{ settings.container_padding_desktop }}px;
+    
+    /* Section Spacing */
+    --section-padding: {{ settings.section_padding_mobile }}px;
+    --section-padding-desktop: {{ settings.section_padding_desktop }}px;
+    
+    /* Grid */
+    --grid-gap: {{ settings.grid_gap_mobile }}px;
+    --grid-gap-desktop: {{ settings.grid_gap_desktop }}px;
+    
+    /* Spacing Scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+    
+    /* ==========================================================================
+       Component Tokens
+       ========================================================================== */
+    
+    /* Buttons */
+    --button-border-radius: {{ settings.button_border_radius }}px;
+    --button-padding-y: {{ settings.button_padding_vertical }}px;
+    --button-padding-x: {{ settings.button_padding_horizontal }}px;
+    --button-text-transform: {{ settings.button_text_transform }};
+    
+    /* Inputs */
+    --input-border-radius: {{ settings.input_border_radius }}px;
+    --input-border-width: {{ settings.input_border_width }}px;
+    
+    /* Cards */
+    --card-border-radius: {{ settings.card_border_radius }}px;
+    --card-padding: {{ settings.card_padding }}px;
+    
+    /* Badges */
+    --badge-border-radius: {{ settings.badge_border_radius }}px;
+    
+    /* ==========================================================================
+       Animation Tokens
+       ========================================================================== */
+    
+    /* Transition Speeds */
+    {%- case settings.transition_speed -%}
+      {%- when 'fast' -%}
+        --transition-duration: 150ms;
+      {%- when 'slow' -%}
+        --transition-duration: 350ms;
+      {%- else -%}
+        --transition-duration: 250ms;
+    {%- endcase -%}
+    
+    --transition-easing: {{ settings.transition_easing }};
+    --transition: var(--transition-duration) var(--transition-easing);
+    
+    /* Hover Effects */
+    --hover-lift: {% if settings.enable_hover_lift %}-{{ settings.hover_lift_distance }}px{% else %}0{% endif %};
+    --image-zoom-scale: {% if settings.enable_image_zoom %}{{ settings.image_zoom_scale }}{% else %}1{% endif %};
+    
+    /* ==========================================================================
+       Shadow Tokens
+       ========================================================================== */
+    
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    
+    /* Card Shadow based on setting */
+    {%- case settings.card_shadow -%}
+      {%- when 'sm' -%}
+        --card-shadow: var(--shadow-sm);
+      {%- when 'md' -%}
+        --card-shadow: var(--shadow-md);
+      {%- when 'lg' -%}
+        --card-shadow: var(--shadow-lg);
+      {%- else -%}
+        --card-shadow: none;
+    {%- endcase -%}
+    
+    /* ==========================================================================
+       Z-Index Scale
+       ========================================================================== */
+    
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+  }
+  
+  /* ==========================================================================
+     Responsive Token Overrides
+     ========================================================================== */
+  
+  @media (min-width: 768px) {
+    :root {
+      --container-padding: var(--container-padding-desktop);
+      --section-padding: var(--section-padding-desktop);
+      --grid-gap: var(--grid-gap-desktop);
+    }
+  }
+  
+  /* ==========================================================================
+     Reduced Motion
+     ========================================================================== */
+  
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --transition-duration: 0.01ms;
+      --hover-lift: 0;
+      --image-zoom-scale: 1;
+    }
+  }
+{% endstyle %}
+
+{{ settings.font_heading | font_face: font_display: 'swap' }}
+{{ settings.font_body | font_face: font_display: 'swap' }}
+
+{%- if settings.font_heading_weight == '600' -%}
+  {{ settings.font_heading | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+{%- elsif settings.font_heading_weight == '700' -%}
+  {{ settings.font_heading | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+{%- elsif settings.font_heading_weight == '800' -%}
+  {{ settings.font_heading | font_modify: 'weight', '800' | font_face: font_display: 'swap' }}
+{%- endif -%}
+
+{%- if settings.font_body_weight == '300' -%}
+  {{ settings.font_body | font_modify: 'weight', '300' | font_face: font_display: 'swap' }}
+{%- elsif settings.font_body_weight == '500' -%}
+  {{ settings.font_body | font_modify: 'weight', '500' | font_face: font_display: 'swap' }}
+{%- endif -%}
+
+{{ settings.font_body | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+{{ settings.font_body | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}

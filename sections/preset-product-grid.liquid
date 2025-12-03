@@ -1,0 +1,314 @@
+{% comment %}
+  Product Grid Section
+  Displays a grid of product cards with add-to-cart functionality
+  
+  Features:
+  - Responsive product grid
+  - Quick add to cart
+  - Sale/badge support
+  - Star ratings display
+{% endcomment %}
+
+{{ 'preset-product-grid.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="product-grid-{{ section.id }}"
+  class="product-grid"
+  aria-labelledby="product-grid-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-grid"
+>
+  <div class="product-grid__container container">
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <header class="product-grid__header">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="product-grid__subtitle">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 id="product-grid-title-{{ section.id }}" class="product-grid__title">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.view_all_link != blank and section.settings.view_all_text != blank -%}
+          <a href="{{ section.settings.view_all_link }}" class="product-grid__view-all">
+            {{ section.settings.view_all_text }}
+            {% render 'icon', icon: 'arrow-right', size: 16 %}
+          </a>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="product-grid__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product' -%}
+          <article class="product-card" {{ block.shopify_attributes }}>
+            {%- comment -%} Product Image {%- endcomment -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="product-card__media">
+              {%- if block.settings.badge != blank -%}
+                <span class="product-card__badge product-card__badge--{{ block.settings.badge_style }}">
+                  {{ block.settings.badge }}
+                </span>
+              {%- endif -%}
+              
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 600 | image_tag:
+                  loading: 'lazy',
+                  class: 'product-card__image',
+                  widths: '300, 450, 600',
+                  sizes: '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw',
+                  alt: block.settings.title
+                }}
+              {%- else -%}
+                <div class="product-card__placeholder">
+                  {% render 'icon', icon: block.settings.placeholder_icon, size: 48 %}
+                </div>
+              {%- endif -%}
+            </a>
+
+            {%- comment -%} Product Content {%- endcomment -%}
+            <div class="product-card__content">
+              {%- if block.settings.vendor != blank -%}
+                <span class="product-card__vendor">{{ block.settings.vendor }}</span>
+              {%- endif -%}
+              
+              <h3 class="product-card__title">
+                <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.title }}</a>
+              </h3>
+              
+              {%- if block.settings.description != blank -%}
+                <p class="product-card__description">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- comment -%} Rating {%- endcomment -%}
+              {%- if block.settings.rating > 0 -%}
+                <div class="product-card__rating" aria-label="Rated {{ block.settings.rating }} out of 5 stars">
+                  <div class="product-card__stars">
+                    {%- for i in (1..5) -%}
+                      {%- if i <= block.settings.rating -%}
+                        <svg class="product-card__star product-card__star--filled" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                          <polygon fill="currentColor" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                      {%- else -%}
+                        <svg class="product-card__star" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                          <polygon fill="none" stroke="currentColor" stroke-width="2" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                  {%- if block.settings.review_count > 0 -%}
+                    <span class="product-card__review-count">({{ block.settings.review_count }})</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {%- comment -%} Pricing {%- endcomment -%}
+              <div class="product-card__pricing">
+                <span class="product-card__price">{{ block.settings.price }}</span>
+                {%- if block.settings.compare_price != blank -%}
+                  <span class="product-card__compare-price">{{ block.settings.compare_price }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- comment -%} Add to Cart {%- endcomment -%}
+              <button 
+                type="button" 
+                class="product-card__add-btn"
+                data-add-to-cart
+                aria-label="Add {{ block.settings.title }} to cart"
+              >
+                {% render 'icon', icon: 'cart', size: 18 %}
+                {{ section.settings.add_to_cart_text | default: 'Add to Cart' }}
+              </button>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'preset-product-grid.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Preset: Product Grid",
+  "tag": "section",
+  "class": "product-grid-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Top Picks"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Popular Products"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all text",
+      "default": "View All Products"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_text",
+      "label": "Add to cart text",
+      "default": "Add to Cart"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image"
+        },
+        {
+          "type": "select",
+          "id": "placeholder_icon",
+          "label": "Placeholder icon (if no image)",
+          "options": [
+            { "value": "cog", "label": "Cog" },
+            { "value": "tool", "label": "Tool" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "cube", "label": "Cube" }
+          ],
+          "default": "cog"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text"
+        },
+        {
+          "type": "select",
+          "id": "badge_style",
+          "label": "Badge style",
+          "options": [
+            { "value": "sale", "label": "Sale (Red)" },
+            { "value": "new", "label": "New (Blue)" },
+            { "value": "popular", "label": "Popular (Orange)" }
+          ],
+          "default": "popular"
+        },
+        {
+          "type": "text",
+          "id": "vendor",
+          "label": "Vendor/Brand"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short description"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "number",
+          "id": "review_count",
+          "label": "Review count",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$499"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at price"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Product Grid",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "Model 6V Belt Skimmer",
+            "description": "Our most popular belt skimmer for CNC machine sumps",
+            "price": "$428",
+            "rating": 5,
+            "review_count": 127,
+            "badge": "Best Seller",
+            "badge_style": "popular"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Sidewinder® Tube Skimmer",
+            "description": "Flexible tube design reaches into tight spaces",
+            "price": "$385",
+            "rating": 5,
+            "review_count": 89,
+            "badge": "New",
+            "badge_style": "new"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Disk Skimmer Pro",
+            "description": "Precision disk technology for light oil removal",
+            "price": "$762",
+            "rating": 4,
+            "review_count": 45
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Blue Mamba™ Coolant Hose",
+            "description": "Heavy-duty coolant delivery with quick-connect fittings",
+            "price": "$89",
+            "compare_price": "$129",
+            "rating": 5,
+            "review_count": 203,
+            "badge": "Sale",
+            "badge_style": "sale"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

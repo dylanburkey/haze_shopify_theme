@@ -1,0 +1,214 @@
+{% comment %}
+  Product Categories Section
+  Displays product category cards with images, titles, and product counts
+  
+  Features:
+  - Hover animations with image zoom
+  - Gradient overlays
+  - Product count badges
+  - Responsive grid
+{% endcomment %}
+
+{{ 'preset-product-categories.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="product-categories-{{ section.id }}"
+  class="product-categories"
+  aria-labelledby="product-categories-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-categories"
+>
+  <div class="product-categories__container container">
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <header class="product-categories__header">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="product-categories__subtitle">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 id="product-categories-title-{{ section.id }}" class="product-categories__title">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="product-categories__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="product-categories__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          <a 
+            href="{{ block.settings.link | default: '#' }}" 
+            class="category-card"
+            {{ block.shopify_attributes }}
+          >
+            <div class="category-card__image-wrapper">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag:
+                  loading: 'lazy',
+                  class: 'category-card__image',
+                  widths: '400, 600, 800',
+                  sizes: '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw',
+                  alt: block.settings.title
+                }}
+              {%- else -%}
+                <div class="category-card__placeholder">
+                  {% render 'icon', icon: block.settings.placeholder_icon, size: 48 %}
+                </div>
+              {%- endif -%}
+              <div class="category-card__overlay"></div>
+            </div>
+            
+            <div class="category-card__content">
+              {%- if block.settings.product_count > 0 -%}
+                <span class="category-card__count">
+                  {{ block.settings.product_count }} {{ block.settings.product_count | pluralize: 'product', 'products' }}
+                </span>
+              {%- endif -%}
+              
+              <h3 class="category-card__title">{{ block.settings.title }}</h3>
+              
+              {%- if block.settings.description != blank -%}
+                <p class="category-card__description">{{ block.settings.description }}</p>
+              {%- endif -%}
+              
+              <span class="category-card__cta">
+                {{ section.settings.cta_text | default: 'Shop Now' }}
+                {% render 'icon', icon: 'arrow-right', size: 16 %}
+              </span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preset: Product Categories",
+  "tag": "section",
+  "class": "product-categories-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Browse Our Solutions"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product Categories"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Find the perfect oil removal and coolant management solution for your application."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Card CTA text",
+      "default": "Shop Now"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "placeholder_icon",
+          "label": "Placeholder icon (if no image)",
+          "options": [
+            { "value": "cog", "label": "Cog" },
+            { "value": "tool", "label": "Tool" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "cube", "label": "Cube" }
+          ],
+          "default": "cog"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Belt Skimmers"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Industrial-grade belt oil skimmers for heavy-duty applications"
+        },
+        {
+          "type": "number",
+          "id": "product_count",
+          "label": "Product count",
+          "default": 17
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Product Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Belt Skimmers",
+            "description": "Industrial-grade belt oil skimmers for heavy-duty applications",
+            "product_count": 17,
+            "placeholder_icon": "cog"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Tube Skimmers",
+            "description": "Flexible tube skimmers for tight spaces and CNC sumps",
+            "product_count": 15,
+            "placeholder_icon": "tool"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Disk Skimmers",
+            "description": "Precision disk skimmers for light oil removal",
+            "product_count": 7,
+            "placeholder_icon": "droplet"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Coolant Automation",
+            "description": "Complete sump management and automation systems",
+            "product_count": 12,
+            "placeholder_icon": "cube"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

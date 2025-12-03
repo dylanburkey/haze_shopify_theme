@@ -1,0 +1,173 @@
+{% comment %}
+  Newsletter CTA Section
+  Email signup with engaging design
+  
+  Features:
+  - Email form with validation
+  - Trust indicators
+  - Gradient background
+  - Success/error states
+{% endcomment %}
+
+{{ 'preset-newsletter-cta.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="newsletter-cta-{{ section.id }}"
+  class="newsletter-cta"
+  aria-labelledby="newsletter-cta-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="newsletter-cta"
+>
+  <div class="newsletter-cta__container container">
+    <div class="newsletter-cta__inner">
+      {%- comment -%} Content {%- endcomment -%}
+      <div class="newsletter-cta__content">
+        {%- if section.settings.icon != 'none' -%}
+          <div class="newsletter-cta__icon">
+            {% render 'icon', icon: section.settings.icon, size: 40 %}
+          </div>
+        {%- endif -%}
+        
+        {%- if section.settings.title != blank -%}
+          <h2 id="newsletter-cta-title-{{ section.id }}" class="newsletter-cta__title">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        
+        {%- if section.settings.description != blank -%}
+          <p class="newsletter-cta__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Form {%- endcomment -%}
+      <div class="newsletter-cta__form-wrapper">
+        <form 
+          class="newsletter-cta__form"
+          data-newsletter-form
+          action="{{ section.settings.form_action | default: '/contact#contact_form' }}"
+          method="post"
+        >
+          <input type="hidden" name="form_type" value="newsletter">
+          <input type="hidden" name="utf8" value="✓">
+          
+          <div class="newsletter-cta__input-group">
+            <label for="newsletter-email-{{ section.id }}" class="visually-hidden">
+              {{ section.settings.placeholder | default: 'Enter your email' }}
+            </label>
+            <input 
+              type="email" 
+              id="newsletter-email-{{ section.id }}"
+              name="contact[email]"
+              class="newsletter-cta__input"
+              placeholder="{{ section.settings.placeholder | default: 'Enter your email address' }}"
+              required
+              autocomplete="email"
+            >
+            <button type="submit" class="newsletter-cta__submit">
+              {{ section.settings.button_text | default: 'Subscribe' }}
+              {% render 'icon', icon: 'arrow-right', size: 18 %}
+            </button>
+          </div>
+
+          <div class="newsletter-cta__message newsletter-cta__message--success" data-success-message hidden>
+            {% render 'icon', icon: 'check-circle', size: 18 %}
+            {{ section.settings.success_message | default: 'Thank you for subscribing!' }}
+          </div>
+
+          <div class="newsletter-cta__message newsletter-cta__message--error" data-error-message hidden>
+            {% render 'icon', icon: 'close', size: 18 %}
+            {{ section.settings.error_message | default: 'Something went wrong. Please try again.' }}
+          </div>
+        </form>
+
+        {%- if section.settings.trust_text != blank -%}
+          <p class="newsletter-cta__trust">
+            {% render 'icon', icon: 'shield-check', size: 14 %}
+            {{ section.settings.trust_text }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'preset-newsletter-cta.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Preset: Newsletter CTA",
+  "tag": "section",
+  "class": "newsletter-cta-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "mail", "label": "Mail" },
+        { "value": "sparkle", "label": "Sparkle" },
+        { "value": "bolt", "label": "Bolt" },
+        { "value": "star", "label": "Star" }
+      ],
+      "default": "mail"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Stay in the Loop"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Subscribe to our newsletter for exclusive deals, maintenance tips, and new product announcements."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "url",
+      "id": "form_action",
+      "label": "Form action URL",
+      "info": "Leave blank to use default Shopify newsletter"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for subscribing!"
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Something went wrong. Please try again."
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust text",
+      "default": "We respect your privacy. Unsubscribe at any time."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Newsletter CTA"
+    }
+  ]
+}
+{% endschema %}

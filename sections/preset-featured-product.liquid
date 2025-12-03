@@ -1,0 +1,348 @@
+{% comment %}
+  Featured Product Section
+  Showcases a single product with detailed benefits and CTAs
+  
+  Features:
+  - Split layout (image + content)
+  - Benefits list with icons
+  - Price display with comparison
+  - Dual CTAs
+  - Badge support
+{% endcomment %}
+
+{{ 'preset-featured-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign layout = section.settings.layout | default: 'image-left'
+-%}
+
+<section 
+  id="featured-product-{{ section.id }}"
+  class="featured-product featured-product--{{ layout }}"
+  aria-labelledby="featured-product-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="featured-product"
+>
+  <div class="featured-product__container container">
+    <div class="featured-product__inner">
+      {%- comment -%} Image Column {%- endcomment -%}
+      <div class="featured-product__media">
+        <div class="featured-product__image-wrapper">
+          {%- if section.settings.badge_text != blank -%}
+            <span class="featured-product__badge">{{ section.settings.badge_text }}</span>
+          {%- endif -%}
+          
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1000 | image_tag:
+              loading: 'lazy',
+              class: 'featured-product__image',
+              widths: '500, 750, 1000',
+              sizes: '(min-width: 1024px) 50vw, 100vw',
+              alt: section.settings.title
+            }}
+          {%- else -%}
+            <div class="featured-product__placeholder">
+              {% render 'icon', icon: 'cog', size: 80 %}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Floating Stats {%- endcomment -%}
+        {%- assign has_stats = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            {%- assign has_stats = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if has_stats -%}
+          <div class="featured-product__stats">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'stat' -%}
+                <div class="featured-product__stat" {{ block.shopify_attributes }}>
+                  <span class="featured-product__stat-value">{{ block.settings.value }}</span>
+                  <span class="featured-product__stat-label">{{ block.settings.label }}</span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Content Column {%- endcomment -%}
+      <div class="featured-product__content">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="featured-product__subtitle">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+
+        <h2 id="featured-product-title-{{ section.id }}" class="featured-product__title">
+          {{ section.settings.title }}
+        </h2>
+
+        {%- if section.settings.description != blank -%}
+          <div class="featured-product__description">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Benefits List {%- endcomment -%}
+        {%- assign has_benefits = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' -%}
+            {%- assign has_benefits = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if has_benefits -%}
+          <ul class="featured-product__benefits" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'benefit' -%}
+                <li class="featured-product__benefit" {{ block.shopify_attributes }}>
+                  <span class="featured-product__benefit-icon">
+                    {% render 'icon', icon: 'check-circle', size: 20 %}
+                  </span>
+                  <span class="featured-product__benefit-text">{{ block.settings.text }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- comment -%} Price {%- endcomment -%}
+        {%- if section.settings.price != blank -%}
+          <div class="featured-product__pricing">
+            {%- if section.settings.price_prefix != blank -%}
+              <span class="featured-product__price-prefix">{{ section.settings.price_prefix }}</span>
+            {%- endif -%}
+            <span class="featured-product__price">{{ section.settings.price }}</span>
+            {%- if section.settings.compare_price != blank -%}
+              <span class="featured-product__compare-price">{{ section.settings.compare_price }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} CTAs {%- endcomment -%}
+        <div class="featured-product__cta">
+          {%- if section.settings.primary_button_text != blank -%}
+            <a 
+              href="{{ section.settings.primary_button_link }}" 
+              class="featured-product__btn featured-product__btn--primary"
+            >
+              {{ section.settings.primary_button_text }}
+              {% render 'icon', icon: 'arrow-right', size: 18 %}
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.secondary_button_text != blank -%}
+            <a 
+              href="{{ section.settings.secondary_button_link }}" 
+              class="featured-product__btn featured-product__btn--secondary"
+            >
+              {% render 'icon', icon: 'phone', size: 18 %}
+              {{ section.settings.secondary_button_text }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Trust Note {%- endcomment -%}
+        {%- if section.settings.trust_note != blank -%}
+          <p class="featured-product__trust">
+            {% render 'icon', icon: 'shield-check', size: 16 %}
+            {{ section.settings.trust_note }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preset: Featured Product",
+  "tag": "section",
+  "class": "featured-product-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "image-left", "label": "Image Left" },
+        { "value": "image-right", "label": "Image Right" }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Best Seller"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Featured Product"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "DAZZLE™ 1 Automated Sump System"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>The Dazzle™ 1 is a modular, automated sump management system that monitors and maintains your coolant at optimal conditions 24/7. Reduce coolant costs, extend tool life, and improve part quality with automated fluid management.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Pricing"
+    },
+    {
+      "type": "text",
+      "id": "price_prefix",
+      "label": "Price prefix",
+      "default": "Starting at"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "$682"
+    },
+    {
+      "type": "text",
+      "id": "compare_price",
+      "label": "Compare at price"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary button text",
+      "default": "Configure & Buy"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "Talk to an Expert"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Trust"
+    },
+    {
+      "type": "text",
+      "id": "trust_note",
+      "label": "Trust note",
+      "default": "Free lifetime warranty included"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Reduce coolant costs by up to 50%"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Floating Stat",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Cost Savings"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Featured Product",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": { "text": "Reduce coolant costs by up to 50%" }
+        },
+        {
+          "type": "benefit",
+          "settings": { "text": "Automated 24/7 fluid monitoring" }
+        },
+        {
+          "type": "benefit",
+          "settings": { "text": "Extend tool life and improve part quality" }
+        },
+        {
+          "type": "benefit",
+          "settings": { "text": "Modular design - start small, expand later" }
+        },
+        {
+          "type": "benefit",
+          "settings": { "text": "ROI typically achieved in 8 months" }
+        },
+        {
+          "type": "stat",
+          "settings": { "value": "50%", "label": "Cost Savings" }
+        },
+        {
+          "type": "stat",
+          "settings": { "value": "8mo", "label": "Avg. ROI" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

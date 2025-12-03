@@ -1,0 +1,276 @@
+{% comment %}
+  Testimonials Section
+  Displays customer testimonials with ratings and company info
+  
+  Features:
+  - Star ratings
+  - Customer photos/initials
+  - Company attribution
+  - Gradient background
+{% endcomment %}
+
+{{ 'preset-testimonials.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="testimonials-{{ section.id }}"
+  class="testimonials"
+  aria-labelledby="testimonials-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="testimonials"
+>
+  <div class="testimonials__container container">
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <header class="testimonials__header">
+        {%- if section.settings.subtitle != blank -%}
+          <span class="testimonials__subtitle">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 id="testimonials-title-{{ section.id }}" class="testimonials__title">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="testimonials__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="testimonials__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'testimonial' -%}
+          <blockquote class="testimonial-card" {{ block.shopify_attributes }}>
+            {%- comment -%} Rating {%- endcomment -%}
+            {%- if block.settings.rating > 0 -%}
+              <div class="testimonial-card__rating" aria-label="Rated {{ block.settings.rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  {%- if i <= block.settings.rating -%}
+                    <svg class="testimonial-card__star testimonial-card__star--filled" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                      <polygon fill="currentColor" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- else -%}
+                    <svg class="testimonial-card__star" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                      <polygon fill="none" stroke="currentColor" stroke-width="2" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Quote {%- endcomment -%}
+            <p class="testimonial-card__quote">{{ block.settings.quote }}</p>
+
+            {%- comment -%} Author {%- endcomment -%}
+            <footer class="testimonial-card__author">
+              <div class="testimonial-card__avatar">
+                {%- if block.settings.avatar != blank -%}
+                  {{ block.settings.avatar | image_url: width: 96 | image_tag:
+                    loading: 'lazy',
+                    alt: block.settings.name
+                  }}
+                {%- else -%}
+                  <span class="testimonial-card__initials">
+                    {{ block.settings.name | slice: 0 }}
+                  </span>
+                {%- endif -%}
+              </div>
+              <div class="testimonial-card__info">
+                <cite class="testimonial-card__name">{{ block.settings.name }}</cite>
+                {%- if block.settings.title != blank or block.settings.company != blank -%}
+                  <span class="testimonial-card__role">
+                    {%- if block.settings.title != blank -%}
+                      {{ block.settings.title }}
+                    {%- endif -%}
+                    {%- if block.settings.title != blank and block.settings.company != blank -%}
+                      <span class="testimonial-card__separator">at</span>
+                    {%- endif -%}
+                    {%- if block.settings.company != blank -%}
+                      {{ block.settings.company }}
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+              </div>
+            </footer>
+          </blockquote>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Stats Bar {%- endcomment -%}
+    {%- if section.settings.show_stats -%}
+      <div class="testimonials__stats">
+        <div class="testimonials__stat">
+          <span class="testimonials__stat-value">{{ section.settings.stat_1_value }}</span>
+          <span class="testimonials__stat-label">{{ section.settings.stat_1_label }}</span>
+        </div>
+        <div class="testimonials__stat">
+          <span class="testimonials__stat-value">{{ section.settings.stat_2_value }}</span>
+          <span class="testimonials__stat-label">{{ section.settings.stat_2_label }}</span>
+        </div>
+        <div class="testimonials__stat">
+          <span class="testimonials__stat-value">{{ section.settings.stat_3_value }}</span>
+          <span class="testimonials__stat-label">{{ section.settings.stat_3_label }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preset: Testimonials",
+  "tag": "section",
+  "class": "testimonials-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Customer Stories"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What Machinists Are Saying"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Join thousands of machine shops that trust Zebra Skimmers for their oil removal and coolant management needs."
+    },
+    {
+      "type": "header",
+      "content": "Stats Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 value",
+      "default": "4.9/5"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Average Rating"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 value",
+      "default": "2,500+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Happy Customers"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_value",
+      "label": "Stat 3 value",
+      "default": "98%"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Would Recommend"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The Dazzle system paid for itself in just 6 months. Our coolant costs are down 45% and our tools are lasting longer than ever."
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Author photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Author name",
+          "default": "John Smith"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Author title",
+          "default": "Shop Manager"
+        },
+        {
+          "type": "text",
+          "id": "company",
+          "label": "Company",
+          "default": "Precision Machine Works"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The Dazzle system paid for itself in just 6 months. Our coolant costs are down 45% and our tools are lasting longer than ever.",
+            "name": "Mike Richardson",
+            "title": "Shop Manager",
+            "company": "Precision Machine Works"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "We've been using Zebra belt skimmers for over 10 years. They just work. The lifetime warranty isn't just marketing—they actually stand behind it.",
+            "name": "Sarah Chen",
+            "title": "Operations Director",
+            "company": "Chen Manufacturing"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "After trying three other brands, Zebra is the only one that consistently performs in our harsh environment. Worth every penny.",
+            "name": "David Martinez",
+            "title": "Maintenance Lead",
+            "company": "Industrial Dynamics"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,724 @@
+{% comment %}
+  Hero Section - Zebra Skimmers
+  A full-featured hero section with animated elements, floating cards, 
+  product showcase, stats counter, and trust indicators.
+  
+  Features:
+  - Animated grid background
+  - Floating particles
+  - 3D product showcase with parallax
+  - Animated stat counters
+  - Floating benefit cards
+  - Video modal trigger
+  - Trusted by logos
+  - Fully customizable via theme editor
+{% endcomment %}
+
+{{ 'preset-hero.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="hero-{{ section.id }}"
+  class="hero"
+  aria-labelledby="hero-title-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="hero"
+>
+  {%- comment -%} Animated Background Elements {%- endcomment -%}
+  {%- if section.settings.show_grid_background -%}
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+  {%- endif -%}
+  
+  {%- if section.settings.show_particles -%}
+    <div class="hero__particles" aria-hidden="true">
+      {%- for i in (1..8) -%}
+        <span class="hero__particle"></span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="hero__container container">
+    <div class="hero__inner">
+      {%- comment -%} Hero Content {%- endcomment -%}
+      <div class="hero__content">
+        {%- comment -%} Eyebrow / Badge Area {%- endcomment -%}
+        <div class="hero__eyebrow">
+          {%- if section.settings.badge_text != blank -%}
+            <span class="hero__badge">
+              {%- if section.settings.badge_icon != 'none' -%}
+                {% render 'icon', icon: section.settings.badge_icon, size: 14 %}
+              {%- endif -%}
+              {{ section.settings.badge_text }}
+            </span>
+          {%- endif -%}
+          
+          {%- if section.settings.since_text != blank -%}
+            <span class="hero__since">
+              {% render 'icon', icon: 'flag', size: 16 %}
+              {{ section.settings.since_text }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Main Title {%- endcomment -%}
+        <h1 id="hero-title-{{ section.id }}" class="hero__title">
+          {%- if section.settings.title_prefix != blank -%}
+            {{ section.settings.title_prefix }}
+          {%- endif -%}
+          {%- if section.settings.title_highlight != blank -%}
+            <span class="hero__title-highlight">{{ section.settings.title_highlight }}</span>
+          {%- endif -%}
+          {%- if section.settings.title_suffix != blank -%}
+            {{ section.settings.title_suffix }}
+          {%- endif -%}
+        </h1>
+
+        {%- comment -%} Description {%- endcomment -%}
+        {%- if section.settings.description != blank -%}
+          <p class="hero__description">
+            {{ section.settings.description }}
+          </p>
+        {%- endif -%}
+
+        {%- comment -%} CTA Buttons {%- endcomment -%}
+        <div class="hero__cta">
+          {%- if section.settings.primary_button_text != blank -%}
+            <a 
+              href="{{ section.settings.primary_button_link }}" 
+              class="hero__btn hero__btn--primary btn"
+              {% if section.settings.primary_button_link contains 'http' %}
+                target="_blank" 
+                rel="noopener noreferrer"
+              {% endif %}
+            >
+              {{ section.settings.primary_button_text }}
+              {% render 'icon', icon: 'arrow-right', size: 18 %}
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.secondary_button_text != blank -%}
+            <a 
+              href="{{ section.settings.secondary_button_link }}" 
+              class="hero__btn hero__btn--secondary btn"
+              {% if section.settings.secondary_button_link contains 'http' %}
+                target="_blank" 
+                rel="noopener noreferrer"
+              {% endif %}
+            >
+              {%- if section.settings.secondary_button_icon != 'none' -%}
+                {% render 'icon', icon: section.settings.secondary_button_icon, size: 18 %}
+              {%- endif -%}
+              {{ section.settings.secondary_button_text }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Stats Section {%- endcomment -%}
+        {%- if section.settings.show_stats -%}
+          <div class="hero__stats" data-hero-stats>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'stat' -%}
+                <div class="hero__stat" {{ block.shopify_attributes }}>
+                  <div 
+                    class="hero__stat-value" 
+                    data-count="{{ block.settings.stat_value }}"
+                    data-suffix="{{ block.settings.stat_suffix }}"
+                  >
+                    0{{ block.settings.stat_suffix }}
+                  </div>
+                  <div class="hero__stat-label">{{ block.settings.stat_label }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Hero Media Area {%- endcomment -%}
+      <div class="hero__media-wrapper" data-hero-media>
+        {%- comment -%} Floating Cards {%- endcomment -%}
+        {%- if section.settings.show_floating_cards -%}
+          {%- assign card_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'floating_card' -%}
+              {%- assign card_index = card_index | plus: 1 -%}
+              <div 
+                class="hero__float-card hero__float-card--{{ card_index }}" 
+                aria-hidden="true"
+                {{ block.shopify_attributes }}
+              >
+                <div class="hero__float-card-inner">
+                  <div class="hero__float-card-icon">
+                    {% render 'icon', icon: block.settings.card_icon, size: 24 %}
+                  </div>
+                  <div class="hero__float-card-content">
+                    <div class="hero__float-card-title">{{ block.settings.card_title }}</div>
+                    <div class="hero__float-card-meta">
+                      {%- if block.settings.card_highlight != blank -%}
+                        <strong>{{ block.settings.card_highlight }}</strong>
+                      {%- endif -%}
+                      {{ block.settings.card_subtitle }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- comment -%} Main Showcase {%- endcomment -%}
+        <div class="hero__showcase" data-hero-showcase>
+          {%- if section.settings.showcase_badge != blank -%}
+            <span class="hero__showcase-badge">{{ section.settings.showcase_badge }}</span>
+          {%- endif -%}
+          
+          <div class="hero__showcase-inner">
+            {%- if section.settings.showcase_image != blank -%}
+              <div class="hero__showcase-image">
+                {{ section.settings.showcase_image | image_url: width: 600 | image_tag:
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  widths: '300, 400, 500, 600',
+                  sizes: '(min-width: 1024px) 500px, 100vw',
+                  alt: section.settings.showcase_title
+                }}
+              </div>
+            {%- else -%}
+              <div class="hero__showcase-icon">
+                {% render 'icon', icon: section.settings.showcase_icon, size: 60 %}
+              </div>
+            {%- endif -%}
+            
+            {%- if section.settings.showcase_title != blank -%}
+              <h2 class="hero__showcase-title">{{ section.settings.showcase_title }}</h2>
+            {%- endif -%}
+            
+            {%- if section.settings.showcase_subtitle != blank -%}
+              <p class="hero__showcase-subtitle">{{ section.settings.showcase_subtitle }}</p>
+            {%- endif -%}
+            
+            {%- if section.settings.showcase_price != blank -%}
+              <div class="hero__showcase-price">
+                {{ section.settings.showcase_price }}
+                {%- if section.settings.showcase_price_suffix != blank -%}
+                  <span>{{ section.settings.showcase_price_suffix }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Video Button {%- endcomment -%}
+          {%- if section.settings.video_url != blank -%}
+            <button 
+              type="button" 
+              class="hero__video-btn"
+              data-hero-video-btn
+              data-video-url="{{ section.settings.video_url }}"
+              aria-label="{{ section.settings.video_button_text | default: 'Watch demo video' }}"
+            >
+              {% render 'icon', icon: 'play', size: 20 %}
+              {{ section.settings.video_button_text | default: 'Watch Demo' }}
+            </button>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Trusted By Section {%- endcomment -%}
+        {%- if section.settings.show_trusted_by -%}
+          <div class="hero__trusted">
+            {%- if section.settings.trusted_label != blank -%}
+              <div class="hero__trusted-label">{{ section.settings.trusted_label }}</div>
+            {%- endif -%}
+            <div class="hero__trusted-logos">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'trusted_logo' -%}
+                  {%- if block.settings.logo_image != blank -%}
+                    <div class="hero__trusted-logo" {{ block.shopify_attributes }}>
+                      {{ block.settings.logo_image | image_url: width: 120 | image_tag:
+                        loading: 'lazy',
+                        alt: block.settings.logo_name
+                      }}
+                    </div>
+                  {%- elsif block.settings.logo_name != blank -%}
+                    <span class="hero__trusted-logo hero__trusted-logo--text" {{ block.shopify_attributes }}>
+                      {{ block.settings.logo_name }}
+                    </span>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Video Modal {%- endcomment -%}
+{%- if section.settings.video_url != blank -%}
+  <div 
+    id="hero-video-modal-{{ section.id }}" 
+    class="hero__video-modal" 
+    data-hero-video-modal
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Video player"
+  >
+    <div class="hero__video-modal-backdrop" data-hero-video-close></div>
+    <div class="hero__video-modal-content">
+      <button 
+        type="button" 
+        class="hero__video-modal-close" 
+        data-hero-video-close
+        aria-label="Close video"
+      >
+        {% render 'icon', icon: 'close', size: 24 %}
+      </button>
+      <div class="hero__video-modal-player" data-hero-video-player>
+        {%- comment -%} Video iframe inserted via JS {%- endcomment -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+<script src="{{ 'preset-hero.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Preset: Hero",
+  "tag": "section",
+  "class": "hero-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge & Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "New: Dazzle™ 2 Now Available"
+    },
+    {
+      "type": "select",
+      "id": "badge_icon",
+      "label": "Badge icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "star", "label": "Star" },
+        { "value": "sparkle", "label": "Sparkle" },
+        { "value": "bolt", "label": "Bolt" },
+        { "value": "fire", "label": "Fire" }
+      ],
+      "default": "star"
+    },
+    {
+      "type": "text",
+      "id": "since_text",
+      "label": "Since text",
+      "default": "Made in USA Since 1994"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "label": "Title prefix",
+      "default": "Reduce Coolant Costs by"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Highlighted text",
+      "default": "Up to 50%"
+    },
+    {
+      "type": "text",
+      "id": "title_suffix",
+      "label": "Title suffix",
+      "default": "with Automated Fluid Management"
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Industry-leading oil skimmers and coolant automation systems trusted by thousands of machine shops worldwide. American-made quality backed by a free lifetime warranty."
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Button text",
+      "default": "Explore Dazzle™ Systems"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Button text",
+      "default": "Browse All Products"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "secondary_button_icon",
+      "label": "Button icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "grid", "label": "Grid" },
+        { "value": "cube", "label": "Cube" },
+        { "value": "search", "label": "Search" }
+      ],
+      "default": "cube"
+    },
+    {
+      "type": "header",
+      "content": "Stats"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product Showcase"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image",
+      "label": "Showcase image"
+    },
+    {
+      "type": "select",
+      "id": "showcase_icon",
+      "label": "Showcase icon (if no image)",
+      "options": [
+        { "value": "cog", "label": "Cog / Gear" },
+        { "value": "tool", "label": "Tool" },
+        { "value": "cube", "label": "Cube" },
+        { "value": "droplet", "label": "Droplet" }
+      ],
+      "default": "cog"
+    },
+    {
+      "type": "text",
+      "id": "showcase_badge",
+      "label": "Showcase badge",
+      "default": "Best Seller"
+    },
+    {
+      "type": "text",
+      "id": "showcase_title",
+      "label": "Showcase title",
+      "default": "DAZZLE™ 1"
+    },
+    {
+      "type": "text",
+      "id": "showcase_subtitle",
+      "label": "Showcase subtitle",
+      "default": "Modular Automated Sump Management"
+    },
+    {
+      "type": "text",
+      "id": "showcase_price",
+      "label": "Showcase price",
+      "default": "Starting at $682"
+    },
+    {
+      "type": "text",
+      "id": "showcase_price_suffix",
+      "label": "Price suffix",
+      "default": "USD"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "YouTube or Vimeo URL"
+    },
+    {
+      "type": "text",
+      "id": "video_button_text",
+      "label": "Video button text",
+      "default": "Watch Demo"
+    },
+    {
+      "type": "header",
+      "content": "Trusted By"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trusted_by",
+      "label": "Show trusted by section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trusted_label",
+      "label": "Trusted by label",
+      "default": "Trusted by industry leaders"
+    },
+    {
+      "type": "header",
+      "content": "Floating Cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_floating_cards",
+      "label": "Show floating cards",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Background Effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_grid_background",
+      "label": "Show animated grid",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_particles",
+      "label": "Show floating particles",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "color_primary",
+      "label": "Primary color",
+      "default": "#003d79"
+    },
+    {
+      "type": "color",
+      "id": "color_primary_light",
+      "label": "Primary light",
+      "default": "#0056a8"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Accent color",
+      "default": "#0077cc"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "Highlight color",
+      "default": "#00a3e0"
+    },
+    {
+      "type": "color",
+      "id": "color_cta",
+      "label": "CTA button color",
+      "default": "#ff6b00"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "number",
+          "id": "stat_value",
+          "label": "Value",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "stat_suffix",
+          "label": "Suffix",
+          "default": "+",
+          "info": "e.g., +, %, K"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Label",
+          "default": "Years of Innovation"
+        }
+      ]
+    },
+    {
+      "type": "floating_card",
+      "name": "Floating Card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "card_icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield-check", "label": "Shield Check" },
+            { "value": "trending-up", "label": "Trending Up" },
+            { "value": "star", "label": "Star" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "award", "label": "Award" }
+          ],
+          "default": "shield-check"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Title",
+          "default": "Lifetime Warranty"
+        },
+        {
+          "type": "text",
+          "id": "card_highlight",
+          "label": "Highlight text",
+          "info": "Displayed in green/bold"
+        },
+        {
+          "type": "text",
+          "id": "card_subtitle",
+          "label": "Subtitle",
+          "default": "On all skimmers"
+        }
+      ]
+    },
+    {
+      "type": "trusted_logo",
+      "name": "Trusted Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo image",
+          "info": "Recommended: 120px wide, transparent PNG"
+        },
+        {
+          "type": "text",
+          "id": "logo_name",
+          "label": "Company name",
+          "default": "Company Name",
+          "info": "Used as alt text or displayed if no image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset: Hero",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "stat_value": 30,
+            "stat_suffix": "+",
+            "stat_label": "Years of Innovation"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_value": 50,
+            "stat_suffix": "K+",
+            "stat_label": "Skimmers Deployed"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "stat_value": 120,
+            "stat_suffix": "+",
+            "stat_label": "Products Available"
+          }
+        },
+        {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "shield-check",
+            "card_title": "Lifetime Warranty",
+            "card_subtitle": "On all skimmers"
+          }
+        },
+        {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "trending-up",
+            "card_title": "ROI in 8 Months",
+            "card_highlight": "80%",
+            "card_subtitle": "coolant savings"
+          }
+        },
+        {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "star",
+            "card_title": "5-Star Rated",
+            "card_subtitle": "By machinists worldwide"
+          }
+        },
+        {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "General Motors"
+          }
+        },
+        {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Boeing"
+          }
+        },
+        {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Lockheed Martin"
+          }
+        },
+        {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Caterpillar"
+          }
+        },
+        {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "John Deere"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

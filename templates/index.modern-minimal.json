@@ -1,0 +1,149 @@
+{
+  "name": "Modern Minimal Homepage",
+  "sections": {
+    "hero": {
+      "type": "hero-minimal",
+      "settings": {
+        "alignment": "center",
+        "subtitle": "Curated Essentials",
+        "title": "Refined Living Starts Here",
+        "description": "Discover our thoughtfully curated collection of everyday essentials, designed with intention and made to last.",
+        "primary_button_text": "Shop the Collection",
+        "primary_button_link": "",
+        "secondary_button_text": "Our Story",
+        "secondary_button_link": "",
+        "background_color": "light"
+      }
+    },
+    "featured_collection": {
+      "type": "collection-grid-minimal",
+      "settings": {
+        "title": "New Arrivals",
+        "description": "Fresh additions to our curated selection",
+        "columns": 4,
+        "products_to_show": 8,
+        "show_vendor": false,
+        "show_secondary_image": true,
+        "view_all_text": "View All"
+      }
+    },
+    "brand_story": {
+      "type": "image-with-text",
+      "settings": {
+        "image_position": "left",
+        "subtitle": "Our Philosophy",
+        "title": "Less, But Better",
+        "content": "<p>We believe that thoughtful design and quality materials create products worth keeping. Each piece in our collection is selected for its timeless appeal and lasting value.</p><p>Our commitment to sustainability means choosing makers who share our vision for a more intentional way of living.</p>",
+        "button_text": "Learn More",
+        "button_link": ""
+      }
+    },
+    "collection_list": {
+      "type": "collection-list-minimal",
+      "settings": {
+        "title": "Shop by Category",
+        "columns": 3
+      },
+      "blocks": {
+        "collection_1": {
+          "type": "collection",
+          "settings": {
+            "title": "Home",
+            "description": "Elevated everyday objects"
+          }
+        },
+        "collection_2": {
+          "type": "collection",
+          "settings": {
+            "title": "Wear",
+            "description": "Timeless wardrobe essentials"
+          }
+        },
+        "collection_3": {
+          "type": "collection",
+          "settings": {
+            "title": "Care",
+            "description": "Mindful personal rituals"
+          }
+        }
+      },
+      "block_order": ["collection_1", "collection_2", "collection_3"]
+    },
+    "testimonial": {
+      "type": "testimonial-single",
+      "settings": {
+        "quote": "Finally, a brand that understands quality over quantity. Every piece I've purchased has exceeded my expectations.",
+        "author": "Amanda K.",
+        "location": "San Francisco, CA",
+        "background": "secondary"
+      }
+    },
+    "values": {
+      "type": "icon-row",
+      "settings": {
+        "columns": 4
+      },
+      "blocks": {
+        "value_1": {
+          "type": "icon",
+          "settings": {
+            "icon": "package",
+            "title": "Thoughtful Packaging",
+            "description": "Plastic-free, recyclable materials"
+          }
+        },
+        "value_2": {
+          "type": "icon",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "description": "On orders over $75"
+          }
+        },
+        "value_3": {
+          "type": "icon",
+          "settings": {
+            "icon": "refresh",
+            "title": "Easy Returns",
+            "description": "30-day hassle-free returns"
+          }
+        },
+        "value_4": {
+          "type": "icon",
+          "settings": {
+            "icon": "heart",
+            "title": "Made to Last",
+            "description": "Quality guaranteed"
+          }
+        }
+      },
+      "block_order": ["value_1", "value_2", "value_3", "value_4"]
+    },
+    "newsletter": {
+      "type": "newsletter-minimal",
+      "settings": {
+        "title": "Stay Inspired",
+        "description": "Join our community for early access, styling tips, and thoughtful content.",
+        "placeholder_text": "Your email",
+        "button_text": "Subscribe"
+      }
+    },
+    "footer": {
+      "type": "footer-minimal",
+      "settings": {
+        "logo_text": "Essentials",
+        "tagline": "Thoughtfully designed. Mindfully made."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_collection",
+    "brand_story",
+    "collection_list",
+    "testimonial",
+    "values",
+    "newsletter",
+    "footer"
+  ]
+}
