@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -13,12 +22,6 @@
     },
     "search": {
       "type": "ai-search",
-      "settings": {
-        "heading": "Find The Right Gear",
-        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
-        "button_label": "Search",
-        "show_suggestions": true
-      },
       "blocks": {
         "suggestion-1": {
           "type": "suggestion",
@@ -42,15 +45,20 @@
           }
         }
       },
-      "block_order": ["suggestion-1", "suggestion-2", "suggestion-3"]
+      "block_order": [
+        "suggestion-1",
+        "suggestion-2",
+        "suggestion-3"
+      ],
+      "settings": {
+        "heading": "Find The Right Gear",
+        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
+        "button_label": "Search",
+        "show_suggestions": true
+      }
     },
     "featured": {
       "type": "smart-grid",
-      "settings": {
-        "heading": "Core Solutions",
-        "layout": "highlight",
-        "use_surface_bg": false
-      },
       "blocks": {
         "card-1": {
           "type": "card",
@@ -66,20 +74,112 @@
         "card-2": {
           "type": "card",
           "settings": {
+            "show_placeholder": false,
+            "tag": "Category",
             "heading": "Safety Gear",
-            "text": "Helmets, gloves, and fume extraction."
+            "text": "Helmets, gloves, and fume extraction.",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         },
         "card-3": {
           "type": "card",
           "settings": {
+            "show_placeholder": false,
+            "tag": "Category",
             "heading": "Automation",
-            "text": "Robotic cells and Cobot integration."
+            "text": "Robotic cells and Cobot integration.",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         }
       },
-      "block_order": ["card-1", "card-2", "card-3"]
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "heading": "Core Solutions",
+        "layout": "highlight",
+        "use_surface_bg": false
+      }
+    },
+    "container_grid_LfVg6H": {
+      "type": "container-grid",
+      "blocks": {
+        "card_nmqW4U": {
+          "type": "card",
+          "settings": {
+            "image_position": "left",
+            "badge": "",
+            "icon": "",
+            "heading": "Feature title",
+            "text": "<p>Describe the feature or content here.</p>",
+            "link": "",
+            "link_text": "Learn more",
+            "span_columns": false
+          }
+        },
+        "card_nGPTVq": {
+          "type": "card",
+          "settings": {
+            "image_position": "left",
+            "badge": "",
+            "icon": "",
+            "heading": "Feature title",
+            "text": "<p>Describe the feature or content here.</p>",
+            "link": "",
+            "link_text": "Learn more",
+            "span_columns": false
+          }
+        },
+        "card_dFQNGE": {
+          "type": "card",
+          "settings": {
+            "image_position": "left",
+            "badge": "",
+            "icon": "",
+            "heading": "Feature title",
+            "text": "<p>Describe the feature or content here.</p>",
+            "link": "",
+            "link_text": "Learn more",
+            "span_columns": false
+          }
+        }
+      },
+      "block_order": [
+        "card_nmqW4U",
+        "card_nGPTVq",
+        "card_dFQNGE"
+      ],
+      "name": "Container grid",
+      "settings": {
+        "subtitle": "",
+        "title": "Featured content",
+        "description": "",
+        "center_header": true,
+        "layout_pattern": "grid",
+        "columns": 3,
+        "gap": 24,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "card_background": "#ffffff",
+        "card_border_color": "#e5e5e5",
+        "card_border_radius": 8,
+        "card_padding": 24,
+        "card_shadow": "0 8px 24px rgba(0,0,0,0.12)",
+        "accent_color": "#334FB4",
+        "button_text": "",
+        "button_link": "",
+        "button_style": "primary"
+      }
     }
   },
-  "order": ["hero", "search", "featured"]
+  "order": [
+    "hero",
+    "search",
+    "featured",
+    "container_grid_LfVg6H"
+  ]
 }
