@@ -26,7 +26,7 @@
       "name": "t:sections.announcement_bar.name",
       "settings": {
         "background_color": "#121212",
-        "text_color": "#FFFFFF"
+        "text_color": "#ffffff"
       }
     },
     "hero": {
@@ -38,6 +38,81 @@
         "text": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>",
         "button_label": "Explore Equipment",
         "button_link": "shopify://collections/all"
+      }
+    },
+    "preset_featured_product_XXJRzJ": {
+      "type": "preset-featured-product",
+      "blocks": {
+        "benefit_n6BhfY": {
+          "type": "benefit",
+          "settings": {
+            "text": "Reduce coolant costs by up to 50%"
+          }
+        },
+        "benefit_zH48HG": {
+          "type": "benefit",
+          "settings": {
+            "text": "Automated 24/7 fluid monitoring"
+          }
+        },
+        "benefit_Dei8Gt": {
+          "type": "benefit",
+          "settings": {
+            "text": "Extend tool life and improve part quality"
+          }
+        },
+        "benefit_xK7y9H": {
+          "type": "benefit",
+          "settings": {
+            "text": "Modular design - start small, expand later"
+          }
+        },
+        "benefit_MXRj9N": {
+          "type": "benefit",
+          "settings": {
+            "text": "ROI typically achieved in 8 months"
+          }
+        },
+        "stat_zB9ctc": {
+          "type": "stat",
+          "settings": {
+            "value": "50%",
+            "label": "Cost Savings"
+          }
+        },
+        "stat_c7Vjbx": {
+          "type": "stat",
+          "settings": {
+            "value": "8mo",
+            "label": "Avg. ROI"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_n6BhfY",
+        "benefit_zH48HG",
+        "benefit_Dei8Gt",
+        "benefit_xK7y9H",
+        "benefit_MXRj9N",
+        "stat_zB9ctc",
+        "stat_c7Vjbx"
+      ],
+      "name": "Preset: Featured Product",
+      "settings": {
+        "layout": "image-left",
+        "image": "shopify://shop_images/welder.png",
+        "badge_text": "Best Seller",
+        "subtitle": "Featured Product",
+        "title": "Smart Disk Skimmer",
+        "description": "<p>The Dazzle™ 1 is a modular, automated sump management system that monitors and maintains your coolant at optimal conditions 24/7. Reduce coolant costs, extend tool life, and improve part quality with automated fluid management.</p>",
+        "price_prefix": "Starting at",
+        "price": "$682",
+        "compare_price": "",
+        "primary_button_text": "Configure & Buy",
+        "primary_button_link": "",
+        "secondary_button_text": "Talk to an Expert",
+        "secondary_button_link": "",
+        "trust_note": "Free lifetime warranty included"
       }
     },
     "search": {
@@ -129,6 +204,7 @@
   "order": [
     "announcement_bar_BKqVJn",
     "hero",
+    "preset_featured_product_XXJRzJ",
     "search",
     "featured"
   ]
