@@ -28,9 +28,9 @@
     },
     {%- else -%}
     {
-      "src": "{{ 'pwa-icon-192.png' | asset_url }}",
+      "src": "{{ 'pwa-icon-192.svg' | asset_url }}",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {%- endif -%}
@@ -49,9 +49,9 @@
     }
     {%- else -%}
     {
-      "src": "{{ 'pwa-icon-512.png' | asset_url }}",
+      "src": "{{ 'pwa-icon-512.svg' | asset_url }}",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
     {%- endif -%}

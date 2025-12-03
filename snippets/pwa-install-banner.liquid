@@ -10,10 +10,7 @@
       {%- if settings.pwa_icon_192 -%}
         <img src="{{ settings.pwa_icon_192 | image_url: width: 48 }}" alt="{{ shop.name }}" width="48" height="48">
       {%- else -%}
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="5" y="2" width="14" height="20" rx="2"/>
-          <path d="M12 18h.01"/>
-        </svg>
+        <img src="{{ 'pwa-icon-192.svg' | asset_url }}" alt="{{ shop.name }}" width="48" height="48">
       {%- endif -%}
     </div>
     <div class="pwa-install-banner__text">

@@ -1,0 +1,7 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="180" rx="40" fill="#111111"/>
+  <path d="M90 35L130 62V118L90 145L50 118V62L90 35Z" fill="#d71920"/>
+  <path d="M90 45L120 67V113L90 135L60 113V67L90 45Z" fill="#111111"/>
+  <text x="90" y="97" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="26" font-weight="bold" fill="#ffffff">FORGE</text>
+  <text x="90" y="117" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#d71920">.IND</text>
+</svg>
