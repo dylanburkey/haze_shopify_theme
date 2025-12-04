@@ -21,6 +21,13 @@
       "unavailable": "Unavailable",
       "quantity": "Quantity",
       "sku": "SKU"
+    },
+    "card": {
+      "view_product": "View Product",
+      "quick_view": "Quick View",
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "sale": "Sale"
     }
   },
   "collections": {

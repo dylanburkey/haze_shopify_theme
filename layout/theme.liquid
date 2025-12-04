@@ -131,7 +131,16 @@
   {%- render 'pwa-install-banner' -%}
 
   {%- comment -%} Dynamic Header based on settings {%- endcomment -%}
-  {% section 'header-unified' %}
+  {%- case settings.header_style -%}
+    {%- when 'mega-menu' -%}
+      {% section 'mega-menu-header' %}
+    {%- when 'industrial' -%}
+      {% section 'header-industrial' %}
+    {%- when 'corporate' -%}
+      {% section 'corporate-header' %}
+    {%- else -%}
+      {% section 'header-unified' %}
+  {%- endcase -%}
 
   <main id="MainContent" role="main" tabindex="-1">
     {{ content_for_layout }}

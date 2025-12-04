@@ -57,6 +57,23 @@
         ],
         "default": "default",
         "info": "Select a landing page style. This determines which sections appear on your homepage."
+      },
+      {
+        "type": "header",
+        "content": "Header Style"
+      },
+      {
+        "type": "select",
+        "id": "header_style",
+        "label": "Header Type",
+        "options": [
+          { "value": "unified", "label": "Unified Header (Recommended)" },
+          { "value": "mega-menu", "label": "Mega Menu Header" },
+          { "value": "industrial", "label": "Industrial Header" },
+          { "value": "corporate", "label": "Corporate Header" }
+        ],
+        "default": "unified",
+        "info": "Choose which header style to use across your store. All headers support mega menu navigation."
       }
     ]
   },
