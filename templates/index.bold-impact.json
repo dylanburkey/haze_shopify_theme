@@ -1,223 +1,179 @@
 {
-  "name": "Bold Impact Homepage",
   "sections": {
-    "hero": {
-      "type": "hero-video",
-      "settings": {
-        "video_type": "background",
-        "overlay_opacity": 60,
-        "title": "PUSH YOUR LIMITS",
-        "subtitle": "Performance Gear for Champions",
-        "description": "Engineered for athletes who demand more. Every product tested in extreme conditions.",
-        "primary_button_text": "SHOP NOW",
-        "primary_button_link": "",
-        "secondary_button_text": "WATCH FILM",
-        "secondary_button_link": "",
-        "countdown_enabled": false,
-        "scroll_indicator": true
-      }
-    },
-    "announcement_bar": {
-      "type": "announcement-bar-bold",
-      "settings": {
-        "text": "🔥 FLASH SALE: 30% OFF ALL TRAINING GEAR — ENDS MIDNIGHT",
-        "link": "",
-        "background": "cta"
-      }
-    },
-    "featured_collection": {
-      "type": "collection-carousel",
-      "settings": {
-        "subtitle": "JUST DROPPED",
-        "title": "New Releases",
-        "collection": "",
-        "products_to_show": 8,
-        "show_quick_add": true,
-        "autoplay": true
-      }
-    },
-    "split_banner": {
-      "type": "split-promo",
-      "settings": {},
+    "landing": {
+      "type": "landing-bold-impact",
       "blocks": {
-        "promo_1": {
-          "type": "promo",
+        "hero-stat-1": {
+          "type": "hero_stat",
           "settings": {
-            "title": "TRAINING",
-            "subtitle": "Built to perform",
-            "button_text": "Shop Training",
-            "button_link": "",
-            "background_color": "#7c3aed"
+            "value": "50K+",
+            "label": "Athletes"
           }
         },
-        "promo_2": {
-          "type": "promo",
-          "settings": {
-            "title": "COMPETITION",
-            "subtitle": "Made for winners",
-            "button_text": "Shop Competition",
-            "button_link": "",
-            "background_color": "#dc2626"
-          }
-        }
-      },
-      "block_order": ["promo_1", "promo_2"]
-    },
-    "featured_product": {
-      "type": "featured-product-bold",
-      "settings": {
-        "badge_text": "#1 BESTSELLER",
-        "title": "PRO SERIES X TRAINER",
-        "description": "Our most advanced training shoe yet. Featuring reactive cushioning, carbon fiber plate, and breathable mesh upper. Trusted by Olympic athletes worldwide.",
-        "price": "$189",
-        "compare_price": "$249",
-        "primary_button_text": "ADD TO CART",
-        "secondary_button_text": "CUSTOMIZE",
-        "show_color_options": true
-      },
-      "blocks": {
-        "feature_1": {
-          "type": "feature",
-          "settings": {
-            "icon": "zap",
-            "text": "Reactive Foam Technology"
-          }
-        },
-        "feature_2": {
-          "type": "feature",
-          "settings": {
-            "icon": "feather",
-            "text": "Ultra-Lightweight: 8.2oz"
-          }
-        },
-        "feature_3": {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "text": "Carbon Fiber Stability Plate"
-          }
-        },
-        "feature_4": {
-          "type": "feature",
-          "settings": {
-            "icon": "wind",
-            "text": "360° Breathable Mesh"
-          }
-        }
-      },
-      "block_order": ["feature_1", "feature_2", "feature_3", "feature_4"]
-    },
-    "social_proof": {
-      "type": "stats-bar",
-      "settings": {
-        "background": "primary"
-      },
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "value": "500K+",
-            "label": "Athletes Trust Us"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "value": "50+",
-            "label": "Olympic Medals"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
+        "hero-stat-2": {
+          "type": "hero_stat",
           "settings": {
             "value": "4.9",
-            "label": "Star Rating"
+            "label": "Rating"
           }
         },
-        "stat_4": {
-          "type": "stat",
+        "hero-stat-3": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "100%",
+            "label": "Performance"
+          }
+        },
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "title": "Running"
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "title": "Training"
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "title": "Basketball"
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "title": "Soccer"
+          }
+        },
+        "product-feature-1": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Responsive cushioning technology"
+          }
+        },
+        "product-feature-2": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Breathable mesh upper"
+          }
+        },
+        "product-feature-3": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Superior grip outsole"
+          }
+        },
+        "product-feature-4": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Lightweight at only 8.5oz"
+          }
+        },
+        "banner-stat-1": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "10M+",
+            "label": "Products Sold"
+          }
+        },
+        "banner-stat-2": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "500+",
+            "label": "Pro Athletes"
+          }
+        },
+        "banner-stat-3": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "50",
+            "label": "Countries"
+          }
+        },
+        "banner-stat-4": {
+          "type": "banner_stat",
           "settings": {
             "value": "24/7",
-            "label": "Expert Support"
+            "label": "Support"
+          }
+        },
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Marcus Williams",
+            "sport": "Professional Basketball",
+            "quote": "The support and responsiveness are unmatched. These are the only shoes I trust on the court."
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah Chen",
+            "sport": "Marathon Runner",
+            "quote": "Ran my PR wearing these. The cushioning kept me fresh through mile 26."
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Jake Rodriguez",
+            "sport": "CrossFit Athlete",
+            "quote": "Finally a shoe that can handle everything from box jumps to rope climbs."
           }
         }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"]
-    },
-    "testimonials": {
-      "type": "testimonials-slider",
+      "block_order": [
+        "hero-stat-1",
+        "hero-stat-2",
+        "hero-stat-3",
+        "category-1",
+        "category-2",
+        "category-3",
+        "category-4",
+        "product-feature-1",
+        "product-feature-2",
+        "product-feature-3",
+        "product-feature-4",
+        "banner-stat-1",
+        "banner-stat-2",
+        "banner-stat-3",
+        "banner-stat-4",
+        "testimonial-1",
+        "testimonial-2",
+        "testimonial-3"
+      ],
       "settings": {
-        "title": "ATHLETE REVIEWS",
-        "autoplay": true,
-        "show_rating": true
-      },
-      "blocks": {
-        "testimonial_1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "These are the only shoes I'll compete in. The responsiveness is unmatched.",
-            "name": "Marcus Johnson",
-            "title": "Olympic Sprinter, Team USA"
-          }
-        },
-        "testimonial_2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Finally, training gear that can keep up with my workouts. Game changer.",
-            "name": "Elena Rodriguez",
-            "title": "CrossFit Games Athlete"
-          }
-        },
-        "testimonial_3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "The quality is insane. Been through 200+ miles and still going strong.",
-            "name": "James Chen",
-            "title": "Ultra Marathon Runner"
-          }
-        }
-      },
-      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"]
-    },
-    "instagram": {
-      "type": "instagram-feed",
-      "settings": {
-        "title": "#TRAINHARD",
-        "subtitle": "Join the community",
-        "posts_to_show": 6
-      }
-    },
-    "newsletter": {
-      "type": "newsletter-bold",
-      "settings": {
-        "title": "JOIN THE MOVEMENT",
-        "description": "Get exclusive drops, training tips, and 15% off your first order.",
-        "placeholder_text": "Enter your email",
-        "button_text": "SIGN UP",
-        "background": "gradient"
-      }
-    },
-    "footer": {
-      "type": "preset-footer",
-      "settings": {
-        "logo_text": "IMPACT",
-        "tagline": "Performance gear for those who push limits."
+        "hero_badge": "New Collection",
+        "hero_title": "PUSH YOUR LIMITS",
+        "hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
+        "hero_button_label": "Shop Now",
+        "hero_secondary_label": "View Lookbook",
+        "show_hero_stats": true,
+        "show_categories": true,
+        "categories_eyebrow": "Collections",
+        "categories_title": "Shop by Sport",
+        "show_featured_product": true,
+        "featured_eyebrow": "Featured",
+        "show_products": true,
+        "products_limit": 8,
+        "products_eyebrow": "Best Sellers",
+        "products_title": "Top Picks",
+        "products_button_label": "View All Products",
+        "show_stats_banner": true,
+        "show_testimonials": true,
+        "testimonials_eyebrow": "Reviews",
+        "testimonials_title": "What Athletes Say",
+        "show_newsletter": true,
+        "newsletter_title": "Join the Team",
+        "newsletter_text": "Get exclusive drops, training tips, and 15% off your first order.",
+        "newsletter_placeholder": "Enter your email",
+        "newsletter_button": "Subscribe",
+        "newsletter_note": "No spam. Unsubscribe anytime."
       }
     }
   },
-  "order": [
-    "hero",
-    "announcement_bar",
-    "featured_collection",
-    "split_banner",
-    "featured_product",
-    "social_proof",
-    "testimonials",
-    "instagram",
-    "newsletter",
-    "footer"
-  ]
+  "order": ["landing"]
 }

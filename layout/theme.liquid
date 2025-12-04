@@ -130,12 +130,14 @@
   {%- comment -%} PWA Install Banner {%- endcomment -%}
   {%- render 'pwa-install-banner' -%}
 
-  {% section 'header' %}
+  {%- comment -%} Dynamic Header based on settings {%- endcomment -%}
+  {% section 'header-unified' %}
 
   <main id="MainContent" role="main" tabindex="-1">
     {{ content_for_layout }}
   </main>
 
+  {%- comment -%} Dynamic Footer based on preset {%- endcomment -%}
   {% section 'footer' %}
 </body>
 </html>

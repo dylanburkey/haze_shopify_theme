@@ -10,12 +10,18 @@
           "label": "Theme style",
           "info": "Select a pre-configured color and typography scheme",
           "options": {
-            "default": "The Welder (Lincoln Style)",
-            "site_ops": "Site Ops (Construction)",
+            "the_welder": "The Welder (Industrial Red)",
+            "work_zone": "Work Zone (Safety Orange)",
+            "site_ops": "Site Ops (Construction Yellow)",
             "midnight_shift": "Midnight Shift (Dark Mode)",
             "precision": "Precision (Lab/Tech)",
             "tactical": "Tactical (Outdoor)",
-            "monolith": "Monolith (Minimalist)"
+            "monolith": "Monolith (Minimalist)",
+            "zebra_skimmers": "Zebra Skimmers (Industrial B2B)",
+            "modern_minimal": "Modern Minimal (Lifestyle)",
+            "bold_impact": "Bold Impact (Athletic)",
+            "warm_artisan": "Warm Artisan (Handmade)",
+            "tech_forward": "Tech Forward (Electronics)"
           }
         }
       }

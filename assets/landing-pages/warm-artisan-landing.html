@@ -1,0 +1,1573 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Willow & Sage — Handcrafted with Heart</title>
+        <meta
+            name="description"
+            content="Small-batch ceramics and home goods made by hand in our Portland studio. Each piece tells a story."
+        />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:wght@300;400;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            /* ==========================================================================
+       Warm Artisan - Design Tokens
+       ========================================================================== */
+            :root {
+                --color-primary: #5d4037;
+                --color-primary-light: #795548;
+                --color-primary-dark: #3e2723;
+                --color-accent: #8d6e63;
+                --color-highlight: #d7ccc8;
+                --color-cta: #5d4037;
+                --color-cta-hover: #4e342e;
+                --color-star: #d4a574;
+                --color-background: #faf8f5;
+                --color-background-secondary: #ffffff;
+                --color-background-tertiary: #f5f0eb;
+                --color-text: #3e2723;
+                --color-text-secondary: #5d4037;
+                --color-text-muted: #8d6e63;
+                --color-text-light: #ffffff;
+                --color-border: #e8e0d8;
+
+                --font-heading: "Cormorant Garamond", Georgia, serif;
+                --font-body: "Nunito Sans", -apple-system, sans-serif;
+                --font-heading-weight: 500;
+
+                --container-max-width: 1200px;
+                --container-padding: 24px;
+                --section-padding: 80px;
+                --grid-gap: 32px;
+
+                --button-border-radius: 100px;
+                --card-border-radius: 16px;
+                --transition: 300ms ease;
+                --hover-lift: -4px;
+                --image-zoom-scale: 1.05;
+            }
+
+            @media (min-width: 768px) {
+                :root {
+                    --container-padding: 48px;
+                    --section-padding: 120px;
+                }
+            }
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                font-size: 16px;
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: var(--font-body);
+                font-weight: 400;
+                line-height: 1.7;
+                color: var(--color-text);
+                background: var(--color-background);
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .skip-link {
+                position: absolute;
+                top: -100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--color-primary);
+                color: var(--color-text-light);
+                padding: 1rem 2rem;
+                text-decoration: none;
+                z-index: 9999;
+                border-radius: var(--button-border-radius);
+            }
+            .skip-link:focus {
+                top: 1rem;
+            }
+
+            .container {
+                width: 100%;
+                max-width: var(--container-max-width);
+                margin: 0 auto;
+                padding: 0 var(--container-padding);
+            }
+
+            h1,
+            h2,
+            h3 {
+                font-family: var(--font-heading);
+                font-weight: var(--font-heading-weight);
+                line-height: 1.2;
+                color: var(--color-text);
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                padding: 14px 32px;
+                font-family: var(--font-body);
+                font-size: 0.9375rem;
+                font-weight: 600;
+                border-radius: var(--button-border-radius);
+                text-decoration: none;
+                cursor: pointer;
+                border: 2px solid transparent;
+                transition: all var(--transition);
+            }
+            .btn svg {
+                width: 18px;
+                height: 18px;
+            }
+            .btn--primary {
+                background: var(--color-cta);
+                color: var(--color-text-light);
+                border-color: var(--color-cta);
+            }
+            .btn--primary:hover {
+                background: var(--color-cta-hover);
+                border-color: var(--color-cta-hover);
+                transform: translateY(var(--hover-lift));
+            }
+            .btn--secondary {
+                background: transparent;
+                color: var(--color-text);
+                border-color: var(--color-border);
+            }
+            .btn--secondary:hover {
+                border-color: var(--color-text);
+                background: var(--color-background-tertiary);
+            }
+
+            .section {
+                padding: var(--section-padding) 0;
+            }
+            .section--alt {
+                background: var(--color-background-secondary);
+            }
+            .section__header {
+                text-align: center;
+                margin-bottom: 4rem;
+            }
+            .section__eyebrow {
+                display: inline-block;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                color: var(--color-text-muted);
+                margin-bottom: 1rem;
+            }
+            .section__title {
+                font-size: clamp(2.25rem, 5vw, 3.5rem);
+                margin-bottom: 1rem;
+                font-style: italic;
+            }
+            .section__description {
+                font-size: 1.0625rem;
+                color: var(--color-text-secondary);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            /* Hero */
+            .hero {
+                min-height: 100vh;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                background: var(--color-background-secondary);
+            }
+            @media (max-width: 1023px) {
+                .hero {
+                    grid-template-columns: 1fr;
+                    min-height: auto;
+                }
+            }
+            .hero__media {
+                position: relative;
+                overflow: hidden;
+                min-height: 60vh;
+            }
+            .hero__media-bg {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    135deg,
+                    var(--color-highlight) 0%,
+                    var(--color-background-tertiary) 100%
+                );
+            }
+            .hero__media-overlay {
+                position: absolute;
+                bottom: 2rem;
+                left: 2rem;
+                right: 2rem;
+                background: var(--color-background-secondary);
+                padding: 1.5rem;
+                border-radius: var(--card-border-radius);
+            }
+            .hero__media-quote {
+                font-family: var(--font-heading);
+                font-size: 1.125rem;
+                font-style: italic;
+                color: var(--color-text-secondary);
+                margin-bottom: 0.5rem;
+            }
+            .hero__media-cite {
+                font-size: 0.8125rem;
+                color: var(--color-text-muted);
+            }
+            .hero__content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 4rem;
+                background: var(--color-background-secondary);
+            }
+            @media (max-width: 1023px) {
+                .hero__content {
+                    padding: 3rem var(--container-padding);
+                }
+            }
+            .hero__eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.75rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                color: var(--color-text-muted);
+                margin-bottom: 2rem;
+            }
+            .hero__eyebrow::before {
+                content: "";
+                width: 40px;
+                height: 1px;
+                background: var(--color-border);
+            }
+            .hero__title {
+                font-size: clamp(3rem, 6vw, 5rem);
+                font-style: italic;
+                margin-bottom: 1.5rem;
+            }
+            .hero__title-accent {
+                color: var(--color-accent);
+                font-weight: 400;
+            }
+            .hero__description {
+                font-size: 1.125rem;
+                color: var(--color-text-secondary);
+                margin-bottom: 2.5rem;
+                max-width: 480px;
+                line-height: 1.8;
+            }
+            .hero__cta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-bottom: 3rem;
+            }
+            .hero__features {
+                display: flex;
+                gap: 2rem;
+                flex-wrap: wrap;
+                padding-top: 2rem;
+                border-top: 1px solid var(--color-border);
+            }
+            .hero__feature {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .hero__feature svg {
+                width: 20px;
+                height: 20px;
+                stroke: var(--color-accent);
+            }
+            .hero__feature-text {
+                font-size: 0.875rem;
+                color: var(--color-text-secondary);
+            }
+
+            /* Story */
+            .story {
+                padding: var(--section-padding) 0;
+                background: var(--color-background);
+            }
+            .story__inner {
+                display: grid;
+                grid-template-columns: 1fr 1.2fr;
+                gap: 4rem;
+                align-items: center;
+            }
+            @media (max-width: 1023px) {
+                .story__inner {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .story__content {
+                max-width: 500px;
+            }
+            .story__eyebrow {
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                color: var(--color-text-muted);
+                margin-bottom: 1rem;
+            }
+            .story__title {
+                font-size: clamp(2rem, 4vw, 3rem);
+                font-style: italic;
+                margin-bottom: 1.5rem;
+            }
+            .story__text {
+                font-size: 1.0625rem;
+                color: var(--color-text-secondary);
+                margin-bottom: 1.5rem;
+                line-height: 1.8;
+            }
+            .story__signature {
+                font-family: var(--font-heading);
+                font-size: 1.5rem;
+                font-style: italic;
+                color: var(--color-accent);
+                margin-top: 2rem;
+            }
+            .story__images {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .story__image {
+                aspect-ratio: 4/5;
+                background: var(--color-background-tertiary);
+                border-radius: var(--card-border-radius);
+                overflow: hidden;
+            }
+            .story__image:first-child {
+                margin-top: 3rem;
+            }
+
+            /* Collections */
+            .collections {
+                padding: var(--section-padding) 0;
+                background: var(--color-background-secondary);
+            }
+            .collections__grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--grid-gap);
+            }
+            @media (max-width: 1023px) {
+                .collections__grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .collection-card {
+                position: relative;
+                aspect-ratio: 3/4;
+                overflow: hidden;
+                border-radius: var(--card-border-radius);
+                background: var(--color-background-tertiary);
+            }
+            .collection-card__image {
+                position: absolute;
+                inset: 0;
+                transition: transform 0.6s ease;
+            }
+            .collection-card:hover .collection-card__image {
+                transform: scale(var(--image-zoom-scale));
+            }
+            .collection-card__content {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 2rem;
+                background: linear-gradient(
+                    to top,
+                    rgba(62, 39, 35, 0.8) 0%,
+                    transparent 60%
+                );
+            }
+            .collection-card__title {
+                font-size: 1.75rem;
+                font-style: italic;
+                color: var(--color-text-light);
+                margin-bottom: 0.5rem;
+            }
+            .collection-card__count {
+                font-size: 0.875rem;
+                color: rgba(255, 255, 255, 0.7);
+                margin-bottom: 1rem;
+            }
+            .collection-card__link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.875rem;
+                font-weight: 600;
+                color: var(--color-text-light);
+                text-decoration: none;
+                transition: gap var(--transition);
+            }
+            .collection-card:hover .collection-card__link {
+                gap: 0.75rem;
+            }
+            .collection-card__link svg {
+                width: 16px;
+                height: 16px;
+                stroke: currentColor;
+            }
+
+            /* Featured */
+            .featured {
+                padding: var(--section-padding) 0;
+            }
+            .featured__grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--grid-gap);
+            }
+            @media (max-width: 1023px) {
+                .featured__grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (max-width: 639px) {
+                .featured__grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .product-card {
+                background: var(--color-background-secondary);
+                border-radius: var(--card-border-radius);
+                overflow: hidden;
+                transition: all var(--transition);
+            }
+            .product-card:hover {
+                transform: translateY(var(--hover-lift));
+                box-shadow: 0 12px 40px rgba(93, 64, 55, 0.1);
+            }
+            .product-card__image {
+                position: relative;
+                aspect-ratio: 1;
+                background: var(--color-background-tertiary);
+                overflow: hidden;
+            }
+            .product-card__image-bg {
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    135deg,
+                    var(--color-highlight) 0%,
+                    var(--color-background-tertiary) 100%
+                );
+                transition: transform 0.5s ease;
+            }
+            .product-card:hover .product-card__image-bg {
+                transform: scale(var(--image-zoom-scale));
+            }
+            .product-card__badge {
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+                background: var(--color-accent);
+                color: var(--color-text-light);
+                padding: 0.375rem 0.75rem;
+                font-size: 0.6875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                border-radius: var(--button-border-radius);
+            }
+            .product-card__content {
+                padding: 1.5rem;
+                text-align: center;
+            }
+            .product-card__title {
+                font-family: var(--font-heading);
+                font-size: 1.125rem;
+                font-style: italic;
+                color: var(--color-text);
+                margin-bottom: 0.5rem;
+            }
+            .product-card__price {
+                font-size: 0.9375rem;
+                color: var(--color-text-muted);
+            }
+
+            /* Process */
+            .process {
+                padding: var(--section-padding) 0;
+                background: var(--color-background-tertiary);
+            }
+            .process__grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--grid-gap);
+            }
+            @media (max-width: 1023px) {
+                .process__grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (max-width: 639px) {
+                .process__grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .process-step {
+                text-align: center;
+            }
+            .process-step__number {
+                width: 64px;
+                height: 64px;
+                margin: 0 auto 1.5rem;
+                background: var(--color-background-secondary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: var(--font-heading);
+                font-size: 1.5rem;
+                font-style: italic;
+                color: var(--color-accent);
+            }
+            .process-step__title {
+                font-family: var(--font-heading);
+                font-size: 1.25rem;
+                font-style: italic;
+                margin-bottom: 0.75rem;
+            }
+            .process-step__description {
+                font-size: 0.9375rem;
+                color: var(--color-text-secondary);
+                line-height: 1.7;
+            }
+
+            /* Testimonials */
+            .testimonials {
+                padding: var(--section-padding) 0;
+                background: var(--color-background-secondary);
+            }
+            .testimonials__grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--grid-gap);
+            }
+            @media (max-width: 1023px) {
+                .testimonials__grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .testimonial-card {
+                background: var(--color-background);
+                padding: 2.5rem;
+                border-radius: var(--card-border-radius);
+                text-align: center;
+            }
+            .testimonial-card__stars {
+                display: flex;
+                justify-content: center;
+                gap: 4px;
+                margin-bottom: 1.5rem;
+            }
+            .testimonial-card__stars svg {
+                width: 18px;
+                height: 18px;
+                fill: var(--color-star);
+            }
+            .testimonial-card__quote {
+                font-family: var(--font-heading);
+                font-size: 1.25rem;
+                font-style: italic;
+                color: var(--color-text);
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+            .testimonial-card__author {
+                font-size: 0.875rem;
+                font-weight: 600;
+                color: var(--color-text);
+                margin-bottom: 0.25rem;
+            }
+            .testimonial-card__location {
+                font-size: 0.8125rem;
+                color: var(--color-text-muted);
+            }
+
+            /* Instagram */
+            .instagram {
+                padding: var(--section-padding) 0;
+                background: var(--color-background);
+            }
+            .instagram__grid {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 4px;
+            }
+            @media (max-width: 1023px) {
+                .instagram__grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            @media (max-width: 639px) {
+                .instagram__grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            .instagram__item {
+                aspect-ratio: 1;
+                background: var(--color-background-tertiary);
+                overflow: hidden;
+                position: relative;
+            }
+            .instagram__item::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(93, 64, 55, 0);
+                transition: background var(--transition);
+            }
+            .instagram__item:hover::after {
+                background: rgba(93, 64, 55, 0.3);
+            }
+
+            /* Newsletter */
+            .newsletter {
+                padding: var(--section-padding) 0;
+                background: var(--color-primary);
+                text-align: center;
+            }
+            .newsletter__inner {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .newsletter__title {
+                font-size: clamp(2rem, 4vw, 3rem);
+                font-style: italic;
+                color: var(--color-text-light);
+                margin-bottom: 1rem;
+            }
+            .newsletter__description {
+                font-size: 1.0625rem;
+                color: rgba(255, 255, 255, 0.8);
+                margin-bottom: 2rem;
+            }
+            .newsletter__form {
+                display: flex;
+                gap: 0.75rem;
+            }
+            @media (max-width: 639px) {
+                .newsletter__form {
+                    flex-direction: column;
+                }
+            }
+            .newsletter__input {
+                flex: 1;
+                padding: 1rem 1.5rem;
+                font-family: var(--font-body);
+                font-size: 0.9375rem;
+                background: var(--color-background-secondary);
+                border: none;
+                border-radius: var(--button-border-radius);
+                color: var(--color-text);
+            }
+            .newsletter__input:focus {
+                outline: none;
+            }
+            .newsletter__input::placeholder {
+                color: var(--color-text-muted);
+            }
+            .newsletter__btn {
+                padding: 1rem 2rem;
+                background: var(--color-text-light);
+                color: var(--color-primary);
+                font-family: var(--font-body);
+                font-size: 0.9375rem;
+                font-weight: 600;
+                border: none;
+                border-radius: var(--button-border-radius);
+                cursor: pointer;
+                transition: all var(--transition);
+            }
+            .newsletter__btn:hover {
+                background: var(--color-highlight);
+            }
+            .newsletter__note {
+                font-size: 0.8125rem;
+                color: rgba(255, 255, 255, 0.6);
+                margin-top: 1rem;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 4rem 0 2rem;
+                background: var(--color-background-tertiary);
+            }
+            .footer__grid {
+                display: grid;
+                grid-template-columns: 1.5fr repeat(3, 1fr);
+                gap: 3rem;
+                margin-bottom: 4rem;
+            }
+            @media (max-width: 1023px) {
+                .footer__grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (max-width: 639px) {
+                .footer__grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .footer__brand {
+                max-width: 280px;
+            }
+            .footer__logo {
+                font-family: var(--font-heading);
+                font-size: 1.75rem;
+                font-style: italic;
+                color: var(--color-text);
+                margin-bottom: 1rem;
+            }
+            .footer__tagline {
+                font-size: 0.9375rem;
+                color: var(--color-text-secondary);
+                line-height: 1.7;
+                margin-bottom: 1.5rem;
+            }
+            .footer__social {
+                display: flex;
+                gap: 1rem;
+            }
+            .footer__social-link {
+                width: 40px;
+                height: 40px;
+                background: var(--color-background-secondary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--color-text-muted);
+                transition: all var(--transition);
+            }
+            .footer__social-link:hover {
+                background: var(--color-primary);
+                color: var(--color-text-light);
+            }
+            .footer__social-link svg {
+                width: 18px;
+                height: 18px;
+            }
+            .footer__column-title {
+                font-family: var(--font-heading);
+                font-size: 1.125rem;
+                font-style: italic;
+                color: var(--color-text);
+                margin-bottom: 1.25rem;
+            }
+            .footer__links {
+                list-style: none;
+            }
+            .footer__link {
+                display: block;
+                padding: 0.375rem 0;
+                font-size: 0.9375rem;
+                color: var(--color-text-secondary);
+                text-decoration: none;
+                transition: color var(--transition);
+            }
+            .footer__link:hover {
+                color: var(--color-primary);
+            }
+            .footer__bottom {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding-top: 2rem;
+                border-top: 1px solid var(--color-border);
+            }
+            .footer__copyright {
+                font-size: 0.8125rem;
+                color: var(--color-text-muted);
+            }
+            .footer__legal {
+                display: flex;
+                gap: 2rem;
+            }
+            .footer__legal-link {
+                font-size: 0.8125rem;
+                color: var(--color-text-muted);
+                text-decoration: none;
+            }
+            .footer__legal-link:hover {
+                color: var(--color-text);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <main id="main-content">
+            <!-- Hero -->
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero__media">
+                    <div
+                        class="hero__media-bg"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #d7ccc8 0%,
+                                #bcaaa4 100%
+                            );
+                        "
+                    ></div>
+                    <div class="hero__media-overlay">
+                        <p class="hero__media-quote">
+                            "Every piece carries the warmth of human touch and
+                            the patience of slow making."
+                        </p>
+                        <cite class="hero__media-cite"
+                            >— Emma & James, Founders</cite
+                        >
+                    </div>
+                </div>
+                <div class="hero__content">
+                    <p class="hero__eyebrow">Handcrafted in Portland</p>
+                    <h1 id="hero-title" class="hero__title">
+                        Made with <span class="hero__title-accent">heart</span>
+                    </h1>
+                    <p class="hero__description">
+                        Small-batch ceramics and home goods created in our
+                        Portland studio. Each piece is shaped by hand, fired
+                        with care, and made to be cherished for generations.
+                    </p>
+                    <div class="hero__cta">
+                        <a href="#" class="btn btn--primary">Shop Collection</a>
+                        <a href="#" class="btn btn--secondary">Our Story</a>
+                    </div>
+                    <div class="hero__features">
+                        <div class="hero__feature">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                                /></svg
+                            ><span class="hero__feature-text"
+                                >Handmade with love</span
+                            >
+                        </div>
+                        <div class="hero__feature">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"
+                                />
+                                <path
+                                    d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"
+                                /></svg
+                            ><span class="hero__feature-text"
+                                >Sustainably made</span
+                            >
+                        </div>
+                        <div class="hero__feature">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                                />
+                                <circle cx="12" cy="10" r="3" /></svg
+                            ><span class="hero__feature-text"
+                                >Portland, Oregon</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Story -->
+            <section class="story" aria-labelledby="story-title">
+                <div class="container">
+                    <div class="story__inner">
+                        <div class="story__content">
+                            <p class="story__eyebrow">Our Story</p>
+                            <h2 id="story-title" class="story__title">
+                                From our hands to your home
+                            </h2>
+                            <p class="story__text">
+                                What began in a small garage studio in 2016 has
+                                grown into a passionate practice of mindful
+                                making. We believe in the beauty of
+                                imperfection, the value of slow craft, and the
+                                connection that forms between maker and keeper.
+                            </p>
+                            <p class="story__text">
+                                Every piece that leaves our studio carries with
+                                it countless hours of intention—from the
+                                sourcing of local clays to the final glaze
+                                firing.
+                            </p>
+                            <p class="story__signature">— Emma & James</p>
+                        </div>
+                        <div class="story__images">
+                            <div
+                                class="story__image"
+                                style="
+                                    background: linear-gradient(
+                                        180deg,
+                                        #d7ccc8 0%,
+                                        #bcaaa4 100%
+                                    );
+                                "
+                            ></div>
+                            <div
+                                class="story__image"
+                                style="
+                                    background: linear-gradient(
+                                        180deg,
+                                        #efebe9 0%,
+                                        #d7ccc8 100%
+                                    );
+                                "
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Collections -->
+            <section class="collections" aria-labelledby="collections-title">
+                <div class="container">
+                    <div class="section__header">
+                        <span class="section__eyebrow">Shop by Collection</span>
+                        <h2 id="collections-title" class="section__title">
+                            Find your favorites
+                        </h2>
+                    </div>
+                    <div class="collections__grid">
+                        <article class="collection-card">
+                            <div
+                                class="collection-card__image"
+                                style="
+                                    background: linear-gradient(
+                                        180deg,
+                                        #a1887f 0%,
+                                        #5d4037 100%
+                                    );
+                                "
+                            ></div>
+                            <div class="collection-card__content">
+                                <h3 class="collection-card__title">
+                                    Kitchen & Dining
+                                </h3>
+                                <p class="collection-card__count">24 pieces</p>
+                                <a href="#" class="collection-card__link"
+                                    >Explore
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke-width="2"
+                                    >
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <polyline
+                                            points="12 5 19 12 12 19"
+                                        /></svg
+                                ></a>
+                            </div>
+                        </article>
+                        <article class="collection-card">
+                            <div
+                                class="collection-card__image"
+                                style="
+                                    background: linear-gradient(
+                                        180deg,
+                                        #bcaaa4 0%,
+                                        #795548 100%
+                                    );
+                                "
+                            ></div>
+                            <div class="collection-card__content">
+                                <h3 class="collection-card__title">
+                                    Home Decor
+                                </h3>
+                                <p class="collection-card__count">18 pieces</p>
+                                <a href="#" class="collection-card__link"
+                                    >Explore
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke-width="2"
+                                    >
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <polyline
+                                            points="12 5 19 12 12 19"
+                                        /></svg
+                                ></a>
+                            </div>
+                        </article>
+                        <article class="collection-card">
+                            <div
+                                class="collection-card__image"
+                                style="
+                                    background: linear-gradient(
+                                        180deg,
+                                        #d7ccc8 0%,
+                                        #8d6e63 100%
+                                    );
+                                "
+                            ></div>
+                            <div class="collection-card__content">
+                                <h3 class="collection-card__title">
+                                    Garden & Planters
+                                </h3>
+                                <p class="collection-card__count">12 pieces</p>
+                                <a href="#" class="collection-card__link"
+                                    >Explore
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke-width="2"
+                                    >
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <polyline
+                                            points="12 5 19 12 12 19"
+                                        /></svg
+                                ></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured -->
+            <section class="featured section" aria-labelledby="featured-title">
+                <div class="container">
+                    <div class="section__header">
+                        <span class="section__eyebrow">New Arrivals</span>
+                        <h2 id="featured-title" class="section__title">
+                            Fresh from the kiln
+                        </h2>
+                        <p class="section__description">
+                            Our latest creations, ready to find their forever
+                            homes.
+                        </p>
+                    </div>
+                    <div class="featured__grid">
+                        <article class="product-card">
+                            <div class="product-card__image">
+                                <div class="product-card__image-bg"></div>
+                                <span class="product-card__badge">New</span>
+                            </div>
+                            <div class="product-card__content">
+                                <h3 class="product-card__title">
+                                    Speckled Mug Set
+                                </h3>
+                                <p class="product-card__price">$68</p>
+                            </div>
+                        </article>
+                        <article class="product-card">
+                            <div class="product-card__image">
+                                <div class="product-card__image-bg"></div>
+                            </div>
+                            <div class="product-card__content">
+                                <h3 class="product-card__title">
+                                    Olive Oil Cruet
+                                </h3>
+                                <p class="product-card__price">$45</p>
+                            </div>
+                        </article>
+                        <article class="product-card">
+                            <div class="product-card__image">
+                                <div class="product-card__image-bg"></div>
+                                <span class="product-card__badge"
+                                    >Bestseller</span
+                                >
+                            </div>
+                            <div class="product-card__content">
+                                <h3 class="product-card__title">
+                                    Serving Bowl — Large
+                                </h3>
+                                <p class="product-card__price">$95</p>
+                            </div>
+                        </article>
+                        <article class="product-card">
+                            <div class="product-card__image">
+                                <div class="product-card__image-bg"></div>
+                            </div>
+                            <div class="product-card__content">
+                                <h3 class="product-card__title">
+                                    Bud Vase Trio
+                                </h3>
+                                <p class="product-card__price">$52</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process -->
+            <section class="process" aria-labelledby="process-title">
+                <div class="container">
+                    <div class="section__header">
+                        <span class="section__eyebrow">The Craft</span>
+                        <h2 id="process-title" class="section__title">
+                            How we make
+                        </h2>
+                    </div>
+                    <div class="process__grid">
+                        <div class="process-step">
+                            <div class="process-step__number">1</div>
+                            <h3 class="process-step__title">Sourcing</h3>
+                            <p class="process-step__description">
+                                We begin with locally-sourced clay and natural
+                                materials from Pacific Northwest suppliers.
+                            </p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step__number">2</div>
+                            <h3 class="process-step__title">Shaping</h3>
+                            <p class="process-step__description">
+                                Each piece is thrown on the wheel or hand-built,
+                                taking shape over several sessions.
+                            </p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step__number">3</div>
+                            <h3 class="process-step__title">Glazing</h3>
+                            <p class="process-step__description">
+                                We mix our own glazes using traditional recipes
+                                and apply them by hand.
+                            </p>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-step__number">4</div>
+                            <h3 class="process-step__title">Firing</h3>
+                            <p class="process-step__description">
+                                Two firings bring each piece to life—bisque
+                                first, then a final glaze firing.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="testimonials" aria-labelledby="testimonials-title">
+                <div class="container">
+                    <div class="section__header">
+                        <span class="section__eyebrow">Kind Words</span>
+                        <h2 id="testimonials-title" class="section__title">
+                            From our community
+                        </h2>
+                    </div>
+                    <div class="testimonials__grid">
+                        <article class="testimonial-card">
+                            <div class="testimonial-card__stars">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    />
+                                </svg>
+                            </div>
+                            <blockquote class="testimonial-card__quote">
+                                "The most beautiful mugs I've ever owned. You
+                                can feel the care in every curve and glaze
+                                drip."
+                            </blockquote>
+                            <div class="testimonial-card__author">Sarah M.</div>
+                            <div class="testimonial-card__location">
+                                Seattle, WA
+                            </div>
+                        </article>
+                        <article class="testimonial-card">
+                            <div class="testimonial-card__stars">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    />
+                                </svg>
+                            </div>
+                            <blockquote class="testimonial-card__quote">
+                                "Bought the serving bowl for my wife's birthday.
+                                She teared up when she opened it. That says
+                                everything."
+                            </blockquote>
+                            <div class="testimonial-card__author">
+                                Michael R.
+                            </div>
+                            <div class="testimonial-card__location">
+                                Denver, CO
+                            </div>
+                        </article>
+                        <article class="testimonial-card">
+                            <div class="testimonial-card__stars">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    /></svg
+                                ><svg viewBox="0 0 24 24">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                                    />
+                                </svg>
+                            </div>
+                            <blockquote class="testimonial-card__quote">
+                                "My morning coffee ritual has become something
+                                special thanks to these pieces. Worth every
+                                penny."
+                            </blockquote>
+                            <div class="testimonial-card__author">Jenny L.</div>
+                            <div class="testimonial-card__location">
+                                San Francisco, CA
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instagram -->
+            <section class="instagram" aria-labelledby="instagram-title">
+                <div class="container">
+                    <div class="section__header">
+                        <span class="section__eyebrow">@willowandsage</span>
+                        <h2 id="instagram-title" class="section__title">
+                            Follow along
+                        </h2>
+                    </div>
+                </div>
+                <div class="instagram__grid">
+                    <div
+                        class="instagram__item"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #d7ccc8 0%,
+                                #bcaaa4 100%
+                            );
+                        "
+                    ></div>
+                    <div
+                        class="instagram__item"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #efebe9 0%,
+                                #d7ccc8 100%
+                            );
+                        "
+                    ></div>
+                    <div
+                        class="instagram__item"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #bcaaa4 0%,
+                                #8d6e63 100%
+                            );
+                        "
+                    ></div>
+                    <div
+                        class="instagram__item"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #d7ccc8 0%,
+                                #a1887f 100%
+                            );
+                        "
+                    ></div>
+                    <div
+                        class="instagram__item"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #efebe9 0%,
+                                #bcaaa4 100%
+                            );
+                        "
+                    ></div>
+                    <div
+                        class="instagram__item"
+                        style="
+                            background: linear-gradient(
+                                135deg,
+                                #a1887f 0%,
+                                #5d4037 100%
+                            );
+                        "
+                    ></div>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter" aria-labelledby="newsletter-title">
+                <div class="container">
+                    <div class="newsletter__inner">
+                        <h2 id="newsletter-title" class="newsletter__title">
+                            Join the family
+                        </h2>
+                        <p class="newsletter__description">
+                            Be the first to know about new pieces, studio
+                            updates, and the stories behind our work.
+                        </p>
+                        <form class="newsletter__form" action="#" method="POST">
+                            <input
+                                type="email"
+                                class="newsletter__input"
+                                placeholder="Your email address"
+                                required
+                                aria-label="Email address"
+                            />
+                            <button type="submit" class="newsletter__btn">
+                                Subscribe
+                            </button>
+                        </form>
+                        <p class="newsletter__note">
+                            We respect your inbox. Unsubscribe anytime.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer" role="contentinfo">
+                <div class="container">
+                    <div class="footer__grid">
+                        <div class="footer__brand">
+                            <div class="footer__logo">Willow & Sage</div>
+                            <p class="footer__tagline">
+                                Small-batch ceramics and home goods handcrafted
+                                with love in Portland, Oregon.
+                            </p>
+                            <div class="footer__social">
+                                <a
+                                    href="#"
+                                    class="footer__social-link"
+                                    aria-label="Instagram"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <rect
+                                            x="2"
+                                            y="2"
+                                            width="20"
+                                            height="20"
+                                            rx="5"
+                                        />
+                                        <path
+                                            d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                                        />
+                                        <line
+                                            x1="17.5"
+                                            y1="6.5"
+                                            x2="17.51"
+                                            y2="6.5"
+                                        /></svg
+                                ></a>
+                                <a
+                                    href="#"
+                                    class="footer__social-link"
+                                    aria-label="Pinterest"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path
+                                            d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4"
+                                        />
+                                        <path d="M12 16v5" /></svg
+                                ></a>
+                                <a
+                                    href="#"
+                                    class="footer__social-link"
+                                    aria-label="Facebook"
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                                        /></svg
+                                ></a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="footer__column-title">Shop</h3>
+                            <ul class="footer__links">
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >All Products</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Kitchen & Dining</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Home Decor</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link">Garden</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Gift Cards</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="footer__column-title">About</h3>
+                            <ul class="footer__links">
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Our Story</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >The Studio</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link">Process</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Wholesale</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="footer__column-title">Help</h3>
+                            <ul class="footer__links">
+                                <li>
+                                    <a href="#" class="footer__link">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Shipping</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link">Returns</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Care Guide</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer__bottom">
+                        <p class="footer__copyright">
+                            &copy; 2024 Willow & Sage Ceramics. Made with love
+                            in Portland.
+                        </p>
+                        <div class="footer__legal">
+                            <a href="#" class="footer__legal-link">Privacy</a
+                            ><a href="#" class="footer__legal-link">Terms</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </body>
+</html>

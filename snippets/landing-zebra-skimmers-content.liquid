@@ -1,0 +1,566 @@
+{% comment %}
+  Zebra Skimmers Landing Page Content Snippet
+  B2B Industrial theme - focused on professional/industrial equipment
+  Used by landing-page-switcher section
+{% endcomment %}
+
+<div class="landing-zebra-skimmers">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="zebra-hero">
+    <div class="container">
+      <div class="zebra-hero__inner">
+        <div class="zebra-hero__content">
+          <span class="zebra-hero__badge">Industrial Solutions</span>
+          <h1 class="zebra-hero__title">Professional Oil Skimming Systems</h1>
+          <p class="zebra-hero__subtitle">Engineered for reliability and efficiency. Trusted by manufacturing facilities worldwide for over 50 years.</p>
+          <div class="zebra-hero__actions">
+            <a href="/collections/all" class="btn btn--primary">View Products</a>
+            <a href="/pages/contact" class="btn btn--outline">Request Quote</a>
+          </div>
+          <div class="zebra-hero__trust">
+            <span>Trusted by 5,000+ facilities worldwide</span>
+          </div>
+        </div>
+        <div class="zebra-hero__media">
+          <div class="zebra-hero__placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Industries Section {%- endcomment -%}
+  <section class="zebra-industries">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Industries</span>
+        <h2 class="section-title">Solutions for Every Application</h2>
+      </div>
+      <div class="zebra-industries__grid">
+        <div class="zebra-industry-card">
+          <div class="zebra-industry-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+            </svg>
+          </div>
+          <h3 class="zebra-industry-card__title">Manufacturing</h3>
+          <p class="zebra-industry-card__text">CNC machining, stamping, and metalworking operations</p>
+        </div>
+        <div class="zebra-industry-card">
+          <div class="zebra-industry-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3 class="zebra-industry-card__title">Food Processing</h3>
+          <p class="zebra-industry-card__text">FDA-compliant solutions for food and beverage</p>
+        </div>
+        <div class="zebra-industry-card">
+          <div class="zebra-industry-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7v14l6-4 6 4 6-4V3l-6 4-6-4-6 4z"/>
+            </svg>
+          </div>
+          <h3 class="zebra-industry-card__title">Wastewater</h3>
+          <p class="zebra-industry-card__text">Municipal and industrial water treatment</p>
+        </div>
+        <div class="zebra-industry-card">
+          <div class="zebra-industry-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M2 12h20"/>
+            </svg>
+          </div>
+          <h3 class="zebra-industry-card__title">Steel Mills</h3>
+          <p class="zebra-industry-card__text">Heavy-duty systems for steel production</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Products Section {%- endcomment -%}
+  <section class="zebra-products">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Products</span>
+        <h2 class="section-title">Oil Skimming Equipment</h2>
+      </div>
+      <div class="zebra-products__grid">
+        {%- for product in collections.all.products limit: 6 -%}
+          <article class="zebra-product-card">
+            <a href="{{ product.url }}" class="zebra-product-card__link">
+              <div class="zebra-product-card__image">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="zebra-product-card__content">
+                <h3 class="zebra-product-card__title">{{ product.title }}</h3>
+                <p class="zebra-product-card__sku">{{ product.variants.first.sku }}</p>
+                <span class="zebra-product-card__cta">View Details →</span>
+              </div>
+            </a>
+          </article>
+        {%- endfor -%}
+      </div>
+      <div class="zebra-products__action">
+        <a href="/collections/all" class="btn btn--primary">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Features Section {%- endcomment -%}
+  <section class="zebra-features">
+    <div class="container">
+      <div class="zebra-features__inner">
+        <div class="zebra-features__content">
+          <span class="section-eyebrow">Why Choose Us</span>
+          <h2 class="zebra-features__title">Built to Perform</h2>
+          <ul class="zebra-features__list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              50+ years of engineering expertise
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Made in USA manufacturing
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Industry-leading warranty
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Dedicated technical support
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Custom engineering solutions
+            </li>
+          </ul>
+          <a href="/pages/about" class="btn btn--primary">Learn More</a>
+        </div>
+        <div class="zebra-features__media">
+          <div class="zebra-features__placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  <section class="zebra-cta">
+    <div class="container">
+      <div class="zebra-cta__inner">
+        <h2 class="zebra-cta__title">Need Help Selecting the Right Solution?</h2>
+        <p class="zebra-cta__text">Our engineering team can help you find the perfect system for your application.</p>
+        <div class="zebra-cta__actions">
+          <a href="/pages/contact" class="btn btn--primary">Request a Consultation</a>
+          <a href="tel:+18005551234" class="btn btn--outline">Call 1-800-555-1234</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .landing-zebra-skimmers {
+    --zebra-bg: #ffffff;
+    --zebra-surface: #f5f5f5;
+    --zebra-text: #1a1a1a;
+    --zebra-text-muted: #666666;
+    --zebra-accent: #1a1a1a;
+    --zebra-accent-secondary: #ffc107;
+    --zebra-border: #e0e0e0;
+
+    background: var(--zebra-bg);
+    color: var(--zebra-text);
+  }
+
+  .landing-zebra-skimmers .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .landing-zebra-skimmers .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .landing-zebra-skimmers .section-header--center {
+    text-align: center;
+  }
+
+  .landing-zebra-skimmers .section-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--zebra-accent-secondary);
+    background: var(--zebra-accent);
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .landing-zebra-skimmers .section-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--zebra-text);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .landing-zebra-skimmers .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .landing-zebra-skimmers .btn--primary {
+    background: var(--zebra-accent);
+    color: #fff;
+  }
+
+  .landing-zebra-skimmers .btn--primary:hover {
+    background: #333;
+  }
+
+  .landing-zebra-skimmers .btn--outline {
+    background: transparent;
+    color: var(--zebra-accent);
+    border: 2px solid var(--zebra-accent);
+  }
+
+  .landing-zebra-skimmers .btn--outline:hover {
+    background: var(--zebra-accent);
+    color: #fff;
+  }
+
+  /* Hero */
+  .zebra-hero {
+    padding: 5rem 0;
+    background: var(--zebra-surface);
+  }
+
+  .zebra-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .zebra-hero__inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .zebra-hero__badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background: var(--zebra-accent-secondary);
+    color: var(--zebra-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .zebra-hero__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--zebra-text);
+    line-height: 1.1;
+    margin: 0 0 1.25rem;
+  }
+
+  .zebra-hero__subtitle {
+    font-size: 1.125rem;
+    color: var(--zebra-text-muted);
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  .zebra-hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .zebra-hero__trust {
+    font-size: 0.875rem;
+    color: var(--zebra-text-muted);
+  }
+
+  .zebra-hero__placeholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+  }
+
+  /* Industries */
+  .zebra-industries {
+    padding: 5rem 0;
+  }
+
+  .zebra-industries__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .zebra-industries__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .zebra-industries__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .zebra-industry-card {
+    padding: 2rem;
+    background: var(--zebra-surface);
+    border: 1px solid var(--zebra-border);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .zebra-industry-card:hover {
+    border-color: var(--zebra-accent);
+  }
+
+  .zebra-industry-card__icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    color: var(--zebra-accent);
+  }
+
+  .zebra-industry-card__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .zebra-industry-card__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .zebra-industry-card__text {
+    font-size: 0.9375rem;
+    color: var(--zebra-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Products */
+  .zebra-products {
+    padding: 5rem 0;
+    background: var(--zebra-surface);
+  }
+
+  .zebra-products__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .zebra-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .zebra-products__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .zebra-product-card {
+    background: #fff;
+    border: 1px solid var(--zebra-border);
+    transition: all 0.3s ease;
+  }
+
+  .zebra-product-card:hover {
+    border-color: var(--zebra-accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .zebra-product-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .zebra-product-card__image {
+    aspect-ratio: 1;
+    background: var(--zebra-surface);
+  }
+
+  .zebra-product-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .zebra-product-card__content {
+    padding: 1.25rem;
+  }
+
+  .zebra-product-card__title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+  }
+
+  .zebra-product-card__sku {
+    font-size: 0.8125rem;
+    color: var(--zebra-text-muted);
+    margin: 0 0 0.75rem;
+  }
+
+  .zebra-product-card__cta {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--zebra-accent);
+  }
+
+  .zebra-products__action {
+    text-align: center;
+  }
+
+  /* Features */
+  .zebra-features {
+    padding: 5rem 0;
+  }
+
+  .zebra-features__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .zebra-features__inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .zebra-features__title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+  }
+
+  .zebra-features__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+
+  .zebra-features__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--zebra-border);
+    font-size: 1rem;
+  }
+
+  .zebra-features__list svg {
+    width: 20px;
+    height: 20px;
+    color: var(--zebra-accent-secondary);
+    flex-shrink: 0;
+  }
+
+  .zebra-features__placeholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+  }
+
+  /* CTA */
+  .zebra-cta {
+    padding: 5rem 0;
+    background: var(--zebra-accent);
+    color: #fff;
+  }
+
+  .zebra-cta__inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .zebra-cta__title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    margin: 0 0 1rem;
+  }
+
+  .zebra-cta__text {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin: 0 0 2rem;
+  }
+
+  .zebra-cta__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .zebra-cta .btn--primary {
+    background: var(--zebra-accent-secondary);
+    color: var(--zebra-accent);
+  }
+
+  .zebra-cta .btn--primary:hover {
+    background: #e6ac00;
+  }
+
+  .zebra-cta .btn--outline {
+    border-color: #fff;
+    color: #fff;
+  }
+
+  .zebra-cta .btn--outline:hover {
+    background: #fff;
+    color: var(--zebra-accent);
+  }
+</style>

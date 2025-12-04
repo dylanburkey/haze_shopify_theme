@@ -1,10 +1,48 @@
 {
   "sections": {
     "main": {
-      "type": "product-main",
+      "type": "product-main-enhanced",
       "settings": {
-        "show_specs": true
-      }
+        "show_breadcrumbs": true,
+        "enable_zoom": true,
+        "show_vendor": true,
+        "show_sku": true,
+        "show_short_description": true,
+        "show_stock_status": true,
+        "low_stock_threshold": 5,
+        "show_reviews": true,
+        "variant_style": "pills",
+        "show_quantity": true,
+        "show_specs": true,
+        "show_attachments": true,
+        "show_trust_badges": true,
+        "add_to_cart_text": "Add to Cart",
+        "sold_out_text": "Sold Out"
+      },
+      "blocks": {
+        "trust-1": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield",
+            "text": "Lifetime Warranty"
+          }
+        },
+        "trust-2": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free Shipping Over $99"
+          }
+        },
+        "trust-3": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "refresh",
+            "text": "30-Day Returns"
+          }
+        }
+      },
+      "block_order": ["trust-1", "trust-2", "trust-3"]
     },
     "related": {
       "type": "smart-grid",

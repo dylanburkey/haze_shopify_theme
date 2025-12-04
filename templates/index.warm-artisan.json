@@ -1,223 +1,165 @@
 {
-  "name": "Warm Artisan Homepage",
   "sections": {
-    "hero": {
-      "type": "hero-editorial",
-      "settings": {
-        "layout": "split",
-        "content_position": "left",
-        "subtitle": "Handcrafted with Love",
-        "title": "Artisan Goods for Your Home & Table",
-        "description": "Every piece tells a story. Discover handmade ceramics, textiles, and home goods crafted by skilled artisans from around the world.",
-        "primary_button_text": "Explore the Collection",
-        "primary_button_link": "",
-        "secondary_button_text": "Meet Our Makers",
-        "secondary_button_link": ""
-      }
-    },
-    "welcome_message": {
-      "type": "rich-text",
-      "settings": {
-        "subtitle": "Welcome",
-        "title": "Made by Hand, Made with Heart",
-        "content": "<p>We partner with independent artisans and small workshops to bring you authentic, handcrafted goods that celebrate traditional craftsmanship. Each item is made with care, supporting sustainable practices and fair wages for makers.</p>",
-        "background": "secondary"
-      }
-    },
-    "collection_list": {
-      "type": "collection-list-cards",
-      "settings": {
-        "title": "Shop by Craft",
-        "columns": 3,
-        "card_style": "rounded"
-      },
+    "landing": {
+      "type": "landing-warm-artisan",
       "blocks": {
-        "collection_1": {
-          "type": "collection",
+        "process-1": {
+          "type": "process_step",
           "settings": {
-            "title": "Ceramics & Pottery",
-            "description": "Handthrown vessels for everyday rituals",
-            "link": ""
+            "title": "Sourced",
+            "text": "We source only the finest clays and materials from local suppliers who share our values."
           }
         },
-        "collection_2": {
-          "type": "collection",
+        "process-2": {
+          "type": "process_step",
           "settings": {
-            "title": "Woven Textiles",
-            "description": "Traditional weaving techniques, modern designs",
-            "link": ""
+            "title": "Shaped",
+            "text": "Each piece is thrown on the wheel or hand-built with careful attention to form and function."
           }
         },
-        "collection_3": {
-          "type": "collection",
+        "process-3": {
+          "type": "process_step",
           "settings": {
-            "title": "Woodwork",
-            "description": "Carved and turned pieces for home",
-            "link": ""
-          }
-        }
-      },
-      "block_order": ["collection_1", "collection_2", "collection_3"]
-    },
-    "featured_collection": {
-      "type": "collection-grid-warm",
-      "settings": {
-        "subtitle": "Seasonal Favorites",
-        "title": "Autumn Collection",
-        "description": "Warm tones and cozy textures for the season ahead",
-        "columns": 4,
-        "products_to_show": 8
-      }
-    },
-    "maker_feature": {
-      "type": "image-with-text",
-      "settings": {
-        "image_position": "right",
-        "subtitle": "Meet the Maker",
-        "title": "Maria's Ceramics Studio",
-        "content": "<p>In her sun-filled studio in Oaxaca, Mexico, Maria continues a family tradition spanning four generations. Each piece is hand-formed using local clay and fired in a traditional wood kiln.</p><p>\"My grandmother taught me that clay has memory. It remembers every touch, every intention. That's why I take my time with each piece.\"</p>",
-        "button_text": "Shop Maria's Collection",
-        "button_link": "",
-        "background": "primary"
-      }
-    },
-    "process": {
-      "type": "process-steps",
-      "settings": {
-        "title": "From Hands to Home",
-        "description": "The journey of every artisan piece"
-      },
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "number": "01",
-            "title": "Sourced with Care",
-            "description": "We work directly with artisans, visiting their studios and understanding their craft"
+            "title": "Glazed",
+            "text": "Our signature glazes are mixed in-house using recipes developed over years of experimentation."
           }
         },
-        "step_2": {
-          "type": "step",
+        "process-4": {
+          "type": "process_step",
           "settings": {
-            "number": "02",
-            "title": "Made by Hand",
-            "description": "Each piece is crafted using traditional techniques passed down through generations"
+            "title": "Fired",
+            "text": "Multiple firings in our kilns bring out the unique character of each piece."
           }
         },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "number": "03",
-            "title": "Delivered to You",
-            "description": "Carefully packaged and shipped directly to your door"
-          }
-        }
-      },
-      "block_order": ["step_1", "step_2", "step_3"]
-    },
-    "testimonials": {
-      "type": "testimonials-masonry",
-      "settings": {
-        "title": "From Our Community",
-        "columns": 2
-      },
-      "blocks": {
-        "testimonial_1": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "The quality is extraordinary. You can feel the love and skill in every piece. My ceramic bowl from Maria has become my most treasured possession.",
-            "name": "Rebecca",
-            "location": "Portland, OR"
-          }
-        },
-        "testimonial_2": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "I love knowing the story behind what I buy. These aren't just products—they're pieces of cultural heritage.",
-            "name": "James",
-            "location": "Austin, TX"
-          }
-        },
-        "testimonial_3": {
-          "type": "testimonial",
-          "settings": {
-            "quote": "Beautiful craftsmanship and excellent customer service. The woven throw I ordered is even more stunning in person.",
-            "name": "Sofia",
-            "location": "Brooklyn, NY"
-          }
-        }
-      },
-      "block_order": ["testimonial_1", "testimonial_2", "testimonial_3"]
-    },
-    "values": {
-      "type": "values-grid",
-      "settings": {
-        "background": "secondary"
-      },
-      "blocks": {
-        "value_1": {
+        "value-1": {
           "type": "value",
           "settings": {
-            "icon": "heart",
-            "title": "Fair Trade",
-            "description": "Artisans receive fair compensation for their skilled work"
+            "icon": "hand",
+            "title": "Handcrafted",
+            "text": "Every piece is made by hand in our studio—no two are exactly alike."
           }
         },
-        "value_2": {
+        "value-2": {
           "type": "value",
           "settings": {
             "icon": "leaf",
             "title": "Sustainable",
-            "description": "Natural materials and traditional, low-impact methods"
+            "text": "We use eco-friendly materials and practices in everything we do."
           }
         },
-        "value_3": {
+        "value-3": {
           "type": "value",
           "settings": {
-            "icon": "globe",
-            "title": "Cultural Heritage",
-            "description": "Preserving traditional crafts for future generations"
+            "icon": "heart",
+            "title": "Made with Love",
+            "text": "Each piece carries the care and intention of its maker."
           }
         },
-        "value_4": {
+        "value-4": {
           "type": "value",
           "settings": {
-            "icon": "gift",
-            "title": "Gift Ready",
-            "description": "Beautiful packaging included with every order"
+            "icon": "home",
+            "title": "Built to Last",
+            "text": "Quality craftsmanship means these pieces will be cherished for generations."
           }
+        },
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Emma S.",
+            "location": "Seattle, WA",
+            "quote": "These mugs have completely transformed my morning routine. Each sip feels special."
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael R.",
+            "location": "Denver, CO",
+            "quote": "Bought the serving bowl for my wife's birthday. She teared up when she opened it. That says everything."
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Jenny L.",
+            "location": "San Francisco, CA",
+            "quote": "My morning coffee ritual has become something special thanks to these pieces. Worth every penny."
+          }
+        },
+        "instagram-1": {
+          "type": "instagram_image"
+        },
+        "instagram-2": {
+          "type": "instagram_image"
+        },
+        "instagram-3": {
+          "type": "instagram_image"
+        },
+        "instagram-4": {
+          "type": "instagram_image"
+        },
+        "instagram-5": {
+          "type": "instagram_image"
+        },
+        "instagram-6": {
+          "type": "instagram_image"
         }
       },
-      "block_order": ["value_1", "value_2", "value_3", "value_4"]
-    },
-    "newsletter": {
-      "type": "newsletter-editorial",
+      "block_order": [
+        "process-1",
+        "process-2",
+        "process-3",
+        "process-4",
+        "value-1",
+        "value-2",
+        "value-3",
+        "value-4",
+        "testimonial-1",
+        "testimonial-2",
+        "testimonial-3",
+        "instagram-1",
+        "instagram-2",
+        "instagram-3",
+        "instagram-4",
+        "instagram-5",
+        "instagram-6"
+      ],
       "settings": {
-        "title": "Join Our Community",
-        "description": "Stories from our artisans, new arrivals, and exclusive offers delivered to your inbox.",
-        "placeholder_text": "Your email address",
-        "button_text": "Subscribe",
-        "note": "We send thoughtful emails, never spam."
-      }
-    },
-    "footer": {
-      "type": "preset-footer",
-      "settings": {
-        "logo_text": "Artisan Collective",
-        "tagline": "Handcrafted goods. Authentic stories. Meaningful connections."
+        "hero_eyebrow": "Handcrafted with love",
+        "hero_title": "Artisan Ceramics for Everyday Living",
+        "hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
+        "hero_button_label": "Shop Collection",
+        "hero_secondary_label": "Our Story",
+        "show_story": true,
+        "story_eyebrow": "Our Story",
+        "story_title": "Where Every Piece Tells a Story",
+        "story_text": "<p>What started as a small passion project in my garage has grown into something I never imagined. Each piece that leaves our studio carries a bit of our heart with it.</p><p>We believe that everyday objects should bring joy. That's why we spend countless hours perfecting each glaze, each curve, each handle—so that your morning coffee becomes a moment of beauty.</p>",
+        "story_signature": "Sarah, Founder",
+        "show_products": true,
+        "products_limit": 6,
+        "products_eyebrow": "Shop",
+        "products_title": "Thoughtfully Made",
+        "products_subtitle": "Browse our collection of handcrafted ceramics, each one unique and made with care.",
+        "products_button_label": "View All Products",
+        "show_process": true,
+        "process_eyebrow": "Our Process",
+        "process_title": "Made with Intention",
+        "show_values": true,
+        "show_testimonials": true,
+        "testimonials_eyebrow": "Kind Words",
+        "testimonials_title": "What Our Customers Say",
+        "show_instagram": true,
+        "instagram_handle": "yourbrand",
+        "instagram_title": "Follow Along",
+        "show_newsletter": true,
+        "newsletter_title": "Join the Family",
+        "newsletter_text": "Be the first to know about new pieces, studio updates, and the stories behind our work.",
+        "newsletter_placeholder": "Your email address",
+        "newsletter_button": "Subscribe",
+        "newsletter_note": "We respect your inbox. Unsubscribe anytime."
       }
     }
   },
-  "order": [
-    "hero",
-    "welcome_message",
-    "collection_list",
-    "featured_collection",
-    "maker_feature",
-    "process",
-    "testimonials",
-    "values",
-    "newsletter",
-    "footer"
-  ]
+  "order": ["landing"]
 }

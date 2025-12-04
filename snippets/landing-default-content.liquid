@@ -1,0 +1,41 @@
+{% comment %}
+  Default Landing Page Content
+  Industrial theme default homepage content
+{% endcomment %}
+
+<section class="landing-default-hero">
+  <div class="container">
+    <div class="landing-default-hero__content">
+      <h1 class="landing-default-hero__title">{{ section.settings.default_hero_title }}</h1>
+      <div class="landing-default-hero__text">{{ section.settings.default_hero_text }}</div>
+      {%- if section.settings.default_hero_button_label != blank -%}
+        <a href="{{ section.settings.default_hero_button_link }}" class="btn">
+          {{ section.settings.default_hero_button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .landing-default-hero {
+    padding: 6rem 0;
+    background: var(--color-surface, #f4f4f4);
+  }
+
+  .landing-default-hero__content {
+    max-width: 700px;
+  }
+
+  .landing-default-hero__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .landing-default-hero__text {
+    font-size: 1.25rem;
+    color: var(--color-text-muted, #666);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+</style>

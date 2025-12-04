@@ -1,0 +1,658 @@
+{% comment %}
+  Warm Artisan Landing Page Section
+  Handmade/artisan brand theme with warm, organic feel
+  Based on mockup: assets/landing-pages/warm-artisan-landing.html
+{% endcomment %}
+
+{{ 'landing-warm-artisan.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-warm-artisan" data-section-id="{{ section.id }}">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="artisan-hero">
+    <div class="container">
+      <div class="artisan-hero__inner">
+        <div class="artisan-hero__content">
+          {%- if section.settings.hero_eyebrow != blank -%}
+            <span class="artisan-hero__eyebrow">{{ section.settings.hero_eyebrow }}</span>
+          {%- endif -%}
+          <h1 class="artisan-hero__title">{{ section.settings.hero_title }}</h1>
+          {%- if section.settings.hero_subtitle != blank -%}
+            <p class="artisan-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+          {%- endif -%}
+          <div class="artisan-hero__actions">
+            {%- if section.settings.hero_button_label != blank -%}
+              <a href="{{ section.settings.hero_button_link }}" class="btn btn--primary">
+                {{ section.settings.hero_button_label }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.hero_secondary_label != blank -%}
+              <a href="{{ section.settings.hero_secondary_link }}" class="btn btn--outline">
+                {{ section.settings.hero_secondary_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="artisan-hero__media">
+          {%- if section.settings.hero_image != blank -%}
+            {{ section.settings.hero_image | image_url: width: 800 | image_tag: class: 'artisan-hero__image', loading: 'eager' }}
+          {%- else -%}
+            <div class="artisan-hero__placeholder"></div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Story Section {%- endcomment -%}
+  {%- if section.settings.show_story -%}
+    <section class="artisan-story">
+      <div class="container">
+        <div class="artisan-story__inner">
+          <div class="artisan-story__media">
+            {%- if section.settings.story_image != blank -%}
+              {{ section.settings.story_image | image_url: width: 700 | image_tag: class: 'artisan-story__image', loading: 'lazy' }}
+            {%- else -%}
+              <div class="artisan-story__placeholder"></div>
+            {%- endif -%}
+          </div>
+          <div class="artisan-story__content">
+            {%- if section.settings.story_eyebrow != blank -%}
+              <span class="section-eyebrow">{{ section.settings.story_eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="artisan-story__title">{{ section.settings.story_title }}</h2>
+            <div class="artisan-story__text">{{ section.settings.story_text }}</div>
+            {%- if section.settings.story_signature != blank -%}
+              <div class="artisan-story__signature">— {{ section.settings.story_signature }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Products Section {%- endcomment -%}
+  {%- if section.settings.show_products and section.settings.collection != blank -%}
+    <section class="artisan-products">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.products_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.products_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.products_title }}</h2>
+          {%- if section.settings.products_subtitle != blank -%}
+            <p class="section-subtitle">{{ section.settings.products_subtitle }}</p>
+          {%- endif -%}
+        </div>
+        <div class="artisan-products__grid">
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            <article class="artisan-product-card">
+              <a href="{{ product.url }}" class="artisan-product-card__link">
+                <div class="artisan-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="artisan-product-card__content">
+                  <h3 class="artisan-product-card__title">{{ product.title }}</h3>
+                  <p class="artisan-product-card__price">{{ product.price | money }}</p>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.products_button_label != blank -%}
+          <div class="artisan-products__action">
+            <a href="{{ section.settings.collection.url }}" class="btn btn--primary">
+              {{ section.settings.products_button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Process Section {%- endcomment -%}
+  {%- if section.settings.show_process -%}
+    <section class="artisan-process">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.process_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.process_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.process_title }}</h2>
+        </div>
+        <div class="artisan-process__grid">
+          {%- assign step_number = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'process_step' -%}
+              {%- assign step_number = step_number | plus: 1 -%}
+              <div class="artisan-process-step" {{ block.shopify_attributes }}>
+                <div class="artisan-process-step__number">{{ step_number }}</div>
+                <h3 class="artisan-process-step__title">{{ block.settings.title }}</h3>
+                <p class="artisan-process-step__text">{{ block.settings.text }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Values Section {%- endcomment -%}
+  {%- if section.settings.show_values -%}
+    <section class="artisan-values">
+      <div class="container">
+        <div class="artisan-values__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'value' -%}
+              <div class="artisan-value-card" {{ block.shopify_attributes }}>
+                <div class="artisan-value-card__icon">
+                  {%- if block.settings.icon == 'heart' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'leaf' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'hand' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+                      <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+                      <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+                      <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'home' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                      <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+                <h3 class="artisan-value-card__title">{{ block.settings.title }}</h3>
+                <p class="artisan-value-card__text">{{ block.settings.text }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  {%- if section.settings.show_testimonials -%}
+    <section class="artisan-testimonials">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.testimonials_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.testimonials_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+        </div>
+        <div class="artisan-testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="artisan-testimonial-card" {{ block.shopify_attributes }}>
+                <div class="artisan-testimonial-card__stars">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- endfor -%}
+                </div>
+                <blockquote class="artisan-testimonial-card__quote">
+                  "{{ block.settings.quote }}"
+                </blockquote>
+                <div class="artisan-testimonial-card__author">{{ block.settings.name }}</div>
+                {%- if block.settings.location != blank -%}
+                  <div class="artisan-testimonial-card__location">{{ block.settings.location }}</div>
+                {%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Instagram Section {%- endcomment -%}
+  {%- if section.settings.show_instagram -%}
+    <section class="artisan-instagram">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.instagram_handle != blank -%}
+            <span class="section-eyebrow">@{{ section.settings.instagram_handle }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.instagram_title | default: 'Follow along' }}</h2>
+        </div>
+      </div>
+      <div class="artisan-instagram__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'instagram_image' -%}
+            <a href="{{ section.settings.instagram_link }}" class="artisan-instagram__item" {{ block.shopify_attributes }} target="_blank" rel="noopener">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+              {%- else -%}
+                <div class="artisan-instagram__placeholder"></div>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Newsletter {%- endcomment -%}
+  {%- if section.settings.show_newsletter -%}
+    <section class="artisan-newsletter">
+      <div class="container">
+        <div class="artisan-newsletter__inner">
+          <h2 class="artisan-newsletter__title">{{ section.settings.newsletter_title }}</h2>
+          {%- if section.settings.newsletter_text != blank -%}
+            <p class="artisan-newsletter__text">{{ section.settings.newsletter_text }}</p>
+          {%- endif -%}
+          {%- form 'customer', class: 'artisan-newsletter__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              class="artisan-newsletter__input"
+              placeholder="{{ section.settings.newsletter_placeholder | default: 'Your email address' }}"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit" class="btn btn--primary">
+              {{ section.settings.newsletter_button | default: 'Subscribe' }}
+            </button>
+          {%- endform -%}
+          {%- if section.settings.newsletter_note != blank -%}
+            <p class="artisan-newsletter__note">{{ section.settings.newsletter_note }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Warm Artisan",
+  "tag": "section",
+  "class": "section-landing-warm-artisan",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Handcrafted with love"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "Artisan Ceramics for Everyday Living"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Primary button label",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "hero_secondary_label",
+      "label": "Secondary button label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "hero_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Story Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_story",
+      "label": "Show story section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story image"
+    },
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Title",
+      "default": "Where Every Piece Tells a Story"
+    },
+    {
+      "type": "richtext",
+      "id": "story_text",
+      "label": "Story text",
+      "default": "<p>What started as a small passion project in my garage has grown into something I never imagined. Each piece that leaves our studio carries a bit of our heart with it.</p><p>We believe that everyday objects should bring joy. That's why we spend countless hours perfecting each glaze, each curve, each handle—so that your morning coffee becomes a moment of beauty.</p>"
+    },
+    {
+      "type": "text",
+      "id": "story_signature",
+      "label": "Signature",
+      "default": "Sarah, Founder"
+    },
+    {
+      "type": "header",
+      "content": "Products Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show products section",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products to show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "products_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Title",
+      "default": "Thoughtfully Made"
+    },
+    {
+      "type": "textarea",
+      "id": "products_subtitle",
+      "label": "Subtitle",
+      "default": "Browse our collection of handcrafted ceramics, each one unique and made with care."
+    },
+    {
+      "type": "text",
+      "id": "products_button_label",
+      "label": "Button label",
+      "default": "View All Products"
+    },
+    {
+      "type": "header",
+      "content": "Process Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_process",
+      "label": "Show process section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "process_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Process"
+    },
+    {
+      "type": "text",
+      "id": "process_title",
+      "label": "Title",
+      "default": "Made with Intention"
+    },
+    {
+      "type": "header",
+      "content": "Values Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_values",
+      "label": "Show values section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show testimonials",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Kind Words"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Title",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "header",
+      "content": "Instagram Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_instagram",
+      "label": "Show Instagram section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram handle",
+      "default": "yourbrand"
+    },
+    {
+      "type": "text",
+      "id": "instagram_title",
+      "label": "Title",
+      "default": "Follow Along"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram profile link"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Title",
+      "default": "Join the Family"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Text",
+      "default": "Be the first to know about new pieces, studio updates, and the stories behind our work."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Input placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_note",
+      "label": "Note text",
+      "default": "We respect your inbox. Unsubscribe anytime."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "process_step",
+      "name": "Process Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Description of this step in the process."
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "heart", "label": "Heart" },
+            { "value": "leaf", "label": "Leaf/Eco" },
+            { "value": "hand", "label": "Handmade" },
+            { "value": "home", "label": "Home" }
+          ],
+          "default": "heart"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Value Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Description of this value."
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Customer Name"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Portland, OR"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "These pieces have become treasured parts of my daily routine."
+        }
+      ]
+    },
+    {
+      "type": "instagram_image",
+      "name": "Instagram Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Warm Artisan",
+      "blocks": [
+        { "type": "process_step", "settings": { "title": "Sourced", "text": "We source only the finest clays and materials from local suppliers who share our values." } },
+        { "type": "process_step", "settings": { "title": "Shaped", "text": "Each piece is thrown on the wheel or hand-built with careful attention to form and function." } },
+        { "type": "process_step", "settings": { "title": "Glazed", "text": "Our signature glazes are mixed in-house using recipes developed over years of experimentation." } },
+        { "type": "process_step", "settings": { "title": "Fired", "text": "Multiple firings in our kilns bring out the unique character of each piece." } },
+        { "type": "value", "settings": { "icon": "hand", "title": "Handcrafted", "text": "Every piece is made by hand in our studio—no two are exactly alike." } },
+        { "type": "value", "settings": { "icon": "leaf", "title": "Sustainable", "text": "We use eco-friendly materials and practices in everything we do." } },
+        { "type": "value", "settings": { "icon": "heart", "title": "Made with Love", "text": "Each piece carries the care and intention of its maker." } },
+        { "type": "value", "settings": { "icon": "home", "title": "Built to Last", "text": "Quality craftsmanship means these pieces will be cherished for generations." } },
+        { "type": "testimonial", "settings": { "name": "Emma S.", "location": "Seattle, WA", "quote": "These mugs have completely transformed my morning routine. Each sip feels special." } },
+        { "type": "testimonial", "settings": { "name": "Michael R.", "location": "Denver, CO", "quote": "Bought the serving bowl for my wife's birthday. She teared up when she opened it. That says everything." } },
+        { "type": "testimonial", "settings": { "name": "Jenny L.", "location": "San Francisco, CA", "quote": "My morning coffee ritual has become something special thanks to these pieces. Worth every penny." } },
+        { "type": "instagram_image" },
+        { "type": "instagram_image" },
+        { "type": "instagram_image" },
+        { "type": "instagram_image" },
+        { "type": "instagram_image" },
+        { "type": "instagram_image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

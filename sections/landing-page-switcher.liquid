@@ -1,0 +1,194 @@
+{% comment %}
+  Landing Page Switcher Section
+
+  This section renders different landing page content based on the selected
+  landing_page_style setting in the theme customizer.
+
+  Usage: Add this section to the homepage template to enable preset-based landing pages.
+
+  Available landing page styles:
+  - default: Industrial/default theme homepage
+  - tech-forward: Dark tech/SaaS landing page
+  - bold-impact: Athletic/sports brand landing page
+  - warm-artisan: Handmade/artisan brand landing page
+  - zebra-skimmers: B2B industrial landing page
+{% endcomment %}
+
+{%- liquid
+  assign landing_style = settings.landing_page_style | default: 'default'
+
+  # Allow section setting to override theme setting
+  if section.settings.override_style != blank and section.settings.override_style != 'use_theme_setting'
+    assign landing_style = section.settings.override_style
+  endif
+-%}
+
+<div class="landing-page-switcher" data-landing-style="{{ landing_style }}">
+  {%- case landing_style -%}
+
+    {%- when 'tech-forward' -%}
+      {%- render 'landing-tech-forward-content', section: section -%}
+
+    {%- when 'bold-impact' -%}
+      {%- render 'landing-bold-impact-content', section: section -%}
+
+    {%- when 'warm-artisan' -%}
+      {%- render 'landing-warm-artisan-content', section: section -%}
+
+    {%- when 'zebra-skimmers' -%}
+      {%- render 'landing-zebra-skimmers-content', section: section -%}
+
+    {%- else -%}
+      {%- comment -%} Default industrial landing page {%- endcomment -%}
+      {%- render 'landing-default-content', section: section -%}
+
+  {%- endcase -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing Page Switcher",
+  "tag": "section",
+  "class": "section-landing-page-switcher",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This section displays different landing page layouts based on the 'Homepage Style' setting in Theme Settings > Theme Preset. You can override that setting here for testing purposes."
+    },
+    {
+      "type": "select",
+      "id": "override_style",
+      "label": "Override landing page style",
+      "options": [
+        { "value": "use_theme_setting", "label": "Use Theme Setting" },
+        { "value": "default", "label": "Default (Industrial)" },
+        { "value": "tech-forward", "label": "Tech Forward (Dark/Futuristic)" },
+        { "value": "bold-impact", "label": "Bold Impact (Athletic)" },
+        { "value": "warm-artisan", "label": "Warm Artisan (Handmade)" },
+        { "value": "zebra-skimmers", "label": "Zebra Skimmers (B2B)" }
+      ],
+      "default": "use_theme_setting",
+      "info": "Override the theme-level landing page style setting. Use 'Use Theme Setting' to respect the global setting."
+    },
+    {
+      "type": "header",
+      "content": "Default Landing Page Settings"
+    },
+    {
+      "type": "text",
+      "id": "default_hero_title",
+      "label": "Hero title",
+      "default": "Precision Welding Systems"
+    },
+    {
+      "type": "textarea",
+      "id": "default_hero_text",
+      "label": "Hero text",
+      "default": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field."
+    },
+    {
+      "type": "text",
+      "id": "default_hero_button_label",
+      "label": "Hero button label",
+      "default": "Explore Equipment"
+    },
+    {
+      "type": "url",
+      "id": "default_hero_button_link",
+      "label": "Hero button link"
+    },
+    {
+      "type": "header",
+      "content": "Tech Forward Settings"
+    },
+    {
+      "type": "text",
+      "id": "tech_hero_badge",
+      "label": "Badge text",
+      "default": "Now Available"
+    },
+    {
+      "type": "text",
+      "id": "tech_hero_title",
+      "label": "Hero title",
+      "default": "The Future of Intelligence"
+    },
+    {
+      "type": "textarea",
+      "id": "tech_hero_subtitle",
+      "label": "Hero subtitle",
+      "default": "Experience next-generation AI that learns, adapts, and evolves with your business needs."
+    },
+    {
+      "type": "text",
+      "id": "tech_hero_button_label",
+      "label": "Primary button label",
+      "default": "Start Free Trial"
+    },
+    {
+      "type": "url",
+      "id": "tech_hero_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "header",
+      "content": "Bold Impact Settings"
+    },
+    {
+      "type": "text",
+      "id": "impact_hero_badge",
+      "label": "Badge text",
+      "default": "New Collection"
+    },
+    {
+      "type": "text",
+      "id": "impact_hero_title",
+      "label": "Hero title",
+      "default": "PUSH YOUR LIMITS"
+    },
+    {
+      "type": "textarea",
+      "id": "impact_hero_subtitle",
+      "label": "Hero subtitle",
+      "default": "Premium performance gear engineered for athletes who refuse to settle."
+    },
+    {
+      "type": "collection",
+      "id": "impact_collection",
+      "label": "Featured collection"
+    },
+    {
+      "type": "header",
+      "content": "Warm Artisan Settings"
+    },
+    {
+      "type": "text",
+      "id": "artisan_hero_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Handcrafted with love"
+    },
+    {
+      "type": "text",
+      "id": "artisan_hero_title",
+      "label": "Hero title",
+      "default": "Artisan Ceramics for Everyday Living"
+    },
+    {
+      "type": "textarea",
+      "id": "artisan_hero_subtitle",
+      "label": "Hero subtitle",
+      "default": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home."
+    },
+    {
+      "type": "collection",
+      "id": "artisan_collection",
+      "label": "Featured collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing Page Switcher"
+    }
+  ]
+}
+{% endschema %}

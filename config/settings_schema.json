@@ -20,7 +20,8 @@
         "label": "Active Preset",
         "options": [
           { "value": "the-welder", "label": "The Welder (Industrial Red)" },
-          { "value": "site-ops", "label": "Site Ops (Safety Orange)" },
+          { "value": "work-zone", "label": "Work Zone (Safety Orange)" },
+          { "value": "site-ops", "label": "Site Ops (Construction Yellow)" },
           { "value": "midnight-shift", "label": "Midnight Shift (Dark Mode)" },
           { "value": "precision", "label": "Precision (Corporate Blue)" },
           { "value": "tactical", "label": "Tactical (Military Green)" },

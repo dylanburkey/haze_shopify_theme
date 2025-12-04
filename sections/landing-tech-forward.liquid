@@ -1,0 +1,682 @@
+{% comment %}
+  Tech Forward Landing Page Section
+  Dark/futuristic theme for tech and electronics brands
+  Based on mockup: assets/landing-pages/tech-forward-landing.html
+{% endcomment %}
+
+{{ 'landing-tech-forward.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-tech-forward" data-section-id="{{ section.id }}">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="tech-hero">
+    <div class="tech-hero__bg">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: class: 'tech-hero__bg-image', loading: 'eager' }}
+      {%- else -%}
+        <div class="tech-hero__bg-gradient"></div>
+      {%- endif -%}
+    </div>
+    <div class="container">
+      <div class="tech-hero__content">
+        {%- if section.settings.hero_badge != blank -%}
+          <span class="tech-hero__badge">{{ section.settings.hero_badge }}</span>
+        {%- endif -%}
+        <h1 class="tech-hero__title">{{ section.settings.hero_title }}</h1>
+        {%- if section.settings.hero_subtitle != blank -%}
+          <p class="tech-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+        {%- endif -%}
+        <div class="tech-hero__actions">
+          {%- if section.settings.hero_button_label != blank -%}
+            <a href="{{ section.settings.hero_button_link }}" class="btn btn--primary btn--glow">
+              {{ section.settings.hero_button_label }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.hero_secondary_label != blank -%}
+            <a href="{{ section.settings.hero_secondary_link }}" class="btn btn--ghost">
+              {{ section.settings.hero_secondary_label }}
+            </a>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.show_hero_stats -%}
+          <div class="tech-hero__stats">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'hero_stat' -%}
+                <div class="tech-hero__stat" {{ block.shopify_attributes }}>
+                  <span class="tech-hero__stat-value">{{ block.settings.value }}</span>
+                  <span class="tech-hero__stat-label">{{ block.settings.label }}</span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Features Grid {%- endcomment -%}
+  {%- if section.settings.show_features -%}
+    <section class="tech-features">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.features_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.features_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.features_title }}</h2>
+          {%- if section.settings.features_subtitle != blank -%}
+            <p class="section-subtitle">{{ section.settings.features_subtitle }}</p>
+          {%- endif -%}
+        </div>
+        <div class="tech-features__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <article class="tech-feature-card" {{ block.shopify_attributes }}>
+                <div class="tech-feature-card__icon">
+                  {%- if block.settings.icon == 'cpu' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="4" y="4" width="16" height="16" rx="2"/>
+                      <rect x="9" y="9" width="6" height="6"/>
+                      <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'shield' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'zap' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'cloud' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'globe' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="2" y1="12" x2="22" y2="12"/>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                  {%- elsif block.settings.icon == 'code' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="16 18 22 12 16 6"/>
+                      <polyline points="8 6 2 12 8 18"/>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+                <h3 class="tech-feature-card__title">{{ block.settings.title }}</h3>
+                <p class="tech-feature-card__text">{{ block.settings.text }}</p>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Product Showcase {%- endcomment -%}
+  {%- if section.settings.show_showcase -%}
+    <section class="tech-showcase">
+      <div class="container">
+        <div class="tech-showcase__inner">
+          <div class="tech-showcase__content">
+            {%- if section.settings.showcase_eyebrow != blank -%}
+              <span class="section-eyebrow">{{ section.settings.showcase_eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="tech-showcase__title">{{ section.settings.showcase_title }}</h2>
+            <p class="tech-showcase__text">{{ section.settings.showcase_text }}</p>
+            <ul class="tech-showcase__list">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'showcase_item' -%}
+                  <li class="tech-showcase__item" {{ block.shopify_attributes }}>
+                    <svg class="tech-showcase__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {{ block.settings.text }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            {%- if section.settings.showcase_button_label != blank -%}
+              <a href="{{ section.settings.showcase_button_link }}" class="btn btn--primary">
+                {{ section.settings.showcase_button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+          <div class="tech-showcase__media">
+            {%- if section.settings.showcase_image != blank -%}
+              {{ section.settings.showcase_image | image_url: width: 800 | image_tag: class: 'tech-showcase__image', loading: 'lazy' }}
+            {%- else -%}
+              <div class="tech-showcase__placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Pricing Section {%- endcomment -%}
+  {%- if section.settings.show_pricing -%}
+    <section class="tech-pricing">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.pricing_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.pricing_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.pricing_title }}</h2>
+          {%- if section.settings.pricing_subtitle != blank -%}
+            <p class="section-subtitle">{{ section.settings.pricing_subtitle }}</p>
+          {%- endif -%}
+        </div>
+        <div class="tech-pricing__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'pricing_tier' -%}
+              <article class="tech-pricing-card{% if block.settings.featured %} tech-pricing-card--featured{% endif %}" {{ block.shopify_attributes }}>
+                {%- if block.settings.featured -%}
+                  <div class="tech-pricing-card__badge">Most Popular</div>
+                {%- endif -%}
+                <h3 class="tech-pricing-card__name">{{ block.settings.name }}</h3>
+                <div class="tech-pricing-card__price">
+                  <span class="tech-pricing-card__currency">$</span>
+                  <span class="tech-pricing-card__amount">{{ block.settings.price }}</span>
+                  <span class="tech-pricing-card__period">/month</span>
+                </div>
+                <p class="tech-pricing-card__description">{{ block.settings.description }}</p>
+                <ul class="tech-pricing-card__features">
+                  {%- assign features = block.settings.features | split: '|' -%}
+                  {%- for feature in features -%}
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                      {{ feature }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                <a href="{{ block.settings.button_link }}" class="btn {% if block.settings.featured %}btn--primary{% else %}btn--outline{% endif %}">
+                  {{ block.settings.button_label | default: 'Get Started' }}
+                </a>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  {%- if section.settings.show_testimonials -%}
+    <section class="tech-testimonials">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.testimonials_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.testimonials_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+        </div>
+        <div class="tech-testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="tech-testimonial-card" {{ block.shopify_attributes }}>
+                <div class="tech-testimonial-card__stars">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- endfor -%}
+                </div>
+                <blockquote class="tech-testimonial-card__quote">
+                  "{{ block.settings.quote }}"
+                </blockquote>
+                <div class="tech-testimonial-card__author">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 80 | image_tag: class: 'tech-testimonial-card__avatar', loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="tech-testimonial-card__avatar-placeholder">
+                      {{ block.settings.name | slice: 0 }}
+                    </div>
+                  {%- endif -%}
+                  <div>
+                    <div class="tech-testimonial-card__name">{{ block.settings.name }}</div>
+                    <div class="tech-testimonial-card__role">{{ block.settings.role }}</div>
+                  </div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  {%- if section.settings.show_cta -%}
+    <section class="tech-cta">
+      <div class="container">
+        <div class="tech-cta__inner">
+          <h2 class="tech-cta__title">{{ section.settings.cta_title }}</h2>
+          {%- if section.settings.cta_text != blank -%}
+            <p class="tech-cta__text">{{ section.settings.cta_text }}</p>
+          {%- endif -%}
+          <div class="tech-cta__actions">
+            {%- if section.settings.cta_button_label != blank -%}
+              <a href="{{ section.settings.cta_button_link }}" class="btn btn--primary btn--glow btn--large">
+                {{ section.settings.cta_button_label }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.cta_secondary_label != blank -%}
+              <a href="{{ section.settings.cta_secondary_link }}" class="btn btn--ghost btn--large">
+                {{ section.settings.cta_secondary_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Tech Forward",
+  "tag": "section",
+  "class": "section-landing-tech-forward",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge text",
+      "default": "Now Available"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "The Future of Intelligence"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Experience next-generation AI that learns, adapts, and evolves with your business needs."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Primary button label",
+      "default": "Start Free Trial"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "hero_secondary_label",
+      "label": "Secondary button label",
+      "default": "Watch Demo"
+    },
+    {
+      "type": "url",
+      "id": "hero_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_stats",
+      "label": "Show hero stats",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Features Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show features section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "features_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Features"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Title",
+      "default": "Built for the future"
+    },
+    {
+      "type": "textarea",
+      "id": "features_subtitle",
+      "label": "Subtitle",
+      "default": "Everything you need to harness the power of artificial intelligence, wrapped in one elegant platform."
+    },
+    {
+      "type": "header",
+      "content": "Product Showcase"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_showcase",
+      "label": "Show product showcase",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "showcase_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Core Product"
+    },
+    {
+      "type": "text",
+      "id": "showcase_title",
+      "label": "Title",
+      "default": "NeuralCore X1"
+    },
+    {
+      "type": "textarea",
+      "id": "showcase_text",
+      "label": "Description",
+      "default": "The most advanced AI processing unit ever created. Engineered for tomorrow's challenges."
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "showcase_button_label",
+      "label": "Button label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "showcase_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Pricing Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pricing",
+      "label": "Show pricing section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pricing_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Pricing"
+    },
+    {
+      "type": "text",
+      "id": "pricing_title",
+      "label": "Title",
+      "default": "Simple, transparent pricing"
+    },
+    {
+      "type": "textarea",
+      "id": "pricing_subtitle",
+      "label": "Subtitle",
+      "default": "Start free, scale as you grow. No hidden fees, cancel anytime."
+    },
+    {
+      "type": "header",
+      "content": "Testimonials Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show testimonials",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Title",
+      "default": "Loved by innovators"
+    },
+    {
+      "type": "header",
+      "content": "CTA Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "Ready to transform your workflow?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "Join thousands of forward-thinking teams already using NeuralCore."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_label",
+      "label": "Primary button label",
+      "default": "Get Started Free"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary button label",
+      "default": "Talk to Sales"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_stat",
+      "name": "Hero Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "99.9%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Uptime"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "cpu", "label": "CPU/Processor" },
+            { "value": "shield", "label": "Shield/Security" },
+            { "value": "zap", "label": "Lightning/Speed" },
+            { "value": "cloud", "label": "Cloud" },
+            { "value": "globe", "label": "Globe/Global" },
+            { "value": "code", "label": "Code" }
+          ],
+          "default": "cpu"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Feature description goes here."
+        }
+      ]
+    },
+    {
+      "type": "showcase_item",
+      "name": "Showcase Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Feature item"
+        }
+      ]
+    },
+    {
+      "type": "pricing_tier",
+      "name": "Pricing Tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Plan name",
+          "default": "Pro"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "49"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "For growing teams"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Features (separate with |)",
+          "default": "Unlimited projects|10 team members|API access|Priority support"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured/Popular",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Get Started"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role/Company",
+          "default": "CEO at Company"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "This product has transformed how we work."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Tech Forward",
+      "blocks": [
+        { "type": "hero_stat", "settings": { "value": "99.9%", "label": "Uptime" } },
+        { "type": "hero_stat", "settings": { "value": "10M+", "label": "Users" } },
+        { "type": "hero_stat", "settings": { "value": "<50ms", "label": "Latency" } },
+        { "type": "feature", "settings": { "icon": "cpu", "title": "Neural Processing", "text": "Advanced AI algorithms that learn and adapt to your unique business patterns." } },
+        { "type": "feature", "settings": { "icon": "shield", "title": "Enterprise Security", "text": "Bank-grade encryption with SOC 2 Type II compliance and zero-knowledge architecture." } },
+        { "type": "feature", "settings": { "icon": "zap", "title": "Lightning Fast", "text": "Sub-millisecond response times with our globally distributed edge network." } },
+        { "type": "feature", "settings": { "icon": "cloud", "title": "Cloud Native", "text": "Built for the cloud from day one. Auto-scaling, multi-region, always available." } },
+        { "type": "feature", "settings": { "icon": "globe", "title": "Global Reach", "text": "Deploy anywhere with 50+ data centers across six continents." } },
+        { "type": "feature", "settings": { "icon": "code", "title": "Developer First", "text": "RESTful APIs, SDKs for every language, and comprehensive documentation." } },
+        { "type": "showcase_item", "settings": { "text": "200+ TOPS neural processing power" } },
+        { "type": "showcase_item", "settings": { "text": "Real-time adaptive learning" } },
+        { "type": "showcase_item", "settings": { "text": "Ultra-low power consumption" } },
+        { "type": "showcase_item", "settings": { "text": "Seamless cloud integration" } },
+        { "type": "pricing_tier", "settings": { "name": "Starter", "price": "0", "description": "Perfect for individuals", "features": "3 projects|1 user|Community support|Basic analytics", "featured": false } },
+        { "type": "pricing_tier", "settings": { "name": "Pro", "price": "49", "description": "For growing teams", "features": "Unlimited projects|10 team members|API access|Priority support", "featured": true } },
+        { "type": "pricing_tier", "settings": { "name": "Enterprise", "price": "199", "description": "For large organizations", "features": "Custom solutions|Unlimited users|Dedicated support|SLA guarantee", "featured": false } },
+        { "type": "testimonial", "settings": { "name": "Sarah Chen", "role": "CTO at TechFlow", "quote": "NeuralCore has completely transformed our data pipeline. What used to take hours now happens in seconds." } },
+        { "type": "testimonial", "settings": { "name": "Marcus Johnson", "role": "Lead Engineer at Scale AI", "quote": "The API is incredibly well-designed. Our team was up and running in less than a day." } },
+        { "type": "testimonial", "settings": { "name": "Emily Watson", "role": "VP of Product at DataSync", "quote": "Finally, an AI platform that actually delivers on its promises. The accuracy is remarkable." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

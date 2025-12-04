@@ -1,0 +1,629 @@
+{% comment %}
+  Bold Impact Landing Page Section
+  Athletic/Sports brand theme with dynamic energy
+  Based on mockup: assets/landing-pages/bold-impact-landing.html
+{% endcomment %}
+
+{{ 'landing-bold-impact.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-bold-impact" data-section-id="{{ section.id }}">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="impact-hero">
+    <div class="impact-hero__bg">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: class: 'impact-hero__bg-image', loading: 'eager' }}
+      {%- else -%}
+        <div class="impact-hero__bg-gradient"></div>
+      {%- endif -%}
+    </div>
+    <div class="container">
+      <div class="impact-hero__content">
+        {%- if section.settings.hero_badge != blank -%}
+          <span class="impact-hero__badge">{{ section.settings.hero_badge }}</span>
+        {%- endif -%}
+        <h1 class="impact-hero__title">{{ section.settings.hero_title }}</h1>
+        {%- if section.settings.hero_subtitle != blank -%}
+          <p class="impact-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+        {%- endif -%}
+        <div class="impact-hero__actions">
+          {%- if section.settings.hero_button_label != blank -%}
+            <a href="{{ section.settings.hero_button_link }}" class="btn btn--primary btn--large">
+              {{ section.settings.hero_button_label }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.hero_secondary_label != blank -%}
+            <a href="{{ section.settings.hero_secondary_link }}" class="btn btn--outline btn--large">
+              {{ section.settings.hero_secondary_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if section.settings.show_hero_stats -%}
+        <div class="impact-hero__stats">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'hero_stat' -%}
+              <div class="impact-hero__stat" {{ block.shopify_attributes }}>
+                <span class="impact-hero__stat-value">{{ block.settings.value }}</span>
+                <span class="impact-hero__stat-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} Category Blocks {%- endcomment -%}
+  {%- if section.settings.show_categories -%}
+    <section class="impact-categories">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.categories_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.categories_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.categories_title }}</h2>
+        </div>
+        <div class="impact-categories__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              <a href="{{ block.settings.link }}" class="impact-category-card" {{ block.shopify_attributes }}>
+                <div class="impact-category-card__image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="impact-category-card__placeholder"></div>
+                  {%- endif -%}
+                </div>
+                <div class="impact-category-card__content">
+                  <h3 class="impact-category-card__title">{{ block.settings.title }}</h3>
+                  <span class="impact-category-card__cta">
+                    Shop Now
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Featured Product {%- endcomment -%}
+  {%- if section.settings.show_featured_product and section.settings.featured_product != blank -%}
+    {%- assign featured = section.settings.featured_product -%}
+    <section class="impact-featured">
+      <div class="container">
+        <div class="impact-featured__inner">
+          <div class="impact-featured__media">
+            {%- if featured.featured_image != blank -%}
+              {{ featured.featured_image | image_url: width: 800 | image_tag: class: 'impact-featured__image', loading: 'lazy' }}
+            {%- else -%}
+              <div class="impact-featured__placeholder"></div>
+            {%- endif -%}
+          </div>
+          <div class="impact-featured__content">
+            {%- if section.settings.featured_eyebrow != blank -%}
+              <span class="section-eyebrow">{{ section.settings.featured_eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="impact-featured__title">{{ featured.title }}</h2>
+            <p class="impact-featured__description">{{ featured.description | strip_html | truncate: 200 }}</p>
+            <div class="impact-featured__price">
+              {%- if featured.compare_at_price > featured.price -%}
+                <span class="impact-featured__price-compare">{{ featured.compare_at_price | money }}</span>
+              {%- endif -%}
+              <span class="impact-featured__price-current">{{ featured.price | money }}</span>
+            </div>
+            <ul class="impact-featured__features">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'product_feature' -%}
+                  <li {{ block.shopify_attributes }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {{ block.settings.text }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            <a href="{{ featured.url }}" class="btn btn--primary btn--large">
+              Shop Now — {{ featured.price | money }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Products Grid {%- endcomment -%}
+  {%- if section.settings.show_products and section.settings.collection != blank -%}
+    <section class="impact-products">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.products_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.products_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.products_title }}</h2>
+        </div>
+        <div class="impact-products__grid">
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            <article class="impact-product-card">
+              <a href="{{ product.url }}" class="impact-product-card__link">
+                <div class="impact-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="impact-product-card__badge">Sale</span>
+                  {%- endif -%}
+                </div>
+                <div class="impact-product-card__content">
+                  <h3 class="impact-product-card__title">{{ product.title }}</h3>
+                  <div class="impact-product-card__price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="impact-product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <span class="impact-product-card__price-current">{{ product.price | money }}</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.products_button_label != blank -%}
+          <div class="impact-products__action">
+            <a href="{{ section.settings.collection.url }}" class="btn btn--primary btn--large">
+              {{ section.settings.products_button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Stats Banner {%- endcomment -%}
+  {%- if section.settings.show_stats_banner -%}
+    <section class="impact-stats-banner">
+      <div class="container">
+        <div class="impact-stats-banner__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'banner_stat' -%}
+              <div class="impact-stats-banner__item" {{ block.shopify_attributes }}>
+                <span class="impact-stats-banner__value">{{ block.settings.value }}</span>
+                <span class="impact-stats-banner__label">{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  {%- if section.settings.show_testimonials -%}
+    <section class="impact-testimonials">
+      <div class="container">
+        <div class="section-header section-header--center">
+          {%- if section.settings.testimonials_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.testimonials_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+        </div>
+        <div class="impact-testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="impact-testimonial-card" {{ block.shopify_attributes }}>
+                <div class="impact-testimonial-card__stars">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {%- endfor -%}
+                </div>
+                <blockquote class="impact-testimonial-card__quote">
+                  "{{ block.settings.quote }}"
+                </blockquote>
+                <div class="impact-testimonial-card__author">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 80 | image_tag: class: 'impact-testimonial-card__avatar', loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="impact-testimonial-card__avatar-placeholder">
+                      {{ block.settings.name | slice: 0 }}
+                    </div>
+                  {%- endif -%}
+                  <div>
+                    <div class="impact-testimonial-card__name">{{ block.settings.name }}</div>
+                    <div class="impact-testimonial-card__sport">{{ block.settings.sport }}</div>
+                  </div>
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Newsletter {%- endcomment -%}
+  {%- if section.settings.show_newsletter -%}
+    <section class="impact-newsletter">
+      <div class="container">
+        <div class="impact-newsletter__inner">
+          <h2 class="impact-newsletter__title">{{ section.settings.newsletter_title }}</h2>
+          {%- if section.settings.newsletter_text != blank -%}
+            <p class="impact-newsletter__text">{{ section.settings.newsletter_text }}</p>
+          {%- endif -%}
+          {%- form 'customer', class: 'impact-newsletter__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              class="impact-newsletter__input"
+              placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email' }}"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit" class="btn btn--primary">
+              {{ section.settings.newsletter_button | default: 'Join' }}
+            </button>
+          {%- endform -%}
+          {%- if section.settings.newsletter_note != blank -%}
+            <p class="impact-newsletter__note">{{ section.settings.newsletter_note }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Bold Impact",
+  "tag": "section",
+  "class": "section-landing-bold-impact",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge text",
+      "default": "New Collection"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "PUSH YOUR LIMITS"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Premium performance gear engineered for athletes who refuse to settle."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Primary button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "hero_secondary_label",
+      "label": "Secondary button label",
+      "default": "View Lookbook"
+    },
+    {
+      "type": "url",
+      "id": "hero_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_stats",
+      "label": "Show hero stats",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Category Blocks"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_categories",
+      "label": "Show categories section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "categories_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "categories_title",
+      "label": "Title",
+      "default": "Shop by Sport"
+    },
+    {
+      "type": "header",
+      "content": "Featured Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_product",
+      "label": "Show featured product",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Featured product"
+    },
+    {
+      "type": "text",
+      "id": "featured_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Featured"
+    },
+    {
+      "type": "header",
+      "content": "Products Grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show products section",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "products_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Title",
+      "default": "Top Picks"
+    },
+    {
+      "type": "text",
+      "id": "products_button_label",
+      "label": "Button label",
+      "default": "View All Products"
+    },
+    {
+      "type": "header",
+      "content": "Stats Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats_banner",
+      "label": "Show stats banner",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show testimonials",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Title",
+      "default": "What Athletes Say"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Title",
+      "default": "Join the Team"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Text",
+      "default": "Get exclusive drops, training tips, and 15% off your first order."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_note",
+      "label": "Note text",
+      "default": "No spam. Unsubscribe anytime."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_stat",
+      "name": "Hero Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50K+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Athletes"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Category Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Running"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "product_feature",
+      "name": "Product Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Lightweight construction"
+        }
+      ]
+    },
+    {
+      "type": "banner_stat",
+      "name": "Banner Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "10M+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Products Sold"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Alex Johnson"
+        },
+        {
+          "type": "text",
+          "id": "sport",
+          "label": "Sport/Activity",
+          "default": "Marathon Runner"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Best gear I've ever used. Period."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Bold Impact",
+      "blocks": [
+        { "type": "hero_stat", "settings": { "value": "50K+", "label": "Athletes" } },
+        { "type": "hero_stat", "settings": { "value": "4.9", "label": "Rating" } },
+        { "type": "hero_stat", "settings": { "value": "100%", "label": "Performance" } },
+        { "type": "category", "settings": { "title": "Running" } },
+        { "type": "category", "settings": { "title": "Training" } },
+        { "type": "category", "settings": { "title": "Basketball" } },
+        { "type": "category", "settings": { "title": "Soccer" } },
+        { "type": "product_feature", "settings": { "text": "Responsive cushioning technology" } },
+        { "type": "product_feature", "settings": { "text": "Breathable mesh upper" } },
+        { "type": "product_feature", "settings": { "text": "Superior grip outsole" } },
+        { "type": "product_feature", "settings": { "text": "Lightweight at only 8.5oz" } },
+        { "type": "banner_stat", "settings": { "value": "10M+", "label": "Products Sold" } },
+        { "type": "banner_stat", "settings": { "value": "500+", "label": "Pro Athletes" } },
+        { "type": "banner_stat", "settings": { "value": "50", "label": "Countries" } },
+        { "type": "banner_stat", "settings": { "value": "24/7", "label": "Support" } },
+        { "type": "testimonial", "settings": { "name": "Marcus Williams", "sport": "Professional Basketball", "quote": "The support and responsiveness are unmatched. These are the only shoes I trust on the court." } },
+        { "type": "testimonial", "settings": { "name": "Sarah Chen", "sport": "Marathon Runner", "quote": "Ran my PR wearing these. The cushioning kept me fresh through mile 26." } },
+        { "type": "testimonial", "settings": { "name": "Jake Rodriguez", "sport": "CrossFit Athlete", "quote": "Finally a shoe that can handle everything from box jumps to rope climbs." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

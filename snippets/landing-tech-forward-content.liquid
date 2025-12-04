@@ -1,0 +1,138 @@
+{% comment %}
+  Tech Forward Landing Page Content Snippet
+  Used by landing-page-switcher section
+{% endcomment %}
+
+{{ 'landing-tech-forward.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-tech-forward">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="tech-hero">
+    <div class="tech-hero__bg">
+      <div class="tech-hero__bg-gradient"></div>
+    </div>
+    <div class="container">
+      <div class="tech-hero__content">
+        {%- if section.settings.tech_hero_badge != blank -%}
+          <span class="tech-hero__badge">{{ section.settings.tech_hero_badge }}</span>
+        {%- endif -%}
+        <h1 class="tech-hero__title">{{ section.settings.tech_hero_title }}</h1>
+        {%- if section.settings.tech_hero_subtitle != blank -%}
+          <p class="tech-hero__subtitle">{{ section.settings.tech_hero_subtitle }}</p>
+        {%- endif -%}
+        <div class="tech-hero__actions">
+          {%- if section.settings.tech_hero_button_label != blank -%}
+            <a href="{{ section.settings.tech_hero_button_link }}" class="btn btn--primary btn--glow">
+              {{ section.settings.tech_hero_button_label }}
+            </a>
+          {%- endif -%}
+          <a href="#features" class="btn btn--ghost">Learn More</a>
+        </div>
+        <div class="tech-hero__stats">
+          <div class="tech-hero__stat">
+            <span class="tech-hero__stat-value">99.9%</span>
+            <span class="tech-hero__stat-label">Uptime</span>
+          </div>
+          <div class="tech-hero__stat">
+            <span class="tech-hero__stat-value">10M+</span>
+            <span class="tech-hero__stat-label">Users</span>
+          </div>
+          <div class="tech-hero__stat">
+            <span class="tech-hero__stat-value"><50ms</span>
+            <span class="tech-hero__stat-label">Latency</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Features Grid {%- endcomment -%}
+  <section id="features" class="tech-features">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Features</span>
+        <h2 class="section-title">Built for the future</h2>
+        <p class="section-subtitle">Everything you need to harness the power of artificial intelligence, wrapped in one elegant platform.</p>
+      </div>
+      <div class="tech-features__grid">
+        <article class="tech-feature-card">
+          <div class="tech-feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+              <rect x="9" y="9" width="6" height="6"/>
+              <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>
+            </svg>
+          </div>
+          <h3 class="tech-feature-card__title">Neural Processing</h3>
+          <p class="tech-feature-card__text">Advanced AI algorithms that learn and adapt to your unique business patterns.</p>
+        </article>
+        <article class="tech-feature-card">
+          <div class="tech-feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="tech-feature-card__title">Enterprise Security</h3>
+          <p class="tech-feature-card__text">Bank-grade encryption with SOC 2 Type II compliance and zero-knowledge architecture.</p>
+        </article>
+        <article class="tech-feature-card">
+          <div class="tech-feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3 class="tech-feature-card__title">Lightning Fast</h3>
+          <p class="tech-feature-card__text">Sub-millisecond response times with our globally distributed edge network.</p>
+        </article>
+        <article class="tech-feature-card">
+          <div class="tech-feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+            </svg>
+          </div>
+          <h3 class="tech-feature-card__title">Cloud Native</h3>
+          <p class="tech-feature-card__text">Built for the cloud from day one. Auto-scaling, multi-region, always available.</p>
+        </article>
+        <article class="tech-feature-card">
+          <div class="tech-feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3 class="tech-feature-card__title">Global Reach</h3>
+          <p class="tech-feature-card__text">Deploy anywhere with 50+ data centers across six continents.</p>
+        </article>
+        <article class="tech-feature-card">
+          <div class="tech-feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3 class="tech-feature-card__title">Developer First</h3>
+          <p class="tech-feature-card__text">RESTful APIs, SDKs for every language, and comprehensive documentation.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  <section class="tech-cta">
+    <div class="container">
+      <div class="tech-cta__inner">
+        <h2 class="tech-cta__title">Ready to transform your workflow?</h2>
+        <p class="tech-cta__text">Join thousands of forward-thinking teams already using our platform.</p>
+        <div class="tech-cta__actions">
+          <a href="{{ section.settings.tech_hero_button_link }}" class="btn btn--primary btn--glow btn--large">
+            Get Started Free
+          </a>
+          <a href="/pages/contact" class="btn btn--ghost btn--large">
+            Talk to Sales
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

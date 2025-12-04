@@ -1,0 +1,246 @@
+{% comment %}
+  Warm Artisan Landing Page Content Snippet
+  Used by landing-page-switcher section
+{% endcomment %}
+
+{{ 'landing-warm-artisan.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-warm-artisan">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="artisan-hero">
+    <div class="container">
+      <div class="artisan-hero__inner">
+        <div class="artisan-hero__content">
+          {%- if section.settings.artisan_hero_eyebrow != blank -%}
+            <span class="artisan-hero__eyebrow">{{ section.settings.artisan_hero_eyebrow }}</span>
+          {%- endif -%}
+          <h1 class="artisan-hero__title">{{ section.settings.artisan_hero_title }}</h1>
+          {%- if section.settings.artisan_hero_subtitle != blank -%}
+            <p class="artisan-hero__subtitle">{{ section.settings.artisan_hero_subtitle }}</p>
+          {%- endif -%}
+          <div class="artisan-hero__actions">
+            <a href="/collections/all" class="btn btn--primary">Shop Collection</a>
+            <a href="/pages/about" class="btn btn--outline">Our Story</a>
+          </div>
+        </div>
+        <div class="artisan-hero__media">
+          <div class="artisan-hero__placeholder"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Story Section {%- endcomment -%}
+  <section class="artisan-story">
+    <div class="container">
+      <div class="artisan-story__inner">
+        <div class="artisan-story__media">
+          <div class="artisan-story__placeholder"></div>
+        </div>
+        <div class="artisan-story__content">
+          <span class="section-eyebrow">Our Story</span>
+          <h2 class="artisan-story__title">Where Every Piece Tells a Story</h2>
+          <div class="artisan-story__text">
+            <p>What started as a small passion project in my garage has grown into something I never imagined. Each piece that leaves our studio carries a bit of our heart with it.</p>
+            <p>We believe that everyday objects should bring joy. That's why we spend countless hours perfecting each glaze, each curve, each handle—so that your morning coffee becomes a moment of beauty.</p>
+          </div>
+          <div class="artisan-story__signature">— Sarah, Founder</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Products Section {%- endcomment -%}
+  {%- assign featured_collection = section.settings.artisan_collection | default: collections['all'] -%}
+  {%- if featured_collection != blank -%}
+    <section class="artisan-products">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <span class="section-eyebrow">Shop</span>
+          <h2 class="section-title">Thoughtfully Made</h2>
+          <p class="section-subtitle">Browse our collection of handcrafted ceramics, each one unique and made with care.</p>
+        </div>
+        <div class="artisan-products__grid">
+          {%- for product in featured_collection.products limit: 6 -%}
+            <article class="artisan-product-card">
+              <a href="{{ product.url }}" class="artisan-product-card__link">
+                <div class="artisan-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="artisan-product-card__content">
+                  <h3 class="artisan-product-card__title">{{ product.title }}</h3>
+                  <p class="artisan-product-card__price">{{ product.price | money }}</p>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        <div class="artisan-products__action">
+          <a href="{{ featured_collection.url }}" class="btn btn--primary">View All Products</a>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Process Section {%- endcomment -%}
+  <section class="artisan-process">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Our Process</span>
+        <h2 class="section-title">Made with Intention</h2>
+      </div>
+      <div class="artisan-process__grid">
+        <div class="artisan-process-step">
+          <div class="artisan-process-step__number">1</div>
+          <h3 class="artisan-process-step__title">Sourced</h3>
+          <p class="artisan-process-step__text">We source only the finest clays and materials from local suppliers who share our values.</p>
+        </div>
+        <div class="artisan-process-step">
+          <div class="artisan-process-step__number">2</div>
+          <h3 class="artisan-process-step__title">Shaped</h3>
+          <p class="artisan-process-step__text">Each piece is thrown on the wheel or hand-built with careful attention to form and function.</p>
+        </div>
+        <div class="artisan-process-step">
+          <div class="artisan-process-step__number">3</div>
+          <h3 class="artisan-process-step__title">Glazed</h3>
+          <p class="artisan-process-step__text">Our signature glazes are mixed in-house using recipes developed over years of experimentation.</p>
+        </div>
+        <div class="artisan-process-step">
+          <div class="artisan-process-step__number">4</div>
+          <h3 class="artisan-process-step__title">Fired</h3>
+          <p class="artisan-process-step__text">Multiple firings in our kilns bring out the unique character of each piece.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Values Section {%- endcomment -%}
+  <section class="artisan-values">
+    <div class="container">
+      <div class="artisan-values__grid">
+        <div class="artisan-value-card">
+          <div class="artisan-value-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+              <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+              <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+              <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+            </svg>
+          </div>
+          <h3 class="artisan-value-card__title">Handcrafted</h3>
+          <p class="artisan-value-card__text">Every piece is made by hand in our studio—no two are exactly alike.</p>
+        </div>
+        <div class="artisan-value-card">
+          <div class="artisan-value-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+          </div>
+          <h3 class="artisan-value-card__title">Sustainable</h3>
+          <p class="artisan-value-card__text">We use eco-friendly materials and practices in everything we do.</p>
+        </div>
+        <div class="artisan-value-card">
+          <div class="artisan-value-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="artisan-value-card__title">Made with Love</h3>
+          <p class="artisan-value-card__text">Each piece carries the care and intention of its maker.</p>
+        </div>
+        <div class="artisan-value-card">
+          <div class="artisan-value-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3 class="artisan-value-card__title">Built to Last</h3>
+          <p class="artisan-value-card__text">Quality craftsmanship means these pieces will be cherished for generations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  <section class="artisan-testimonials">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Kind Words</span>
+        <h2 class="section-title">What Our Customers Say</h2>
+      </div>
+      <div class="artisan-testimonials__grid">
+        <article class="artisan-testimonial-card">
+          <div class="artisan-testimonial-card__stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="artisan-testimonial-card__quote">
+            "These mugs have completely transformed my morning routine. Each sip feels special."
+          </blockquote>
+          <div class="artisan-testimonial-card__author">Emma S.</div>
+          <div class="artisan-testimonial-card__location">Seattle, WA</div>
+        </article>
+        <article class="artisan-testimonial-card">
+          <div class="artisan-testimonial-card__stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="artisan-testimonial-card__quote">
+            "Bought the serving bowl for my wife's birthday. She teared up when she opened it. That says everything."
+          </blockquote>
+          <div class="artisan-testimonial-card__author">Michael R.</div>
+          <div class="artisan-testimonial-card__location">Denver, CO</div>
+        </article>
+        <article class="artisan-testimonial-card">
+          <div class="artisan-testimonial-card__stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="artisan-testimonial-card__quote">
+            "My morning coffee ritual has become something special thanks to these pieces. Worth every penny."
+          </blockquote>
+          <div class="artisan-testimonial-card__author">Jenny L.</div>
+          <div class="artisan-testimonial-card__location">San Francisco, CA</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Newsletter {%- endcomment -%}
+  <section class="artisan-newsletter">
+    <div class="container">
+      <div class="artisan-newsletter__inner">
+        <h2 class="artisan-newsletter__title">Join the Family</h2>
+        <p class="artisan-newsletter__text">Be the first to know about new pieces, studio updates, and the stories behind our work.</p>
+        {%- form 'customer', class: 'artisan-newsletter__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            class="artisan-newsletter__input"
+            placeholder="Your email address"
+            required
+            aria-label="Email address"
+          >
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        {%- endform -%}
+        <p class="artisan-newsletter__note">We respect your inbox. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+</div>

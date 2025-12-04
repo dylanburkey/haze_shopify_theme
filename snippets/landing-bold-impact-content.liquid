@@ -1,0 +1,168 @@
+{% comment %}
+  Bold Impact Landing Page Content Snippet
+  Used by landing-page-switcher section
+{% endcomment %}
+
+{{ 'landing-bold-impact.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-bold-impact">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="impact-hero">
+    <div class="impact-hero__bg">
+      <div class="impact-hero__bg-gradient"></div>
+    </div>
+    <div class="container">
+      <div class="impact-hero__content">
+        {%- if section.settings.impact_hero_badge != blank -%}
+          <span class="impact-hero__badge">{{ section.settings.impact_hero_badge }}</span>
+        {%- endif -%}
+        <h1 class="impact-hero__title">{{ section.settings.impact_hero_title }}</h1>
+        {%- if section.settings.impact_hero_subtitle != blank -%}
+          <p class="impact-hero__subtitle">{{ section.settings.impact_hero_subtitle }}</p>
+        {%- endif -%}
+        <div class="impact-hero__actions">
+          <a href="/collections/all" class="btn btn--primary btn--large">Shop Now</a>
+          <a href="/pages/lookbook" class="btn btn--outline btn--large">View Lookbook</a>
+        </div>
+      </div>
+      <div class="impact-hero__stats">
+        <div class="impact-hero__stat">
+          <span class="impact-hero__stat-value">50K+</span>
+          <span class="impact-hero__stat-label">Athletes</span>
+        </div>
+        <div class="impact-hero__stat">
+          <span class="impact-hero__stat-value">4.9</span>
+          <span class="impact-hero__stat-label">Rating</span>
+        </div>
+        <div class="impact-hero__stat">
+          <span class="impact-hero__stat-value">100%</span>
+          <span class="impact-hero__stat-label">Performance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Category Blocks {%- endcomment -%}
+  <section class="impact-categories">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Collections</span>
+        <h2 class="section-title">Shop by Sport</h2>
+      </div>
+      <div class="impact-categories__grid">
+        {%- for collection in collections limit: 4 -%}
+          {%- if collection.handle != 'all' -%}
+            <a href="{{ collection.url }}" class="impact-category-card">
+              <div class="impact-category-card__image">
+                {%- if collection.image -%}
+                  {{ collection.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  <div class="impact-category-card__placeholder"></div>
+                {%- endif -%}
+              </div>
+              <div class="impact-category-card__content">
+                <h3 class="impact-category-card__title">{{ collection.title }}</h3>
+                <span class="impact-category-card__cta">
+                  Shop Now
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Products Grid {%- endcomment -%}
+  {%- assign featured_collection = section.settings.impact_collection | default: collections['all'] -%}
+  {%- if featured_collection != blank -%}
+    <section class="impact-products">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <span class="section-eyebrow">Best Sellers</span>
+          <h2 class="section-title">Top Picks</h2>
+        </div>
+        <div class="impact-products__grid">
+          {%- for product in featured_collection.products limit: 8 -%}
+            <article class="impact-product-card">
+              <a href="{{ product.url }}" class="impact-product-card__link">
+                <div class="impact-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="impact-product-card__badge">Sale</span>
+                  {%- endif -%}
+                </div>
+                <div class="impact-product-card__content">
+                  <h3 class="impact-product-card__title">{{ product.title }}</h3>
+                  <div class="impact-product-card__price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="impact-product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <span class="impact-product-card__price-current">{{ product.price | money }}</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        <div class="impact-products__action">
+          <a href="{{ featured_collection.url }}" class="btn btn--primary btn--large">View All Products</a>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Stats Banner {%- endcomment -%}
+  <section class="impact-stats-banner">
+    <div class="container">
+      <div class="impact-stats-banner__grid">
+        <div class="impact-stats-banner__item">
+          <span class="impact-stats-banner__value">10M+</span>
+          <span class="impact-stats-banner__label">Products Sold</span>
+        </div>
+        <div class="impact-stats-banner__item">
+          <span class="impact-stats-banner__value">500+</span>
+          <span class="impact-stats-banner__label">Pro Athletes</span>
+        </div>
+        <div class="impact-stats-banner__item">
+          <span class="impact-stats-banner__value">50</span>
+          <span class="impact-stats-banner__label">Countries</span>
+        </div>
+        <div class="impact-stats-banner__item">
+          <span class="impact-stats-banner__value">24/7</span>
+          <span class="impact-stats-banner__label">Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Newsletter {%- endcomment -%}
+  <section class="impact-newsletter">
+    <div class="container">
+      <div class="impact-newsletter__inner">
+        <h2 class="impact-newsletter__title">Join the Team</h2>
+        <p class="impact-newsletter__text">Get exclusive drops, training tips, and 15% off your first order.</p>
+        {%- form 'customer', class: 'impact-newsletter__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            class="impact-newsletter__input"
+            placeholder="Enter your email"
+            required
+            aria-label="Email address"
+          >
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        {%- endform -%}
+        <p class="impact-newsletter__note">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+</div>

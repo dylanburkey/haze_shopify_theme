@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "landing-switcher": {
+      "type": "landing-page-switcher",
+      "settings": {
+        "override_style": "use_theme_setting",
+        "default_hero_title": "Precision Welding Systems",
+        "default_hero_text": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.",
+        "default_hero_button_label": "Explore Equipment",
+        "tech_hero_badge": "Now Available",
+        "tech_hero_title": "The Future of Intelligence",
+        "tech_hero_subtitle": "Experience next-generation AI that learns, adapts, and evolves with your business needs.",
+        "tech_hero_button_label": "Start Free Trial",
+        "impact_hero_badge": "New Collection",
+        "impact_hero_title": "PUSH YOUR LIMITS",
+        "impact_hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
+        "artisan_hero_eyebrow": "Handcrafted with love",
+        "artisan_hero_title": "Artisan Ceramics for Everyday Living",
+        "artisan_hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home."
+      }
+    }
+  },
+  "order": [
+    "landing-switcher"
+  ]
+}

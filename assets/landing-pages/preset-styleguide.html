@@ -1,0 +1,1447 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Forge Industrial | Theme Preview</title>
+
+        <!-- Google Fonts: Load all fonts for all presets -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Bitter:wght@700;800&family=Chivo+Mono:wght@400;500&family=Fira+Code:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=Lato:wght@400;700&family=Oswald:wght@500;700&family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&family=Source+Code+Pro:wght@400;500&family=Space+Mono:wght@400;700&family=Teko:wght@500;600;700&family=Work+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            /* --- 1. DESIGN SYSTEM CORE --- */
+            :root {
+                /* Shared Layout Variables */
+                --radius: 0px;
+                --container-width: 1200px;
+                --grid-gap: 24px;
+
+                /* Default: The Welder */
+                --color-primary: #d71920;
+                --color-black: #1a1a1a;
+                --color-dark: #111111;
+                --color-white: #ffffff;
+                --color-surface: #f4f4f4;
+                --color-border: #e5e5e5;
+                --color-text-inverse: #ffffff;
+
+                --font-heading: "Oswald", sans-serif;
+                --font-body: "Roboto", sans-serif;
+            }
+
+            /* --- THEME PRESETS --- */
+
+            /* 1. The Welder (Default) */
+            body.theme-welder {
+                --color-primary: #d71920;
+                --color-black: #1a1a1a;
+                --color-white: #ffffff;
+                --color-surface: #f4f4f4;
+                --color-border: #e5e5e5;
+                --color-text-inverse: #ffffff;
+                --font-heading: "Oswald", sans-serif;
+                --font-body: "Roboto", sans-serif;
+            }
+
+            /* 2. Site Ops (Construction) */
+            body.theme-construction {
+                --color-primary: #ffb400;
+                --color-black: #333333; /* Charcoal Body */
+                --color-white: #ffffff;
+                --color-surface: #232323; /* Dark Asphalt */
+                --color-border: #dddddd;
+                --color-text-inverse: #000000; /* Black text on Yellow */
+                --font-heading: "Archivo Black", sans-serif; /* Heavy Duty */
+                --font-body: "Work Sans", sans-serif;
+            }
+
+            /* 3. Midnight Shift (Dark Mode) */
+            body.theme-dark {
+                --color-primary: #ff5722; /* Industrial Orange */
+                --color-black: #e0e0e0; /* Off-White Text */
+                --color-white: #121212; /* Deep Black BG */
+                --color-surface: #1e1e1e; /* Dark Grey Surface */
+                --color-border: #333333;
+                --color-dark: #000000;
+                --color-text-inverse: #ffffff;
+                --font-heading: "Teko", sans-serif; /* Precision Tech */
+                --font-body: "Inter", sans-serif;
+            }
+
+            /* 4. Precision (Lab/Medical) */
+            body.theme-precision {
+                --color-primary: #007ac9; /* Electric Blue */
+                --color-black: #0f172a; /* Navy Black */
+                --color-white: #f8f9fa; /* Cool White */
+                --color-surface: #ffffff; /* Pure White */
+                --color-border: #cbd5e1;
+                --color-text-inverse: #ffffff;
+                --font-heading:
+                    "IBM Plex Sans Condensed", sans-serif; /* Corporate */
+                --font-body: "IBM Plex Sans", sans-serif;
+            }
+
+            /* 5. Tactical (Outdoor) */
+            body.theme-tactical {
+                --color-primary: #689f38; /* Olive */
+                --color-black: #dcedc8; /* Light Green-Grey Text */
+                --color-white: #2b2b2b; /* Gunmetal BG */
+                --color-surface: #383838; /* Lighter Gunmetal */
+                --color-border: #4a4a4a;
+                --color-dark: #1a1a1a;
+                --color-text-inverse: #ffffff;
+                --font-heading: "Barlow Condensed", sans-serif; /* Blueprint */
+                --font-body: "Barlow", sans-serif;
+            }
+
+            /* 6. Monolith (Minimalist) */
+            body.theme-monolith {
+                --color-primary: #000000;
+                --color-black: #111111;
+                --color-white: #ffffff;
+                --color-surface: #e0e0e0; /* Concrete */
+                --color-border: #000000; /* Hard Black Border */
+                --color-text-inverse: #ffffff;
+                --font-heading: "Bitter", serif; /* Steel/Heritage */
+                --font-body: "Lato", sans-serif;
+            }
+
+            /* --- BASE STYLES --- */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                font-family: var(--font-body);
+                color: var(--color-black);
+                background-color: var(--color-white);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+                overflow-x: hidden;
+                transition:
+                    background 0.3s,
+                    color 0.3s;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                font-family: var(--font-heading);
+                text-transform: uppercase;
+                line-height: 1.1;
+                margin: 0 0 1rem;
+                letter-spacing: 0.5px;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .container {
+                max-width: var(--container-width);
+                margin: 0 auto;
+                padding: 0 24px;
+            }
+
+            /* Industrial Button */
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 14px 28px;
+                background-color: var(--color-primary);
+                color: var(--color-text-inverse);
+                font-weight: 700;
+                text-transform: uppercase;
+                border: none;
+                cursor: pointer;
+                transition:
+                    filter 0.2s,
+                    transform 0.1s;
+            }
+            .btn:hover {
+                filter: brightness(0.9);
+            }
+            .btn:active {
+                transform: translateY(1px);
+            }
+            .btn--full {
+                width: 100%;
+            }
+            .btn--outline {
+                background: transparent;
+                border: 2px solid var(--color-black);
+                color: var(--color-black);
+            }
+            .btn--outline:hover {
+                background: var(--color-black);
+                color: var(--color-white);
+            }
+
+            /* --- 2. HEADER --- */
+            .site-header {
+                background: var(--color-dark);
+                color: #fff;
+                border-bottom: 5px solid var(--color-primary);
+                padding: 20px 0;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+            body.theme-monolith .site-header {
+                background: #000;
+                color: #fff;
+            }
+            body.theme-precision .site-header {
+                background: #fff;
+                color: #0f172a;
+                border-bottom-color: var(--color-primary);
+            }
+
+            .header-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .logo {
+                font-size: 2rem;
+                font-family: var(--font-heading);
+                font-weight: 700;
+                cursor: pointer;
+            }
+            .logo span {
+                color: var(--color-primary);
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 30px;
+            }
+            .nav-links button {
+                background: none;
+                border: none;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+                color: #ccc;
+                cursor: pointer;
+                font-family: var(--font-heading);
+                transition: color 0.2s;
+            }
+            .nav-links button:hover,
+            .nav-links button.active {
+                color: var(--color-primary);
+                opacity: 1;
+            }
+
+            /* --- 3. SECTIONS --- */
+
+            /* AutoRAG */
+            .section-autorag {
+                background: var(--color-surface);
+                padding: 80px 0;
+                text-align: center;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .rag-container {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            .rag-input-wrapper {
+                display: flex;
+                background: var(--color-white);
+                border: 2px solid var(--color-black);
+            }
+            .rag-input {
+                width: 100%;
+                border: none;
+                padding: 20px;
+                font-size: 1.2rem;
+                outline: none;
+                background: transparent;
+                color: var(--color-black);
+            }
+            .rag-results {
+                margin-top: 20px;
+                text-align: left;
+                background: var(--color-white);
+                border: 1px solid var(--color-border);
+                display: none;
+            }
+            .rag-results.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+            .rag-item {
+                display: flex;
+                gap: 15px;
+                padding: 15px;
+                border-bottom: 1px solid var(--color-border);
+                transition: background 0.2s;
+                cursor: pointer;
+            }
+            .rag-item:hover {
+                background: var(--color-surface);
+                border-left: 4px solid var(--color-primary);
+            }
+            .rag-score {
+                font-size: 0.75rem;
+                background: var(--color-border);
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: bold;
+                color: var(--color-black);
+            }
+
+            /* Hero Industrial */
+            .hero-industrial {
+                position: relative;
+                height: 600px;
+                display: flex;
+                align-items: center;
+                background: #333;
+                color: white;
+                background-image:
+                    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                    url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80");
+                background-size: cover;
+                background-position: center;
+            }
+            .hero-box {
+                background: var(--color-white);
+                color: var(--color-black);
+                padding: 40px;
+                max-width: 600px;
+                border-left: 8px solid var(--color-primary);
+            }
+
+            /* Smart Grid */
+            .section-smart-grid {
+                padding: 60px 0;
+            }
+            .smart-grid {
+                display: grid;
+                gap: var(--grid-gap);
+            }
+            .layout--cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .layout--highlight {
+                grid-template-columns: 1fr;
+            }
+            @media (min-width: 900px) {
+                .layout--highlight {
+                    grid-template-columns: 2fr 1fr;
+                }
+            }
+            @media (max-width: 768px) {
+                .layout--cols-3 {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .grid-item-wrapper {
+                container-type: inline-size;
+                height: 100%;
+            }
+            .industrial-card {
+                display: flex;
+                flex-direction: column;
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                height: 100%;
+                transition: box-shadow 0.2s;
+            }
+            .industrial-card:hover {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-bottom: 4px solid var(--color-primary);
+            }
+            body.theme-construction .industrial-card {
+                color: #fff;
+            } /* Fix contrast for dark cards */
+
+            .card-img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                background: var(--color-border);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--color-black);
+                opacity: 0.7;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+            .card-content {
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+            @container (min-width: 500px) {
+                .industrial-card {
+                    flex-direction: row;
+                    align-items: center;
+                }
+                .card-img {
+                    width: 50%;
+                    height: 100%;
+                    min-height: 300px;
+                }
+                .card-content {
+                    width: 50%;
+                    padding: 40px;
+                }
+            }
+
+            /* Product Main */
+            .product-main {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 0;
+            }
+            @media (min-width: 900px) {
+                .product-main {
+                    grid-template-columns: 1.5fr 1fr;
+                }
+            }
+            .product-gallery-main {
+                width: 100%;
+                height: 500px;
+                background: #eee;
+                object-fit: cover;
+                border: 1px solid var(--color-border);
+            }
+            .product-price {
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--color-primary);
+                margin: 10px 0 20px;
+            }
+            .tech-specs-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 30px;
+                font-size: 0.9rem;
+                color: var(--color-black);
+            }
+            .tech-specs-table td {
+                padding: 10px;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .tech-specs-table td:first-child {
+                font-weight: bold;
+                width: 40%;
+                opacity: 0.8;
+            }
+
+            /* AI Brief Box */
+            .ai-brief-box {
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-left: 4px solid var(--color-primary);
+                padding: 20px;
+                margin-top: 20px;
+                display: none;
+                font-size: 0.9rem;
+            }
+            .ai-brief-box.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+            .ai-brief-box h4 {
+                margin-top: 0;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            /* Collection Layout (With Sidebar) */
+            .collection-header {
+                padding: 60px 0;
+                background: var(--color-surface);
+                text-align: center;
+                margin-bottom: 40px;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .collection-layout {
+                display: grid;
+                gap: 40px;
+            }
+
+            .filter-sidebar {
+                display: none;
+            }
+            .filter-group {
+                border-bottom: 1px solid var(--color-border);
+                padding: 20px 0;
+            }
+            .filter-group:first-child {
+                padding-top: 0;
+            }
+            .filter-group summary {
+                list-style: none;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-family: var(--font-heading);
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+            }
+            .filter-group summary::after {
+                content: "+";
+                font-size: 1.2em;
+                color: var(--color-primary);
+            }
+            .filter-group[open] summary::after {
+                content: "-";
+            }
+            .filter-options {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .filter-label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 0.9rem;
+                cursor: pointer;
+            }
+            .filter-checkbox {
+                appearance: none;
+                width: 18px;
+                height: 18px;
+                border: 2px solid var(--color-border);
+                background: var(--color-white);
+                cursor: pointer;
+                position: relative;
+            }
+            .filter-checkbox:checked {
+                background: var(--color-primary);
+                border-color: var(--color-primary);
+            }
+
+            @media (min-width: 900px) {
+                .collection-layout {
+                    grid-template-columns: 250px 1fr;
+                }
+                .filter-sidebar {
+                    display: block;
+                }
+            }
+            .collection-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 24px;
+            }
+
+            /* --- 5. LOYALTY ENGINE --- */
+            .loyalty-section {
+                background: var(--color-dark);
+                color: #fff;
+                padding: 60px 0;
+                border-top: 1px solid var(--color-border);
+            }
+            body.theme-precision .loyalty-section,
+            body.theme-monolith .loyalty-section {
+                background: #f0f0f0;
+                color: #111;
+            }
+            .loyalty-badge {
+                display: inline-block;
+                border-left: 5px solid;
+                padding: 20px 30px;
+                background: rgba(128, 128, 128, 0.1);
+                margin-top: 10px;
+            }
+
+            /* --- 6. PWA BANNER --- */
+            .pwa-banner {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: var(--color-primary);
+                color: var(--color-text-inverse);
+                padding: 15px 24px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transform: translateY(100%);
+                transition: transform 0.4s
+                    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 9999;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .pwa-banner.visible {
+                transform: translateY(0);
+            }
+            .pwa-btn {
+                background: var(--color-white);
+                color: var(--color-primary);
+                border: none;
+                padding: 8px 16px;
+                font-weight: 700;
+                cursor: pointer;
+                border-radius: var(--radius);
+            }
+
+            /* --- THEME SWITCHER WIDGET --- */
+            .theme-switcher {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--color-dark);
+                color: white;
+                padding: 10px;
+                border-radius: 4px;
+                z-index: 10001; /* Higher than PWA Banner */
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                border: 1px solid var(--color-border);
+            }
+            .page-btn,
+            .theme-btn {
+                background: transparent;
+                border: 1px solid #555;
+                color: #aaa;
+                padding: 8px 12px;
+                cursor: pointer;
+                text-align: left;
+                font-family: var(--font-heading);
+                text-transform: uppercase;
+                font-size: 11px;
+            }
+            .page-btn:hover,
+            .theme-btn:hover {
+                background: #333;
+                color: white;
+            }
+            .page-btn.active,
+            .theme-btn.active {
+                border-color: var(--color-primary);
+                color: white;
+                font-weight: bold;
+            }
+            .swatch {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                margin-right: 8px;
+                border-radius: 50%;
+            }
+
+            /* Views Utility */
+            .view-section {
+                display: none;
+            }
+            .view-section.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body class="theme-welder">
+        <!-- Header -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <div
+                    class="logo"
+                    onclick="switchView('home')"
+                    style="cursor: pointer"
+                >
+                    FORGE<span>.IND</span>
+                </div>
+                <nav class="nav-links">
+                    <button onclick="switchView('collection')">
+                        Equipment
+                    </button>
+                    <button onclick="switchView('product')">Product</button>
+                    <button>Support</button>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- VIEW 1: LANDING PAGE -->
+            <div id="view-home" class="view-section active">
+                <!-- Hero -->
+                <div class="hero-industrial">
+                    <div class="container" style="width: 100%">
+                        <div class="hero-box">
+                            <h1>Precision Welding Systems</h1>
+                            <p>
+                                Industry-leading technology for the toughest
+                                jobs. Engineered for performance and durability
+                                in the field.
+                            </p>
+                            <button
+                                class="btn"
+                                onclick="switchView('collection')"
+                            >
+                                EXPLORE EQUIPMENT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AutoRAG Search -->
+                <section class="section-autorag">
+                    <div class="container rag-container">
+                        <h2>Find The Right Gear</h2>
+                        <div class="rag-input-wrapper">
+                            <input
+                                type="text"
+                                id="RagInput"
+                                class="rag-input"
+                                placeholder="Ask AI: 'Which welder is best for aluminum?'"
+                                autocomplete="off"
+                            />
+                            <button class="btn" onclick="performRagSearch()">
+                                SEARCH
+                            </button>
+                        </div>
+                        <div id="RagResults" class="rag-results"></div>
+                    </div>
+                </section>
+
+                <!-- Smart Grid (Highlight Layout) -->
+                <section class="section-smart-grid">
+                    <div class="container">
+                        <h2>Core Solutions</h2>
+                        <div class="smart-grid layout--highlight">
+                            <!-- Large Item -->
+                            <div class="grid-item-wrapper">
+                                <div class="industrial-card">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80"
+                                        class="card-img"
+                                    />
+                                    <div class="card-content">
+                                        <span
+                                            style="
+                                                color: var(--color-primary);
+                                                font-weight: 700;
+                                                font-size: 0.8rem;
+                                            "
+                                            >HEAVY EQUIPMENT</span
+                                        >
+                                        <h3>MIG-250 Pro Series</h3>
+                                        <p>
+                                            High performance welding for
+                                            industrial fabrication. Container
+                                            query active: horizontal layout.
+                                        </p>
+                                        <button
+                                            class="btn"
+                                            onclick="switchView('product')"
+                                        >
+                                            View Specs
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Small Item 1 -->
+                            <div class="grid-item-wrapper">
+                                <div class="industrial-card">
+                                    <div class="card-content">
+                                        <h3>Safety Gear</h3>
+                                        <p>
+                                            Helmets, gloves, and fume
+                                            extraction.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Small Item 2 -->
+                            <div class="grid-item-wrapper">
+                                <div class="industrial-card">
+                                    <div class="card-content">
+                                        <h3>Automation</h3>
+                                        <p>
+                                            Robotic cells and Cobot integration.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- VIEW 2: COLLECTION PAGE -->
+            <div id="view-collection" class="view-section">
+                <div class="collection-header">
+                    <div class="container">
+                        <h1>Heavy Equipment</h1>
+                        <p>
+                            Professional grade machinery for industrial
+                            applications.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="collection-layout">
+                        <!-- Filter Sidebar -->
+                        <aside class="filter-sidebar">
+                            <div class="filter-group">
+                                <h4 style="margin-bottom: 15px">Filter By</h4>
+                            </div>
+
+                            <details class="filter-group" open>
+                                <summary>Price</summary>
+                                <div class="filter-options">
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        $0 - $500</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        $500 - $1000</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        $1000+</label
+                                    >
+                                </div>
+                            </details>
+
+                            <details class="filter-group" open>
+                                <summary>Process</summary>
+                                <div class="filter-options">
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        MIG</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        TIG</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        Stick</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        Plasma</label
+                                    >
+                                </div>
+                            </details>
+
+                            <details class="filter-group">
+                                <summary>Amperage</summary>
+                                <div class="filter-options">
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        100A - 200A</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        200A - 300A</label
+                                    >
+                                    <label class="filter-label"
+                                        ><input
+                                            type="checkbox"
+                                            class="filter-checkbox"
+                                        />
+                                        300A+</label
+                                    >
+                                </div>
+                            </details>
+                        </aside>
+
+                        <!-- Product Grid -->
+                        <div class="collection-grid">
+                            <!-- Product Card 1 -->
+                            <div
+                                class="industrial-card"
+                                onclick="switchView('product')"
+                                style="cursor: pointer"
+                            >
+                                <img
+                                    src="https://images.unsplash.com/photo-1581092921461-eab62e97a783?auto=format&fit=crop&w=600&q=80"
+                                    class="card-img"
+                                    style="height: 200px"
+                                />
+                                <div class="card-content">
+                                    <h4>TIG-200 AC/DC</h4>
+                                    <p>$1,499.00</p>
+                                </div>
+                            </div>
+                            <!-- Product Card 2 -->
+                            <div class="industrial-card">
+                                <img
+                                    src="https://images.unsplash.com/photo-1617791160505-6f00504e3519?auto=format&fit=crop&w=600&q=80"
+                                    class="card-img"
+                                    style="height: 200px"
+                                />
+                                <div class="card-content">
+                                    <h4>Plasma Cutter 50</h4>
+                                    <p>$899.00</p>
+                                </div>
+                            </div>
+                            <!-- Product Card 3 -->
+                            <div class="industrial-card">
+                                <img
+                                    src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80"
+                                    class="card-img"
+                                    style="height: 200px"
+                                />
+                                <div class="card-content">
+                                    <h4>MIG Wire Feeder</h4>
+                                    <p>$450.00</p>
+                                </div>
+                            </div>
+                            <!-- Product Card 4 -->
+                            <div class="industrial-card">
+                                <div
+                                    class="card-img"
+                                    style="
+                                        height: 200px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        background: #eee;
+                                        color: #999;
+                                        font-weight: bold;
+                                    "
+                                >
+                                    IMG
+                                </div>
+                                <div class="card-content">
+                                    <h4>Industrial Cart</h4>
+                                    <p>$299.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom CTA (Smart Grid) -->
+                <section class="section-smart-grid">
+                    <div class="container">
+                        <div class="smart-grid layout--cols-3">
+                            <div class="industrial-card">
+                                <div class="card-content">
+                                    <h3>Size Guide</h3>
+                                </div>
+                            </div>
+                            <div class="industrial-card">
+                                <div class="card-content">
+                                    <h3>OSHA Compliance</h3>
+                                </div>
+                            </div>
+                            <div class="industrial-card">
+                                <div class="card-content">
+                                    <h3>Bulk Quotes</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- VIEW 3: PRODUCT PAGE -->
+            <div id="view-product" class="view-section">
+                <div class="container">
+                    <div class="product-main">
+                        <!-- Gallery -->
+                        <div>
+                            <img
+                                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1200&q=80"
+                                class="product-gallery-main"
+                            />
+                            <div
+                                style="
+                                    display: flex;
+                                    gap: 10px;
+                                    margin-top: 10px;
+                                "
+                            >
+                                <div
+                                    style="
+                                        width: 80px;
+                                        height: 80px;
+                                        background: #ddd;
+                                    "
+                                ></div>
+                                <div
+                                    style="
+                                        width: 80px;
+                                        height: 80px;
+                                        background: #ddd;
+                                    "
+                                ></div>
+                                <div
+                                    style="
+                                        width: 80px;
+                                        height: 80px;
+                                        background: #ddd;
+                                    "
+                                ></div>
+                            </div>
+                        </div>
+
+                        <!-- Info -->
+                        <div>
+                            <span style="color: #666; font-size: 0.9rem"
+                                >SKU: WLD-250-PRO</span
+                            >
+                            <h1
+                                style="font-size: 2.5rem; margin-top: 5px"
+                                id="ProductTitle"
+                            >
+                                MIG-250 Pro Series
+                            </h1>
+                            <div class="product-price">$2,499.00</div>
+
+                            <p>
+                                The MIG-250 is a multi-process welder designed
+                                for the professional fabricator. Features pulse
+                                capability, digital interface, and rugged steel
+                                chassis.
+                            </p>
+
+                            <div style="margin: 30px 0">
+                                <label
+                                    style="
+                                        font-weight: bold;
+                                        display: block;
+                                        margin-bottom: 5px;
+                                    "
+                                    >VOLTAGE</label
+                                >
+                                <div style="display: flex; gap: 10px">
+                                    <button class="btn btn--outline">
+                                        120V
+                                    </button>
+                                    <button class="btn">240V</button>
+                                </div>
+                            </div>
+
+                            <div
+                                style="
+                                    display: flex;
+                                    gap: 10px;
+                                    flex-wrap: wrap;
+                                "
+                            >
+                                <button class="btn btn--full" style="flex: 2">
+                                    ADD TO CART
+                                </button>
+                                <button
+                                    class="btn btn--outline"
+                                    style="flex: 1"
+                                    onclick="generateTechBrief()"
+                                >
+                                    ✨ AI Tech Brief
+                                </button>
+                            </div>
+
+                            <!-- AI Tech Brief Output -->
+                            <div id="AiBriefContainer" class="ai-brief-box">
+                                <h4>✨ Forge AI Analysis</h4>
+                                <div id="AiBriefContent">
+                                    Loading analysis...
+                                </div>
+                            </div>
+
+                            <!-- Tech Specs Smart Grid (Embedded) -->
+                            <table class="tech-specs-table">
+                                <tr>
+                                    <td>Input Power</td>
+                                    <td>208/230/460/575/1/60</td>
+                                </tr>
+                                <tr>
+                                    <td>Duty Cycle</td>
+                                    <td>100% at 300A</td>
+                                </tr>
+                                <tr>
+                                    <td>Process</td>
+                                    <td>MIG, TIG, Stick</td>
+                                </tr>
+                                <tr>
+                                    <td>Warranty</td>
+                                    <td>3 Year Industrial</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <section
+                    class="section-smart-grid"
+                    style="background: var(--color-surface)"
+                >
+                    <div class="container">
+                        <h2>Related Gear</h2>
+                        <div class="smart-grid layout--cols-3">
+                            <div class="grid-item-wrapper">
+                                <div class="industrial-card">
+                                    <div class="card-content">
+                                        <h3>Consumables Kit</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-item-wrapper">
+                                <div class="industrial-card">
+                                    <div class="card-content">
+                                        <h3>Welding Jacket</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-item-wrapper">
+                                <div class="industrial-card">
+                                    <div class="card-content">
+                                        <h3>Fume Extractor</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer
+            style="
+                background: var(--color-dark);
+                color: #666;
+                padding: 60px 0;
+                text-align: center;
+                border-top: 1px solid #333;
+                margin-top: 60px;
+            "
+        >
+            <div class="container">
+                <p>&copy; 2025 Forge Industrial Theme.</p>
+            </div>
+        </footer>
+
+        <!-- PWA Install Banner -->
+        <div id="PWA-Banner" class="pwa-banner">
+            <div style="display: flex; align-items: center; gap: 15px">
+                <div
+                    style="
+                        width: 40px;
+                        height: 40px;
+                        background: white;
+                        border-radius: 4px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: var(--color-primary);
+                        font-weight: bold;
+                    "
+                >
+                    F
+                </div>
+                <div>
+                    <strong style="display: block; line-height: 1"
+                        >Forge App</strong
+                    >
+                    <small style="opacity: 0.8"
+                        >Install for offline access & speed</small
+                    >
+                </div>
+            </div>
+            <button id="PWA-Install-Btn" class="pwa-btn">INSTALL</button>
+        </div>
+
+        <!-- THEME SWITCHER (For Demo Only) -->
+        <div class="theme-switcher">
+            <h4
+                style="
+                    margin: 0 0 10px 0;
+                    color: #888;
+                    font-size: 10px;
+                    letter-spacing: 1px;
+                "
+            >
+                SWITCH PAGE
+            </h4>
+            <button class="page-btn active" onclick="switchView('home')">
+                1. Landing Page
+            </button>
+            <button class="page-btn" onclick="switchView('collection')">
+                2. Category Page
+            </button>
+            <button class="page-btn" onclick="switchView('product')">
+                3. Product Page
+            </button>
+
+            <h4
+                style="
+                    margin: 15px 0 10px 0;
+                    color: #888;
+                    font-size: 10px;
+                    letter-spacing: 1px;
+                "
+            >
+                SWITCH THEME
+            </h4>
+            <button class="theme-btn active" onclick="setTheme('welder', this)">
+                <span class="swatch" style="background: #d71920"></span> The
+                Welder
+            </button>
+            <button class="theme-btn" onclick="setTheme('construction', this)">
+                <span class="swatch" style="background: #ffb400"></span> Site
+                Ops
+            </button>
+            <button class="theme-btn" onclick="setTheme('dark', this)">
+                <span class="swatch" style="background: #ff5722"></span>
+                Midnight Shift
+            </button>
+            <button class="theme-btn" onclick="setTheme('precision', this)">
+                <span class="swatch" style="background: #007ac9"></span>
+                Precision
+            </button>
+            <button class="theme-btn" onclick="setTheme('tactical', this)">
+                <span class="swatch" style="background: #689f38"></span>
+                Tactical
+            </button>
+            <button class="theme-btn" onclick="setTheme('monolith', this)">
+                <span class="swatch" style="background: #000000"></span>
+                Monolith
+            </button>
+        </div>
+
+        <script>
+            // --- 0. CONFIG ---
+            const apiKey = ""; // Insert Key at runtime if needed, using mock fallbacks otherwise
+
+            // --- 3. UI LOGIC (Views & Themes) ---
+            // Defined early to prevent race conditions
+            function switchView(viewName) {
+                document
+                    .querySelectorAll(".view-section")
+                    .forEach((el) => el.classList.remove("active"));
+                document
+                    .getElementById("view-" + viewName)
+                    .classList.add("active");
+
+                // Update buttons state
+                document
+                    .querySelectorAll(".page-btn")
+                    .forEach((btn) => btn.classList.remove("active"));
+                const index =
+                    viewName === "home" ? 0 : viewName === "collection" ? 1 : 2;
+                document
+                    .querySelectorAll(".page-btn")
+                    [index].classList.add("active");
+
+                window.scrollTo(0, 0);
+            }
+
+            function setTheme(themeName, btn) {
+                document.body.className = `theme-${themeName}`;
+                document
+                    .querySelectorAll(".theme-btn")
+                    .forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+            }
+
+            // --- 1. GEMINI HELPER ---
+            async function callGemini(prompt) {
+                if (!apiKey) return null; // Fallback to mock if no key
+
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                    });
+
+                    // Simple exponential backoff retry logic could go here
+                    if (!response.ok)
+                        throw new Error(`Gemini API Error: ${response.status}`);
+
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (error) {
+                    console.error("Gemini Call Failed", error);
+                    return null;
+                }
+            }
+
+            // --- 2. AI FEATURES ---
+
+            // Feature A: AutoRAG Search
+            async function performRagSearch() {
+                const input = document.getElementById("RagInput");
+                const results = document.getElementById("RagResults");
+                const query = input.value;
+
+                if (!query) return;
+
+                results.innerHTML =
+                    '<div style="padding:20px; text-align:center; opacity: 0.7;">Scanning Knowledge Base...</div>';
+                results.classList.add("active");
+
+                // 1. Try Gemini
+                const prompt = `You are a search engine for 'Forge Industrial'. The user query is: '${query}'. Return a JSON object with a key 'results' containing an array of 2 items. Items have: 'title', 'score' (0.8-1.0), 'snippet' (technical). If query is about aluminum, recommend TIG welders. If about safety, recommend gloves/helmets. STRICT JSON.`;
+
+                const aiResponse = await callGemini(prompt);
+
+                if (aiResponse) {
+                    try {
+                        // Extract JSON from potential code fences
+                        const jsonStr = aiResponse
+                            .replace(/```json/g, "")
+                            .replace(/```/g, "")
+                            .trim();
+                        const data = JSON.parse(jsonStr);
+                        renderRagResults(data.results);
+                        return;
+                    } catch (e) {
+                        console.warn("AI JSON Parse Error", e);
+                    }
+                }
+
+                // 2. Fallback Mock Data
+                setTimeout(() => {
+                    const mockData = [
+                        {
+                            title: "TIG-200 AC/DC Welder",
+                            score: 0.98,
+                            snippet:
+                                "Ideal for aluminum applications with advanced pulse control.",
+                        },
+                        {
+                            title: "Aluminum Filler Rod (4043)",
+                            score: 0.85,
+                            snippet:
+                                "Standard silicon alloy for general purpose aluminum welding.",
+                        },
+                    ];
+                    renderRagResults(mockData);
+                }, 800);
+            }
+
+            function renderRagResults(items) {
+                const results = document.getElementById("RagResults");
+                results.innerHTML = items
+                    .map(
+                        (item) => `
+                <div class="rag-item">
+                    <div style="width:60px; height:60px; background:#ddd; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#777;">IMG</div>
+                    <div>
+                        <strong>${item.title}</strong><br>
+                        <span class="rag-score">${Math.round(item.score * 100)}% Match</span>
+                        <p style="margin:5px 0 0; font-size:0.9rem; opacity:0.7;">${item.snippet}</p>
+                    </div>
+                </div>
+            `,
+                    )
+                    .join("");
+            }
+
+            // Feature B: Product Tech Brief
+            async function generateTechBrief() {
+                const container = document.getElementById("AiBriefContainer");
+                const content = document.getElementById("AiBriefContent");
+                const title = document.getElementById("ProductTitle").innerText;
+
+                container.classList.add("active");
+                content.innerHTML = "Consulting engineering specs...";
+
+                const prompt = `Write a concise technical brief for the '${title}'. Focus on industrial duty cycle, typical applications (e.g. shipyard, fabrication), and key benefits. Use HTML <ul><li> format. Max 3 bullet points.`;
+
+                const aiResponse = await callGemini(prompt);
+
+                if (aiResponse) {
+                    content.innerHTML = aiResponse;
+                } else {
+                    setTimeout(() => {
+                        content.innerHTML = `<ul>
+                        <li><strong>High Duty Cycle:</strong> Engineered for continuous operation at 300A without thermal shutdown.</li>
+                        <li><strong>Multi-Process:</strong> Seamlessly switches between MIG, TIG, and Stick for versatile fabrication.</li>
+                        <li><strong>Rugged Chassis:</strong> IP23S rated steel enclosure withstands harsh shipyard environments.</li>
+                    </ul>`;
+                    }, 1000);
+                }
+            }
+
+            // Search Trigger
+            document
+                .getElementById("RagInput")
+                .addEventListener("keypress", (e) => {
+                    if (e.key === "Enter") performRagSearch();
+                });
+
+            // PWA Sim (Corrected: Uses ID)
+            setTimeout(() => {
+                document.getElementById("PWA-Banner").classList.add("visible");
+            }, 3000);
+
+            document
+                .getElementById("PWA-Install-Btn")
+                .addEventListener("click", function () {
+                    this.parentElement.classList.remove("visible");
+                    alert("App Installation Simulated!");
+                });
+        </script>
+    </body>
+</html>
