@@ -16,7 +16,7 @@
   }
 {%- endstyle -%}
 
-<section class="shoppable-image section">
+<section class="shoppable-image section" data-section-id="{{ section.id }}">
   <div class="container">
     {%- if section.settings.title != blank -%}
       <header class="shoppable-image__header">
@@ -28,7 +28,7 @@
     {%- endif -%}
 
     <div class="shoppable-image__wrapper">
-      <div class="shoppable-image__container">
+      <div class="shoppable-image__container" data-hotspot-container>
         {%- if section.settings.image != blank -%}
           {% render 'image',
             image: section.settings.image,
@@ -43,27 +43,32 @@
           {%- assign product = block.settings.product -%}
 
           <div
-            class="hotspot"
+            class="hotspot hotspot--3d"
             style="top: {{ block.settings.position_y }}%; left: {{ block.settings.position_x }}%;"
+            data-hotspot-x="{{ block.settings.position_x }}"
+            data-hotspot-y="{{ block.settings.position_y }}"
             {{ block.shopify_attributes }}
           >
             <button
               type="button"
-              class="hotspot__trigger"
+              class="hotspot__trigger hotspot__trigger--3d"
               aria-expanded="false"
               aria-controls="hotspot-card-{{ block.id }}"
               aria-label="{% if product != blank %}{{ product.title }}{% else %}Product details{% endif %}"
               data-hotspot-trigger
             >
-              <span class="hotspot__dot"></span>
+              <span class="hotspot__dot hotspot__dot--3d"></span>
               <span class="hotspot__pulse"></span>
+              <span class="hotspot__ring"></span>
             </button>
 
             <div
               id="hotspot-card-{{ block.id }}"
-              class="hotspot__card hotspot__card--{{ block.settings.card_position }}"
+              class="hotspot__card"
+              data-card-position="{{ block.settings.card_position }}"
               data-hotspot-card
             >
+              <div class="hotspot__card-arrow" data-card-arrow></div>
               {%- if product != blank -%}
                 <a href="{{ product.url }}" class="hotspot__product">
                   {%- if product.featured_image != blank -%}
@@ -191,13 +196,14 @@
   .shoppable-image__container {
     position: relative;
     border-radius: var(--radius-lg);
-    overflow: hidden;
+    overflow: visible;
   }
 
   .shoppable-image__image {
     display: block;
     width: 100%;
     height: auto;
+    border-radius: var(--radius-lg);
   }
 
   .shoppable-image__placeholder {
@@ -221,6 +227,56 @@
     background: none;
     border: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 3D Effect Styles */
+  .hotspot__trigger--3d {
+    perspective: 100px;
+    transform-style: preserve-3d;
+  }
+
+  .hotspot__dot--3d {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, var(--hotspot-color, var(--color-secondary)), color-mix(in srgb, var(--hotspot-color, var(--color-secondary)) 80%, #000));
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.3),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    transform: translateZ(0);
+  }
+
+  .hotspot__trigger--3d:hover .hotspot__dot--3d,
+  .hotspot__trigger--3d[aria-expanded="true"] .hotspot__dot--3d {
+    transform: translateZ(8px) scale(1.1);
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.35),
+      0 4px 8px rgba(0, 0, 0, 0.25),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .hotspot__ring {
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--hotspot-color, var(--color-secondary));
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .hotspot__trigger--3d:hover .hotspot__ring,
+  .hotspot__trigger--3d[aria-expanded="true"] .hotspot__ring {
+    opacity: 0.4;
+    transform: scale(1.3);
   }
 
   .hotspot__dot {
@@ -264,7 +320,18 @@
     opacity: 0;
   }
 
-  /* Hotspot Card */
+  /* Card Arrow (Pointer) */
+  .hotspot__card-arrow {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--card-bg, var(--color-background));
+    border: 1px solid var(--color-border);
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  /* Hotspot Card - Smart Positioning */
   .hotspot__card {
     position: absolute;
     z-index: 20;
@@ -272,61 +339,21 @@
     background-color: var(--card-bg, var(--color-background));
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.1);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
     transition:
-      opacity var(--duration-normal) var(--ease-default),
-      visibility var(--duration-normal) var(--ease-default),
-      transform var(--duration-normal) var(--ease-default);
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    overflow: visible;
   }
 
   .hotspot__card.is-open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
-  }
-
-  /* Card positioning */
-  .hotspot__card--bottom {
-    top: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%) translateY(8px);
-  }
-
-  .hotspot__card--bottom.is-open {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .hotspot__card--top {
-    bottom: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-  }
-
-  .hotspot__card--top.is-open {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .hotspot__card--left {
-    right: calc(100% + 12px);
-    top: 50%;
-    transform: translateY(-50%) translateX(-8px);
-  }
-
-  .hotspot__card--left.is-open {
-    transform: translateY(-50%) translateX(0);
-  }
-
-  .hotspot__card--right {
-    left: calc(100% + 12px);
-    top: 50%;
-    transform: translateY(-50%) translateX(8px);
-  }
-
-  .hotspot__card--right.is-open {
-    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
   }
 
   .hotspot__close {
@@ -336,14 +363,17 @@
     display: flex;
     padding: var(--space-1);
     color: var(--color-text-secondary);
-    background: none;
+    background: rgba(255, 255, 255, 0.9);
     border: none;
+    border-radius: 50%;
     cursor: pointer;
-    transition: color var(--duration-fast) var(--ease-default);
+    transition: color var(--duration-fast) var(--ease-default), background var(--duration-fast);
+    z-index: 5;
   }
 
   .hotspot__close:hover {
     color: var(--color-text);
+    background: #fff;
   }
 
   .hotspot__product {
@@ -481,12 +511,25 @@
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
   }
+
+  /* Mobile Responsive */
+  @media (max-width: 640px) {
+    .hotspot__card {
+      max-width: calc(100vw - 40px);
+    }
+  }
 {% endstylesheet %}
 
 {% javascript %}
   class ShoppableImage {
     constructor() {
-      this.hotspots = document.querySelectorAll('.hotspot');
+      this.section = document.querySelector('[data-section-id]');
+      if (!this.section) return;
+
+      this.container = this.section.querySelector('[data-hotspot-container]');
+      if (!this.container) return;
+
+      this.hotspots = this.section.querySelectorAll('.hotspot');
       this.activeCard = null;
 
       this.init();
@@ -503,7 +546,7 @@
         // Toggle on click
         trigger.addEventListener('click', (e) => {
           e.stopPropagation();
-          this.toggleCard(trigger, card);
+          this.toggleCard(trigger, card, hotspot);
         });
 
         // Close button
@@ -516,7 +559,7 @@
         trigger.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            this.toggleCard(trigger, card);
+            this.toggleCard(trigger, card, hotspot);
           }
           if (e.key === 'Escape') {
             this.closeCard(trigger, card);
@@ -537,21 +580,148 @@
           this.closeAllCards();
         }
       });
+
+      // Reposition cards on resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (this.activeCard) {
+            const trigger = this.section.querySelector('[aria-expanded="true"]');
+            if (trigger) {
+              const hotspot = trigger.closest('.hotspot');
+              this.positionCard(hotspot, this.activeCard);
+            }
+          }
+        }, 100);
+      });
     }
 
-    toggleCard(trigger, card) {
+    /**
+     * Smart card positioning that keeps cards within the container bounds
+     */
+    positionCard(hotspot, card) {
+      const preferredPosition = card.dataset.cardPosition || 'bottom';
+      const arrow = card.querySelector('[data-card-arrow]');
+
+      // Reset any inline styles from previous positioning
+      card.style.cssText = '';
+      if (arrow) arrow.style.cssText = '';
+
+      // Get measurements
+      const containerRect = this.container.getBoundingClientRect();
+      const hotspotRect = hotspot.getBoundingClientRect();
+      const cardWidth = card.offsetWidth;
+      const cardHeight = card.offsetHeight;
+
+      // Calculate hotspot center relative to container
+      const hotspotCenterX = hotspotRect.left + hotspotRect.width / 2 - containerRect.left;
+      const hotspotCenterY = hotspotRect.top + hotspotRect.height / 2 - containerRect.top;
+
+      const gap = 14; // Space between hotspot and card
+      const edgePadding = 12; // Minimum padding from container edge
+      const arrowSize = 12; // Arrow dimensions
+
+      let cardLeft, cardTop;
+      let arrowLeft, arrowTop;
+      let finalPosition = preferredPosition;
+
+      // Calculate available space in each direction
+      const spaceAbove = hotspotCenterY - edgePadding;
+      const spaceBelow = containerRect.height - hotspotCenterY - edgePadding;
+      const spaceLeft = hotspotCenterX - edgePadding;
+      const spaceRight = containerRect.width - hotspotCenterX - edgePadding;
+
+      // Determine best position based on available space
+      const canFit = (pos) => {
+        switch (pos) {
+          case 'bottom': return spaceBelow >= cardHeight + gap;
+          case 'top': return spaceAbove >= cardHeight + gap;
+          case 'right': return spaceRight >= cardWidth + gap;
+          case 'left': return spaceLeft >= cardWidth + gap;
+          default: return false;
+        }
+      };
+
+      // Try preferred position first, then fallbacks
+      const positionOrder = [preferredPosition];
+      if (preferredPosition === 'bottom' || preferredPosition === 'top') {
+        positionOrder.push(preferredPosition === 'bottom' ? 'top' : 'bottom', 'right', 'left');
+      } else {
+        positionOrder.push(preferredPosition === 'right' ? 'left' : 'right', 'bottom', 'top');
+      }
+
+      for (const pos of positionOrder) {
+        if (canFit(pos)) {
+          finalPosition = pos;
+          break;
+        }
+      }
+
+      // Position the card based on final position
+      switch (finalPosition) {
+        case 'bottom':
+          cardTop = hotspotCenterY + hotspotRect.height / 2 + gap;
+          cardLeft = Math.max(edgePadding, Math.min(hotspotCenterX - cardWidth / 2, containerRect.width - cardWidth - edgePadding));
+          arrowTop = -arrowSize / 2 - 1;
+          arrowLeft = hotspotCenterX - cardLeft - arrowSize / 2;
+          break;
+
+        case 'top':
+          cardTop = hotspotCenterY - hotspotRect.height / 2 - gap - cardHeight;
+          cardLeft = Math.max(edgePadding, Math.min(hotspotCenterX - cardWidth / 2, containerRect.width - cardWidth - edgePadding));
+          arrowTop = cardHeight - arrowSize / 2 - 1;
+          arrowLeft = hotspotCenterX - cardLeft - arrowSize / 2;
+          break;
+
+        case 'right':
+          cardLeft = hotspotCenterX + hotspotRect.width / 2 + gap;
+          cardTop = Math.max(edgePadding, Math.min(hotspotCenterY - cardHeight / 2, containerRect.height - cardHeight - edgePadding));
+          arrowLeft = -arrowSize / 2 - 1;
+          arrowTop = hotspotCenterY - cardTop - arrowSize / 2;
+          break;
+
+        case 'left':
+          cardLeft = hotspotCenterX - hotspotRect.width / 2 - gap - cardWidth;
+          cardTop = Math.max(edgePadding, Math.min(hotspotCenterY - cardHeight / 2, containerRect.height - cardHeight - edgePadding));
+          arrowLeft = cardWidth - arrowSize / 2 - 1;
+          arrowTop = hotspotCenterY - cardTop - arrowSize / 2;
+          break;
+      }
+
+      // Clamp arrow position to stay within card
+      arrowLeft = Math.max(arrowSize, Math.min(arrowLeft, cardWidth - arrowSize * 2));
+      arrowTop = Math.max(arrowSize, Math.min(arrowTop, cardHeight - arrowSize * 2));
+
+      // Apply positioning
+      card.style.position = 'absolute';
+      card.style.left = `${cardLeft}px`;
+      card.style.top = `${cardTop}px`;
+      card.style.transform = 'none';
+
+      if (arrow) {
+        arrow.style.position = 'absolute';
+        arrow.style.left = `${arrowLeft}px`;
+        arrow.style.top = `${arrowTop}px`;
+      }
+    }
+
+    toggleCard(trigger, card, hotspot) {
       const isOpen = card.classList.contains('is-open');
 
       // Close any other open cards first
       this.closeAllCards();
 
       if (!isOpen) {
-        card.classList.add('is-open');
-        trigger.setAttribute('aria-expanded', 'true');
-        this.activeCard = card;
+        // Position the card smartly before showing
+        this.positionCard(hotspot, card);
 
-        // Adjust position if card goes off-screen
-        this.adjustCardPosition(card);
+        // Show with animation
+        requestAnimationFrame(() => {
+          card.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          this.activeCard = card;
+        });
       }
     }
 
@@ -569,24 +739,6 @@
           this.closeCard(trigger, card);
         }
       });
-    }
-
-    adjustCardPosition(card) {
-      // Get card dimensions and position
-      const rect = card.getBoundingClientRect();
-      const container = card.closest('.shoppable-image__container').getBoundingClientRect();
-
-      // Check if card overflows container and adjust
-      if (rect.left < container.left) {
-        card.style.left = '0';
-        card.style.transform = card.style.transform.replace('translateX(-50%)', '');
-      }
-
-      if (rect.right > container.right) {
-        card.style.left = 'auto';
-        card.style.right = '0';
-        card.style.transform = card.style.transform.replace('translateX(-50%)', '');
-      }
     }
   }
 
@@ -713,14 +865,15 @@
         {
           "type": "select",
           "id": "card_position",
-          "label": "Card position",
+          "label": "Preferred card position",
           "options": [
             { "value": "bottom", "label": "Below" },
             { "value": "top", "label": "Above" },
             { "value": "left", "label": "Left" },
             { "value": "right", "label": "Right" }
           ],
-          "default": "bottom"
+          "default": "bottom",
+          "info": "Card will automatically adjust if there's not enough space"
         },
         {
           "type": "checkbox",
