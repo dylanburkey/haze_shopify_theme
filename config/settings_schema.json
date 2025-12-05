@@ -78,6 +78,92 @@
     ]
   },
   {
+    "name": "SEO",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search Engine Optimization"
+      },
+      {
+        "type": "paragraph",
+        "content": "Optimize your store for search engines. These settings apply globally across your theme."
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_structured_data",
+        "label": "Enable structured data (JSON-LD)",
+        "default": true,
+        "info": "Adds rich snippets for products, organization, and breadcrumbs"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_breadcrumbs",
+        "label": "Show breadcrumb navigation",
+        "default": true,
+        "info": "Displays breadcrumb links on product and collection pages"
+      },
+      {
+        "type": "header",
+        "content": "Social Sharing"
+      },
+      {
+        "type": "image_picker",
+        "id": "seo_default_share_image",
+        "label": "Default social sharing image",
+        "info": "Used when pages don't have a specific image. Recommended: 1200x630 pixels"
+      },
+      {
+        "type": "text",
+        "id": "seo_twitter_handle",
+        "label": "Twitter/X handle",
+        "info": "Include the @ symbol (e.g., @yourstore)"
+      },
+      {
+        "type": "header",
+        "content": "Performance"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_lazy_load_images",
+        "label": "Lazy load images",
+        "default": true,
+        "info": "Defer loading of offscreen images to improve page speed"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_preconnect_cdn",
+        "label": "Preconnect to CDN",
+        "default": true,
+        "info": "Establish early connections to Shopify CDN for faster resource loading"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_speculation_rules",
+        "label": "Enable speculation rules",
+        "default": true,
+        "info": "Prerender pages on hover for near-instant navigation (Chrome only)"
+      },
+      {
+        "type": "header",
+        "content": "Accessibility"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_skip_to_content",
+        "label": "Show skip to content link",
+        "default": true,
+        "info": "Adds a skip navigation link for keyboard users"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_focus_indicators",
+        "label": "Enhanced focus indicators",
+        "default": true,
+        "info": "Shows visible focus outlines for keyboard navigation"
+      }
+    ]
+  },
+  {
     "name": "Colors",
     "settings": [
       {
@@ -92,15 +178,33 @@
       },
       {
         "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary",
+        "default": "#334fb4"
+      },
+      {
+        "type": "color",
         "id": "color_text",
         "label": "Text",
         "default": "#1a1a1a"
       },
       {
         "type": "color",
+        "id": "color_text_secondary",
+        "label": "Text secondary",
+        "default": "#6b7280"
+      },
+      {
+        "type": "color",
         "id": "color_background",
         "label": "Background",
         "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_background_secondary",
+        "label": "Background secondary",
+        "default": "#f4f4f4"
       },
       {
         "type": "color",
@@ -136,9 +240,37 @@
       },
       {
         "type": "color",
+        "id": "color_button_background",
+        "label": "Button background",
+        "default": "#d71920"
+      },
+      {
+        "type": "color",
         "id": "color_button_text",
         "label": "Button text",
         "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Status colors"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success",
+        "default": "#16a34a"
+      },
+      {
+        "type": "color",
+        "id": "color_warning",
+        "label": "Warning",
+        "default": "#f59e0b"
+      },
+      {
+        "type": "color",
+        "id": "color_error",
+        "label": "Error",
+        "default": "#dc2626"
       }
     ]
   },
@@ -146,35 +278,36 @@
     "name": "Typography",
     "settings": [
       {
-        "type": "select",
+        "type": "font_picker",
         "id": "font_heading",
         "label": "Heading font",
-        "options": [
-          { "value": "Oswald", "label": "Oswald" },
-          { "value": "Teko", "label": "Teko" },
-          { "value": "Archivo Black", "label": "Archivo Black" },
-          {
-            "value": "IBM Plex Sans Condensed",
-            "label": "IBM Plex Sans Condensed"
-          },
-          { "value": "Barlow Condensed", "label": "Barlow Condensed" },
-          { "value": "Bitter", "label": "Bitter" }
-        ],
-        "default": "Oswald"
+        "default": "oswald_n7"
       },
       {
-        "type": "select",
+        "type": "range",
+        "id": "font_heading_scale",
+        "label": "Heading font scale",
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
+      },
+      {
+        "type": "font_picker",
         "id": "font_body",
         "label": "Body font",
-        "options": [
-          { "value": "Roboto", "label": "Roboto" },
-          { "value": "Inter", "label": "Inter" },
-          { "value": "Work Sans", "label": "Work Sans" },
-          { "value": "IBM Plex Sans", "label": "IBM Plex Sans" },
-          { "value": "Barlow", "label": "Barlow" },
-          { "value": "Lato", "label": "Lato" }
-        ],
-        "default": "Roboto"
+        "default": "roboto_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_scale",
+        "label": "Body font scale",
+        "min": 75,
+        "max": 150,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
       }
     ]
   },
@@ -347,6 +480,120 @@
           { "value": "page", "label": "Page" }
         ],
         "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_vendor",
+        "label": "Show product vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_enable_notes",
+        "label": "Enable cart notes",
+        "default": true,
+        "info": "Allow customers to add notes to their order"
+      }
+    ]
+  },
+  {
+    "name": "Collection Filters",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Filter Display"
+      },
+      {
+        "type": "select",
+        "id": "collection_filter_position",
+        "label": "Filter position",
+        "options": [
+          { "value": "left", "label": "Left sidebar" },
+          { "value": "right", "label": "Right sidebar" },
+          { "value": "horizontal", "label": "Horizontal (above products)" }
+        ],
+        "default": "left",
+        "info": "Choose where filters appear on collection pages"
+      },
+      {
+        "type": "select",
+        "id": "collection_filter_default_state",
+        "label": "Filter groups default state",
+        "options": [
+          { "value": "open", "label": "Open (expanded)" },
+          { "value": "closed", "label": "Closed (collapsed)" },
+          { "value": "first_open", "label": "First group open, rest closed" }
+        ],
+        "default": "open",
+        "info": "How filter groups appear when the page loads"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_filter_sticky",
+        "label": "Sticky filters on scroll",
+        "default": true,
+        "info": "Keep filters visible while scrolling (sidebar only)"
+      },
+      {
+        "type": "header",
+        "content": "Mobile Filters"
+      },
+      {
+        "type": "select",
+        "id": "collection_filter_mobile",
+        "label": "Mobile filter display",
+        "options": [
+          { "value": "drawer", "label": "Slide-out drawer" },
+          { "value": "modal", "label": "Full-screen modal" },
+          { "value": "dropdown", "label": "Dropdown below toolbar" }
+        ],
+        "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "Product Attachments",
+    "settings": [
+      {
+        "type": "header",
+        "content": "File Display"
+      },
+      {
+        "type": "paragraph",
+        "content": "Configure how product attachments (PDFs, documents, CAD files) are displayed on product pages."
+      },
+      {
+        "type": "checkbox",
+        "id": "attachments_show_file_size",
+        "label": "Show file size",
+        "default": true,
+        "info": "Display the file size next to each attachment"
+      },
+      {
+        "type": "checkbox",
+        "id": "attachments_show_file_icon",
+        "label": "Show file type icon",
+        "default": true,
+        "info": "Display an icon based on file type"
+      },
+      {
+        "type": "select",
+        "id": "attachments_open_behavior",
+        "label": "Click behavior",
+        "options": [
+          { "value": "download", "label": "Download file" },
+          { "value": "new_tab", "label": "Open in new tab" },
+          { "value": "preview", "label": "Preview (PDFs only)" }
+        ],
+        "default": "new_tab"
+      },
+      {
+        "type": "header",
+        "content": "Supported File Types"
+      },
+      {
+        "type": "paragraph",
+        "content": "The theme supports: PDF, DOC, DOCX, XLS, XLSX, CSV, DWG, STEP, STL, PNG, JPG, and more."
       }
     ]
   },
@@ -434,6 +681,50 @@
         "id": "pwa_splash_screen",
         "label": "iOS splash screen",
         "info": "Shown while app loads on iOS devices"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter/X URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin",
+        "label": "LinkedIn URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
       }
     ]
   }

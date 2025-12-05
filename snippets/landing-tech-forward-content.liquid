@@ -1,5 +1,6 @@
 {% comment %}
   Tech Forward Landing Page Content Snippet
+  Dark, futuristic theme for electronics/tech products
   Used by landing-page-switcher section
 {% endcomment %}
 
@@ -9,6 +10,7 @@
   {%- comment -%} Hero Section {%- endcomment -%}
   <section class="tech-hero">
     <div class="tech-hero__bg">
+      <div class="tech-hero__bg-grid"></div>
       <div class="tech-hero__bg-gradient"></div>
     </div>
     <div class="container">
@@ -46,13 +48,47 @@
     </div>
   </section>
 
+  {%- comment -%} Trusted By Section {%- endcomment -%}
+  <section class="tech-trusted">
+    <div class="container">
+      <p class="tech-trusted__label">Trusted by industry leaders</p>
+      <div class="tech-trusted__logos">
+        <div class="tech-trusted__logo">
+          <svg viewBox="0 0 120 40" fill="currentColor" opacity="0.5">
+            <rect x="10" y="12" width="100" height="16" rx="2"/>
+          </svg>
+        </div>
+        <div class="tech-trusted__logo">
+          <svg viewBox="0 0 120 40" fill="currentColor" opacity="0.5">
+            <circle cx="60" cy="20" r="16"/>
+          </svg>
+        </div>
+        <div class="tech-trusted__logo">
+          <svg viewBox="0 0 120 40" fill="currentColor" opacity="0.5">
+            <polygon points="60,4 76,36 44,36"/>
+          </svg>
+        </div>
+        <div class="tech-trusted__logo">
+          <svg viewBox="0 0 120 40" fill="currentColor" opacity="0.5">
+            <rect x="20" y="8" width="80" height="24" rx="4"/>
+          </svg>
+        </div>
+        <div class="tech-trusted__logo">
+          <svg viewBox="0 0 120 40" fill="currentColor" opacity="0.5">
+            <path d="M60 4 L76 20 L60 36 L44 20 Z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
   {%- comment -%} Features Grid {%- endcomment -%}
   <section id="features" class="tech-features">
     <div class="container">
       <div class="section-header section-header--center">
         <span class="section-eyebrow">Features</span>
         <h2 class="section-title">Built for the future</h2>
-        <p class="section-subtitle">Everything you need to harness the power of artificial intelligence, wrapped in one elegant platform.</p>
+        <p class="section-subtitle">Everything you need to harness the power of next-generation technology, wrapped in one elegant platform.</p>
       </div>
       <div class="tech-features__grid">
         <article class="tech-feature-card">
@@ -114,6 +150,171 @@
           <h3 class="tech-feature-card__title">Developer First</h3>
           <p class="tech-feature-card__text">RESTful APIs, SDKs for every language, and comprehensive documentation.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Products Section {%- endcomment -%}
+  {%- assign tech_collection = collections['all'] -%}
+  {%- if tech_collection != blank -%}
+    <section class="tech-products">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <span class="section-eyebrow">Products</span>
+          <h2 class="section-title">Explore Our Solutions</h2>
+          <p class="section-subtitle">Cutting-edge technology designed to transform how you work.</p>
+        </div>
+        <div class="tech-products__grid">
+          {%- for product in tech_collection.products limit: 8 -%}
+            <article class="tech-product-card">
+              <a href="{{ product.url }}" class="tech-product-card__link">
+                <div class="tech-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  <div class="tech-product-card__overlay">
+                    <span class="tech-product-card__quick-view">Quick View</span>
+                  </div>
+                </div>
+                <div class="tech-product-card__content">
+                  <h3 class="tech-product-card__title">{{ product.title }}</h3>
+                  <div class="tech-product-card__price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="tech-product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <span class="tech-product-card__price-current">{{ product.price | money }}</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        <div class="tech-products__action">
+          <a href="/collections/all" class="btn btn--primary btn--glow">View All Products</a>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Stats Section {%- endcomment -%}
+  <section class="tech-stats">
+    <div class="container">
+      <div class="tech-stats__grid">
+        <div class="tech-stats__item">
+          <span class="tech-stats__value">500K+</span>
+          <span class="tech-stats__label">Active Users</span>
+        </div>
+        <div class="tech-stats__item">
+          <span class="tech-stats__value">99.99%</span>
+          <span class="tech-stats__label">Uptime SLA</span>
+        </div>
+        <div class="tech-stats__item">
+          <span class="tech-stats__value">150+</span>
+          <span class="tech-stats__label">Countries</span>
+        </div>
+        <div class="tech-stats__item">
+          <span class="tech-stats__value">24/7</span>
+          <span class="tech-stats__label">Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  <section class="tech-testimonials">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Testimonials</span>
+        <h2 class="section-title">What Our Customers Say</h2>
+      </div>
+      <div class="tech-testimonials__grid">
+        <article class="tech-testimonial-card">
+          <div class="tech-testimonial-card__rating">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="tech-testimonial-card__quote">
+            "This platform has completely revolutionized our workflow. The speed and reliability are unmatched in the industry."
+          </blockquote>
+          <div class="tech-testimonial-card__author">
+            <div class="tech-testimonial-card__avatar">JS</div>
+            <div class="tech-testimonial-card__info">
+              <span class="tech-testimonial-card__name">James Smith</span>
+              <span class="tech-testimonial-card__role">CTO, TechCorp</span>
+            </div>
+          </div>
+        </article>
+        <article class="tech-testimonial-card">
+          <div class="tech-testimonial-card__rating">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="tech-testimonial-card__quote">
+            "The API documentation is fantastic and the integration was seamless. We were up and running in less than a day."
+          </blockquote>
+          <div class="tech-testimonial-card__author">
+            <div class="tech-testimonial-card__avatar">MK</div>
+            <div class="tech-testimonial-card__info">
+              <span class="tech-testimonial-card__name">Maria Kim</span>
+              <span class="tech-testimonial-card__role">Lead Developer, StartupXYZ</span>
+            </div>
+          </div>
+        </article>
+        <article class="tech-testimonial-card">
+          <div class="tech-testimonial-card__rating">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="tech-testimonial-card__quote">
+            "Best-in-class security features. Our compliance team was impressed with the SOC 2 certifications and data handling."
+          </blockquote>
+          <div class="tech-testimonial-card__author">
+            <div class="tech-testimonial-card__avatar">DL</div>
+            <div class="tech-testimonial-card__info">
+              <span class="tech-testimonial-card__name">David Lee</span>
+              <span class="tech-testimonial-card__role">Security Director, FinanceHub</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Newsletter {%- endcomment -%}
+  <section class="tech-newsletter">
+    <div class="container">
+      <div class="tech-newsletter__inner">
+        <div class="tech-newsletter__content">
+          <span class="section-eyebrow">Stay Updated</span>
+          <h2 class="tech-newsletter__title">Get the Latest Updates</h2>
+          <p class="tech-newsletter__text">Subscribe to our newsletter for product updates, tech insights, and exclusive offers.</p>
+        </div>
+        <div class="tech-newsletter__form-wrapper">
+          {%- form 'customer', class: 'tech-newsletter__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              class="tech-newsletter__input"
+              placeholder="Enter your email"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit" class="btn btn--primary btn--glow">Subscribe</button>
+          {%- endform -%}
+          <p class="tech-newsletter__note">No spam. Unsubscribe anytime.</p>
+        </div>
       </div>
     </div>
   </section>

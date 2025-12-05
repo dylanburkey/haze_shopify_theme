@@ -9,15 +9,111 @@
       {%- endif -%}
     </header>
 
+    {%- liquid
+      assign filter_position = settings.collection_filter_position | default: 'left'
+      assign is_horizontal = false
+      if filter_position == 'horizontal'
+        assign is_horizontal = true
+      endif
+    -%}
+
     {%- if collection.products.size > 0 -%}
-      <div class="collection-layout">
+      {%- comment -%} Horizontal Filters (above products) {%- endcomment -%}
+      {%- if is_horizontal and section.settings.enable_filtering -%}
+        <div class="collection-filters-horizontal">
+          {% render 'product-filters', collection: collection %}
+        </div>
+      {%- endif -%}
+
+      <div class="collection-layout{% if filter_position == 'right' %} collection-layout--reverse{% endif %}{% if is_horizontal %} collection-layout--no-sidebar{% endif %}">
+        {%- comment -%} Sidebar Filters (left or right) {%- endcomment -%}
         {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
-          <div class="collection-sidebar" id="CollectionFilters">
-            {% render 'product-filters', collection: collection %}
-          </div>
+          {%- unless is_horizontal -%}
+            <div class="collection-sidebar{% if filter_position == 'right' %} collection-sidebar--right{% endif %}" id="CollectionFilters">
+              {% render 'product-filters', collection: collection %}
+
+              {%- comment -%} Custom content blocks below filters {%- endcomment -%}
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'filter_content' -%}
+                    <div class="filter-content-block" {{ block.shopify_attributes }}>
+                      {%- if block.settings.heading != blank -%}
+                        <h3 class="filter-content-block__heading">{{ block.settings.heading }}</h3>
+                      {%- endif -%}
+                      {%- if block.settings.content != blank -%}
+                        <div class="filter-content-block__content">{{ block.settings.content }}</div>
+                      {%- endif -%}
+                      {%- if block.settings.button_label != blank -%}
+                        <a href="{{ block.settings.button_link }}" class="filter-content-block__button btn btn--outline">
+                          {{ block.settings.button_label }}
+                        </a>
+                      {%- endif -%}
+                    </div>
+
+                  {%- when 'filter_image' -%}
+                    <div class="filter-image-block" {{ block.shopify_attributes }}>
+                      {%- if block.settings.image != blank -%}
+                        <a href="{{ block.settings.link | default: '#' }}" class="filter-image-block__link">
+                          {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'filter-image-block__image' }}
+                          {%- if block.settings.overlay_text != blank -%}
+                            <span class="filter-image-block__overlay">{{ block.settings.overlay_text }}</span>
+                          {%- endif -%}
+                        </a>
+                      {%- endif -%}
+                    </div>
+
+                  {%- when 'filter_links' -%}
+                    <div class="filter-links-block" {{ block.shopify_attributes }}>
+                      {%- if block.settings.heading != blank -%}
+                        <h3 class="filter-links-block__heading">{{ block.settings.heading }}</h3>
+                      {%- endif -%}
+                      <ul class="filter-links-block__list">
+                        {%- if block.settings.link_1_label != blank -%}
+                          <li><a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_label }}</a></li>
+                        {%- endif -%}
+                        {%- if block.settings.link_2_label != blank -%}
+                          <li><a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_label }}</a></li>
+                        {%- endif -%}
+                        {%- if block.settings.link_3_label != blank -%}
+                          <li><a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_label }}</a></li>
+                        {%- endif -%}
+                        {%- if block.settings.link_4_label != blank -%}
+                          <li><a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_label }}</a></li>
+                        {%- endif -%}
+                      </ul>
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
         {%- endif -%}
 
         <div class="collection-main">
+          {%- comment -%} Mobile Filter Toggle {%- endcomment -%}
+          {%- unless is_horizontal -%}
+            <button type="button" class="collection-filter-toggle" data-filter-toggle aria-controls="CollectionFilters">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+              {{ 'collections.filters.title' | t | default: 'Filters' }}
+              {%- assign active_count = 0 -%}
+              {%- for filter in collection.filters -%}
+                {%- assign active_count = active_count | plus: filter.active_values.size -%}
+              {%- endfor -%}
+              {%- if active_count > 0 -%}
+                <span class="collection-filter-toggle__count">{{ active_count }}</span>
+              {%- endif -%}
+            </button>
+          {%- endunless -%}
+
           <div class="collection-toolbar">
             <p class="collection-toolbar__count">
               {{ 'collections.products_count' | t: count: collection.products_count }}
@@ -72,7 +168,9 @@
               <nav class="pagination" aria-label="{{ 'general.pagination.page' | t }}">
                 {%- if paginate.previous -%}
                   <a href="{{ paginate.previous.url }}" class="pagination__link pagination__link--prev">
-                    {% render 'icon', name: 'chevron-left', size: 16 %}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
                     {{ 'general.pagination.previous' | t }}
                   </a>
                 {%- endif -%}
@@ -96,7 +194,9 @@
                 {%- if paginate.next -%}
                   <a href="{{ paginate.next.url }}" class="pagination__link pagination__link--next">
                     {{ 'general.pagination.next' | t }}
-                    {% render 'icon', name: 'chevron-right', size: 16 %}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </a>
                 {%- endif -%}
               </nav>
@@ -127,15 +227,65 @@
     color: var(--color-text-secondary);
   }
 
+  /* Mobile filter toggle */
+  .collection-filter-toggle {
+    display: none;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-button);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: var(--space-4);
+  }
+
+  .collection-filter-toggle__count {
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    font-size: var(--font-size-xs);
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-full);
+  }
+
+  @media (max-width: 63.9375rem) {
+    .collection-filter-toggle {
+      display: inline-flex;
+    }
+  }
+
+  /* Horizontal filters container */
+  .collection-filters-horizontal {
+    margin-bottom: var(--space-6);
+  }
+
   .collection-layout {
     display: grid;
     gap: var(--space-8);
+  }
+
+  .collection-layout--no-sidebar {
+    display: block;
   }
 
   @media (min-width: 64rem) {
     .collection-layout {
       grid-template-columns: 16rem 1fr;
       gap: var(--space-10);
+    }
+
+    .collection-layout--reverse {
+      grid-template-columns: 1fr 16rem;
+    }
+
+    .collection-layout--reverse .collection-sidebar {
+      order: 2;
+    }
+
+    .collection-layout--reverse .collection-main {
+      order: 1;
     }
   }
 
@@ -145,6 +295,91 @@
     align-self: start;
     max-height: calc(100vh - 6rem);
     overflow-y: auto;
+  }
+
+  /* Filter content blocks */
+  .filter-content-block,
+  .filter-image-block,
+  .filter-links-block {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .filter-content-block__heading,
+  .filter-links-block__heading {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin: 0 0 var(--space-3);
+  }
+
+  .filter-content-block__content {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+
+  .filter-content-block__button {
+    width: 100%;
+    font-size: var(--font-size-xs);
+  }
+
+  .filter-image-block__link {
+    display: block;
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .filter-image-block__image {
+    width: 100%;
+    height: auto;
+    transition: transform var(--duration-normal) var(--ease-default);
+  }
+
+  .filter-image-block__link:hover .filter-image-block__image {
+    transform: scale(1.05);
+  }
+
+  .filter-image-block__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .filter-links-block__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .filter-links-block__list li {
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .filter-links-block__list li:last-child {
+    border-bottom: none;
+  }
+
+  .filter-links-block__list a {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .filter-links-block__list a:hover {
+    color: var(--color-primary);
   }
 
   .collection-toolbar {
@@ -307,6 +542,22 @@
   .collection-grid.is-changing {
     opacity: 0.5;
   }
+
+  /* Mobile sidebar overlay */
+  .collection-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: calc(var(--z-modal) - 1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-default), visibility var(--duration-normal) var(--ease-default);
+  }
+
+  .collection-sidebar-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
 {% endstylesheet %}
 
 {% javascript %}
@@ -344,6 +595,29 @@
 
     viewToggles.forEach(t => {
       t.classList.toggle('is-active', t.dataset.viewToggle === savedView);
+    });
+  }
+
+  // Mobile filter toggle
+  const filterToggle = document.querySelector('[data-filter-toggle]');
+  const filterSidebar = document.getElementById('CollectionFilters');
+
+  if (filterToggle && filterSidebar) {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'collection-sidebar-overlay';
+    document.body.appendChild(overlay);
+
+    filterToggle.addEventListener('click', () => {
+      filterSidebar.classList.toggle('is-open');
+      overlay.classList.toggle('is-visible');
+      document.body.style.overflow = filterSidebar.classList.contains('is-open') ? 'hidden' : '';
+    });
+
+    overlay.addEventListener('click', () => {
+      filterSidebar.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      document.body.style.overflow = '';
     });
   }
 {% endjavascript %}
@@ -400,6 +674,114 @@
       "id": "enable_sorting",
       "label": "Enable sorting",
       "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Filter position, default state, and mobile display can be configured in Theme Settings > Collection Filters."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_content",
+      "name": "Content block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Need Help?"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Contact our team for assistance with product selection.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Contact Us"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "filter_image",
+      "name": "Image block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "overlay_text",
+          "label": "Overlay text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "filter_links",
+      "name": "Links block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Quick Links"
+        },
+        {
+          "type": "text",
+          "id": "link_1_label",
+          "label": "Link 1 label"
+        },
+        {
+          "type": "url",
+          "id": "link_1_url",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_2_label",
+          "label": "Link 2 label"
+        },
+        {
+          "type": "url",
+          "id": "link_2_url",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_3_label",
+          "label": "Link 3 label"
+        },
+        {
+          "type": "url",
+          "id": "link_3_url",
+          "label": "Link 3 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_4_label",
+          "label": "Link 4 label"
+        },
+        {
+          "type": "url",
+          "id": "link_4_url",
+          "label": "Link 4 URL"
+        }
+      ]
     }
   ]
 }

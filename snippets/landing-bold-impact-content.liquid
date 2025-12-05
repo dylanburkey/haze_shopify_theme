@@ -1,5 +1,6 @@
 {% comment %}
   Bold Impact Landing Page Content Snippet
+  Athletic/sports theme with bold visuals
   Used by landing-page-switcher section
 {% endcomment %}
 
@@ -76,6 +77,49 @@
     </div>
   </section>
 
+  {%- comment -%} Featured Product Spotlight {%- endcomment -%}
+  <section class="impact-spotlight">
+    <div class="container">
+      <div class="impact-spotlight__inner">
+        <div class="impact-spotlight__media">
+          <div class="impact-spotlight__placeholder"></div>
+        </div>
+        <div class="impact-spotlight__content">
+          <span class="section-eyebrow">Featured</span>
+          <h2 class="impact-spotlight__title">Engineered for Champions</h2>
+          <p class="impact-spotlight__text">Our latest performance gear combines cutting-edge technology with athlete-tested design. Every stitch, every fiber, engineered for victory.</p>
+          <ul class="impact-spotlight__features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Moisture-wicking technology
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              4-way stretch fabric
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Anti-odor treatment
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Sustainable materials
+            </li>
+          </ul>
+          <a href="/collections/all" class="btn btn--primary">Shop the Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   {%- comment -%} Products Grid {%- endcomment -%}
   {%- assign featured_collection = section.settings.impact_collection | default: collections['all'] -%}
   {%- if featured_collection != blank -%}
@@ -139,6 +183,93 @@
           <span class="impact-stats-banner__value">24/7</span>
           <span class="impact-stats-banner__label">Support</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  <section class="impact-testimonials">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Reviews</span>
+        <h2 class="section-title">Athletes Love Us</h2>
+      </div>
+      <div class="impact-testimonials__grid">
+        <article class="impact-testimonial-card">
+          <div class="impact-testimonial-card__rating">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="impact-testimonial-card__quote">
+            "The compression fit is unreal. I've shaved seconds off my sprint times since switching to this gear."
+          </blockquote>
+          <div class="impact-testimonial-card__author">
+            <div class="impact-testimonial-card__avatar">MJ</div>
+            <div class="impact-testimonial-card__info">
+              <span class="impact-testimonial-card__name">Marcus Johnson</span>
+              <span class="impact-testimonial-card__sport">Track & Field</span>
+            </div>
+          </div>
+        </article>
+        <article class="impact-testimonial-card">
+          <div class="impact-testimonial-card__rating">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="impact-testimonial-card__quote">
+            "Finally, workout clothes that keep up with me. The breathability is game-changing for my HIIT sessions."
+          </blockquote>
+          <div class="impact-testimonial-card__author">
+            <div class="impact-testimonial-card__avatar">SR</div>
+            <div class="impact-testimonial-card__info">
+              <span class="impact-testimonial-card__name">Sarah Rodriguez</span>
+              <span class="impact-testimonial-card__sport">CrossFit Athlete</span>
+            </div>
+          </div>
+        </article>
+        <article class="impact-testimonial-card">
+          <div class="impact-testimonial-card__rating">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <blockquote class="impact-testimonial-card__quote">
+            "I train 6 days a week and this gear holds up wash after wash. Best investment I've made for my training."
+          </blockquote>
+          <div class="impact-testimonial-card__author">
+            <div class="impact-testimonial-card__avatar">DK</div>
+            <div class="impact-testimonial-card__info">
+              <span class="impact-testimonial-card__name">David Kim</span>
+              <span class="impact-testimonial-card__sport">Weightlifting</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Instagram / Social Proof {%- endcomment -%}
+  <section class="impact-social">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">#BoldImpact</span>
+        <h2 class="section-title">Join the Movement</h2>
+        <p class="section-subtitle">Tag us in your training photos for a chance to be featured.</p>
+      </div>
+      <div class="impact-social__grid">
+        {%- for i in (1..6) -%}
+          <div class="impact-social__item">
+            <div class="impact-social__placeholder"></div>
+          </div>
+        {%- endfor -%}
       </div>
     </div>
   </section>

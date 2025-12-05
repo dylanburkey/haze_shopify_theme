@@ -1,28 +1,443 @@
 {%- comment -%}
   CSS Variables - Design System Core
   Based on Forge Industrial Theme Presets
+
+  This snippet applies CSS variables based on the selected theme preset.
+  When "Custom" is selected, it uses the individual color/typography settings.
 {%- endcomment -%}
+
+{%- liquid
+  assign preset = settings.theme_preset | default: 'the-welder'
+
+  # Default values (The Welder)
+  assign preset_primary = '#d71920'
+  assign preset_secondary = '#334FB4'
+  assign preset_accent = '#D97706'
+  assign preset_background = '#ffffff'
+  assign preset_background_secondary = '#f3f4f6'
+  assign preset_text = '#1a1a1a'
+  assign preset_text_secondary = '#4b5563'
+  assign preset_border = '#d1d5db'
+  assign preset_header_bg = '#1c1c1c'
+  assign preset_header_text = '#ffffff'
+  assign preset_button_bg = '#d71920'
+  assign preset_button_text = '#ffffff'
+  assign preset_success = '#16A34A'
+  assign preset_warning = '#F59E0B'
+  assign preset_error = '#DC2626'
+  assign preset_font_heading = 'Oswald'
+  assign preset_font_body = 'Roboto'
+  assign preset_page_width = 1320
+  assign preset_spacing_sections = 96
+  assign preset_grid_gap = 32
+  assign preset_button_radius = 2
+  assign preset_card_radius = 0
+  assign preset_input_radius = 0
+  assign preset_logo_text = 'FORGE'
+  assign preset_logo_suffix = '.IND'
+
+  case preset
+    when 'work-zone'
+      assign preset_primary = '#f97316'
+      assign preset_secondary = '#ea580c'
+      assign preset_accent = '#1c1c1c'
+      assign preset_background = '#ffffff'
+      assign preset_background_secondary = '#f3f4f6'
+      assign preset_text = '#111827'
+      assign preset_text_secondary = '#4b5563'
+      assign preset_border = '#d1d5db'
+      assign preset_header_bg = '#1c1c1c'
+      assign preset_header_text = '#ffffff'
+      assign preset_button_bg = '#f97316'
+      assign preset_button_text = '#ffffff'
+      assign preset_font_heading = 'Oswald'
+      assign preset_font_body = 'Roboto'
+      assign preset_logo_text = 'WORK'
+      assign preset_logo_suffix = '.ZONE'
+
+    when 'site-ops'
+      assign preset_primary = '#ffb400'
+      assign preset_secondary = '#ff8c00'
+      assign preset_accent = '#1a1a1a'
+      assign preset_background = '#ffffff'
+      assign preset_background_secondary = '#f5f5f5'
+      assign preset_text = '#333333'
+      assign preset_text_secondary = '#666666'
+      assign preset_border = '#dddddd'
+      assign preset_header_bg = '#232323'
+      assign preset_header_text = '#ffffff'
+      assign preset_button_bg = '#ffb400'
+      assign preset_button_text = '#000000'
+      assign preset_font_heading = 'Oswald'
+      assign preset_font_body = 'Work Sans'
+      assign preset_page_width = 1450
+      assign preset_spacing_sections = 48
+      assign preset_grid_gap = 24
+      assign preset_button_radius = 4
+      assign preset_card_radius = 8
+      assign preset_input_radius = 4
+      assign preset_logo_text = 'SITE'
+      assign preset_logo_suffix = '.OPS'
+
+    when 'midnight-shift'
+      assign preset_primary = '#ff5722'
+      assign preset_secondary = '#ff7043'
+      assign preset_accent = '#ffc107'
+      assign preset_background = '#121212'
+      assign preset_background_secondary = '#1e1e1e'
+      assign preset_text = '#e0e0e0'
+      assign preset_text_secondary = '#9e9e9e'
+      assign preset_border = '#333333'
+      assign preset_header_bg = '#000000'
+      assign preset_header_text = '#ffffff'
+      assign preset_button_bg = '#ff5722'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#4caf50'
+      assign preset_warning = '#ff9800'
+      assign preset_error = '#f44336'
+      assign preset_font_heading = 'Teko'
+      assign preset_font_body = 'Roboto'
+      assign preset_page_width = 1600
+      assign preset_spacing_sections = 56
+      assign preset_grid_gap = 32
+      assign preset_button_radius = 8
+      assign preset_card_radius = 12
+      assign preset_input_radius = 8
+      assign preset_logo_text = 'NIGHT'
+      assign preset_logo_suffix = '.SHIFT'
+
+    when 'precision'
+      assign preset_primary = '#007ac9'
+      assign preset_secondary = '#0056b3'
+      assign preset_accent = '#00bcd4'
+      assign preset_background = '#f8f9fa'
+      assign preset_background_secondary = '#ffffff'
+      assign preset_text = '#0f172a'
+      assign preset_text_secondary = '#64748b'
+      assign preset_border = '#cbd5e1'
+      assign preset_header_bg = '#ffffff'
+      assign preset_header_text = '#0f172a'
+      assign preset_button_bg = '#007ac9'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#22c55e'
+      assign preset_warning = '#eab308'
+      assign preset_error = '#ef4444'
+      assign preset_font_heading = 'IBM Plex Sans'
+      assign preset_font_body = 'IBM Plex Sans'
+      assign preset_page_width = 1300
+      assign preset_spacing_sections = 32
+      assign preset_grid_gap = 16
+      assign preset_button_radius = 2
+      assign preset_card_radius = 4
+      assign preset_input_radius = 2
+      assign preset_logo_text = 'PRECISION'
+      assign preset_logo_suffix = '.LAB'
+
+    when 'tactical'
+      assign preset_primary = '#689f38'
+      assign preset_secondary = '#558b2f'
+      assign preset_accent = '#cddc39'
+      assign preset_background = '#2b2b2b'
+      assign preset_background_secondary = '#383838'
+      assign preset_text = '#dcedc8'
+      assign preset_text_secondary = '#aed581'
+      assign preset_border = '#4a4a4a'
+      assign preset_header_bg = '#1a1a1a'
+      assign preset_header_text = '#dcedc8'
+      assign preset_button_bg = '#689f38'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#8bc34a'
+      assign preset_warning = '#ffc107'
+      assign preset_error = '#ff5252'
+      assign preset_font_heading = 'Archivo Black'
+      assign preset_font_body = 'Roboto'
+      assign preset_page_width = 1450
+      assign preset_spacing_sections = 40
+      assign preset_grid_gap = 12
+      assign preset_button_radius = 0
+      assign preset_card_radius = 0
+      assign preset_input_radius = 0
+      assign preset_logo_text = 'TACTICAL'
+      assign preset_logo_suffix = '.GEAR'
+
+    when 'monolith'
+      assign preset_primary = '#000000'
+      assign preset_secondary = '#333333'
+      assign preset_accent = '#ffffff'
+      assign preset_background = '#0a0a0a'
+      assign preset_background_secondary = '#141414'
+      assign preset_text = '#ffffff'
+      assign preset_text_secondary = '#a0a0a0'
+      assign preset_border = '#2a2a2a'
+      assign preset_header_bg = '#000000'
+      assign preset_header_text = '#ffffff'
+      assign preset_button_bg = '#ffffff'
+      assign preset_button_text = '#000000'
+      assign preset_success = '#00ff88'
+      assign preset_warning = '#ffaa00'
+      assign preset_error = '#ff4444'
+      assign preset_font_heading = 'Inter'
+      assign preset_font_body = 'Inter'
+      assign preset_page_width = 1400
+      assign preset_spacing_sections = 64
+      assign preset_grid_gap = 24
+      assign preset_button_radius = 0
+      assign preset_card_radius = 0
+      assign preset_input_radius = 0
+      assign preset_logo_text = 'MONOLITH'
+      assign preset_logo_suffix = ''
+
+    when 'zebra-skimmers'
+      assign preset_primary = '#003d79'
+      assign preset_secondary = '#0056a8'
+      assign preset_accent = '#00a3e0'
+      assign preset_background = '#ffffff'
+      assign preset_background_secondary = '#f8fafc'
+      assign preset_text = '#1e293b'
+      assign preset_text_secondary = '#475569'
+      assign preset_border = '#e2e8f0'
+      assign preset_header_bg = '#003d79'
+      assign preset_header_text = '#ffffff'
+      assign preset_button_bg = '#ff6b00'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#059669'
+      assign preset_warning = '#d97706'
+      assign preset_error = '#dc2626'
+      assign preset_font_heading = 'Inter'
+      assign preset_font_body = 'Inter'
+      assign preset_page_width = 1280
+      assign preset_spacing_sections = 64
+      assign preset_grid_gap = 24
+      assign preset_button_radius = 8
+      assign preset_card_radius = 20
+      assign preset_input_radius = 10
+      assign preset_logo_text = 'ZEBRA'
+      assign preset_logo_suffix = '.SKIM'
+
+    when 'modern-minimal'
+      assign preset_primary = '#18181b'
+      assign preset_secondary = '#27272a'
+      assign preset_accent = '#71717a'
+      assign preset_background = '#ffffff'
+      assign preset_background_secondary = '#fafafa'
+      assign preset_text = '#18181b'
+      assign preset_text_secondary = '#3f3f46'
+      assign preset_border = '#e4e4e7'
+      assign preset_header_bg = '#ffffff'
+      assign preset_header_text = '#18181b'
+      assign preset_button_bg = '#18181b'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#22c55e'
+      assign preset_warning = '#eab308'
+      assign preset_error = '#ef4444'
+      assign preset_font_heading = 'Bitter'
+      assign preset_font_body = 'Roboto'
+      assign preset_page_width = 1200
+      assign preset_spacing_sections = 80
+      assign preset_grid_gap = 20
+      assign preset_button_radius = 0
+      assign preset_card_radius = 0
+      assign preset_input_radius = 0
+      assign preset_logo_text = 'MINIMAL'
+      assign preset_logo_suffix = ''
+
+    when 'bold-impact'
+      assign preset_primary = '#0f172a'
+      assign preset_secondary = '#1e293b'
+      assign preset_accent = '#7c3aed'
+      assign preset_background = '#ffffff'
+      assign preset_background_secondary = '#f8fafc'
+      assign preset_text = '#0f172a'
+      assign preset_text_secondary = '#334155'
+      assign preset_border = '#e2e8f0'
+      assign preset_header_bg = '#0f172a'
+      assign preset_header_text = '#ffffff'
+      assign preset_button_bg = '#dc2626'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#16a34a'
+      assign preset_warning = '#ca8a04'
+      assign preset_error = '#dc2626'
+      assign preset_font_heading = 'Oswald'
+      assign preset_font_body = 'Roboto'
+      assign preset_page_width = 1400
+      assign preset_spacing_sections = 64
+      assign preset_grid_gap = 24
+      assign preset_button_radius = 12
+      assign preset_card_radius = 24
+      assign preset_input_radius = 12
+      assign preset_logo_text = 'BOLD'
+      assign preset_logo_suffix = '.IMP'
+
+    when 'warm-artisan'
+      assign preset_primary = '#78350f'
+      assign preset_secondary = '#92400e'
+      assign preset_accent = '#d97706'
+      assign preset_background = '#fffbeb'
+      assign preset_background_secondary = '#fef3c7'
+      assign preset_text = '#451a03'
+      assign preset_text_secondary = '#78350f'
+      assign preset_border = '#fcd34d'
+      assign preset_header_bg = '#78350f'
+      assign preset_header_text = '#fffbeb'
+      assign preset_button_bg = '#c2410c'
+      assign preset_button_text = '#fffbeb'
+      assign preset_success = '#15803d'
+      assign preset_warning = '#a16207'
+      assign preset_error = '#b91c1c'
+      assign preset_font_heading = 'Bitter'
+      assign preset_font_body = 'Lato'
+      assign preset_page_width = 1100
+      assign preset_spacing_sections = 72
+      assign preset_grid_gap = 24
+      assign preset_button_radius = 4
+      assign preset_card_radius = 8
+      assign preset_input_radius = 4
+      assign preset_logo_text = 'ARTISAN'
+      assign preset_logo_suffix = ''
+
+    when 'tech-forward'
+      assign preset_primary = '#0ea5e9'
+      assign preset_secondary = '#38bdf8'
+      assign preset_accent = '#06b6d4'
+      assign preset_background = '#0f172a'
+      assign preset_background_secondary = '#1e293b'
+      assign preset_text = '#f1f5f9'
+      assign preset_text_secondary = '#cbd5e1'
+      assign preset_border = '#334155'
+      assign preset_header_bg = '#0f172a'
+      assign preset_header_text = '#f1f5f9'
+      assign preset_button_bg = '#10b981'
+      assign preset_button_text = '#ffffff'
+      assign preset_success = '#10b981'
+      assign preset_warning = '#f59e0b'
+      assign preset_error = '#f43f5e'
+      assign preset_font_heading = 'Inter'
+      assign preset_font_body = 'Inter'
+      assign preset_page_width = 1320
+      assign preset_spacing_sections = 64
+      assign preset_grid_gap = 20
+      assign preset_button_radius = 8
+      assign preset_card_radius = 16
+      assign preset_input_radius = 8
+      assign preset_logo_text = 'TECH'
+      assign preset_logo_suffix = '.FWD'
+
+    when 'custom'
+      # Use the individual settings from theme customizer
+      assign preset_primary = settings.color_primary
+      assign preset_secondary = settings.color_secondary | default: settings.color_primary
+      assign preset_accent = settings.color_primary
+      assign preset_background = settings.color_background
+      assign preset_background_secondary = settings.color_background_secondary | default: settings.color_surface
+      assign preset_text = settings.color_text
+      assign preset_text_secondary = settings.color_text_secondary | default: settings.color_text
+      assign preset_border = settings.color_border
+      assign preset_header_bg = settings.color_header_bg
+      assign preset_header_text = settings.color_header_text
+      assign preset_button_bg = settings.color_button_background | default: settings.color_primary
+      assign preset_button_text = settings.color_button_text
+      assign preset_success = settings.color_success | default: '#16a34a'
+      assign preset_warning = settings.color_warning | default: '#f59e0b'
+      assign preset_error = settings.color_error | default: '#dc2626'
+      assign preset_font_heading = settings.font_heading.family | default: 'Oswald'
+      assign preset_font_body = settings.font_body.family | default: 'Roboto'
+      assign preset_page_width = settings.page_width | default: 1450
+      assign preset_spacing_sections = settings.spacing_sections | default: 40
+      assign preset_grid_gap = settings.grid_gap | default: 24
+      assign preset_button_radius = settings.button_border_radius | default: 0
+      assign preset_card_radius = settings.card_border_radius | default: 8
+      assign preset_input_radius = settings.input_border_radius | default: 4
+      assign preset_logo_text = settings.logo_text | default: 'FORGE'
+      assign preset_logo_suffix = settings.logo_suffix | default: '.IND'
+  endcase
+-%}
 
 <style>
   :root {
-    /* Layout */
-    --radius: 0px;
-    --container-width: 1200px;
-    --grid-gap: 24px;
-
-    /* Colors from settings */
-    --color-primary: {{ settings.color_primary }};
-    --color-text: {{ settings.color_text }};
-    --color-background: {{ settings.color_background }};
-    --color-surface: {{ settings.color_surface }};
-    --color-border: {{ settings.color_border }};
-    --color-header-bg: {{ settings.color_header_bg }};
-    --color-header-text: {{ settings.color_header_text }};
-    --color-button-text: {{ settings.color_button_text }};
+    /* Colors */
+    --color-primary: {{ preset_primary }};
+    --color-secondary: {{ preset_secondary }};
+    --color-accent: {{ preset_accent }};
+    --color-background: {{ preset_background }};
+    --color-background-secondary: {{ preset_background_secondary }};
+    --color-surface: {{ preset_background_secondary }};
+    --color-text: {{ preset_text }};
+    --color-text-secondary: {{ preset_text_secondary }};
+    --color-border: {{ preset_border }};
+    --color-header-bg: {{ preset_header_bg }};
+    --color-header-text: {{ preset_header_text }};
+    --color-button-bg: {{ preset_button_bg }};
+    --color-button-text: {{ preset_button_text }};
+    --color-success: {{ preset_success }};
+    --color-warning: {{ preset_warning }};
+    --color-error: {{ preset_error }};
 
     /* Typography */
-    --font-heading: {{ settings.font_heading }}, sans-serif;
-    --font-body: {{ settings.font_body }}, sans-serif;
+    --font-heading: '{{ preset_font_heading }}', sans-serif;
+    --font-body: '{{ preset_font_body }}', sans-serif;
     --font-size-base: 16px;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+
+    /* Layout */
+    --container-width: {{ preset_page_width }}px;
+    --page-width: {{ preset_page_width }}px;
+    --spacing-sections: {{ preset_spacing_sections }}px;
+    --grid-gap: {{ preset_grid_gap }}px;
+
+    /* Radii */
+    --radius: {{ preset_button_radius }}px;
+    --radius-button: {{ preset_button_radius }}px;
+    --radius-card: {{ preset_card_radius }}px;
+    --radius-input: {{ preset_input_radius }}px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+
+    /* Transitions */
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Z-index */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+
+    /* Logo */
+    --logo-text: '{{ preset_logo_text }}';
+    --logo-suffix: '{{ preset_logo_suffix }}';
   }
+
+  /* Dark mode detection for presets with dark backgrounds */
+  {%- if preset == 'midnight-shift' or preset == 'tactical' or preset == 'monolith' or preset == 'tech-forward' -%}
+  :root {
+    color-scheme: dark;
+  }
+  {%- endif -%}
 </style>

@@ -2,655 +2,700 @@
 /* Athletic/sports brand theme with dynamic energy */
 
 .landing-bold-impact {
-  --impact-bg: #ffffff;
-  --impact-surface: #f8f8f8;
-  --impact-text: #1a1a1a;
-  --impact-text-muted: #666666;
-  --impact-accent: #ff3b30;
-  --impact-accent-dark: #e6352b;
-  --impact-border: #e5e5e5;
+    --impact-bg: #ffffff;
+    --impact-surface: #f8f8f8;
+    --impact-text: #1a1a1a;
+    --impact-text-muted: #666666;
+    --impact-accent: #ff3b30;
+    --impact-accent-dark: #e6352b;
+    --impact-border: #e5e5e5;
 
-  background: var(--impact-bg);
-  color: var(--impact-text);
+    background: var(--impact-bg);
+    color: var(--impact-text);
 }
 
 .landing-bold-impact .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
 /* Section Headers */
 .landing-bold-impact .section-header {
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
 }
 
 .landing-bold-impact .section-header--center {
-  text-align: center;
+    text-align: center;
 }
 
 .landing-bold-impact .section-eyebrow {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--impact-accent);
-  margin-bottom: 0.75rem;
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--impact-accent);
+    margin-bottom: 0.75rem;
 }
 
 .landing-bold-impact .section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  color: var(--impact-text);
-  margin: 0;
-  line-height: 1.1;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--impact-text);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.landing-bold-impact .section-subtitle {
+    font-size: 1.125rem;
+    color: var(--impact-text-muted);
+    margin: 1rem 0 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Buttons */
 .landing-bold-impact .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  border-radius: 0;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
 }
 
 .landing-bold-impact .btn--primary {
-  background: var(--impact-accent);
-  color: #fff;
+    background: var(--impact-accent);
+    color: #fff;
 }
 
 .landing-bold-impact .btn--primary:hover {
-  background: var(--impact-accent-dark);
-  transform: translateY(-2px);
+    background: var(--impact-accent-dark);
+    transform: translateY(-2px);
 }
 
 .landing-bold-impact .btn--outline {
-  background: transparent;
-  color: var(--impact-text);
-  border: 2px solid var(--impact-text);
+    background: transparent;
+    color: var(--impact-text);
+    border: 2px solid var(--impact-text);
 }
 
 .landing-bold-impact .btn--outline:hover {
-  background: var(--impact-text);
-  color: #fff;
+    background: var(--impact-text);
+    color: #fff;
 }
 
 .landing-bold-impact .btn--large {
-  padding: 1.125rem 2.5rem;
-  font-size: 0.9375rem;
+    padding: 1.125rem 2.5rem;
+    font-size: 0.9375rem;
 }
 
 /* Hero Section */
 .impact-hero {
-  position: relative;
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  padding: 6rem 0;
-  overflow: hidden;
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 0;
+    overflow: hidden;
 }
 
 .impact-hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
 }
 
 .impact-hero__bg-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .impact-hero__bg-gradient {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
 }
 
 .impact-hero__bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.6)
+    );
 }
 
 .impact-hero .container {
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .impact-hero__content {
-  max-width: 800px;
+    max-width: 800px;
 }
 
 .impact-hero__badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: var(--impact-accent);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--impact-accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
 }
 
 .impact-hero__title {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 900;
-  color: #fff;
-  line-height: 0.95;
-  margin: 0 0 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 0.95;
+    margin: 0 0 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
 .impact-hero__subtitle {
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
-  margin: 0 0 2rem;
-  max-width: 500px;
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin: 0 0 2rem;
+    max-width: 500px;
 }
 
 .impact-hero__actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 4rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
 }
 
 .impact-hero__actions .btn--outline {
-  border-color: #fff;
-  color: #fff;
+    border-color: #fff;
+    color: #fff;
 }
 
 .impact-hero__actions .btn--outline:hover {
-  background: #fff;
-  color: var(--impact-text);
+    background: #fff;
+    color: var(--impact-text);
 }
 
 .impact-hero__stats {
-  display: flex;
-  gap: 4rem;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 4rem;
+    flex-wrap: wrap;
 }
 
 .impact-hero__stat {
-  text-align: left;
+    text-align: left;
 }
 
 .impact-hero__stat-value {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1;
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
 }
 
 .impact-hero__stat-label {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 /* Category Blocks */
 .impact-categories {
-  padding: 6rem 0;
+    padding: 6rem 0;
 }
 
 .impact-categories__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
 }
 
 @media (max-width: 900px) {
-  .impact-categories__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .impact-categories__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 500px) {
-  .impact-categories__grid {
-    grid-template-columns: 1fr;
-  }
+    .impact-categories__grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .impact-category-card {
-  position: relative;
-  display: block;
-  text-decoration: none;
-  overflow: hidden;
-  aspect-ratio: 3/4;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    aspect-ratio: 3/4;
 }
 
 .impact-category-card__image {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 }
 
 .impact-category-card__image img,
 .impact-category-card__placeholder {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 .impact-category-card__placeholder {
-  background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
 }
 
 .impact-category-card:hover .impact-category-card__image img {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .impact-category-card__content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.5rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  color: #fff;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: #fff;
 }
 
 .impact-category-card__title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
 }
 
 .impact-category-card__cta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
 }
 
 .impact-category-card:hover .impact-category-card__cta {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .impact-category-card__cta svg {
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
-/* Featured Product */
-.impact-featured {
-  padding: 6rem 0;
-  background: var(--impact-surface);
+/* Featured Product Spotlight */
+.impact-spotlight {
+    padding: 6rem 0;
+    background: var(--impact-surface);
 }
 
-.impact-featured__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+.impact-spotlight__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
-  .impact-featured__inner {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+    .impact-spotlight__inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
-.impact-featured__image {
-  width: 100%;
-  height: auto;
+.impact-spotlight__media {
+    position: relative;
 }
 
-.impact-featured__placeholder {
-  aspect-ratio: 1;
-  background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+.impact-spotlight__placeholder {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
 }
 
-.impact-featured__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  margin: 0 0 1rem;
-  line-height: 1.1;
+.impact-spotlight__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    line-height: 1.1;
 }
 
-.impact-featured__description {
-  font-size: 1rem;
-  color: var(--impact-text-muted);
-  line-height: 1.6;
-  margin: 0 0 1.5rem;
+.impact-spotlight__text {
+    font-size: 1.125rem;
+    color: var(--impact-text-muted);
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
 }
 
-.impact-featured__price {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+.impact-spotlight__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.impact-featured__price-compare {
-  font-size: 1.25rem;
-  color: var(--impact-text-muted);
-  text-decoration: line-through;
+.impact-spotlight__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-.impact-featured__price-current {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--impact-accent);
-}
-
-.impact-featured__features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.impact-featured__features li {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 1rem;
-}
-
-.impact-featured__features svg {
-  width: 20px;
-  height: 20px;
-  color: var(--impact-accent);
-  flex-shrink: 0;
+.impact-spotlight__features svg {
+    width: 20px;
+    height: 20px;
+    color: var(--impact-accent);
+    flex-shrink: 0;
 }
 
 /* Products Grid */
 .impact-products {
-  padding: 6rem 0;
+    padding: 6rem 0;
 }
 
 .impact-products__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 @media (max-width: 900px) {
-  .impact-products__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .impact-products__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 500px) {
-  .impact-products__grid {
-    grid-template-columns: 1fr;
-  }
+    .impact-products__grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .impact-product-card {
-  position: relative;
+    position: relative;
 }
 
 .impact-product-card__link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 
 .impact-product-card__image {
-  position: relative;
-  aspect-ratio: 1;
-  background: var(--impact-surface);
-  margin-bottom: 1rem;
-  overflow: hidden;
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--impact-surface);
+    margin-bottom: 1rem;
+    overflow: hidden;
 }
 
 .impact-product-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .impact-product-card:hover .impact-product-card__image img {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .impact-product-card__badge {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  padding: 0.375rem 0.75rem;
-  background: var(--impact-accent);
-  color: #fff;
-  font-size: 0.625rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.375rem 0.75rem;
+    background: var(--impact-accent);
+    color: #fff;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .impact-product-card__title {
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
 }
 
 .impact-product-card__price {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
 }
 
 .impact-product-card__price-compare {
-  font-size: 0.875rem;
-  color: var(--impact-text-muted);
-  text-decoration: line-through;
+    font-size: 0.875rem;
+    color: var(--impact-text-muted);
+    text-decoration: line-through;
 }
 
 .impact-product-card__price-current {
-  font-size: 1rem;
-  font-weight: 700;
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 .impact-products__action {
-  text-align: center;
+    text-align: center;
 }
 
 /* Stats Banner */
 .impact-stats-banner {
-  padding: 4rem 0;
-  background: var(--impact-text);
-  color: #fff;
+    padding: 4rem 0;
+    background: var(--impact-text);
+    color: #fff;
 }
 
 .impact-stats-banner__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
-  .impact-stats-banner__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .impact-stats-banner__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .impact-stats-banner__value {
-  display: block;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 0.5rem;
+    display: block;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
 }
 
 .impact-stats-banner__label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  opacity: 0.7;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.7;
 }
 
 /* Testimonials */
 .impact-testimonials {
-  padding: 6rem 0;
-  background: var(--impact-surface);
+    padding: 6rem 0;
+    background: var(--impact-surface);
 }
 
 .impact-testimonials__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 
 @media (max-width: 900px) {
-  .impact-testimonials__grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
-  }
+    .impact-testimonials__grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
 }
 
 .impact-testimonial-card {
-  background: #fff;
-  padding: 2rem;
+    background: #fff;
+    padding: 2rem;
 }
 
-.impact-testimonial-card__stars {
-  display: flex;
-  gap: 0.25rem;
-  margin-bottom: 1rem;
+.impact-testimonial-card__rating {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
 }
 
-.impact-testimonial-card__stars svg {
-  width: 18px;
-  height: 18px;
-  color: #fbbf24;
+.impact-testimonial-card__rating svg {
+    width: 18px;
+    height: 18px;
+    color: #fbbf24;
 }
 
 .impact-testimonial-card__quote {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--impact-text);
-  margin: 0 0 1.5rem;
-  font-style: normal;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--impact-text);
+    margin: 0 0 1.5rem;
+    font-style: normal;
 }
 
 .impact-testimonial-card__author {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .impact-testimonial-card__avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--impact-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
 }
 
-.impact-testimonial-card__avatar-placeholder {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--impact-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #fff;
-  font-size: 1.125rem;
+.impact-testimonial-card__info {
+    display: flex;
+    flex-direction: column;
 }
 
 .impact-testimonial-card__name {
-  font-size: 0.9375rem;
-  font-weight: 700;
+    font-size: 0.9375rem;
+    font-weight: 700;
 }
 
 .impact-testimonial-card__sport {
-  font-size: 0.8125rem;
-  color: var(--impact-text-muted);
+    font-size: 0.8125rem;
+    color: var(--impact-text-muted);
+}
+
+/* Social Section */
+.impact-social {
+    padding: 6rem 0;
+}
+
+.impact-social__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+}
+
+@media (max-width: 900px) {
+    .impact-social__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .impact-social__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.impact-social__item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.impact-social__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+}
+
+.impact-social__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.impact-social__item:hover img {
+    transform: scale(1.05);
 }
 
 /* Newsletter */
 .impact-newsletter {
-  padding: 6rem 0;
-  background: var(--impact-text);
-  color: #fff;
+    padding: 6rem 0;
+    background: var(--impact-text);
+    color: #fff;
 }
 
 .impact-newsletter__inner {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .impact-newsletter__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  margin: 0 0 1rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
 }
 
 .impact-newsletter__text {
-  font-size: 1.125rem;
-  opacity: 0.8;
-  margin: 0 0 2rem;
+    font-size: 1.125rem;
+    opacity: 0.8;
+    margin: 0 0 2rem;
 }
 
 .impact-newsletter__form {
-  display: flex;
-  gap: 0;
-  max-width: 500px;
-  margin: 0 auto 1rem;
+    display: flex;
+    gap: 0;
+    max-width: 500px;
+    margin: 0 auto 1rem;
+}
+
+@media (max-width: 500px) {
+    .impact-newsletter__form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
 
 .impact-newsletter__input {
-  flex: 1;
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
-  border: none;
-  background: #fff;
-  color: var(--impact-text);
+    flex: 1;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border: none;
+    background: #fff;
+    color: var(--impact-text);
 }
 
 .impact-newsletter__input::placeholder {
-  color: var(--impact-text-muted);
+    color: var(--impact-text-muted);
 }
 
 .impact-newsletter__form .btn {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 .impact-newsletter__note {
-  font-size: 0.8125rem;
-  opacity: 0.6;
-  margin: 0;
+    font-size: 0.8125rem;
+    opacity: 0.6;
+    margin: 0;
 }

@@ -2,10 +2,25 @@
   Product Filters Snippet
   Renders faceted filtering for collection pages
 
+  Supports:
+  - Left/Right sidebar positioning
+  - Horizontal layout above products
+  - Collapsed/expanded default state
+  - Mobile drawer/modal/dropdown
+
   Usage: {% render 'product-filters', collection: collection %}
 {%- endcomment -%}
 
-<form class="filters-form" data-filters-form>
+{%- liquid
+  assign filter_position = settings.collection_filter_position | default: 'left'
+  assign filter_default_state = settings.collection_filter_default_state | default: 'open'
+  assign is_horizontal = false
+  if filter_position == 'horizontal'
+    assign is_horizontal = true
+  endif
+-%}
+
+<form class="filters-form{% if is_horizontal %} filters-form--horizontal{% endif %}" data-filters-form>
   <div class="filters-header">
     <h2 class="filters-title">
       {% render 'icon', name: 'filter', size: 18 %}
@@ -26,8 +41,31 @@
     {%- endif -%}
   </div>
 
+  {%- if is_horizontal -%}
+    <div class="filters-horizontal-grid">
+  {%- endif -%}
+
   {%- for filter in collection.filters -%}
-    <details class="filter-group" open>
+    {%- liquid
+      # Determine if this filter group should be open by default
+      assign is_open = true
+      if filter_default_state == 'closed'
+        assign is_open = false
+      elsif filter_default_state == 'first_open'
+        if forloop.first
+          assign is_open = true
+        else
+          assign is_open = false
+        endif
+      endif
+
+      # Always open if filter has active values
+      if filter.active_values.size > 0
+        assign is_open = true
+      endif
+    -%}
+
+    <details class="filter-group" {% if is_open %}open{% endif %}>
       <summary class="filter-group__header">
         <span class="filter-group__title">{{ filter.label }}</span>
         <span class="filter-group__count">
@@ -35,7 +73,9 @@
             ({{ filter.active_values.size }})
           {%- endif -%}
         </span>
-        {% render 'icon', name: 'chevron-down', size: 16 %}
+        <svg class="filter-group__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </summary>
 
       <div class="filter-group__content">
@@ -55,7 +95,9 @@
                       data-filter-input
                     >
                     <span class="filter-checkbox__box">
-                      {% render 'icon', name: 'check', size: 12 %}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
                     </span>
                     <span class="filter-checkbox__label">{{ value.label }}</span>
                     <span class="filter-checkbox__count">({{ value.count }})</span>
@@ -137,7 +179,9 @@
                 data-filter-input
               >
               <span class="filter-checkbox__box">
-                {% render 'icon', name: 'check', size: 12 %}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
               </span>
               <span class="filter-checkbox__label">{{ filter.label }}</span>
             </label>
@@ -146,11 +190,17 @@
     </details>
   {%- endfor -%}
 
+  {%- if is_horizontal -%}
+    </div>
+  {%- endif -%}
+
   {%- comment -%} Sorting {%- endcomment -%}
-  <details class="filter-group" open>
+  <details class="filter-group filter-group--sort" {% if filter_default_state != 'closed' %}open{% endif %}>
     <summary class="filter-group__header">
       <span class="filter-group__title">{{ 'collections.sorting.title' | t | default: 'Sort by' }}</span>
-      {% render 'icon', name: 'chevron-down', size: 16 %}
+      <svg class="filter-group__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
     </summary>
 
     <div class="filter-group__content">
@@ -190,7 +240,10 @@
           <li class="active-filters__item">
             <a href="{{ value.url_to_remove }}" class="active-filters__tag" data-filter-remove>
               {{ filter.label }}: {{ value.label }}
-              {% render 'icon', name: 'x', size: 14 %}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </a>
           </li>
         {%- endfor -%}
@@ -204,6 +257,51 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+  }
+
+  /* Horizontal layout */
+  .filters-form--horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-background-secondary);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-6);
+  }
+
+  .filters-form--horizontal .filters-header {
+    width: 100%;
+    margin-bottom: var(--space-2);
+  }
+
+  .filters-form--horizontal .filters-horizontal-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .filters-form--horizontal .filter-group {
+    flex: 0 0 auto;
+    min-width: 180px;
+    max-width: 250px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-background);
+  }
+
+  .filters-form--horizontal .filter-group__header {
+    padding: var(--space-3);
+  }
+
+  .filters-form--horizontal .filter-group__content {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+
+  .filters-form--horizontal .filter-group--sort {
+    margin-left: auto;
   }
 
   .filters-header {
@@ -260,12 +358,13 @@
     margin-left: var(--space-1);
   }
 
-  .filter-group__header svg {
+  .filter-group__chevron {
     transition: transform var(--duration-fast) var(--ease-default);
     color: var(--color-text-secondary);
+    flex-shrink: 0;
   }
 
-  .filter-group[open] .filter-group__header svg {
+  .filter-group[open] .filter-group__chevron {
     transform: rotate(180deg);
   }
 
@@ -491,8 +590,28 @@
       overflow-y: auto;
     }
 
+    .collection-sidebar--right {
+      left: auto;
+      right: 0;
+      transform: translateX(100%);
+    }
+
     .collection-sidebar.is-open {
       transform: translateX(0);
+    }
+
+    /* Horizontal filters stack on mobile */
+    .filters-form--horizontal {
+      flex-direction: column;
+    }
+
+    .filters-form--horizontal .filters-horizontal-grid {
+      flex-direction: column;
+    }
+
+    .filters-form--horizontal .filter-group {
+      max-width: none;
+      width: 100%;
     }
   }
 </style>

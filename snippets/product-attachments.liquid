@@ -1,143 +1,256 @@
 {%- comment -%}
   Product Attachments Display
   Shows downloadable documentation from product metafields
+  Supports: PDF, DOC, DOCX, XLS, XLSX, CSV, DWG, STEP, STL, PNG, JPG, ZIP, and more
+
   Usage: {% render 'product-attachments', product: product %}
+
+  Metafield namespace: attachments
+  Supported metafields:
+    - spec_sheet (file_reference)
+    - user_manual (file_reference)
+    - safety_data (file_reference)
+    - cad_file (file_reference)
+    - warranty (file_reference)
+    - custom_docs (list.file_reference)
 {%- endcomment -%}
 
 {%- liquid
   assign has_attachments = false
-  if product.metafields.attachments.spec_sheet or product.metafields.attachments.user_manual or product.metafields.attachments.safety_data or product.metafields.attachments.cad_file or product.metafields.attachments.warranty or product.metafields.attachments.custom_docs
+
+  # Check for individual file metafields
+  if product.metafields.attachments.spec_sheet != blank
     assign has_attachments = true
   endif
+  if product.metafields.attachments.user_manual != blank
+    assign has_attachments = true
+  endif
+  if product.metafields.attachments.safety_data != blank
+    assign has_attachments = true
+  endif
+  if product.metafields.attachments.cad_file != blank
+    assign has_attachments = true
+  endif
+  if product.metafields.attachments.warranty != blank
+    assign has_attachments = true
+  endif
+  if product.metafields.attachments.custom_docs != blank
+    assign has_attachments = true
+  endif
+
+  # Settings from theme
+  assign show_file_size = settings.attachments_show_file_size | default: true
+  assign show_file_icon = settings.attachments_show_file_icon | default: true
+  assign open_behavior = settings.attachments_open_behavior | default: 'new_tab'
 -%}
 
 {%- if has_attachments -%}
   <div class="product-attachments">
     <h3 class="attachments-heading">
-      <svg class="attachments-heading__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-        <polyline points="14 2 14 8 20 8"></polyline>
-        <line x1="16" y1="13" x2="8" y2="13"></line>
-        <line x1="16" y1="17" x2="8" y2="17"></line>
-        <polyline points="10 9 9 9 8 9"></polyline>
-      </svg>
+      {%- if show_file_icon -%}
+        <svg class="attachments-heading__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      {%- endif -%}
       {{ 'products.attachments.heading' | t | default: 'Product Documentation' }}
     </h3>
 
     <ul class="attachments-list">
-      {%- if product.metafields.attachments.spec_sheet -%}
+      {%- comment -%} Spec Sheet {%- endcomment -%}
+      {%- if product.metafields.attachments.spec_sheet != blank -%}
+        {%- assign file = product.metafields.attachments.spec_sheet -%}
+        {%- assign file_url = file.value | file_url -%}
+        {%- if file_url == blank -%}
+          {%- assign file_url = file | file_url -%}
+        {%- endif -%}
+        {%- assign file_type = 'PDF' -%}
         <li class="attachment-item">
-          <a href="{{ product.metafields.attachments.spec_sheet | file_url }}"
-             target="_blank"
-             rel="noopener"
+          <a href="{{ file_url }}"
+             {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
              class="attachment-link"
-             download>
-            <span class="attachment-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-            </span>
-            <span class="attachment-name">{{ 'products.attachments.spec_sheet' | t | default: 'Specification Sheet' }}</span>
-            <span class="attachment-type">PDF</span>
-          </a>
-        </li>
-      {%- endif -%}
-
-      {%- if product.metafields.attachments.user_manual -%}
-        <li class="attachment-item">
-          <a href="{{ product.metafields.attachments.user_manual | file_url }}"
-             target="_blank"
-             rel="noopener"
-             class="attachment-link"
-             download>
-            <span class="attachment-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-              </svg>
-            </span>
-            <span class="attachment-name">{{ 'products.attachments.user_manual' | t | default: 'User Manual' }}</span>
-            <span class="attachment-type">PDF</span>
-          </a>
-        </li>
-      {%- endif -%}
-
-      {%- if product.metafields.attachments.safety_data -%}
-        <li class="attachment-item attachment-item--safety">
-          <a href="{{ product.metafields.attachments.safety_data | file_url }}"
-             target="_blank"
-             rel="noopener"
-             class="attachment-link"
-             download>
-            <span class="attachment-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </span>
-            <span class="attachment-name">{{ 'products.attachments.safety_data' | t | default: 'Safety Data Sheet (SDS)' }}</span>
-            <span class="attachment-type">PDF</span>
-          </a>
-        </li>
-      {%- endif -%}
-
-      {%- if product.metafields.attachments.cad_file -%}
-        <li class="attachment-item">
-          <a href="{{ product.metafields.attachments.cad_file | file_url }}"
-             target="_blank"
-             rel="noopener"
-             class="attachment-link"
-             download>
-            <span class="attachment-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
-            </span>
-            <span class="attachment-name">{{ 'products.attachments.cad_file' | t | default: 'CAD / 3D Model' }}</span>
-            <span class="attachment-type">DWG/STEP</span>
-          </a>
-        </li>
-      {%- endif -%}
-
-      {%- if product.metafields.attachments.warranty -%}
-        <li class="attachment-item">
-          <a href="{{ product.metafields.attachments.warranty | file_url }}"
-             target="_blank"
-             rel="noopener"
-             class="attachment-link"
-             download>
-            <span class="attachment-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-              </svg>
-            </span>
-            <span class="attachment-name">{{ 'products.attachments.warranty' | t | default: 'Warranty Information' }}</span>
-            <span class="attachment-type">PDF</span>
-          </a>
-        </li>
-      {%- endif -%}
-
-      {%- if product.metafields.attachments.custom_docs -%}
-        {%- for doc in product.metafields.attachments.custom_docs.value -%}
-          <li class="attachment-item">
-            <a href="{{ doc | file_url }}"
-               target="_blank"
-               rel="noopener"
-               class="attachment-link"
-               download>
-              <span class="attachment-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
+             {% if open_behavior == 'download' %}download{% endif %}>
+            {%- if show_file_icon -%}
+              <span class="attachment-icon attachment-icon--pdf">
+                {%- render 'icon-file-pdf' -%}
               </span>
-              <span class="attachment-name">{{ doc.alt | default: 'Document' }}</span>
-              <span class="attachment-type">{{ doc.media_type | split: '/' | last | upcase }}</span>
+            {%- endif -%}
+            <span class="attachment-name">{{ 'products.attachments.spec_sheet' | t | default: 'Specification Sheet' }}</span>
+            <span class="attachment-type">{{ file_type }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} User Manual {%- endcomment -%}
+      {%- if product.metafields.attachments.user_manual != blank -%}
+        {%- assign file = product.metafields.attachments.user_manual -%}
+        {%- assign file_url = file.value | file_url -%}
+        {%- if file_url == blank -%}
+          {%- assign file_url = file | file_url -%}
+        {%- endif -%}
+        {%- assign file_type = 'PDF' -%}
+        <li class="attachment-item">
+          <a href="{{ file_url }}"
+             {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
+             class="attachment-link"
+             {% if open_behavior == 'download' %}download{% endif %}>
+            {%- if show_file_icon -%}
+              <span class="attachment-icon attachment-icon--manual">
+                {%- render 'icon-file-manual' -%}
+              </span>
+            {%- endif -%}
+            <span class="attachment-name">{{ 'products.attachments.user_manual' | t | default: 'User Manual' }}</span>
+            <span class="attachment-type">{{ file_type }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} Safety Data Sheet {%- endcomment -%}
+      {%- if product.metafields.attachments.safety_data != blank -%}
+        {%- assign file = product.metafields.attachments.safety_data -%}
+        {%- assign file_url = file.value | file_url -%}
+        {%- if file_url == blank -%}
+          {%- assign file_url = file | file_url -%}
+        {%- endif -%}
+        {%- assign file_type = 'PDF' -%}
+        <li class="attachment-item attachment-item--safety">
+          <a href="{{ file_url }}"
+             {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
+             class="attachment-link"
+             {% if open_behavior == 'download' %}download{% endif %}>
+            {%- if show_file_icon -%}
+              <span class="attachment-icon attachment-icon--safety">
+                {%- render 'icon-file-safety' -%}
+              </span>
+            {%- endif -%}
+            <span class="attachment-name">{{ 'products.attachments.safety_data' | t | default: 'Safety Data Sheet (SDS)' }}</span>
+            <span class="attachment-type">{{ file_type }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} CAD File {%- endcomment -%}
+      {%- if product.metafields.attachments.cad_file != blank -%}
+        {%- assign file = product.metafields.attachments.cad_file -%}
+        {%- assign file_url = file.value | file_url -%}
+        {%- if file_url == blank -%}
+          {%- assign file_url = file | file_url -%}
+        {%- endif -%}
+        {%- assign file_type = 'DWG/STEP' -%}
+        <li class="attachment-item">
+          <a href="{{ file_url }}"
+             {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
+             class="attachment-link"
+             {% if open_behavior == 'download' %}download{% endif %}>
+            {%- if show_file_icon -%}
+              <span class="attachment-icon attachment-icon--cad">
+                {%- render 'icon-file-cad' -%}
+              </span>
+            {%- endif -%}
+            <span class="attachment-name">{{ 'products.attachments.cad_file' | t | default: 'CAD / 3D Model' }}</span>
+            <span class="attachment-type">{{ file_type }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} Warranty {%- endcomment -%}
+      {%- if product.metafields.attachments.warranty != blank -%}
+        {%- assign file = product.metafields.attachments.warranty -%}
+        {%- assign file_url = file.value | file_url -%}
+        {%- if file_url == blank -%}
+          {%- assign file_url = file | file_url -%}
+        {%- endif -%}
+        {%- assign file_type = 'PDF' -%}
+        <li class="attachment-item">
+          <a href="{{ file_url }}"
+             {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
+             class="attachment-link"
+             {% if open_behavior == 'download' %}download{% endif %}>
+            {%- if show_file_icon -%}
+              <span class="attachment-icon attachment-icon--warranty">
+                {%- render 'icon-file-warranty' -%}
+              </span>
+            {%- endif -%}
+            <span class="attachment-name">{{ 'products.attachments.warranty' | t | default: 'Warranty Information' }}</span>
+            <span class="attachment-type">{{ file_type }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- comment -%} Custom Documents {%- endcomment -%}
+      {%- if product.metafields.attachments.custom_docs != blank -%}
+        {%- for doc in product.metafields.attachments.custom_docs.value -%}
+          {%- liquid
+            # Get file URL - handle different metafield structures
+            assign doc_url = doc | file_url
+            if doc_url == blank
+              assign doc_url = doc.url
+            endif
+
+            # Determine file type from media_type or filename
+            assign doc_type = 'FILE'
+            if doc.media_type != blank
+              assign media_parts = doc.media_type | split: '/'
+              assign doc_type = media_parts | last | upcase
+            elsif doc.filename != blank
+              assign filename_parts = doc.filename | split: '.'
+              assign doc_type = filename_parts | last | upcase
+            endif
+
+            # Get filename for display
+            assign doc_name = doc.alt | default: doc.filename | default: 'Document'
+
+            # Determine icon based on type
+            assign icon_class = 'file'
+            case doc_type
+              when 'PDF'
+                assign icon_class = 'pdf'
+              when 'DOC', 'DOCX'
+                assign icon_class = 'doc'
+              when 'XLS', 'XLSX'
+                assign icon_class = 'xls'
+              when 'CSV'
+                assign icon_class = 'csv'
+              when 'DWG', 'STEP', 'STL', 'IGES', 'IGS'
+                assign icon_class = 'cad'
+              when 'PNG', 'JPG', 'JPEG', 'GIF', 'WEBP'
+                assign icon_class = 'image'
+              when 'ZIP', 'RAR', '7Z'
+                assign icon_class = 'archive'
+            endcase
+          -%}
+          <li class="attachment-item">
+            <a href="{{ doc_url }}"
+               {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
+               class="attachment-link"
+               {% if open_behavior == 'download' %}download{% endif %}>
+              {%- if show_file_icon -%}
+                <span class="attachment-icon attachment-icon--{{ icon_class }}">
+                  {%- case icon_class -%}
+                    {%- when 'pdf' -%}
+                      {%- render 'icon-file-pdf' -%}
+                    {%- when 'doc' -%}
+                      {%- render 'icon-file-doc' -%}
+                    {%- when 'xls' -%}
+                      {%- render 'icon-file-xls' -%}
+                    {%- when 'csv' -%}
+                      {%- render 'icon-file-csv' -%}
+                    {%- when 'cad' -%}
+                      {%- render 'icon-file-cad' -%}
+                    {%- when 'image' -%}
+                      {%- render 'icon-file-image' -%}
+                    {%- when 'archive' -%}
+                      {%- render 'icon-file-archive' -%}
+                    {%- else -%}
+                      {%- render 'icon-file-generic' -%}
+                  {%- endcase -%}
+                </span>
+              {%- endif -%}
+              <span class="attachment-name">{{ doc_name }}</span>
+              <span class="attachment-type">{{ doc_type }}</span>
             </a>
           </li>
         {%- endfor -%}
