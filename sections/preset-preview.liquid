@@ -1,0 +1,499 @@
+{%- comment -%}
+  Preset Preview Section
+  Shows users a live preview of their selected theme preset
+  Helps users understand the visual impact of preset choices
+{%- endcomment -%}
+
+{%- liquid
+  assign preset = settings.theme_preset | default: 'the-welder'
+  assign preset_name = ''
+  assign preset_description = ''
+  
+  case preset
+    when 'the-welder'
+      assign preset_name = 'The Welder'
+      assign preset_description = 'Bold industrial red with high-contrast design. Perfect for welding, fabrication, and heavy equipment.'
+    when 'work-zone'
+      assign preset_name = 'Work Zone'
+      assign preset_description = 'Safety orange with construction-grade aesthetics. Ideal for construction and worksite supplies.'
+    when 'site-ops'
+      assign preset_name = 'Site Ops'
+      assign preset_description = 'Construction yellow with professional appeal. Great for contracting and site management.'
+    when 'midnight-shift'
+      assign preset_name = 'Midnight Shift'
+      assign preset_description = 'Dark mode with energetic orange accents. Perfect for 24/7 operations and night crew gear.'
+    when 'precision'
+      assign preset_name = 'Precision'
+      assign preset_description = 'Clean corporate blue with technical precision. Ideal for precision tools and professional equipment.'
+    when 'tactical'
+      assign preset_name = 'Tactical'
+      assign preset_description = 'Military green with rugged appeal. Perfect for tactical gear and outdoor equipment.'
+    when 'monolith'
+      assign preset_name = 'Monolith'
+      assign preset_description = 'Minimal black and white with bold contrast. Ideal for luxury industrial and premium tools.'
+    when 'zebra-skimmers'
+      assign preset_name = 'Zebra Skimmers'
+      assign preset_description = 'Professional B2B with trust-building blue. Perfect for industrial B2B and manufacturing.'
+    when 'modern-minimal'
+      assign preset_name = 'Modern Minimal'
+      assign preset_description = 'Clean editorial style with refined typography. Great for lifestyle and design-focused brands.'
+    when 'bold-impact'
+      assign preset_name = 'Bold Impact'
+      assign preset_description = 'Dynamic with athletic energy. Perfect for sports, performance, and high-energy brands.'
+    when 'warm-artisan'
+      assign preset_name = 'Warm Artisan'
+      assign preset_description = 'Warm amber tones with handcrafted feel. Ideal for artisan, handmade, and craft products.'
+    when 'tech-forward'
+      assign preset_name = 'Tech Forward'
+      assign preset_description = 'Futuristic dark theme with cyan accents. Perfect for electronics and tech products.'
+    when 'custom'
+      assign preset_name = 'Custom Theme'
+      assign preset_description = 'Your personalized color and typography settings. Configure colors in Theme Settings.'
+  endcase
+-%}
+
+<section 
+  id="preset-preview-{{ section.id }}"
+  class="preset-preview"
+  data-section-id="{{ section.id }}"
+  data-section-type="preset-preview"
+>
+  <div class="preset-preview__container container">
+    {%- if section.settings.show_header -%}
+      <header class="preset-preview__header">
+        <span class="preset-preview__label">{{ section.settings.label }}</span>
+        <h2 class="preset-preview__title">{{ preset_name }}</h2>
+        <p class="preset-preview__description">{{ preset_description }}</p>
+      </header>
+    {%- endif -%}
+
+    <div class="preset-preview__grid">
+      {%- comment -%} Color Palette Display {%- endcomment -%}
+      <div class="preset-preview__card preset-preview__card--colors">
+        <h3 class="preset-preview__card-title">Color Palette</h3>
+        <div class="preset-preview__swatches">
+          <div class="preset-preview__swatch preset-preview__swatch--primary" title="Primary">
+            <span>Primary</span>
+          </div>
+          <div class="preset-preview__swatch preset-preview__swatch--secondary" title="Secondary">
+            <span>Secondary</span>
+          </div>
+          <div class="preset-preview__swatch preset-preview__swatch--accent" title="Accent">
+            <span>Accent</span>
+          </div>
+          <div class="preset-preview__swatch preset-preview__swatch--background" title="Background">
+            <span>Background</span>
+          </div>
+          <div class="preset-preview__swatch preset-preview__swatch--text" title="Text">
+            <span>Text</span>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} Typography Preview {%- endcomment -%}
+      <div class="preset-preview__card preset-preview__card--typography">
+        <h3 class="preset-preview__card-title">Typography</h3>
+        <div class="preset-preview__typography">
+          <div class="preset-preview__type-sample preset-preview__type-sample--heading">
+            <span class="preset-preview__type-label">Heading Font</span>
+            <span class="preset-preview__type-example">{{ preset_name }}</span>
+          </div>
+          <div class="preset-preview__type-sample preset-preview__type-sample--body">
+            <span class="preset-preview__type-label">Body Font</span>
+            <span class="preset-preview__type-example">The quick brown fox jumps over the lazy dog.</span>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} Button Styles {%- endcomment -%}
+      <div class="preset-preview__card preset-preview__card--buttons">
+        <h3 class="preset-preview__card-title">Button Styles</h3>
+        <div class="preset-preview__buttons">
+          <button type="button" class="preset-preview__btn preset-preview__btn--primary">
+            Primary Button
+          </button>
+          <button type="button" class="preset-preview__btn preset-preview__btn--secondary">
+            Secondary Button
+          </button>
+          <button type="button" class="preset-preview__btn preset-preview__btn--outline">
+            Outline Button
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Card Preview {%- endcomment -%}
+      <div class="preset-preview__card preset-preview__card--product">
+        <h3 class="preset-preview__card-title">Product Card Preview</h3>
+        <div class="preset-preview__product">
+          <div class="preset-preview__product-image">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="100" height="100" fill="var(--color-background-secondary)"/>
+              <path d="M35 65L50 45L65 60L75 50L80 60V80H20V70L35 65Z" fill="var(--color-border)" opacity="0.5"/>
+              <circle cx="35" cy="35" r="8" fill="var(--color-border)" opacity="0.5"/>
+            </svg>
+            <span class="preset-preview__product-badge">Sale</span>
+          </div>
+          <div class="preset-preview__product-info">
+            <span class="preset-preview__product-vendor">Brand Name</span>
+            <h4 class="preset-preview__product-title">Sample Product Title</h4>
+            <div class="preset-preview__product-price">
+              <span class="preset-preview__product-price--sale">$99.00</span>
+              <span class="preset-preview__product-price--compare">$129.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- if section.settings.show_cta -%}
+      <div class="preset-preview__cta">
+        <p class="preset-preview__cta-text">{{ section.settings.cta_text }}</p>
+        <div class="preset-preview__cta-buttons">
+          <a href="{{ routes.root_url }}?preview_theme_id={{ theme.id }}" class="btn">
+            Customize This Preset
+          </a>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .preset-preview {
+    padding: var(--spacing-sections, 60px) 0;
+    background: var(--color-background);
+  }
+
+  .preset-preview__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .preset-preview__label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    border-radius: 100px;
+  }
+
+  .preset-preview__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .preset-preview__description {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .preset-preview__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--grid-gap, 24px);
+  }
+
+  .preset-preview__card {
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card, 8px);
+    padding: 24px;
+  }
+
+  .preset-preview__card-title {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin: 0 0 20px;
+  }
+
+  /* Color Swatches */
+  .preset-preview__swatches {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .preset-preview__swatch {
+    aspect-ratio: 1;
+    border-radius: var(--radius-sm, 4px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .preset-preview__swatch span {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+  }
+
+  .preset-preview__swatch--primary {
+    background: var(--color-primary);
+    color: var(--color-button-text);
+  }
+
+  .preset-preview__swatch--secondary {
+    background: var(--color-secondary);
+    color: white;
+  }
+
+  .preset-preview__swatch--accent {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .preset-preview__swatch--background {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .preset-preview__swatch--text {
+    background: var(--color-text);
+    color: var(--color-background);
+  }
+
+  /* Typography */
+  .preset-preview__typography {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .preset-preview__type-sample {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .preset-preview__type-label {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .preset-preview__type-sample--heading .preset-preview__type-example {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+  }
+
+  .preset-preview__type-sample--body .preset-preview__type-example {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  /* Buttons */
+  .preset-preview__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .preset-preview__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-button, 0);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .preset-preview__btn--primary {
+    background: var(--color-button-bg);
+    color: var(--color-button-text);
+    border-color: var(--color-button-bg);
+  }
+
+  .preset-preview__btn--secondary {
+    background: var(--color-secondary);
+    color: white;
+    border-color: var(--color-secondary);
+  }
+
+  .preset-preview__btn--outline {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  /* Product Card */
+  .preset-preview__product {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card, 8px);
+    overflow: hidden;
+    background: var(--color-background);
+  }
+
+  .preset-preview__product-image {
+    aspect-ratio: 4/3;
+    position: relative;
+    background: var(--color-background-secondary);
+  }
+
+  .preset-preview__product-image svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .preset-preview__product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--color-error);
+    color: white;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm, 4px);
+  }
+
+  .preset-preview__product-info {
+    padding: 16px;
+  }
+
+  .preset-preview__product-vendor {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .preset-preview__product-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 4px 0 8px;
+    text-transform: uppercase;
+  }
+
+  .preset-preview__product-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .preset-preview__product-price--sale {
+    font-weight: 700;
+    color: var(--color-error);
+  }
+
+  .preset-preview__product-price--compare {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-decoration: line-through;
+  }
+
+  /* CTA */
+  .preset-preview__cta {
+    margin-top: 48px;
+    text-align: center;
+    padding: 32px;
+    background: var(--color-background-secondary);
+    border-radius: var(--radius-card, 8px);
+  }
+
+  .preset-preview__cta-text {
+    font-size: 1.125rem;
+    color: var(--color-text);
+    margin: 0 0 20px;
+  }
+
+  @media (max-width: 768px) {
+    .preset-preview__swatches {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .preset-preview__buttons {
+      flex-direction: column;
+    }
+
+    .preset-preview__btn {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Preset Preview",
+  "tag": "section",
+  "class": "section-preset-preview",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Current Theme Preset"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show call-to-action",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Like this style? Customize it further in theme settings."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset Preview",
+      "settings": {
+        "show_header": true,
+        "show_cta": true
+      }
+    }
+  ]
+}
+{% endschema %}

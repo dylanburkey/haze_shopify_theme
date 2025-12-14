@@ -1,84 +1,157 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
+    "getting-started": {
+      "type": "getting-started",
+      "disabled": false,
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose a Preset",
+            "description": "Start by selecting a preset in Theme Settings → Theme Preset. Each preset includes coordinated colors, typography, and layout settings.",
+            "icon": "palette",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "title": "Add Your Logo",
+            "description": "Upload your logo in Theme Settings → Logo. You can also use text-based logos with the built-in styling.",
+            "icon": "image",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "title": "Customize Sections",
+            "description": "Add, remove, and rearrange sections using the Theme Editor. Each section has its own settings for complete control.",
+            "icon": "layout",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "title": "Launch Your Store",
+            "description": "Preview your changes, test on mobile, then publish your theme when ready. Your store is ready for customers!",
+            "icon": "rocket",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3", "step-4"],
+      "settings": {
+        "badge_text": "Quick Setup Guide",
+        "title": "Getting Started with Forge Industrial",
+        "subtitle": "Follow these steps to customize your store. You can remove this section once you're familiar with the theme.",
+        "show_presets_grid": true
+      }
+    },
+    "preset-preview": {
+      "type": "preset-preview",
+      "disabled": false,
+      "settings": {
+        "show_header": true,
+        "label": "Current Theme Preset",
+        "show_cta": true,
+        "cta_text": "This preview updates automatically when you change your theme preset in Theme Settings."
+      }
+    },
     "hero": {
       "type": "hero-industrial",
       "settings": {
         "overlay_opacity": 60,
         "height": 600,
-        "heading": "Precision Welding Systems",
-        "text": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>",
-        "button_label": "Explore Equipment",
+        "heading": "Industrial-Grade E-Commerce",
+        "text": "<p>A premium Shopify theme built for manufacturers, distributors, and industrial brands. 12 preset styles. Unlimited possibilities.</p>",
+        "button_label": "Explore Products",
         "button_link": "shopify://collections/all"
       }
     },
-    "search": {
-      "type": "ai-search",
+    "trust-badges": {
+      "type": "preset-trust-badges",
+      "disabled": false,
       "blocks": {
-        "suggestion-1": {
-          "type": "suggestion",
+        "badge-1": {
+          "type": "badge",
           "settings": {
-            "label": "MIG Welders",
-            "query": "MIG welder"
+            "icon": "shield-check",
+            "title": "Free Lifetime Warranty",
+            "subtitle": "On all products"
           }
         },
-        "suggestion-2": {
-          "type": "suggestion",
+        "badge-2": {
+          "type": "badge",
           "settings": {
-            "label": "TIG Welders",
-            "query": "TIG welder"
+            "icon": "flag",
+            "title": "Made in the USA",
+            "subtitle": "American quality"
           }
         },
-        "suggestion-3": {
-          "type": "suggestion",
+        "badge-3": {
+          "type": "badge",
           "settings": {
-            "label": "Safety Gear",
-            "query": "safety equipment"
+            "icon": "truck",
+            "title": "Fast Shipping",
+            "subtitle": "Most orders ship same day"
+          }
+        },
+        "badge-4": {
+          "type": "badge",
+          "settings": {
+            "icon": "phone",
+            "title": "Expert Support",
+            "subtitle": "Real people, real answers"
           }
         }
       },
-      "block_order": [
-        "suggestion-1",
-        "suggestion-2",
-        "suggestion-3"
-      ],
+      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"],
       "settings": {
-        "heading": "Find The Right Gear",
-        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
-        "button_label": "Search",
-        "show_suggestions": true
+        "title": "Why Choose Us",
+        "background_style": "light",
+        "columns": 4
       }
     },
-    "featured": {
+    "featured-collection": {
+      "type": "featured-collection",
+      "disabled": false,
+      "settings": {
+        "heading": "Featured Products",
+        "collection": "",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true
+      }
+    },
+    "smart-grid": {
       "type": "smart-grid",
+      "disabled": false,
       "blocks": {
         "card-1": {
           "type": "card",
           "settings": {
             "show_placeholder": true,
-            "tag": "Heavy Equipment",
-            "heading": "MIG-250 Pro Series",
-            "text": "High performance welding for industrial fabrication. Container query active: horizontal layout.",
-            "button_label": "View Specs",
-            "button_link": ""
+            "tag": "Featured",
+            "heading": "Product Categories",
+            "text": "Organize your products into clear categories for easy navigation.",
+            "button_label": "Browse Categories",
+            "button_link": "shopify://collections"
           }
         },
         "card-2": {
           "type": "card",
           "settings": {
             "show_placeholder": false,
-            "tag": "Category",
-            "heading": "Safety Gear",
-            "text": "Helmets, gloves, and fume extraction.",
-            "button_label": "View Specs",
+            "tag": "New",
+            "heading": "Latest Arrivals",
+            "text": "Discover newly added products and equipment.",
+            "button_label": "View New",
             "button_link": ""
           }
         },
@@ -86,100 +159,28 @@
           "type": "card",
           "settings": {
             "show_placeholder": false,
-            "tag": "Category",
-            "heading": "Automation",
-            "text": "Robotic cells and Cobot integration.",
-            "button_label": "View Specs",
+            "tag": "Popular",
+            "heading": "Best Sellers",
+            "text": "Shop our most popular products and top-rated items.",
+            "button_label": "View Best Sellers",
             "button_link": ""
           }
         }
       },
-      "block_order": [
-        "card-1",
-        "card-2",
-        "card-3"
-      ],
+      "block_order": ["card-1", "card-2", "card-3"],
       "settings": {
-        "heading": "Core Solutions",
+        "heading": "Explore Our Catalog",
         "layout": "highlight",
         "use_surface_bg": false
-      }
-    },
-    "container_grid_LfVg6H": {
-      "type": "container-grid",
-      "blocks": {
-        "card_nmqW4U": {
-          "type": "card",
-          "settings": {
-            "image_position": "left",
-            "badge": "",
-            "icon": "",
-            "heading": "Feature title",
-            "text": "<p>Describe the feature or content here.</p>",
-            "link": "",
-            "link_text": "Learn more",
-            "span_columns": false
-          }
-        },
-        "card_nGPTVq": {
-          "type": "card",
-          "settings": {
-            "image_position": "left",
-            "badge": "",
-            "icon": "",
-            "heading": "Feature title",
-            "text": "<p>Describe the feature or content here.</p>",
-            "link": "",
-            "link_text": "Learn more",
-            "span_columns": false
-          }
-        },
-        "card_dFQNGE": {
-          "type": "card",
-          "settings": {
-            "image_position": "left",
-            "badge": "",
-            "icon": "",
-            "heading": "Feature title",
-            "text": "<p>Describe the feature or content here.</p>",
-            "link": "",
-            "link_text": "Learn more",
-            "span_columns": false
-          }
-        }
-      },
-      "block_order": [
-        "card_nmqW4U",
-        "card_nGPTVq",
-        "card_dFQNGE"
-      ],
-      "name": "Container grid",
-      "settings": {
-        "subtitle": "",
-        "title": "Featured content",
-        "description": "",
-        "center_header": true,
-        "layout_pattern": "grid",
-        "columns": 3,
-        "gap": 24,
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "card_background": "#ffffff",
-        "card_border_color": "#e5e5e5",
-        "card_border_radius": 8,
-        "card_padding": 24,
-        "card_shadow": "0 8px 24px rgba(0,0,0,0.12)",
-        "accent_color": "#334FB4",
-        "button_text": "",
-        "button_link": "",
-        "button_style": "primary"
       }
     }
   },
   "order": [
+    "getting-started",
+    "preset-preview",
     "hero",
-    "search",
-    "featured",
-    "container_grid_LfVg6H"
+    "trust-badges",
+    "featured-collection",
+    "smart-grid"
   ]
 }

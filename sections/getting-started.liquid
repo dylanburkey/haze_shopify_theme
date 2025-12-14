@@ -1,0 +1,511 @@
+{%- comment -%}
+  Getting Started Section
+  Onboarding guide for new theme users
+  Shows steps to customize the theme
+{%- endcomment -%}
+
+{%- liquid
+  assign current_preset = settings.theme_preset | default: 'the-welder'
+-%}
+
+<section 
+  id="getting-started-{{ section.id }}"
+  class="getting-started"
+  data-section-id="{{ section.id }}"
+  data-section-type="getting-started"
+>
+  <div class="getting-started__container container">
+    <header class="getting-started__header">
+      <span class="getting-started__badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        {{ section.settings.badge_text }}
+      </span>
+      <h2 class="getting-started__title">{{ section.settings.title }}</h2>
+      <p class="getting-started__subtitle">{{ section.settings.subtitle }}</p>
+    </header>
+
+    <div class="getting-started__steps">
+      {%- for block in section.blocks -%}
+        <div class="getting-started__step" {{ block.shopify_attributes }}>
+          <div class="getting-started__step-number">{{ forloop.index }}</div>
+          <div class="getting-started__step-content">
+            <h3 class="getting-started__step-title">{{ block.settings.title }}</h3>
+            <p class="getting-started__step-text">{{ block.settings.description }}</p>
+            {%- if block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_link }}" class="getting-started__step-link">
+                {{ block.settings.button_text }}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.icon != blank -%}
+            <div class="getting-started__step-icon">
+              {%- case block.settings.icon -%}
+                {%- when 'palette' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="8" r="2" fill="currentColor"/>
+                    <circle cx="8" cy="14" r="2" fill="currentColor"/>
+                    <circle cx="16" cy="14" r="2" fill="currentColor"/>
+                  </svg>
+                {%- when 'layout' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="9" y1="21" x2="9" y2="9"/>
+                  </svg>
+                {%- when 'type' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="4 7 4 4 20 4 20 7"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                    <line x1="12" y1="4" x2="12" y2="20"/>
+                  </svg>
+                {%- when 'image' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                {%- when 'rocket' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                  </svg>
+                {%- when 'settings' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+              {%- endcase -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_presets_grid -%}
+      <div class="getting-started__presets">
+        <h3 class="getting-started__presets-title">Available Presets</h3>
+        <p class="getting-started__presets-subtitle">Click any preset to preview its design</p>
+        <div class="getting-started__presets-grid">
+          {%- assign presets = 'the-welder,work-zone,site-ops,midnight-shift,precision,tactical,monolith,zebra-skimmers,modern-minimal,bold-impact,warm-artisan,tech-forward' | split: ',' -%}
+          {%- assign preset_names = 'The Welder,Work Zone,Site Ops,Midnight Shift,Precision,Tactical,Monolith,Zebra Skimmers,Modern Minimal,Bold Impact,Warm Artisan,Tech Forward' | split: ',' -%}
+          {%- assign preset_colors = '#d71920,#f97316,#ffb400,#ff5722,#007ac9,#689f38,#000000,#003d79,#18181b,#0f172a,#78350f,#0ea5e9' | split: ',' -%}
+          
+          {%- for preset in presets -%}
+            <button 
+              type="button" 
+              class="getting-started__preset-card{% if current_preset == preset %} getting-started__preset-card--active{% endif %}"
+              data-preset="{{ preset }}"
+              style="--preset-color: {{ preset_colors[forloop.index0] }}"
+            >
+              <div class="getting-started__preset-color" style="background: {{ preset_colors[forloop.index0] }}"></div>
+              <span class="getting-started__preset-name">{{ preset_names[forloop.index0] }}</span>
+              {%- if current_preset == preset -%}
+                <span class="getting-started__preset-badge">Active</span>
+              {%- endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+        <p class="getting-started__presets-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          To change presets, go to <strong>Theme Settings → Theme Preset</strong>
+        </p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .getting-started {
+    padding: var(--spacing-sections, 60px) 0;
+    background: var(--color-background-secondary);
+  }
+
+  .getting-started__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .getting-started__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+
+  .getting-started__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+
+  .getting-started__subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .getting-started__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .getting-started__step {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card, 8px);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .getting-started__step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  }
+
+  .getting-started__step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .getting-started__step-content {
+    flex: 1;
+  }
+
+  .getting-started__step-title {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  .getting-started__step-text {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+
+  .getting-started__step-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .getting-started__step-link:hover {
+    gap: 10px;
+  }
+
+  .getting-started__step-icon {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 32px;
+    height: 32px;
+    color: var(--color-border);
+    opacity: 0.5;
+  }
+
+  .getting-started__step-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Presets Grid */
+  .getting-started__presets {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card, 8px);
+    padding: 32px;
+    text-align: center;
+  }
+
+  .getting-started__presets-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+
+  .getting-started__presets-subtitle {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 24px;
+  }
+
+  .getting-started__presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .getting-started__preset-card {
+    background: var(--color-background-secondary);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm, 4px);
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  .getting-started__preset-card:hover {
+    border-color: var(--preset-color);
+    transform: scale(1.02);
+  }
+
+  .getting-started__preset-card--active {
+    border-color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 5%, var(--color-background));
+  }
+
+  .getting-started__preset-color {
+    width: 100%;
+    height: 40px;
+    border-radius: var(--radius-sm, 4px);
+  }
+
+  .getting-started__preset-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .getting-started__preset-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--color-success);
+    color: white;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .getting-started__presets-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .getting-started__presets-note svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .getting-started__presets-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .getting-started__step-icon {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .getting-started__presets-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Getting Started",
+  "tag": "section",
+  "class": "section-getting-started",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Quick Setup Guide"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Getting Started"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Follow these steps to customize your store with the Forge Industrial theme."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_presets_grid",
+      "label": "Show presets grid",
+      "default": true,
+      "info": "Display available theme presets for quick reference"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Describe what the user should do in this step."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "palette", "label": "Palette (Colors)" },
+            { "value": "layout", "label": "Layout" },
+            { "value": "type", "label": "Typography" },
+            { "value": "image", "label": "Image" },
+            { "value": "rocket", "label": "Rocket (Launch)" },
+            { "value": "settings", "label": "Settings" }
+          ],
+          "default": "palette"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "info": "Leave blank to hide button"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Getting Started",
+      "settings": {
+        "badge_text": "Quick Setup Guide",
+        "title": "Getting Started",
+        "subtitle": "Follow these steps to customize your store with the Forge Industrial theme.",
+        "show_presets_grid": true
+      },
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Choose a Preset",
+            "description": "Start by selecting a preset that matches your brand. Each preset includes coordinated colors, fonts, and layouts.",
+            "icon": "palette",
+            "button_text": "View Presets",
+            "button_link": ""
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Add Your Logo",
+            "description": "Upload your logo in Theme Settings → Logo. The theme will automatically position it in your header.",
+            "icon": "image",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Customize Sections",
+            "description": "Use the Theme Editor to add, remove, and rearrange sections. Each section can be customized individually.",
+            "icon": "layout",
+            "button_text": "",
+            "button_link": ""
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Launch Your Store",
+            "description": "Preview your changes, then publish your theme when you're ready to go live.",
+            "icon": "rocket",
+            "button_text": "",
+            "button_link": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
