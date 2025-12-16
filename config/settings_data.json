@@ -46,12 +46,28 @@
     "sections": {
       "header-unified": {
         "type": "header-unified",
+        "blocks": {
+          "featured_card_kpghHG": {
+            "type": "featured_card",
+            "settings": {
+              "parent_menu": "Catalog",
+              "image": "shopify://shop_images/generate-a-cnc-machine-working.png",
+              "label": "Featured",
+              "title": "Featured Product",
+              "description": "",
+              "link": "shopify://products/the-compare-at-price-snowboard"
+            }
+          }
+        },
+        "block_order": [
+          "featured_card_kpghHG"
+        ],
         "settings": {
           "logo_width": 150,
           "logo_scale": 100,
           "menu": "main-menu",
           "sticky_header": true,
-          "search_style": "icon",
+          "search_style": "bar_above",
           "search_placeholder": "Search products, articles...",
           "show_search_filter": true,
           "filter_all_label": "All",

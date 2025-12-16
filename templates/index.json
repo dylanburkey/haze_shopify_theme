@@ -1,8 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "getting-started": {
       "type": "getting-started",
-      "disabled": false,
       "blocks": {
         "step-1": {
           "type": "step",
@@ -45,7 +53,12 @@
           }
         }
       },
-      "block_order": ["step-1", "step-2", "step-3", "step-4"],
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ],
       "settings": {
         "badge_text": "Quick Setup Guide",
         "title": "Getting Started with Forge Industrial",
@@ -55,7 +68,6 @@
     },
     "preset-preview": {
       "type": "preset-preview",
-      "disabled": false,
       "settings": {
         "show_header": true,
         "label": "Current Theme Preset",
@@ -76,7 +88,6 @@
     },
     "trust-badges": {
       "type": "preset-trust-badges",
-      "disabled": false,
       "blocks": {
         "badge-1": {
           "type": "badge",
@@ -111,7 +122,12 @@
           }
         }
       },
-      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"],
+      "block_order": [
+        "badge-1",
+        "badge-2",
+        "badge-3",
+        "badge-4"
+      ],
       "settings": {
         "title": "Why Choose Us",
         "background_style": "light",
@@ -120,7 +136,6 @@
     },
     "featured-collection": {
       "type": "featured-collection",
-      "disabled": false,
       "settings": {
         "heading": "Featured Products",
         "collection": "",
@@ -131,7 +146,6 @@
     },
     "smart-grid": {
       "type": "smart-grid",
-      "disabled": false,
       "blocks": {
         "card-1": {
           "type": "card",
@@ -167,11 +181,39 @@
           }
         }
       },
-      "block_order": ["card-1", "card-2", "card-3"],
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
       "settings": {
         "heading": "Explore Our Catalog",
         "layout": "highlight",
         "use_surface_bg": false
+      }
+    },
+    "landing_page_switcher_GWyVwi": {
+      "type": "landing-page-switcher",
+      "name": "Landing Page Switcher",
+      "settings": {
+        "override_style": "zebra-skimmers",
+        "default_hero_title": "Precision Welding Systems",
+        "default_hero_text": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.",
+        "default_hero_button_label": "Explore Equipment",
+        "default_hero_button_link": "",
+        "tech_hero_badge": "Now Available",
+        "tech_hero_title": "The Future of Intelligence",
+        "tech_hero_subtitle": "Experience next-generation AI that learns, adapts, and evolves with your business needs.",
+        "tech_hero_button_label": "Start Free Trial",
+        "tech_hero_button_link": "",
+        "impact_hero_badge": "New Collection",
+        "impact_hero_title": "PUSH YOUR LIMITS",
+        "impact_hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
+        "impact_collection": "",
+        "artisan_hero_eyebrow": "Handcrafted with love",
+        "artisan_hero_title": "Artisan Ceramics for Everyday Living",
+        "artisan_hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
+        "artisan_collection": ""
       }
     }
   },
@@ -181,6 +223,7 @@
     "hero",
     "trust-badges",
     "featured-collection",
-    "smart-grid"
+    "smart-grid",
+    "landing_page_switcher_GWyVwi"
   ]
 }
