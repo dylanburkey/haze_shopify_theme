@@ -192,90 +192,35 @@
         "use_surface_bg": false
       }
     },
-    "mega_menu_header_QUa4mN": {
-      "type": "mega-menu-header",
-      "blocks": {
-        "utility_link_VK6anT": {
-          "type": "utility_link",
-          "settings": {
-            "label": "Find a Location",
-            "link": "/pages/locations",
-            "icon": "location",
-            "open_new_tab": false
-          }
-        },
-        "utility_link_hqQNyH": {
-          "type": "utility_link",
-          "settings": {
-            "label": "Contact Us",
-            "link": "/pages/contact",
-            "icon": "phone",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_iNgwCK": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Products",
-            "link": "",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_eea7kz": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Solutions",
-            "link": "",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_cNqMYh": {
-          "type": "menu_item",
-          "settings": {
-            "label": "About",
-            "link": "/pages/about",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_NwggcK": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Careers",
-            "link": "/pages/careers",
-            "open_new_tab": false
-          }
-        }
-      },
-      "block_order": [
-        "utility_link_VK6anT",
-        "utility_link_hqQNyH",
-        "menu_item_iNgwCK",
-        "menu_item_eea7kz",
-        "menu_item_cNqMYh",
-        "menu_item_NwggcK"
-      ],
-      "name": "Mega Menu Header",
+    "landing_page_switcher_dA44Yh": {
+      "type": "landing-page-switcher",
+      "name": "Landing Page Switcher",
       "settings": {
-        "logo_width": 150,
-        "sticky_header": true,
-        "show_search": true,
-        "search_placeholder": "Search...",
-        "show_account": true,
-        "show_cart": true,
-        "utility_bg": "#f5f5f5",
-        "utility_text": "#333333",
-        "header_bg": "#ffffff",
-        "header_text": "#1a1a1a",
-        "nav_hover": "#0056b3",
-        "dropdown_bg": "#ffffff",
-        "dropdown_border": "#e5e5e5"
+        "override_style": "use_theme_setting",
+        "default_hero_title": "Precision Welding Systems",
+        "default_hero_text": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.",
+        "default_hero_button_label": "Explore Equipment",
+        "default_hero_button_link": "",
+        "tech_hero_badge": "Now Available",
+        "tech_hero_title": "The Future of Intelligence",
+        "tech_hero_subtitle": "Experience next-generation AI that learns, adapts, and evolves with your business needs.",
+        "tech_hero_button_label": "Start Free Trial",
+        "tech_hero_button_link": "",
+        "impact_hero_badge": "New Collection",
+        "impact_hero_title": "PUSH YOUR LIMITS",
+        "impact_hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
+        "impact_collection": "",
+        "artisan_hero_eyebrow": "Handcrafted with love",
+        "artisan_hero_title": "Artisan Ceramics for Everyday Living",
+        "artisan_hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
+        "artisan_collection": ""
       }
     }
   },
   "order": [
-    "mega_menu_header_QUa4mN",
     "getting-started",
     "preset-preview",
+    "landing_page_switcher_dA44Yh",
     "hero",
     "trust-badges",
     "featured-collection",
