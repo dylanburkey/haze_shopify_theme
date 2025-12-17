@@ -493,6 +493,360 @@
         "artisan_collection": ""
       }
     },
+    "landing_warm_artisan_VNJQp3": {
+      "type": "landing-warm-artisan",
+      "blocks": {
+        "process_step_acip3b": {
+          "type": "process_step",
+          "settings": {
+            "title": "Sourced",
+            "text": "We source only the finest clays and materials from local suppliers who share our values."
+          }
+        },
+        "process_step_4MnUeG": {
+          "type": "process_step",
+          "settings": {
+            "title": "Shaped",
+            "text": "Each piece is thrown on the wheel or hand-built with careful attention to form and function."
+          }
+        },
+        "process_step_ChKnTL": {
+          "type": "process_step",
+          "settings": {
+            "title": "Glazed",
+            "text": "Our signature glazes are mixed in-house using recipes developed over years of experimentation."
+          }
+        },
+        "process_step_QX3PmF": {
+          "type": "process_step",
+          "settings": {
+            "title": "Fired",
+            "text": "Multiple firings in our kilns bring out the unique character of each piece."
+          }
+        },
+        "value_WgHUBe": {
+          "type": "value",
+          "settings": {
+            "icon": "hand",
+            "title": "Handcrafted",
+            "text": "Every piece is made by hand in our studio—no two are exactly alike."
+          }
+        },
+        "value_QP7Kr6": {
+          "type": "value",
+          "settings": {
+            "icon": "leaf",
+            "title": "Sustainable",
+            "text": "We use eco-friendly materials and practices in everything we do."
+          }
+        },
+        "value_nbf9MV": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "title": "Made with Love",
+            "text": "Each piece carries the care and intention of its maker."
+          }
+        },
+        "value_6Ubgaw": {
+          "type": "value",
+          "settings": {
+            "icon": "home",
+            "title": "Built to Last",
+            "text": "Quality craftsmanship means these pieces will be cherished for generations."
+          }
+        },
+        "testimonial_DcmWzk": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Emma S.",
+            "location": "Seattle, WA",
+            "quote": "These mugs have completely transformed my morning routine. Each sip feels special."
+          }
+        },
+        "testimonial_Fx6FKb": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael R.",
+            "location": "Denver, CO",
+            "quote": "Bought the serving bowl for my wife's birthday. She teared up when she opened it. That says everything."
+          }
+        },
+        "testimonial_K6yQA4": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Jenny L.",
+            "location": "San Francisco, CA",
+            "quote": "My morning coffee ritual has become something special thanks to these pieces. Worth every penny."
+          }
+        },
+        "instagram_image_cF8k9e": {
+          "type": "instagram_image",
+          "settings": {}
+        },
+        "instagram_image_hkxJPr": {
+          "type": "instagram_image",
+          "settings": {}
+        },
+        "instagram_image_i69pCT": {
+          "type": "instagram_image",
+          "settings": {}
+        },
+        "instagram_image_MjG7fH": {
+          "type": "instagram_image",
+          "settings": {}
+        },
+        "instagram_image_Gx3wGT": {
+          "type": "instagram_image",
+          "settings": {}
+        },
+        "instagram_image_UBLAF8": {
+          "type": "instagram_image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "process_step_acip3b",
+        "process_step_4MnUeG",
+        "process_step_ChKnTL",
+        "process_step_QX3PmF",
+        "value_WgHUBe",
+        "value_QP7Kr6",
+        "value_nbf9MV",
+        "value_6Ubgaw",
+        "testimonial_DcmWzk",
+        "testimonial_Fx6FKb",
+        "testimonial_K6yQA4",
+        "instagram_image_cF8k9e",
+        "instagram_image_hkxJPr",
+        "instagram_image_i69pCT",
+        "instagram_image_MjG7fH",
+        "instagram_image_Gx3wGT",
+        "instagram_image_UBLAF8"
+      ],
+      "name": "Landing: Warm Artisan",
+      "settings": {
+        "hero_eyebrow": "Handcrafted with love",
+        "hero_title": "Artisan Ceramics for Everyday Living",
+        "hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
+        "hero_button_label": "Shop Collection",
+        "hero_button_link": "",
+        "hero_secondary_label": "Our Story",
+        "hero_secondary_link": "",
+        "show_story": true,
+        "story_eyebrow": "Our Story",
+        "story_title": "Where Every Piece Tells a Story",
+        "story_text": "<p>What started as a small passion project in my garage has grown into something I never imagined. Each piece that leaves our studio carries a bit of our heart with it.</p><p>We believe that everyday objects should bring joy. That's why we spend countless hours perfecting each glaze, each curve, each handle—so that your morning coffee becomes a moment of beauty.</p>",
+        "story_signature": "Sarah, Founder",
+        "show_products": true,
+        "collection": "",
+        "products_limit": 6,
+        "products_eyebrow": "Shop",
+        "products_title": "Thoughtfully Made",
+        "products_subtitle": "Browse our collection of handcrafted ceramics, each one unique and made with care.",
+        "products_button_label": "View All Products",
+        "show_process": true,
+        "process_eyebrow": "Our Process",
+        "process_title": "Made with Intention",
+        "show_values": true,
+        "show_testimonials": true,
+        "testimonials_eyebrow": "Kind Words",
+        "testimonials_title": "What Our Customers Say",
+        "show_instagram": true,
+        "instagram_handle": "yourbrand",
+        "instagram_title": "Follow Along",
+        "instagram_link": "",
+        "show_newsletter": true,
+        "newsletter_title": "Join the Family",
+        "newsletter_text": "Be the first to know about new pieces, studio updates, and the stories behind our work.",
+        "newsletter_placeholder": "Your email address",
+        "newsletter_button": "Subscribe",
+        "newsletter_note": "We respect your inbox. Unsubscribe anytime."
+      }
+    },
+    "landing_bold_impact_DiwrTd": {
+      "type": "landing-bold-impact",
+      "blocks": {
+        "hero_stat_gTgJQM": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "50K+",
+            "label": "Athletes"
+          }
+        },
+        "hero_stat_49bygY": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "4.9",
+            "label": "Rating"
+          }
+        },
+        "hero_stat_trXFKm": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "100%",
+            "label": "Performance"
+          }
+        },
+        "category_zrQCxF": {
+          "type": "category",
+          "settings": {
+            "title": "Running",
+            "link": ""
+          }
+        },
+        "category_AEbc4A": {
+          "type": "category",
+          "settings": {
+            "title": "Training",
+            "link": ""
+          }
+        },
+        "category_XajwAW": {
+          "type": "category",
+          "settings": {
+            "title": "Basketball",
+            "link": ""
+          }
+        },
+        "category_VjLggM": {
+          "type": "category",
+          "settings": {
+            "title": "Soccer",
+            "link": ""
+          }
+        },
+        "product_feature_wdYXaK": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Responsive cushioning technology"
+          }
+        },
+        "product_feature_YytAdg": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Breathable mesh upper"
+          }
+        },
+        "product_feature_rHrFdm": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Superior grip outsole"
+          }
+        },
+        "product_feature_UHJhqC": {
+          "type": "product_feature",
+          "settings": {
+            "text": "Lightweight at only 8.5oz"
+          }
+        },
+        "banner_stat_nmhfLp": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "10M+",
+            "label": "Products Sold"
+          }
+        },
+        "banner_stat_NmWYtz": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "500+",
+            "label": "Pro Athletes"
+          }
+        },
+        "banner_stat_fTLNVa": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "50",
+            "label": "Countries"
+          }
+        },
+        "banner_stat_FwHeVa": {
+          "type": "banner_stat",
+          "settings": {
+            "value": "24/7",
+            "label": "Support"
+          }
+        },
+        "testimonial_NfaFXX": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Marcus Williams",
+            "sport": "Professional Basketball",
+            "quote": "The support and responsiveness are unmatched. These are the only shoes I trust on the court."
+          }
+        },
+        "testimonial_YPeLgn": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah Chen",
+            "sport": "Marathon Runner",
+            "quote": "Ran my PR wearing these. The cushioning kept me fresh through mile 26."
+          }
+        },
+        "testimonial_RNeVTM": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Jake Rodriguez",
+            "sport": "CrossFit Athlete",
+            "quote": "Finally a shoe that can handle everything from box jumps to rope climbs."
+          }
+        }
+      },
+      "block_order": [
+        "hero_stat_gTgJQM",
+        "hero_stat_49bygY",
+        "hero_stat_trXFKm",
+        "category_zrQCxF",
+        "category_AEbc4A",
+        "category_XajwAW",
+        "category_VjLggM",
+        "product_feature_wdYXaK",
+        "product_feature_YytAdg",
+        "product_feature_rHrFdm",
+        "product_feature_UHJhqC",
+        "banner_stat_nmhfLp",
+        "banner_stat_NmWYtz",
+        "banner_stat_fTLNVa",
+        "banner_stat_FwHeVa",
+        "testimonial_NfaFXX",
+        "testimonial_YPeLgn",
+        "testimonial_RNeVTM"
+      ],
+      "name": "Landing: Bold Impact",
+      "settings": {
+        "hero_badge": "New Collection",
+        "hero_title": "PUSH YOUR LIMITS",
+        "hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
+        "hero_button_label": "Shop Now",
+        "hero_button_link": "",
+        "hero_secondary_label": "View Lookbook",
+        "hero_secondary_link": "",
+        "show_hero_stats": true,
+        "show_categories": true,
+        "categories_eyebrow": "Collections",
+        "categories_title": "Shop by Sport",
+        "show_featured_product": true,
+        "featured_product": "",
+        "featured_eyebrow": "Featured",
+        "show_products": true,
+        "collection": "",
+        "products_limit": 8,
+        "products_eyebrow": "Best Sellers",
+        "products_title": "Top Picks",
+        "products_button_label": "View All Products",
+        "show_stats_banner": true,
+        "show_testimonials": true,
+        "testimonials_eyebrow": "Reviews",
+        "testimonials_title": "What Athletes Say",
+        "show_newsletter": true,
+        "newsletter_title": "Join the Team",
+        "newsletter_text": "Get exclusive drops, training tips, and 15% off your first order.",
+        "newsletter_placeholder": "Enter your email",
+        "newsletter_button": "Subscribe",
+        "newsletter_note": "No spam. Unsubscribe anytime."
+      }
+    },
     "hero": {
       "type": "hero-industrial",
       "settings": {
@@ -664,6 +1018,8 @@
     "getting-started",
     "preset-preview",
     "landing_page_switcher_dA44Yh",
+    "landing_warm_artisan_VNJQp3",
+    "landing_bold_impact_DiwrTd",
     "hero",
     "trust-badges",
     "featured-collection",
