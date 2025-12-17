@@ -9,6 +9,400 @@
  */
 {
   "sections": {
+    "mega_menu_header_grRJgy": {
+      "type": "mega-menu-header",
+      "blocks": {
+        "utility_link_d4tycd": {
+          "type": "utility_link",
+          "settings": {
+            "label": "Find a Location",
+            "link": "/pages/locations",
+            "icon": "location",
+            "open_new_tab": false
+          }
+        },
+        "utility_link_kdb6JQ": {
+          "type": "utility_link",
+          "settings": {
+            "label": "Contact Us",
+            "link": "/pages/contact",
+            "icon": "phone",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_V34axz": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Products",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_k9mxaK": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Solutions",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_6CmDm7": {
+          "type": "menu_item",
+          "settings": {
+            "label": "About",
+            "link": "/pages/about",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_hmCd6i": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Careers",
+            "link": "/pages/careers",
+            "open_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "utility_link_d4tycd",
+        "utility_link_kdb6JQ",
+        "menu_item_V34axz",
+        "menu_item_k9mxaK",
+        "menu_item_6CmDm7",
+        "menu_item_hmCd6i"
+      ],
+      "name": "Mega Menu Header",
+      "settings": {
+        "logo_width": 150,
+        "sticky_header": true,
+        "show_search": true,
+        "search_placeholder": "Search...",
+        "show_account": true,
+        "show_cart": true,
+        "utility_bg": "#f5f5f5",
+        "utility_text": "#333333",
+        "header_bg": "#ffffff",
+        "header_text": "#1a1a1a",
+        "nav_hover": "#0056b3",
+        "dropdown_bg": "#ffffff",
+        "dropdown_border": "#e5e5e5"
+      }
+    },
+    "corporate_header_reYyXm": {
+      "type": "corporate-header",
+      "blocks": {
+        "nav_item_PEdgbM": {
+          "type": "nav_item",
+          "settings": {
+            "label": "About",
+            "link": "",
+            "new_tab": false,
+            "submenu_1_label": "Our Story",
+            "submenu_1_link": "/pages/about",
+            "submenu_2_label": "Leadership",
+            "submenu_2_link": "/pages/team",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_qrjF9W": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Products",
+            "link": "/collections/all",
+            "new_tab": false,
+            "submenu_1_label": "",
+            "submenu_1_link": "",
+            "submenu_2_label": "",
+            "submenu_2_link": "",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_faf8aj": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Solutions",
+            "link": "",
+            "new_tab": false,
+            "submenu_1_label": "Industrial",
+            "submenu_1_link": "/pages/industrial",
+            "submenu_2_label": "Commercial",
+            "submenu_2_link": "/pages/commercial",
+            "submenu_3_label": "Residential",
+            "submenu_3_link": "/pages/residential",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_YTMPjH": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Careers",
+            "link": "/pages/careers",
+            "new_tab": false,
+            "submenu_1_label": "",
+            "submenu_1_link": "",
+            "submenu_2_label": "",
+            "submenu_2_link": "",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_PNFwVy": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Contact",
+            "link": "/pages/contact",
+            "new_tab": false,
+            "submenu_1_label": "",
+            "submenu_1_link": "",
+            "submenu_2_label": "",
+            "submenu_2_link": "",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "nav_item_PEdgbM",
+        "nav_item_qrjF9W",
+        "nav_item_faf8aj",
+        "nav_item_YTMPjH",
+        "nav_item_PNFwVy"
+      ],
+      "name": "Corporate Header",
+      "settings": {
+        "logo_width": 150,
+        "logo_svg": "",
+        "sticky": true,
+        "show_search": true,
+        "search_placeholder": "Search...",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "hover_color": "#0056b3"
+      }
+    },
+    "header_industrial_Mj4jxM": {
+      "type": "header-industrial",
+      "blocks": {
+        "menu_item_yCaKLD": {
+          "type": "menu_item",
+          "settings": {
+            "label": "PRODUCTS",
+            "link": "/collections/all"
+          }
+        },
+        "menu_item_XDn9EE": {
+          "type": "menu_item",
+          "settings": {
+            "label": "CATALOG",
+            "link": "/collections"
+          }
+        },
+        "menu_item_8DfiKK": {
+          "type": "menu_item",
+          "settings": {
+            "label": "ABOUT",
+            "link": "/pages/about"
+          }
+        },
+        "menu_item_BGrKE7": {
+          "type": "menu_item",
+          "settings": {
+            "label": "CONTACT",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "menu_item_yCaKLD",
+        "menu_item_XDn9EE",
+        "menu_item_8DfiKK",
+        "menu_item_BGrKE7"
+      ],
+      "name": "Header industrial",
+      "settings": {
+        "style": "machinist",
+        "header_height": 80,
+        "background_color": "#0a0a0a",
+        "text_color": "#e5e5e5",
+        "border_color": "#333333",
+        "logo_width": 150,
+        "logo_text": "FORGE",
+        "logo_suffix": "IND.",
+        "show_numbers": true,
+        "show_search": true,
+        "show_account": true
+      }
+    },
+    "header_wLyPK9": {
+      "type": "header",
+      "blocks": {
+        "menu_item_LXURjz": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Equipment",
+            "link": "/collections/all"
+          }
+        },
+        "menu_item_JXJkcP": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Products",
+            "link": "/collections"
+          }
+        },
+        "menu_item_aEbfLD": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Support",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "menu_item_LXURjz",
+        "menu_item_JXJkcP",
+        "menu_item_aEbfLD"
+      ],
+      "name": "Header",
+      "settings": {
+        "show_search": true,
+        "show_account": true
+      }
+    },
+    "corporate_header_E4jMBH": {
+      "type": "corporate-header",
+      "blocks": {
+        "nav_item_NhhDHj": {
+          "type": "nav_item",
+          "settings": {
+            "label": "About",
+            "link": "",
+            "new_tab": false,
+            "submenu_1_label": "Our Story",
+            "submenu_1_link": "/pages/about",
+            "submenu_2_label": "Leadership",
+            "submenu_2_link": "/pages/team",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_cy3GbV": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Products",
+            "link": "/collections/all",
+            "new_tab": false,
+            "submenu_1_label": "",
+            "submenu_1_link": "",
+            "submenu_2_label": "",
+            "submenu_2_link": "",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_p8tiRU": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Solutions",
+            "link": "",
+            "new_tab": false,
+            "submenu_1_label": "Industrial",
+            "submenu_1_link": "/pages/industrial",
+            "submenu_2_label": "Commercial",
+            "submenu_2_link": "/pages/commercial",
+            "submenu_3_label": "Residential",
+            "submenu_3_link": "/pages/residential",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_Ptm69a": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Careers",
+            "link": "/pages/careers",
+            "new_tab": false,
+            "submenu_1_label": "",
+            "submenu_1_link": "",
+            "submenu_2_label": "",
+            "submenu_2_link": "",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        },
+        "nav_item_Gg8gmU": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Contact",
+            "link": "/pages/contact",
+            "new_tab": false,
+            "submenu_1_label": "",
+            "submenu_1_link": "",
+            "submenu_2_label": "",
+            "submenu_2_link": "",
+            "submenu_3_label": "",
+            "submenu_3_link": "",
+            "submenu_4_label": "",
+            "submenu_4_link": "",
+            "submenu_5_label": "",
+            "submenu_5_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "nav_item_NhhDHj",
+        "nav_item_cy3GbV",
+        "nav_item_p8tiRU",
+        "nav_item_Ptm69a",
+        "nav_item_Gg8gmU"
+      ],
+      "name": "Corporate Header",
+      "settings": {
+        "logo_width": 150,
+        "logo_svg": "",
+        "sticky": true,
+        "show_search": true,
+        "search_placeholder": "Search...",
+        "bg_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "hover_color": "#0056b3"
+      }
+    },
     "getting-started": {
       "type": "getting-started",
       "blocks": {
@@ -73,6 +467,30 @@
         "label": "Current Theme Preset",
         "show_cta": true,
         "cta_text": "This preview updates automatically when you change your theme preset in Theme Settings."
+      }
+    },
+    "landing_page_switcher_dA44Yh": {
+      "type": "landing-page-switcher",
+      "name": "Landing Page Switcher",
+      "settings": {
+        "override_style": "tech-forward",
+        "default_hero_title": "Precision Welding Systems",
+        "default_hero_text": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.",
+        "default_hero_button_label": "Explore Equipment",
+        "default_hero_button_link": "",
+        "tech_hero_badge": "Now Available",
+        "tech_hero_title": "The Future of Intelligence",
+        "tech_hero_subtitle": "Experience next-generation AI that learns, adapts, and evolves with your business needs.",
+        "tech_hero_button_label": "Start Free Trial",
+        "tech_hero_button_link": "",
+        "impact_hero_badge": "New Collection",
+        "impact_hero_title": "PUSH YOUR LIMITS",
+        "impact_hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
+        "impact_collection": "",
+        "artisan_hero_eyebrow": "Handcrafted with love",
+        "artisan_hero_title": "Artisan Ceramics for Everyday Living",
+        "artisan_hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
+        "artisan_collection": ""
       }
     },
     "hero": {
@@ -192,38 +610,64 @@
         "use_surface_bg": false
       }
     },
-    "landing_page_switcher_dA44Yh": {
-      "type": "landing-page-switcher",
-      "name": "Landing Page Switcher",
+    "footer_industrial_79B3rj": {
+      "type": "footer-industrial",
+      "blocks": {
+        "menu_FViTrR": {
+          "type": "menu",
+          "settings": {
+            "title": "PRODUCTS",
+            "menu": ""
+          }
+        },
+        "menu_zpjBn7": {
+          "type": "menu",
+          "settings": {
+            "title": "COMPANY",
+            "menu": ""
+          }
+        },
+        "newsletter_URFxXy": {
+          "type": "newsletter",
+          "settings": {
+            "title": "NEWSLETTER",
+            "text": "Subscribe for product updates and industry news."
+          }
+        }
+      },
+      "block_order": [
+        "menu_FViTrR",
+        "menu_zpjBn7",
+        "newsletter_URFxXy"
+      ],
+      "name": "Footer industrial",
       "settings": {
-        "override_style": "use_theme_setting",
-        "default_hero_title": "Precision Welding Systems",
-        "default_hero_text": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.",
-        "default_hero_button_label": "Explore Equipment",
-        "default_hero_button_link": "",
-        "tech_hero_badge": "Now Available",
-        "tech_hero_title": "The Future of Intelligence",
-        "tech_hero_subtitle": "Experience next-generation AI that learns, adapts, and evolves with your business needs.",
-        "tech_hero_button_label": "Start Free Trial",
-        "tech_hero_button_link": "",
-        "impact_hero_badge": "New Collection",
-        "impact_hero_title": "PUSH YOUR LIMITS",
-        "impact_hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
-        "impact_collection": "",
-        "artisan_hero_eyebrow": "Handcrafted with love",
-        "artisan_hero_title": "Artisan Ceramics for Everyday Living",
-        "artisan_hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
-        "artisan_collection": ""
+        "style": "machinist",
+        "background_color": "#0a0a0a",
+        "text_color": "#e5e5e5",
+        "border_color": "#333333",
+        "logo_width": 120,
+        "logo_text": "FORGE",
+        "logo_suffix": "IND.",
+        "description": "Industrial-grade products built to perform. Precision engineering for demanding environments.",
+        "show_social": true,
+        "show_payment_icons": true
       }
     }
   },
   "order": [
+    "mega_menu_header_grRJgy",
+    "corporate_header_reYyXm",
+    "header_industrial_Mj4jxM",
+    "header_wLyPK9",
+    "corporate_header_E4jMBH",
     "getting-started",
     "preset-preview",
     "landing_page_switcher_dA44Yh",
     "hero",
     "trust-badges",
     "featured-collection",
-    "smart-grid"
+    "smart-grid",
+    "footer_industrial_79B3rj"
   ]
 }
