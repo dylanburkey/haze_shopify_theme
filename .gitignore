@@ -17,6 +17,8 @@
 .Spotlight-V100
 .Trashes
 
+
+
 # Linux
 *~
 .nfs*
@@ -29,6 +31,9 @@ Desktop.ini
 
 ## AI
 ################
+# Claude Code
+.claude/
+
 # Cursor (AI-first VS Code fork)
 .cursor/
 .cursorignore
