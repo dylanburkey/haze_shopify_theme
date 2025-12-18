@@ -1208,9 +1208,12 @@
 
 {% schema %}
 {
-  "name": "Header (Unified)",
-  "tag": "div",
+  "name": "t:sections.header_unified.name",
+  "tag": "header",
   "class": "header-unified-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "settings": [
     {
       "type": "header",
@@ -1383,7 +1386,7 @@
   "blocks": [
     {
       "type": "featured_card",
-      "name": "Featured Card",
+      "name": "t:sections.header_unified.blocks.featured_card.name",
       "settings": [
         {
           "type": "text",
@@ -1421,9 +1424,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "presets": [
     {
-      "name": "Header (Unified)",
+      "name": "t:sections.header_unified.presets.default.name",
       "settings": {
         "search_style": "bar_above"
       }

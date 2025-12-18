@@ -327,7 +327,8 @@
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "t:sections.header_classic.name",
+  "tag": "header",
   "class": "section-header",
   "enabled_on": {
     "groups": ["header"]
@@ -349,7 +350,7 @@
   "blocks": [
     {
       "type": "menu_item",
-      "name": "Menu item",
+      "name": "t:sections.header_classic.blocks.menu_item.name",
       "settings": [
         {
           "type": "text",
@@ -365,9 +366,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "presets": [
     {
-      "name": "Header",
+      "name": "t:sections.header_classic.presets.default.name",
       "blocks": [
         {
           "type": "menu_item",

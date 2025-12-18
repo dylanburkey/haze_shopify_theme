@@ -130,24 +130,23 @@
   {%- comment -%} PWA Install Banner {%- endcomment -%}
   {%- render 'pwa-install-banner' -%}
 
-  {%- comment -%} Dynamic Header based on settings {%- endcomment -%}
-  {%- case settings.header_style -%}
-    {%- when 'mega-menu' -%}
-      {% section 'mega-menu-header' %}
-    {%- when 'industrial' -%}
-      {% section 'header-industrial' %}
-    {%- when 'corporate' -%}
-      {% section 'corporate-header' %}
-    {%- else -%}
-      {% section 'header-unified' %}
-  {%- endcase -%}
+  {%- comment -%}
+    Header Section Group
+    Merchants can swap header variants (announcement-bar, header--classic, header--mega, etc.)
+    directly from the theme editor. Each preset can configure its own header combination.
+  {%- endcomment -%}
+  {% sections 'header-group' %}
 
   <main id="MainContent" role="main" tabindex="-1">
     {{ content_for_layout }}
   </main>
 
-  {%- comment -%} Dynamic Footer based on preset {%- endcomment -%}
-  {% section 'footer' %}
+  {%- comment -%}
+    Footer Section Group
+    Merchants can swap footer variants directly from the theme editor.
+    Each preset can configure its own footer style.
+  {%- endcomment -%}
+  {% sections 'footer-group' %}
 
   {%- comment -%} Preset Showcase System {%- endcomment -%}
   {%- render 'preset-showcase' -%}

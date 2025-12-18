@@ -1155,8 +1155,8 @@
 
 {% schema %}
 {
-  "name": "Mega Menu Header",
-  "tag": "div",
+  "name": "t:sections.header_mega.name",
+  "tag": "header",
   "class": "mega-menu-header-section",
   "enabled_on": {
     "groups": ["header"]
@@ -1269,7 +1269,7 @@
   "blocks": [
     {
       "type": "utility_link",
-      "name": "Utility Link",
+      "name": "t:sections.header_mega.blocks.utility_link.name",
       "settings": [
         {
           "type": "text",
@@ -1307,7 +1307,7 @@
     },
     {
       "type": "menu_item",
-      "name": "Menu Item",
+      "name": "t:sections.header_mega.blocks.menu_item.name",
       "settings": [
         {
           "type": "text",
@@ -1331,7 +1331,7 @@
     },
     {
       "type": "dropdown_link",
-      "name": "Dropdown Link",
+      "name": "t:sections.header_mega.blocks.dropdown_link.name",
       "settings": [
         {
           "type": "text",
@@ -1354,7 +1354,7 @@
     },
     {
       "type": "dropdown_featured",
-      "name": "Featured Card",
+      "name": "t:sections.header_mega.blocks.dropdown_featured.name",
       "settings": [
         {
           "type": "text",
@@ -1392,9 +1392,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "presets": [
     {
-      "name": "Mega Menu Header",
+      "name": "t:sections.header_mega.presets.default.name",
       "blocks": [
         {
           "type": "utility_link",

@@ -1,6 +1,6 @@
 {
   "type": "header",
-  "name": "Header group",
+  "name": "Header",
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
@@ -10,15 +10,13 @@
       }
     },
     "header": {
-      "type": "header",
+      "type": "header--unified",
       "settings": {
-        "logo_width": 100,
-        "menu": "main-menu"
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true
       }
     }
   },
-  "order": [
-    "announcement-bar",
-    "header"
-  ]
+  "order": ["announcement-bar", "header"]
 }

@@ -734,8 +734,8 @@
 
 {% schema %}
 {
-  "name": "Corporate Header",
-  "tag": "div",
+  "name": "t:sections.header_corporate.name",
+  "tag": "header",
   "class": "corporate-header-section",
   "enabled_on": {
     "groups": ["header"]
@@ -814,7 +814,7 @@
   "blocks": [
     {
       "type": "nav_item",
-      "name": "Navigation Item",
+      "name": "t:sections.header_corporate.blocks.nav_item.name",
       "settings": [
         {
           "type": "text",
@@ -890,9 +890,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "presets": [
     {
-      "name": "Corporate Header",
+      "name": "t:sections.header_corporate.presets.default.name",
       "blocks": [
         {
           "type": "nav_item",

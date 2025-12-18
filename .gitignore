@@ -298,3 +298,4 @@ junit.xml
 # OS / tooling noise
 .history/
 *.orig
+.claude/settings.local.json

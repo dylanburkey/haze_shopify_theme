@@ -253,7 +253,7 @@
 
 {% schema %}
 {
-  "name": "Footer",
+  "name": "t:sections.footer_standard.name",
   "class": "section-footer",
   "enabled_on": {
     "groups": ["footer"]
@@ -307,7 +307,7 @@
   "blocks": [
     {
       "type": "menu",
-      "name": "Menu",
+      "name": "t:sections.footer_standard.blocks.menu.name",
       "settings": [
         {
           "type": "text",
@@ -325,7 +325,7 @@
     },
     {
       "type": "text",
-      "name": "Text",
+      "name": "t:sections.footer_standard.blocks.text.name",
       "settings": [
         {
           "type": "text",
@@ -342,7 +342,7 @@
     },
     {
       "type": "social",
-      "name": "Social links",
+      "name": "t:sections.footer_standard.blocks.social.name",
       "limit": 1,
       "settings": [
         {
@@ -354,9 +354,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["footer"]
+  },
   "presets": [
     {
-      "name": "Footer",
+      "name": "t:sections.footer_standard.presets.default.name",
       "blocks": [
         {
           "type": "menu",

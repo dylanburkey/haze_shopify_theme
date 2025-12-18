@@ -188,7 +188,7 @@
 
 {% schema %}
 {
-  "name": "Preset: Footer",
+  "name": "t:sections.footer_preset.name",
   "tag": "section",
   "class": "footer-section",
   "enabled_on": {
@@ -263,7 +263,7 @@
   "blocks": [
     {
       "type": "menu",
-      "name": "Navigation Menu",
+      "name": "t:sections.footer_preset.blocks.menu.name",
       "settings": [
         {
           "type": "text",
@@ -280,7 +280,7 @@
     },
     {
       "type": "social",
-      "name": "Social Link",
+      "name": "t:sections.footer_preset.blocks.social.name",
       "settings": [
         {
           "type": "select",
@@ -303,6 +303,14 @@
           "label": "Link"
         }
       ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "presets": [
+    {
+      "name": "t:sections.footer_preset.presets.default.name"
     }
   ],
   "default": {

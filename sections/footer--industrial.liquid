@@ -440,7 +440,7 @@
 
 {% schema %}
 {
-  "name": "Footer industrial",
+  "name": "t:sections.footer_industrial.name",
   "tag": "section",
   "class": "section-footer-industrial",
   "enabled_on": {
@@ -540,7 +540,7 @@
   "blocks": [
     {
       "type": "menu",
-      "name": "Menu",
+      "name": "t:sections.footer_industrial.blocks.menu.name",
       "settings": [
         {
           "type": "text",
@@ -557,7 +557,7 @@
     },
     {
       "type": "newsletter",
-      "name": "Newsletter",
+      "name": "t:sections.footer_industrial.blocks.newsletter.name",
       "limit": 1,
       "settings": [
         {
@@ -576,7 +576,7 @@
     },
     {
       "type": "contact",
-      "name": "Contact info",
+      "name": "t:sections.footer_industrial.blocks.contact.name",
       "limit": 1,
       "settings": [
         {
@@ -609,9 +609,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["footer"]
+  },
   "presets": [
     {
-      "name": "Footer industrial",
+      "name": "t:sections.footer_industrial.presets.default.name",
       "blocks": [
         { "type": "menu", "settings": { "title": "PRODUCTS" } },
         { "type": "menu", "settings": { "title": "COMPANY" } },

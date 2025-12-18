@@ -9,26 +9,6 @@
  */
 {
   "sections": {
-    "announcement_bar_BKqVJn": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement_BPVFPk": {
-          "type": "announcement",
-          "settings": {
-            "text": "Saa",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_BPVFPk"
-      ],
-      "name": "t:sections.announcement_bar.name",
-      "settings": {
-        "background_color": "#121212",
-        "text_color": "#ffffff"
-      }
-    },
     "hero": {
       "type": "hero-industrial",
       "disabled": true,
@@ -454,7 +434,6 @@
     }
   },
   "order": [
-    "announcement_bar_BKqVJn",
     "hero",
     "preset_hero_JeNtxf",
     "preset_featured_product_XXJRzJ",

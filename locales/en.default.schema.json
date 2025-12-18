@@ -225,8 +225,136 @@
     "header": {
       "name": "Header"
     },
+    "header_unified": {
+      "name": "Header — Unified",
+      "blocks": {
+        "featured_card": {
+          "name": "Featured Card"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Header — Unified"
+        }
+      }
+    },
+    "header_industrial": {
+      "name": "Header — Industrial",
+      "blocks": {
+        "menu_item": {
+          "name": "Menu item"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Header — Industrial"
+        }
+      }
+    },
+    "header_corporate": {
+      "name": "Header — Corporate",
+      "blocks": {
+        "nav_item": {
+          "name": "Navigation Item"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Header — Corporate"
+        }
+      }
+    },
+    "header_mega": {
+      "name": "Header — Mega Menu",
+      "blocks": {
+        "utility_link": {
+          "name": "Utility Link"
+        },
+        "menu_item": {
+          "name": "Menu Item"
+        },
+        "dropdown_link": {
+          "name": "Dropdown Link"
+        },
+        "dropdown_featured": {
+          "name": "Featured Card"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Header — Mega Menu"
+        }
+      }
+    },
+    "header_classic": {
+      "name": "Header — Classic",
+      "blocks": {
+        "menu_item": {
+          "name": "Menu item"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Header — Classic"
+        }
+      }
+    },
     "footer": {
       "name": "Footer"
+    },
+    "footer_standard": {
+      "name": "Footer — Standard",
+      "blocks": {
+        "menu": {
+          "name": "Menu"
+        },
+        "text": {
+          "name": "Text"
+        },
+        "social": {
+          "name": "Social links"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Footer — Standard"
+        }
+      }
+    },
+    "footer_industrial": {
+      "name": "Footer — Industrial",
+      "blocks": {
+        "menu": {
+          "name": "Menu"
+        },
+        "newsletter": {
+          "name": "Newsletter"
+        },
+        "contact": {
+          "name": "Contact info"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Footer — Industrial"
+        }
+      }
+    },
+    "footer_preset": {
+      "name": "Footer — Preset",
+      "blocks": {
+        "menu": {
+          "name": "Navigation Menu"
+        },
+        "social": {
+          "name": "Social Link"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Footer — Preset"
+        }
+      }
     },
     "announcement_bar": {
       "name": "Announcement bar"

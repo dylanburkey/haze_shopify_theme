@@ -1,10 +1,17 @@
 {
   "type": "footer",
-  "name": "Footer group",
+  "name": "Footer",
   "sections": {
     "footer": {
-      "type": "footer",
-      "settings": {}
+      "type": "footer--standard",
+      "settings": {
+        "show_newsletter": true,
+        "newsletter_heading": "Stay Connected",
+        "newsletter_text": "Get updates on new products and industry news.",
+        "newsletter_placeholder": "Enter your email",
+        "newsletter_button": "Subscribe",
+        "show_payment_icons": true
+      }
     }
   },
   "order": ["footer"]

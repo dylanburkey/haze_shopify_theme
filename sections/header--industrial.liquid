@@ -569,8 +569,8 @@
 
 {% schema %}
 {
-  "name": "Header industrial",
-  "tag": "section",
+  "name": "t:sections.header_industrial.name",
+  "tag": "header",
   "class": "section-header-industrial",
   "enabled_on": {
     "groups": ["header"]
@@ -683,7 +683,7 @@
   "blocks": [
     {
       "type": "menu_item",
-      "name": "Menu item",
+      "name": "t:sections.header_industrial.blocks.menu_item.name",
       "settings": [
         {
           "type": "text",
@@ -699,9 +699,12 @@
       ]
     }
   ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "presets": [
     {
-      "name": "Header industrial",
+      "name": "t:sections.header_industrial.presets.default.name",
       "blocks": [
         { "type": "menu_item", "settings": { "label": "PRODUCTS", "link": "/collections/all" } },
         { "type": "menu_item", "settings": { "label": "CATALOG", "link": "/collections" } },

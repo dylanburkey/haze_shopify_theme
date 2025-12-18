@@ -4,7 +4,14 @@
       "Bash(for:*)",
       "Bash(do grep -l \"## Communication Protocol\" \"$file\")",
       "Bash(done)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(shopify theme check:*)",
+      "Bash(shopify theme dev:*)"
     ],
     "deny": [],
     "ask": []
