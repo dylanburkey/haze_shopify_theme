@@ -9,6 +9,18 @@
  */
 {
   "sections": {
+    "hero_industrial_qraTDy": {
+      "type": "hero-industrial",
+      "name": "Hero Industrial",
+      "settings": {
+        "overlay_opacity": 60,
+        "height": 600,
+        "heading": "Precision Welding Systems",
+        "text": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>",
+        "button_label": "Explore Equipment",
+        "button_link": ""
+      }
+    },
     "announcement_bar_BKqVJn": {
       "type": "announcement-bar",
       "blocks": {
@@ -39,139 +51,6 @@
         "text": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>",
         "button_label": "Explore Equipment",
         "button_link": "shopify://collections/all"
-      }
-    },
-    "preset_hero_JeNtxf": {
-      "type": "preset-hero",
-      "blocks": {
-        "stat_x4apFU": {
-          "type": "stat",
-          "settings": {
-            "stat_value": 30,
-            "stat_suffix": "+",
-            "stat_label": "Years of Innovation"
-          }
-        },
-        "stat_dVxb8C": {
-          "type": "stat",
-          "settings": {
-            "stat_value": 50,
-            "stat_suffix": "K+",
-            "stat_label": "Skimmers Deployed"
-          }
-        },
-        "stat_GKFqfJ": {
-          "type": "stat",
-          "settings": {
-            "stat_value": 120,
-            "stat_suffix": "+",
-            "stat_label": "Products Available"
-          }
-        },
-        "floating_card_JdQNeP": {
-          "type": "floating_card",
-          "settings": {
-            "card_icon": "shield-check",
-            "card_title": "Lifetime Warranty",
-            "card_highlight": "",
-            "card_subtitle": "On all skimmers"
-          }
-        },
-        "floating_card_gb7nKt": {
-          "type": "floating_card",
-          "settings": {
-            "card_icon": "trending-up",
-            "card_title": "ROI in 8 Months",
-            "card_highlight": "80%",
-            "card_subtitle": "coolant savings"
-          }
-        },
-        "floating_card_9NzqWL": {
-          "type": "floating_card",
-          "settings": {
-            "card_icon": "star",
-            "card_title": "5-Star Rated",
-            "card_highlight": "",
-            "card_subtitle": "By machinists worldwide"
-          }
-        },
-        "trusted_logo_MEqBYM": {
-          "type": "trusted_logo",
-          "settings": {
-            "logo_name": "General Motors"
-          }
-        },
-        "trusted_logo_bQQ7h6": {
-          "type": "trusted_logo",
-          "settings": {
-            "logo_name": "Boeing"
-          }
-        },
-        "trusted_logo_Q3Q3L7": {
-          "type": "trusted_logo",
-          "settings": {
-            "logo_name": "Lockheed Martin"
-          }
-        },
-        "trusted_logo_TmcNgM": {
-          "type": "trusted_logo",
-          "settings": {
-            "logo_name": "Caterpillar"
-          }
-        },
-        "trusted_logo_bR8QtV": {
-          "type": "trusted_logo",
-          "settings": {
-            "logo_name": "John Deere"
-          }
-        }
-      },
-      "block_order": [
-        "stat_x4apFU",
-        "stat_dVxb8C",
-        "stat_GKFqfJ",
-        "floating_card_JdQNeP",
-        "floating_card_gb7nKt",
-        "floating_card_9NzqWL",
-        "trusted_logo_MEqBYM",
-        "trusted_logo_bQQ7h6",
-        "trusted_logo_Q3Q3L7",
-        "trusted_logo_TmcNgM",
-        "trusted_logo_bR8QtV"
-      ],
-      "name": "Preset: Hero",
-      "settings": {
-        "badge_text": "New: Dazzle™ 2 Now Available",
-        "badge_icon": "star",
-        "since_text": "Made in USA Since 1994",
-        "title_prefix": "Reduce Coolant Costs by",
-        "title_highlight": "",
-        "title_suffix": "with Automated Fluid Management",
-        "description": "Industry-leading oil skimmers and coolant automation systems trusted by thousands of machine shops worldwide. American-made quality backed by a free lifetime warranty.",
-        "primary_button_text": "Explore Dazzle™ Systems",
-        "primary_button_link": "",
-        "secondary_button_text": "Browse All Products",
-        "secondary_button_link": "",
-        "secondary_button_icon": "grid",
-        "show_stats": true,
-        "showcase_image": "shopify://shop_images/cnc-machine.png",
-        "showcase_icon": "cog",
-        "showcase_badge": "Best Seller",
-        "showcase_title": "DAZZLE™ 1",
-        "showcase_subtitle": "Modular Automated Sump Management",
-        "showcase_price": "Starting at $682",
-        "showcase_price_suffix": "USD",
-        "video_button_text": "Watch Demo",
-        "show_trusted_by": true,
-        "trusted_label": "Trusted by industry leaders",
-        "show_floating_cards": true,
-        "show_grid_background": true,
-        "show_particles": true,
-        "color_primary": "#003d79",
-        "color_primary_light": "#0056a8",
-        "color_accent": "#0077cc",
-        "color_highlight": "#00a3e0",
-        "color_cta": "#ff6b00"
       }
     },
     "preset_featured_product_XXJRzJ": {
@@ -454,9 +333,9 @@
     }
   },
   "order": [
+    "hero_industrial_qraTDy",
     "announcement_bar_BKqVJn",
     "hero",
-    "preset_hero_JeNtxf",
     "preset_featured_product_XXJRzJ",
     "preset_testimonials_M8HyKT",
     "preset_trust_badges_igfNy9",

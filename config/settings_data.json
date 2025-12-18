@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "enable_speculation_rules": true,
@@ -52,6 +61,47 @@
           "newsletter_button": "Subscribe",
           "show_payment_icons": true
         }
+      },
+      "header-unified": {
+        "type": "header-unified",
+        "blocks": {
+          "featured_card_TKbeiL": {
+            "type": "featured_card",
+            "settings": {
+              "parent_menu": "",
+              "label": "Featured",
+              "title": "Featured Product",
+              "description": "",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "featured_card_TKbeiL"
+        ],
+        "settings": {
+          "logo_width": 150,
+          "logo_scale": 100,
+          "menu": "main-menu",
+          "sticky_header": true,
+          "search_style": "icon",
+          "search_placeholder": "Search products, articles...",
+          "show_search_filter": true,
+          "filter_all_label": "All",
+          "filter_products_label": "Products",
+          "filter_articles_label": "Articles",
+          "filter_pages_label": "Pages",
+          "show_account": true,
+          "show_cart": true,
+          "header_bg": "#ffffff",
+          "header_text": "#1a1a1a",
+          "header_border": "#e5e5e5",
+          "search_bar_bg": "#f5f5f5",
+          "search_bar_text": "#333333",
+          "dropdown_bg": "#ffffff",
+          "dropdown_text": "#333333",
+          "dropdown_hover": "#f5f5f5"
+        }
       }
     },
     "content_for_index": []
@@ -93,46 +143,12 @@
         "header-group": {
           "type": "header",
           "name": "Header group",
-          "sections": {
-            "announcement-bar": {
-              "type": "announcement-bar",
-              "settings": {
-                "background_color": "#0f172a",
-                "text_color": "#ffffff"
-              }
-            },
-            "header": {
-              "type": "mega-menu-header",
-              "settings": {
-                "sticky_header": true,
-                "show_search": true,
-                "show_account": true,
-                "show_cart": true,
-                "header_bg": "#0f172a",
-                "header_text": "#ffffff"
-              }
-            }
-          },
-          "order": [
-            "announcement-bar",
-            "header"
-          ]
+          "settings": {}
         },
         "footer-group": {
           "type": "footer",
           "name": "Footer group",
-          "sections": {
-            "footer": {
-              "type": "preset-footer",
-              "settings": {
-                "show_newsletter": true,
-                "show_payment_icons": true
-              }
-            }
-          },
-          "order": [
-            "footer"
-          ]
+          "settings": {}
         }
       }
     },
@@ -172,34 +188,12 @@
         "header-group": {
           "type": "header",
           "name": "Header group",
-          "sections": {
-            "header": {
-              "type": "header",
-              "settings": {
-                "show_search": true,
-                "show_account": true
-              }
-            }
-          },
-          "order": [
-            "header"
-          ]
+          "settings": {}
         },
         "footer-group": {
           "type": "footer",
           "name": "Footer group",
-          "sections": {
-            "footer": {
-              "type": "footer",
-              "settings": {
-                "show_newsletter": true,
-                "show_payment_icons": false
-              }
-            }
-          },
-          "order": [
-            "footer"
-          ]
+          "settings": {}
         }
       }
     },
@@ -239,46 +233,12 @@
         "header-group": {
           "type": "header",
           "name": "Header group",
-          "sections": {
-            "announcement-bar": {
-              "type": "announcement-bar",
-              "settings": {
-                "background_color": "#10b981",
-                "text_color": "#ffffff"
-              }
-            },
-            "header": {
-              "type": "mega-menu-header",
-              "settings": {
-                "sticky_header": true,
-                "show_search": true,
-                "show_account": true,
-                "show_cart": true,
-                "header_bg": "#0f172a",
-                "header_text": "#f1f5f9"
-              }
-            }
-          },
-          "order": [
-            "announcement-bar",
-            "header"
-          ]
+          "settings": {}
         },
         "footer-group": {
           "type": "footer",
           "name": "Footer group",
-          "sections": {
-            "footer": {
-              "type": "preset-footer",
-              "settings": {
-                "show_newsletter": true,
-                "show_payment_icons": true
-              }
-            }
-          },
-          "order": [
-            "footer"
-          ]
+          "settings": {}
         }
       }
     },
@@ -318,35 +278,12 @@
         "header-group": {
           "type": "header",
           "name": "Header group",
-          "sections": {
-            "header": {
-              "type": "corporate-header",
-              "settings": {
-                "show_search": true,
-                "show_account": true,
-                "show_cart": true
-              }
-            }
-          },
-          "order": [
-            "header"
-          ]
+          "settings": {}
         },
         "footer-group": {
           "type": "footer",
           "name": "Footer group",
-          "sections": {
-            "footer": {
-              "type": "footer",
-              "settings": {
-                "show_newsletter": true,
-                "show_payment_icons": true
-              }
-            }
-          },
-          "order": [
-            "footer"
-          ]
+          "settings": {}
         }
       }
     },
@@ -386,42 +323,12 @@
         "header-group": {
           "type": "header",
           "name": "Header group",
-          "sections": {
-            "announcement-bar": {
-              "type": "announcement-bar",
-              "settings": {
-                "background_color": "#003d79",
-                "text_color": "#ffffff"
-              }
-            },
-            "header": {
-              "type": "header-industrial",
-              "settings": {
-                "style": "machinist",
-                "show_search": true,
-                "show_account": true
-              }
-            }
-          },
-          "order": [
-            "announcement-bar",
-            "header"
-          ]
+          "settings": {}
         },
         "footer-group": {
           "type": "footer",
           "name": "Footer group",
-          "sections": {
-            "footer": {
-              "type": "footer-industrial",
-              "settings": {
-                "style": "machinist"
-              }
-            }
-          },
-          "order": [
-            "footer"
-          ]
+          "settings": {}
         }
       }
     },
