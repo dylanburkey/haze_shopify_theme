@@ -102,6 +102,31 @@
           "dropdown_text": "#333333",
           "dropdown_hover": "#f5f5f5"
         }
+      },
+      "theme-tour-headers": {
+        "type": "theme-tour-headers",
+        "settings": {
+          "title": "Header Variants",
+          "description": "Choose from 4 distinct header styles, each optimized for different business types and navigation needs."
+        }
+      },
+      "theme-tour-footers": {
+        "type": "theme-tour-footers",
+        "settings": {
+          "title": "Footer Variants",
+          "description": "Choose from 3 footer styles to match your header and overall brand aesthetic."
+        }
+      },
+      "theme-tour-instructions": {
+        "type": "theme-tour-instructions",
+        "settings": {
+          "title": "How to Swap Headers & Footers",
+          "description": "Follow these simple steps to change your store's header or footer in the Shopify theme editor.",
+          "show_tip": true,
+          "tip_title": "Pro Tip",
+          "tip_text": "Always preview your changes before publishing. Some header/footer combinations work better together than others.",
+          "show_pairings": true
+        }
       }
     },
     "content_for_index": []
