@@ -1,0 +1,141 @@
+{
+  "layout": "theme.showcase",
+  "name": "Showcase - Zebra Skimmers",
+  "sections": {
+    "header": {
+      "type": "mega-menu-header",
+      "settings": {
+        "logo_text": "ZEBRA SKIMMERS",
+        "show_utility_bar": true,
+        "utility_left_text": "Industrial Oil Removal Solutions",
+        "utility_phone": "1-800-555-SKIM",
+        "show_announcement": false,
+        "color_scheme": "industrial",
+        "sticky_header": true,
+        "header_style": "industrial"
+      }
+    },
+    "hero": {
+      "type": "preset-hero",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "height": "large",
+        "overlay_opacity": 50,
+        "title": "Industrial Oil Removal\nMade Simple",
+        "subtitle": "Since 1968",
+        "description": "Trusted by manufacturers worldwide. Our skimmers remove oil, coolant, and tramp oil from sumps and tanks.",
+        "primary_button_text": "View Products",
+        "primary_button_link": "",
+        "secondary_button_text": "Request Quote",
+        "show_scroll_indicator": false,
+        "text_alignment": "left"
+      }
+    },
+    "trust_badges": {
+      "type": "preset-trust-badges",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "layout": "stats"
+      },
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "value": "55+", "label": "Years Experience" }},
+        "stat_2": { "type": "stat", "settings": { "value": "50K+", "label": "Units Installed" }},
+        "stat_3": { "type": "stat", "settings": { "value": "100+", "label": "Countries Served" }},
+        "stat_4": { "type": "stat", "settings": { "value": "24/7", "label": "Technical Support" }}
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"]
+    },
+    "featured_collection": {
+      "type": "preset-product-grid",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "title": "Our Products",
+        "subtitle": "Industrial-Grade Solutions",
+        "collection": "",
+        "products_to_show": 6,
+        "columns": 3,
+        "show_quick_add": false,
+        "card_style": "industrial"
+      }
+    },
+    "featured_product": {
+      "type": "preset-featured-product",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "badge_text": "Best Seller",
+        "product": "",
+        "title_override": "Model 50 Belt Skimmer",
+        "description_override": "Our flagship industrial oil skimmer. Removes up to 40 gallons of oil per hour. Engineered for continuous 24/7 operation.",
+        "show_features": true,
+        "layout": "industrial"
+      },
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "icon": "settings", "text": "40 GPH Capacity" }},
+        "feature_2": { "type": "feature", "settings": { "icon": "clock", "text": "24/7 Operation" }},
+        "feature_3": { "type": "feature", "settings": { "icon": "award", "text": "5-Year Warranty" }}
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"]
+    },
+    "testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "title": "Customer Success Stories",
+        "layout": "grid"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Reduced our coolant costs by 60% in the first year. ROI in under 6 months.",
+            "author": "Bob Johnson",
+            "title": "Plant Manager, Midwest Manufacturing",
+            "rating": 5
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Reliable, effective, and backed by excellent technical support. Highly recommend.",
+            "author": "Lisa Chen",
+            "title": "Operations Director, Pacific Industries",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2"]
+    },
+    "newsletter": {
+      "type": "preset-newsletter-cta",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "title": "Request a Free Consultation",
+        "description": "Our engineers will help you find the right solution for your application.",
+        "button_text": "Get Started",
+        "background_style": "industrial"
+      }
+    },
+    "footer": {
+      "type": "preset-footer",
+      "settings": {
+        "preset_style": "zebra-skimmers",
+        "logo_text": "ZEBRA SKIMMERS",
+        "tagline": "Industrial oil removal solutions since 1968.",
+        "show_newsletter": false,
+        "show_social": true,
+        "show_payment_icons": false,
+        "columns": 4
+      }
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "trust_badges",
+    "featured_collection",
+    "featured_product",
+    "testimonials",
+    "newsletter",
+    "footer"
+  ]
+}

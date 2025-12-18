@@ -1,0 +1,125 @@
+{
+  "layout": "theme.showcase",
+  "name": "Showcase - Warm Artisan",
+  "sections": {
+    "header": {
+      "type": "mega-menu-header",
+      "settings": {
+        "logo_text": "Artisan",
+        "show_utility_bar": false,
+        "show_announcement": true,
+        "announcement_text": "🌿 Handcrafted with love — Free shipping on orders over $75",
+        "color_scheme": "warm",
+        "sticky_header": true,
+        "header_style": "artisan"
+      }
+    },
+    "hero": {
+      "type": "preset-hero",
+      "settings": {
+        "preset_style": "warm-artisan",
+        "height": "large",
+        "overlay_opacity": 30,
+        "title": "Made by Hand,\nMade with Heart",
+        "subtitle": "Artisan Crafted Goods",
+        "description": "Every piece tells a story. Handcrafted using traditional techniques passed down through generations.",
+        "primary_button_text": "Shop Collection",
+        "primary_button_link": "",
+        "secondary_button_text": "Our Story",
+        "show_scroll_indicator": false,
+        "text_alignment": "center"
+      }
+    },
+    "featured_collection": {
+      "type": "preset-product-grid",
+      "settings": {
+        "preset_style": "warm-artisan",
+        "title": "Handpicked Favorites",
+        "subtitle": "Curated with care",
+        "collection": "",
+        "products_to_show": 6,
+        "columns": 3,
+        "show_quick_add": false,
+        "card_style": "artisan"
+      }
+    },
+    "featured_product": {
+      "type": "preset-featured-product",
+      "settings": {
+        "preset_style": "warm-artisan",
+        "badge_text": "Bestseller",
+        "product": "",
+        "title_override": "Heritage Ceramic Mug",
+        "description_override": "Hand-thrown and glazed by master artisans. Each piece is unique, celebrating imperfection and authenticity.",
+        "show_features": true,
+        "layout": "story"
+      },
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "icon": "heart", "text": "Handcrafted with Love" }},
+        "feature_2": { "type": "feature", "settings": { "icon": "leaf", "text": "Natural Materials" }},
+        "feature_3": { "type": "feature", "settings": { "icon": "home", "text": "Small Batch Made" }}
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"]
+    },
+    "testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "preset_style": "warm-artisan",
+        "title": "Stories from Our Community",
+        "layout": "masonry"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Every morning, my coffee tastes better in this mug. It's become a treasured ritual.",
+            "author": "Emma W.",
+            "title": "Portland, OR",
+            "rating": 5
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "You can feel the love and intention in every piece. These are heirlooms in the making.",
+            "author": "James R.",
+            "title": "Austin, TX",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2"]
+    },
+    "newsletter": {
+      "type": "preset-newsletter-cta",
+      "settings": {
+        "preset_style": "warm-artisan",
+        "title": "Join Our Community",
+        "description": "Get stories from our artisans, early access to new pieces, and a 10% welcome discount.",
+        "button_text": "Join Us",
+        "background_style": "warm"
+      }
+    },
+    "footer": {
+      "type": "preset-footer",
+      "settings": {
+        "preset_style": "warm-artisan",
+        "logo_text": "Artisan",
+        "tagline": "Handcrafted goods, made with intention.",
+        "show_newsletter": false,
+        "show_social": true,
+        "show_payment_icons": true,
+        "columns": 3
+      }
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "featured_collection",
+    "featured_product",
+    "testimonials",
+    "newsletter",
+    "footer"
+  ]
+}

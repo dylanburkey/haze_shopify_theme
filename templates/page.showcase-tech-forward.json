@@ -1,0 +1,141 @@
+{
+  "layout": "theme.showcase",
+  "name": "Showcase - Tech Forward",
+  "sections": {
+    "header": {
+      "type": "mega-menu-header",
+      "settings": {
+        "logo_text": "TECHFWD",
+        "show_utility_bar": true,
+        "utility_left_text": "🚀 NEW: AI-POWERED RECOMMENDATIONS",
+        "show_announcement": true,
+        "announcement_text": "Pre-order the X1 Pro — Ships January",
+        "color_scheme": "dark",
+        "sticky_header": true,
+        "header_style": "tech"
+      }
+    },
+    "hero": {
+      "type": "preset-hero",
+      "settings": {
+        "preset_style": "tech-forward",
+        "height": "full",
+        "overlay_opacity": 70,
+        "title": "THE FUTURE IS NOW",
+        "subtitle": "Next-Gen Technology",
+        "description": "Experience innovation that pushes boundaries. Designed for tomorrow, available today.",
+        "primary_button_text": "EXPLORE",
+        "primary_button_link": "",
+        "secondary_button_text": "WATCH DEMO",
+        "show_scroll_indicator": true,
+        "animation_style": "glitch"
+      }
+    },
+    "featured_collection": {
+      "type": "preset-product-grid",
+      "settings": {
+        "preset_style": "tech-forward",
+        "title": "Latest Releases",
+        "subtitle": "CUTTING EDGE",
+        "collection": "",
+        "products_to_show": 8,
+        "columns": 4,
+        "show_quick_add": true,
+        "card_style": "tech"
+      }
+    },
+    "featured_product": {
+      "type": "preset-featured-product",
+      "settings": {
+        "preset_style": "tech-forward",
+        "badge_text": "NEW",
+        "product": "",
+        "title_override": "X1 Pro Controller",
+        "description_override": "Precision engineered with haptic feedback, adaptive triggers, and zero-latency wireless.",
+        "show_features": true,
+        "layout": "tech"
+      },
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "icon": "cpu", "text": "Neural Processing Unit" }},
+        "feature_2": { "type": "feature", "settings": { "icon": "wifi", "text": "Zero-Latency Wireless" }},
+        "feature_3": { "type": "feature", "settings": { "icon": "battery", "text": "40hr Battery Life" }}
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"]
+    },
+    "trust_badges": {
+      "type": "preset-trust-badges",
+      "settings": {
+        "preset_style": "tech-forward",
+        "layout": "stats"
+      },
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "value": "2M+", "label": "Devices Sold" }},
+        "stat_2": { "type": "stat", "settings": { "value": "99.9%", "label": "Uptime" }},
+        "stat_3": { "type": "stat", "settings": { "value": "0.1ms", "label": "Response Time" }},
+        "stat_4": { "type": "stat", "settings": { "value": "5yr", "label": "Warranty" }}
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"]
+    },
+    "testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "preset_style": "tech-forward",
+        "title": "REVIEWS",
+        "layout": "carousel"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The responsiveness is incredible. It's like an extension of my thoughts.",
+            "author": "Alex Chen",
+            "title": "Pro Gamer",
+            "rating": 5
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally, hardware that matches software innovation. Game-changing.",
+            "author": "Jordan Smith",
+            "title": "Tech Reviewer",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2"]
+    },
+    "newsletter": {
+      "type": "preset-newsletter-cta",
+      "settings": {
+        "preset_style": "tech-forward",
+        "title": "GET EARLY ACCESS",
+        "description": "Be first to know about new product launches and exclusive drops.",
+        "button_text": "NOTIFY ME",
+        "background_style": "gradient"
+      }
+    },
+    "footer": {
+      "type": "preset-footer",
+      "settings": {
+        "preset_style": "tech-forward",
+        "logo_text": "TECHFWD",
+        "tagline": "Innovation without limits.",
+        "show_newsletter": false,
+        "show_social": true,
+        "show_payment_icons": true,
+        "columns": 4
+      }
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "featured_collection",
+    "featured_product",
+    "trust_badges",
+    "testimonials",
+    "newsletter",
+    "footer"
+  ]
+}

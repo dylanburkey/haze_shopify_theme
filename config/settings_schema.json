@@ -252,5 +252,58 @@
         "info": "Shown while app loads on iOS devices"
       }
     ]
+  },
+  {
+    "name": "Preset Showcase",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Preset Showcase System"
+      },
+      {
+        "type": "paragraph",
+        "content": "Allow visitors to preview different theme presets without accessing the theme editor. Perfect for demonstrating theme versatility to potential customers."
+      },
+      {
+        "type": "checkbox",
+        "id": "preset_showcase_enabled",
+        "label": "Enable preset showcase",
+        "default": false,
+        "info": "Shows a floating preset switcher widget"
+      },
+      {
+        "type": "checkbox",
+        "id": "preset_showcase_homepage",
+        "label": "Show on homepage",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "preset_showcase_all_pages",
+        "label": "Show on all pages",
+        "default": false,
+        "info": "When enabled, the switcher appears on every page"
+      },
+      {
+        "type": "select",
+        "id": "preset_showcase_position",
+        "label": "Widget position",
+        "options": [
+          { "value": "bottom-right", "label": "Bottom right" },
+          { "value": "bottom-left", "label": "Bottom left" },
+          { "value": "top-right", "label": "Top right" },
+          { "value": "top-left", "label": "Top left" }
+        ],
+        "default": "bottom-right"
+      },
+      {
+        "type": "header",
+        "content": "URL Parameters"
+      },
+      {
+        "type": "paragraph",
+        "content": "Visitors can also activate presets via URL: ?preset=bold-impact, ?preset=modern-minimal, ?preset=tech-forward, ?preset=warm-artisan, ?preset=zebra-skimmers"
+      }
+    ]
   }
 ]
