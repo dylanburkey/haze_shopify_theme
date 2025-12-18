@@ -161,6 +161,7 @@
         "showcase_subtitle": "Modular Automated Sump Management",
         "showcase_price": "Starting at $682",
         "showcase_price_suffix": "USD",
+        "video_url": "",
         "video_button_text": "Watch Demo",
         "show_trusted_by": true,
         "trusted_label": "Trusted by industry leaders",
@@ -451,6 +452,134 @@
         "error_message": "Something went wrong. Please try again.",
         "trust_text": "We respect your privacy. Unsubscribe at any time."
       }
+    },
+    "theme_tour_headers_hYtFqJ": {
+      "type": "theme-tour-headers",
+      "blocks": {
+        "header_variant_aLExne": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Standard Header",
+            "description": "Clean, minimal header with logo, navigation, and utility icons. Perfect for stores that want a straightforward, professional look.",
+            "file_name": "header.liquid",
+            "best_for": "General Use",
+            "style": "industrial",
+            "preview_logo": "STORE",
+            "has_mega_menu": false
+          }
+        },
+        "header_variant_RUaJ69": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Mega Menu Header",
+            "description": "Feature-rich header with expandable mega menus for complex navigation. Ideal for stores with large catalogs or multiple categories.",
+            "file_name": "mega-menu-header.liquid",
+            "best_for": "Large Catalogs",
+            "style": "dark",
+            "preview_logo": "MEGA",
+            "has_mega_menu": true
+          }
+        },
+        "header_variant_QaRHiy": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Industrial Header",
+            "description": "Bold, utilitarian design with strong visual hierarchy. Built for B2B, manufacturing, and equipment suppliers.",
+            "file_name": "header-industrial.liquid",
+            "best_for": "B2B / Industrial",
+            "style": "industrial",
+            "preview_logo": "FORGE",
+            "has_mega_menu": false
+          }
+        },
+        "header_variant_xfJmch": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Corporate Header",
+            "description": "Warm, professional header with refined typography. Designed for artisan brands, premium products, and service businesses.",
+            "file_name": "corporate-header.liquid",
+            "best_for": "Premium / Artisan",
+            "style": "corporate",
+            "preview_logo": "ARTISAN",
+            "has_mega_menu": false
+          }
+        }
+      },
+      "block_order": [
+        "header_variant_aLExne",
+        "header_variant_RUaJ69",
+        "header_variant_QaRHiy",
+        "header_variant_xfJmch"
+      ],
+      "name": "Theme Tour Headers",
+      "settings": {
+        "title": "Header Variants",
+        "description": "Choose from 4 distinct header styles, each optimized for different business types and navigation needs."
+      }
+    },
+    "theme_tour_headers_RV8Mjq": {
+      "type": "theme-tour-headers",
+      "blocks": {
+        "header_variant_eWPDRD": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Standard Header",
+            "description": "Clean, minimal header with logo, navigation, and utility icons. Perfect for stores that want a straightforward, professional look.",
+            "file_name": "header.liquid",
+            "best_for": "General Use",
+            "style": "light",
+            "preview_logo": "STORE",
+            "has_mega_menu": false
+          }
+        },
+        "header_variant_KAp64A": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Mega Menu Header",
+            "description": "Feature-rich header with expandable mega menus for complex navigation. Ideal for stores with large catalogs or multiple categories.",
+            "file_name": "mega-menu-header.liquid",
+            "best_for": "Large Catalogs",
+            "style": "dark",
+            "preview_logo": "MEGA",
+            "has_mega_menu": true
+          }
+        },
+        "header_variant_hwBTt4": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Industrial Header",
+            "description": "Bold, utilitarian design with strong visual hierarchy. Built for B2B, manufacturing, and equipment suppliers.",
+            "file_name": "header-industrial.liquid",
+            "best_for": "B2B / Industrial",
+            "style": "industrial",
+            "preview_logo": "FORGE",
+            "has_mega_menu": true
+          }
+        },
+        "header_variant_y8UxWC": {
+          "type": "header_variant",
+          "settings": {
+            "title": "Corporate Header",
+            "description": "Warm, professional header with refined typography. Designed for artisan brands, premium products, and service businesses.",
+            "file_name": "corporate-header.liquid",
+            "best_for": "Premium / Artisan",
+            "style": "corporate",
+            "preview_logo": "ARTISAN",
+            "has_mega_menu": false
+          }
+        }
+      },
+      "block_order": [
+        "header_variant_eWPDRD",
+        "header_variant_KAp64A",
+        "header_variant_hwBTt4",
+        "header_variant_y8UxWC"
+      ],
+      "name": "Theme Tour Headers",
+      "settings": {
+        "title": "Header Variants",
+        "description": "Choose from 4 distinct header styles, each optimized for different business types and navigation needs."
+      }
     }
   },
   "order": [
@@ -462,6 +591,8 @@
     "preset_trust_badges_igfNy9",
     "search",
     "featured",
-    "preset_newsletter_cta_xnDaaD"
+    "preset_newsletter_cta_xnDaaD",
+    "theme_tour_headers_hYtFqJ",
+    "theme_tour_headers_RV8Mjq"
   ]
 }
