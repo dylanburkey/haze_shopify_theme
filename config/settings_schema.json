@@ -8,162 +8,6 @@
     "theme_support_url": ""
   },
   {
-    "name": "Theme Preset",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Select a preset to quickly change your store's look and feel. After selecting a preset, customize individual settings below."
-      },
-      {
-        "type": "select",
-        "id": "theme_preset",
-        "label": "Active Preset",
-        "options": [
-          { "value": "the-welder", "label": "The Welder (Industrial Red)" },
-          { "value": "work-zone", "label": "Work Zone (Safety Orange)" },
-          { "value": "site-ops", "label": "Site Ops (Construction Yellow)" },
-          { "value": "midnight-shift", "label": "Midnight Shift (Dark Mode)" },
-          { "value": "precision", "label": "Precision (Corporate Blue)" },
-          { "value": "tactical", "label": "Tactical (Military Green)" },
-          { "value": "monolith", "label": "Monolith (Minimal Black)" },
-          {
-            "value": "zebra-skimmers",
-            "label": "Zebra Skimmers (Industrial B2B)"
-          },
-          { "value": "modern-minimal", "label": "Modern Minimal (Lifestyle)" },
-          { "value": "bold-impact", "label": "Bold Impact (Athletic)" },
-          { "value": "warm-artisan", "label": "Warm Artisan (Handmade)" },
-          { "value": "tech-forward", "label": "Tech Forward (Electronics)" },
-          { "value": "custom", "label": "Custom (Use settings below)" }
-        ],
-        "default": "the-welder",
-        "info": "Choose a preset or select 'Custom' to use your own settings"
-      },
-      {
-        "type": "header",
-        "content": "Landing Page Template"
-      },
-      {
-        "type": "select",
-        "id": "landing_page_style",
-        "label": "Homepage Style",
-        "options": [
-          { "value": "default", "label": "Default (Industrial)" },
-          { "value": "zebra-skimmers", "label": "Zebra Skimmers (B2B Focus)" },
-          { "value": "modern-minimal", "label": "Modern Minimal (Editorial)" },
-          { "value": "bold-impact", "label": "Bold Impact (Dynamic)" },
-          { "value": "warm-artisan", "label": "Warm Artisan (Storytelling)" },
-          { "value": "tech-forward", "label": "Tech Forward (Dark/Futuristic)" }
-        ],
-        "default": "default",
-        "info": "Select a landing page style. This determines which sections appear on your homepage."
-      },
-      {
-        "type": "header",
-        "content": "Header Style"
-      },
-      {
-        "type": "select",
-        "id": "header_style",
-        "label": "Header Type",
-        "options": [
-          { "value": "unified", "label": "Unified Header (Recommended)" },
-          { "value": "mega-menu", "label": "Mega Menu Header" },
-          { "value": "industrial", "label": "Industrial Header" },
-          { "value": "corporate", "label": "Corporate Header" }
-        ],
-        "default": "unified",
-        "info": "Choose which header style to use across your store. All headers support mega menu navigation."
-      }
-    ]
-  },
-  {
-    "name": "SEO",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Search Engine Optimization"
-      },
-      {
-        "type": "paragraph",
-        "content": "Optimize your store for search engines. These settings apply globally across your theme."
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_structured_data",
-        "label": "Enable structured data (JSON-LD)",
-        "default": true,
-        "info": "Adds rich snippets for products, organization, and breadcrumbs"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_breadcrumbs",
-        "label": "Show breadcrumb navigation",
-        "default": true,
-        "info": "Displays breadcrumb links on product and collection pages"
-      },
-      {
-        "type": "header",
-        "content": "Social Sharing"
-      },
-      {
-        "type": "image_picker",
-        "id": "seo_default_share_image",
-        "label": "Default social sharing image",
-        "info": "Used when pages don't have a specific image. Recommended: 1200x630 pixels"
-      },
-      {
-        "type": "text",
-        "id": "seo_twitter_handle",
-        "label": "Twitter/X handle",
-        "info": "Include the @ symbol (e.g., @yourstore)"
-      },
-      {
-        "type": "header",
-        "content": "Performance"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_lazy_load_images",
-        "label": "Lazy load images",
-        "default": true,
-        "info": "Defer loading of offscreen images to improve page speed"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_preconnect_cdn",
-        "label": "Preconnect to CDN",
-        "default": true,
-        "info": "Establish early connections to Shopify CDN for faster resource loading"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_enable_speculation_rules",
-        "label": "Enable speculation rules",
-        "default": true,
-        "info": "Prerender pages on hover for near-instant navigation (Chrome only)"
-      },
-      {
-        "type": "header",
-        "content": "Accessibility"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_skip_to_content",
-        "label": "Show skip to content link",
-        "default": true,
-        "info": "Adds a skip navigation link for keyboard users"
-      },
-      {
-        "type": "checkbox",
-        "id": "seo_focus_indicators",
-        "label": "Enhanced focus indicators",
-        "default": true,
-        "info": "Shows visible focus outlines for keyboard navigation"
-      }
-    ]
-  },
-  {
     "name": "Colors",
     "settings": [
       {
@@ -178,33 +22,15 @@
       },
       {
         "type": "color",
-        "id": "color_secondary",
-        "label": "Secondary",
-        "default": "#334fb4"
-      },
-      {
-        "type": "color",
         "id": "color_text",
         "label": "Text",
         "default": "#1a1a1a"
       },
       {
         "type": "color",
-        "id": "color_text_secondary",
-        "label": "Text secondary",
-        "default": "#6b7280"
-      },
-      {
-        "type": "color",
         "id": "color_background",
         "label": "Background",
         "default": "#ffffff"
-      },
-      {
-        "type": "color",
-        "id": "color_background_secondary",
-        "label": "Background secondary",
-        "default": "#f4f4f4"
       },
       {
         "type": "color",
@@ -240,37 +66,9 @@
       },
       {
         "type": "color",
-        "id": "color_button_background",
-        "label": "Button background",
-        "default": "#d71920"
-      },
-      {
-        "type": "color",
         "id": "color_button_text",
         "label": "Button text",
         "default": "#ffffff"
-      },
-      {
-        "type": "header",
-        "content": "Status colors"
-      },
-      {
-        "type": "color",
-        "id": "color_success",
-        "label": "Success",
-        "default": "#16a34a"
-      },
-      {
-        "type": "color",
-        "id": "color_warning",
-        "label": "Warning",
-        "default": "#f59e0b"
-      },
-      {
-        "type": "color",
-        "id": "color_error",
-        "label": "Error",
-        "default": "#dc2626"
       }
     ]
   },
@@ -278,36 +76,35 @@
     "name": "Typography",
     "settings": [
       {
-        "type": "font_picker",
+        "type": "select",
         "id": "font_heading",
         "label": "Heading font",
-        "default": "oswald_n7"
+        "options": [
+          { "value": "Oswald", "label": "Oswald" },
+          { "value": "Teko", "label": "Teko" },
+          { "value": "Archivo Black", "label": "Archivo Black" },
+          {
+            "value": "IBM Plex Sans Condensed",
+            "label": "IBM Plex Sans Condensed"
+          },
+          { "value": "Barlow Condensed", "label": "Barlow Condensed" },
+          { "value": "Bitter", "label": "Bitter" }
+        ],
+        "default": "Oswald"
       },
       {
-        "type": "range",
-        "id": "font_heading_scale",
-        "label": "Heading font scale",
-        "min": 75,
-        "max": 150,
-        "step": 5,
-        "default": 100,
-        "unit": "%"
-      },
-      {
-        "type": "font_picker",
+        "type": "select",
         "id": "font_body",
         "label": "Body font",
-        "default": "roboto_n4"
-      },
-      {
-        "type": "range",
-        "id": "font_body_scale",
-        "label": "Body font scale",
-        "min": 75,
-        "max": 150,
-        "step": 5,
-        "default": 100,
-        "unit": "%"
+        "options": [
+          { "value": "Roboto", "label": "Roboto" },
+          { "value": "Inter", "label": "Inter" },
+          { "value": "Work Sans", "label": "Work Sans" },
+          { "value": "IBM Plex Sans", "label": "IBM Plex Sans" },
+          { "value": "Barlow", "label": "Barlow" },
+          { "value": "Lato", "label": "Lato" }
+        ],
+        "default": "Roboto"
       }
     ]
   },
@@ -355,120 +152,6 @@
     ]
   },
   {
-    "name": "Layout",
-    "settings": [
-      {
-        "type": "range",
-        "id": "page_width",
-        "label": "Page width",
-        "min": 1000,
-        "max": 1800,
-        "step": 10,
-        "default": 1450,
-        "unit": "px",
-        "info": "Maximum width of the page content"
-      },
-      {
-        "type": "range",
-        "id": "spacing_sections",
-        "label": "Space between sections",
-        "min": 0,
-        "max": 100,
-        "step": 4,
-        "default": 40,
-        "unit": "px"
-      },
-      {
-        "type": "range",
-        "id": "grid_gap",
-        "label": "Grid gap",
-        "min": 8,
-        "max": 48,
-        "step": 4,
-        "default": 24,
-        "unit": "px"
-      }
-    ]
-  },
-  {
-    "name": "Buttons",
-    "settings": [
-      {
-        "type": "range",
-        "id": "button_border_radius",
-        "label": "Button border radius",
-        "min": 0,
-        "max": 40,
-        "step": 2,
-        "default": 0,
-        "unit": "px"
-      },
-      {
-        "type": "select",
-        "id": "button_style",
-        "label": "Button style",
-        "options": [
-          { "value": "solid", "label": "Solid" },
-          { "value": "outline", "label": "Outline" }
-        ],
-        "default": "solid"
-      },
-      {
-        "type": "range",
-        "id": "input_border_radius",
-        "label": "Input border radius",
-        "min": 0,
-        "max": 20,
-        "step": 2,
-        "default": 4,
-        "unit": "px"
-      }
-    ]
-  },
-  {
-    "name": "Cards",
-    "settings": [
-      {
-        "type": "select",
-        "id": "card_style",
-        "label": "Card style",
-        "options": [
-          { "value": "standard", "label": "Standard" },
-          { "value": "elevated", "label": "Elevated" },
-          { "value": "outlined", "label": "Outlined" }
-        ],
-        "default": "standard"
-      },
-      {
-        "type": "range",
-        "id": "card_border_radius",
-        "label": "Card border radius",
-        "min": 0,
-        "max": 40,
-        "step": 4,
-        "default": 8,
-        "unit": "px"
-      },
-      {
-        "type": "select",
-        "id": "card_image_ratio",
-        "label": "Card image ratio",
-        "options": [
-          { "value": "portrait", "label": "Portrait (2:3)" },
-          { "value": "square", "label": "Square (1:1)" },
-          { "value": "landscape", "label": "Landscape (3:2)" }
-        ],
-        "default": "portrait"
-      },
-      {
-        "type": "checkbox",
-        "id": "card_show_secondary_image",
-        "label": "Show secondary image on hover",
-        "default": true
-      }
-    ]
-  },
-  {
     "name": "Cart",
     "settings": [
       {
@@ -480,120 +163,6 @@
           { "value": "page", "label": "Page" }
         ],
         "default": "drawer"
-      },
-      {
-        "type": "checkbox",
-        "id": "cart_show_vendor",
-        "label": "Show product vendor",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "cart_enable_notes",
-        "label": "Enable cart notes",
-        "default": true,
-        "info": "Allow customers to add notes to their order"
-      }
-    ]
-  },
-  {
-    "name": "Collection Filters",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Filter Display"
-      },
-      {
-        "type": "select",
-        "id": "collection_filter_position",
-        "label": "Filter position",
-        "options": [
-          { "value": "left", "label": "Left sidebar" },
-          { "value": "right", "label": "Right sidebar" },
-          { "value": "horizontal", "label": "Horizontal (above products)" }
-        ],
-        "default": "left",
-        "info": "Choose where filters appear on collection pages"
-      },
-      {
-        "type": "select",
-        "id": "collection_filter_default_state",
-        "label": "Filter groups default state",
-        "options": [
-          { "value": "open", "label": "Open (expanded)" },
-          { "value": "closed", "label": "Closed (collapsed)" },
-          { "value": "first_open", "label": "First group open, rest closed" }
-        ],
-        "default": "open",
-        "info": "How filter groups appear when the page loads"
-      },
-      {
-        "type": "checkbox",
-        "id": "collection_filter_sticky",
-        "label": "Sticky filters on scroll",
-        "default": true,
-        "info": "Keep filters visible while scrolling (sidebar only)"
-      },
-      {
-        "type": "header",
-        "content": "Mobile Filters"
-      },
-      {
-        "type": "select",
-        "id": "collection_filter_mobile",
-        "label": "Mobile filter display",
-        "options": [
-          { "value": "drawer", "label": "Slide-out drawer" },
-          { "value": "modal", "label": "Full-screen modal" },
-          { "value": "dropdown", "label": "Dropdown below toolbar" }
-        ],
-        "default": "drawer"
-      }
-    ]
-  },
-  {
-    "name": "Product Attachments",
-    "settings": [
-      {
-        "type": "header",
-        "content": "File Display"
-      },
-      {
-        "type": "paragraph",
-        "content": "Configure how product attachments (PDFs, documents, CAD files) are displayed on product pages."
-      },
-      {
-        "type": "checkbox",
-        "id": "attachments_show_file_size",
-        "label": "Show file size",
-        "default": true,
-        "info": "Display the file size next to each attachment"
-      },
-      {
-        "type": "checkbox",
-        "id": "attachments_show_file_icon",
-        "label": "Show file type icon",
-        "default": true,
-        "info": "Display an icon based on file type"
-      },
-      {
-        "type": "select",
-        "id": "attachments_open_behavior",
-        "label": "Click behavior",
-        "options": [
-          { "value": "download", "label": "Download file" },
-          { "value": "new_tab", "label": "Open in new tab" },
-          { "value": "preview", "label": "Preview (PDFs only)" }
-        ],
-        "default": "new_tab"
-      },
-      {
-        "type": "header",
-        "content": "Supported File Types"
-      },
-      {
-        "type": "paragraph",
-        "content": "The theme supports: PDF, DOC, DOCX, XLS, XLSX, CSV, DWG, STEP, STL, PNG, JPG, and more."
       }
     ]
   },
@@ -685,46 +254,55 @@
     ]
   },
   {
-    "name": "Social Media",
+    "name": "Preset Showcase",
     "settings": [
       {
         "type": "header",
-        "content": "Social Links"
+        "content": "Preset Showcase System"
       },
       {
-        "type": "text",
-        "id": "social_facebook",
-        "label": "Facebook URL"
+        "type": "paragraph",
+        "content": "Allow visitors to preview different theme presets without accessing the theme editor. Perfect for demonstrating theme versatility to potential customers."
       },
       {
-        "type": "text",
-        "id": "social_instagram",
-        "label": "Instagram URL"
+        "type": "checkbox",
+        "id": "preset_showcase_enabled",
+        "label": "Enable preset showcase",
+        "default": false,
+        "info": "Shows a floating preset switcher widget"
       },
       {
-        "type": "text",
-        "id": "social_twitter",
-        "label": "Twitter/X URL"
+        "type": "checkbox",
+        "id": "preset_showcase_homepage",
+        "label": "Show on homepage",
+        "default": true
       },
       {
-        "type": "text",
-        "id": "social_youtube",
-        "label": "YouTube URL"
+        "type": "checkbox",
+        "id": "preset_showcase_all_pages",
+        "label": "Show on all pages",
+        "default": false,
+        "info": "When enabled, the switcher appears on every page"
       },
       {
-        "type": "text",
-        "id": "social_linkedin",
-        "label": "LinkedIn URL"
+        "type": "select",
+        "id": "preset_showcase_position",
+        "label": "Widget position",
+        "options": [
+          { "value": "bottom-right", "label": "Bottom right" },
+          { "value": "bottom-left", "label": "Bottom left" },
+          { "value": "top-right", "label": "Top right" },
+          { "value": "top-left", "label": "Top left" }
+        ],
+        "default": "bottom-right"
       },
       {
-        "type": "text",
-        "id": "social_tiktok",
-        "label": "TikTok URL"
+        "type": "header",
+        "content": "URL Parameters"
       },
       {
-        "type": "text",
-        "id": "social_pinterest",
-        "label": "Pinterest URL"
+        "type": "paragraph",
+        "content": "Visitors can also activate presets via URL: ?preset=bold-impact, ?preset=modern-minimal, ?preset=tech-forward, ?preset=warm-artisan, ?preset=zebra-skimmers"
       }
     ]
   }

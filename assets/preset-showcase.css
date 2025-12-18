@@ -1,0 +1,404 @@
+/**
+ * Preset Showcase Styles
+ * 
+ * Floating widget and transition styles for the preset showcase system.
+ */
+
+/* ==========================================================================
+   Preset Switcher Widget
+   ========================================================================== */
+
+.preset-switcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.preset-switcher__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.preset-switcher__toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 28px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+.preset-switcher__toggle svg {
+  width: 20px;
+  height: 20px;
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.preset-switcher__toggle[aria-expanded="true"] svg {
+  animation-play-state: paused;
+}
+
+/* Panel */
+.preset-switcher__panel {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  width: 320px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.preset-switcher__header {
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.preset-switcher__header h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.preset-switcher__header p {
+  margin: 0;
+  font-size: 13px;
+  color: #666666;
+}
+
+/* Preset List */
+.preset-switcher__list {
+  padding: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.preset-switcher__item {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.preset-switcher__item:hover {
+  background: #f5f5f5;
+}
+
+.preset-switcher__item.is-active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+}
+
+.preset-switcher__name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.preset-switcher__desc {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.preset-switcher__item.is-active .preset-switcher__desc {
+  opacity: 0.85;
+}
+
+/* Footer */
+.preset-switcher__footer {
+  padding: 12px 20px;
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+}
+
+.preset-switcher__view-full {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #667eea;
+  text-decoration: none;
+}
+
+.preset-switcher__view-full:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Preset Transitions - Applied to body when switching presets
+   ========================================================================== */
+
+body {
+  transition: 
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Header transitions */
+header,
+.header,
+[data-section-type="header"] {
+  transition: 
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Footer transitions */
+footer,
+.footer,
+[data-section-type="footer"] {
+  transition: 
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ==========================================================================
+   Preset-Specific Header Styles
+   ========================================================================== */
+
+/* Bold Impact Header */
+.header-style-bold {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%) !important;
+  border-bottom: 3px solid var(--color-primary, #7c3aed) !important;
+}
+
+.header-style-bold .header__logo,
+.header-style-bold .nav__link {
+  color: #ffffff !important;
+}
+
+/* Modern Minimal Header */
+.header-style-minimal {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+}
+
+.header-style-minimal .header__logo,
+.header-style-minimal .nav__link {
+  color: #1a1a1a !important;
+}
+
+/* Tech Forward Header */
+.header-style-tech {
+  background: rgba(10, 10, 15, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2) !important;
+}
+
+.header-style-tech .header__logo,
+.header-style-tech .nav__link {
+  color: #e0e0e0 !important;
+}
+
+.header-style-tech .nav__link:hover {
+  color: #00d4ff !important;
+}
+
+/* Warm Artisan Header */
+.header-style-artisan {
+  background: #fef3c7 !important;
+  border-bottom: 2px solid #b45309 !important;
+}
+
+.header-style-artisan .header__logo,
+.header-style-artisan .nav__link {
+  color: #451a03 !important;
+}
+
+/* Industrial/Zebra Header */
+.header-style-industrial {
+  background: #1f2937 !important;
+  border-bottom: 4px solid #f59e0b !important;
+}
+
+.header-style-industrial .header__logo,
+.header-style-industrial .nav__link {
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Preset-Specific Footer Styles
+   ========================================================================== */
+
+/* Bold Impact Footer */
+.footer-style-bold {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Modern Minimal Footer */
+.footer-style-minimal {
+  background: #fafafa !important;
+  border-top: 1px solid #e5e5e5 !important;
+  color: #1a1a1a !important;
+}
+
+/* Tech Forward Footer */
+.footer-style-tech {
+  background: #0a0a0f !important;
+  border-top: 1px solid rgba(0, 212, 255, 0.2) !important;
+  color: #e0e0e0 !important;
+}
+
+/* Warm Artisan Footer */
+.footer-style-artisan {
+  background: #451a03 !important;
+  color: #fef3c7 !important;
+}
+
+/* Industrial/Zebra Footer */
+.footer-style-industrial {
+  background: #111827 !important;
+  border-top: 4px solid #f59e0b !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Preset Body Classes - Color Scheme Overrides
+   ========================================================================== */
+
+/* Bold Impact */
+body.preset-bold-impact {
+  --color-primary: #7c3aed;
+  --color-secondary: #dc2626;
+  --color-background: #0f0f0f;
+  --color-text: #ffffff;
+  --color-text-secondary: #a0a0a0;
+}
+
+/* Modern Minimal */
+body.preset-modern-minimal {
+  --color-primary: #000000;
+  --color-secondary: #666666;
+  --color-background: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #666666;
+}
+
+/* Tech Forward */
+body.preset-tech-forward {
+  --color-primary: #00d4ff;
+  --color-secondary: #7c3aed;
+  --color-background: #0a0a0f;
+  --color-text: #e0e0e0;
+  --color-text-secondary: #888888;
+}
+
+/* Warm Artisan */
+body.preset-warm-artisan {
+  --color-primary: #b45309;
+  --color-secondary: #166534;
+  --color-background: #fef3c7;
+  --color-text: #451a03;
+  --color-text-secondary: #78350f;
+}
+
+/* Zebra Skimmers / Industrial */
+body.preset-zebra-skimmers {
+  --color-primary: #f59e0b;
+  --color-secondary: #1f2937;
+  --color-background: #ffffff;
+  --color-text: #111827;
+  --color-text-secondary: #4b5563;
+}
+
+/* ==========================================================================
+   Mobile Responsive
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .preset-switcher {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .preset-switcher__toggle span {
+    display: none;
+  }
+
+  .preset-switcher__toggle {
+    padding: 14px;
+    border-radius: 50%;
+  }
+
+  .preset-switcher__panel {
+    width: calc(100vw - 32px);
+    right: -8px;
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Support
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .preset-switcher__panel {
+    background: #1a1a2e;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .preset-switcher__header {
+    border-bottom-color: #2a2a4e;
+  }
+
+  .preset-switcher__header h3 {
+    color: #ffffff;
+  }
+
+  .preset-switcher__header p {
+    color: #a0a0a0;
+  }
+
+  .preset-switcher__item:hover {
+    background: #2a2a4e;
+  }
+
+  .preset-switcher__footer {
+    background: #12122e;
+    border-top-color: #2a2a4e;
+  }
+}

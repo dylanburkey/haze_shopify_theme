@@ -1,0 +1,276 @@
+<section class="theme-tour-instructions">
+  <div class="container">
+    <div class="theme-tour-section-header">
+      <h2 class="theme-tour-section-title">{{ section.settings.title }}</h2>
+      <p class="theme-tour-section-desc">{{ section.settings.description }}</p>
+    </div>
+
+    <div class="instructions-grid">
+      {% for block in section.blocks %}
+        <div class="instruction-card" {{ block.shopify_attributes }}>
+          <div class="instruction-card__number">{{ forloop.index }}</div>
+          <div class="instruction-card__content">
+            <h3 class="instruction-card__title">{{ block.settings.title }}</h3>
+            <p class="instruction-card__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_tip %}
+      <div class="instructions-tip">
+        <div class="instructions-tip__icon">💡</div>
+        <div class="instructions-tip__content">
+          <strong>{{ section.settings.tip_title }}</strong>
+          <p>{{ section.settings.tip_text }}</p>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_pairings %}
+      <div class="recommended-pairings">
+        <h3 class="pairings-title">Recommended Pairings</h3>
+        <div class="pairings-grid">
+          <div class="pairing-card">
+            <div class="pairing-card__header">Bold Impact / Tech Forward</div>
+            <div class="pairing-card__combo">mega-menu-header + preset-footer</div>
+          </div>
+          <div class="pairing-card">
+            <div class="pairing-card__header">Modern Minimal</div>
+            <div class="pairing-card__combo">header + footer</div>
+          </div>
+          <div class="pairing-card">
+            <div class="pairing-card__header">Warm Artisan</div>
+            <div class="pairing-card__combo">corporate-header + footer</div>
+          </div>
+          <div class="pairing-card">
+            <div class="pairing-card__header">Zebra Skimmers</div>
+            <div class="pairing-card__combo">header-industrial + footer-industrial</div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .theme-tour-instructions {
+    padding: 4rem 1.5rem;
+    background: var(--color-background);
+  }
+
+  .instructions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+  }
+
+  .instruction-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .instruction-card__number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  .instruction-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--color-text);
+  }
+
+  .instruction-card__text {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .instructions-tip {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(var(--color-primary-rgb, 0, 122, 201), 0.1);
+    border: 1px solid var(--color-primary);
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .instructions-tip__icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .instructions-tip__content strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .instructions-tip__content p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .recommended-pairings {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .pairings-title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    color: var(--color-text);
+  }
+
+  .pairings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .pairing-card {
+    padding: 1rem;
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .pairing-card__header {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .pairing-card__combo {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    background: var(--color-background);
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Theme Tour Instructions",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "How to Swap Headers & Footers"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Follow these simple steps to change your store's header or footer in the Shopify theme editor."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tip",
+      "label": "Show Pro Tip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tip_title",
+      "label": "Tip Title",
+      "default": "Pro Tip"
+    },
+    {
+      "type": "textarea",
+      "id": "tip_text",
+      "label": "Tip Text",
+      "default": "Always preview your changes before publishing. Some header/footer combinations work better together than others."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pairings",
+      "label": "Show Recommended Pairings",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Instruction Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Step Text",
+          "default": "Step description goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Theme Tour Instructions",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Open Theme Editor",
+            "text": "Go to Online Store → Themes → Customize to open the theme editor."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Navigate to Header/Footer",
+            "text": "In the left sidebar, click on 'Header' or 'Footer' in the sections list."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Click Section Settings",
+            "text": "Click the section name to expand its settings panel."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Change Section Type",
+            "text": "Look for 'Change' or 'Replace section' option to swap to a different header/footer variant."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,246 @@
+<section class="theme-tour-footers">
+  <div class="container">
+    <div class="theme-tour-section-header">
+      <h2 class="theme-tour-section-title">{{ section.settings.title }}</h2>
+      <p class="theme-tour-section-desc">{{ section.settings.description }}</p>
+    </div>
+
+    <div class="theme-tour-grid">
+      {% for block in section.blocks %}
+        <div class="theme-tour-card" {{ block.shopify_attributes }}>
+          <div class="theme-tour-card__preview theme-tour-card__preview--{{ block.settings.style }}">
+            <div class="preview-footer">
+              <div class="preview-footer-cols">
+                <div class="preview-col"></div>
+                <div class="preview-col"></div>
+                <div class="preview-col"></div>
+                {% if block.settings.has_newsletter %}
+                  <div class="preview-col preview-col--newsletter">
+                    <div class="preview-input"></div>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="preview-footer-bottom">
+                <span>© 2024</span>
+                {% if block.settings.has_social %}
+                  <div class="preview-social">
+                    <span></span><span></span><span></span>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="theme-tour-card__content">
+            <h3 class="theme-tour-card__title">{{ block.settings.title }}</h3>
+            <p class="theme-tour-card__desc">{{ block.settings.description }}</p>
+            <div class="theme-tour-card__meta">
+              <span class="theme-tour-card__file">{{ block.settings.file_name }}</span>
+              {% if block.settings.best_for != blank %}
+                <span class="theme-tour-card__tag">{{ block.settings.best_for }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .theme-tour-footers {
+    background: var(--color-background-secondary);
+  }
+
+  .preview-footer {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+
+  .theme-tour-card__preview--light .preview-footer {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .preview-footer-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .preview-col {
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .theme-tour-card__preview--light .preview-col {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .preview-col--newsletter {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .preview-input {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  .theme-tour-card__preview--light .preview-input {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .preview-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.625rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .theme-tour-card__preview--light .preview-footer-bottom {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .preview-social {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .preview-social span {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+  }
+
+  .theme-tour-card__preview--light .preview-social span {
+    background: rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Theme Tour Footers",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Footer Variants"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Choose from 3 footer styles to match your header and overall brand aesthetic."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "footer_variant",
+      "name": "Footer Variant",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Variant Name",
+          "default": "Standard Footer"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "file_name",
+          "label": "File Name",
+          "default": "footer.liquid"
+        },
+        {
+          "type": "text",
+          "id": "best_for",
+          "label": "Best For"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Preview Style",
+          "options": [
+            { "value": "dark", "label": "Dark" },
+            { "value": "light", "label": "Light" },
+            { "value": "industrial", "label": "Industrial" }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "checkbox",
+          "id": "has_newsletter",
+          "label": "Has Newsletter",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "has_social",
+          "label": "Has Social Icons",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Theme Tour Footers",
+      "blocks": [
+        {
+          "type": "footer_variant",
+          "settings": {
+            "title": "Standard Footer",
+            "description": "Versatile footer with multi-column layout, newsletter signup, and social links. Works well with most header styles.",
+            "file_name": "footer.liquid",
+            "best_for": "General Use",
+            "style": "dark",
+            "has_newsletter": true,
+            "has_social": true
+          }
+        },
+        {
+          "type": "footer_variant",
+          "settings": {
+            "title": "Industrial Footer",
+            "description": "Robust footer design matching the industrial header. Features strong typography and utilitarian layout for B2B stores.",
+            "file_name": "footer-industrial.liquid",
+            "best_for": "B2B / Industrial",
+            "style": "industrial",
+            "has_newsletter": true,
+            "has_social": true
+          }
+        },
+        {
+          "type": "footer_variant",
+          "settings": {
+            "title": "Preset Footer",
+            "description": "Enhanced footer with additional customization options. Optimized for the Bold Impact and Tech Forward presets.",
+            "file_name": "preset-footer.liquid",
+            "best_for": "Premium Stores",
+            "style": "dark",
+            "has_newsletter": true,
+            "has_social": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

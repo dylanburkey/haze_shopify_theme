@@ -1,0 +1,295 @@
+### Editor-agnostic rule
+
+# Ignore AI/editor local state across tools
+**/.cursor/
+**/.zed/
+**/.windsurf/
+**/.kiroo/
+
+## Operating System
+####################
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.nfs*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+## AI
+################
+# Cursor (AI-first VS Code fork)
+.cursor/
+.cursorignore
+.cursor-rules
+.cursor-history/
+
+# Zed editor
+.zed/
+.zed-settings.json
+.zed-workspace
+.zed-session
+
+# Windsurf (Codeium IDE)
+.windsurf/
+.windsurf-settings.json
+.windsurf-workspace
+
+# Kiroo / Kiro (emerging IDE tooling)
+.kiroo/
+.kiroo-workspace
+.kiroo-settings.json
+
+
+
+
+## IDE
+###############
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# JetBrains (WebStorm, IntelliJ, PyCharm, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Emacs
+*~
+\#*\
+
+### Node & TypeScript
+#########################
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.vercel/
+
+# Env
+.env
+.env.*
+!.env.example
+
+
+## Front-end Tooling
+#####################
+
+# Vite
+.vite/
+
+# Gatsby
+.cache/
+
+# Astro
+.astro/
+
+# Parcel
+.parcel-cache/
+
+# Storybook
+storybook-static/
+
+# Turborepo
+.turbo/
+
+
+## Python
+#################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Packaging
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+
+## PHP
+#################
+
+/vendor/
+composer.lock
+
+# Laravel
+/storage/*.key
+/storage/logs/
+bootstrap/cache/
+.phpunit.result.cache
+
+# PHPStan / Psalm
+.phpstan.cache
+.psalm-cache/
+
+
+## RUBY
+########################
+.bundle/
+vendor/bundle/
+log/
+tmp/
+.ruby-version
+.ruby-gemset
+
+
+## JAVA
+################
+
+.bundle/
+vendor/bundle/
+log/
+tmp/
+.ruby-version
+.ruby-gemset
+
+
+## GO
+#################
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go workspace
+go.work
+
+
+### DATABASES
+##################
+
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql
+
+# Redis
+dump.rdb
+
+
+## CLOUD 
+###################
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.tfvars
+
+# AWS / GCP / Azure local configs
+.aws/
+.gcloud/
+.azure/
+
+# Cloudflare
+.wrangler/
+.wrangler.toml
+.dev.vars
+
+# Docker
+docker-compose.override.yml
+
+
+
+## LOGS
+#################
+
+logs/
+*.log
+*.trace
+*.pid
+
+
+### Archives and Binary
+##########################
+
+
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.gz
+
+*.exe
+*.dll
+*.bin
+
+
+## Testing, Coverage and Reports
+##################################
+
+coverage/
+reports/
+test-results/
+junit.xml
+
+## RANDOM
+#################
+
+# Temporary files
+.tmp/
+.temp/
+.cache/
+*.tmp
+
+# OS / tooling noise
+.history/
+*.orig

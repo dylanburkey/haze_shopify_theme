@@ -1,0 +1,103 @@
+{% comment %}
+  Preset Showcase System
+  
+  Enables visitors to preview different theme presets without accessing the theme editor.
+  
+  Usage: {% render 'preset-showcase' %}
+  
+  Features:
+  - Floating preset switcher widget
+  - URL parameter support (?preset=bold-impact)
+  - Automatic header/footer style switching
+  - LocalStorage persistence
+  
+  Activation:
+  1. URL parameter: ?preset=bold-impact
+  2. URL parameter: ?showcase=true
+  3. Theme setting: settings.preset_showcase_enabled
+{% endcomment %}
+
+{%- liquid
+  # Check if showcase mode should be active
+  assign showcase_active = false
+  
+  # Check URL params (done in JS, but we check for asset loading)
+  if request.page_type == 'index' or request.page_type == 'page'
+    assign showcase_active = true
+  endif
+  
+  # Check theme setting
+  if settings.preset_showcase_enabled
+    assign showcase_active = true
+  endif
+  
+  # Get current preset from URL if present
+  assign current_preset = 'default'
+  if request.path contains 'preset='
+    # Will be handled by JS
+  endif
+-%}
+
+{%- if showcase_active -%}
+  {%- comment -%} Load Preset Showcase Styles {%- endcomment -%}
+  {{ 'preset-showcase.css' | asset_url | stylesheet_tag }}
+  
+  {%- comment -%} Preset Configuration Data {%- endcomment -%}
+  <script type="application/json" id="preset-config">
+    {
+      "presets": {
+        "default": {
+          "name": "Default",
+          "description": "{{ settings.preset_default_description | default: 'Clean industrial design' }}",
+          "template": "index",
+          "headerStyle": "default",
+          "footerStyle": "default"
+        },
+        "bold-impact": {
+          "name": "Bold Impact",
+          "description": "High-energy athletic brand",
+          "template": "index.bold-impact",
+          "headerStyle": "bold",
+          "footerStyle": "bold"
+        },
+        "modern-minimal": {
+          "name": "Modern Minimal",
+          "description": "Clean, sophisticated aesthetic",
+          "template": "index.modern-minimal",
+          "headerStyle": "minimal",
+          "footerStyle": "minimal"
+        },
+        "tech-forward": {
+          "name": "Tech Forward",
+          "description": "Futuristic technology brand",
+          "template": "index.tech-forward",
+          "headerStyle": "tech",
+          "footerStyle": "tech"
+        },
+        "warm-artisan": {
+          "name": "Warm Artisan",
+          "description": "Handcrafted, organic feel",
+          "template": "index.warm-artisan",
+          "headerStyle": "artisan",
+          "footerStyle": "artisan"
+        },
+        "zebra-skimmers": {
+          "name": "Zebra Skimmers",
+          "description": "Industrial equipment brand",
+          "template": "index.zebra-skimmers",
+          "headerStyle": "industrial",
+          "footerStyle": "industrial"
+        }
+      },
+      "settings": {
+        "enabledByDefault": {{ settings.preset_showcase_enabled | default: false }},
+        "showOnHomepage": {{ settings.preset_showcase_homepage | default: true }},
+        "showOnAllPages": {{ settings.preset_showcase_all_pages | default: false }},
+        "position": "{{ settings.preset_showcase_position | default: 'bottom-right' }}"
+      }
+    }
+  </script>
+  
+  {%- comment -%} Load Preset Showcase Script {%- endcomment -%}
+  <script src="{{ 'preset-showcase.js' | asset_url }}" defer></script>
+{%- endif -%}

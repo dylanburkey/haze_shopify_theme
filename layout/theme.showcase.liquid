@@ -1,0 +1,58 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
+  
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% render 'meta-tags' %}
+  {% render 'critical-css' %}
+  
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'preset-showcase.css' | asset_url | stylesheet_tag }}
+  
+  {%- if settings.preset_showcase_enabled or request.path contains 'showcase' -%}
+    {% render 'preset-css-variables' %}
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+</head>
+
+<body class="template-{{ template.name | handle }} template-{{ template | replace: '.', '-' | handle }}{% if template.suffix %} template-suffix-{{ template.suffix }}{% endif %} showcase-layout">
+  
+  <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+    {{ 'accessibility.skip_to_text' | t }}
+  </a>
+
+  {%- comment -%}
+    SHOWCASE LAYOUT: No global header/footer groups.
+    Each template using this layout includes its own header/footer sections.
+    This allows complete visual customization per preset.
+  {%- endcomment -%}
+
+  <main id="MainContent" class="main-content" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {%- comment -%} Preset Showcase Floating Widget {%- endcomment -%}
+  {% render 'preset-showcase-widget' %}
+
+  {{ 'global.js' | asset_url | script_tag }}
+  {{ 'preset-showcase.js' | asset_url | script_tag }}
+</body>
+</html>

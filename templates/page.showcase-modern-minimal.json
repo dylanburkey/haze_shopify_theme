@@ -1,0 +1,124 @@
+{
+  "layout": "theme.showcase",
+  "name": "Showcase - Modern Minimal",
+  "sections": {
+    "header": {
+      "type": "mega-menu-header",
+      "settings": {
+        "logo_text": "MINIMAL",
+        "show_utility_bar": false,
+        "show_announcement": false,
+        "color_scheme": "light",
+        "sticky_header": true,
+        "header_style": "minimal"
+      }
+    },
+    "hero": {
+      "type": "preset-hero",
+      "settings": {
+        "preset_style": "modern-minimal",
+        "height": "large",
+        "overlay_opacity": 0,
+        "title": "Less is More",
+        "subtitle": "Curated Essentials",
+        "description": "Thoughtfully designed pieces that stand the test of time. Quality over quantity.",
+        "primary_button_text": "Explore Collection",
+        "primary_button_link": "",
+        "secondary_button_text": "",
+        "show_scroll_indicator": false,
+        "text_alignment": "left"
+      }
+    },
+    "featured_collection": {
+      "type": "preset-product-grid",
+      "settings": {
+        "preset_style": "modern-minimal",
+        "title": "Featured",
+        "subtitle": "",
+        "collection": "",
+        "products_to_show": 6,
+        "columns": 3,
+        "show_quick_add": false,
+        "card_style": "minimal"
+      }
+    },
+    "featured_product": {
+      "type": "preset-featured-product",
+      "settings": {
+        "preset_style": "modern-minimal",
+        "badge_text": "",
+        "product": "",
+        "title_override": "The Essential Tee",
+        "description_override": "Crafted from 100% organic cotton. Made to last, designed to feel good.",
+        "show_features": true,
+        "layout": "centered"
+      },
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "icon": "check", "text": "100% Organic Cotton" }},
+        "feature_2": { "type": "feature", "settings": { "icon": "check", "text": "Ethically Made" }},
+        "feature_3": { "type": "feature", "settings": { "icon": "check", "text": "Free Returns" }}
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"]
+    },
+    "testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "preset_style": "modern-minimal",
+        "title": "What People Say",
+        "layout": "grid"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally found a brand that matches my aesthetic. Simple, beautiful, quality.",
+            "author": "Sarah L.",
+            "title": "Designer",
+            "rating": 5
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The attention to detail is remarkable. These pieces are built to last.",
+            "author": "Michael T.",
+            "title": "Architect",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2"]
+    },
+    "newsletter": {
+      "type": "preset-newsletter-cta",
+      "settings": {
+        "preset_style": "modern-minimal",
+        "title": "Stay Updated",
+        "description": "Subscribe for early access to new arrivals.",
+        "button_text": "Subscribe",
+        "background_style": "subtle"
+      }
+    },
+    "footer": {
+      "type": "preset-footer",
+      "settings": {
+        "preset_style": "modern-minimal",
+        "logo_text": "MINIMAL",
+        "tagline": "Thoughtfully designed essentials.",
+        "show_newsletter": false,
+        "show_social": true,
+        "show_payment_icons": false,
+        "columns": 3
+      }
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "featured_collection",
+    "featured_product",
+    "testimonials",
+    "newsletter",
+    "footer"
+  ]
+}

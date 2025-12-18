@@ -1,0 +1,298 @@
+{% comment %}
+  Preset Showcase Widget
+  Floating navigation for switching between preset demo pages.
+  
+  This widget provides instant navigation between preset pages without
+  requiring any theme editor changes.
+{% endcomment %}
+
+{%- liquid
+  assign current_preset = 'default'
+  
+  if template.suffix contains 'bold-impact'
+    assign current_preset = 'bold-impact'
+  elsif template.suffix contains 'modern-minimal'
+    assign current_preset = 'modern-minimal'
+  elsif template.suffix contains 'tech-forward'
+    assign current_preset = 'tech-forward'
+  elsif template.suffix contains 'warm-artisan'
+    assign current_preset = 'warm-artisan'
+  elsif template.suffix contains 'zebra-skimmers'
+    assign current_preset = 'zebra-skimmers'
+  endif
+  
+  assign show_widget = false
+  if template.name == 'page' and template.suffix contains 'showcase'
+    assign show_widget = true
+  endif
+  if request.path contains 'showcase'
+    assign show_widget = true
+  endif
+-%}
+
+{%- if show_widget -%}
+<div class="preset-showcase-widget" data-current-preset="{{ current_preset }}">
+  <button 
+    class="preset-showcase-widget__toggle"
+    aria-label="Toggle preset menu"
+    aria-expanded="false"
+    aria-controls="preset-panel"
+  >
+    <span class="preset-showcase-widget__icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </span>
+    <span class="preset-showcase-widget__label">Presets</span>
+  </button>
+  
+  <div id="preset-panel" class="preset-showcase-widget__panel" hidden>
+    <div class="preset-showcase-widget__header">
+      <h3 class="preset-showcase-widget__title">Theme Presets</h3>
+      <p class="preset-showcase-widget__subtitle">Click to preview each style</p>
+    </div>
+    
+    <nav class="preset-showcase-widget__nav" aria-label="Preset navigation">
+      <a 
+        href="{{ pages['showcase-bold-impact'].url | default: '/pages/showcase-bold-impact' }}"
+        class="preset-showcase-widget__item{% if current_preset == 'bold-impact' %} is-active{% endif %}"
+        data-preset="bold-impact"
+      >
+        <span class="preset-showcase-widget__swatch" style="background: linear-gradient(135deg, #7c3aed 0%, #dc2626 100%);"></span>
+        <span class="preset-showcase-widget__item-content">
+          <span class="preset-showcase-widget__name">Bold Impact</span>
+          <span class="preset-showcase-widget__desc">Athletic / High-energy</span>
+        </span>
+      </a>
+      
+      <a 
+        href="{{ pages['showcase-modern-minimal'].url | default: '/pages/showcase-modern-minimal' }}"
+        class="preset-showcase-widget__item{% if current_preset == 'modern-minimal' %} is-active{% endif %}"
+        data-preset="modern-minimal"
+      >
+        <span class="preset-showcase-widget__swatch" style="background: linear-gradient(135deg, #000000 0%, #666666 100%);"></span>
+        <span class="preset-showcase-widget__item-content">
+          <span class="preset-showcase-widget__name">Modern Minimal</span>
+          <span class="preset-showcase-widget__desc">Clean / Sophisticated</span>
+        </span>
+      </a>
+      
+      <a 
+        href="{{ pages['showcase-tech-forward'].url | default: '/pages/showcase-tech-forward' }}"
+        class="preset-showcase-widget__item{% if current_preset == 'tech-forward' %} is-active{% endif %}"
+        data-preset="tech-forward"
+      >
+        <span class="preset-showcase-widget__swatch" style="background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);"></span>
+        <span class="preset-showcase-widget__item-content">
+          <span class="preset-showcase-widget__name">Tech Forward</span>
+          <span class="preset-showcase-widget__desc">Futuristic / Digital</span>
+        </span>
+      </a>
+      
+      <a 
+        href="{{ pages['showcase-warm-artisan'].url | default: '/pages/showcase-warm-artisan' }}"
+        class="preset-showcase-widget__item{% if current_preset == 'warm-artisan' %} is-active{% endif %}"
+        data-preset="warm-artisan"
+      >
+        <span class="preset-showcase-widget__swatch" style="background: linear-gradient(135deg, #b45309 0%, #166534 100%);"></span>
+        <span class="preset-showcase-widget__item-content">
+          <span class="preset-showcase-widget__name">Warm Artisan</span>
+          <span class="preset-showcase-widget__desc">Handcrafted / Organic</span>
+        </span>
+      </a>
+      
+      <a 
+        href="{{ pages['showcase-zebra-skimmers'].url | default: '/pages/showcase-zebra-skimmers' }}"
+        class="preset-showcase-widget__item{% if current_preset == 'zebra-skimmers' %} is-active{% endif %}"
+        data-preset="zebra-skimmers"
+      >
+        <span class="preset-showcase-widget__swatch" style="background: linear-gradient(135deg, #f59e0b 0%, #1f2937 100%);"></span>
+        <span class="preset-showcase-widget__item-content">
+          <span class="preset-showcase-widget__name">Zebra Skimmers</span>
+          <span class="preset-showcase-widget__desc">Industrial / Equipment</span>
+        </span>
+      </a>
+    </nav>
+    
+    <div class="preset-showcase-widget__footer">
+      <a href="{{ pages['preset-showcase'].url | default: '/pages/preset-showcase' }}" class="preset-showcase-widget__overview-link">
+        View All Presets Overview →
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .preset-showcase-widget {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .preset-showcase-widget__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .preset-showcase-widget__toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  }
+  
+  .preset-showcase-widget__icon {
+    display: flex;
+  }
+  
+  .preset-showcase-widget__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .preset-showcase-widget__panel {
+    position: absolute;
+    bottom: calc(100% + 0.75rem);
+    right: 0;
+    width: 280px;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  .preset-showcase-widget__header {
+    padding: 1rem 1.25rem;
+    background: #f8f8f8;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .preset-showcase-widget__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  
+  .preset-showcase-widget__subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    color: #666;
+  }
+  
+  .preset-showcase-widget__nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .preset-showcase-widget__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.15s;
+  }
+  
+  .preset-showcase-widget__item:hover {
+    background: #f5f5f5;
+  }
+  
+  .preset-showcase-widget__item.is-active {
+    background: #f0f9ff;
+  }
+  
+  .preset-showcase-widget__swatch {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+  }
+  
+  .preset-showcase-widget__item-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .preset-showcase-widget__name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+  
+  .preset-showcase-widget__desc {
+    font-size: 0.75rem;
+    color: #666;
+  }
+  
+  .preset-showcase-widget__footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+  }
+  
+  .preset-showcase-widget__overview-link {
+    font-size: 0.8125rem;
+    color: #2563eb;
+    text-decoration: none;
+  }
+  
+  .preset-showcase-widget__overview-link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 480px) {
+    .preset-showcase-widget {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    
+    .preset-showcase-widget__panel {
+      width: calc(100vw - 2rem);
+      right: 0;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const widget = document.querySelector('.preset-showcase-widget');
+    if (!widget) return;
+    
+    const toggle = widget.querySelector('.preset-showcase-widget__toggle');
+    const panel = widget.querySelector('.preset-showcase-widget__panel');
+    
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      panel.hidden = expanded;
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!widget.contains(e.target)) {
+        toggle.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) {
+        toggle.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+        toggle.focus();
+      }
+    });
+  })();
+</script>
+{%- endif -%}

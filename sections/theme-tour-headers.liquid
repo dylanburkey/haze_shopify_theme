@@ -1,0 +1,335 @@
+<section class="theme-tour-headers">
+  <div class="container">
+    <div class="theme-tour-section-header">
+      <h2 class="theme-tour-section-title">{{ section.settings.title }}</h2>
+      <p class="theme-tour-section-desc">{{ section.settings.description }}</p>
+    </div>
+
+    <div class="theme-tour-grid">
+      {% for block in section.blocks %}
+        <div class="theme-tour-card" {{ block.shopify_attributes }}>
+          <div class="theme-tour-card__preview theme-tour-card__preview--{{ block.settings.style }}">
+            <div class="preview-header">
+              <div class="preview-logo">{{ block.settings.preview_logo }}</div>
+              <div class="preview-nav">
+                <span></span><span></span><span></span>
+              </div>
+              {% if block.settings.has_mega_menu %}
+                <div class="preview-mega-indicator">▼</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="theme-tour-card__content">
+            <h3 class="theme-tour-card__title">{{ block.settings.title }}</h3>
+            <p class="theme-tour-card__desc">{{ block.settings.description }}</p>
+            <div class="theme-tour-card__meta">
+              <span class="theme-tour-card__file">{{ block.settings.file_name }}</span>
+              {% if block.settings.best_for != blank %}
+                <span class="theme-tour-card__tag">{{ block.settings.best_for }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .theme-tour-headers,
+  .theme-tour-footers {
+    padding: 4rem 1.5rem;
+  }
+
+  .theme-tour-headers {
+    background: var(--color-background);
+  }
+
+  .theme-tour-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .theme-tour-section-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+  }
+
+  .theme-tour-section-desc {
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .theme-tour-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .theme-tour-card {
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .theme-tour-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-tour-card__preview {
+    height: 120px;
+    padding: 1rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .theme-tour-card__preview--dark {
+    background: #1a1a1a;
+  }
+
+  .theme-tour-card__preview--light {
+    background: #f8f9fa;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .theme-tour-card__preview--industrial {
+    background: linear-gradient(135deg, #003d79 0%, #001a33 100%);
+  }
+
+  .theme-tour-card__preview--corporate {
+    background: linear-gradient(to bottom, #78350f 0%, #92400e 100%);
+  }
+
+  .preview-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+
+  .theme-tour-card__preview--light .preview-header {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .preview-logo {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #fff;
+  }
+
+  .theme-tour-card__preview--light .preview-logo {
+    color: #1a1a1a;
+  }
+
+  .preview-nav {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .preview-nav span {
+    width: 24px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+  }
+
+  .theme-tour-card__preview--light .preview-nav span {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .preview-mega-indicator {
+    font-size: 0.625rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .theme-tour-card__preview--light .preview-mega-indicator {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .theme-tour-card__content {
+    padding: 1.25rem;
+  }
+
+  .theme-tour-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--color-text);
+  }
+
+  .theme-tour-card__desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+
+  .theme-tour-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .theme-tour-card__file {
+    font-family: monospace;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+  }
+
+  .theme-tour-card__tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    border-radius: 4px;
+    font-weight: 500;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Theme Tour Headers",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Header Variants"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Choose from 4 distinct header styles, each optimized for different business types and navigation needs."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header_variant",
+      "name": "Header Variant",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Variant Name",
+          "default": "Standard Header"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Clean, minimal header suitable for most stores."
+        },
+        {
+          "type": "text",
+          "id": "file_name",
+          "label": "File Name",
+          "default": "header.liquid"
+        },
+        {
+          "type": "text",
+          "id": "best_for",
+          "label": "Best For",
+          "default": "General Use"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Preview Style",
+          "options": [
+            { "value": "dark", "label": "Dark" },
+            { "value": "light", "label": "Light" },
+            { "value": "industrial", "label": "Industrial" },
+            { "value": "corporate", "label": "Corporate" }
+          ],
+          "default": "dark"
+        },
+        {
+          "type": "text",
+          "id": "preview_logo",
+          "label": "Preview Logo Text",
+          "default": "LOGO"
+        },
+        {
+          "type": "checkbox",
+          "id": "has_mega_menu",
+          "label": "Has Mega Menu",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Theme Tour Headers",
+      "blocks": [
+        {
+          "type": "header_variant",
+          "settings": {
+            "title": "Standard Header",
+            "description": "Clean, minimal header with logo, navigation, and utility icons. Perfect for stores that want a straightforward, professional look.",
+            "file_name": "header.liquid",
+            "best_for": "General Use",
+            "style": "light",
+            "preview_logo": "STORE",
+            "has_mega_menu": false
+          }
+        },
+        {
+          "type": "header_variant",
+          "settings": {
+            "title": "Mega Menu Header",
+            "description": "Feature-rich header with expandable mega menus for complex navigation. Ideal for stores with large catalogs or multiple categories.",
+            "file_name": "mega-menu-header.liquid",
+            "best_for": "Large Catalogs",
+            "style": "dark",
+            "preview_logo": "MEGA",
+            "has_mega_menu": true
+          }
+        },
+        {
+          "type": "header_variant",
+          "settings": {
+            "title": "Industrial Header",
+            "description": "Bold, utilitarian design with strong visual hierarchy. Built for B2B, manufacturing, and equipment suppliers.",
+            "file_name": "header-industrial.liquid",
+            "best_for": "B2B / Industrial",
+            "style": "industrial",
+            "preview_logo": "FORGE",
+            "has_mega_menu": false
+          }
+        },
+        {
+          "type": "header_variant",
+          "settings": {
+            "title": "Corporate Header",
+            "description": "Warm, professional header with refined typography. Designed for artisan brands, premium products, and service businesses.",
+            "file_name": "corporate-header.liquid",
+            "best_for": "Premium / Artisan",
+            "style": "corporate",
+            "preview_logo": "ARTISAN",
+            "has_mega_menu": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

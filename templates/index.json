@@ -9,875 +9,319 @@
  */
 {
   "sections": {
-    "mega_menu_header_grRJgy": {
-      "type": "mega-menu-header",
+    "announcement_bar_BKqVJn": {
+      "type": "announcement-bar",
       "blocks": {
-        "utility_link_d4tycd": {
-          "type": "utility_link",
+        "announcement_BPVFPk": {
+          "type": "announcement",
           "settings": {
-            "label": "Find a Location",
-            "link": "/pages/locations",
-            "icon": "location",
-            "open_new_tab": false
-          }
-        },
-        "utility_link_kdb6JQ": {
-          "type": "utility_link",
-          "settings": {
-            "label": "Contact Us",
-            "link": "/pages/contact",
-            "icon": "phone",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_V34axz": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Products",
-            "link": "",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_k9mxaK": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Solutions",
-            "link": "",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_6CmDm7": {
-          "type": "menu_item",
-          "settings": {
-            "label": "About",
-            "link": "/pages/about",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_hmCd6i": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Careers",
-            "link": "/pages/careers",
-            "open_new_tab": false
-          }
-        }
-      },
-      "block_order": [
-        "utility_link_d4tycd",
-        "utility_link_kdb6JQ",
-        "menu_item_V34axz",
-        "menu_item_k9mxaK",
-        "menu_item_6CmDm7",
-        "menu_item_hmCd6i"
-      ],
-      "name": "Mega Menu Header",
-      "settings": {
-        "logo_width": 150,
-        "sticky_header": true,
-        "show_search": true,
-        "search_placeholder": "Search...",
-        "show_account": true,
-        "show_cart": true,
-        "utility_bg": "#f5f5f5",
-        "utility_text": "#333333",
-        "header_bg": "#ffffff",
-        "header_text": "#1a1a1a",
-        "nav_hover": "#0056b3",
-        "dropdown_bg": "#ffffff",
-        "dropdown_border": "#e5e5e5"
-      }
-    },
-    "corporate_header_reYyXm": {
-      "type": "corporate-header",
-      "blocks": {
-        "nav_item_PEdgbM": {
-          "type": "nav_item",
-          "settings": {
-            "label": "About",
-            "link": "",
-            "new_tab": false,
-            "submenu_1_label": "Our Story",
-            "submenu_1_link": "/pages/about",
-            "submenu_2_label": "Leadership",
-            "submenu_2_link": "/pages/team",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_qrjF9W": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Products",
-            "link": "/collections/all",
-            "new_tab": false,
-            "submenu_1_label": "",
-            "submenu_1_link": "",
-            "submenu_2_label": "",
-            "submenu_2_link": "",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_faf8aj": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Solutions",
-            "link": "",
-            "new_tab": false,
-            "submenu_1_label": "Industrial",
-            "submenu_1_link": "/pages/industrial",
-            "submenu_2_label": "Commercial",
-            "submenu_2_link": "/pages/commercial",
-            "submenu_3_label": "Residential",
-            "submenu_3_link": "/pages/residential",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_YTMPjH": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Careers",
-            "link": "/pages/careers",
-            "new_tab": false,
-            "submenu_1_label": "",
-            "submenu_1_link": "",
-            "submenu_2_label": "",
-            "submenu_2_link": "",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_PNFwVy": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Contact",
-            "link": "/pages/contact",
-            "new_tab": false,
-            "submenu_1_label": "",
-            "submenu_1_link": "",
-            "submenu_2_label": "",
-            "submenu_2_link": "",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "nav_item_PEdgbM",
-        "nav_item_qrjF9W",
-        "nav_item_faf8aj",
-        "nav_item_YTMPjH",
-        "nav_item_PNFwVy"
-      ],
-      "name": "Corporate Header",
-      "settings": {
-        "logo_width": 150,
-        "logo_svg": "",
-        "sticky": true,
-        "show_search": true,
-        "search_placeholder": "Search...",
-        "bg_color": "#ffffff",
-        "text_color": "#1a1a1a",
-        "hover_color": "#0056b3"
-      }
-    },
-    "header_industrial_Mj4jxM": {
-      "type": "header-industrial",
-      "blocks": {
-        "menu_item_yCaKLD": {
-          "type": "menu_item",
-          "settings": {
-            "label": "PRODUCTS",
-            "link": "/collections/all"
-          }
-        },
-        "menu_item_XDn9EE": {
-          "type": "menu_item",
-          "settings": {
-            "label": "CATALOG",
-            "link": "/collections"
-          }
-        },
-        "menu_item_8DfiKK": {
-          "type": "menu_item",
-          "settings": {
-            "label": "ABOUT",
-            "link": "/pages/about"
-          }
-        },
-        "menu_item_BGrKE7": {
-          "type": "menu_item",
-          "settings": {
-            "label": "CONTACT",
-            "link": "/pages/contact"
-          }
-        }
-      },
-      "block_order": [
-        "menu_item_yCaKLD",
-        "menu_item_XDn9EE",
-        "menu_item_8DfiKK",
-        "menu_item_BGrKE7"
-      ],
-      "name": "Header industrial",
-      "settings": {
-        "style": "machinist",
-        "header_height": 80,
-        "background_color": "#0a0a0a",
-        "text_color": "#e5e5e5",
-        "border_color": "#333333",
-        "logo_width": 150,
-        "logo_text": "FORGE",
-        "logo_suffix": "IND.",
-        "show_numbers": true,
-        "show_search": true,
-        "show_account": true
-      }
-    },
-    "header_wLyPK9": {
-      "type": "header",
-      "blocks": {
-        "menu_item_LXURjz": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Equipment",
-            "link": "/collections/all"
-          }
-        },
-        "menu_item_JXJkcP": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Products",
-            "link": "/collections"
-          }
-        },
-        "menu_item_aEbfLD": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Support",
-            "link": "/pages/contact"
-          }
-        }
-      },
-      "block_order": [
-        "menu_item_LXURjz",
-        "menu_item_JXJkcP",
-        "menu_item_aEbfLD"
-      ],
-      "name": "Header",
-      "settings": {
-        "show_search": true,
-        "show_account": true
-      }
-    },
-    "corporate_header_E4jMBH": {
-      "type": "corporate-header",
-      "blocks": {
-        "nav_item_NhhDHj": {
-          "type": "nav_item",
-          "settings": {
-            "label": "About",
-            "link": "",
-            "new_tab": false,
-            "submenu_1_label": "Our Story",
-            "submenu_1_link": "/pages/about",
-            "submenu_2_label": "Leadership",
-            "submenu_2_link": "/pages/team",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_cy3GbV": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Products",
-            "link": "/collections/all",
-            "new_tab": false,
-            "submenu_1_label": "",
-            "submenu_1_link": "",
-            "submenu_2_label": "",
-            "submenu_2_link": "",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_p8tiRU": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Solutions",
-            "link": "",
-            "new_tab": false,
-            "submenu_1_label": "Industrial",
-            "submenu_1_link": "/pages/industrial",
-            "submenu_2_label": "Commercial",
-            "submenu_2_link": "/pages/commercial",
-            "submenu_3_label": "Residential",
-            "submenu_3_link": "/pages/residential",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_Ptm69a": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Careers",
-            "link": "/pages/careers",
-            "new_tab": false,
-            "submenu_1_label": "",
-            "submenu_1_link": "",
-            "submenu_2_label": "",
-            "submenu_2_link": "",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        },
-        "nav_item_Gg8gmU": {
-          "type": "nav_item",
-          "settings": {
-            "label": "Contact",
-            "link": "/pages/contact",
-            "new_tab": false,
-            "submenu_1_label": "",
-            "submenu_1_link": "",
-            "submenu_2_label": "",
-            "submenu_2_link": "",
-            "submenu_3_label": "",
-            "submenu_3_link": "",
-            "submenu_4_label": "",
-            "submenu_4_link": "",
-            "submenu_5_label": "",
-            "submenu_5_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "nav_item_NhhDHj",
-        "nav_item_cy3GbV",
-        "nav_item_p8tiRU",
-        "nav_item_Ptm69a",
-        "nav_item_Gg8gmU"
-      ],
-      "name": "Corporate Header",
-      "settings": {
-        "logo_width": 150,
-        "logo_svg": "",
-        "sticky": true,
-        "show_search": true,
-        "search_placeholder": "Search...",
-        "bg_color": "#ffffff",
-        "text_color": "#1a1a1a",
-        "hover_color": "#0056b3"
-      }
-    },
-    "getting-started": {
-      "type": "getting-started",
-      "blocks": {
-        "step-1": {
-          "type": "step",
-          "settings": {
-            "title": "Choose a Preset",
-            "description": "Start by selecting a preset in Theme Settings → Theme Preset. Each preset includes coordinated colors, typography, and layout settings.",
-            "icon": "palette",
-            "button_text": "",
-            "button_link": ""
-          }
-        },
-        "step-2": {
-          "type": "step",
-          "settings": {
-            "title": "Add Your Logo",
-            "description": "Upload your logo in Theme Settings → Logo. You can also use text-based logos with the built-in styling.",
-            "icon": "image",
-            "button_text": "",
-            "button_link": ""
-          }
-        },
-        "step-3": {
-          "type": "step",
-          "settings": {
-            "title": "Customize Sections",
-            "description": "Add, remove, and rearrange sections using the Theme Editor. Each section has its own settings for complete control.",
-            "icon": "layout",
-            "button_text": "",
-            "button_link": ""
-          }
-        },
-        "step-4": {
-          "type": "step",
-          "settings": {
-            "title": "Launch Your Store",
-            "description": "Preview your changes, test on mobile, then publish your theme when ready. Your store is ready for customers!",
-            "icon": "rocket",
-            "button_text": "",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "step-1",
-        "step-2",
-        "step-3",
-        "step-4"
-      ],
-      "settings": {
-        "badge_text": "Quick Setup Guide",
-        "title": "Getting Started with Forge Industrial",
-        "subtitle": "Follow these steps to customize your store. You can remove this section once you're familiar with the theme.",
-        "show_presets_grid": true
-      }
-    },
-    "preset-preview": {
-      "type": "preset-preview",
-      "settings": {
-        "show_header": true,
-        "label": "Current Theme Preset",
-        "show_cta": true,
-        "cta_text": "This preview updates automatically when you change your theme preset in Theme Settings."
-      }
-    },
-    "landing_page_switcher_dA44Yh": {
-      "type": "landing-page-switcher",
-      "name": "Landing Page Switcher",
-      "settings": {
-        "override_style": "tech-forward",
-        "default_hero_title": "Precision Welding Systems",
-        "default_hero_text": "Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.",
-        "default_hero_button_label": "Explore Equipment",
-        "default_hero_button_link": "",
-        "tech_hero_badge": "Now Available",
-        "tech_hero_title": "The Future of Intelligence",
-        "tech_hero_subtitle": "Experience next-generation AI that learns, adapts, and evolves with your business needs.",
-        "tech_hero_button_label": "Start Free Trial",
-        "tech_hero_button_link": "",
-        "impact_hero_badge": "New Collection",
-        "impact_hero_title": "PUSH YOUR LIMITS",
-        "impact_hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
-        "impact_collection": "",
-        "artisan_hero_eyebrow": "Handcrafted with love",
-        "artisan_hero_title": "Artisan Ceramics for Everyday Living",
-        "artisan_hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
-        "artisan_collection": ""
-      }
-    },
-    "landing_warm_artisan_VNJQp3": {
-      "type": "landing-warm-artisan",
-      "blocks": {
-        "process_step_acip3b": {
-          "type": "process_step",
-          "settings": {
-            "title": "Sourced",
-            "text": "We source only the finest clays and materials from local suppliers who share our values."
-          }
-        },
-        "process_step_4MnUeG": {
-          "type": "process_step",
-          "settings": {
-            "title": "Shaped",
-            "text": "Each piece is thrown on the wheel or hand-built with careful attention to form and function."
-          }
-        },
-        "process_step_ChKnTL": {
-          "type": "process_step",
-          "settings": {
-            "title": "Glazed",
-            "text": "Our signature glazes are mixed in-house using recipes developed over years of experimentation."
-          }
-        },
-        "process_step_QX3PmF": {
-          "type": "process_step",
-          "settings": {
-            "title": "Fired",
-            "text": "Multiple firings in our kilns bring out the unique character of each piece."
-          }
-        },
-        "value_WgHUBe": {
-          "type": "value",
-          "settings": {
-            "icon": "hand",
-            "title": "Handcrafted",
-            "text": "Every piece is made by hand in our studio—no two are exactly alike."
-          }
-        },
-        "value_QP7Kr6": {
-          "type": "value",
-          "settings": {
-            "icon": "leaf",
-            "title": "Sustainable",
-            "text": "We use eco-friendly materials and practices in everything we do."
-          }
-        },
-        "value_nbf9MV": {
-          "type": "value",
-          "settings": {
-            "icon": "heart",
-            "title": "Made with Love",
-            "text": "Each piece carries the care and intention of its maker."
-          }
-        },
-        "value_6Ubgaw": {
-          "type": "value",
-          "settings": {
-            "icon": "home",
-            "title": "Built to Last",
-            "text": "Quality craftsmanship means these pieces will be cherished for generations."
-          }
-        },
-        "testimonial_DcmWzk": {
-          "type": "testimonial",
-          "settings": {
-            "name": "Emma S.",
-            "location": "Seattle, WA",
-            "quote": "These mugs have completely transformed my morning routine. Each sip feels special."
-          }
-        },
-        "testimonial_Fx6FKb": {
-          "type": "testimonial",
-          "settings": {
-            "name": "Michael R.",
-            "location": "Denver, CO",
-            "quote": "Bought the serving bowl for my wife's birthday. She teared up when she opened it. That says everything."
-          }
-        },
-        "testimonial_K6yQA4": {
-          "type": "testimonial",
-          "settings": {
-            "name": "Jenny L.",
-            "location": "San Francisco, CA",
-            "quote": "My morning coffee ritual has become something special thanks to these pieces. Worth every penny."
-          }
-        },
-        "instagram_image_cF8k9e": {
-          "type": "instagram_image",
-          "settings": {}
-        },
-        "instagram_image_hkxJPr": {
-          "type": "instagram_image",
-          "settings": {}
-        },
-        "instagram_image_i69pCT": {
-          "type": "instagram_image",
-          "settings": {}
-        },
-        "instagram_image_MjG7fH": {
-          "type": "instagram_image",
-          "settings": {}
-        },
-        "instagram_image_Gx3wGT": {
-          "type": "instagram_image",
-          "settings": {}
-        },
-        "instagram_image_UBLAF8": {
-          "type": "instagram_image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "process_step_acip3b",
-        "process_step_4MnUeG",
-        "process_step_ChKnTL",
-        "process_step_QX3PmF",
-        "value_WgHUBe",
-        "value_QP7Kr6",
-        "value_nbf9MV",
-        "value_6Ubgaw",
-        "testimonial_DcmWzk",
-        "testimonial_Fx6FKb",
-        "testimonial_K6yQA4",
-        "instagram_image_cF8k9e",
-        "instagram_image_hkxJPr",
-        "instagram_image_i69pCT",
-        "instagram_image_MjG7fH",
-        "instagram_image_Gx3wGT",
-        "instagram_image_UBLAF8"
-      ],
-      "name": "Landing: Warm Artisan",
-      "settings": {
-        "hero_eyebrow": "Handcrafted with love",
-        "hero_title": "Artisan Ceramics for Everyday Living",
-        "hero_subtitle": "Each piece is carefully crafted by hand in our Portland studio, bringing warmth and character to your home.",
-        "hero_button_label": "Shop Collection",
-        "hero_button_link": "",
-        "hero_secondary_label": "Our Story",
-        "hero_secondary_link": "",
-        "show_story": true,
-        "story_eyebrow": "Our Story",
-        "story_title": "Where Every Piece Tells a Story",
-        "story_text": "<p>What started as a small passion project in my garage has grown into something I never imagined. Each piece that leaves our studio carries a bit of our heart with it.</p><p>We believe that everyday objects should bring joy. That's why we spend countless hours perfecting each glaze, each curve, each handle—so that your morning coffee becomes a moment of beauty.</p>",
-        "story_signature": "Sarah, Founder",
-        "show_products": true,
-        "collection": "",
-        "products_limit": 6,
-        "products_eyebrow": "Shop",
-        "products_title": "Thoughtfully Made",
-        "products_subtitle": "Browse our collection of handcrafted ceramics, each one unique and made with care.",
-        "products_button_label": "View All Products",
-        "show_process": true,
-        "process_eyebrow": "Our Process",
-        "process_title": "Made with Intention",
-        "show_values": true,
-        "show_testimonials": true,
-        "testimonials_eyebrow": "Kind Words",
-        "testimonials_title": "What Our Customers Say",
-        "show_instagram": true,
-        "instagram_handle": "yourbrand",
-        "instagram_title": "Follow Along",
-        "instagram_link": "",
-        "show_newsletter": true,
-        "newsletter_title": "Join the Family",
-        "newsletter_text": "Be the first to know about new pieces, studio updates, and the stories behind our work.",
-        "newsletter_placeholder": "Your email address",
-        "newsletter_button": "Subscribe",
-        "newsletter_note": "We respect your inbox. Unsubscribe anytime."
-      }
-    },
-    "landing_bold_impact_DiwrTd": {
-      "type": "landing-bold-impact",
-      "blocks": {
-        "hero_stat_gTgJQM": {
-          "type": "hero_stat",
-          "settings": {
-            "value": "50K+",
-            "label": "Athletes"
-          }
-        },
-        "hero_stat_49bygY": {
-          "type": "hero_stat",
-          "settings": {
-            "value": "4.9",
-            "label": "Rating"
-          }
-        },
-        "hero_stat_trXFKm": {
-          "type": "hero_stat",
-          "settings": {
-            "value": "100%",
-            "label": "Performance"
-          }
-        },
-        "category_zrQCxF": {
-          "type": "category",
-          "settings": {
-            "title": "Running",
+            "text": "Saa",
             "link": ""
           }
-        },
-        "category_AEbc4A": {
-          "type": "category",
-          "settings": {
-            "title": "Training",
-            "link": ""
-          }
-        },
-        "category_XajwAW": {
-          "type": "category",
-          "settings": {
-            "title": "Basketball",
-            "link": ""
-          }
-        },
-        "category_VjLggM": {
-          "type": "category",
-          "settings": {
-            "title": "Soccer",
-            "link": ""
-          }
-        },
-        "product_feature_wdYXaK": {
-          "type": "product_feature",
-          "settings": {
-            "text": "Responsive cushioning technology"
-          }
-        },
-        "product_feature_YytAdg": {
-          "type": "product_feature",
-          "settings": {
-            "text": "Breathable mesh upper"
-          }
-        },
-        "product_feature_rHrFdm": {
-          "type": "product_feature",
-          "settings": {
-            "text": "Superior grip outsole"
-          }
-        },
-        "product_feature_UHJhqC": {
-          "type": "product_feature",
-          "settings": {
-            "text": "Lightweight at only 8.5oz"
-          }
-        },
-        "banner_stat_nmhfLp": {
-          "type": "banner_stat",
-          "settings": {
-            "value": "10M+",
-            "label": "Products Sold"
-          }
-        },
-        "banner_stat_NmWYtz": {
-          "type": "banner_stat",
-          "settings": {
-            "value": "500+",
-            "label": "Pro Athletes"
-          }
-        },
-        "banner_stat_fTLNVa": {
-          "type": "banner_stat",
-          "settings": {
-            "value": "50",
-            "label": "Countries"
-          }
-        },
-        "banner_stat_FwHeVa": {
-          "type": "banner_stat",
-          "settings": {
-            "value": "24/7",
-            "label": "Support"
-          }
-        },
-        "testimonial_NfaFXX": {
-          "type": "testimonial",
-          "settings": {
-            "name": "Marcus Williams",
-            "sport": "Professional Basketball",
-            "quote": "The support and responsiveness are unmatched. These are the only shoes I trust on the court."
-          }
-        },
-        "testimonial_YPeLgn": {
-          "type": "testimonial",
-          "settings": {
-            "name": "Sarah Chen",
-            "sport": "Marathon Runner",
-            "quote": "Ran my PR wearing these. The cushioning kept me fresh through mile 26."
-          }
-        },
-        "testimonial_RNeVTM": {
-          "type": "testimonial",
-          "settings": {
-            "name": "Jake Rodriguez",
-            "sport": "CrossFit Athlete",
-            "quote": "Finally a shoe that can handle everything from box jumps to rope climbs."
-          }
         }
       },
       "block_order": [
-        "hero_stat_gTgJQM",
-        "hero_stat_49bygY",
-        "hero_stat_trXFKm",
-        "category_zrQCxF",
-        "category_AEbc4A",
-        "category_XajwAW",
-        "category_VjLggM",
-        "product_feature_wdYXaK",
-        "product_feature_YytAdg",
-        "product_feature_rHrFdm",
-        "product_feature_UHJhqC",
-        "banner_stat_nmhfLp",
-        "banner_stat_NmWYtz",
-        "banner_stat_fTLNVa",
-        "banner_stat_FwHeVa",
-        "testimonial_NfaFXX",
-        "testimonial_YPeLgn",
-        "testimonial_RNeVTM"
+        "announcement_BPVFPk"
       ],
-      "name": "Landing: Bold Impact",
+      "name": "t:sections.announcement_bar.name",
       "settings": {
-        "hero_badge": "New Collection",
-        "hero_title": "PUSH YOUR LIMITS",
-        "hero_subtitle": "Premium performance gear engineered for athletes who refuse to settle.",
-        "hero_button_label": "Shop Now",
-        "hero_button_link": "",
-        "hero_secondary_label": "View Lookbook",
-        "hero_secondary_link": "",
-        "show_hero_stats": true,
-        "show_categories": true,
-        "categories_eyebrow": "Collections",
-        "categories_title": "Shop by Sport",
-        "show_featured_product": true,
-        "featured_product": "",
-        "featured_eyebrow": "Featured",
-        "show_products": true,
-        "collection": "",
-        "products_limit": 8,
-        "products_eyebrow": "Best Sellers",
-        "products_title": "Top Picks",
-        "products_button_label": "View All Products",
-        "show_stats_banner": true,
-        "show_testimonials": true,
-        "testimonials_eyebrow": "Reviews",
-        "testimonials_title": "What Athletes Say",
-        "show_newsletter": true,
-        "newsletter_title": "Join the Team",
-        "newsletter_text": "Get exclusive drops, training tips, and 15% off your first order.",
-        "newsletter_placeholder": "Enter your email",
-        "newsletter_button": "Subscribe",
-        "newsletter_note": "No spam. Unsubscribe anytime."
+        "background_color": "#121212",
+        "text_color": "#ffffff"
       }
     },
     "hero": {
       "type": "hero-industrial",
+      "disabled": true,
       "settings": {
         "overlay_opacity": 60,
         "height": 600,
-        "heading": "Industrial-Grade E-Commerce",
-        "text": "<p>A premium Shopify theme built for manufacturers, distributors, and industrial brands. 12 preset styles. Unlimited possibilities.</p>",
-        "button_label": "Explore Products",
+        "heading": "Precision Welding Systems",
+        "text": "<p>Industry-leading technology for the toughest jobs. Engineered for performance and durability in the field.</p>",
+        "button_label": "Explore Equipment",
         "button_link": "shopify://collections/all"
       }
     },
-    "trust-badges": {
-      "type": "preset-trust-badges",
+    "preset_hero_JeNtxf": {
+      "type": "preset-hero",
       "blocks": {
-        "badge-1": {
-          "type": "badge",
+        "stat_x4apFU": {
+          "type": "stat",
           "settings": {
-            "icon": "shield-check",
-            "title": "Free Lifetime Warranty",
-            "subtitle": "On all products"
+            "stat_value": 30,
+            "stat_suffix": "+",
+            "stat_label": "Years of Innovation"
           }
         },
-        "badge-2": {
+        "stat_dVxb8C": {
+          "type": "stat",
+          "settings": {
+            "stat_value": 50,
+            "stat_suffix": "K+",
+            "stat_label": "Skimmers Deployed"
+          }
+        },
+        "stat_GKFqfJ": {
+          "type": "stat",
+          "settings": {
+            "stat_value": 120,
+            "stat_suffix": "+",
+            "stat_label": "Products Available"
+          }
+        },
+        "floating_card_JdQNeP": {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "shield-check",
+            "card_title": "Lifetime Warranty",
+            "card_highlight": "",
+            "card_subtitle": "On all skimmers"
+          }
+        },
+        "floating_card_gb7nKt": {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "trending-up",
+            "card_title": "ROI in 8 Months",
+            "card_highlight": "80%",
+            "card_subtitle": "coolant savings"
+          }
+        },
+        "floating_card_9NzqWL": {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "star",
+            "card_title": "5-Star Rated",
+            "card_highlight": "",
+            "card_subtitle": "By machinists worldwide"
+          }
+        },
+        "trusted_logo_MEqBYM": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "General Motors"
+          }
+        },
+        "trusted_logo_bQQ7h6": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Boeing"
+          }
+        },
+        "trusted_logo_Q3Q3L7": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Lockheed Martin"
+          }
+        },
+        "trusted_logo_TmcNgM": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Caterpillar"
+          }
+        },
+        "trusted_logo_bR8QtV": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "John Deere"
+          }
+        }
+      },
+      "block_order": [
+        "stat_x4apFU",
+        "stat_dVxb8C",
+        "stat_GKFqfJ",
+        "floating_card_JdQNeP",
+        "floating_card_gb7nKt",
+        "floating_card_9NzqWL",
+        "trusted_logo_MEqBYM",
+        "trusted_logo_bQQ7h6",
+        "trusted_logo_Q3Q3L7",
+        "trusted_logo_TmcNgM",
+        "trusted_logo_bR8QtV"
+      ],
+      "name": "Preset: Hero",
+      "settings": {
+        "badge_text": "New: Dazzle™ 2 Now Available",
+        "badge_icon": "star",
+        "since_text": "Made in USA Since 1994",
+        "title_prefix": "Reduce Coolant Costs by",
+        "title_highlight": "",
+        "title_suffix": "with Automated Fluid Management",
+        "description": "Industry-leading oil skimmers and coolant automation systems trusted by thousands of machine shops worldwide. American-made quality backed by a free lifetime warranty.",
+        "primary_button_text": "Explore Dazzle™ Systems",
+        "primary_button_link": "",
+        "secondary_button_text": "Browse All Products",
+        "secondary_button_link": "",
+        "secondary_button_icon": "grid",
+        "show_stats": true,
+        "showcase_image": "shopify://shop_images/cnc-machine.png",
+        "showcase_icon": "cog",
+        "showcase_badge": "Best Seller",
+        "showcase_title": "DAZZLE™ 1",
+        "showcase_subtitle": "Modular Automated Sump Management",
+        "showcase_price": "Starting at $682",
+        "showcase_price_suffix": "USD",
+        "video_button_text": "Watch Demo",
+        "show_trusted_by": true,
+        "trusted_label": "Trusted by industry leaders",
+        "show_floating_cards": true,
+        "show_grid_background": true,
+        "show_particles": true,
+        "color_primary": "#003d79",
+        "color_primary_light": "#0056a8",
+        "color_accent": "#0077cc",
+        "color_highlight": "#00a3e0",
+        "color_cta": "#ff6b00"
+      }
+    },
+    "preset_featured_product_XXJRzJ": {
+      "type": "preset-featured-product",
+      "blocks": {
+        "benefit_n6BhfY": {
+          "type": "benefit",
+          "settings": {
+            "text": "Reduce coolant costs by up to 50%"
+          }
+        },
+        "benefit_zH48HG": {
+          "type": "benefit",
+          "settings": {
+            "text": "Automated 24/7 fluid monitoring"
+          }
+        },
+        "benefit_Dei8Gt": {
+          "type": "benefit",
+          "settings": {
+            "text": "Extend tool life and improve part quality"
+          }
+        },
+        "benefit_xK7y9H": {
+          "type": "benefit",
+          "settings": {
+            "text": "Modular design - start small, expand later"
+          }
+        },
+        "benefit_MXRj9N": {
+          "type": "benefit",
+          "settings": {
+            "text": "ROI typically achieved in 8 months"
+          }
+        },
+        "stat_zB9ctc": {
+          "type": "stat",
+          "settings": {
+            "value": "50%",
+            "label": "Cost Savings"
+          }
+        },
+        "stat_c7Vjbx": {
+          "type": "stat",
+          "settings": {
+            "value": "8mo",
+            "label": "Avg. ROI"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_n6BhfY",
+        "benefit_zH48HG",
+        "benefit_Dei8Gt",
+        "benefit_xK7y9H",
+        "benefit_MXRj9N",
+        "stat_zB9ctc",
+        "stat_c7Vjbx"
+      ],
+      "name": "Preset: Featured Product",
+      "settings": {
+        "layout": "image-left",
+        "image": "shopify://shop_images/welder.png",
+        "badge_text": "Best Seller",
+        "subtitle": "Featured Product",
+        "title": "Smart Disk Skimmer",
+        "description": "<p>The Dazzle™ 1 is a modular, automated sump management system that monitors and maintains your coolant at optimal conditions 24/7. Reduce coolant costs, extend tool life, and improve part quality with automated fluid management.</p>",
+        "price_prefix": "Starting at",
+        "price": "$682",
+        "compare_price": "",
+        "primary_button_text": "Configure & Buy",
+        "primary_button_link": "",
+        "secondary_button_text": "Talk to an Expert",
+        "secondary_button_link": "",
+        "trust_note": "Free lifetime warranty included"
+      }
+    },
+    "preset_testimonials_M8HyKT": {
+      "type": "preset-testimonials",
+      "blocks": {
+        "testimonial_jPJziA": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The Dazzle system paid for itself in just 6 months. Our coolant costs are down 45% and our tools are lasting longer than ever.",
+            "name": "Mike Richardson",
+            "title": "Shop Manager",
+            "company": "Precision Machine Works"
+          }
+        },
+        "testimonial_GmVn7b": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "We've been using Zebra belt skimmers for over 10 years. They just work. The lifetime warranty isn't just marketing—they actually stand behind it.",
+            "name": "Sarah Chen",
+            "title": "Operations Director",
+            "company": "Chen Manufacturing"
+          }
+        },
+        "testimonial_rRLKr7": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "After trying three other brands, Zebra is the only one that consistently performs in our harsh environment. Worth every penny.",
+            "name": "David Martinez",
+            "title": "Maintenance Lead",
+            "company": "Industrial Dynamics"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_jPJziA",
+        "testimonial_GmVn7b",
+        "testimonial_rRLKr7"
+      ],
+      "name": "Preset: Testimonials",
+      "settings": {
+        "subtitle": "Customer Stories",
+        "title": "What Machinists Are Saying",
+        "description": "Join thousands of machine shops that trust Zebra Skimmers for their oil removal and coolant management needs.",
+        "show_stats": true,
+        "stat_1_value": "4.9/5",
+        "stat_1_label": "Average Rating",
+        "stat_2_value": "2,500+",
+        "stat_2_label": "Happy Customers",
+        "stat_3_value": "98%",
+        "stat_3_label": "Would Recommend"
+      }
+    },
+    "preset_trust_badges_igfNy9": {
+      "type": "preset-trust-badges",
+      "blocks": {
+        "badge_fpCQCb": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Lifetime Warranty",
+            "subtitle": "On all oil skimmers"
+          }
+        },
+        "badge_WTbdNq": {
           "type": "badge",
           "settings": {
             "icon": "flag",
             "title": "Made in the USA",
-            "subtitle": "American quality"
+            "subtitle": "American quality since 1994"
           }
         },
-        "badge-3": {
+        "badge_pT6KM7": {
           "type": "badge",
           "settings": {
             "icon": "truck",
@@ -885,59 +329,88 @@
             "subtitle": "Most orders ship same day"
           }
         },
-        "badge-4": {
+        "badge_b4jGGF": {
           "type": "badge",
           "settings": {
             "icon": "phone",
             "title": "Expert Support",
-            "subtitle": "Real people, real answers"
+            "subtitle": "Real engineers, real answers"
           }
         }
       },
       "block_order": [
-        "badge-1",
-        "badge-2",
-        "badge-3",
-        "badge-4"
+        "badge_fpCQCb",
+        "badge_WTbdNq",
+        "badge_pT6KM7",
+        "badge_b4jGGF"
       ],
+      "name": "Preset: Trust Badges",
       "settings": {
         "title": "Why Choose Us",
         "background_style": "light",
         "columns": 4
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
+    "search": {
+      "type": "ai-search",
+      "blocks": {
+        "suggestion-1": {
+          "type": "suggestion",
+          "settings": {
+            "label": "MIG Welders",
+            "query": "MIG welder"
+          }
+        },
+        "suggestion-2": {
+          "type": "suggestion",
+          "settings": {
+            "label": "TIG Welders",
+            "query": "TIG welder"
+          }
+        },
+        "suggestion-3": {
+          "type": "suggestion",
+          "settings": {
+            "label": "Safety Gear",
+            "query": "safety equipment"
+          }
+        }
+      },
+      "block_order": [
+        "suggestion-1",
+        "suggestion-2",
+        "suggestion-3"
+      ],
+      "disabled": true,
       "settings": {
-        "heading": "Featured Products",
-        "collection": "",
-        "products_to_show": 4,
-        "columns": 4,
-        "show_view_all": true
+        "heading": "Find The Right Gear",
+        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
+        "button_label": "Search",
+        "show_suggestions": true
       }
     },
-    "smart-grid": {
+    "featured": {
       "type": "smart-grid",
       "blocks": {
         "card-1": {
           "type": "card",
           "settings": {
             "show_placeholder": true,
-            "tag": "Featured",
-            "heading": "Product Categories",
-            "text": "Organize your products into clear categories for easy navigation.",
-            "button_label": "Browse Categories",
-            "button_link": "shopify://collections"
+            "tag": "Heavy Equipment",
+            "heading": "MIG-250 Pro Series",
+            "text": "High performance welding for industrial fabrication. Container query active: horizontal layout.",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         },
         "card-2": {
           "type": "card",
           "settings": {
             "show_placeholder": false,
-            "tag": "New",
-            "heading": "Latest Arrivals",
-            "text": "Discover newly added products and equipment.",
-            "button_label": "View New",
+            "tag": "Category",
+            "heading": "Safety Gear",
+            "text": "Helmets, gloves, and fume extraction.",
+            "button_label": "View Specs",
             "button_link": ""
           }
         },
@@ -945,10 +418,10 @@
           "type": "card",
           "settings": {
             "show_placeholder": false,
-            "tag": "Popular",
-            "heading": "Best Sellers",
-            "text": "Shop our most popular products and top-rated items.",
-            "button_label": "View Best Sellers",
+            "tag": "Category",
+            "heading": "Automation",
+            "text": "Robotic cells and Cobot integration.",
+            "button_label": "View Specs",
             "button_link": ""
           }
         }
@@ -959,71 +432,36 @@
         "card-3"
       ],
       "settings": {
-        "heading": "Explore Our Catalog",
+        "heading": "Core Solutions",
         "layout": "highlight",
         "use_surface_bg": false
       }
     },
-    "footer_industrial_79B3rj": {
-      "type": "footer-industrial",
-      "blocks": {
-        "menu_FViTrR": {
-          "type": "menu",
-          "settings": {
-            "title": "PRODUCTS",
-            "menu": ""
-          }
-        },
-        "menu_zpjBn7": {
-          "type": "menu",
-          "settings": {
-            "title": "COMPANY",
-            "menu": ""
-          }
-        },
-        "newsletter_URFxXy": {
-          "type": "newsletter",
-          "settings": {
-            "title": "NEWSLETTER",
-            "text": "Subscribe for product updates and industry news."
-          }
-        }
-      },
-      "block_order": [
-        "menu_FViTrR",
-        "menu_zpjBn7",
-        "newsletter_URFxXy"
-      ],
-      "name": "Footer industrial",
+    "preset_newsletter_cta_xnDaaD": {
+      "type": "preset-newsletter-cta",
+      "name": "Preset: Newsletter CTA",
       "settings": {
-        "style": "machinist",
-        "background_color": "#0a0a0a",
-        "text_color": "#e5e5e5",
-        "border_color": "#333333",
-        "logo_width": 120,
-        "logo_text": "FORGE",
-        "logo_suffix": "IND.",
-        "description": "Industrial-grade products built to perform. Precision engineering for demanding environments.",
-        "show_social": true,
-        "show_payment_icons": true
+        "icon": "mail",
+        "title": "Stay in the Loop",
+        "description": "Subscribe to our newsletter for exclusive deals, maintenance tips, and new product announcements.",
+        "placeholder": "Enter your email address",
+        "button_text": "Subscribe",
+        "form_action": "",
+        "success_message": "Thank you for subscribing!",
+        "error_message": "Something went wrong. Please try again.",
+        "trust_text": "We respect your privacy. Unsubscribe at any time."
       }
     }
   },
   "order": [
-    "mega_menu_header_grRJgy",
-    "corporate_header_reYyXm",
-    "header_industrial_Mj4jxM",
-    "header_wLyPK9",
-    "corporate_header_E4jMBH",
-    "getting-started",
-    "preset-preview",
-    "landing_page_switcher_dA44Yh",
-    "landing_warm_artisan_VNJQp3",
-    "landing_bold_impact_DiwrTd",
+    "announcement_bar_BKqVJn",
     "hero",
-    "trust-badges",
-    "featured-collection",
-    "smart-grid",
-    "footer_industrial_79B3rj"
+    "preset_hero_JeNtxf",
+    "preset_featured_product_XXJRzJ",
+    "preset_testimonials_M8HyKT",
+    "preset_trust_badges_igfNy9",
+    "search",
+    "featured",
+    "preset_newsletter_cta_xnDaaD"
   ]
 }

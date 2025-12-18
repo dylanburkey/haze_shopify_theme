@@ -1,0 +1,147 @@
+{
+  "layout": "theme",
+  "name": "Preset Showcase",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "medium",
+        "overlay_opacity": 50,
+        "title": "Theme Presets",
+        "subtitle": "One theme, endless possibilities",
+        "description": "Explore our curated design presets. Each transforms the entire shopping experience with unique colors, typography, and layouts.",
+        "primary_button_text": "",
+        "text_alignment": "center"
+      }
+    },
+    "preset-intro": {
+      "type": "page-content",
+      "settings": {
+        "max_width": "narrow",
+        "padding": "large"
+      }
+    },
+    "preset-grid": {
+      "type": "container-grid",
+      "settings": {
+        "title": "Choose Your Style",
+        "subtitle": "Click any preset to see a full demo",
+        "columns": 3,
+        "gap": "large"
+      },
+      "blocks": {
+        "preset-1": {
+          "type": "card",
+          "settings": {
+            "title": "Bold Impact",
+            "description": "High-energy athletic brand. Dynamic, powerful, and commanding.",
+            "link": "/pages/showcase-bold-impact",
+            "button_text": "View Demo",
+            "background_color": "#0f0f0f",
+            "text_color": "#ffffff",
+            "accent_color": "#7c3aed"
+          }
+        },
+        "preset-2": {
+          "type": "card",
+          "settings": {
+            "title": "Modern Minimal",
+            "description": "Clean, sophisticated aesthetic. Less is more.",
+            "link": "/pages/showcase-modern-minimal",
+            "button_text": "View Demo",
+            "background_color": "#ffffff",
+            "text_color": "#1a1a1a",
+            "accent_color": "#000000"
+          }
+        },
+        "preset-3": {
+          "type": "card",
+          "settings": {
+            "title": "Tech Forward",
+            "description": "Futuristic technology brand. Innovation meets design.",
+            "link": "/pages/showcase-tech-forward",
+            "button_text": "View Demo",
+            "background_color": "#0a0a0f",
+            "text_color": "#e0e0e0",
+            "accent_color": "#00d4ff"
+          }
+        },
+        "preset-4": {
+          "type": "card",
+          "settings": {
+            "title": "Warm Artisan",
+            "description": "Handcrafted, organic feel. Authentic and intentional.",
+            "link": "/pages/showcase-warm-artisan",
+            "button_text": "View Demo",
+            "background_color": "#fef3c7",
+            "text_color": "#451a03",
+            "accent_color": "#b45309"
+          }
+        },
+        "preset-5": {
+          "type": "card",
+          "settings": {
+            "title": "Zebra Skimmers",
+            "description": "Industrial equipment brand. Professional and trusted.",
+            "link": "/pages/showcase-zebra-skimmers",
+            "button_text": "View Demo",
+            "background_color": "#ffffff",
+            "text_color": "#111827",
+            "accent_color": "#f59e0b"
+          }
+        }
+      },
+      "block_order": ["preset-1", "preset-2", "preset-3", "preset-4", "preset-5"]
+    },
+    "features": {
+      "type": "builder-grid",
+      "settings": {
+        "title": "What's Included",
+        "subtitle": "Every preset includes these features",
+        "columns": 4,
+        "gap": "medium"
+      },
+      "blocks": {
+        "feature-1": {
+          "type": "card",
+          "settings": {
+            "icon": "palette",
+            "title": "Custom Colors",
+            "description": "Carefully curated color palettes that work together beautifully"
+          }
+        },
+        "feature-2": {
+          "type": "card",
+          "settings": {
+            "icon": "type",
+            "title": "Typography",
+            "description": "Matched font pairs for headings and body text"
+          }
+        },
+        "feature-3": {
+          "type": "card",
+          "settings": {
+            "icon": "layout",
+            "title": "Section Layouts",
+            "description": "Pre-configured sections that match the aesthetic"
+          }
+        },
+        "feature-4": {
+          "type": "card",
+          "settings": {
+            "icon": "smartphone",
+            "title": "Fully Responsive",
+            "description": "Every preset looks great on all devices"
+          }
+        }
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    }
+  },
+  "order": [
+    "hero",
+    "preset-intro",
+    "preset-grid",
+    "features"
+  ]
+}
