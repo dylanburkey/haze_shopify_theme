@@ -9,23 +9,31 @@
  */
 {
   "current": {
-    "enable_speculation_rules": true,
     "color_primary": "#007ac9",
+    "color_text": "#0f172a",
+    "color_background": "#f8f9fa",
+    "color_border": "#cbd5e1",
+    "color_header_bg": "#ffffff",
+    "color_header_text": "#0f172a",
+    "color_button_text": "#ffffff",
+    "font_heading": "Oswald",
+    "font_body": "Roboto",
+    "logo_text": "FORGE",
+    "logo_suffix": ".IND",
+    "cart_type": "drawer",
+    "preset_showcase_enabled": true,
+    "preset_showcase_all_pages": true,
+    "preset_showcase_position": "top-right",
+    "enable_speculation_rules": true,
     "color_secondary": "#0056b3",
     "color_accent": "#00bcd4",
-    "color_background": "#f8f9fa",
     "color_background_secondary": "#ffffff",
-    "color_text": "#0f172a",
     "color_text_secondary": "#64748b",
     "color_button_background": "#007ac9",
-    "color_button_text": "#ffffff",
-    "color_border": "#cbd5e1",
     "color_success": "#22c55e",
     "color_warning": "#eab308",
     "color_error": "#ef4444",
-    "font_heading": "ibm_plex_sans_n6",
     "font_heading_scale": 95,
-    "font_body": "ibm_plex_sans_n4",
     "font_body_scale": 100,
     "page_width": 1300,
     "spacing_sections": 32,
@@ -37,12 +45,7 @@
     "card_border_radius": 4,
     "card_image_ratio": "landscape",
     "card_show_secondary_image": false,
-    "cart_type": "drawer",
     "cart_show_vendor": false,
-    "color_header_bg": "#111111",
-    "color_header_text": "#ffffff",
-    "logo_text": "FORGE",
-    "logo_suffix": ".IND",
     "sections": {
       "theme-tour-headers": {
         "type": "theme-tour-headers",
@@ -67,6 +70,14 @@
           "tip_title": "Pro Tip",
           "tip_text": "Always preview your changes before publishing. Some header/footer combinations work better together than others.",
           "show_pairings": true
+        }
+      },
+      "theme-tour-hero": {
+        "type": "theme-tour-hero",
+        "settings": {
+          "badge_text": "Theme Components",
+          "title": "Header & Footer Variants",
+          "subtitle": "Explore all the header and footer options available in this theme. Each variant is designed for specific use cases and can be easily swapped in the theme editor."
         }
       }
     },
