@@ -18,97 +18,52 @@
         "text_color": "#ffffff"
       }
     },
-    "header_mega_r4rCW7": {
-      "type": "header--mega",
+    "header_unified_YBDKrp": {
+      "type": "header--unified",
       "blocks": {
-        "utility_link_r8afGB": {
-          "type": "utility_link",
+        "featured_card_dXfHdd": {
+          "type": "featured_card",
           "settings": {
-            "label": "Find a Location",
-            "link": "/pages/locations",
-            "icon": "location",
-            "open_new_tab": false
-          }
-        },
-        "utility_link_HHrhyB": {
-          "type": "utility_link",
-          "settings": {
-            "label": "Contact Us",
-            "link": "/pages/contact",
-            "icon": "phone",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_DfLypX": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Products",
-            "link": "",
-            "open_new_tab": false
-          }
-        },
-        "dropdown_link_y6DwtR": {
-          "type": "dropdown_link",
-          "settings": {
-            "parent_menu": "Products",
-            "label": "Dropdown Link",
+            "parent_menu": "catalog",
+            "image": "shopify://shop_images/generare-a-pdf-abour-welding.png",
+            "label": "Featured",
+            "title": "Featured Product",
+            "description": "This is featured",
             "link": "shopify://pages/data-sharing-opt-out"
-          }
-        },
-        "menu_item_QB8Gk8": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Solutions",
-            "link": "",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_pGNTQ3": {
-          "type": "menu_item",
-          "settings": {
-            "label": "About",
-            "link": "/pages/about",
-            "open_new_tab": false
-          }
-        },
-        "menu_item_efpyBf": {
-          "type": "menu_item",
-          "settings": {
-            "label": "Careers",
-            "link": "/pages/careers",
-            "open_new_tab": false
           }
         }
       },
       "block_order": [
-        "utility_link_r8afGB",
-        "utility_link_HHrhyB",
-        "menu_item_DfLypX",
-        "dropdown_link_y6DwtR",
-        "menu_item_QB8Gk8",
-        "menu_item_pGNTQ3",
-        "menu_item_efpyBf"
+        "featured_card_dXfHdd"
       ],
-      "name": "t:sections.header_mega.presets.default.name",
+      "name": "t:sections.header_unified.presets.default.name",
       "settings": {
         "logo_width": 150,
+        "logo_scale": 100,
+        "menu": "main-menu",
         "sticky_header": true,
-        "show_search": true,
-        "search_placeholder": "Search...",
+        "search_style": "bar_above",
+        "search_placeholder": "Search products, articles...",
+        "show_search_filter": true,
+        "filter_all_label": "All",
+        "filter_products_label": "Products",
+        "filter_articles_label": "Articles",
+        "filter_pages_label": "Pages",
         "show_account": true,
         "show_cart": true,
-        "utility_bg": "#f5f5f5",
-        "utility_text": "#333333",
         "header_bg": "#ffffff",
         "header_text": "#1a1a1a",
-        "nav_hover": "#0056b3",
+        "header_border": "#e5e5e5",
+        "search_bar_bg": "#f5f5f5",
+        "search_bar_text": "#333333",
         "dropdown_bg": "#ffffff",
-        "dropdown_border": "#e5e5e5"
+        "dropdown_text": "#333333",
+        "dropdown_hover": "#f5f5f5"
       }
     }
   },
   "order": [
     "announcement-bar",
-    "header_mega_r4rCW7"
+    "header_unified_YBDKrp"
   ]
 }
