@@ -9,12 +9,12 @@
  */
 {
   "current": {
-    "color_primary": "#007ac9",
-    "color_text": "#0f172a",
-    "color_background": "#f8f9fa",
-    "color_border": "#cbd5e1",
-    "color_header_bg": "#ffffff",
-    "color_header_text": "#0f172a",
+    "color_primary": "#003d79",
+    "color_text": "#1e293b",
+    "color_background": "#ffffff",
+    "color_border": "#e2e8f0",
+    "color_header_bg": "#003d79",
+    "color_header_text": "#ffffff",
     "color_button_text": "#ffffff",
     "font_heading": "Oswald",
     "font_body": "Roboto",
