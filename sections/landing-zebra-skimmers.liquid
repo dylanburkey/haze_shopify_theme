@@ -1,0 +1,542 @@
+{% comment %}
+  Zebra Skimmers Landing Page Section
+  Industrial equipment brand with professional, trusted feel
+  Perfect for B2B, tools, and professional services
+{% endcomment %}
+
+{{ 'landing-zebra-skimmers.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-zebra-skimmers" data-section-id="{{ section.id }}">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="zebra-hero">
+    <div class="zebra-hero__bg">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: class: 'zebra-hero__bg-image', loading: 'eager' }}
+      {%- endif -%}
+      <div class="zebra-hero__overlay"></div>
+    </div>
+    <div class="container">
+      <div class="zebra-hero__content">
+        {%- if section.settings.hero_badge != blank -%}
+          <span class="zebra-hero__badge">{{ section.settings.hero_badge }}</span>
+        {%- endif -%}
+        <h1 class="zebra-hero__title">{{ section.settings.hero_title }}</h1>
+        {%- if section.settings.hero_subtitle != blank -%}
+          <p class="zebra-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+        {%- endif -%}
+        <div class="zebra-hero__actions">
+          {%- if section.settings.hero_button_label != blank -%}
+            <a href="{{ section.settings.hero_button_link }}" class="btn btn--primary btn--large">
+              {{ section.settings.hero_button_label }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.hero_secondary_label != blank -%}
+            <a href="{{ section.settings.hero_secondary_link }}" class="btn btn--outline btn--large">
+              {{ section.settings.hero_secondary_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Trust Badges {%- endcomment -%}
+  {%- if section.settings.show_trust_badges -%}
+    <section class="zebra-trust">
+      <div class="container">
+        <div class="zebra-trust__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust_badge' -%}
+              <div class="zebra-trust__item" {{ block.shopify_attributes }}>
+                <div class="zebra-trust__icon">
+                  {%- case block.settings.icon -%}
+                    {%- when 'shield' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    {%- when 'truck' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    {%- when 'phone' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    {%- when 'award' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                    {%- else -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  {%- endcase -%}
+                </div>
+                <div class="zebra-trust__text">
+                  <strong>{{ block.settings.title }}</strong>
+                  <span>{{ block.settings.text }}</span>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Products Grid {%- endcomment -%}
+  {%- if section.settings.show_products and section.settings.collection != blank -%}
+    <section class="zebra-products">
+      <div class="container">
+        <div class="section-header">
+          {%- if section.settings.products_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.products_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.products_title }}</h2>
+        </div>
+        <div class="zebra-products__grid">
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            <article class="zebra-product-card">
+              <a href="{{ product.url }}" class="zebra-product-card__link">
+                <div class="zebra-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="zebra-product-card__content">
+                  <h3 class="zebra-product-card__title">{{ product.title }}</h3>
+                  <p class="zebra-product-card__price">{{ product.price | money }}</p>
+                  <span class="zebra-product-card__cta">View Details</span>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.products_button_label != blank -%}
+          <div class="zebra-products__action">
+            <a href="{{ section.settings.collection.url }}" class="btn btn--primary">
+              {{ section.settings.products_button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Features Section {%- endcomment -%}
+  {%- if section.settings.show_features -%}
+    <section class="zebra-features">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2 class="section-title">{{ section.settings.features_title }}</h2>
+          {%- if section.settings.features_subtitle != blank -%}
+            <p class="section-subtitle">{{ section.settings.features_subtitle }}</p>
+          {%- endif -%}
+        </div>
+        <div class="zebra-features__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <div class="zebra-feature-card" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  <div class="zebra-feature-card__image">
+                    {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                  </div>
+                {%- endif -%}
+                <h3 class="zebra-feature-card__title">{{ block.settings.title }}</h3>
+                <p class="zebra-feature-card__text">{{ block.settings.text }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Stats Banner {%- endcomment -%}
+  {%- if section.settings.show_stats -%}
+    <section class="zebra-stats">
+      <div class="container">
+        <div class="zebra-stats__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'stat' -%}
+              <div class="zebra-stat" {{ block.shopify_attributes }}>
+                <span class="zebra-stat__value">{{ block.settings.value }}</span>
+                <span class="zebra-stat__label">{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  {%- if section.settings.show_testimonials -%}
+    <section class="zebra-testimonials">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+        </div>
+        <div class="zebra-testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="zebra-testimonial-card" {{ block.shopify_attributes }}>
+                <div class="zebra-testimonial-card__rating">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  {%- endfor -%}
+                </div>
+                <blockquote class="zebra-testimonial-card__quote">"{{ block.settings.quote }}"</blockquote>
+                <div class="zebra-testimonial-card__author">
+                  <strong>{{ block.settings.name }}</strong>
+                  {%- if block.settings.company != blank -%}
+                    <span>{{ block.settings.company }}</span>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  {%- if section.settings.show_cta -%}
+    <section class="zebra-cta">
+      <div class="container">
+        <div class="zebra-cta__inner">
+          <h2 class="zebra-cta__title">{{ section.settings.cta_title }}</h2>
+          {%- if section.settings.cta_text != blank -%}
+            <p class="zebra-cta__text">{{ section.settings.cta_text }}</p>
+          {%- endif -%}
+          <div class="zebra-cta__actions">
+            {%- if section.settings.cta_button_label != blank -%}
+              <a href="{{ section.settings.cta_button_link }}" class="btn btn--primary btn--large">
+                {{ section.settings.cta_button_label }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.cta_secondary_label != blank -%}
+              <a href="{{ section.settings.cta_secondary_link }}" class="btn btn--outline btn--large">
+                {{ section.settings.cta_secondary_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Zebra Skimmers",
+  "tag": "section",
+  "class": "section-landing-zebra-skimmers",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge text",
+      "default": "Industry Leader"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "Professional-Grade Oil Skimmers"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Trusted by manufacturers worldwide. Industrial-strength solutions for oil removal and fluid management."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Primary button label",
+      "default": "View Products"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "hero_secondary_label",
+      "label": "Secondary button label",
+      "default": "Request Quote"
+    },
+    {
+      "type": "url",
+      "id": "hero_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Products Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show products section",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products to show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "products_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Products"
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Title",
+      "default": "Industrial Equipment"
+    },
+    {
+      "type": "text",
+      "id": "products_button_label",
+      "label": "Button label",
+      "default": "View All Products"
+    },
+    {
+      "type": "header",
+      "content": "Features Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show features section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Title",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "textarea",
+      "id": "features_subtitle",
+      "label": "Subtitle",
+      "default": "Industry-leading solutions backed by decades of expertise."
+    },
+    {
+      "type": "header",
+      "content": "Stats Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show testimonials",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Title",
+      "default": "What Our Clients Say"
+    },
+    {
+      "type": "header",
+      "content": "CTA Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "Ready to Get Started?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "Contact our team for a custom solution tailored to your needs."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_label",
+      "label": "Primary button label",
+      "default": "Contact Sales"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary button label",
+      "default": "Download Catalog"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield", "label": "Shield/Warranty" },
+            { "value": "truck", "label": "Truck/Shipping" },
+            { "value": "phone", "label": "Phone/Support" },
+            { "value": "award", "label": "Award/Quality" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "5-Year Warranty"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Industry-leading coverage"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Description of this feature."
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Years Experience"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "John Smith"
+        },
+        {
+          "type": "text",
+          "id": "company",
+          "label": "Company",
+          "default": "Manufacturing Co."
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Reliable equipment that works. Their support team is always there when we need them."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Zebra Skimmers",
+      "blocks": [
+        { "type": "trust_badge", "settings": { "icon": "shield", "title": "5-Year Warranty", "text": "Industry-leading coverage" } },
+        { "type": "trust_badge", "settings": { "icon": "truck", "title": "Free Shipping", "text": "On orders over $500" } },
+        { "type": "trust_badge", "settings": { "icon": "phone", "title": "Expert Support", "text": "Technical assistance 24/7" } },
+        { "type": "trust_badge", "settings": { "icon": "award", "title": "ISO Certified", "text": "Quality guaranteed" } },
+        { "type": "feature", "settings": { "title": "Durable Construction", "text": "Built to withstand harsh industrial environments and heavy daily use." } },
+        { "type": "feature", "settings": { "title": "Easy Maintenance", "text": "Simple design means less downtime and lower maintenance costs." } },
+        { "type": "feature", "settings": { "title": "Expert Support", "text": "Our team of engineers provides technical assistance when you need it." } },
+        { "type": "stat", "settings": { "value": "50+", "label": "Years Experience" } },
+        { "type": "stat", "settings": { "value": "10K+", "label": "Units Sold" } },
+        { "type": "stat", "settings": { "value": "98%", "label": "Customer Satisfaction" } },
+        { "type": "stat", "settings": { "value": "24/7", "label": "Support" } },
+        { "type": "testimonial", "settings": { "name": "Robert Chen", "company": "Pacific Manufacturing", "quote": "These skimmers have reduced our coolant costs by 40%. Best investment we've made." } },
+        { "type": "testimonial", "settings": { "name": "Lisa Martinez", "company": "Midwest Machining", "quote": "Reliable equipment that just works. Their support team is always there when we need them." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,424 @@
+{% comment %}
+  Modern Minimal Landing Page Section
+  Clean, sophisticated aesthetic with minimal design
+  Perfect for lifestyle brands, fashion, and premium products
+{% endcomment %}
+
+{{ 'landing-modern-minimal.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-modern-minimal" data-section-id="{{ section.id }}">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="minimal-hero">
+    <div class="container">
+      <div class="minimal-hero__inner">
+        <div class="minimal-hero__content">
+          {%- if section.settings.hero_eyebrow != blank -%}
+            <span class="minimal-hero__eyebrow">{{ section.settings.hero_eyebrow }}</span>
+          {%- endif -%}
+          <h1 class="minimal-hero__title">{{ section.settings.hero_title }}</h1>
+          {%- if section.settings.hero_subtitle != blank -%}
+            <p class="minimal-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+          {%- endif -%}
+          {%- if section.settings.hero_button_label != blank -%}
+            <a href="{{ section.settings.hero_button_link }}" class="btn btn--primary">
+              {{ section.settings.hero_button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.hero_image != blank -%}
+          <div class="minimal-hero__media">
+            {{ section.settings.hero_image | image_url: width: 900 | image_tag: class: 'minimal-hero__image', loading: 'eager' }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Featured Products {%- endcomment -%}
+  {%- if section.settings.show_products and section.settings.collection != blank -%}
+    <section class="minimal-products">
+      <div class="container">
+        {%- if section.settings.products_title != blank -%}
+          <div class="section-header section-header--left">
+            <h2 class="section-title">{{ section.settings.products_title }}</h2>
+          </div>
+        {%- endif -%}
+        <div class="minimal-products__grid">
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            <article class="minimal-product-card">
+              <a href="{{ product.url }}" class="minimal-product-card__link">
+                <div class="minimal-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="minimal-product-card__content">
+                  <h3 class="minimal-product-card__title">{{ product.title }}</h3>
+                  <p class="minimal-product-card__price">{{ product.price | money }}</p>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.products_button_label != blank -%}
+          <div class="minimal-products__action">
+            <a href="{{ section.settings.collection.url }}" class="btn btn--outline">
+              {{ section.settings.products_button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Featured Split {%- endcomment -%}
+  {%- if section.settings.show_featured -%}
+    <section class="minimal-featured">
+      <div class="container">
+        <div class="minimal-featured__inner">
+          <div class="minimal-featured__media">
+            {%- if section.settings.featured_image != blank -%}
+              {{ section.settings.featured_image | image_url: width: 800 | image_tag: class: 'minimal-featured__image', loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+          <div class="minimal-featured__content">
+            {%- if section.settings.featured_eyebrow != blank -%}
+              <span class="section-eyebrow">{{ section.settings.featured_eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="minimal-featured__title">{{ section.settings.featured_title }}</h2>
+            {%- if section.settings.featured_text != blank -%}
+              <p class="minimal-featured__text">{{ section.settings.featured_text }}</p>
+            {%- endif -%}
+            {%- if section.settings.featured_button_label != blank -%}
+              <a href="{{ section.settings.featured_button_link }}" class="btn btn--primary">
+                {{ section.settings.featured_button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Values Strip {%- endcomment -%}
+  {%- if section.settings.show_values -%}
+    <section class="minimal-values">
+      <div class="container">
+        <div class="minimal-values__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'value' -%}
+              <div class="minimal-value" {{ block.shopify_attributes }}>
+                <h3 class="minimal-value__title">{{ block.settings.title }}</h3>
+                <p class="minimal-value__text">{{ block.settings.text }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  {%- if section.settings.show_testimonials -%}
+    <section class="minimal-testimonials">
+      <div class="container">
+        {%- if section.settings.testimonials_title != blank -%}
+          <div class="section-header section-header--center">
+            <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+          </div>
+        {%- endif -%}
+        <div class="minimal-testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="minimal-testimonial" {{ block.shopify_attributes }}>
+                <blockquote class="minimal-testimonial__quote">
+                  "{{ block.settings.quote }}"
+                </blockquote>
+                <div class="minimal-testimonial__author">
+                  <span class="minimal-testimonial__name">{{ block.settings.name }}</span>
+                  {%- if block.settings.title != blank -%}
+                    <span class="minimal-testimonial__title">{{ block.settings.title }}</span>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Newsletter {%- endcomment -%}
+  {%- if section.settings.show_newsletter -%}
+    <section class="minimal-newsletter">
+      <div class="container">
+        <div class="minimal-newsletter__inner">
+          <h2 class="minimal-newsletter__title">{{ section.settings.newsletter_title }}</h2>
+          {%- if section.settings.newsletter_text != blank -%}
+            <p class="minimal-newsletter__text">{{ section.settings.newsletter_text }}</p>
+          {%- endif -%}
+          {%- form 'customer', class: 'minimal-newsletter__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              class="minimal-newsletter__input"
+              placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter email' }}"
+              required
+              aria-label="Email address"
+            >
+            <button type="submit" class="btn btn--primary">
+              {{ section.settings.newsletter_button | default: 'Subscribe' }}
+            </button>
+          {%- endform -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Modern Minimal",
+  "tag": "section",
+  "class": "section-landing-modern-minimal",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow text",
+      "default": "New Collection"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "Less is More"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Thoughtfully designed pieces that stand the test of time. Quality over quantity."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Button label",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Products Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show products section",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products to show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Title",
+      "default": "Featured"
+    },
+    {
+      "type": "text",
+      "id": "products_button_label",
+      "label": "Button label",
+      "default": "View All"
+    },
+    {
+      "type": "header",
+      "content": "Featured Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured",
+      "label": "Show featured section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "featured_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Philosophy"
+    },
+    {
+      "type": "text",
+      "id": "featured_title",
+      "label": "Title",
+      "default": "Designed with Purpose"
+    },
+    {
+      "type": "textarea",
+      "id": "featured_text",
+      "label": "Text",
+      "default": "Every detail matters. We believe in creating products that serve their purpose beautifully, without excess."
+    },
+    {
+      "type": "text",
+      "id": "featured_button_label",
+      "label": "Button label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "featured_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Values Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_values",
+      "label": "Show values section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show testimonials",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Title",
+      "default": "What People Say"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Title",
+      "default": "Stay Updated"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Text",
+      "default": "Subscribe for early access to new arrivals and exclusive offers."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter email"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Button text",
+      "default": "Subscribe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Quality"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Crafted from premium materials."
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Sarah L."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Designer"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Finally found a brand that matches my aesthetic."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Modern Minimal",
+      "blocks": [
+        { "type": "value", "settings": { "title": "Quality", "text": "Crafted from premium materials that last." } },
+        { "type": "value", "settings": { "title": "Simplicity", "text": "Designed without excess or clutter." } },
+        { "type": "value", "settings": { "title": "Sustainability", "text": "Made with the environment in mind." } },
+        { "type": "testimonial", "settings": { "name": "Sarah L.", "title": "Designer", "quote": "Finally found a brand that matches my aesthetic. Simple, beautiful, quality." } },
+        { "type": "testimonial", "settings": { "name": "Michael T.", "title": "Architect", "quote": "The attention to detail is remarkable. These pieces are built to last." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

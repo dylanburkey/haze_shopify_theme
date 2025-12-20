@@ -1,0 +1,274 @@
+{
+  "layout": "theme",
+  "name": "Features",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "medium",
+        "overlay_opacity": 70,
+        "title": "Everything You Need, No Apps Required",
+        "subtitle": "Save $150-400/month",
+        "description": "FORGE 4.0 is the most advanced Shopify theme available. Built-in features that replace expensive third-party apps, optimized for performance, and designed for flexibility.",
+        "primary_button_text": "View Presets",
+        "primary_button_link": "/pages/theme-presets",
+        "secondary_button_text": "Get Started",
+        "text_alignment": "center"
+      }
+    },
+    "cost-savings": {
+      "type": "feature-cost-savings",
+      "settings": {
+        "title": "Your Monthly Savings",
+        "subtitle": "Apps you no longer need",
+        "show_calculator": true
+      },
+      "blocks": {
+        "app-1": { "type": "app_replacement", "settings": { "app_name": "Mega Menu App", "monthly_cost": 15, "feature_name": "Built-in Mega Menu", "icon": "menu" }},
+        "app-2": { "type": "app_replacement", "settings": { "app_name": "Loyalty & Rewards App", "monthly_cost": 50, "feature_name": "Loyalty Engine", "icon": "award" }},
+        "app-3": { "type": "app_replacement", "settings": { "app_name": "SEO Suite App", "monthly_cost": 30, "feature_name": "Enhanced SEO", "icon": "search" }},
+        "app-4": { "type": "app_replacement", "settings": { "app_name": "Page Speed Optimizer", "monthly_cost": 25, "feature_name": "Performance Built-in", "icon": "zap" }},
+        "app-5": { "type": "app_replacement", "settings": { "app_name": "Page Builder App", "monthly_cost": 40, "feature_name": "Dynamic Page Builder", "icon": "layout" }},
+        "app-6": { "type": "app_replacement", "settings": { "app_name": "FAQ App", "monthly_cost": 15, "feature_name": "Advanced FAQ", "icon": "help-circle" }},
+        "app-7": { "type": "app_replacement", "settings": { "app_name": "PWA App", "monthly_cost": 30, "feature_name": "Progressive Web App", "icon": "smartphone" }},
+        "app-8": { "type": "app_replacement", "settings": { "app_name": "AI Search/Chat", "monthly_cost": 100, "feature_name": "AI Search & Chat", "icon": "message-circle" }}
+      },
+      "block_order": ["app-1", "app-2", "app-3", "app-4", "app-5", "app-6", "app-7", "app-8"]
+    },
+    "mega-menu": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Mega Menu",
+        "subtitle": "Professional Navigation",
+        "description": "Create stunning, multi-column navigation menus with images, featured products, and promotional banners. Multiple styles to match your brand.",
+        "layout": "image-right",
+        "icon": "menu",
+        "badge_text": "Replaces $15/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Multiple mega menu layout styles" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Add images, products, and collections" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Promotional banners and CTAs" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Mobile-optimized dropdown" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "loyalty": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Loyalty Program",
+        "subtitle": "Built-in Rewards Engine",
+        "description": "Engage customers with a points-based loyalty program. Reward purchases, referrals, and social actions without monthly subscription fees.",
+        "layout": "image-left",
+        "icon": "award",
+        "badge_text": "Replaces $50/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Points for purchases and actions" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Tiered VIP levels" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Referral rewards" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Birthday rewards" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "seo": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Enhanced SEO",
+        "subtitle": "Rank Higher, Sell More",
+        "description": "Comprehensive SEO toolkit that helps search engines and AI understand your content. Automatic structured data, canonical URL fixes, and AI-powered optimizations.",
+        "layout": "image-right",
+        "icon": "search",
+        "badge_text": "Replaces $30/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "JSON-LD structured data for rich snippets" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "AI-generated title and alt tags" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Canonical URL fix for duplicate content" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Open Graph and Twitter Cards" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "performance": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Performance Optimization",
+        "subtitle": "90+ PageSpeed Score",
+        "description": "Every millisecond counts. FORGE is engineered for speed with critical CSS, service workers, intelligent preloading, and optimized asset delivery.",
+        "layout": "image-left",
+        "icon": "zap",
+        "badge_text": "Replaces $25/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Critical CSS inlining" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Service Worker for offline caching" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Network prehints (preconnect, prefetch)" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Smart lazy/eager loading" }},
+        "feature-5": { "type": "feature_point", "settings": { "text": "Deferred and async JavaScript" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4", "feature-5"]
+    },
+    "page-builder": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Dynamic Page Builder",
+        "subtitle": "Design Freedom, Brand Consistency",
+        "description": "Build custom pages with a flexible grid/row system. Drag and drop sections while maintaining consistent styling across your entire store.",
+        "layout": "image-right",
+        "icon": "layout",
+        "badge_text": "Replaces $40/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Grid and row-based layouts" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "70+ customizable sections" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Reusable content blocks" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Consistent design system" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "headers-footers": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Headers & Footers",
+        "subtitle": "Multiple Layout Options",
+        "description": "Choose from multiple header and footer styles. Add search with filters, utility bars, mega menus, and more to create the perfect navigation experience.",
+        "layout": "image-left",
+        "icon": "layers",
+        "badge_text": "Included"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Multiple header layout styles" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Search with filters or icon-only" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Utility bar with contact info" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Sticky and transparent options" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "product-attachments": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Product Attachments",
+        "subtitle": "Specs, Manuals & Documents",
+        "description": "Upload product documents like spec sheets, manuals, and certifications. Associate files with multiple products and display them anywhere on your site.",
+        "layout": "image-right",
+        "icon": "file-text",
+        "badge_text": "Included"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "PDF, images, and document support" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Associate with multiple products" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Display on product pages or site-wide" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Organized file management" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "product-page": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Customizable Product Pages",
+        "subtitle": "Sell Smarter",
+        "description": "Create product pages that convert. Add comparison tables, related products, specifications tabs, and trust badges without any apps.",
+        "layout": "image-left",
+        "icon": "shopping-bag",
+        "badge_text": "Included"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Dynamic comparison tables" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Related and complementary products" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Specification tabs" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Trust badges and guarantees" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "faq": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Advanced FAQ",
+        "subtitle": "Answer Questions, Boost SEO",
+        "description": "Create comprehensive FAQ sections with schema markup for rich search results. Link FAQs to products or display site-wide.",
+        "layout": "image-right",
+        "icon": "help-circle",
+        "badge_text": "Replaces $15/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Fully customizable FAQ sections" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "FAQPage schema for rich results" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Link FAQs to product pages" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Accordion and list layouts" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "pwa": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "Progressive Web App",
+        "subtitle": "App-Like Experience",
+        "description": "Your store can be installed as an app on any device. Customers get push notifications, offline browsing, and a native app experience.",
+        "layout": "image-left",
+        "icon": "smartphone",
+        "badge_text": "Replaces $30/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Install on home screen" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "Offline functionality" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Push notifications" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "App-like navigation" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "ai-search": {
+      "type": "feature-showcase",
+      "settings": {
+        "title": "AI Search & Chat",
+        "subtitle": "Powered by Cloudflare",
+        "description": "Let AI guide customers to the right products. Intelligent search understands natural language, and AI chat provides personalized recommendations.",
+        "layout": "image-right",
+        "icon": "message-circle",
+        "badge_text": "Replaces $100/mo app"
+      },
+      "blocks": {
+        "feature-1": { "type": "feature_point", "settings": { "text": "Natural language search" }},
+        "feature-2": { "type": "feature_point", "settings": { "text": "AI-powered chat assistant" }},
+        "feature-3": { "type": "feature_point", "settings": { "text": "Product recommendations" }},
+        "feature-4": { "type": "feature_point", "settings": { "text": "Powered by Cloudflare AI" }}
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "comparison": {
+      "type": "feature-comparison-table",
+      "settings": {
+        "title": "FORGE vs. Apps",
+        "subtitle": "Why pay monthly when it's already included?"
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "title": "Ready to Stop Paying for Apps?",
+        "description": "FORGE 4.0 is the most advanced Shopify theme available. Get all these features and 6 stunning presets included.",
+        "primary_button_text": "View Presets",
+        "primary_button_link": "/pages/theme-presets",
+        "secondary_button_text": "Contact Sales",
+        "secondary_button_link": "/pages/contact",
+        "background": "gradient"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "cost-savings",
+    "mega-menu",
+    "loyalty",
+    "seo",
+    "performance",
+    "page-builder",
+    "headers-footers",
+    "product-attachments",
+    "product-page",
+    "faq",
+    "pwa",
+    "ai-search",
+    "comparison",
+    "cta"
+  ]
+}

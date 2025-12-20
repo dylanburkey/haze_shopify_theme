@@ -1,0 +1,66 @@
+{% doc %}
+  Star rating display snippet
+  Renders a visual star rating based on a numeric value
+
+  Usage: {% render 'star-rating', rating: 4.5, max_rating: 5, show_count: true, count: 42 %}
+
+  Parameters (passed via render):
+  - rating: Numeric rating value (0-5)
+  - max_rating: Maximum rating value (default: 5)
+  - show_count: Whether to show rating count
+  - count: Number of reviews/ratings
+{% enddoc %}
+
+{%- liquid
+  assign star_rating = rating | default: 0 | times: 1.0
+  assign star_max = max_rating | default: 5
+  assign display_count = show_count | default: false
+  assign review_count = count | default: 0
+-%}
+
+<div class="star-rating" role="img" aria-label="{{ star_rating }} out of {{ star_max }} stars">
+  {%- for i in (1..star_max) -%}
+    {%- assign threshold = i | minus: 1 -%}
+    {%- if star_rating >= i -%}
+      <span class="star-rating__star star-rating__star--full" aria-hidden="true">★</span>
+    {%- elsif star_rating > threshold -%}
+      <span class="star-rating__star star-rating__star--half" aria-hidden="true">★</span>
+    {%- else -%}
+      <span class="star-rating__star star-rating__star--empty" aria-hidden="true">☆</span>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if display_count and review_count > 0 -%}
+    <span class="star-rating__count">({{ review_count }})</span>
+  {%- endif -%}
+</div>
+
+<style>
+  .star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1em;
+    color: var(--color-primary, #d71920);
+  }
+  .star-rating__star {
+    font-size: 1.2em;
+    line-height: 1;
+  }
+  .star-rating__star--empty {
+    color: var(--color-border, #e5e5e5);
+  }
+  .star-rating__star--half {
+    position: relative;
+  }
+  .star-rating__star--half::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+  .star-rating__count {
+    margin-left: 0.5em;
+    font-size: 0.875em;
+    color: var(--color-text-secondary, #666);
+  }
+</style>

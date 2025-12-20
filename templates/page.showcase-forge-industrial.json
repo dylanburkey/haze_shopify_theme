@@ -1,0 +1,154 @@
+{
+  "layout": "theme.showcase",
+  "name": "Showcase - Forge Industrial",
+  "sections": {
+    "header": {
+      "type": "mega-menu-header",
+      "settings": {
+        "logo_text": "FORGE",
+        "show_utility_bar": true,
+        "utility_left_text": "PROFESSIONAL GRADE EQUIPMENT",
+        "show_announcement": true,
+        "announcement_text": "Free shipping on orders over $500",
+        "color_scheme": "dark",
+        "sticky_header": true
+      }
+    },
+    "hero": {
+      "type": "preset-hero",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "height": "large",
+        "overlay_opacity": 40,
+        "title": "Built to Last",
+        "subtitle": "Professional Equipment",
+        "description": "Industrial-grade tools and equipment engineered for the toughest jobs. Trusted by professionals worldwide.",
+        "primary_button_text": "View Catalog",
+        "primary_button_link": "",
+        "secondary_button_text": "Get Quote",
+        "show_scroll_indicator": true
+      }
+    },
+    "trust_strip": {
+      "type": "preset-trust-badges",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "layout": "inline"
+      },
+      "blocks": {
+        "badge_1": { "type": "badge", "settings": { "icon": "shield", "text": "5-Year Warranty" }},
+        "badge_2": { "type": "badge", "settings": { "icon": "truck", "text": "Free Shipping $500+" }},
+        "badge_3": { "type": "badge", "settings": { "icon": "phone", "text": "Expert Support" }},
+        "badge_4": { "type": "badge", "settings": { "icon": "refresh", "text": "30-Day Returns" }}
+      },
+      "block_order": ["badge_1", "badge_2", "badge_3", "badge_4"]
+    },
+    "featured_collection": {
+      "type": "preset-product-grid",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "title": "Featured Equipment",
+        "subtitle": "Top Sellers",
+        "collection": "",
+        "products_to_show": 8,
+        "columns": 4,
+        "show_quick_add": true,
+        "card_style": "industrial"
+      }
+    },
+    "featured_product": {
+      "type": "preset-featured-product",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "badge_text": "BEST SELLER",
+        "product": "",
+        "title_override": "Industrial Welding System Pro",
+        "description_override": "Our flagship welding system delivers consistent performance in demanding industrial environments. Rated for continuous duty cycles.",
+        "show_features": true,
+        "layout": "split"
+      },
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "icon": "zap", "text": "400A Output Capacity" }},
+        "feature_2": { "type": "feature", "settings": { "icon": "shield", "text": "IP23 Protection Rating" }},
+        "feature_3": { "type": "feature", "settings": { "icon": "clock", "text": "100% Duty Cycle at 250A" }}
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"]
+    },
+    "specs_banner": {
+      "type": "preset-trust-badges",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "layout": "stats"
+      },
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "value": "25+", "label": "Years Experience" }},
+        "stat_2": { "type": "stat", "settings": { "value": "50K+", "label": "Products Sold" }},
+        "stat_3": { "type": "stat", "settings": { "value": "98%", "label": "Customer Satisfaction" }},
+        "stat_4": { "type": "stat", "settings": { "value": "500+", "label": "Authorized Dealers" }}
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"]
+    },
+    "testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "title": "Trusted by Professionals",
+        "layout": "carousel"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "We've been using Forge equipment in our shop for over 10 years. The reliability is unmatched.",
+            "author": "Mike Thompson",
+            "title": "Shop Owner, Thompson Fabrication",
+            "rating": 5
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The support team helped us spec the perfect system for our production line. Outstanding service.",
+            "author": "Linda Chen",
+            "title": "Production Manager, Chen Manufacturing",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["testimonial_1", "testimonial_2"]
+    },
+    "newsletter": {
+      "type": "preset-newsletter-cta",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "title": "Get Industry Updates",
+        "description": "Subscribe for product news, technical tips, and exclusive dealer pricing.",
+        "button_text": "Subscribe",
+        "background_style": "dark"
+      }
+    },
+    "footer": {
+      "type": "preset-footer",
+      "settings": {
+        "preset_style": "forge-industrial",
+        "logo_text": "FORGE",
+        "tagline": "Industrial-grade equipment for professionals.",
+        "show_newsletter": false,
+        "show_social": true,
+        "show_payment_icons": true,
+        "columns": 4
+      }
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "trust_strip",
+    "featured_collection",
+    "featured_product",
+    "specs_banner",
+    "testimonials",
+    "newsletter",
+    "footer"
+  ]
+}

@@ -1,0 +1,355 @@
+/* Landing: Zebra Skimmers
+ * Industrial equipment brand with professional, trusted feel
+ */
+
+.landing-zebra-skimmers {
+  --zebra-primary: #f59e0b;
+  --zebra-primary-dark: #d97706;
+  --zebra-text: #111827;
+  --zebra-text-muted: #6b7280;
+  --zebra-bg: #ffffff;
+  --zebra-bg-dark: #1f2937;
+  --zebra-bg-alt: #f9fafb;
+  --zebra-border: #e5e7eb;
+}
+
+/* Hero */
+.zebra-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: var(--zebra-bg-dark);
+}
+
+.zebra-hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.zebra-hero__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zebra-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(31, 41, 55, 0.95) 0%, rgba(31, 41, 55, 0.7) 100%);
+}
+
+.zebra-hero__content {
+  position: relative;
+  max-width: 40rem;
+}
+
+.zebra-hero__badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--zebra-primary);
+  color: var(--zebra-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.zebra-hero__title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+  color: #ffffff;
+}
+
+.zebra-hero__subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+.zebra-hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Trust Strip */
+.zebra-trust {
+  padding: 2rem 0;
+  background: var(--zebra-primary);
+}
+
+.zebra-trust__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.zebra-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--zebra-text);
+}
+
+.zebra-trust__icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+}
+
+.zebra-trust__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.zebra-trust__text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+}
+
+.zebra-trust__text strong {
+  font-weight: 600;
+}
+
+.zebra-trust__text span {
+  opacity: 0.8;
+}
+
+/* Products */
+.zebra-products {
+  padding: 5rem 0;
+  background: var(--zebra-bg);
+}
+
+.zebra-products__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.zebra-product-card__link {
+  display: block;
+  text-decoration: none;
+  background: var(--zebra-bg);
+  border: 1px solid var(--zebra-border);
+  transition: box-shadow 0.3s ease;
+}
+
+.zebra-product-card__link:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.zebra-product-card__image {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--zebra-bg-alt);
+}
+
+.zebra-product-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zebra-product-card__content {
+  padding: 1.25rem;
+}
+
+.zebra-product-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--zebra-text);
+}
+
+.zebra-product-card__price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--zebra-primary-dark);
+  margin: 0 0 0.75rem;
+}
+
+.zebra-product-card__cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--zebra-primary-dark);
+}
+
+.zebra-products__action {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Features */
+.zebra-features {
+  padding: 5rem 0;
+  background: var(--zebra-bg-alt);
+}
+
+.zebra-features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.zebra-feature-card {
+  background: var(--zebra-bg);
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--zebra-border);
+}
+
+.zebra-feature-card__image {
+  margin-bottom: 1.5rem;
+}
+
+.zebra-feature-card__image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.zebra-feature-card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--zebra-text);
+}
+
+.zebra-feature-card__text {
+  font-size: 0.9375rem;
+  color: var(--zebra-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Stats */
+.zebra-stats {
+  padding: 4rem 0;
+  background: var(--zebra-bg-dark);
+}
+
+.zebra-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.zebra-stat__value {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--zebra-primary);
+  line-height: 1;
+}
+
+.zebra-stat__label {
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Testimonials */
+.zebra-testimonials {
+  padding: 5rem 0;
+  background: var(--zebra-bg);
+}
+
+.zebra-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.zebra-testimonial-card {
+  padding: 2rem;
+  background: var(--zebra-bg-alt);
+  border-left: 4px solid var(--zebra-primary);
+}
+
+.zebra-testimonial-card__rating {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.zebra-testimonial-card__rating svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: var(--zebra-primary);
+}
+
+.zebra-testimonial-card__quote {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--zebra-text);
+  margin: 0 0 1rem;
+}
+
+.zebra-testimonial-card__author strong {
+  display: block;
+  color: var(--zebra-text);
+}
+
+.zebra-testimonial-card__author span {
+  font-size: 0.875rem;
+  color: var(--zebra-text-muted);
+}
+
+/* CTA */
+.zebra-cta {
+  padding: 5rem 0;
+  background: var(--zebra-bg-dark);
+}
+
+.zebra-cta__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.zebra-cta__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1rem;
+}
+
+.zebra-cta__text {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 2rem;
+}
+
+.zebra-cta__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .zebra-trust__grid,
+  .zebra-stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zebra-products__grid,
+  .zebra-features__grid,
+  .zebra-testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+}

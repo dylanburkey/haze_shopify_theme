@@ -11,7 +11,13 @@
       "Bash(git push:*)",
       "Bash(npm install:*)",
       "Bash(shopify theme check:*)",
-      "Bash(shopify theme dev:*)"
+      "Bash(shopify theme dev:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(shopify theme push:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

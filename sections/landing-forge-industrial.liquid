@@ -1,0 +1,582 @@
+{% comment %}
+  Forge Industrial Landing Page Section
+  Heavy-duty professional equipment aesthetic
+  Perfect for B2B, manufacturing, and trade brands
+{% endcomment %}
+
+{{ 'landing-forge-industrial.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-forge-industrial" data-section-id="{{ section.id }}">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="forge-hero">
+    <div class="forge-hero__bg">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 1920 | image_tag: class: 'forge-hero__bg-image', loading: 'eager' }}
+      {%- endif -%}
+      <div class="forge-hero__overlay"></div>
+    </div>
+    <div class="container">
+      <div class="forge-hero__content">
+        {%- if section.settings.hero_badge != blank -%}
+          <span class="forge-hero__badge">{{ section.settings.hero_badge }}</span>
+        {%- endif -%}
+        <h1 class="forge-hero__title">{{ section.settings.hero_title }}</h1>
+        {%- if section.settings.hero_subtitle != blank -%}
+          <p class="forge-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+        {%- endif -%}
+        <div class="forge-hero__actions">
+          {%- if section.settings.hero_button_label != blank -%}
+            <a href="{{ section.settings.hero_button_link }}" class="btn btn--primary btn--large">
+              {{ section.settings.hero_button_label }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.hero_secondary_label != blank -%}
+            <a href="{{ section.settings.hero_secondary_link }}" class="btn btn--outline btn--large">
+              {{ section.settings.hero_secondary_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if section.settings.show_hero_stats -%}
+        <div class="forge-hero__stats">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'hero_stat' -%}
+              <div class="forge-hero__stat" {{ block.shopify_attributes }}>
+                <span class="forge-hero__stat-value">{{ block.settings.value }}</span>
+                <span class="forge-hero__stat-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} Trust Strip {%- endcomment -%}
+  {%- if section.settings.show_trust_strip -%}
+    <section class="forge-trust-strip">
+      <div class="container">
+        <div class="forge-trust-strip__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust_badge' -%}
+              <div class="forge-trust-strip__item" {{ block.shopify_attributes }}>
+                <div class="forge-trust-strip__icon">
+                  {%- case block.settings.icon -%}
+                    {%- when 'shield' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    {%- when 'truck' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    {%- when 'phone' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    {%- when 'clock' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {%- else -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  {%- endcase -%}
+                </div>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Products Section {%- endcomment -%}
+  {%- if section.settings.show_products and section.settings.collection != blank -%}
+    <section class="forge-products">
+      <div class="container">
+        <div class="section-header">
+          {%- if section.settings.products_eyebrow != blank -%}
+            <span class="section-eyebrow">{{ section.settings.products_eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="section-title">{{ section.settings.products_title }}</h2>
+        </div>
+        <div class="forge-products__grid">
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            <article class="forge-product-card">
+              <a href="{{ product.url }}" class="forge-product-card__link">
+                <div class="forge-product-card__image">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="forge-product-card__badge">Sale</span>
+                  {%- endif -%}
+                </div>
+                <div class="forge-product-card__content">
+                  <h3 class="forge-product-card__title">{{ product.title }}</h3>
+                  <div class="forge-product-card__price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="forge-product-card__price-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <span class="forge-product-card__price-current">{{ product.price | money }}</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.products_button_label != blank -%}
+          <div class="forge-products__action">
+            <a href="{{ section.settings.collection.url }}" class="btn btn--primary">
+              {{ section.settings.products_button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Featured Product {%- endcomment -%}
+  {%- if section.settings.show_featured and section.settings.featured_product != blank -%}
+    {%- assign featured = section.settings.featured_product -%}
+    <section class="forge-featured">
+      <div class="container">
+        <div class="forge-featured__inner">
+          <div class="forge-featured__media">
+            {%- if featured.featured_image != blank -%}
+              {{ featured.featured_image | image_url: width: 800 | image_tag: class: 'forge-featured__image', loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+          <div class="forge-featured__content">
+            {%- if section.settings.featured_badge != blank -%}
+              <span class="forge-featured__badge">{{ section.settings.featured_badge }}</span>
+            {%- endif -%}
+            <h2 class="forge-featured__title">{{ featured.title }}</h2>
+            <p class="forge-featured__description">{{ featured.description | strip_html | truncate: 300 }}</p>
+            <ul class="forge-featured__specs">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'spec' -%}
+                  <li {{ block.shopify_attributes }}>
+                    <strong>{{ block.settings.label }}:</strong> {{ block.settings.value }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            <div class="forge-featured__price">
+              <span class="forge-featured__price-current">{{ featured.price | money }}</span>
+            </div>
+            <a href="{{ featured.url }}" class="btn btn--primary btn--large">
+              View Product Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Stats Banner {%- endcomment -%}
+  {%- if section.settings.show_stats -%}
+    <section class="forge-stats">
+      <div class="container">
+        <div class="forge-stats__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'stat' -%}
+              <div class="forge-stat" {{ block.shopify_attributes }}>
+                <span class="forge-stat__value">{{ block.settings.value }}</span>
+                <span class="forge-stat__label">{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  {%- if section.settings.show_testimonials -%}
+    <section class="forge-testimonials">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2 class="section-title">{{ section.settings.testimonials_title }}</h2>
+        </div>
+        <div class="forge-testimonials__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <article class="forge-testimonial-card" {{ block.shopify_attributes }}>
+                <div class="forge-testimonial-card__stars">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  {%- endfor -%}
+                </div>
+                <blockquote class="forge-testimonial-card__quote">"{{ block.settings.quote }}"</blockquote>
+                <div class="forge-testimonial-card__author">
+                  <strong>{{ block.settings.name }}</strong>
+                  {%- if block.settings.title != blank -%}
+                    <span>{{ block.settings.title }}</span>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  {%- if section.settings.show_cta -%}
+    <section class="forge-cta">
+      <div class="container">
+        <div class="forge-cta__inner">
+          <h2 class="forge-cta__title">{{ section.settings.cta_title }}</h2>
+          {%- if section.settings.cta_text != blank -%}
+            <p class="forge-cta__text">{{ section.settings.cta_text }}</p>
+          {%- endif -%}
+          <div class="forge-cta__actions">
+            {%- if section.settings.cta_button_label != blank -%}
+              <a href="{{ section.settings.cta_button_link }}" class="btn btn--primary btn--large">
+                {{ section.settings.cta_button_label }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.cta_secondary_label != blank -%}
+              <a href="{{ section.settings.cta_secondary_link }}" class="btn btn--outline btn--large">
+                {{ section.settings.cta_secondary_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Forge Industrial",
+  "tag": "section",
+  "class": "section-landing-forge-industrial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge text",
+      "default": "Professional Grade"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "Built to Last"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Subtitle",
+      "default": "Industrial-grade equipment engineered for the toughest jobs. Trusted by professionals worldwide."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Primary button label",
+      "default": "View Catalog"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "hero_secondary_label",
+      "label": "Secondary button label",
+      "default": "Get Quote"
+    },
+    {
+      "type": "url",
+      "id": "hero_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_stats",
+      "label": "Show hero stats",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Trust Strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_strip",
+      "label": "Show trust strip",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Products Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products",
+      "label": "Show products section",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "products_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Equipment"
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Title",
+      "default": "Featured Products"
+    },
+    {
+      "type": "text",
+      "id": "products_button_label",
+      "label": "Button label",
+      "default": "View All Products"
+    },
+    {
+      "type": "header",
+      "content": "Featured Product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured",
+      "label": "Show featured product",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Featured product"
+    },
+    {
+      "type": "text",
+      "id": "featured_badge",
+      "label": "Badge text",
+      "default": "BEST SELLER"
+    },
+    {
+      "type": "header",
+      "content": "Stats Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show testimonials",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Title",
+      "default": "Trusted by Professionals"
+    },
+    {
+      "type": "header",
+      "content": "CTA Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Title",
+      "default": "Ready to Get Started?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "Contact our team for expert advice and custom solutions."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_label",
+      "label": "Primary button label",
+      "default": "Contact Sales"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary button label",
+      "default": "Download Catalog"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_stat",
+      "name": "Hero Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "25+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Years Experience"
+        }
+      ]
+    },
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield", "label": "Shield/Warranty" },
+            { "value": "truck", "label": "Truck/Shipping" },
+            { "value": "phone", "label": "Phone/Support" },
+            { "value": "clock", "label": "Clock/Fast" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "5-Year Warranty"
+        }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "Product Spec",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Power Output"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "400A"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50K+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Units Sold"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Mike Thompson"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title/Company",
+          "default": "Shop Owner, Thompson Fabrication"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "We've been using Forge equipment in our shop for over 10 years. The reliability is unmatched."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Forge Industrial",
+      "blocks": [
+        { "type": "hero_stat", "settings": { "value": "25+", "label": "Years Experience" } },
+        { "type": "hero_stat", "settings": { "value": "50K+", "label": "Products Sold" } },
+        { "type": "hero_stat", "settings": { "value": "98%", "label": "Satisfaction" } },
+        { "type": "trust_badge", "settings": { "icon": "shield", "text": "5-Year Warranty" } },
+        { "type": "trust_badge", "settings": { "icon": "truck", "text": "Free Shipping $500+" } },
+        { "type": "trust_badge", "settings": { "icon": "phone", "text": "Expert Support" } },
+        { "type": "trust_badge", "settings": { "icon": "clock", "text": "Same-Day Shipping" } },
+        { "type": "spec", "settings": { "label": "Power Output", "value": "400A" } },
+        { "type": "spec", "settings": { "label": "Duty Cycle", "value": "100% at 250A" } },
+        { "type": "spec", "settings": { "label": "Protection Rating", "value": "IP23" } },
+        { "type": "stat", "settings": { "value": "25+", "label": "Years Experience" } },
+        { "type": "stat", "settings": { "value": "50K+", "label": "Products Sold" } },
+        { "type": "stat", "settings": { "value": "98%", "label": "Customer Satisfaction" } },
+        { "type": "stat", "settings": { "value": "500+", "label": "Authorized Dealers" } },
+        { "type": "testimonial", "settings": { "name": "Mike Thompson", "title": "Shop Owner, Thompson Fabrication", "quote": "We've been using Forge equipment in our shop for over 10 years. The reliability is unmatched." } },
+        { "type": "testimonial", "settings": { "name": "Linda Chen", "title": "Production Manager, Chen Manufacturing", "quote": "The support team helped us spec the perfect system for our production line. Outstanding service." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

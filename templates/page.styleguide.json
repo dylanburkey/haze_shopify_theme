@@ -1,0 +1,46 @@
+{
+  "layout": "theme",
+  "name": "Styleguide",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "small",
+        "text_alignment": "left",
+        "heading": "Design System",
+        "subheading": "Explore the colors, typography, components, and patterns that power FORGE 4.0",
+        "show_overlay": true,
+        "overlay_opacity": 70
+      }
+    },
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
+    "styleguide": {
+      "type": "styleguide",
+      "settings": {
+        "show_intro": false,
+        "title": "Design System",
+        "description": "A comprehensive overview of colors, typography, buttons, and components used in the FORGE theme.",
+        "show_colors": true,
+        "show_typography": true,
+        "show_buttons": true,
+        "show_forms": true,
+        "show_spacing": true,
+        "show_components": true
+      }
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "title": "Ready to Customize?",
+        "text": "Explore the theme editor to apply your own brand colors, fonts, and styles.",
+        "button_label": "View Documentation",
+        "button_link": "/pages/documentation",
+        "button_style": "primary"
+      }
+    }
+  },
+  "order": ["hero", "breadcrumbs", "styleguide", "cta"]
+}

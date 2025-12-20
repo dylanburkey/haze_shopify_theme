@@ -11,8 +11,8 @@
 {%- endcomment -%}
 
 {%- if settings.enable_pwa -%}
-  {%- comment -%} Web App Manifest {%- endcomment -%}
-  <link rel="manifest" href="{{ 'manifest.json' | asset_url | replace: 'assets/', '' | replace: '.json', '' }}">
+  {%- comment -%} Web App Manifest - generated dynamically via templates/manifest.json.liquid {%- endcomment -%}
+  <link rel="manifest" href="{{ routes.root_url }}manifest.json">
 
   {%- comment -%} Theme Color {%- endcomment -%}
   <meta name="theme-color" content="{{ settings.color_primary | default: '#d71920' }}" media="(prefers-color-scheme: light)">

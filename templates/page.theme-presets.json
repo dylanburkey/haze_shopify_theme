@@ -1,0 +1,248 @@
+{
+  "layout": "theme",
+  "name": "Theme Presets Collection",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "medium",
+        "overlay_opacity": 60,
+        "title": "Theme Presets",
+        "subtitle": "6 Complete Design Systems",
+        "description": "One theme, endless possibilities. Each preset transforms your entire store with unique colors, typography, and layouts - all included in your purchase.",
+        "primary_button_text": "",
+        "text_alignment": "center"
+      }
+    },
+    "value-prop": {
+      "type": "icon-blocks",
+      "settings": {
+        "title": "No Apps Needed",
+        "subtitle": "Everything you need is included",
+        "columns": 3,
+        "style": "cards"
+      },
+      "blocks": {
+        "prop-1": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "palette",
+            "title": "6 Complete Presets",
+            "description": "Professional design systems ready to use"
+          }
+        },
+        "prop-2": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "dollar-sign",
+            "title": "Save $150-400/mo",
+            "description": "Replace third-party apps with built-in features"
+          }
+        },
+        "prop-3": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "zap",
+            "title": "Lightning Fast",
+            "description": "Optimized for 90+ PageSpeed scores"
+          }
+        }
+      },
+      "block_order": ["prop-1", "prop-2", "prop-3"]
+    },
+    "presets-grid": {
+      "type": "container-grid",
+      "settings": {
+        "title": "Choose Your Style",
+        "subtitle": "Click any preset to experience the full demo",
+        "columns": 3,
+        "gap": "large"
+      },
+      "blocks": {
+        "preset-forge": {
+          "type": "card",
+          "settings": {
+            "title": "Forge Industrial",
+            "description": "Heavy-duty professional equipment. Industrial strength meets modern design. Perfect for B2B, manufacturing, and trade brands.",
+            "link": "/pages/showcase-forge-industrial",
+            "button_text": "View Demo",
+            "background_color": "#1a1a1a",
+            "text_color": "#ffffff",
+            "accent_color": "#d71920"
+          }
+        },
+        "preset-bold": {
+          "type": "card",
+          "settings": {
+            "title": "Bold Impact",
+            "description": "High-energy athletic brand. Dynamic, powerful, and commanding. Ideal for sports, fitness, and activewear stores.",
+            "link": "/pages/showcase-bold-impact",
+            "button_text": "View Demo",
+            "background_color": "#0f0f0f",
+            "text_color": "#ffffff",
+            "accent_color": "#7c3aed"
+          }
+        },
+        "preset-minimal": {
+          "type": "card",
+          "settings": {
+            "title": "Modern Minimal",
+            "description": "Clean, sophisticated aesthetic. Less is more. Best for lifestyle brands, fashion, and premium products.",
+            "link": "/pages/showcase-modern-minimal",
+            "button_text": "View Demo",
+            "background_color": "#ffffff",
+            "text_color": "#1a1a1a",
+            "accent_color": "#000000"
+          }
+        },
+        "preset-tech": {
+          "type": "card",
+          "settings": {
+            "title": "Tech Forward",
+            "description": "Futuristic technology brand. Innovation meets design. Great for electronics, SaaS, and tech products.",
+            "link": "/pages/showcase-tech-forward",
+            "button_text": "View Demo",
+            "background_color": "#0a0a0f",
+            "text_color": "#e0e0e0",
+            "accent_color": "#00d4ff"
+          }
+        },
+        "preset-artisan": {
+          "type": "card",
+          "settings": {
+            "title": "Warm Artisan",
+            "description": "Handcrafted, organic feel. Authentic and intentional. Perfect for crafts, food, and handmade goods.",
+            "link": "/pages/showcase-warm-artisan",
+            "button_text": "View Demo",
+            "background_color": "#fef3c7",
+            "text_color": "#451a03",
+            "accent_color": "#b45309"
+          }
+        },
+        "preset-zebra": {
+          "type": "card",
+          "settings": {
+            "title": "Zebra Skimmers",
+            "description": "Industrial equipment brand. Professional and trusted. Suited for B2B, tools, and professional services.",
+            "link": "/pages/showcase-zebra-skimmers",
+            "button_text": "View Demo",
+            "background_color": "#ffffff",
+            "text_color": "#111827",
+            "accent_color": "#f59e0b"
+          }
+        }
+      },
+      "block_order": ["preset-forge", "preset-bold", "preset-minimal", "preset-tech", "preset-artisan", "preset-zebra"]
+    },
+    "features-included": {
+      "type": "builder-grid",
+      "settings": {
+        "title": "What's Included With Every Preset",
+        "subtitle": "Built-in features that replace expensive apps",
+        "columns": 4,
+        "gap": "medium"
+      },
+      "blocks": {
+        "feature-colors": {
+          "type": "card",
+          "settings": {
+            "icon": "palette",
+            "title": "Custom Colors",
+            "description": "Carefully curated color palettes that work together beautifully"
+          }
+        },
+        "feature-fonts": {
+          "type": "card",
+          "settings": {
+            "icon": "type",
+            "title": "Typography Pairs",
+            "description": "Matched heading and body fonts for visual harmony"
+          }
+        },
+        "feature-layouts": {
+          "type": "card",
+          "settings": {
+            "icon": "layout",
+            "title": "Section Layouts",
+            "description": "Pre-configured sections matching each aesthetic"
+          }
+        },
+        "feature-responsive": {
+          "type": "card",
+          "settings": {
+            "icon": "smartphone",
+            "title": "Fully Responsive",
+            "description": "Every preset looks great on all devices"
+          }
+        },
+        "feature-loyalty": {
+          "type": "card",
+          "settings": {
+            "icon": "award",
+            "title": "Loyalty Engine",
+            "description": "Built-in rewards program - no app needed"
+          }
+        },
+        "feature-seo": {
+          "type": "card",
+          "settings": {
+            "icon": "search",
+            "title": "SEO Structured Data",
+            "description": "Rich snippets for better search visibility"
+          }
+        },
+        "feature-megamenu": {
+          "type": "card",
+          "settings": {
+            "icon": "menu",
+            "title": "Mega Menu",
+            "description": "Advanced navigation with images and featured items"
+          }
+        },
+        "feature-faq": {
+          "type": "card",
+          "settings": {
+            "icon": "help-circle",
+            "title": "Advanced FAQ",
+            "description": "SEO-optimized FAQ sections with schema markup"
+          }
+        }
+      },
+      "block_order": ["feature-colors", "feature-fonts", "feature-layouts", "feature-responsive", "feature-loyalty", "feature-seo", "feature-megamenu", "feature-faq"]
+    },
+    "stats": {
+      "type": "stats-strip",
+      "settings": {
+        "background": "primary",
+        "columns": 4
+      },
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "value": "6", "label": "Complete Presets" }},
+        "stat-2": { "type": "stat", "settings": { "value": "$400+", "label": "Monthly App Savings" }},
+        "stat-3": { "type": "stat", "settings": { "value": "90+", "label": "PageSpeed Score" }},
+        "stat-4": { "type": "stat", "settings": { "value": "0", "label": "Apps Required" }}
+      },
+      "block_order": ["stat-1", "stat-2", "stat-3", "stat-4"]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "title": "Ready to Transform Your Store?",
+        "description": "Get all 6 presets plus built-in features that replace $150-400/month in third-party apps.",
+        "primary_button_text": "Get Started",
+        "primary_button_link": "",
+        "secondary_button_text": "Contact Sales",
+        "secondary_button_link": "",
+        "background": "gradient"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "value-prop",
+    "presets-grid",
+    "features-included",
+    "stats",
+    "cta"
+  ]
+}

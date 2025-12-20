@@ -1,0 +1,921 @@
+{% comment %}
+  Styleguide Section
+  Displays design system elements: colors, typography, buttons, forms, etc.
+{% endcomment %}
+
+<section class="styleguide" data-section-id="{{ section.id }}">
+  <div class="container">
+    {%- if section.settings.show_intro -%}
+      <div class="styleguide__intro">
+        <h1 class="styleguide__title">{{ section.settings.title }}</h1>
+        {%- if section.settings.description != blank -%}
+          <p class="styleguide__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="styleguide__sections">
+      {%- if section.settings.show_colors -%}
+        <div class="styleguide__section" id="styleguide-colors">
+          <h2 class="styleguide__section-title">Colors</h2>
+          <p class="styleguide__section-desc">The color palette is defined by design tokens and adapts based on the selected preset.</p>
+
+          <div class="styleguide__subsection">
+            <h3>Primary Colors</h3>
+            <div class="styleguide__color-grid">
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-primary);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Primary</span>
+                  <code>--color-primary</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-secondary);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Secondary</span>
+                  <code>--color-secondary</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-accent);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Accent</span>
+                  <code>--color-accent</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-cta);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">CTA</span>
+                  <code>--color-cta</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Text Colors</h3>
+            <div class="styleguide__color-grid">
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-text);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Text</span>
+                  <code>--color-text</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-text-secondary);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Text Secondary</span>
+                  <code>--color-text-secondary</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-text-inverse); border: 1px solid var(--color-border);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Text Inverse</span>
+                  <code>--color-text-inverse</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Background Colors</h3>
+            <div class="styleguide__color-grid">
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-background); border: 1px solid var(--color-border);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Background</span>
+                  <code>--color-background</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-background-alt);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Background Alt</span>
+                  <code>--color-background-alt</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: var(--color-border);"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Border</span>
+                  <code>--color-border</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Status Colors</h3>
+            <div class="styleguide__color-grid">
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: #16a34a;"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Success</span>
+                  <code>#16a34a</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: #dc2626;"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Error</span>
+                  <code>#dc2626</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: #f59e0b;"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Warning</span>
+                  <code>#f59e0b</code>
+                </div>
+              </div>
+              <div class="styleguide__color-card">
+                <div class="styleguide__color-swatch" style="background: #3b82f6;"></div>
+                <div class="styleguide__color-info">
+                  <span class="styleguide__color-name">Info</span>
+                  <code>#3b82f6</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_typography -%}
+        <div class="styleguide__section" id="styleguide-typography">
+          <h2 class="styleguide__section-title">Typography</h2>
+          <p class="styleguide__section-desc">Typography scales and font families defined by the preset system.</p>
+
+          <div class="styleguide__subsection">
+            <h3>Headings</h3>
+            <div class="styleguide__type-sample">
+              <h1>Heading 1 - The quick brown fox</h1>
+              <code>h1 / --font-heading-family</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <h2>Heading 2 - The quick brown fox</h2>
+              <code>h2</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <h3>Heading 3 - The quick brown fox</h3>
+              <code>h3</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <h4>Heading 4 - The quick brown fox</h4>
+              <code>h4</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <h5>Heading 5 - The quick brown fox</h5>
+              <code>h5</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <h6>Heading 6 - The quick brown fox</h6>
+              <code>h6</code>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Body Text</h3>
+            <div class="styleguide__type-sample">
+              <p class="text-large">Large body text for lead paragraphs and important content. The quick brown fox jumps over the lazy dog.</p>
+              <code>.text-large</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <p>Regular body text for standard content. The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p>
+              <code>p / --font-body-family</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <p class="text-small">Small text for captions and secondary information. The quick brown fox jumps over the lazy dog.</p>
+              <code>.text-small</code>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Text Styles</h3>
+            <div class="styleguide__type-sample">
+              <p><strong>Bold text</strong> for emphasis</p>
+              <code>&lt;strong&gt;</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <p><em>Italic text</em> for emphasis</p>
+              <code>&lt;em&gt;</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <p><a href="#">Link text</a> for navigation</p>
+              <code>&lt;a&gt;</code>
+            </div>
+            <div class="styleguide__type-sample">
+              <p><code>Inline code</code> for technical content</p>
+              <code>&lt;code&gt;</code>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Lists</h3>
+            <div class="styleguide__type-row">
+              <div class="styleguide__type-sample">
+                <ul>
+                  <li>Unordered list item one</li>
+                  <li>Unordered list item two</li>
+                  <li>Unordered list item three</li>
+                </ul>
+                <code>&lt;ul&gt;</code>
+              </div>
+              <div class="styleguide__type-sample">
+                <ol>
+                  <li>Ordered list item one</li>
+                  <li>Ordered list item two</li>
+                  <li>Ordered list item three</li>
+                </ol>
+                <code>&lt;ol&gt;</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_buttons -%}
+        <div class="styleguide__section" id="styleguide-buttons">
+          <h2 class="styleguide__section-title">Buttons</h2>
+          <p class="styleguide__section-desc">Button variants for different contexts and actions.</p>
+
+          <div class="styleguide__subsection">
+            <h3>Button Variants</h3>
+            <div class="styleguide__button-row">
+              <button class="btn btn--primary">Primary Button</button>
+              <code>.btn--primary</code>
+            </div>
+            <div class="styleguide__button-row">
+              <button class="btn btn--secondary">Secondary Button</button>
+              <code>.btn--secondary</code>
+            </div>
+            <div class="styleguide__button-row">
+              <button class="btn btn--outline">Outline Button</button>
+              <code>.btn--outline</code>
+            </div>
+            <div class="styleguide__button-row">
+              <button class="btn btn--ghost">Ghost Button</button>
+              <code>.btn--ghost</code>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Button Sizes</h3>
+            <div class="styleguide__button-row">
+              <button class="btn btn--primary btn--small">Small</button>
+              <button class="btn btn--primary">Default</button>
+              <button class="btn btn--primary btn--large">Large</button>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Button States</h3>
+            <div class="styleguide__button-row">
+              <button class="btn btn--primary">Normal</button>
+              <button class="btn btn--primary" disabled>Disabled</button>
+              <button class="btn btn--primary btn--loading">
+                <span class="btn__spinner"></span>
+                Loading
+              </button>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Icon Buttons</h3>
+            <div class="styleguide__button-row">
+              <button class="btn btn--primary btn--icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Continue
+              </button>
+              <button class="btn btn--outline btn--icon-only" aria-label="Search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_forms -%}
+        <div class="styleguide__section" id="styleguide-forms">
+          <h2 class="styleguide__section-title">Form Elements</h2>
+          <p class="styleguide__section-desc">Form inputs, selects, and other interactive elements.</p>
+
+          <div class="styleguide__subsection">
+            <h3>Text Inputs</h3>
+            <div class="styleguide__form-row">
+              <div class="field">
+                <label for="demo-text">Text Input</label>
+                <input type="text" id="demo-text" placeholder="Enter text...">
+              </div>
+              <div class="field">
+                <label for="demo-email">Email Input</label>
+                <input type="email" id="demo-email" placeholder="email@example.com">
+              </div>
+            </div>
+            <div class="styleguide__form-row">
+              <div class="field">
+                <label for="demo-password">Password Input</label>
+                <input type="password" id="demo-password" placeholder="Enter password...">
+              </div>
+              <div class="field">
+                <label for="demo-disabled">Disabled Input</label>
+                <input type="text" id="demo-disabled" placeholder="Disabled" disabled>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Textarea</h3>
+            <div class="field">
+              <label for="demo-textarea">Message</label>
+              <textarea id="demo-textarea" rows="4" placeholder="Enter your message..."></textarea>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Select</h3>
+            <div class="styleguide__form-row">
+              <div class="field">
+                <label for="demo-select">Select Option</label>
+                <select id="demo-select">
+                  <option value="">Choose an option</option>
+                  <option value="1">Option One</option>
+                  <option value="2">Option Two</option>
+                  <option value="3">Option Three</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Checkboxes & Radio</h3>
+            <div class="styleguide__form-row">
+              <div class="field field--checkbox">
+                <input type="checkbox" id="demo-check1">
+                <label for="demo-check1">Checkbox option one</label>
+              </div>
+              <div class="field field--checkbox">
+                <input type="checkbox" id="demo-check2" checked>
+                <label for="demo-check2">Checkbox option two</label>
+              </div>
+            </div>
+            <div class="styleguide__form-row">
+              <div class="field field--radio">
+                <input type="radio" id="demo-radio1" name="demo-radio" checked>
+                <label for="demo-radio1">Radio option one</label>
+              </div>
+              <div class="field field--radio">
+                <input type="radio" id="demo-radio2" name="demo-radio">
+                <label for="demo-radio2">Radio option two</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_spacing -%}
+        <div class="styleguide__section" id="styleguide-spacing">
+          <h2 class="styleguide__section-title">Spacing & Layout</h2>
+          <p class="styleguide__section-desc">Spacing tokens and layout utilities.</p>
+
+          <div class="styleguide__subsection">
+            <h3>Spacing Scale</h3>
+            <div class="styleguide__spacing-grid">
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 0.25rem; height: 0.25rem;"></div>
+                <span>4px / 0.25rem</span>
+              </div>
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 0.5rem; height: 0.5rem;"></div>
+                <span>8px / 0.5rem</span>
+              </div>
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 1rem; height: 1rem;"></div>
+                <span>16px / 1rem</span>
+              </div>
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 1.5rem; height: 1.5rem;"></div>
+                <span>24px / 1.5rem</span>
+              </div>
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 2rem; height: 2rem;"></div>
+                <span>32px / 2rem</span>
+              </div>
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 3rem; height: 3rem;"></div>
+                <span>48px / 3rem</span>
+              </div>
+              <div class="styleguide__spacing-item">
+                <div class="styleguide__spacing-box" style="width: 4rem; height: 4rem;"></div>
+                <span>64px / 4rem</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Border Radius</h3>
+            <div class="styleguide__radius-grid">
+              <div class="styleguide__radius-item">
+                <div class="styleguide__radius-box" style="border-radius: 0;"></div>
+                <span>None</span>
+              </div>
+              <div class="styleguide__radius-item">
+                <div class="styleguide__radius-box" style="border-radius: var(--button-radius);"></div>
+                <span>Button</span>
+                <code>--button-radius</code>
+              </div>
+              <div class="styleguide__radius-item">
+                <div class="styleguide__radius-box" style="border-radius: var(--card-radius);"></div>
+                <span>Card</span>
+                <code>--card-radius</code>
+              </div>
+              <div class="styleguide__radius-item">
+                <div class="styleguide__radius-box" style="border-radius: 50%;"></div>
+                <span>Full</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Section Spacing</h3>
+            <p>Default section padding: <code>var(--spacing-sections)</code></p>
+            <p>Grid gap: <code>var(--grid-gap)</code></p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_components -%}
+        <div class="styleguide__section" id="styleguide-components">
+          <h2 class="styleguide__section-title">Components</h2>
+          <p class="styleguide__section-desc">Common UI components used throughout the theme.</p>
+
+          <div class="styleguide__subsection">
+            <h3>Cards</h3>
+            <div class="styleguide__card-grid">
+              <div class="card">
+                <div class="card__media" style="background: var(--color-background-alt); aspect-ratio: 4/3;"></div>
+                <div class="card__content">
+                  <h4 class="card__title">Card Title</h4>
+                  <p class="card__text">Card description text goes here with some additional context.</p>
+                </div>
+              </div>
+              <div class="card card--bordered">
+                <div class="card__media" style="background: var(--color-background-alt); aspect-ratio: 4/3;"></div>
+                <div class="card__content">
+                  <h4 class="card__title">Bordered Card</h4>
+                  <p class="card__text">Card with border instead of shadow.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Badges</h3>
+            <div class="styleguide__badge-row">
+              <span class="badge">Default</span>
+              <span class="badge badge--primary">Primary</span>
+              <span class="badge badge--success">Success</span>
+              <span class="badge badge--warning">Warning</span>
+              <span class="badge badge--error">Error</span>
+            </div>
+          </div>
+
+          <div class="styleguide__subsection">
+            <h3>Alerts</h3>
+            <div class="alert alert--info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <p>This is an informational alert message.</p>
+            </div>
+            <div class="alert alert--success">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <p>This is a success alert message.</p>
+            </div>
+            <div class="alert alert--warning">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <p>This is a warning alert message.</p>
+            </div>
+            <div class="alert alert--error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <p>This is an error alert message.</p>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .styleguide {
+    padding: 4rem 0;
+    background: var(--color-background, #ffffff);
+  }
+
+  .styleguide__intro {
+    max-width: 40rem;
+    margin-bottom: 4rem;
+  }
+
+  .styleguide__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+  }
+
+  .styleguide__description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary, #666);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .styleguide__sections {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .styleguide__section {
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .styleguide__section:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .styleguide__section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .styleguide__section-desc {
+    font-size: 1rem;
+    color: var(--color-text-secondary, #666);
+    margin: 0 0 2rem;
+  }
+
+  .styleguide__subsection {
+    margin-bottom: 3rem;
+  }
+
+  .styleguide__subsection:last-child {
+    margin-bottom: 0;
+  }
+
+  .styleguide__subsection h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary, #666);
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  /* Colors */
+  .styleguide__color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .styleguide__color-card {
+    background: var(--color-background, #ffffff);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: var(--card-radius, 8px);
+    overflow: hidden;
+  }
+
+  .styleguide__color-swatch {
+    height: 80px;
+  }
+
+  .styleguide__color-info {
+    padding: 1rem;
+  }
+
+  .styleguide__color-name {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .styleguide__color-info code {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  /* Typography */
+  .styleguide__type-sample {
+    padding: 1.5rem;
+    background: var(--color-background-alt, #f8f9fa);
+    border-radius: var(--card-radius, 8px);
+    margin-bottom: 1rem;
+  }
+
+  .styleguide__type-sample h1,
+  .styleguide__type-sample h2,
+  .styleguide__type-sample h3,
+  .styleguide__type-sample h4,
+  .styleguide__type-sample h5,
+  .styleguide__type-sample h6,
+  .styleguide__type-sample p,
+  .styleguide__type-sample ul,
+  .styleguide__type-sample ol {
+    margin: 0 0 0.75rem;
+  }
+
+  .styleguide__type-sample code {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #666);
+    margin-top: 0.5rem;
+  }
+
+  .styleguide__type-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .text-large {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .text-small {
+    font-size: 0.875rem;
+  }
+
+  /* Buttons */
+  .styleguide__button-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .styleguide__button-row code {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  /* Forms */
+  .styleguide__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Spacing */
+  .styleguide__spacing-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-end;
+  }
+
+  .styleguide__spacing-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .styleguide__spacing-box {
+    background: var(--color-primary, #d71920);
+  }
+
+  .styleguide__spacing-item span {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  .styleguide__radius-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .styleguide__radius-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .styleguide__radius-box {
+    width: 80px;
+    height: 80px;
+    background: var(--color-background-alt, #f8f9fa);
+    border: 2px solid var(--color-border, #e5e5e5);
+  }
+
+  .styleguide__radius-item span {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .styleguide__radius-item code {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  /* Components */
+  .styleguide__card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: var(--color-background, #ffffff);
+    border-radius: var(--card-radius, 8px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .card--bordered {
+    box-shadow: none;
+    border: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .card__content {
+    padding: 1.25rem;
+  }
+
+  .card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .card__text {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary, #666);
+    margin: 0;
+  }
+
+  .styleguide__badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 100px;
+    background: var(--color-background-alt, #f8f9fa);
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .badge--primary {
+    background: var(--color-primary, #d71920);
+    color: #ffffff;
+  }
+
+  .badge--success {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .badge--warning {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .badge--error {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--card-radius, 8px);
+    margin-bottom: 1rem;
+  }
+
+  .alert svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  .alert p {
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+
+  .alert--info {
+    background: #eff6ff;
+    color: #1e40af;
+  }
+
+  .alert--success {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .alert--warning {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .alert--error {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .styleguide__form-row,
+    .styleguide__type-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Styleguide",
+  "tag": "section",
+  "class": "section-styleguide",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_intro",
+      "label": "Show introduction",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Design System"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A comprehensive overview of colors, typography, buttons, and components used in the FORGE theme."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_colors",
+      "label": "Show colors section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_typography",
+      "label": "Show typography section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buttons",
+      "label": "Show buttons section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_forms",
+      "label": "Show forms section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_spacing",
+      "label": "Show spacing section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_components",
+      "label": "Show components section",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Styleguide"
+    }
+  ]
+}
+{% endschema %}

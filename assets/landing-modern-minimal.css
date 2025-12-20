@@ -1,0 +1,276 @@
+/* Landing: Modern Minimal
+ * Clean, sophisticated aesthetic with minimal design
+ */
+
+.landing-modern-minimal {
+  --minimal-text: #1a1a1a;
+  --minimal-text-muted: #666666;
+  --minimal-bg: #ffffff;
+  --minimal-bg-alt: #fafafa;
+  --minimal-border: #e5e5e5;
+  --minimal-accent: #000000;
+}
+
+/* Hero */
+.minimal-hero {
+  padding: 8rem 0;
+  background: var(--minimal-bg);
+}
+
+.minimal-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.minimal-hero__eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--minimal-text-muted);
+  margin-bottom: 1rem;
+}
+
+.minimal-hero__title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+  color: var(--minimal-text);
+}
+
+.minimal-hero__subtitle {
+  font-size: 1.125rem;
+  color: var(--minimal-text-muted);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+  max-width: 28rem;
+}
+
+.minimal-hero__media {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+.minimal-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Products */
+.minimal-products {
+  padding: 6rem 0;
+  background: var(--minimal-bg);
+}
+
+.minimal-products__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.minimal-product-card__link {
+  display: block;
+  text-decoration: none;
+}
+
+.minimal-product-card__image {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--minimal-bg-alt);
+  margin-bottom: 1rem;
+}
+
+.minimal-product-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.minimal-product-card:hover .minimal-product-card__image img {
+  transform: scale(1.05);
+}
+
+.minimal-product-card__title {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 0 0.5rem;
+  color: var(--minimal-text);
+}
+
+.minimal-product-card__price {
+  font-size: 0.875rem;
+  color: var(--minimal-text-muted);
+}
+
+.minimal-products__action {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Featured */
+.minimal-featured {
+  padding: 6rem 0;
+  background: var(--minimal-bg-alt);
+}
+
+.minimal-featured__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.minimal-featured__image {
+  width: 100%;
+  height: auto;
+}
+
+.minimal-featured__title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin: 0 0 1.5rem;
+  color: var(--minimal-text);
+}
+
+.minimal-featured__text {
+  font-size: 1rem;
+  color: var(--minimal-text-muted);
+  line-height: 1.8;
+  margin: 0 0 2rem;
+}
+
+/* Values */
+.minimal-values {
+  padding: 4rem 0;
+  background: var(--minimal-bg);
+  border-top: 1px solid var(--minimal-border);
+  border-bottom: 1px solid var(--minimal-border);
+}
+
+.minimal-values__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  text-align: center;
+}
+
+.minimal-value__title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+  color: var(--minimal-text);
+}
+
+.minimal-value__text {
+  font-size: 0.875rem;
+  color: var(--minimal-text-muted);
+  margin: 0;
+}
+
+/* Testimonials */
+.minimal-testimonials {
+  padding: 6rem 0;
+  background: var(--minimal-bg);
+}
+
+.minimal-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.minimal-testimonial {
+  padding: 2rem;
+  background: var(--minimal-bg-alt);
+}
+
+.minimal-testimonial__quote {
+  font-size: 1.125rem;
+  font-style: italic;
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+  color: var(--minimal-text);
+}
+
+.minimal-testimonial__name {
+  display: block;
+  font-weight: 500;
+  color: var(--minimal-text);
+}
+
+.minimal-testimonial__title {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--minimal-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Newsletter */
+.minimal-newsletter {
+  padding: 6rem 0;
+  background: var(--minimal-bg-alt);
+}
+
+.minimal-newsletter__inner {
+  max-width: 32rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.minimal-newsletter__title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 0 0 1rem;
+  color: var(--minimal-text);
+}
+
+.minimal-newsletter__text {
+  font-size: 1rem;
+  color: var(--minimal-text-muted);
+  margin: 0 0 2rem;
+}
+
+.minimal-newsletter__form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.minimal-newsletter__input {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--minimal-border);
+  font-size: 1rem;
+  background: var(--minimal-bg);
+}
+
+.minimal-newsletter__input:focus {
+  outline: none;
+  border-color: var(--minimal-accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .minimal-hero__inner,
+  .minimal-featured__inner,
+  .minimal-values__grid,
+  .minimal-testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .minimal-products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .minimal-newsletter__form {
+    flex-direction: column;
+  }
+}

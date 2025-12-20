@@ -89,9 +89,21 @@
             "text_color": "#111827",
             "accent_color": "#f59e0b"
           }
+        },
+        "preset-6": {
+          "type": "card",
+          "settings": {
+            "title": "Forge Industrial",
+            "description": "Heavy-duty professional grade. Built to last.",
+            "link": "/pages/showcase-forge-industrial",
+            "button_text": "View Demo",
+            "background_color": "#1a1a1a",
+            "text_color": "#ffffff",
+            "accent_color": "#d71920"
+          }
         }
       },
-      "block_order": ["preset-1", "preset-2", "preset-3", "preset-4", "preset-5"]
+      "block_order": ["preset-1", "preset-2", "preset-3", "preset-4", "preset-5", "preset-6"]
     },
     "features": {
       "type": "builder-grid",

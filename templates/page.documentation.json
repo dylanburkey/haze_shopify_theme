@@ -1,0 +1,276 @@
+{
+  "layout": "theme",
+  "name": "Documentation",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "small",
+        "text_alignment": "left",
+        "heading": "FORGE 4.0 Documentation",
+        "subheading": "Everything you need to know to get the most out of your theme",
+        "show_overlay": true,
+        "overlay_opacity": 70
+      }
+    },
+    "documentation": {
+      "type": "side-menu",
+      "settings": {
+        "nav_title": "Documentation",
+        "aria_label": "Documentation navigation",
+        "menu_position": "left",
+        "sticky": true,
+        "show_progress": true
+      },
+      "blocks": {
+        "nav-group-1": {
+          "type": "nav_group",
+          "settings": {
+            "label": "Getting Started"
+          }
+        },
+        "nav-1": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Introduction",
+            "anchor_id": "introduction",
+            "icon": "book"
+          }
+        },
+        "nav-2": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Installation",
+            "anchor_id": "installation",
+            "icon": "download"
+          }
+        },
+        "nav-3": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Theme Presets",
+            "anchor_id": "presets",
+            "icon": "palette"
+          }
+        },
+        "nav-divider-1": {
+          "type": "nav_divider",
+          "settings": {}
+        },
+        "nav-group-2": {
+          "type": "nav_group",
+          "settings": {
+            "label": "Features"
+          }
+        },
+        "nav-4": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Mega Menu",
+            "anchor_id": "mega-menu",
+            "icon": "layout"
+          }
+        },
+        "nav-5": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Loyalty Engine",
+            "anchor_id": "loyalty",
+            "icon": "zap"
+          }
+        },
+        "nav-6": {
+          "type": "nav_item",
+          "settings": {
+            "label": "SEO Tools",
+            "anchor_id": "seo",
+            "icon": "layers"
+          }
+        },
+        "nav-7": {
+          "type": "nav_item",
+          "settings": {
+            "label": "PWA Support",
+            "anchor_id": "pwa",
+            "icon": "zap"
+          }
+        },
+        "nav-divider-2": {
+          "type": "nav_divider",
+          "settings": {}
+        },
+        "nav-group-3": {
+          "type": "nav_group",
+          "settings": {
+            "label": "Customization"
+          }
+        },
+        "nav-8": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Theme Settings",
+            "anchor_id": "settings",
+            "icon": "settings"
+          }
+        },
+        "nav-9": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Sections & Blocks",
+            "anchor_id": "sections",
+            "icon": "layers"
+          }
+        },
+        "nav-10": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Custom Code",
+            "anchor_id": "custom-code",
+            "icon": "code"
+          }
+        },
+        "nav-divider-3": {
+          "type": "nav_divider",
+          "settings": {}
+        },
+        "nav-11": {
+          "type": "nav_item",
+          "settings": {
+            "label": "FAQ",
+            "anchor_id": "faq",
+            "icon": "help-circle"
+          }
+        },
+        "content-1": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "introduction",
+            "title": "Introduction",
+            "content": "<p>Welcome to <strong>FORGE 4.0</strong>, the Shopify theme designed for professionals who need power, flexibility, and performance without the overhead of third-party apps.</p><h3>Why FORGE?</h3><p>FORGE replaces $150-400/month in third-party apps with built-in features:</p><ul><li><strong>Mega Menu</strong> - Advanced navigation with images, videos, and multi-column layouts</li><li><strong>Loyalty Engine</strong> - Points system, referrals, and VIP tiers</li><li><strong>SEO Suite</strong> - Structured data, meta optimization, and performance tuning</li><li><strong>Progressive Web App</strong> - Offline support and app-like experience</li><li><strong>AI Search & Chat</strong> - Intelligent product discovery</li><li><strong>Video Gallery</strong> - YouTube, Vimeo, and self-hosted video support</li><li><strong>Advanced FAQ</strong> - Searchable, categorized FAQ with schema markup</li></ul><h3>Who is FORGE for?</h3><p>FORGE is built for industrial suppliers, B2B merchants, equipment dealers, and any business that needs professional-grade features without app subscriptions.</p>"
+          }
+        },
+        "content-2": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "installation",
+            "title": "Installation",
+            "content": "<p>Installing FORGE is straightforward through the Shopify Theme Store.</p><h3>Step 1: Purchase & Download</h3><p>After purchasing FORGE from the Theme Store, it will automatically be added to your theme library.</p><h3>Step 2: Customize</h3><p>Navigate to <strong>Online Store → Themes</strong> in your Shopify admin. Click <strong>Customize</strong> on FORGE to open the theme editor.</p><h3>Step 3: Choose a Preset</h3><p>FORGE includes 11 pre-designed presets for different industries and aesthetics. Select one from <strong>Theme settings → Presets</strong> to get started quickly.</p><h3>Step 4: Add Your Content</h3><p>Replace placeholder content with your own:</p><ul><li>Upload your logo in <strong>Header</strong> settings</li><li>Add products to collections</li><li>Customize homepage sections</li><li>Set up navigation menus</li></ul><h3>Step 5: Publish</h3><p>When you're ready, click <strong>Publish</strong> to make FORGE your live theme.</p>"
+          }
+        },
+        "content-3": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "presets",
+            "title": "Theme Presets",
+            "content": "<p>FORGE includes 11 professionally designed presets, each with its own color palette, typography, and layout configurations.</p><h3>Industrial Presets</h3><ul><li><strong>The Welder</strong> - Bold red accent, rugged industrial feel</li><li><strong>Work Zone</strong> - Safety orange, construction-ready</li><li><strong>Site Ops</strong> - Caution yellow, high visibility</li><li><strong>Midnight Shift</strong> - Dark mode, late-night operations</li><li><strong>Precision</strong> - Professional blue, engineering focus</li><li><strong>Tactical</strong> - Military green, outdoor equipment</li><li><strong>Monolith</strong> - Pure black, minimal and bold</li></ul><h3>Lifestyle Presets</h3><ul><li><strong>Modern Minimal</strong> - Clean, sophisticated aesthetics</li><li><strong>Bold Impact</strong> - High contrast, attention-grabbing</li><li><strong>Warm Artisan</strong> - Handcrafted, artisanal feel</li><li><strong>Tech Forward</strong> - Futuristic, innovation-focused</li></ul><h3>Switching Presets</h3><p>To change presets, go to <strong>Theme settings → Presets</strong> and select your desired style. All colors, fonts, and spacing will update automatically.</p>"
+          }
+        },
+        "content-4": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "mega-menu",
+            "title": "Mega Menu",
+            "content": "<p>The FORGE Mega Menu transforms your navigation into a powerful discovery tool.</p><h3>Features</h3><ul><li>Multi-column dropdown layouts</li><li>Featured images and promotional banners</li><li>Video integration</li><li>Collection showcases</li><li>Quick links and CTAs</li></ul><h3>Setting Up</h3><ol><li>Navigate to <strong>Header → Mega Menu</strong> in the theme editor</li><li>Create menu items and assign dropdown types</li><li>Add images, links, and featured content</li><li>Configure column layouts and widths</li></ol><h3>Best Practices</h3><ul><li>Limit top-level items to 5-7 for clarity</li><li>Use images to highlight key categories</li><li>Include seasonal promotions in featured areas</li><li>Test on mobile to ensure usability</li></ul>"
+          }
+        },
+        "content-5": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "loyalty",
+            "title": "Loyalty Engine",
+            "content": "<p>Built-in customer loyalty without expensive apps. Reward your customers and increase retention.</p><h3>Points System</h3><p>Customers earn points for:</p><ul><li>Making purchases (configurable points per dollar)</li><li>Creating an account</li><li>Writing product reviews</li><li>Social media follows</li><li>Referrals</li></ul><h3>VIP Tiers</h3><p>Create tiered loyalty levels with increasing benefits:</p><ul><li><strong>Bronze</strong> - Entry level, basic rewards</li><li><strong>Silver</strong> - 1.5x point multiplier</li><li><strong>Gold</strong> - 2x points, exclusive products</li><li><strong>Platinum</strong> - 3x points, priority support, free shipping</li></ul><h3>Referral Program</h3><p>Enable word-of-mouth marketing with built-in referral tracking. Customers share unique links and earn rewards when friends make purchases.</p><h3>Configuration</h3><p>Access loyalty settings in <strong>Theme settings → Loyalty</strong>. Configure point values, tier thresholds, and reward options.</p>"
+          }
+        },
+        "content-6": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "seo",
+            "title": "SEO Tools",
+            "content": "<p>FORGE includes comprehensive SEO optimization built into every page.</p><h3>Structured Data</h3><p>Automatic JSON-LD schema markup for:</p><ul><li><strong>Organization</strong> - Business information for knowledge panels</li><li><strong>Product</strong> - Rich snippets with price, availability, reviews</li><li><strong>BreadcrumbList</strong> - Navigation path in search results</li><li><strong>FAQPage</strong> - FAQ rich results</li><li><strong>VideoObject</strong> - Video thumbnails in search</li></ul><h3>Performance Optimization</h3><ul><li>Critical CSS inlining for faster first paint</li><li>Lazy loading for images and videos</li><li>Preconnect to external resources</li><li>Efficient JavaScript loading</li></ul><h3>Meta Tag Management</h3><p>Control meta titles, descriptions, and social sharing images for all pages through the theme editor.</p>"
+          }
+        },
+        "content-7": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "pwa",
+            "title": "PWA Support",
+            "content": "<p>FORGE is a Progressive Web App, providing an app-like experience for your customers.</p><h3>Features</h3><ul><li><strong>Offline Mode</strong> - Core pages available without internet</li><li><strong>Add to Home Screen</strong> - Install as a mobile app</li><li><strong>Fast Loading</strong> - Service worker caching</li><li><strong>Push Notifications</strong> - Re-engage customers (requires setup)</li></ul><h3>Enabling PWA</h3><p>PWA features are enabled by default. Configure the app manifest in <strong>Theme settings → PWA</strong>:</p><ul><li>App name and short name</li><li>Theme color and background color</li><li>App icons (multiple sizes)</li><li>Display mode (standalone, fullscreen, etc.)</li></ul><h3>Testing</h3><p>Use Chrome DevTools → Application → Manifest to verify your PWA configuration. The Lighthouse audit can also assess PWA readiness.</p>"
+          }
+        },
+        "content-8": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "settings",
+            "title": "Theme Settings",
+            "content": "<p>Access global theme settings through <strong>Online Store → Themes → Customize → Theme settings</strong>.</p><h3>Available Settings</h3><ul><li><strong>Colors</strong> - Primary, secondary, accent, and background colors</li><li><strong>Typography</strong> - Heading and body font families, sizes, weights</li><li><strong>Layout</strong> - Container width, section spacing, grid gaps</li><li><strong>Buttons</strong> - Border radius, padding, hover effects</li><li><strong>Cards</strong> - Shadows, borders, corner radius</li><li><strong>Header</strong> - Logo, navigation style, sticky behavior</li><li><strong>Footer</strong> - Columns, newsletter, social links</li><li><strong>Cart</strong> - Drawer vs page, upsells, notes</li><li><strong>Product</strong> - Gallery style, variant display, add to cart</li><li><strong>Collection</strong> - Grid layout, filters, sorting</li></ul><h3>Design Tokens</h3><p>FORGE uses CSS custom properties for consistent styling. All colors, fonts, and spacing reference these tokens, making customization predictable.</p>"
+          }
+        },
+        "content-9": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "sections",
+            "title": "Sections & Blocks",
+            "content": "<p>FORGE includes 70+ sections for building any page layout.</p><h3>Section Categories</h3><ul><li><strong>Hero</strong> - Banner, slideshow, video hero, split hero</li><li><strong>Products</strong> - Featured collection, product grid, recently viewed</li><li><strong>Content</strong> - Rich text, image with text, multicolumn</li><li><strong>Media</strong> - Image gallery, video gallery, before/after</li><li><strong>Trust</strong> - Testimonials, reviews, trust badges, stats</li><li><strong>Conversion</strong> - CTA banners, newsletter, countdown</li><li><strong>Navigation</strong> - Mega menu, side menu, breadcrumbs</li><li><strong>FAQ</strong> - Accordion FAQ, searchable FAQ</li></ul><h3>Using Blocks</h3><p>Many sections support blocks for flexible content. Click <strong>Add block</strong> within a section to add content units like:</p><ul><li>Headings and text</li><li>Buttons and links</li><li>Images and icons</li><li>Product cards</li><li>Custom HTML</li></ul>"
+          }
+        },
+        "content-10": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "custom-code",
+            "title": "Custom Code",
+            "content": "<p>Add custom CSS and JavaScript to extend FORGE functionality.</p><h3>Custom CSS</h3><p>Add custom styles in <strong>Theme settings → Custom CSS</strong>. Use CSS custom properties for consistency:</p><pre><code>.my-custom-element {\n  color: var(--color-primary);\n  font-family: var(--font-heading-family);\n  padding: var(--spacing-sections);\n}</code></pre><h3>Custom JavaScript</h3><p>Add scripts in <strong>Theme settings → Custom JavaScript</strong>. FORGE utilities are available:</p><pre><code>// Debounce function\nUtils.debounce(callback, delay);\n\n// Fetch JSON data\nUtils.fetchJSON(url);\n\n// Trap focus in modal\nUtils.trapFocus(element);</code></pre><h3>Best Practices</h3><ul><li>Test custom code thoroughly before publishing</li><li>Use browser DevTools to debug issues</li><li>Avoid overriding core theme styles when possible</li><li>Document your customizations for future reference</li></ul>"
+          }
+        },
+        "content-11": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "faq",
+            "title": "Frequently Asked Questions",
+            "content": "<h3>How do I update FORGE?</h3><p>Theme updates are delivered through the Shopify Theme Store. Check for updates in your theme library and apply them when available. Your customizations will be preserved.</p><h3>Can I use FORGE on multiple stores?</h3><p>Each FORGE license is valid for one store. Contact support for multi-store licensing options.</p><h3>Is FORGE mobile-responsive?</h3><p>Yes, FORGE is fully responsive and optimized for all device sizes. We use container queries for precise component adaptation.</p><h3>How do I get support?</h3><p>Submit support requests through the Shopify Theme Store. Include your store URL, browser information, and detailed description of your issue.</p><h3>Can I customize the code?</h3><p>Yes, FORGE is built with clean, documented code. You can modify Liquid templates, CSS, and JavaScript. We recommend duplicating the theme before making code changes.</p><h3>Does FORGE work with Shopify Markets?</h3><p>Yes, FORGE fully supports Shopify Markets for international selling, including currency conversion, language translation, and regional customization.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "nav-group-1",
+        "nav-1",
+        "nav-2",
+        "nav-3",
+        "nav-divider-1",
+        "nav-group-2",
+        "nav-4",
+        "nav-5",
+        "nav-6",
+        "nav-7",
+        "nav-divider-2",
+        "nav-group-3",
+        "nav-8",
+        "nav-9",
+        "nav-10",
+        "nav-divider-3",
+        "nav-11",
+        "content-1",
+        "content-2",
+        "content-3",
+        "content-4",
+        "content-5",
+        "content-6",
+        "content-7",
+        "content-8",
+        "content-9",
+        "content-10",
+        "content-11"
+      ]
+    },
+    "cta": {
+      "type": "cta-banner",
+      "settings": {
+        "title": "Need More Help?",
+        "text": "Our support team is here to help you get the most out of FORGE.",
+        "button_label": "Contact Support",
+        "button_link": "/pages/contact",
+        "button_style": "primary"
+      }
+    }
+  },
+  "order": ["hero", "documentation", "cta"]
+}

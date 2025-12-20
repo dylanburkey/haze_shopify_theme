@@ -1,0 +1,315 @@
+{% comment %}
+  Feature Showcase Section
+  Displays a single feature with image and bullet points
+{% endcomment %}
+
+<section class="feature-showcase feature-showcase--{{ section.settings.layout }}" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="feature-showcase__inner">
+      <div class="feature-showcase__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 800 | image_tag: class: 'feature-showcase__image', loading: 'lazy' }}
+        {%- else -%}
+          <div class="feature-showcase__placeholder">
+            <div class="feature-showcase__icon-large">
+              {%- case section.settings.icon -%}
+                {%- when 'menu' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                {%- when 'award' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                {%- when 'search' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                {%- when 'zap' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                {%- when 'layout' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                {%- when 'layers' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                {%- when 'file-text' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                {%- when 'shopping-bag' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                {%- when 'help-circle' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                {%- when 'smartphone' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                {%- when 'message-circle' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              {%- endcase -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="feature-showcase__content">
+        {%- if section.settings.badge_text != blank -%}
+          <span class="feature-showcase__badge">{{ section.settings.badge_text }}</span>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <span class="feature-showcase__eyebrow">{{ section.settings.subtitle }}</span>
+        {%- endif -%}
+        <h2 class="feature-showcase__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.description != blank -%}
+          <p class="feature-showcase__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+        {%- if section.blocks.size > 0 -%}
+          <ul class="feature-showcase__list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'feature_point' -%}
+                <li class="feature-showcase__list-item" {{ block.shopify_attributes }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  {{ block.settings.text }}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="btn btn--primary">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-showcase {
+    padding: 5rem 0;
+    background: var(--color-background, #ffffff);
+  }
+
+  .feature-showcase:nth-child(even) {
+    background: var(--color-background-alt, #f8f9fa);
+  }
+
+  .feature-showcase__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .feature-showcase--image-left .feature-showcase__media {
+    order: 1;
+  }
+
+  .feature-showcase--image-left .feature-showcase__content {
+    order: 2;
+  }
+
+  .feature-showcase--image-right .feature-showcase__media {
+    order: 2;
+  }
+
+  .feature-showcase--image-right .feature-showcase__content {
+    order: 1;
+  }
+
+  .feature-showcase__media {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: var(--card-radius, 8px);
+    background: var(--color-background-alt, #f8f9fa);
+  }
+
+  .feature-showcase__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feature-showcase__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary, #d71920) 0%, #b81419 100%);
+  }
+
+  .feature-showcase__icon-large {
+    width: 6rem;
+    height: 6rem;
+    color: #ffffff;
+  }
+
+  .feature-showcase__icon-large svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feature-showcase__badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .feature-showcase__eyebrow {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary, #d71920);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-showcase__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .feature-showcase__description {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary, #666);
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+  }
+
+  .feature-showcase__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+
+  .feature-showcase__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .feature-showcase__list-item svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #16a34a;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  @media (max-width: 768px) {
+    .feature-showcase__inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .feature-showcase--image-left .feature-showcase__media,
+    .feature-showcase--image-right .feature-showcase__media {
+      order: 1;
+    }
+
+    .feature-showcase--image-left .feature-showcase__content,
+    .feature-showcase--image-right .feature-showcase__content {
+      order: 2;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Feature Showcase",
+  "tag": "section",
+  "class": "section-feature-showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Feature Name"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Eyebrow text",
+      "default": "Feature Category"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Describe what this feature does and its benefits."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "info": "E.g., 'Replaces $20/mo app'"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "image-left", "label": "Image left" },
+        { "value": "image-right", "label": "Image right" }
+      ],
+      "default": "image-right"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon (if no image)",
+      "options": [
+        { "value": "menu", "label": "Menu" },
+        { "value": "award", "label": "Award" },
+        { "value": "search", "label": "Search" },
+        { "value": "zap", "label": "Zap/Speed" },
+        { "value": "layout", "label": "Layout" },
+        { "value": "layers", "label": "Layers" },
+        { "value": "file-text", "label": "File/Document" },
+        { "value": "shopping-bag", "label": "Shopping Bag" },
+        { "value": "help-circle", "label": "Help/FAQ" },
+        { "value": "smartphone", "label": "Smartphone" },
+        { "value": "message-circle", "label": "Chat" },
+        { "value": "check", "label": "Checkmark" }
+      ],
+      "default": "check"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_point",
+      "name": "Feature Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Feature benefit point"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Showcase"
+    }
+  ]
+}
+{% endschema %}

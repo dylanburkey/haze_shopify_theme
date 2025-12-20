@@ -1,0 +1,754 @@
+{% comment %}
+  Side Menu Section
+  Navigation menu for documentation/content pages with CSS anchor positioning
+{% endcomment %}
+
+{%- liquid
+  assign menu_position = section.settings.menu_position
+  assign sticky = section.settings.sticky
+  assign show_progress = section.settings.show_progress
+-%}
+
+<div class="side-menu side-menu--{{ menu_position }}{% if sticky %} side-menu--sticky{% endif %}" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="side-menu__layout">
+      <aside class="side-menu__nav" role="navigation" aria-label="{{ section.settings.aria_label | default: 'Page navigation' }}">
+        {%- if section.settings.nav_title != blank -%}
+          <h2 class="side-menu__title">{{ section.settings.nav_title }}</h2>
+        {%- endif -%}
+
+        {%- if show_progress -%}
+          <div class="side-menu__progress">
+            <div class="side-menu__progress-bar" id="reading-progress-{{ section.id }}"></div>
+          </div>
+        {%- endif -%}
+
+        <nav class="side-menu__list">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'nav_item' -%}
+                <a
+                  href="#{{ block.settings.anchor_id }}"
+                  class="side-menu__link{% if forloop.first %} side-menu__link--active{% endif %}"
+                  data-anchor-target="{{ block.settings.anchor_id }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block.settings.icon != 'none' -%}
+                    <span class="side-menu__icon">
+                      {%- case block.settings.icon -%}
+                        {%- when 'book' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        {%- when 'settings' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        {%- when 'code' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        {%- when 'layout' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                        {%- when 'palette' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/></svg>
+                        {%- when 'zap' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        {%- when 'layers' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        {%- when 'file-text' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        {%- when 'help-circle' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        {%- when 'download' -%}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      {%- endcase -%}
+                    </span>
+                  {%- endif -%}
+                  <span class="side-menu__text">{{ block.settings.label }}</span>
+                </a>
+
+              {%- when 'nav_group' -%}
+                <div class="side-menu__group" {{ block.shopify_attributes }}>
+                  <span class="side-menu__group-label">{{ block.settings.label }}</span>
+                </div>
+
+              {%- when 'nav_divider' -%}
+                <hr class="side-menu__divider" {{ block.shopify_attributes }}>
+            {%- endcase -%}
+          {%- endfor -%}
+        </nav>
+      </aside>
+
+      <div class="side-menu__content">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'content_section' -%}
+            <section
+              class="side-menu__section"
+              id="{{ block.settings.section_id }}"
+              style="anchor-name: --{{ block.settings.section_id }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.title != blank -%}
+                <h2 class="side-menu__section-title">{{ block.settings.title }}</h2>
+              {%- endif -%}
+              {%- if block.settings.content != blank -%}
+                <div class="side-menu__section-content rte">
+                  {{ block.settings.content }}
+                </div>
+              {%- endif -%}
+            </section>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .side-menu {
+    padding: 4rem 0;
+    background: var(--color-background, #ffffff);
+  }
+
+  .side-menu__layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .side-menu--right .side-menu__layout {
+    grid-template-columns: 1fr 280px;
+  }
+
+  .side-menu--right .side-menu__nav {
+    order: 2;
+  }
+
+  .side-menu--right .side-menu__content {
+    order: 1;
+  }
+
+  .side-menu__nav {
+    background: var(--color-background-alt, #f8f9fa);
+    border-radius: var(--card-radius, 8px);
+    padding: 1.5rem;
+  }
+
+  .side-menu--sticky .side-menu__nav {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + 2rem);
+    max-height: calc(100vh - var(--header-height, 80px) - 4rem);
+    overflow-y: auto;
+  }
+
+  .side-menu__title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary, #666);
+    margin: 0 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .side-menu__progress {
+    height: 3px;
+    background: var(--color-border, #e5e5e5);
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .side-menu__progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--color-primary, #d71920);
+    transition: width 0.15s ease;
+  }
+
+  .side-menu__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .side-menu__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    color: var(--color-text, #1a1a1a);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    border-radius: calc(var(--button-radius, 4px) / 2);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .side-menu__link:hover {
+    background: var(--color-background, #ffffff);
+    color: var(--color-primary, #d71920);
+  }
+
+  .side-menu__link--active {
+    background: var(--color-primary, #d71920);
+    color: #ffffff;
+  }
+
+  .side-menu__link--active:hover {
+    background: var(--color-primary, #d71920);
+    color: #ffffff;
+  }
+
+  .side-menu__icon {
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .side-menu__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .side-menu__text {
+    flex: 1;
+  }
+
+  .side-menu__group {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .side-menu__group:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .side-menu__group-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary, #666);
+    padding: 0.5rem 0.875rem;
+  }
+
+  .side-menu__divider {
+    border: none;
+    border-top: 1px solid var(--color-border, #e5e5e5);
+    margin: 0.75rem 0;
+  }
+
+  .side-menu__content {
+    min-width: 0;
+  }
+
+  .side-menu__section {
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--color-border, #e5e5e5);
+    scroll-margin-top: calc(var(--header-height, 80px) + 2rem);
+  }
+
+  .side-menu__section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .side-menu__section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .side-menu__section-content {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .side-menu__section-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+  }
+
+  .side-menu__section-content h4 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  .side-menu__section-content p {
+    margin: 0 0 1rem;
+  }
+
+  .side-menu__section-content ul,
+  .side-menu__section-content ol {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .side-menu__section-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .side-menu__section-content code {
+    background: var(--color-background-alt, #f8f9fa);
+    padding: 0.125rem 0.375rem;
+    border-radius: 3px;
+    font-size: 0.875em;
+    font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Segoe UI Mono', monospace;
+  }
+
+  .side-menu__section-content pre {
+    background: var(--color-background-alt, #f8f9fa);
+    padding: 1rem 1.25rem;
+    border-radius: var(--card-radius, 8px);
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .side-menu__section-content pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .side-menu__section-content blockquote {
+    border-left: 3px solid var(--color-primary, #d71920);
+    margin: 1.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  .side-menu__section-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--card-radius, 8px);
+    margin: 1rem 0;
+  }
+
+  .side-menu__section-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+
+  .side-menu__section-content th,
+  .side-menu__section-content td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .side-menu__section-content th {
+    font-weight: 600;
+    background: var(--color-background-alt, #f8f9fa);
+  }
+
+  /* CSS Anchor Positioning - Progressive Enhancement */
+  @supports (anchor-name: --test) {
+    .side-menu__link[data-anchor-target] {
+      position-anchor: var(--anchor-target);
+    }
+  }
+
+  /* Mobile Navigation Toggle */
+  .side-menu__mobile-toggle {
+    display: none;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-background-alt, #f8f9fa);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: var(--card-radius, 8px);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text, #1a1a1a);
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  .side-menu__mobile-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .side-menu__mobile-toggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 968px) {
+    .side-menu__layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .side-menu--right .side-menu__nav,
+    .side-menu--right .side-menu__content {
+      order: unset;
+    }
+
+    .side-menu__mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .side-menu__nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      border-radius: 0;
+      padding: 5rem 1.5rem 1.5rem;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .side-menu__nav.is-open {
+      transform: translateX(0);
+    }
+
+    .side-menu--sticky .side-menu__nav {
+      position: fixed;
+      top: 0;
+      max-height: 100vh;
+    }
+
+    .side-menu__nav-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text, #1a1a1a);
+    }
+
+    .side-menu__content {
+      padding-top: 1rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    'use strict';
+
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const nav = section.querySelector('.side-menu__nav');
+    const links = section.querySelectorAll('.side-menu__link[data-anchor-target]');
+    const sections = section.querySelectorAll('.side-menu__section[id]');
+    const progressBar = document.getElementById('reading-progress-{{ section.id }}');
+
+    // Smooth scroll to anchor
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-anchor-target');
+        const target = document.getElementById(targetId);
+
+        if (target) {
+          const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 80;
+          const offset = headerHeight + 32;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+
+          // Close mobile nav if open
+          if (nav.classList.contains('is-open')) {
+            closeMobileNav();
+          }
+        }
+      });
+    });
+
+    // Update active link on scroll
+    function updateActiveLink() {
+      const scrollPosition = window.scrollY;
+      const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 80;
+      const offset = headerHeight + 100;
+
+      let currentSection = null;
+
+      sections.forEach(sec => {
+        const sectionTop = sec.offsetTop - offset;
+        const sectionBottom = sectionTop + sec.offsetHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          currentSection = sec.id;
+        }
+      });
+
+      if (currentSection) {
+        links.forEach(link => {
+          link.classList.remove('side-menu__link--active');
+          if (link.getAttribute('data-anchor-target') === currentSection) {
+            link.classList.add('side-menu__link--active');
+          }
+        });
+      }
+
+      // Update reading progress
+      if (progressBar && sections.length > 0) {
+        const firstSection = sections[0];
+        const lastSection = sections[sections.length - 1];
+        const startPosition = firstSection.offsetTop;
+        const endPosition = lastSection.offsetTop + lastSection.offsetHeight;
+        const totalHeight = endPosition - startPosition;
+        const currentProgress = Math.min(Math.max((scrollPosition - startPosition + window.innerHeight) / totalHeight, 0), 1);
+        progressBar.style.width = (currentProgress * 100) + '%';
+      }
+    }
+
+    // Throttled scroll handler
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          updateActiveLink();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial active link
+    updateActiveLink();
+
+    // Mobile navigation
+    const mobileToggle = section.querySelector('.side-menu__mobile-toggle');
+    const closeBtn = section.querySelector('.side-menu__nav-close');
+
+    function openMobileNav() {
+      nav.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileNav() {
+      nav.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        if (nav.classList.contains('is-open')) {
+          closeMobileNav();
+        } else {
+          openMobileNav();
+        }
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMobileNav);
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        closeMobileNav();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Side Menu",
+  "tag": "section",
+  "class": "section-side-menu",
+  "settings": [
+    {
+      "type": "text",
+      "id": "nav_title",
+      "label": "Navigation title",
+      "default": "On this page"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessibility label",
+      "default": "Page navigation"
+    },
+    {
+      "type": "select",
+      "id": "menu_position",
+      "label": "Menu position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Sticky navigation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress",
+      "label": "Show reading progress",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Navigation Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Section title"
+        },
+        {
+          "type": "text",
+          "id": "anchor_id",
+          "label": "Anchor ID",
+          "info": "Must match the Section ID of the target content section",
+          "default": "section-1"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "book", "label": "Book" },
+            { "value": "settings", "label": "Settings" },
+            { "value": "code", "label": "Code" },
+            { "value": "layout", "label": "Layout" },
+            { "value": "palette", "label": "Palette" },
+            { "value": "zap", "label": "Zap" },
+            { "value": "layers", "label": "Layers" },
+            { "value": "file-text", "label": "File" },
+            { "value": "help-circle", "label": "Help" },
+            { "value": "download", "label": "Download" }
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
+      "type": "nav_group",
+      "name": "Navigation Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Group label",
+          "default": "Section"
+        }
+      ]
+    },
+    {
+      "type": "nav_divider",
+      "name": "Divider",
+      "settings": []
+    },
+    {
+      "type": "content_section",
+      "name": "Content Section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Section ID",
+          "info": "Unique ID for anchor linking (no spaces)",
+          "default": "section-1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Section Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add your documentation content here. You can use headings, lists, code blocks, and more.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Side Menu",
+      "blocks": [
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Getting Started",
+            "anchor_id": "getting-started",
+            "icon": "book"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Installation",
+            "anchor_id": "installation",
+            "icon": "download"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "Configuration",
+            "anchor_id": "configuration",
+            "icon": "settings"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "section_id": "getting-started",
+            "title": "Getting Started",
+            "content": "<p>Welcome to the documentation. This guide will help you get started with your new theme.</p>"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "section_id": "installation",
+            "title": "Installation",
+            "content": "<p>Follow these steps to install and set up your theme.</p>"
+          }
+        },
+        {
+          "type": "content_section",
+          "settings": {
+            "section_id": "configuration",
+            "title": "Configuration",
+            "content": "<p>Learn how to configure your theme settings.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

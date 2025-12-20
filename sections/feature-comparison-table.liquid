@@ -1,0 +1,254 @@
+{% comment %}
+  Feature Comparison Table Section
+  Displays FORGE vs Apps comparison
+{% endcomment %}
+
+<section class="feature-comparison" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="section-header section-header--center">
+      {%- if section.settings.title != blank -%}
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="feature-comparison__table-wrapper">
+      <table class="feature-comparison__table">
+        <thead>
+          <tr>
+            <th class="feature-comparison__feature-col">Feature</th>
+            <th class="feature-comparison__forge-col">
+              <span class="feature-comparison__brand">FORGE 4.0</span>
+              <span class="feature-comparison__price">Included</span>
+            </th>
+            <th class="feature-comparison__apps-col">
+              <span class="feature-comparison__brand">Third-Party Apps</span>
+              <span class="feature-comparison__price">Monthly Cost</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mega Menu</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$10-20/mo</td>
+          </tr>
+          <tr>
+            <td>Loyalty Program</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$29-199/mo</td>
+          </tr>
+          <tr>
+            <td>SEO Suite</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$20-80/mo</td>
+          </tr>
+          <tr>
+            <td>Page Speed Optimizer</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$15-50/mo</td>
+          </tr>
+          <tr>
+            <td>Page Builder</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$19-79/mo</td>
+          </tr>
+          <tr>
+            <td>FAQ App</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$5-25/mo</td>
+          </tr>
+          <tr>
+            <td>Progressive Web App</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$19-49/mo</td>
+          </tr>
+          <tr>
+            <td>AI Search & Chat</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$49-299/mo</td>
+          </tr>
+          <tr>
+            <td>Product Attachments</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$5-15/mo</td>
+          </tr>
+          <tr>
+            <td>Multiple Headers/Footers</td>
+            <td class="feature-comparison__check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Included</td>
+            <td class="feature-comparison__cost">$10-30/mo</td>
+          </tr>
+          <tr class="feature-comparison__total-row">
+            <td><strong>Potential Monthly Savings</strong></td>
+            <td class="feature-comparison__check"><strong>$0</strong></td>
+            <td class="feature-comparison__cost"><strong>$150-850/mo</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="feature-comparison__note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p>App costs based on typical Shopify App Store pricing. Actual savings depend on which apps you currently use or would need.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-comparison {
+    padding: 5rem 0;
+    background: var(--color-background, #ffffff);
+  }
+
+  .feature-comparison__table-wrapper {
+    margin-top: 3rem;
+    overflow-x: auto;
+  }
+
+  .feature-comparison__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .feature-comparison__table thead {
+    background: var(--color-background-alt, #f8f9fa);
+  }
+
+  .feature-comparison__table th,
+  .feature-comparison__table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border, #e5e5e5);
+  }
+
+  .feature-comparison__table th {
+    font-weight: 600;
+    vertical-align: bottom;
+  }
+
+  .feature-comparison__feature-col {
+    width: 40%;
+  }
+
+  .feature-comparison__forge-col,
+  .feature-comparison__apps-col {
+    width: 30%;
+    text-align: center;
+  }
+
+  .feature-comparison__brand {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .feature-comparison__price {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-secondary, #666);
+    margin-top: 0.25rem;
+  }
+
+  .feature-comparison__forge-col {
+    background: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+  }
+
+  .feature-comparison__apps-col {
+    background: rgba(220, 38, 38, 0.05);
+    color: #dc2626;
+  }
+
+  .feature-comparison__check {
+    text-align: center;
+    color: #16a34a;
+    font-weight: 600;
+  }
+
+  .feature-comparison__check svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+  }
+
+  .feature-comparison__cost {
+    text-align: center;
+    color: #dc2626;
+    font-weight: 500;
+  }
+
+  .feature-comparison__total-row {
+    background: var(--color-background-alt, #f8f9fa);
+  }
+
+  .feature-comparison__total-row td {
+    border-bottom: none;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .feature-comparison__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--color-background-alt, #f8f9fa);
+    border-radius: var(--card-radius, 8px);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  .feature-comparison__note svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: var(--color-primary, #d71920);
+  }
+
+  .feature-comparison__note p {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .feature-comparison__table {
+      font-size: 0.875rem;
+    }
+
+    .feature-comparison__table th,
+    .feature-comparison__table td {
+      padding: 0.75rem 1rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Feature Comparison Table",
+  "tag": "section",
+  "class": "section-feature-comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "FORGE vs. Apps"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Why pay monthly when it's already included?"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Comparison Table"
+    }
+  ]
+}
+{% endschema %}

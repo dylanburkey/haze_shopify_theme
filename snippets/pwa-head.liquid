@@ -15,8 +15,8 @@
       assign icon_192 = settings.pwa_icon | image_url: width: 192, height: 192
       assign icon_512 = settings.pwa_icon | image_url: width: 512, height: 512
     else
-      assign icon_192 = 'pwa-icon.png' | asset_url
-      assign icon_512 = 'pwa-icon.png' | asset_url
+      assign icon_192 = 'pwa-icon-192.svg' | asset_url
+      assign icon_512 = 'pwa-icon-512.svg' | asset_url
     endif
   -%}
 
@@ -42,13 +42,15 @@
     "icons": [
       {
         "src": {{ icon_192 | json }},
-        "type": "image/png",
-        "sizes": "192x192"
+        "type": "image/svg+xml",
+        "sizes": "192x192",
+        "purpose": "any maskable"
       },
       {
         "src": {{ icon_512 | json }},
-        "type": "image/png",
-        "sizes": "512x512"
+        "type": "image/svg+xml",
+        "sizes": "512x512",
+        "purpose": "any maskable"
       }
     ]
   }
