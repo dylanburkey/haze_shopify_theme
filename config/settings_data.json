@@ -23,7 +23,7 @@
     "cart_type": "drawer",
     "preset_showcase_enabled": true,
     "preset_showcase_all_pages": true,
-    "preset_showcase_position": "top-right",
+    "preset_showcase_position": "top-left",
     "enable_speculation_rules": true,
     "color_secondary": "#0056b3",
     "color_accent": "#00bcd4",
