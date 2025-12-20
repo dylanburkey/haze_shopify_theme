@@ -44,65 +44,6 @@
     "logo_text": "FORGE",
     "logo_suffix": ".IND",
     "sections": {
-      "header": {
-        "type": "header",
-        "settings": {
-          "show_search": true,
-          "show_account": true
-        }
-      },
-      "footer": {
-        "type": "footer",
-        "settings": {
-          "show_newsletter": true,
-          "newsletter_heading": "Stay Connected",
-          "newsletter_text": "Get updates on new products and industry news.",
-          "newsletter_placeholder": "Enter your email",
-          "newsletter_button": "Subscribe",
-          "show_payment_icons": true
-        }
-      },
-      "header-unified": {
-        "type": "header-unified",
-        "blocks": {
-          "featured_card_TKbeiL": {
-            "type": "featured_card",
-            "settings": {
-              "parent_menu": "",
-              "label": "Featured",
-              "title": "Featured Product",
-              "description": "",
-              "link": ""
-            }
-          }
-        },
-        "block_order": [
-          "featured_card_TKbeiL"
-        ],
-        "settings": {
-          "logo_width": 150,
-          "logo_scale": 100,
-          "menu": "main-menu",
-          "sticky_header": true,
-          "search_style": "icon",
-          "search_placeholder": "Search products, articles...",
-          "show_search_filter": true,
-          "filter_all_label": "All",
-          "filter_products_label": "Products",
-          "filter_articles_label": "Articles",
-          "filter_pages_label": "Pages",
-          "show_account": true,
-          "show_cart": true,
-          "header_bg": "#ffffff",
-          "header_text": "#1a1a1a",
-          "header_border": "#e5e5e5",
-          "search_bar_bg": "#f5f5f5",
-          "search_bar_text": "#333333",
-          "dropdown_bg": "#ffffff",
-          "dropdown_text": "#333333",
-          "dropdown_hover": "#f5f5f5"
-        }
-      },
       "theme-tour-headers": {
         "type": "theme-tour-headers",
         "settings": {

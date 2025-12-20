@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -9,14 +18,97 @@
         "text_color": "#ffffff"
       }
     },
-    "header": {
-      "type": "header--unified",
+    "header_mega_r4rCW7": {
+      "type": "header--mega",
+      "blocks": {
+        "utility_link_r8afGB": {
+          "type": "utility_link",
+          "settings": {
+            "label": "Find a Location",
+            "link": "/pages/locations",
+            "icon": "location",
+            "open_new_tab": false
+          }
+        },
+        "utility_link_HHrhyB": {
+          "type": "utility_link",
+          "settings": {
+            "label": "Contact Us",
+            "link": "/pages/contact",
+            "icon": "phone",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_DfLypX": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Products",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "dropdown_link_y6DwtR": {
+          "type": "dropdown_link",
+          "settings": {
+            "parent_menu": "Products",
+            "label": "Dropdown Link",
+            "link": "shopify://pages/data-sharing-opt-out"
+          }
+        },
+        "menu_item_QB8Gk8": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Solutions",
+            "link": "",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_pGNTQ3": {
+          "type": "menu_item",
+          "settings": {
+            "label": "About",
+            "link": "/pages/about",
+            "open_new_tab": false
+          }
+        },
+        "menu_item_efpyBf": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Careers",
+            "link": "/pages/careers",
+            "open_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "utility_link_r8afGB",
+        "utility_link_HHrhyB",
+        "menu_item_DfLypX",
+        "dropdown_link_y6DwtR",
+        "menu_item_QB8Gk8",
+        "menu_item_pGNTQ3",
+        "menu_item_efpyBf"
+      ],
+      "name": "t:sections.header_mega.presets.default.name",
       "settings": {
+        "logo_width": 150,
+        "sticky_header": true,
         "show_search": true,
+        "search_placeholder": "Search...",
         "show_account": true,
-        "show_cart": true
+        "show_cart": true,
+        "utility_bg": "#f5f5f5",
+        "utility_text": "#333333",
+        "header_bg": "#ffffff",
+        "header_text": "#1a1a1a",
+        "nav_hover": "#0056b3",
+        "dropdown_bg": "#ffffff",
+        "dropdown_border": "#e5e5e5"
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": [
+    "announcement-bar",
+    "header_mega_r4rCW7"
+  ]
 }
