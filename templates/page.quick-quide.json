@@ -1,0 +1,415 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-content",
+      "disabled": true,
+      "settings": {}
+    },
+    "preset_hero_DgxEtG": {
+      "type": "preset-hero",
+      "blocks": {
+        "trusted_logo_GQ4dDQ": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Company Name"
+          }
+        },
+        "stat_rL9pKY": {
+          "type": "stat",
+          "settings": {
+            "stat_value": 30,
+            "stat_suffix": "+",
+            "stat_label": "Years of Innovation"
+          }
+        },
+        "stat_eiRzgJ": {
+          "type": "stat",
+          "settings": {
+            "stat_value": 50,
+            "stat_suffix": "K+",
+            "stat_label": "Skimmers Deployed"
+          }
+        },
+        "stat_hFYEHE": {
+          "type": "stat",
+          "settings": {
+            "stat_value": 120,
+            "stat_suffix": "+",
+            "stat_label": "Products Available"
+          }
+        },
+        "floating_card_b9NBbH": {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "shield-check",
+            "card_title": "Lifetime Warranty",
+            "card_highlight": "",
+            "card_subtitle": "On all skimmers"
+          }
+        },
+        "floating_card_qQBY7b": {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "trending-up",
+            "card_title": "ROI in 8 Months",
+            "card_highlight": "80%",
+            "card_subtitle": "coolant savings"
+          }
+        },
+        "floating_card_qXAnHf": {
+          "type": "floating_card",
+          "settings": {
+            "card_icon": "star",
+            "card_title": "5-Star Rated",
+            "card_highlight": "",
+            "card_subtitle": "By machinists worldwide"
+          }
+        },
+        "trusted_logo_6gkGtN": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "General Motors"
+          }
+        },
+        "trusted_logo_WpVmTb": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Boeing"
+          }
+        },
+        "trusted_logo_UCCQyg": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Lockheed Martin"
+          }
+        },
+        "trusted_logo_xJeiP9": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "Caterpillar"
+          }
+        },
+        "trusted_logo_edPHwx": {
+          "type": "trusted_logo",
+          "settings": {
+            "logo_name": "John Deere"
+          }
+        }
+      },
+      "block_order": [
+        "trusted_logo_GQ4dDQ",
+        "stat_rL9pKY",
+        "stat_eiRzgJ",
+        "stat_hFYEHE",
+        "floating_card_b9NBbH",
+        "floating_card_qQBY7b",
+        "floating_card_qXAnHf",
+        "trusted_logo_6gkGtN",
+        "trusted_logo_WpVmTb",
+        "trusted_logo_UCCQyg",
+        "trusted_logo_xJeiP9",
+        "trusted_logo_edPHwx"
+      ],
+      "name": "Preset: Hero",
+      "settings": {
+        "badge_text": "New: Dazzle™ 2 Now Available",
+        "badge_icon": "star",
+        "since_text": "Made in USA Since 1994",
+        "title_prefix": "Reduce Coolant Costs by",
+        "title_highlight": "Up to 50%",
+        "title_suffix": "with Automated Fluid Management",
+        "description": "Industry-leading oil skimmers and coolant automation systems trusted by thousands of machine shops worldwide. American-made quality backed by a free lifetime warranty.",
+        "primary_button_text": "Explore Dazzle™ Systems",
+        "primary_button_link": "",
+        "secondary_button_text": "Browse All Products",
+        "secondary_button_link": "",
+        "secondary_button_icon": "cube",
+        "show_stats": true,
+        "showcase_icon": "cog",
+        "showcase_badge": "Best Seller",
+        "showcase_title": "DAZZLE™ 1",
+        "showcase_subtitle": "Modular Automated Sump Management",
+        "showcase_price": "Starting at $682",
+        "showcase_price_suffix": "USD",
+        "video_button_text": "Watch Demo",
+        "show_trusted_by": true,
+        "trusted_label": "Trusted by industry leaders",
+        "show_floating_cards": true,
+        "show_grid_background": true,
+        "show_particles": true,
+        "color_primary": "#003d79",
+        "color_primary_light": "#0056a8",
+        "color_accent": "#0077cc",
+        "color_highlight": "#00a3e0",
+        "color_cta": "#ff6b00"
+      }
+    },
+    "preset_product_grid_4EhtQL": {
+      "type": "preset-product-grid",
+      "blocks": {
+        "product_H6YTkV": {
+          "type": "product",
+          "settings": {
+            "placeholder_icon": "cog",
+            "badge": "",
+            "badge_style": "popular",
+            "vendor": "",
+            "title": "Product Name",
+            "description": "",
+            "rating": 5,
+            "review_count": 0,
+            "price": "$499",
+            "compare_price": "",
+            "link": ""
+          }
+        },
+        "product_pRVQqE": {
+          "type": "product",
+          "settings": {
+            "placeholder_icon": "cog",
+            "badge": "Best Seller",
+            "badge_style": "popular",
+            "vendor": "",
+            "title": "Model 6V Belt Skimmer",
+            "description": "Our most popular belt skimmer for CNC machine sumps",
+            "rating": 5,
+            "review_count": 127,
+            "price": "$428",
+            "compare_price": "",
+            "link": ""
+          }
+        },
+        "product_KVpLLi": {
+          "type": "product",
+          "settings": {
+            "placeholder_icon": "cog",
+            "badge": "New",
+            "badge_style": "new",
+            "vendor": "",
+            "title": "Sidewinder® Tube Skimmer",
+            "description": "Flexible tube design reaches into tight spaces",
+            "rating": 5,
+            "review_count": 89,
+            "price": "$385",
+            "compare_price": "",
+            "link": ""
+          }
+        },
+        "product_WK6HEz": {
+          "type": "product",
+          "settings": {
+            "placeholder_icon": "cog",
+            "badge": "",
+            "badge_style": "popular",
+            "vendor": "",
+            "title": "Disk Skimmer Pro",
+            "description": "Precision disk technology for light oil removal",
+            "rating": 4,
+            "review_count": 45,
+            "price": "$762",
+            "compare_price": "",
+            "link": ""
+          }
+        },
+        "product_7w63Xt": {
+          "type": "product",
+          "disabled": true,
+          "settings": {
+            "placeholder_icon": "cog",
+            "badge": "Sale",
+            "badge_style": "sale",
+            "vendor": "",
+            "title": "Blue Mamba™ Coolant Hose",
+            "description": "Heavy-duty coolant delivery with quick-connect fittings",
+            "rating": 5,
+            "review_count": 203,
+            "price": "$89",
+            "compare_price": "$129",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_H6YTkV",
+        "product_pRVQqE",
+        "product_KVpLLi",
+        "product_WK6HEz",
+        "product_7w63Xt"
+      ],
+      "name": "Preset: Product Grid",
+      "settings": {
+        "subtitle": "Top Picks",
+        "title": "Popular Products",
+        "view_all_text": "View All Products",
+        "view_all_link": "",
+        "add_to_cart_text": "Add to Cart"
+      }
+    },
+    "preset_featured_product_mQBCAX": {
+      "type": "preset-featured-product",
+      "blocks": {
+        "benefit_MFhDHT": {
+          "type": "benefit",
+          "settings": {
+            "text": "Reduce coolant costs by up to 50%"
+          }
+        },
+        "benefit_BaWz6p": {
+          "type": "benefit",
+          "settings": {
+            "text": "Automated 24/7 fluid monitoring"
+          }
+        },
+        "benefit_hPYPFg": {
+          "type": "benefit",
+          "settings": {
+            "text": "Extend tool life and improve part quality"
+          }
+        },
+        "benefit_TzK8YY": {
+          "type": "benefit",
+          "settings": {
+            "text": "Modular design - start small, expand later"
+          }
+        },
+        "benefit_86iwLc": {
+          "type": "benefit",
+          "settings": {
+            "text": "ROI typically achieved in 8 months"
+          }
+        },
+        "stat_weERgb": {
+          "type": "stat",
+          "settings": {
+            "value": "50%",
+            "label": "Cost Savings"
+          }
+        },
+        "stat_yx4g8P": {
+          "type": "stat",
+          "settings": {
+            "value": "8mo",
+            "label": "Avg. ROI"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_MFhDHT",
+        "benefit_BaWz6p",
+        "benefit_hPYPFg",
+        "benefit_TzK8YY",
+        "benefit_86iwLc",
+        "stat_weERgb",
+        "stat_yx4g8P"
+      ],
+      "name": "Preset: Featured Product",
+      "settings": {
+        "layout": "image-left",
+        "badge_text": "Best Seller",
+        "subtitle": "Featured Product",
+        "title": "DAZZLE™ 1 Automated Sump System",
+        "description": "<p>The Dazzle™ 1 is a modular, automated sump management system that monitors and maintains your coolant at optimal conditions 24/7. Reduce coolant costs, extend tool life, and improve part quality with automated fluid management.</p>",
+        "price_prefix": "Starting at",
+        "price": "$682",
+        "compare_price": "",
+        "primary_button_text": "Configure & Buy",
+        "primary_button_link": "",
+        "secondary_button_text": "Talk to an Expert",
+        "secondary_button_link": "",
+        "trust_note": "Free lifetime warranty included"
+      }
+    },
+    "preset_testimonials_zgk7yR": {
+      "type": "preset-testimonials",
+      "blocks": {
+        "testimonial_eyyhVc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The Dazzle system paid for itself in just 6 months. Our coolant costs are down 45% and our tools are lasting longer than ever.",
+            "name": "John Smith",
+            "title": "Shop Manager",
+            "company": "Precision Machine Works"
+          }
+        },
+        "testimonial_PzwxAW": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The Dazzle system paid for itself in just 6 months. Our coolant costs are down 45% and our tools are lasting longer than ever.",
+            "name": "Mike Richardson",
+            "title": "Shop Manager",
+            "company": "Precision Machine Works"
+          }
+        },
+        "testimonial_g6mQj4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "We've been using Zebra belt skimmers for over 10 years. They just work. The lifetime warranty isn't just marketing—they actually stand behind it.",
+            "name": "Sarah Chen",
+            "title": "Operations Director",
+            "company": "Chen Manufacturing"
+          }
+        },
+        "testimonial_mhQPWV": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "After trying three other brands, Zebra is the only one that consistently performs in our harsh environment. Worth every penny.",
+            "name": "David Martinez",
+            "title": "Maintenance Lead",
+            "company": "Industrial Dynamics"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_eyyhVc",
+        "testimonial_PzwxAW",
+        "testimonial_g6mQj4",
+        "testimonial_mhQPWV"
+      ],
+      "name": "Preset: Testimonials",
+      "settings": {
+        "subtitle": "Customer Stories",
+        "title": "What Machinists Are Saying",
+        "description": "Join thousands of machine shops that trust Zebra Skimmers for their oil removal and coolant management needs.",
+        "show_stats": true,
+        "stat_1_value": "4.9/5",
+        "stat_1_label": "Average Rating",
+        "stat_2_value": "2,500+",
+        "stat_2_label": "Happy Customers",
+        "stat_3_value": "98%",
+        "stat_3_label": "Would Recommend"
+      }
+    },
+    "search_rag_FiTi36": {
+      "type": "search-rag",
+      "name": "Search RAG",
+      "settings": {
+        "heading": "Find The Right Gear",
+        "placeholder": "Ask AI: 'Which welder is best for aluminum?'",
+        "button_text": "SEARCH",
+        "show_popular": true,
+        "popular_terms": "MIG Welder, TIG, Plasma Cutter, Safety Gear"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "preset_hero_DgxEtG",
+    "preset_product_grid_4EhtQL",
+    "preset_featured_product_mQBCAX",
+    "preset_testimonials_zgk7yR",
+    "search_rag_FiTi36"
+  ]
+}
