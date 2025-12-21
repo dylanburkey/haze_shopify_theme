@@ -20,20 +20,51 @@
     <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
 
-  <link rel="canonical" href="{{ canonical_url }}">
+  {%- comment -%} Canonical URL {%- endcomment -%}
+  {%- if settings.enable_canonical_url -%}
+    <link rel="canonical" href="{{ canonical_url }}">
+  {%- endif -%}
 
   {%- if settings.favicon -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
   {%- endif -%}
 
+  {%- comment -%} DNS Hints {%- endcomment -%}
+  {%- if settings.enable_dns_prefetch -%}
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  {%- endif -%}
+
   {%- comment -%} Google Fonts for all presets {%- endcomment -%}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {%- if settings.enable_preconnect -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {%- endif -%}
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Bitter:wght@700;800&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=Lato:wght@400;700&family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&family=Source+Code+Pro:wght@400;500&family=Teko:wght@500;600;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   {% render 'css-variables' %}
 
   {{ content_for_header }}
+
+  {%- comment -%} JavaScript in Head (if setting enabled) {%- endcomment -%}
+  {%- if settings.js_load_location == 'head' -%}
+    {%- liquid
+      if settings.enable_optimized_js
+        assign js_strategy = settings.js_loading_strategy
+      else
+        assign js_strategy = 'blocking'
+      endif
+    -%}
+
+    {%- if js_strategy == 'defer' -%}
+      <script src="{{ 'global.js' | asset_url }}" defer></script>
+    {%- elsif js_strategy == 'async' -%}
+      <script src="{{ 'global.js' | asset_url }}" async></script>
+    {%- else -%}
+      <script src="{{ 'global.js' | asset_url }}"></script>
+    {%- endif -%}
+  {%- endif -%}
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -151,21 +182,23 @@
   {%- comment -%} Preset Showcase System {%- endcomment -%}
   {%- render 'preset-showcase' -%}
 
-  {%- comment -%} JavaScript Loading {%- endcomment -%}
-  {%- liquid
-    if settings.enable_optimized_js
-      assign js_strategy = settings.js_loading_strategy
-    else
-      assign js_strategy = 'blocking'
-    endif
-  -%}
+  {%- comment -%} JavaScript Loading in Footer (if setting enabled) {%- endcomment -%}
+  {%- if settings.js_load_location == 'footer' or settings.js_load_location == blank -%}
+    {%- liquid
+      if settings.enable_optimized_js
+        assign js_strategy = settings.js_loading_strategy
+      else
+        assign js_strategy = 'blocking'
+      endif
+    -%}
 
-  {%- if js_strategy == 'defer' -%}
-    <script src="{{ 'global.js' | asset_url }}" defer></script>
-  {%- elsif js_strategy == 'async' -%}
-    <script src="{{ 'global.js' | asset_url }}" async></script>
-  {%- else -%}
-    <script src="{{ 'global.js' | asset_url }}"></script>
+    {%- if js_strategy == 'defer' -%}
+      <script src="{{ 'global.js' | asset_url }}" defer></script>
+    {%- elsif js_strategy == 'async' -%}
+      <script src="{{ 'global.js' | asset_url }}" async></script>
+    {%- else -%}
+      <script src="{{ 'global.js' | asset_url }}"></script>
+    {%- endif -%}
   {%- endif -%}
 </body>
 </html>

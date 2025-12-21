@@ -335,6 +335,83 @@
         ],
         "default": "defer",
         "info": "Defer: Scripts execute after page loads. Async: Scripts execute as soon as available. Blocking: Scripts block page rendering."
+      },
+      {
+        "type": "select",
+        "id": "js_load_location",
+        "label": "JavaScript load location",
+        "options": [
+          { "value": "footer", "label": "Footer (Recommended)" },
+          { "value": "head", "label": "Head" }
+        ],
+        "default": "footer",
+        "info": "Footer: Loads after page content for better performance. Head: Traditional loading in document head."
+      },
+      {
+        "type": "header",
+        "content": "CSS Loading"
+      },
+      {
+        "type": "select",
+        "id": "css_load_location",
+        "label": "CSS load location",
+        "options": [
+          { "value": "head", "label": "Head (Recommended)" },
+          { "value": "footer", "label": "Footer" }
+        ],
+        "default": "head",
+        "info": "Head: Standard CSS loading. Footer: Experimental, may cause flash of unstyled content."
+      },
+      {
+        "type": "header",
+        "content": "DNS Hints"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_dns_prefetch",
+        "label": "Enable DNS prefetch for external domains",
+        "default": true,
+        "info": "Resolves DNS for external resources (fonts, CDNs) ahead of time"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_preconnect",
+        "label": "Enable preconnect for critical domains",
+        "default": true,
+        "info": "Establishes early connections to important third-party origins (Google Fonts, etc.)"
+      },
+      {
+        "type": "header",
+        "content": "SEO & URLs"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_canonical_url",
+        "label": "Enable canonical URL tags",
+        "default": true,
+        "info": "Helps search engines identify the preferred version of duplicate pages"
+      },
+      {
+        "type": "header",
+        "content": "Minification"
+      },
+      {
+        "type": "paragraph",
+        "content": "Note: Shopify automatically minifies assets in production. These settings control inline code minification."
+      },
+      {
+        "type": "checkbox",
+        "id": "minify_inline_css",
+        "label": "Minify inline CSS",
+        "default": false,
+        "info": "Removes whitespace from inline CSS in sections. May make code harder to debug."
+      },
+      {
+        "type": "checkbox",
+        "id": "minify_inline_js",
+        "label": "Minify inline JavaScript",
+        "default": false,
+        "info": "Removes whitespace from inline JavaScript. May make code harder to debug."
       }
     ]
   }
