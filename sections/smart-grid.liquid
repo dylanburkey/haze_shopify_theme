@@ -16,12 +16,13 @@
             {%- when 'card' -%}
               <div class="industrial-card">
                 {%- if block.settings.image -%}
-                  <img
-                    src="{{ block.settings.image | image_url: width: 800 }}"
-                    alt="{{ block.settings.image.alt | default: block.settings.heading }}"
-                    class="card-img"
-                    loading="lazy"
-                  >
+                  {% render 'responsive-image',
+                    image: block.settings.image,
+                    alt: block.settings.image.alt | default: block.settings.heading,
+                    class: 'card-img',
+                    loading: 'lazy',
+                    sizes: '(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw'
+                  %}
                 {%- elsif block.settings.show_placeholder -%}
                   <div class="card-img card-img--placeholder">IMG</div>
                 {%- endif -%}
@@ -51,16 +52,13 @@
               {%- assign card_product = block.settings.product -%}
               {%- if card_product != blank -%}
                 <a href="{{ card_product.url }}" class="industrial-card industrial-card--product">
-                  {%- if card_product.featured_image -%}
-                    <img
-                      src="{{ card_product.featured_image | image_url: width: 800 }}"
-                      alt="{{ card_product.featured_image.alt | default: card_product.title }}"
-                      class="card-img"
-                      loading="lazy"
-                    >
-                  {%- else -%}
-                    <div class="card-img card-img--placeholder">IMG</div>
-                  {%- endif -%}
+                  {% render 'responsive-image',
+                    image: card_product.featured_image,
+                    alt: card_product.featured_image.alt | default: card_product.title,
+                    class: 'card-img',
+                    loading: 'lazy',
+                    sizes: '(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw'
+                  %}
 
                   <div class="card-content">
                     {%- if block.settings.show_vendor and card_product.vendor -%}
@@ -80,16 +78,13 @@
               {%- assign card_collection = block.settings.collection -%}
               {%- if card_collection != blank -%}
                 <a href="{{ card_collection.url }}" class="industrial-card industrial-card--collection">
-                  {%- if card_collection.featured_image -%}
-                    <img
-                      src="{{ card_collection.featured_image | image_url: width: 800 }}"
-                      alt="{{ card_collection.featured_image.alt | default: card_collection.title }}"
-                      class="card-img"
-                      loading="lazy"
-                    >
-                  {%- else -%}
-                    <div class="card-img card-img--placeholder">IMG</div>
-                  {%- endif -%}
+                  {% render 'responsive-image',
+                    image: card_collection.featured_image,
+                    alt: card_collection.featured_image.alt | default: card_collection.title,
+                    class: 'card-img',
+                    loading: 'lazy',
+                    sizes: '(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw'
+                  %}
 
                   <div class="card-content">
                     <h3 class="card-heading">{{ card_collection.title }}</h3>

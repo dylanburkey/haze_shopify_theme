@@ -8,18 +8,14 @@
     <div class="product-layout">
       {%- comment -%} Product Gallery {%- endcomment -%}
       <div class="product-gallery">
-        <div class="gallery-main">
-          {%- if product.featured_image -%}
-            <img
-              id="ProductMainImage"
-              src="{{ product.featured_image | image_url: width: 1200 }}"
-              alt="{{ product.featured_image.alt | default: product.title }}"
-              class="product-gallery-main"
-              loading="eager"
-            >
-          {%- else -%}
-            <div class="product-gallery-main product-gallery-main--placeholder">No Image</div>
-          {%- endif -%}
+        <div class="gallery-main" id="ProductMainImage">
+          {% render 'responsive-image',
+            image: product.featured_image,
+            alt: product.featured_image.alt | default: product.title,
+            class: 'product-gallery-main',
+            loading: 'eager',
+            sizes: '(min-width: 1200px) 50vw, 100vw'
+          %}
         </div>
 
         {%- if product.images.size > 1 -%}

@@ -1,0 +1,100 @@
+{%- comment -%}
+  Responsive Image Component using Picture Element
+
+  Generates a responsive image with multiple breakpoints and srcsets
+  for optimal performance across all devices.
+
+  @param {image} image - Shopify image object (required)
+  @param {string} alt - Alt text (defaults to image.alt)
+  @param {string} class - CSS class name
+  @param {string} loading - Loading strategy: 'lazy' or 'eager' (default: 'lazy')
+  @param {boolean} cover - Use object-fit: cover (default: false)
+  @param {string} sizes - Sizes attribute (default: '100vw')
+
+  Breakpoint widths:
+  - Mobile: 400px, 600px, 800px
+  - Tablet: 800px, 1000px, 1200px
+  - Desktop: 1200px, 1600px, 2000px
+
+  @example
+  {% render 'responsive-image',
+    image: product.featured_image,
+    alt: product.title,
+    class: 'product-image',
+    loading: 'eager',
+    sizes: '(min-width: 1200px) 50vw, 100vw'
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  assign img = image
+  assign img_alt = alt | default: img.alt | default: ''
+  assign img_class = class | default: ''
+  assign img_loading = loading | default: 'lazy'
+  assign img_cover = cover | default: false
+  assign img_sizes = sizes | default: '100vw'
+
+  # Get image dimensions for aspect ratio
+  assign img_width = img.width
+  assign img_height = img.height
+  assign aspect_ratio = img_width | times: 1.0 | divided_by: img_height
+-%}
+
+{%- if img != blank -%}
+  <picture>
+    {%- comment -%} Desktop: 1200px+ {%- endcomment -%}
+    <source
+      media="(min-width: 1200px)"
+      srcset="
+        {{ img | image_url: width: 1200 }} 1200w,
+        {{ img | image_url: width: 1600 }} 1600w,
+        {{ img | image_url: width: 2000 }} 2000w
+      "
+      sizes="{{ img_sizes }}"
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+    >
+
+    {%- comment -%} Tablet: 768px - 1199px {%- endcomment -%}
+    <source
+      media="(min-width: 768px)"
+      srcset="
+        {{ img | image_url: width: 800 }} 800w,
+        {{ img | image_url: width: 1000 }} 1000w,
+        {{ img | image_url: width: 1200 }} 1200w
+      "
+      sizes="{{ img_sizes }}"
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+    >
+
+    {%- comment -%} Mobile: < 768px {%- endcomment -%}
+    <source
+      media="(max-width: 767px)"
+      srcset="
+        {{ img | image_url: width: 400 }} 400w,
+        {{ img | image_url: width: 600 }} 600w,
+        {{ img | image_url: width: 800 }} 800w
+      "
+      sizes="{{ img_sizes }}"
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+    >
+
+    {%- comment -%} Fallback img tag {%- endcomment -%}
+    <img
+      src="{{ img | image_url: width: 1200 }}"
+      alt="{{ img_alt | escape }}"
+      loading="{{ img_loading }}"
+      width="{{ img_width }}"
+      height="{{ img_height }}"
+      {%- if img_class != blank %} class="{{ img_class }}"{% endif %}
+      {%- if img_cover %} style="object-fit: cover; width: 100%; height: 100%;"{% endif %}
+    >
+  </picture>
+{%- else -%}
+  {%- comment -%} Placeholder if no image {%- endcomment -%}
+  <div class="responsive-image-placeholder {{ img_class }}">
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  </div>
+{%- endif -%}
