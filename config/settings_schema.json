@@ -305,5 +305,37 @@
         "content": "Visitors can also activate presets via URL: ?preset=bold-impact, ?preset=modern-minimal, ?preset=tech-forward, ?preset=warm-artisan, ?preset=zebra-skimmers"
       }
     ]
+  },
+  {
+    "name": "Performance",
+    "settings": [
+      {
+        "type": "header",
+        "content": "JavaScript Loading"
+      },
+      {
+        "type": "paragraph",
+        "content": "Control how JavaScript files are loaded to optimize performance. Defer is recommended for best page load times."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_optimized_js",
+        "label": "Enable optimized JavaScript loading",
+        "default": true,
+        "info": "Loads JavaScript files asynchronously to improve page load speed"
+      },
+      {
+        "type": "select",
+        "id": "js_loading_strategy",
+        "label": "Loading strategy",
+        "options": [
+          { "value": "defer", "label": "Defer (Recommended)" },
+          { "value": "async", "label": "Async" },
+          { "value": "blocking", "label": "Blocking (slowest)" }
+        ],
+        "default": "defer",
+        "info": "Defer: Scripts execute after page loads. Async: Scripts execute as soon as available. Blocking: Scripts block page rendering."
+      }
+    ]
   }
 ]

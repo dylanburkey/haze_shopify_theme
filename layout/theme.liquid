@@ -150,5 +150,22 @@
 
   {%- comment -%} Preset Showcase System {%- endcomment -%}
   {%- render 'preset-showcase' -%}
+
+  {%- comment -%} JavaScript Loading {%- endcomment -%}
+  {%- liquid
+    if settings.enable_optimized_js
+      assign js_strategy = settings.js_loading_strategy
+    else
+      assign js_strategy = 'blocking'
+    endif
+  -%}
+
+  {%- if js_strategy == 'defer' -%}
+    <script src="{{ 'global.js' | asset_url }}" defer></script>
+  {%- elsif js_strategy == 'async' -%}
+    <script src="{{ 'global.js' | asset_url }}" async></script>
+  {%- else -%}
+    <script src="{{ 'global.js' | asset_url }}"></script>
+  {%- endif -%}
 </body>
 </html>
