@@ -1,10 +1,10 @@
-{% doc %}
+{%- comment -%}
   Video gallery section supporting YouTube, Vimeo, and MP4 videos.
   Can display videos in grid, mosaic, or carousel layout.
 
   @example
   {% section 'video-gallery' %}
-{% enddoc %}
+{%- endcomment -%}
 
 {%- style -%}
   #shopify-section-{{ section.id }} {
@@ -45,7 +45,8 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'video' and block.settings.video_type != blank -%}
             {%- unless video_types contains block.settings.video_type -%}
-              {%- assign video_types = video_types | push: block.settings.video_type -%}
+              {%- assign new_type = block.settings.video_type | split: ',' -%}
+              {%- assign video_types = video_types | concat: new_type -%}
             {%- endunless -%}
           {%- endif -%}
         {%- endfor -%}
@@ -808,11 +809,12 @@
 
         copyBtn?.addEventListener('click', async () => {
           const url = copyBtn.dataset.copyVideoLink;
+          const originalText = copyBtn.innerHTML;
           try {
             await navigator.clipboard.writeText(url);
             copyBtn.textContent = 'Copied!';
             setTimeout(() => {
-              copyBtn.innerHTML = `{% render 'icon', name: 'link', size: 16 %}Copy link`;
+              copyBtn.innerHTML = originalText;
             }, 2000);
           } catch (err) {
             console.error('Failed to copy:', err);

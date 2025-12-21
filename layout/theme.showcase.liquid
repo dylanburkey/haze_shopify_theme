@@ -52,7 +52,7 @@
   {%- comment -%} Preset Showcase Floating Widget {%- endcomment -%}
   {% render 'preset-showcase-widget' %}
 
-  {{ 'global.js' | asset_url | script_tag }}
-  {{ 'preset-showcase.js' | asset_url | script_tag }}
+  <script src="{{ 'global.js' | asset_url }}" defer></script>
+  <script src="{{ 'preset-showcase.js' | asset_url }}" defer></script>
 </body>
 </html>

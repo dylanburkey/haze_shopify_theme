@@ -1,9 +1,26 @@
 {
+  "404": {
+    "title": "Page not found",
+    "subtext": "The page you requested does not exist.",
+    "link": "Continue shopping"
+  },
   "general": {
     "skip_to_content": "Skip to content",
+    "accessibility": {
+      "close": "Close",
+      "skip_to_content": "Skip to content"
+    },
     "search": {
       "placeholder": "Search...",
-      "submit": "Search"
+      "submit": "Search",
+      "search": "Search",
+      "close": "Close search",
+      "title": "Search",
+      "results_count": "{{ count }} results for \"{{ terms }}\"",
+      "no_results": "No results found for \"{{ terms }}\""
+    },
+    "breadcrumbs": {
+      "home": "Home"
     },
     "404": {
       "title": "Page not found",
@@ -11,8 +28,22 @@
     },
     "pagination": {
       "previous": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "page": "Page {{ number }}"
     }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to main content",
+    "skip_to_content": "Skip to content"
+  },
+  "header": {
+    "toggle_menu": "Toggle menu"
+  },
+  "social": {
+    "share_on": "Share on {{ platform }}",
+    "share_via": "Share via {{ platform }}",
+    "copy_link": "Copy link",
+    "copied": "Link copied!"
   },
   "products": {
     "product": {
@@ -20,7 +51,10 @@
       "sold_out": "Sold out",
       "unavailable": "Unavailable",
       "quantity": "Quantity",
-      "sku": "SKU"
+      "sku": "SKU",
+      "barcode": "Barcode",
+      "on_sale": "On Sale",
+      "in_stock": "In Stock"
     },
     "card": {
       "view_product": "View Product",
@@ -28,11 +62,44 @@
       "add_to_cart": "Add to Cart",
       "sold_out": "Sold Out",
       "sale": "Sale"
+    },
+    "facets": {
+      "view_all": "View all {{ count }}"
+    },
+    "attachments": {
+      "heading": "Downloads & Documentation",
+      "spec_sheet": "Specification Sheet",
+      "user_manual": "User Manual",
+      "safety_data": "Safety Data Sheet",
+      "cad_file": "CAD File",
+      "warranty": "Warranty Information"
+    },
+    "specs": {
+      "heading": "Specifications",
+      "weight": "Weight",
+      "dimensions": "Dimensions",
+      "material": "Material",
+      "capacity": "Capacity",
+      "voltage": "Voltage",
+      "power": "Power",
+      "warranty_period": "Warranty Period",
+      "certification": "Certification",
+      "certifications": "Certifications",
+      "origin": "Country of Origin",
+      "country_of_origin": "Country of Origin",
+      "model_number": "Model Number",
+      "part_number": "Part Number",
+      "pressure": "Pressure",
+      "temperature_range": "Temperature Range"
     }
   },
   "collections": {
+    "title": "Collections",
+    "empty": "No products in this collection",
+    "products_count": "{{ count }} products",
     "general": {
-      "no_matches": "No products found"
+      "no_matches": "No products found",
+      "title": "Collections"
     },
     "sorting": {
       "title": "Sort by",
@@ -44,6 +111,14 @@
       "alphabetically_descending": "Alphabetically, Z-A",
       "date_descending": "Date, new to old",
       "date_ascending": "Date, old to new"
+    },
+    "filters": {
+      "title": "Filter",
+      "active": "Active filters",
+      "apply": "Apply",
+      "clear_all": "Clear all",
+      "min_price": "Min price",
+      "max_price": "Max price"
     }
   },
   "cart": {
@@ -55,14 +130,27 @@
       "checkout": "Checkout",
       "update": "Update cart",
       "remove": "Remove"
-    }
+    },
+    "title": "Shopping Cart",
+    "empty": "Your cart is currently empty",
+    "continue_shopping": "Continue shopping",
+    "checkout": "Check out",
+    "note": "Order notes",
+    "note_placeholder": "Add a note to your order",
+    "remove": "Remove",
+    "update": "Update",
+    "subtotal": "Subtotal",
+    "taxes_and_shipping": "Taxes and shipping calculated at checkout"
   },
   "customer": {
     "account": {
       "title": "My Account",
       "details": "Account Details",
       "view_addresses": "View Addresses",
-      "return": "Return to Account Details"
+      "return": "Return to Account Details",
+      "orders": "Orders",
+      "addresses": "Addresses",
+      "logout": "Log out"
     },
     "login": {
       "title": "Login",
@@ -70,6 +158,8 @@
       "password": "Password",
       "forgot_password": "Forgot your password?",
       "sign_in": "Sign In",
+      "submit": "Sign in",
+      "create_account": "Create account",
       "guest_title": "Continue as guest",
       "guest_continue": "Continue"
     },
@@ -80,6 +170,37 @@
       "email": "Email",
       "password": "Password",
       "submit": "Create"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment status",
+      "fulfillment_status": "Fulfillment status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "addresses": {
+      "title": "Addresses",
+      "default": "Default",
+      "add_new": "Add a new address",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "loyalty": {
+      "total_spent": "Total Spent",
+      "orders": "Orders",
+      "your_code": "Your Code",
+      "progress_to": "Progress to",
+      "to_go": "to go",
+      "max_tier": "You've reached our highest tier!",
+      "max_reached": "Maximum tier reached",
+      "view_benefits": "View Benefits"
+    }
+  },
+  "blogs": {
+    "comments": {
+      "title": "Leave a comment"
     }
   }
 }

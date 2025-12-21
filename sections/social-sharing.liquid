@@ -1,4 +1,4 @@
-{% doc %}
+{%- comment -%}
   Social sharing section with customizable icons.
   Uses global social settings but allows per-section overrides.
 
@@ -8,7 +8,7 @@
 
   @example
   {% section 'social-sharing' %}
-{% enddoc %}
+{%- endcomment -%}
 
 {%- liquid
   assign share_url = share_url | default: request.origin | append: request.path
