@@ -63,6 +63,7 @@
         "card-1": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/cnc-machine-shop.png",
             "show_placeholder": false,
             "tag": "Category",
             "heading": "Consumables Kit",
@@ -74,6 +75,7 @@
         "card-2": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/cnc-machine-shop.png",
             "show_placeholder": false,
             "tag": "Category",
             "heading": "Welding Jacket",
@@ -85,10 +87,11 @@
         "card-3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/welder.png",
             "show_placeholder": false,
             "tag": "Category",
             "heading": "Fume Extractor",
-            "text": "",
+            "text": "A fume extra",
             "button_label": "View Specs",
             "button_link": ""
           }
@@ -103,6 +106,75 @@
         "heading": "Related Gear",
         "layout": "cols-3",
         "use_surface_bg": true
+      }
+    },
+    "side_menu_dVARMR": {
+      "type": "side-menu",
+      "blocks": {
+        "nav_item_pjefmE": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Getting Started",
+            "anchor_id": "getting-started",
+            "icon": "book"
+          }
+        },
+        "nav_item_FdKjUa": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Installation",
+            "anchor_id": "installation",
+            "icon": "download"
+          }
+        },
+        "nav_item_8gUNfx": {
+          "type": "nav_item",
+          "settings": {
+            "label": "Configuration",
+            "anchor_id": "configuration",
+            "icon": "settings"
+          }
+        },
+        "content_section_T4PN3P": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "getting-started",
+            "title": "Getting Started",
+            "content": "<p>Welcome to the documentation. This guide will help you get started with your new theme.</p>"
+          }
+        },
+        "content_section_Gdxnca": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "installation",
+            "title": "Installation",
+            "content": "<p>Follow these steps to install and set up your theme.</p>"
+          }
+        },
+        "content_section_jmEFkw": {
+          "type": "content_section",
+          "settings": {
+            "section_id": "configuration",
+            "title": "Configuration",
+            "content": "<p>Learn how to configure your theme settings.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "nav_item_pjefmE",
+        "nav_item_FdKjUa",
+        "nav_item_8gUNfx",
+        "content_section_T4PN3P",
+        "content_section_Gdxnca",
+        "content_section_jmEFkw"
+      ],
+      "name": "Side Menu",
+      "settings": {
+        "nav_title": "On this page",
+        "aria_label": "Page navigation",
+        "menu_position": "left",
+        "sticky": true,
+        "show_progress": true
       }
     },
     "landing_modern_minimal_YjRdVw": {
@@ -185,6 +257,7 @@
   "order": [
     "main",
     "related",
+    "side_menu_dVARMR",
     "landing_modern_minimal_YjRdVw"
   ]
 }
