@@ -225,6 +225,7 @@
         "testimonial_G4NmFb",
         "testimonial_FihC9Y"
       ],
+      "disabled": true,
       "name": "Landing: Modern Minimal",
       "settings": {
         "hero_eyebrow": "New Collection",
@@ -252,12 +253,182 @@
         "newsletter_placeholder": "Enter email",
         "newsletter_button": "Subscribe"
       }
+    },
+    "landing_forge_industrial_qWiwdx": {
+      "type": "landing-forge-industrial",
+      "blocks": {
+        "hero_stat_REAagD": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "25+",
+            "label": "Years Experience"
+          }
+        },
+        "hero_stat_EFzqVa": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "50K+",
+            "label": "Products Sold"
+          }
+        },
+        "hero_stat_Xcypy4": {
+          "type": "hero_stat",
+          "settings": {
+            "value": "98%",
+            "label": "Satisfaction"
+          }
+        },
+        "trust_badge_nYUCF6": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield",
+            "text": "5-Year Warranty"
+          }
+        },
+        "trust_badge_4mycKw": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free Shipping $500+"
+          }
+        },
+        "trust_badge_rrdHyP": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "phone",
+            "text": "Expert Support"
+          }
+        },
+        "trust_badge_YbjdUB": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "clock",
+            "text": "Same-Day Shipping"
+          }
+        },
+        "spec_NJ4Enj": {
+          "type": "spec",
+          "settings": {
+            "label": "Power Output",
+            "value": "400A"
+          }
+        },
+        "spec_CeckCH": {
+          "type": "spec",
+          "settings": {
+            "label": "Duty Cycle",
+            "value": "100% at 250A"
+          }
+        },
+        "spec_PpEdXx": {
+          "type": "spec",
+          "settings": {
+            "label": "Protection Rating",
+            "value": "IP23"
+          }
+        },
+        "stat_AgFcDM": {
+          "type": "stat",
+          "settings": {
+            "value": "25+",
+            "label": "Years Experience"
+          }
+        },
+        "stat_k76abU": {
+          "type": "stat",
+          "settings": {
+            "value": "50K+",
+            "label": "Products Sold"
+          }
+        },
+        "stat_WFid6m": {
+          "type": "stat",
+          "settings": {
+            "value": "98%",
+            "label": "Customer Satisfaction"
+          }
+        },
+        "stat_atryRR": {
+          "type": "stat",
+          "settings": {
+            "value": "500+",
+            "label": "Authorized Dealers"
+          }
+        },
+        "testimonial_meXnkU": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Mike Thompson",
+            "title": "Shop Owner, Thompson Fabrication",
+            "quote": "We've been using Forge equipment in our shop for over 10 years. The reliability is unmatched."
+          }
+        },
+        "testimonial_KNx4Qe": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Linda Chen",
+            "title": "Production Manager, Chen Manufacturing",
+            "quote": "The support team helped us spec the perfect system for our production line. Outstanding service."
+          }
+        }
+      },
+      "block_order": [
+        "hero_stat_REAagD",
+        "hero_stat_EFzqVa",
+        "hero_stat_Xcypy4",
+        "trust_badge_nYUCF6",
+        "trust_badge_4mycKw",
+        "trust_badge_rrdHyP",
+        "trust_badge_YbjdUB",
+        "spec_NJ4Enj",
+        "spec_CeckCH",
+        "spec_PpEdXx",
+        "stat_AgFcDM",
+        "stat_k76abU",
+        "stat_WFid6m",
+        "stat_atryRR",
+        "testimonial_meXnkU",
+        "testimonial_KNx4Qe"
+      ],
+      "name": "Landing: Forge Industrial",
+      "settings": {
+        "hero_image": "shopify://shop_images/generate-a-cnc-machine-working.png",
+        "hero_badge": "Professional Grade",
+        "hero_title": "Built to Last",
+        "hero_subtitle": "Industrial-grade equipment engineered for the toughest jobs. Trusted by professionals worldwide.",
+        "hero_button_label": "View Catalog",
+        "hero_button_link": "",
+        "hero_secondary_label": "Get Quote",
+        "hero_secondary_link": "",
+        "show_hero_stats": true,
+        "show_trust_strip": true,
+        "show_products": true,
+        "collection": "",
+        "products_limit": 8,
+        "products_eyebrow": "Our Equipment",
+        "products_title": "Featured Products",
+        "products_button_label": "View All Products",
+        "show_featured": true,
+        "featured_product": "",
+        "featured_badge": "BEST SELLER",
+        "show_stats": true,
+        "show_testimonials": true,
+        "testimonials_title": "Trusted by Professionals",
+        "show_cta": true,
+        "cta_title": "Ready to Get Started?",
+        "cta_text": "Contact our team for expert advice and custom solutions.",
+        "cta_button_label": "Contact Sales",
+        "cta_button_link": "",
+        "cta_secondary_label": "Download Catalog",
+        "cta_secondary_link": ""
+      }
     }
   },
   "order": [
     "main",
     "related",
     "side_menu_dVARMR",
-    "landing_modern_minimal_YjRdVw"
+    "landing_modern_minimal_YjRdVw",
+    "landing_forge_industrial_qWiwdx"
   ]
 }

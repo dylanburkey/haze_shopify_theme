@@ -11,6 +11,63 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "product_main_enhanced_TiLVhm": {
+      "type": "product-main-enhanced",
+      "blocks": {
+        "trust_badge_EjpjXy": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield",
+            "text": "Free Shipping"
+          }
+        },
+        "trust_badge_fJPzf9": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield",
+            "text": "Lifetime Warranty"
+          }
+        },
+        "trust_badge_yWAXjV": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Free Shipping"
+          }
+        },
+        "trust_badge_RVNRxJ": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "refresh",
+            "text": "30-Day Returns"
+          }
+        }
+      },
+      "block_order": [
+        "trust_badge_EjpjXy",
+        "trust_badge_fJPzf9",
+        "trust_badge_yWAXjV",
+        "trust_badge_RVNRxJ"
+      ],
+      "name": "Product (Enhanced)",
+      "settings": {
+        "show_breadcrumbs": true,
+        "enable_zoom": true,
+        "show_vendor": true,
+        "show_sku": true,
+        "show_short_description": true,
+        "show_stock_status": true,
+        "low_stock_threshold": 5,
+        "show_reviews": true,
+        "variant_style": "pills",
+        "show_quantity": true,
+        "show_specs": true,
+        "show_attachments": true,
+        "show_trust_badges": true,
+        "add_to_cart_text": "Add to Cart",
+        "sold_out_text": "Sold Out"
+      }
+    },
     "footer": {
       "type": "footer--standard",
       "settings": {
@@ -23,5 +80,8 @@
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "product_main_enhanced_TiLVhm",
+    "footer"
+  ]
 }
