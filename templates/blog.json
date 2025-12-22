@@ -1,9 +1,177 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-blog",
       "settings": {}
+    },
+    "landing_zebra_skimmers_n8G37w": {
+      "type": "landing-zebra-skimmers",
+      "blocks": {
+        "testimonial_QRjP3J": {
+          "type": "testimonial",
+          "settings": {
+            "name": "John Smith",
+            "company": "Manufacturing Co.",
+            "quote": "Reliable equipment that works. Their support team is always there when we need them."
+          }
+        },
+        "trust_badge_9cGyBb": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield",
+            "title": "5-Year Warranty",
+            "text": "Industry-leading coverage"
+          }
+        },
+        "trust_badge_3grmQg": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "text": "On orders over $500"
+          }
+        },
+        "trust_badge_nxJxb7": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "phone",
+            "title": "Expert Support",
+            "text": "Technical assistance 24/7"
+          }
+        },
+        "trust_badge_pLQqMw": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "award",
+            "title": "ISO Certified",
+            "text": "Quality guaranteed"
+          }
+        },
+        "feature_HBiVAi": {
+          "type": "feature",
+          "settings": {
+            "title": "Durable Construction",
+            "text": "Built to withstand harsh industrial environments and heavy daily use."
+          }
+        },
+        "feature_kg7PgP": {
+          "type": "feature",
+          "settings": {
+            "title": "Easy Maintenance",
+            "text": "Simple design means less downtime and lower maintenance costs."
+          }
+        },
+        "feature_NGJjRe": {
+          "type": "feature",
+          "settings": {
+            "title": "Expert Support",
+            "text": "Our team of engineers provides technical assistance when you need it."
+          }
+        },
+        "stat_WQMJPM": {
+          "type": "stat",
+          "settings": {
+            "value": "50+",
+            "label": "Years Experience"
+          }
+        },
+        "stat_idCMVH": {
+          "type": "stat",
+          "settings": {
+            "value": "10K+",
+            "label": "Units Sold"
+          }
+        },
+        "stat_p6GHLR": {
+          "type": "stat",
+          "settings": {
+            "value": "98%",
+            "label": "Customer Satisfaction"
+          }
+        },
+        "stat_aCzt4V": {
+          "type": "stat",
+          "settings": {
+            "value": "24/7",
+            "label": "Support"
+          }
+        },
+        "testimonial_RRMh3N": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Robert Chen",
+            "company": "Pacific Manufacturing",
+            "quote": "These skimmers have reduced our coolant costs by 40%. Best investment we've made."
+          }
+        },
+        "testimonial_ikqMXr": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Lisa Martinez",
+            "company": "Midwest Machining",
+            "quote": "Reliable equipment that just works. Their support team is always there when we need them."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_QRjP3J",
+        "trust_badge_9cGyBb",
+        "trust_badge_3grmQg",
+        "trust_badge_nxJxb7",
+        "trust_badge_pLQqMw",
+        "feature_HBiVAi",
+        "feature_kg7PgP",
+        "feature_NGJjRe",
+        "stat_WQMJPM",
+        "stat_idCMVH",
+        "stat_p6GHLR",
+        "stat_aCzt4V",
+        "testimonial_RRMh3N",
+        "testimonial_ikqMXr"
+      ],
+      "name": "Landing: Zebra Skimmers",
+      "settings": {
+        "hero_badge": "Industry Leader",
+        "hero_title": "Professional-Grade Oil Skimmers",
+        "hero_subtitle": "Trusted by manufacturers worldwide. Industrial-strength solutions for oil removal and fluid management.",
+        "hero_button_label": "View Products",
+        "hero_button_link": "",
+        "hero_secondary_label": "Request Quote",
+        "hero_secondary_link": "",
+        "show_trust_badges": true,
+        "show_products": true,
+        "collection": "automated-collection",
+        "products_limit": 6,
+        "products_eyebrow": "Our Products",
+        "products_title": "Industrial Equipment",
+        "products_button_label": "View All Products",
+        "show_features": true,
+        "features_title": "Why Choose Us",
+        "features_subtitle": "Industry-leading solutions backed by decades of expertise.",
+        "show_stats": true,
+        "show_testimonials": true,
+        "testimonials_title": "What Our Clients Say",
+        "show_cta": true,
+        "cta_title": "Ready to Get Started?",
+        "cta_text": "Contact our team for a custom solution tailored to your needs.",
+        "cta_button_label": "Contact Sales",
+        "cta_button_link": "",
+        "cta_secondary_label": "Download Catalog",
+        "cta_secondary_link": ""
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "landing_zebra_skimmers_n8G37w"
+  ]
 }

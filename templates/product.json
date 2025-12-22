@@ -1,24 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product-main-enhanced",
-      "settings": {
-        "show_breadcrumbs": true,
-        "enable_zoom": true,
-        "show_vendor": true,
-        "show_sku": true,
-        "show_short_description": true,
-        "show_stock_status": true,
-        "low_stock_threshold": 5,
-        "show_reviews": true,
-        "variant_style": "pills",
-        "show_quantity": true,
-        "show_specs": true,
-        "show_attachments": true,
-        "show_trust_badges": true,
-        "add_to_cart_text": "Add to Cart",
-        "sold_out_text": "Sold Out"
-      },
       "blocks": {
         "trust-1": {
           "type": "trust_badge",
@@ -42,37 +34,157 @@
           }
         }
       },
-      "block_order": ["trust-1", "trust-2", "trust-3"]
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3"
+      ],
+      "settings": {
+        "show_breadcrumbs": true,
+        "enable_zoom": true,
+        "show_vendor": true,
+        "show_sku": true,
+        "show_short_description": true,
+        "show_stock_status": true,
+        "low_stock_threshold": 5,
+        "show_reviews": true,
+        "variant_style": "pills",
+        "show_quantity": true,
+        "show_specs": true,
+        "show_attachments": true,
+        "show_trust_badges": true,
+        "add_to_cart_text": "Add to Cart",
+        "sold_out_text": "Sold Out"
+      }
     },
     "related": {
       "type": "smart-grid",
-      "settings": {
-        "heading": "Related Gear",
-        "layout": "cols-3",
-        "use_surface_bg": true
-      },
       "blocks": {
         "card-1": {
           "type": "card",
           "settings": {
-            "heading": "Consumables Kit"
+            "show_placeholder": false,
+            "tag": "Category",
+            "heading": "Consumables Kit",
+            "text": "",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         },
         "card-2": {
           "type": "card",
           "settings": {
-            "heading": "Welding Jacket"
+            "show_placeholder": false,
+            "tag": "Category",
+            "heading": "Welding Jacket",
+            "text": "",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         },
         "card-3": {
           "type": "card",
           "settings": {
-            "heading": "Fume Extractor"
+            "show_placeholder": false,
+            "tag": "Category",
+            "heading": "Fume Extractor",
+            "text": "",
+            "button_label": "View Specs",
+            "button_link": ""
           }
         }
       },
-      "block_order": ["card-1", "card-2", "card-3"]
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "heading": "Related Gear",
+        "layout": "cols-3",
+        "use_surface_bg": true
+      }
+    },
+    "landing_modern_minimal_YjRdVw": {
+      "type": "landing-modern-minimal",
+      "blocks": {
+        "value_MnCVgg": {
+          "type": "value",
+          "settings": {
+            "title": "Quality",
+            "text": "Crafted from premium materials that last."
+          }
+        },
+        "value_4qJXzm": {
+          "type": "value",
+          "settings": {
+            "title": "Simplicity",
+            "text": "Designed without excess or clutter."
+          }
+        },
+        "value_JKxXNb": {
+          "type": "value",
+          "settings": {
+            "title": "Sustainability",
+            "text": "Made with the environment in mind."
+          }
+        },
+        "testimonial_G4NmFb": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah L.",
+            "title": "Designer",
+            "quote": "Finally found a brand that matches my aesthetic. Simple, beautiful, quality."
+          }
+        },
+        "testimonial_FihC9Y": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael T.",
+            "title": "Architect",
+            "quote": "The attention to detail is remarkable. These pieces are built to last."
+          }
+        }
+      },
+      "block_order": [
+        "value_MnCVgg",
+        "value_4qJXzm",
+        "value_JKxXNb",
+        "testimonial_G4NmFb",
+        "testimonial_FihC9Y"
+      ],
+      "name": "Landing: Modern Minimal",
+      "settings": {
+        "hero_eyebrow": "New Collection",
+        "hero_title": "Less is More",
+        "hero_subtitle": "Thoughtfully designed pieces that stand the test of time. Quality over quantity.",
+        "hero_button_label": "Explore Collection",
+        "hero_button_link": "",
+        "show_products": true,
+        "collection": "",
+        "products_limit": 6,
+        "products_title": "Featured",
+        "products_button_label": "View All",
+        "show_featured": true,
+        "featured_eyebrow": "Our Philosophy",
+        "featured_title": "Designed with Purpose",
+        "featured_text": "Every detail matters. We believe in creating products that serve their purpose beautifully, without excess.",
+        "featured_button_label": "Learn More",
+        "featured_button_link": "",
+        "show_values": true,
+        "show_testimonials": true,
+        "testimonials_title": "What People Say",
+        "show_newsletter": true,
+        "newsletter_title": "Stay Updated",
+        "newsletter_text": "Subscribe for early access to new arrivals and exclusive offers.",
+        "newsletter_placeholder": "Enter email",
+        "newsletter_button": "Subscribe"
+      }
     }
   },
-  "order": ["main", "related"]
+  "order": [
+    "main",
+    "related",
+    "landing_modern_minimal_YjRdVw"
+  ]
 }

@@ -40,7 +40,7 @@
       "settings": {
         "logo_width": 150,
         "logo_scale": 100,
-        "menu": "main-menu",
+        "menu": "primary-nav",
         "sticky_header": true,
         "search_style": "bar_above",
         "search_placeholder": "Search products, articles...",
@@ -51,7 +51,7 @@
         "filter_pages_label": "Pages",
         "show_account": true,
         "show_cart": true,
-        "header_bg": "#ffffff",
+        "header_bg": "#1e293b",
         "header_text": "#1a1a1a",
         "header_border": "#e5e5e5",
         "search_bar_bg": "#f5f5f5",
