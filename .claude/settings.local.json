@@ -17,7 +17,8 @@
       "Bash(grep:*)",
       "Bash(cat:*)",
       "Bash(shopify theme push:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git rebase:*)"
     ],
     "deny": [],
     "ask": []
