@@ -1,26 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "landing_the_welder": {
       "type": "landing-the-welder",
-      "settings": {
-        "hero_title": "Professional Welding & Fabrication Solutions",
-        "hero_subtitle": "Built tough for the trades. Precision-engineered equipment and supplies for welders, fabricators, and metalworkers who demand excellence.",
-        "hero_button_text": "Shop Equipment",
-        "hero_button_url": "/collections/welding-equipment",
-        "hero_button_secondary_text": "View Catalog",
-        "hero_button_secondary_url": "/collections/all",
-        "features_eyebrow": "Built for Professionals",
-        "features_title": "Industrial-Grade Equipment",
-        "features_subtitle": "Every tool and component is engineered to withstand the demands of professional welding and fabrication work.",
-        "trust_stat_1_number": "25+",
-        "trust_stat_1_label": "Years Experience",
-        "trust_stat_2_number": "10K+",
-        "trust_stat_2_label": "Projects Completed",
-        "trust_stat_3_number": "99%",
-        "trust_stat_3_label": "Customer Satisfaction",
-        "trust_stat_4_number": "24/7",
-        "trust_stat_4_label": "Support Available"
-      },
       "blocks": {
         "feature_1": {
           "type": "feature",
@@ -78,44 +68,39 @@
         "feature_4",
         "feature_5",
         "feature_6"
-      ]
+      ],
+      "settings": {
+        "hero_title": "Professional Welding & Fabrication Solutions",
+        "hero_subtitle": "Built tough for the trades. Precision-engineered equipment and supplies for welders, fabricators, and metalworkers who demand excellence.",
+        "hero_button_text": "Shop Equipment",
+        "hero_button_url": "/collections/welding-equipment",
+        "hero_button_secondary_text": "View Catalog",
+        "hero_button_secondary_url": "/collections/all",
+        "features_eyebrow": "Built for Professionals",
+        "features_title": "Industrial-Grade Equipment",
+        "features_subtitle": "Every tool and component is engineered to withstand the demands of professional welding and fabrication work.",
+        "trust_stat_1_number": "25+",
+        "trust_stat_1_label": "Years Experience",
+        "trust_stat_2_number": "10K+",
+        "trust_stat_2_label": "Projects Completed",
+        "trust_stat_3_number": "99%",
+        "trust_stat_3_label": "Customer Satisfaction",
+        "trust_stat_4_number": "24/7",
+        "trust_stat_4_label": "Support Available"
+      }
     },
     "preset_featured_product": {
       "type": "preset-featured-product",
       "settings": {
-        "eyebrow_text": "Featured Equipment",
-        "heading": "Professional MIG Welder",
-        "subheading": "Industrial-grade welding performance for professional fabricators",
-        "featured_product": "",
-        "show_vendor": true,
-        "show_rating": true,
-        "show_description": true,
-        "button_text": "View Details",
-        "button_style": "primary",
-        "layout": "image_left",
-        "image_aspect_ratio": "square",
-        "background_color": "#2d2d2d",
-        "text_color": "#ffffff"
+        "layout": "image_left"
       }
     },
     "preset_product_categories": {
       "type": "preset-product-categories",
-      "settings": {
-        "eyebrow_text": "Shop by Category",
-        "heading": "Welding & Fabrication Equipment",
-        "subheading": "Professional-grade tools and supplies for every welding application",
-        "layout": "grid_3",
-        "image_aspect_ratio": "square",
-        "show_category_names": true,
-        "show_product_counts": true,
-        "button_text": "Shop Category",
-        "button_style": "outline"
-      },
       "blocks": {
         "category_1": {
           "type": "category",
           "settings": {
-            "collection": "",
             "title": "Welding Machines",
             "description": "Professional MIG, TIG, and stick welders"
           }
@@ -123,7 +108,6 @@
         "category_2": {
           "type": "category",
           "settings": {
-            "collection": "",
             "title": "Safety Equipment",
             "description": "Helmets, gloves, and protective gear"
           }
@@ -131,7 +115,6 @@
         "category_3": {
           "type": "category",
           "settings": {
-            "collection": "",
             "title": "Consumables",
             "description": "Wire, electrodes, and welding supplies"
           }
@@ -141,44 +124,34 @@
         "category_1",
         "category_2",
         "category_3"
-      ]
+      ],
+      "settings": {}
     },
     "preset_trust_badges": {
       "type": "preset-trust-badges",
-      "settings": {
-        "eyebrow_text": "Trusted by Professionals",
-        "heading": "Industry Certifications & Guarantees",
-        "layout": "horizontal",
-        "background_color": "#1a1a1a",
-        "text_color": "#ffffff"
-      },
       "blocks": {
         "badge_1": {
           "type": "badge",
           "settings": {
-            "title": "AWS Certified",
-            "description": "American Welding Society approved equipment"
+            "title": "AWS Certified"
           }
         },
         "badge_2": {
           "type": "badge",
           "settings": {
-            "title": "Made in USA",
-            "description": "Proudly manufactured in the United States"
+            "title": "Made in USA"
           }
         },
         "badge_3": {
           "type": "badge",
           "settings": {
-            "title": "5-Year Warranty",
-            "description": "Comprehensive coverage on all equipment"
+            "title": "5-Year Warranty"
           }
         },
         "badge_4": {
           "type": "badge",
           "settings": {
-            "title": "24/7 Support",
-            "description": "Technical assistance when you need it"
+            "title": "24/7 Support"
           }
         }
       },
@@ -187,45 +160,34 @@
         "badge_2",
         "badge_3",
         "badge_4"
-      ]
+      ],
+      "settings": {}
     },
     "preset_testimonials": {
       "type": "preset-testimonials",
-      "settings": {
-        "eyebrow_text": "Customer Reviews",
-        "heading": "Trusted by Welding Professionals",
-        "subheading": "See what fabricators and welders say about our equipment",
-        "layout": "carousel",
-        "show_ratings": true,
-        "show_company": true,
-        "background_color": "#f5f5f5"
-      },
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "Best welding equipment I've used in 20 years. The precision and reliability are unmatched.",
-            "author": "Mike Rodriguez",
-            "company": "Rodriguez Fabrication",
-            "rating": 5
+            "company": "Rodriguez Fabrication"
           }
         },
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "Outstanding customer service and technical support. They really understand the welding industry.",
-            "author": "Sarah Chen",
-            "company": "Industrial Metalworks",
-            "rating": 5
+            "company": "Industrial Metalworks"
           }
         },
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "quote": "Durable equipment that handles our heavy production schedule without any issues.",
-            "author": "Tom Wilson",
-            "company": "Wilson Steel Works",
-            "rating": 5
+            "company": "Wilson Steel Works"
           }
         }
       },
@@ -233,7 +195,8 @@
         "testimonial_1",
         "testimonial_2",
         "testimonial_3"
-      ]
+      ],
+      "settings": {}
     }
   },
   "order": [
