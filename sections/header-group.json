@@ -13,6 +13,18 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_hPiUmg": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_hPiUmg"
+      ],
       "settings": {
         "background_color": "#121212",
         "text_color": "#ffffff"
@@ -21,6 +33,16 @@
     "header_unified_YBDKrp": {
       "type": "header--unified",
       "blocks": {
+        "featured_card_DCDWVT": {
+          "type": "featured_card",
+          "settings": {
+            "parent_menu": "",
+            "label": "Featured",
+            "title": "Featured Product",
+            "description": "",
+            "link": ""
+          }
+        },
         "featured_card_dXfHdd": {
           "type": "featured_card",
           "settings": {
@@ -34,6 +56,7 @@
         }
       },
       "block_order": [
+        "featured_card_DCDWVT",
         "featured_card_dXfHdd"
       ],
       "name": "t:sections.header_unified.presets.default.name",
