@@ -24,6 +24,21 @@
     "preset_gallery_yntA9H": {
       "type": "preset-gallery",
       "blocks": {
+        "preset_qVQ963": {
+          "type": "preset",
+          "settings": {
+            "preset_id": "modern-minimal",
+            "title": "Modern Minimal",
+            "industry": "Industry Type",
+            "badge_text": "Popular",
+            "description": "Perfect for [industry] businesses",
+            "feature_1": "Custom color scheme",
+            "feature_2": "Industry-specific typography",
+            "feature_3": "Optimized layouts",
+            "demo_link": "",
+            "preview_link": ""
+          }
+        },
         "preset_NfHFtK": {
           "type": "preset",
           "settings": {
@@ -86,6 +101,7 @@
         }
       },
       "block_order": [
+        "preset_qVQ963",
         "preset_NfHFtK",
         "preset_Hyi7F6",
         "preset_UHBiBD",
