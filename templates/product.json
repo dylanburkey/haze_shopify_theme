@@ -57,38 +57,6 @@
         "sold_out_text": "Sold Out"
       }
     },
-    "product-specs": {
-      "type": "product-specs",
-      "settings": {
-        "heading": "Technical Specifications",
-        "use_metafields": true,
-        "collapse_categories": false,
-        "blocks_heading": "Additional Specifications",
-        "open_by_default": true
-      }
-    },
-    "product-attachments": {
-      "type": "product-attachments",
-      "settings": {
-        "heading": "Downloads & Documentation",
-        "show_file_sizes": true,
-        "show_download_count": false,
-        "group_by_category": true,
-        "show_icons": true
-      }
-    },
-    "product-comparison": {
-      "type": "product-comparison",
-      "settings": {
-        "show_comparison_controls": true,
-        "title": "Product Comparison",
-        "show_comparison_table": true,
-        "max_products": 4,
-        "auto_show_comparison": true,
-        "persist_state": true,
-        "highlight_differences": true
-      }
-    },
     "related": {
       "type": "smart-grid",
       "blocks": {
@@ -454,16 +422,144 @@
         "cta_secondary_label": "Download Catalog",
         "cta_secondary_link": ""
       }
+    },
+    "marketing_preset_showcase_89XgyH": {
+      "type": "marketing-preset-showcase",
+      "blocks": {
+        "preset_tile_46eeEy": {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Bold Impact",
+            "industry_focus": "Athletic & Performance",
+            "description": "High-energy design perfect for sports brands, fitness companies, and performance-focused businesses. Features dynamic layouts and conversion-optimized elements.",
+            "use_case_1": "Athletic equipment retailers",
+            "use_case_2": "Fitness and wellness brands",
+            "use_case_3": "Sports performance companies",
+            "use_case_4": "Active lifestyle brands",
+            "use_case_5": "Training and coaching services",
+            "badge_text": "Most Popular",
+            "value_proposition": "Increase conversions by 35% with performance-optimized design",
+            "preview_primary_color": "#7c3aed",
+            "preview_secondary_color": "#dc2626",
+            "template_page_url": "/pages/showcase-bold-impact"
+          }
+        },
+        "preset_tile_QbEWLt": {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Tech Forward",
+            "industry_focus": "Gaming & Electronics",
+            "description": "Futuristic dark design ideal for gaming companies, tech startups, and electronics retailers. Built with cutting-edge UX patterns and modern aesthetics.",
+            "use_case_1": "Gaming hardware companies",
+            "use_case_2": "Electronics retailers",
+            "use_case_3": "Tech startups and SaaS",
+            "use_case_4": "Software development firms",
+            "use_case_5": "Digital agencies",
+            "badge_text": "Trending",
+            "value_proposition": "Built for tech-savvy customers with cutting-edge UX",
+            "preview_primary_color": "#00d4ff",
+            "preview_secondary_color": "#7c3aed",
+            "template_page_url": "/pages/showcase-tech-forward"
+          }
+        },
+        "preset_tile_EJfhA4": {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Zebra Skimmers",
+            "industry_focus": "Industrial B2B",
+            "description": "Professional B2B design with trust indicators, technical specifications, and conversion optimization. Perfect for complex industrial products and services.",
+            "use_case_1": "Manufacturing companies",
+            "use_case_2": "Industrial equipment suppliers",
+            "use_case_3": "Technical service providers",
+            "use_case_4": "B2B distributors",
+            "use_case_5": "Engineering firms",
+            "badge_text": "B2B Focused",
+            "value_proposition": "Proven to increase B2B lead generation by 40%",
+            "preview_primary_color": "#f59e0b",
+            "preview_secondary_color": "#1f2937",
+            "template_page_url": "/pages/showcase-zebra-skimmers"
+          }
+        },
+        "preset_tile_EhA7cj": {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Modern Minimal",
+            "industry_focus": "Luxury & Lifestyle",
+            "description": "Clean, sophisticated design perfect for luxury brands, lifestyle companies, and premium products. Emphasizes elegance and premium positioning.",
+            "use_case_1": "Luxury fashion brands",
+            "use_case_2": "High-end lifestyle products",
+            "use_case_3": "Premium service providers",
+            "use_case_4": "Boutique retailers",
+            "use_case_5": "Design agencies",
+            "badge_text": "Premium",
+            "value_proposition": "Elevate your brand with luxury-focused design",
+            "preview_primary_color": "#1a1a1a",
+            "preview_secondary_color": "#f5f5f5",
+            "template_page_url": "/pages/showcase-modern-minimal"
+          }
+        },
+        "preset_tile_Ej4xpE": {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Warm Artisan",
+            "industry_focus": "Food & Craft",
+            "description": "Warm, inviting design ideal for artisan brands, food companies, and handcrafted products. Features authentic storytelling and community-focused elements.",
+            "use_case_1": "Artisan food producers",
+            "use_case_2": "Craft breweries and distilleries",
+            "use_case_3": "Handmade product retailers",
+            "use_case_4": "Local farm-to-table businesses",
+            "use_case_5": "Creative workshops and studios",
+            "badge_text": "Artisan",
+            "value_proposition": "Connect with customers through authentic storytelling",
+            "preview_primary_color": "#d97706",
+            "preview_secondary_color": "#92400e",
+            "template_page_url": "/pages/showcase-warm-artisan"
+          }
+        },
+        "preset_tile_pfbKKb": {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Forge Industrial",
+            "industry_focus": "Manufacturing & Trades",
+            "description": "Robust industrial design perfect for manufacturing, trades, and heavy industry businesses. Built for durability and professional B2B interactions.",
+            "use_case_1": "Manufacturing companies",
+            "use_case_2": "Construction and trades",
+            "use_case_3": "Industrial equipment suppliers",
+            "use_case_4": "Heavy machinery dealers",
+            "use_case_5": "Fabrication services",
+            "badge_text": "Industrial",
+            "value_proposition": "Built tough for industrial-strength performance",
+            "preview_primary_color": "#374151",
+            "preview_secondary_color": "#f59e0b",
+            "template_page_url": "/pages/showcase-forge-industrial"
+          }
+        }
+      },
+      "block_order": [
+        "preset_tile_46eeEy",
+        "preset_tile_QbEWLt",
+        "preset_tile_EJfhA4",
+        "preset_tile_EhA7cj",
+        "preset_tile_Ej4xpE",
+        "preset_tile_pfbKKb"
+      ],
+      "name": "Marketing Preset Showcase",
+      "settings": {
+        "title": "Choose Your Perfect Design",
+        "subtitle": "Professional preset designs tailored for your industry, ready to customize and launch.",
+        "show_value_indicators": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#ffffff"
+      }
     }
   },
   "order": [
     "main",
-    "product-specs",
-    "product-attachments",
-    "product-comparison",
     "related",
     "side_menu_dVARMR",
     "landing_modern_minimal_YjRdVw",
-    "landing_forge_industrial_qWiwdx"
+    "landing_forge_industrial_qWiwdx",
+    "marketing_preset_showcase_89XgyH"
   ]
 }

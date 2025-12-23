@@ -21,24 +21,171 @@
         "button_link": ""
       }
     },
-    "announcement_bar_BKqVJn": {
-      "type": "announcement-bar",
+    "preset_gallery_yntA9H": {
+      "type": "preset-gallery",
       "blocks": {
-        "announcement_BPVFPk": {
-          "type": "announcement",
+        "preset_NfHFtK": {
+          "type": "preset",
           "settings": {
-            "text": "Saa",
-            "link": ""
+            "preset_id": "the-welder",
+            "title": "The Welder",
+            "industry": "Welding & Fabrication",
+            "badge_text": "Most Popular",
+            "description": "Industrial red design perfect for welding, metalwork, and heavy fabrication businesses.",
+            "feature_1": "Bold industrial red color scheme",
+            "feature_2": "Heavy-duty typography",
+            "feature_3": "Equipment-focused layouts",
+            "demo_link": "/pages/demo-the-welder",
+            "preview_link": "/?preset=the-welder"
+          }
+        },
+        "preset_Hyi7F6": {
+          "type": "preset",
+          "settings": {
+            "preset_id": "zebra-skimmers",
+            "title": "Zebra Skimmers",
+            "industry": "Industrial B2B",
+            "badge_text": "B2B Focused",
+            "description": "Professional B2B design with trust indicators and technical specification displays.",
+            "feature_1": "Trust badges and certifications",
+            "feature_2": "Technical spec layouts",
+            "feature_3": "B2B conversion optimization",
+            "demo_link": "/pages/demo-zebra-skimmers",
+            "preview_link": "/?preset=zebra-skimmers"
+          }
+        },
+        "preset_UHBiBD": {
+          "type": "preset",
+          "settings": {
+            "preset_id": "tech-forward",
+            "title": "Tech Forward",
+            "industry": "Technology & Electronics",
+            "badge_text": "Futuristic",
+            "description": "Dark, modern design perfect for tech companies, electronics, and SaaS businesses.",
+            "feature_1": "Dark mode aesthetic",
+            "feature_2": "Futuristic animations",
+            "feature_3": "Tech-focused layouts",
+            "demo_link": "/pages/demo-tech-forward",
+            "preview_link": "/?preset=tech-forward"
+          }
+        },
+        "preset_6wW9FN": {
+          "type": "preset",
+          "settings": {
+            "preset_id": "",
+            "title": "Preset Name",
+            "industry": "Industry Type",
+            "badge_text": "Popular",
+            "description": "Perfect for [industry] businesses",
+            "feature_1": "Custom color scheme",
+            "feature_2": "Industry-specific typography",
+            "feature_3": "Optimized layouts",
+            "demo_link": "",
+            "preview_link": ""
           }
         }
       },
       "block_order": [
-        "announcement_BPVFPk"
+        "preset_NfHFtK",
+        "preset_Hyi7F6",
+        "preset_UHBiBD",
+        "preset_6wW9FN"
       ],
-      "name": "t:sections.announcement_bar.name",
+      "name": "Preset Gallery",
       "settings": {
-        "background_color": "#121212",
-        "text_color": "#ffffff"
+        "title": "12 Industry Presets Included",
+        "subtitle": "Professional designs for every industry, ready to use",
+        "show_cost_per_preset": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#ffffff"
+      }
+    },
+    "featured_collection_KKdVby": {
+      "type": "featured-collection",
+      "name": "t:sections.featured_collection.name",
+      "settings": {
+        "heading": "Featured collection",
+        "collection": "automated-collection",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true
+      }
+    },
+    "landing_modern_minimal_WqXxzH": {
+      "type": "landing-modern-minimal",
+      "blocks": {
+        "value_HTxYmw": {
+          "type": "value",
+          "settings": {
+            "title": "Quality",
+            "text": "Crafted from premium materials that last."
+          }
+        },
+        "value_tcqkyE": {
+          "type": "value",
+          "settings": {
+            "title": "Simplicity",
+            "text": "Designed without excess or clutter."
+          }
+        },
+        "value_wUUw8W": {
+          "type": "value",
+          "settings": {
+            "title": "Sustainability",
+            "text": "Made with the environment in mind."
+          }
+        },
+        "testimonial_wpigmF": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah L.",
+            "title": "Designer",
+            "quote": "Finally found a brand that matches my aesthetic. Simple, beautiful, quality."
+          }
+        },
+        "testimonial_xaNxDm": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael T.",
+            "title": "Architect",
+            "quote": "The attention to detail is remarkable. These pieces are built to last."
+          }
+        }
+      },
+      "block_order": [
+        "value_HTxYmw",
+        "value_tcqkyE",
+        "value_wUUw8W",
+        "testimonial_wpigmF",
+        "testimonial_xaNxDm"
+      ],
+      "name": "Landing: Modern Minimal",
+      "settings": {
+        "hero_eyebrow": "New Collection",
+        "hero_title": "Less is More",
+        "hero_subtitle": "Thoughtfully designed pieces that stand the test of time. Quality over quantity.",
+        "hero_button_label": "Explore Collection",
+        "hero_button_link": "",
+        "show_products": true,
+        "collection": "",
+        "products_limit": 6,
+        "products_title": "Featured",
+        "products_button_label": "View All",
+        "show_featured": true,
+        "featured_eyebrow": "Our Philosophy",
+        "featured_title": "Designed with Purpose",
+        "featured_text": "Every detail matters. We believe in creating products that serve their purpose beautifully, without excess.",
+        "featured_button_label": "Learn More",
+        "featured_button_link": "",
+        "show_values": true,
+        "show_testimonials": true,
+        "testimonials_title": "What People Say",
+        "show_newsletter": true,
+        "newsletter_title": "Stay Updated",
+        "newsletter_text": "Subscribe for early access to new arrivals and exclusive offers.",
+        "newsletter_placeholder": "Enter email",
+        "newsletter_button": "Subscribe"
       }
     },
     "hero": {
@@ -334,7 +481,9 @@
   },
   "order": [
     "hero_industrial_qraTDy",
-    "announcement_bar_BKqVJn",
+    "preset_gallery_yntA9H",
+    "featured_collection_KKdVby",
+    "landing_modern_minimal_WqXxzH",
     "hero",
     "preset_featured_product_XXJRzJ",
     "preset_testimonials_M8HyKT",
