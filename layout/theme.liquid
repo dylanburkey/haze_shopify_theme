@@ -48,12 +48,40 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
-  {%- comment -%} Google Fonts for all presets {%- endcomment -%}
-  {%- if settings.enable_preconnect -%}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {%- endif -%}
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Bitter:wght@700;800&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=Lato:wght@400;700&family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&family=Source+Code+Pro:wght@400;500&family=Teko:wght@500;600;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  {%- comment -%} Shopify Font Loading for all presets {%- endcomment -%}
+  {%- liquid
+    assign font_families = 'Archivo Black,Barlow Condensed:600;700,Barlow:400;500;600,Bitter:700;800,IBM Plex Sans Condensed:600;700,IBM Plex Sans:400;500;600,Inter:400;500;600,Lato:400;700,Oswald:500;700,Roboto:400;500;700,Source Code Pro:400;500,Teko:500;600;700,Work Sans:400;600;700' | split: ','
+    for font_family in font_families
+      assign font_parts = font_family | split: ':'
+      assign font_name = font_parts[0]
+      assign font_weights = font_parts[1] | default: '400'
+      assign font_weights_array = font_weights | split: ';'
+      for weight in font_weights_array
+        assign font_face = font_name | font_face: weight: weight
+        if font_face
+          echo font_face | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true
+        endif
+      endfor
+    endfor
+  -%}
+
+  {%- comment -%} Font CSS Declarations {%- endcomment -%}
+  <style>
+    {%- liquid
+      for font_family in font_families
+        assign font_parts = font_family | split: ':'
+        assign font_name = font_parts[0]
+        assign font_weights = font_parts[1] | default: '400'
+        assign font_weights_array = font_weights | split: ';'
+        for weight in font_weights_array
+          assign font_face = font_name | font_face: weight: weight
+          if font_face
+            echo font_face | font_face_tag
+          endif
+        endfor
+      endfor
+    -%}
+  </style>
 
   {% render 'css-variables' %}
 

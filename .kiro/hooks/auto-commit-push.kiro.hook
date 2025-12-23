@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "name": "Auto Commit & Push",
   "description": "Automatically commits and pushes code changes to GitHub when a task is completed. If no GitHub repo exists, continues making local commits.",
   "version": "1",
@@ -10,5 +10,7 @@
   "then": {
     "type": "askAgent",
     "prompt": "A task has been completed. Please commit all changes with a descriptive commit message and push to GitHub. If there's no GitHub repository set up, create local commits only. Use git status to check for changes, git add to stage files, git commit with a meaningful message describing what was accomplished, and git push origin main (or appropriate branch) if a remote repository exists."
-  }
+  },
+  "workspaceFolderName": "cetera-media-shopify",
+  "shortName": "auto-commit-push"
 }
