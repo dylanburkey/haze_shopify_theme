@@ -1,63 +1,338 @@
 {%- comment -%}
   Product Attachments Section
-  Standalone section for displaying product documentation
-  Can be added to product pages via theme customizer
+  Displays downloadable files and documentation for products
+  
+  Accepts:
+  - product: {Object} Product object (required)
+  
+  Usage:
+  {% section 'product-attachments' %}
 {%- endcomment -%}
 
-{{ 'component-product-attachments.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  # Get product from section settings or context
+  if section.settings.product != blank
+    assign current_product = section.settings.product
+  else
+    assign current_product = product
+  endif
 
-{%- if product -%}
-  <div class="section-product-attachments">
-    <div class="page-width">
-      <div class="product-attachments {% if section.settings.style == 'grid' %}product-attachments--grid{% endif %}">
-        {% render 'product-attachments', product: product %}
+  # Section settings
+  assign show_heading = section.settings.show_heading
+  assign heading_text = section.settings.heading_text
+  assign layout_type = section.settings.layout
+  assign category_filter = section.settings.category_filter
+  assign show_file_info = section.settings.show_file_info
+  assign show_descriptions = section.settings.show_descriptions
+  assign show_file_sizes = section.settings.show_file_sizes
+  
+  # Check if product has attachments
+  assign has_attachments = false
+  if current_product != blank and current_product.metafields.attachments.files.value != blank
+    assign attachment_data = current_product.metafields.attachments.files.value
+    if attachment_data.attachments != blank and attachment_data.attachments.size > 0
+      assign has_attachments = true
+    endif
+  endif
+  
+  # Determine if section should be shown
+  assign show_section = has_attachments
+-%}
+
+{%- if show_section -%}
+  <div class="product-attachments-section section-{{ section.id }}" data-preset="{{ settings.theme_preset | default: 'the-welder' }}" data-empty="false">
+    {%- if show_heading and heading_text != blank -%}
+      <div class="section-header">
+        <h2 class="section-heading">{{ heading_text }}</h2>
       </div>
+    {%- endif -%}
+
+    <div class="section-content">
+      {%- render 'product-attachments',
+          product: current_product,
+          category: category_filter,
+          layout: layout_type,
+          show_file_info: show_file_info,
+          show_descriptions: show_descriptions,
+          show_file_sizes: show_file_sizes -%}
     </div>
   </div>
+
+  {%- comment -%} Load JavaScript for attachment handling {%- endcomment -%}
+  <script src="{{ 'product-attachments.js' | asset_url }}" defer></script>
+{%- else -%}
+  <!-- Product attachments section hidden: no attachments configured -->
+  <div class="product-attachments-section section-{{ section.id }}" data-preset="{{ settings.theme_preset | default: 'the-welder' }}" data-empty="true" style="display: none !important;">
+  </div>
+{%- endif -%}
+
+  {%- comment -%} Section-specific styles {%- endcomment -%}
+  <style>
+    .product-attachments-section {
+      margin: 2rem 0;
+    }
+
+    .product-attachments {
+      max-width: 100%;
+    }
+
+    .attachments-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .attachments-heading__icon {
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .attachment-category {
+      margin-bottom: 2rem;
+    }
+
+    .attachment-category__title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--color-foreground-75, #666);
+    }
+
+    .attachment-category__icon {
+      flex-shrink: 0;
+    }
+
+    .attachments-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .attachments-list--grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .attachment-item {
+      border: 1px solid var(--color-border, #e0e0e0);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .attachment-item:hover {
+      border-color: var(--color-border-hover, #ccc);
+    }
+
+    .attachment-item--featured {
+      border-color: var(--color-accent, #007acc);
+      background-color: var(--color-accent-background, #f0f8ff);
+    }
+
+    .attachment-item--restricted {
+      opacity: 0.6;
+      background-color: var(--color-background-disabled, #f5f5f5);
+    }
+
+    .attachment-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.2s ease;
+    }
+
+    .attachment-link:hover {
+      background-color: var(--color-background-hover, #f9f9f9);
+    }
+
+    .attachment-link--restricted {
+      cursor: not-allowed;
+    }
+
+    .attachment-link--restricted:hover {
+      background-color: transparent;
+    }
+
+    .attachment-icon {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-background-secondary, #f5f5f5);
+      border-radius: 0.25rem;
+      color: var(--color-foreground-75, #666);
+    }
+
+    .attachment-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .attachment-name {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      word-wrap: break-word;
+    }
+
+    .attachment-description {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--color-foreground-75, #666);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .attachment-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--color-foreground-50, #999);
+    }
+
+    .attachment-type {
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .attachment-size {
+      opacity: 0.8;
+    }
+
+    .attachment-restricted-notice {
+      font-size: 0.75rem;
+      color: var(--color-error, #c41e3a);
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .attachments-list--grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .attachment-link {
+        padding: 0.75rem;
+      }
+      
+      .attachment-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="{{ 'product-specification-theme-integration.css' | asset_url }}">
 {%- endif -%}
 
 {% schema %}
 {
   "name": "Product Attachments",
+  "tag": "section",
   "class": "section-product-attachments",
   "settings": [
     {
-      "type": "paragraph",
-      "content": "Displays product documentation from metafields. Add files in the product admin under 'Attachments' metafields."
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Leave blank to use current product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show section heading",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading text",
+      "default": "Product Documentation"
     },
     {
       "type": "select",
-      "id": "style",
-      "label": "Display style",
+      "id": "layout",
+      "label": "Layout",
       "options": [
-        { "value": "list", "label": "List (default)" },
-        { "value": "grid", "label": "Grid" }
+        {
+          "value": "list",
+          "label": "List"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
       ],
       "default": "list"
     },
     {
-      "type": "header",
-      "content": "Section padding"
+      "type": "select",
+      "id": "category_filter",
+      "label": "Category filter",
+      "options": [
+        {
+          "value": "all",
+          "label": "All categories"
+        },
+        {
+          "value": "manuals",
+          "label": "Manuals only"
+        },
+        {
+          "value": "cad",
+          "label": "CAD files only"
+        },
+        {
+          "value": "certificates",
+          "label": "Certificates only"
+        },
+        {
+          "value": "safety",
+          "label": "Safety documents only"
+        }
+      ],
+      "default": "all"
     },
     {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding top",
-      "default": 36
+      "type": "checkbox",
+      "id": "show_file_info",
+      "label": "Show file type and size",
+      "default": true
     },
     {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding bottom",
-      "default": 36
+      "type": "checkbox",
+      "id": "show_descriptions",
+      "label": "Show file descriptions",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_file_sizes",
+      "label": "Show file sizes",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Attachments"
     }
   ],
   "enabled_on": {

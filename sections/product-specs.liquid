@@ -1,189 +1,456 @@
 {%- comment -%}
-  Product Technical Specifications Section
-  Can be added to product template to display specs
-  Uses blocks for editor-configurable specs OR metafields
+  Advanced Product Technical Specifications Section
+  Displays structured technical specifications with categories, units, ranges, and tolerances
+  Supports both new structured metafield format and legacy format
+  Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 5.1, 5.4
 {%- endcomment -%}
 
 {%- liquid
-  assign has_metafield_specs = false
+  # Initialize variables
+  assign spec_data = null
+  assign spec_categories = null
+  assign has_specifications = false
+  assign attachment_data = null
+  assign attachment_categories = null
+  assign has_attachments = false
+  assign current_variant = product.selected_or_first_available_variant
+  assign parse_error = false
+  assign parse_error_message = ''
+
+  # Parse specifications metafield with error handling
+  assign raw_specs = product.metafields.specifications.technical.value
+  if raw_specs != blank
+    # Validate that we have a proper object structure
+    if raw_specs.specifications != blank
+      assign spec_data = raw_specs
+      assign has_specifications = true
+      
+      # Sort categories by order with error handling
+      assign unsorted_categories = spec_data.categories | default: empty
+      if unsorted_categories != blank
+        assign spec_categories = unsorted_categories | sort: 'order'
+      else
+        # Create default category structure if missing
+        assign spec_categories = blank
+      endif
+    else
+      assign parse_error = true
+      assign parse_error_message = 'Invalid specification data structure'
+    endif
+  endif
+
+  # Check for variant-specific specifications with error handling
+  assign variant_specs = null
+  if current_variant and current_variant.metafields.specifications.technical.value != blank
+    assign variant_specs = current_variant.metafields.specifications.technical.value
+    if variant_specs.specifications != blank
+      # Merge variant specs with product specs, variant takes precedence
+      if spec_data == null
+        assign spec_data = variant_specs
+        assign has_specifications = true
+        assign unsorted_categories = variant_specs.categories | default: empty
+        assign spec_categories = unsorted_categories | sort: 'order'
+      else
+        # Merge specifications - variant overrides product
+        for variant_category in variant_specs.specifications
+          assign category_key = variant_category[0]
+          assign category_specs = variant_category[1]
+          assign spec_data.specifications[category_key] = category_specs
+        endfor
+        
+        # Merge categories
+        if variant_specs.categories != blank
+          for variant_cat in variant_specs.categories
+            assign cat_key = variant_cat[0]
+            assign cat_info = variant_cat[1]
+            assign spec_data.categories[cat_key] = cat_info
+          endfor
+          assign unsorted_categories = spec_data.categories
+          assign spec_categories = unsorted_categories | sort: 'order'
+        endif
+      endif
+    else
+      assign parse_error = true
+      assign parse_error_message = 'Invalid variant specification data structure'
+    endif
+  endif
+
+  # Fallback to legacy metafields if new structure not found
+  unless has_specifications
+    # Check for legacy specs namespace
+    assign legacy_specs = product.metafields.specs
+    if legacy_specs != blank
+      assign has_legacy_specs = false
+      for metafield in legacy_specs
+        if metafield[1] != blank
+          assign has_legacy_specs = true
+          break
+        endif
+      endfor
+      
+      if has_legacy_specs
+        assign has_specifications = true
+      endif
+    endif
+  endunless
+  
+  # Check if we have any specifications to display (including blocks)
   assign has_block_specs = false
-
-  if product.metafields.specs.weight or product.metafields.specs.dimensions or product.metafields.specs.material or product.metafields.specs.capacity or product.metafields.specs.voltage or product.metafields.specs.power or product.metafields.specs.pressure or product.metafields.specs.temperature_range or product.metafields.specs.certifications or product.metafields.specs.warranty_period or product.metafields.specs.country_of_origin or product.metafields.specs.custom
-    assign has_metafield_specs = true
-  endif
-
   if section.blocks.size > 0
-    assign has_block_specs = true
+    for block in section.blocks
+      if block.type == 'spec' and block.settings.label != blank and block.settings.value != blank
+        assign has_block_specs = true
+        break
+      endif
+    endfor
   endif
-
-  assign show_section = has_metafield_specs or has_block_specs
+  
+  # Determine if section should be shown
+  if has_specifications or has_block_specs
+    assign show_section = true
+  else
+    assign show_section = false
+  endif
+  
+  # Override show_section if there's a parse error
+  if parse_error and not has_block_specs
+    assign show_section = false
+  endif
 -%}
 
+{%- if parse_error and not show_section -%}
+  {% render 'error-handler', 
+     error_type: 'metafield_parse',
+     error_context: parse_error_message,
+     fallback_content: '',
+     debug_mode: false
+  %}
+{%- endif -%}
+
 {%- if show_section -%}
-<div class="product-specs-section section" {{ section.shopify_attributes }}>
+<div class="product-specs-section section" {{ section.shopify_attributes }} data-preset="{{ settings.theme_preset | default: 'the-welder' }}" data-empty="false">
   <div class="container">
-    <details class="product-specs__accordion"{% if section.settings.open_by_default %} open{% endif %}>
-      <summary class="product-specs__header">
-        <h3 class="product-specs__title">
-          <svg class="product-specs__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-          {{ section.settings.heading | default: 'Technical Specifications' }}
-        </h3>
-        <svg class="product-specs__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </summary>
+    <div class="product-specs">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="product-specs__main-title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
 
-      <div class="product-specs__content">
-        <table class="product-specs__table">
-          <tbody>
-            {%- comment -%} Metafield-based specs {%- endcomment -%}
-            {%- if section.settings.use_metafields -%}
-              {%- if product.metafields.specs.weight -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Weight</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.weight }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.dimensions -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Dimensions</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.dimensions }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.material -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Material</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.material }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.capacity -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Capacity</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.capacity }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.voltage -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Voltage</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.voltage }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.power -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Power</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.power }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.pressure -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Pressure Rating</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.pressure }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.temperature_range -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Temperature Range</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.temperature_range }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.certifications -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Certifications</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.certifications }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.warranty_period -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Warranty</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.warranty_period }}</td>
-                </tr>
-              {%- endif -%}
-              {%- if product.metafields.specs.country_of_origin -%}
-                <tr class="product-specs__row">
-                  <th class="product-specs__label">Country of Origin</th>
-                  <td class="product-specs__value">{{ product.metafields.specs.country_of_origin }}</td>
-                </tr>
-              {%- endif -%}
+      {%- comment -%} Structured metafield specifications {%- endcomment -%}
+      {%- if has_specifications and section.settings.use_metafields -%}
+        <div class="product-specs__structured">
+          {%- for category_data in spec_categories -%}
+            {%- assign category_key = category_data[0] -%}
+            {%- assign category_info = category_data[1] -%}
+            {%- assign category_specs = spec_data.specifications[category_key] -%}
+            
+            {%- if category_specs != blank -%}
+              <div class="product-specs__category" data-category="{{ category_key }}">
+                {%- if category_info.collapsible -%}
+                  <details class="product-specs__accordion"{% unless section.settings.collapse_categories %} open{% endunless %}>
+                    <summary class="product-specs__header">
+                      <h3 class="product-specs__title">
+                        <svg class="product-specs__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                          <polyline points="14 2 14 8 20 8"/>
+                          <line x1="16" y1="13" x2="8" y2="13"/>
+                          <line x1="16" y1="17" x2="8" y2="17"/>
+                          <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        {{ category_info.name | default: category_key | capitalize }}
+                      </h3>
+                      <svg class="product-specs__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                      </svg>
+                    </summary>
+                    <div class="product-specs__content">
+                      {%- if category_info.description != blank -%}
+                        <p class="product-specs__category-description">{{ category_info.description }}</p>
+                      {%- endif -%}
+                      {% render 'product-specs-table', specifications: category_specs %}
+                    </div>
+                  </details>
+                {%- else -%}
+                  <div class="product-specs__static-category">
+                    <h3 class="product-specs__static-title">
+                      <svg class="product-specs__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                      </svg>
+                      {{ category_info.name | default: category_key | capitalize }}
+                    </h3>
+                    <div class="product-specs__content">
+                      {%- if category_info.description != blank -%}
+                        <p class="product-specs__category-description">{{ category_info.description }}</p>
+                      {%- endif -%}
+                      {% render 'product-specs-table', specifications: category_specs %}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
             {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
 
-            {%- comment -%} Block-based specs (from theme editor) {%- endcomment -%}
-            {%- for block in section.blocks -%}
-              {%- case block.type -%}
-                {%- when 'spec' -%}
-                  <tr class="product-specs__row" {{ block.shopify_attributes }}>
-                    <th class="product-specs__label">{{ block.settings.label }}</th>
-                    <td class="product-specs__value">
-                      {%- if block.settings.use_metafield and block.settings.metafield_key != blank -%}
-                        {{ product.metafields.specs[block.settings.metafield_key] | default: block.settings.value }}
-                      {%- else -%}
-                        {{ block.settings.value }}
-                      {%- endif -%}
-                    </td>
-                  </tr>
-                {%- when 'divider' -%}
-                  <tr class="product-specs__divider" {{ block.shopify_attributes }}>
-                    <td colspan="2">
-                      {%- if block.settings.label != blank -%}
-                        <span class="product-specs__divider-label">{{ block.settings.label }}</span>
-                      {%- endif -%}
-                    </td>
-                  </tr>
-              {%- endcase -%}
-            {%- endfor -%}
-          </tbody>
-        </table>
-      </div>
-    </details>
+      {%- comment -%} Block-based specifications (theme editor) {%- endcomment -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="product-specs__blocks">
+          <details class="product-specs__accordion"{% if section.settings.open_by_default %} open{% endif %}>
+            <summary class="product-specs__header">
+              <h3 class="product-specs__title">
+                <svg class="product-specs__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                {{ section.settings.blocks_heading | default: 'Additional Specifications' }}
+              </h3>
+              <svg class="product-specs__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+
+            <div class="product-specs__content">
+              <div class="product-specs__table-container">
+                <table class="product-specs__table">
+                  <tbody>
+                    {%- for block in section.blocks -%}
+                      {%- case block.type -%}
+                        {%- when 'spec' -%}
+                          <tr class="product-specs__row" {{ block.shopify_attributes }}>
+                            <th class="product-specs__label">{{ block.settings.label }}</th>
+                            <td class="product-specs__value">
+                              {%- if block.settings.use_metafield and block.settings.metafield_key != blank -%}
+                                {{ product.metafields.specs[block.settings.metafield_key] | default: block.settings.value }}
+                              {%- else -%}
+                                {{ block.settings.value }}
+                              {%- endif -%}
+                              {%- if block.settings.unit != blank -%}
+                                <span class="product-specs__unit">{{ block.settings.unit }}</span>
+                              {%- endif -%}
+                            </td>
+                          </tr>
+                        {%- when 'divider' -%}
+                          <tr class="product-specs__divider" {{ block.shopify_attributes }}>
+                            <td colspan="2">
+                              {%- if block.settings.label != blank -%}
+                                <span class="product-specs__divider-label">{{ block.settings.label }}</span>
+                              {%- endif -%}
+                            </td>
+                          </tr>
+                      {%- endcase -%}
+                    {%- endfor -%}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </details>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
+</div>
+{%- else -%}
+<!-- Product specifications section hidden: no specifications or blocks configured -->
+<div class="product-specs-section section" {{ section.shopify_attributes }} data-preset="{{ settings.theme_preset | default: 'the-welder' }}" data-empty="true" style="display: none !important;">
 </div>
 {%- endif -%}
 
 {% stylesheet %}
   .product-specs-section {
-    padding-block: var(--spacing-sections);
+    padding-block: var(--spacing-sections, var(--section-padding, 3rem));
+  }
+
+  .product-specs {
+    container-type: inline-size;
+  }
+
+  .product-specs__main-title {
+    margin-bottom: var(--space-6, 1.5rem);
+    font-family: var(--font-heading, var(--font-heading-family));
+    font-size: var(--font-size-xl, 1.25rem);
+    font-weight: var(--font-heading-weight, 600);
+    color: var(--color-text, var(--color-foreground));
+    line-height: var(--font-heading-line-height, 1.2);
+  }
+
+  .product-specs__title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6, 1.5rem);
+  }
+
+  .product-specs__title-wrapper .product-specs__main-title {
+    margin-bottom: 0;
+  }
+
+  /* Export Button Styles - Integrated with theme design tokens */
+  .spec-export-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    border: 1px solid var(--color-border, var(--color-border-input));
+    border-radius: var(--radius-button, var(--button-border-radius, 0.25rem));
+    background: var(--color-background, var(--color-background));
+    color: var(--color-text, var(--color-foreground));
+    font-family: var(--font-body, var(--font-body-family));
+    font-size: var(--font-size-sm, 0.875rem);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--duration-fast, var(--transition-duration, 0.15s)) var(--ease-default, ease);
+  }
+
+  .spec-export-btn:hover {
+    background: var(--color-background-secondary, var(--color-surface));
+    border-color: var(--color-primary, var(--color-accent));
+    transform: translateY(-1px);
+  }
+
+  .spec-export-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .spec-export-btn--loading {
+    position: relative;
+    color: transparent;
+  }
+
+  .spec-export-btn--loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--color-border, #e5e5e5);
+    border-top: 2px solid var(--color-primary, var(--color-accent));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .spec-export-btn__icon {
+    flex-shrink: 0;
+    color: var(--color-primary, var(--color-accent));
+  }
+
+  /* Export Notifications - Theme integrated */
+  .spec-export-notification {
+    position: fixed;
+    top: var(--space-4, 1rem);
+    right: var(--space-4, 1rem);
+    padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+    border-radius: var(--radius-button, var(--card-border-radius, 0.5rem));
+    font-size: var(--font-size-sm, 0.875rem);
+    font-weight: 500;
+    z-index: var(--z-modal, 1000);
+    box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+    animation: slideIn 0.3s var(--ease-default, ease);
+  }
+
+  .spec-export-notification--error {
+    background: var(--color-error, #ef4444);
+    color: white;
+  }
+
+  .spec-export-notification--success {
+    background: var(--color-success, #10b981);
+    color: white;
+  }
+
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .product-specs__structured,
+  .product-specs__blocks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+  }
+
+  .product-specs__category {
+    border: 1px solid var(--color-border, var(--color-border-input));
+    border-radius: var(--radius-card, var(--card-border-radius, 0.5rem));
+    overflow: hidden;
+    background: var(--color-background, var(--color-background));
   }
 
   .product-specs__accordion {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border, var(--color-border-input));
+    border-radius: var(--radius-card, var(--card-border-radius, 0.5rem));
     overflow: hidden;
+    background: var(--color-background, var(--color-background));
   }
 
   .product-specs__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-4);
-    background: var(--color-background-secondary);
+    padding: var(--space-4, 1rem);
+    background: var(--color-background-secondary, var(--color-surface));
     cursor: pointer;
     list-style: none;
+    transition: background-color var(--duration-fast, var(--transition-duration, 0.15s)) var(--ease-default, ease);
+  }
+
+  .product-specs__header:hover {
+    background: var(--color-background-tertiary, color-mix(in srgb, var(--color-surface) 80%, var(--color-border)));
   }
 
   .product-specs__header::-webkit-details-marker {
     display: none;
   }
 
-  .product-specs__title {
+  .product-specs__title,
+  .product-specs__static-title {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-2, 0.5rem);
     margin: 0;
-    font-size: var(--font-size-lg);
-    font-weight: 600;
+    font-family: var(--font-heading, var(--font-heading-family));
+    font-size: var(--font-size-lg, 1.125rem);
+    font-weight: var(--font-heading-weight, 600);
+    color: var(--color-text, var(--color-foreground));
+    line-height: var(--font-heading-line-height, 1.2);
+  }
+
+  .product-specs__static-title {
+    padding: var(--space-4, 1rem);
+    background: var(--color-background-secondary, var(--color-surface));
+    margin: 0;
   }
 
   .product-specs__icon {
-    color: var(--color-primary);
+    color: var(--color-primary, var(--color-accent));
+    flex-shrink: 0;
   }
 
   .product-specs__chevron {
-    transition: transform var(--duration-fast) var(--ease-default);
+    transition: transform var(--duration-fast, var(--transition-duration, 0.15s)) var(--ease-default, ease);
+    flex-shrink: 0;
+    color: var(--color-text-secondary, var(--color-foreground-secondary));
   }
 
   .product-specs__accordion[open] .product-specs__chevron {
@@ -191,16 +458,33 @@
   }
 
   .product-specs__content {
-    padding: var(--space-4);
+    padding: var(--space-4, 1rem);
+  }
+
+  .product-specs__category-description {
+    margin-bottom: var(--space-4, 1rem);
+    font-family: var(--font-body, var(--font-body-family));
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--color-text-secondary, var(--color-foreground-secondary));
+    font-style: italic;
+    line-height: var(--font-body-line-height, 1.6);
+  }
+
+  .product-specs__table-container {
+    container-type: inline-size;
+    overflow-x: auto;
+    border-radius: var(--radius-input, var(--input-border-radius, 0.25rem));
   }
 
   .product-specs__table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 100%;
+    font-family: var(--font-body, var(--font-body-family));
   }
 
   .product-specs__row {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border, var(--color-border-input));
   }
 
   .product-specs__row:last-child {
@@ -209,8 +493,8 @@
 
   .product-specs__label,
   .product-specs__value {
-    padding: var(--space-3) 0;
-    font-size: var(--font-size-sm);
+    padding: var(--space-3, 0.75rem) var(--space-2, 0.5rem);
+    font-size: var(--font-size-sm, 0.875rem);
     text-align: left;
     vertical-align: top;
   }
@@ -218,71 +502,506 @@
   .product-specs__label {
     width: 40%;
     font-weight: 600;
-    color: var(--color-text);
-    padding-right: var(--space-4);
+    color: var(--color-text, var(--color-foreground));
+    background: var(--color-background-secondary, var(--color-surface));
   }
 
   .product-specs__value {
     font-weight: 400;
-    color: var(--color-text-secondary);
+    color: var(--color-text-secondary, var(--color-foreground-secondary));
+  }
+
+  .product-specs__value-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1, 0.25rem);
+  }
+
+  .product-specs__main-value,
+  .product-specs__range {
+    font-weight: 500;
+    color: var(--color-text, var(--color-foreground));
+  }
+
+  .product-specs__unit {
+    margin-left: var(--space-1, 0.25rem);
+    font-size: var(--font-size-xs, 0.75rem);
+    color: var(--color-text-secondary, var(--color-foreground-secondary));
+    font-weight: 400;
+  }
+
+  .product-specs__tolerance {
+    font-size: var(--font-size-xs, 0.75rem);
+    color: var(--color-primary, var(--color-accent));
+    font-weight: 500;
+    margin-left: var(--space-2, 0.5rem);
+  }
+
+  .product-specs__description {
+    margin-top: var(--space-2, 0.5rem);
+    font-size: var(--font-size-xs, 0.75rem);
+    color: var(--color-text-secondary, var(--color-foreground-secondary));
+    line-height: var(--font-body-line-height, 1.4);
   }
 
   .product-specs__divider td {
-    padding: var(--space-4) 0 var(--space-2);
+    padding: var(--space-4, 1rem) var(--space-2, 0.5rem) var(--space-2, 0.5rem);
     border-bottom: none;
   }
 
   .product-specs__divider-label {
     display: block;
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-xs, 0.75rem);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-primary);
-    padding-bottom: var(--space-2);
-    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary, var(--color-accent));
+    padding-bottom: var(--space-2, 0.5rem);
+    border-bottom: 2px solid var(--color-primary, var(--color-accent));
   }
 
-  @media (max-width: 480px) {
+  /* Container Queries for Responsive Behavior */
+  @container (max-width: 600px) {
+    .product-specs__table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .product-specs__table {
+      min-width: 500px;
+    }
+
+    .product-specs__label {
+      width: 45%;
+      min-width: 120px;
+    }
+
+    .product-specs__value {
+      min-width: 200px;
+    }
+  }
+
+  @container (max-width: 400px) {
     .product-specs__row {
       display: flex;
       flex-direction: column;
       gap: var(--space-1);
-      padding: var(--space-3) 0;
+      padding: var(--space-3) var(--space-2);
+      border-bottom: 1px solid var(--color-border);
     }
 
     .product-specs__label,
     .product-specs__value {
       width: 100%;
       padding: 0;
+      background: transparent;
+    }
+
+    .product-specs__label {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-1);
+    }
+
+    .product-specs__table {
+      min-width: 100%;
+    }
+
+    .product-specs__table-container {
+      overflow-x: visible;
+    }
+  }
+
+  /* Legacy mobile support for older browsers */
+  @media (max-width: 600px) {
+    .product-specs__table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .product-specs__table {
+      min-width: 500px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .product-specs__row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-3) var(--space-2);
+    }
+
+    .product-specs__label,
+    .product-specs__value {
+      width: 100%;
+      padding: 0;
+      background: transparent;
+    }
+
+    .product-specs__label {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-secondary);
+    }
+
+    .product-specs__table {
+      min-width: 100%;
+    }
+
+    .product-specs__table-container {
+      overflow-x: visible;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .product-specs-section {
+      page-break-inside: avoid;
+      margin: 1rem 0;
+    }
+
+    .product-specs__main-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 2px solid #000;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-specs__title-wrapper {
+      margin-bottom: 1rem;
+    }
+
+    .spec-export-btn {
+      display: none; /* Hide export button in print */
+    }
+
+    .product-specs__accordion {
+      border: 1px solid #000;
+      page-break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+
+    .product-specs__accordion[open] .product-specs__content,
+    .product-specs__static-category .product-specs__content {
+      display: block !important;
+    }
+
+    .product-specs__header {
+      background: #f5f5f5 !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+      page-break-after: avoid;
+    }
+
+    .product-specs__title,
+    .product-specs__static-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .product-specs__chevron {
+      display: none;
+    }
+
+    .product-specs__category-description {
+      font-size: 0.9rem;
+      color: #333;
+      margin-bottom: 0.75rem;
+    }
+
+    .product-specs__table-container {
+      overflow: visible;
+      page-break-inside: avoid;
+    }
+
+    .product-specs__table {
+      min-width: 100%;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .product-specs__row {
+      page-break-inside: avoid;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .product-specs__label {
+      background: #f8f8f8 !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+      font-weight: bold;
+      width: 40%;
+      padding: 0.5rem;
+      border-right: 1px solid #ccc;
+    }
+
+    .product-specs__value {
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .product-specs__main-value {
+      font-weight: bold;
+    }
+
+    .product-specs__unit {
+      font-size: 0.75rem;
+      color: #333;
+    }
+
+    .product-specs__tolerance {
+      font-size: 0.75rem;
+      color: #555;
+      font-style: italic;
+    }
+
+    .product-specs__range {
+      font-weight: bold;
+    }
+
+    .product-specs__description {
+      font-size: 0.75rem;
+      color: #555;
+      margin-top: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .product-specs__divider td {
+      background: #e0e0e0 !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+      font-weight: bold;
+      text-align: center;
+      padding: 0.75rem;
+    }
+
+    .product-specs__divider-label {
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Ensure categories don't break across pages */
+    .product-specs__category {
+      page-break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-specs__static-category {
+      page-break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Print page margins */
+    @page {
+      margin: 1in;
+      size: letter;
+    }
+
+    /* Print headers for each category */
+    .product-specs__category::before {
+      content: "";
+      display: block;
+      page-break-before: auto;
     }
   }
 {% endstylesheet %}
 
+<script src="{{ 'performance-optimizer.js' | asset_url }}" defer></script>
+<script src="{{ 'error-handling.js' | asset_url }}" defer></script>
+<script src="{{ 'spec-export.js' | asset_url }}" defer></script>
+<link rel="stylesheet" href="{{ 'print-styles.css' | asset_url }}" media="print">
+<link rel="stylesheet" href="{{ 'product-specification-theme-integration.css' | asset_url }}">
+
+<script>
+  // Variant-specific specification handling
+  document.addEventListener('DOMContentLoaded', function() {
+    const productForm = document.querySelector('[data-product-form]');
+    const specsSection = document.querySelector('.product-specs-section');
+    
+    if (!productForm || !specsSection) return;
+    
+    // Listen for variant changes
+    productForm.addEventListener('change', function(event) {
+      if (event.target.name === 'id') {
+        updateSpecificationsForVariant(event.target.value);
+      }
+    });
+    
+    // Function to update specifications when variant changes
+    function updateSpecificationsForVariant(variantId) {
+      // Find variant data
+      const productData = window.productData || {};
+      const variants = productData.variants || [];
+      const selectedVariant = variants.find(v => v.id == variantId);
+      
+      if (!selectedVariant) return;
+      
+      // Check if variant has specific specifications
+      const variantSpecs = selectedVariant.metafields?.specifications?.technical;
+      
+      if (variantSpecs) {
+        // Update specifications display
+        updateSpecsDisplay(variantSpecs);
+      }
+    }
+    
+    // Function to update the specs display
+    function updateSpecsDisplay(specsData) {
+      const structuredSpecs = specsSection.querySelector('.product-specs__structured');
+      if (!structuredSpecs || !specsData.specifications) return;
+      
+      // Update each category
+      Object.entries(specsData.specifications).forEach(([categoryKey, categorySpecs]) => {
+        const categoryElement = structuredSpecs.querySelector(`[data-category="${categoryKey}"]`);
+        if (categoryElement) {
+          const tableContainer = categoryElement.querySelector('.product-specs__table-container');
+          if (tableContainer) {
+            // Re-render the table with new specifications
+            renderSpecsTable(tableContainer, categorySpecs);
+          }
+        }
+      });
+    }
+    
+    // Function to render specifications table
+    function renderSpecsTable(container, specifications) {
+      const table = container.querySelector('.product-specs__table tbody');
+      if (!table) return;
+      
+      // Clear existing rows
+      table.innerHTML = '';
+      
+      // Add new rows
+      Object.entries(specifications).forEach(([specKey, specInfo]) => {
+        if (specInfo.value) {
+          const row = document.createElement('tr');
+          row.className = 'product-specs__row';
+          
+          const labelCell = document.createElement('th');
+          labelCell.className = 'product-specs__label';
+          labelCell.textContent = specInfo.display_name || specKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          
+          const valueCell = document.createElement('td');
+          valueCell.className = 'product-specs__value';
+          
+          const valueContent = document.createElement('div');
+          valueContent.className = 'product-specs__value-content';
+          
+          // Handle different value types
+          if (specInfo.min && specInfo.max) {
+            const rangeSpan = document.createElement('span');
+            rangeSpan.className = 'product-specs__range';
+            rangeSpan.textContent = `${specInfo.min} - ${specInfo.max}`;
+            if (specInfo.unit) {
+              const unitSpan = document.createElement('span');
+              unitSpan.className = 'product-specs__unit';
+              unitSpan.textContent = specInfo.unit;
+              rangeSpan.appendChild(unitSpan);
+            }
+            valueContent.appendChild(rangeSpan);
+          } else if (specInfo.range) {
+            const rangeSpan = document.createElement('span');
+            rangeSpan.className = 'product-specs__range';
+            rangeSpan.textContent = specInfo.range;
+            if (specInfo.unit) {
+              const unitSpan = document.createElement('span');
+              unitSpan.className = 'product-specs__unit';
+              unitSpan.textContent = specInfo.unit;
+              rangeSpan.appendChild(unitSpan);
+            }
+            valueContent.appendChild(rangeSpan);
+          } else {
+            const valueSpan = document.createElement('span');
+            valueSpan.className = 'product-specs__main-value';
+            valueSpan.textContent = specInfo.value;
+            if (specInfo.unit) {
+              const unitSpan = document.createElement('span');
+              unitSpan.className = 'product-specs__unit';
+              unitSpan.textContent = specInfo.unit;
+              valueSpan.appendChild(unitSpan);
+            }
+            valueContent.appendChild(valueSpan);
+          }
+          
+          // Add tolerance if present
+          if (specInfo.tolerance) {
+            const toleranceSpan = document.createElement('span');
+            toleranceSpan.className = 'product-specs__tolerance';
+            toleranceSpan.textContent = specInfo.tolerance;
+            valueContent.appendChild(toleranceSpan);
+          }
+          
+          // Add description if present
+          if (specInfo.description) {
+            const descDiv = document.createElement('div');
+            descDiv.className = 'product-specs__description';
+            descDiv.textContent = specInfo.description;
+            valueContent.appendChild(descDiv);
+          }
+          
+          valueCell.appendChild(valueContent);
+          row.appendChild(labelCell);
+          row.appendChild(valueCell);
+          table.appendChild(row);
+        }
+      });
+    }
+  });
+</script>
+
 {% schema %}
 {
-  "name": "Product Specs",
+  "name": "Product Specifications",
   "tag": "section",
   "class": "section-product-specs",
   "settings": [
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Technical Specifications"
-    },
-    {
-      "type": "checkbox",
-      "id": "open_by_default",
-      "label": "Open by default",
-      "default": true
+      "label": "Main heading",
+      "default": "Technical Specifications",
+      "info": "Main title for the specifications section"
     },
     {
       "type": "checkbox",
       "id": "use_metafields",
-      "label": "Show specs from metafields",
+      "label": "Show specifications from metafields",
       "default": true,
-      "info": "Display specs stored in product metafields (namespace: specs)"
+      "info": "Display structured specifications from product metafields (namespace: specifications.technical)"
+    },
+    {
+      "type": "checkbox",
+      "id": "collapse_categories",
+      "label": "Collapse categories by default",
+      "default": false,
+      "info": "Start with specification categories collapsed"
+    },
+    {
+      "type": "header",
+      "content": "Block-based specifications"
+    },
+    {
+      "type": "text",
+      "id": "blocks_heading",
+      "label": "Blocks section heading",
+      "default": "Additional Specifications",
+      "info": "Heading for manually configured specifications"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "Open blocks section by default",
+      "default": true,
+      "info": "Start with the blocks section expanded"
     }
   ],
   "blocks": [
@@ -301,6 +1020,12 @@
           "id": "value",
           "label": "Value",
           "default": "Value"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "Unit",
+          "info": "Optional unit of measurement (e.g., 'mm', 'kg', 'PSI')"
         },
         {
           "type": "checkbox",
@@ -325,34 +1050,36 @@
           "type": "text",
           "id": "label",
           "label": "Section label",
-          "info": "Optional label for grouping specs"
+          "info": "Optional label for grouping specifications"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Product Specs",
+      "name": "Product Specifications",
       "blocks": [
         {
           "type": "spec",
           "settings": {
             "label": "Weight",
-            "value": "2.5 lbs"
+            "value": "2.5",
+            "unit": "kg"
           }
         },
         {
           "type": "spec",
           "settings": {
             "label": "Dimensions",
-            "value": "12\" x 8\" x 4\""
+            "value": "300 × 200 × 100",
+            "unit": "mm"
           }
         },
         {
           "type": "spec",
           "settings": {
             "label": "Material",
-            "value": "Steel / Aluminum"
+            "value": "316 Stainless Steel"
           }
         },
         {
@@ -365,14 +1092,16 @@
           "type": "spec",
           "settings": {
             "label": "Voltage",
-            "value": "120V AC"
+            "value": "120/240",
+            "unit": "VAC"
           }
         },
         {
           "type": "spec",
           "settings": {
             "label": "Power",
-            "value": "500W"
+            "value": "500",
+            "unit": "W"
           }
         }
       ]

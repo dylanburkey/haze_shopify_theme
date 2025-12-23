@@ -1,0 +1,240 @@
+{
+  "metafield_definitions": [
+    {
+      "namespace": "specifications",
+      "key": "technical",
+      "name": "Technical Specifications",
+      "description": "Structured technical specification data with categories, values, units, and tolerances",
+      "type": "json",
+      "validation": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "object",
+            "description": "Specification category definitions",
+            "patternProperties": {
+              "^[a-z_]+$": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Display name for the category"
+                  },
+                  "order": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Display order for categories"
+                  },
+                  "collapsible": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether category can be collapsed"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Optional category description"
+                  }
+                },
+                "required": ["name", "order"]
+              }
+            }
+          },
+          "specifications": {
+            "type": "object",
+            "description": "Specification data organized by category",
+            "patternProperties": {
+              "^[a-z_]+$": {
+                "type": "object",
+                "description": "Category containing specifications",
+                "patternProperties": {
+                  "^[a-z_]+$": {
+                    "type": "object",
+                    "description": "Individual specification",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "description": "Specification value"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "description": "Unit of measurement"
+                      },
+                      "tolerance": {
+                        "type": "string",
+                        "description": "Tolerance specification (e.g., ±5)"
+                      },
+                      "range": {
+                        "type": "string",
+                        "description": "Range specification (e.g., 0-150)"
+                      },
+                      "min": {
+                        "type": "string",
+                        "description": "Minimum value for ranges"
+                      },
+                      "max": {
+                        "type": "string",
+                        "description": "Maximum value for ranges"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Rich text description"
+                      },
+                      "display_name": {
+                        "type": "string",
+                        "description": "Custom display name (overrides key)"
+                      }
+                    },
+                    "required": ["value"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": ["specifications"]
+      }
+    },
+    {
+      "namespace": "specifications",
+      "key": "categories",
+      "name": "Specification Categories",
+      "description": "Category definitions for organizing specifications",
+      "type": "json",
+      "validation": {
+        "type": "object",
+        "patternProperties": {
+          "^[a-z_]+$": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name for the category"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Display order for categories"
+              },
+              "collapsible": {
+                "type": "boolean",
+                "default": true,
+                "description": "Whether category can be collapsed"
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional category description"
+              },
+              "icon": {
+                "type": "string",
+                "description": "Icon identifier for the category"
+              }
+            },
+            "required": ["name", "order"]
+          }
+        }
+      }
+    },
+    {
+      "namespace": "attachments",
+      "key": "files",
+      "name": "Product Attachment Files",
+      "description": "Structured file attachment data with categories and metadata",
+      "type": "json",
+      "validation": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier for the file"
+            },
+            "name": {
+              "type": "string",
+              "description": "Display name for the file"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "File URL (Shopify CDN or external)"
+            },
+            "type": {
+              "type": "string",
+              "description": "File type/extension (pdf, dwg, step, etc.)"
+            },
+            "size": {
+              "type": "string",
+              "description": "Human-readable file size (e.g., '2.4 MB')"
+            },
+            "category": {
+              "type": "string",
+              "description": "Category key for grouping files"
+            },
+            "description": {
+              "type": "string",
+              "description": "File description or purpose"
+            },
+            "access_level": {
+              "type": "string",
+              "enum": ["public", "customer", "wholesale"],
+              "default": "public",
+              "description": "Access control level"
+            },
+            "featured": {
+              "type": "boolean",
+              "default": false,
+              "description": "Whether to highlight this file"
+            },
+            "order": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Display order within category"
+            }
+          },
+          "required": ["id", "name", "url", "type", "category"]
+        }
+      }
+    },
+    {
+      "namespace": "attachments",
+      "key": "categories",
+      "name": "Attachment Categories",
+      "description": "Category definitions for organizing file attachments",
+      "type": "json",
+      "validation": {
+        "type": "object",
+        "patternProperties": {
+          "^[a-z_]+$": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name for the category"
+              },
+              "icon": {
+                "type": "string",
+                "description": "Icon identifier for file type"
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Display order for categories"
+              },
+              "description": {
+                "type": "string",
+                "description": "Category description"
+              },
+              "access_level": {
+                "type": "string",
+                "enum": ["public", "customer", "wholesale"],
+                "default": "public",
+                "description": "Default access level for files in this category"
+              }
+            },
+            "required": ["name", "icon", "order"]
+          }
+        }
+      }
+    }
+  ]
+}

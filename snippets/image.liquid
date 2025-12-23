@@ -1,51 +1,101 @@
 {%- comment -%}
-  Renders a responsive image with lazy loading support.
-  Uses the image_url filter for optimal image delivery.
-
-  @param {image} image - The image object to render
-  @param {string} [alt] - Alt text override (defaults to image.alt)
-  @param {string} [class] - CSS class for the image element
-  @param {string} [sizes] - The sizes attribute for responsive images
-  @param {number} [width] - Maximum width to load
-  @param {number} [height] - Height constraint (maintains aspect ratio if width also set)
-  @param {string} [loading] - Loading strategy: 'lazy' (default) or 'eager'
-  @param {boolean} [preload] - Whether to add a preload link
-
-  @example
-  {% render 'image', image: product.featured_image %}
-  {% render 'image', image: section.settings.image, sizes: '(min-width: 750px) 50vw, 100vw' %}
+  Optimized Image Snippet
+  Renders responsive images with lazy loading, proper sizing, and performance optimization
+  
+  Parameters:
+  - image: Image object (required)
+  - alt: Alt text (optional, defaults to image.alt)
+  - loading: Loading strategy ('lazy', 'eager', 'auto') - defaults to 'lazy'
+  - fetchpriority: Fetch priority ('high', 'low', 'auto') - defaults to 'auto'
+  - sizes: Sizes attribute for responsive images
+  - widths: Array of widths for srcset (defaults to responsive widths)
+  - class: CSS classes to add
+  - width: Fixed width (optional)
+  - height: Fixed height (optional)
+  
+  Usage:
+  {% render 'image', image: product.featured_image, alt: product.title, loading: 'eager', fetchpriority: 'high' %}
 {%- endcomment -%}
 
 {%- liquid
-  assign alt_text = alt | default: image.alt | escape
-  assign loading_attr = loading | default: 'lazy'
+  unless image
+    return
+  endunless
+
+  assign image_alt = alt | default: image.alt | escape
+  assign image_loading = loading | default: 'lazy'
+  assign image_fetchpriority = fetchpriority | default: 'auto'
   assign image_class = class | default: ''
-  assign widths = '165, 360, 535, 750, 940, 1100, 1500, 1780, 2000'
-
+  
+  # Default responsive widths for optimal performance
+  assign default_widths = '180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024'
+  assign image_widths = widths | default: default_widths
+  
+  # Generate sizes attribute if not provided
+  unless sizes
+    if width
+      assign sizes = width | append: 'px'
+    else
+      assign sizes = '(min-width: 1200px) 1200px, (min-width: 750px) calc(100vw - 10rem), calc(100vw - 3rem)'
+    endif
+  endunless
+  
+  # Build srcset for responsive images
+  assign srcset_parts = image_widths | split: ','
+  assign srcset = ''
+  for width_str in srcset_parts
+    assign width_int = width_str | plus: 0
+    if width_int <= image.width
+      assign image_url = image | image_url: width: width_int
+      if srcset != blank
+        assign srcset = srcset | append: ', '
+      endif
+      assign srcset = srcset | append: image_url | append: ' ' | append: width_int | append: 'w'
+    endif
+  endfor
+  
+  # Fallback src (use largest available or specified width)
   if width
-    assign max_width = width
+    assign fallback_src = image | image_url: width: width
   else
-    assign max_width = image.width | default: 2000
-  endif
-
-  if sizes
-    assign sizes_attr = sizes
-  else
-    assign sizes_attr = '100vw'
+    assign fallback_src = image | image_url: width: 800
   endif
 -%}
 
-{%- if image != blank -%}
-  {{
-    image
-    | image_url: width: max_width, height: height
-    | image_tag:
-      alt: alt_text,
-      class: image_class,
-      loading: loading_attr,
-      widths: widths,
-      sizes: sizes_attr
-  }}
+{%- if settings.enable_lazy_loading and image_loading == 'lazy' -%}
+  <img
+    class="lazy {{ image_class }}"
+    data-src="{{ fallback_src }}"
+    {%- if srcset != blank %} data-srcset="{{ srcset }}"{% endif -%}
+    {%- if sizes %} data-sizes="{{ sizes }}"{% endif -%}
+    alt="{{ image_alt }}"
+    loading="{{ image_loading }}"
+    {%- if image_fetchpriority != 'auto' %} fetchpriority="{{ image_fetchpriority }}"{% endif -%}
+    {%- if width %} width="{{ width }}"{% endif -%}
+    {%- if height %} height="{{ height }}"{% endif -%}
+    style="background-color: #f4f4f4;"
+  >
+  <noscript>
+    <img
+      src="{{ fallback_src }}"
+      {%- if srcset != blank %} srcset="{{ srcset }}"{% endif -%}
+      {%- if sizes %} sizes="{{ sizes }}"{% endif -%}
+      alt="{{ image_alt }}"
+      {%- if width %} width="{{ width }}"{% endif -%}
+      {%- if height %} height="{{ height }}"{% endif -%}
+      class="{{ image_class }}"
+    >
+  </noscript>
 {%- else -%}
-  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  <img
+    src="{{ fallback_src }}"
+    {%- if srcset != blank %} srcset="{{ srcset }}"{% endif -%}
+    {%- if sizes %} sizes="{{ sizes }}"{% endif -%}
+    alt="{{ image_alt }}"
+    loading="{{ image_loading }}"
+    {%- if image_fetchpriority != 'auto' %} fetchpriority="{{ image_fetchpriority }}"{% endif -%}
+    {%- if width %} width="{{ width }}"{% endif -%}
+    {%- if height %} height="{{ height }}"{% endif -%}
+    class="{{ image_class }}"
+  >
 {%- endif -%}

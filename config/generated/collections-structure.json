@@ -1,0 +1,47 @@
+[
+  {
+    "handle": "manufacturing-equipment",
+    "title": "Manufacturing Equipment",
+    "description": "Professional manufacturing equipment including CNC machines, lathes, mills, and production tools designed for precision manufacturing operations.",
+    "sort_order": "manual",
+    "template_suffix": "specifications",
+    "seo_title": "Manufacturing Equipment - Industrial Grade Machinery",
+    "seo_description": "Shop professional manufacturing equipment including CNC machines, lathes, mills, and precision tools. Industrial grade quality with technical specifications."
+  },
+  {
+    "handle": "industrial-equipment",
+    "title": "Industrial Equipment",
+    "description": "Heavy-duty industrial equipment for material handling, power generation, and facility operations. Built for demanding commercial and industrial applications.",
+    "sort_order": "manual",
+    "template_suffix": "specifications",
+    "seo_title": "Industrial Equipment - Heavy Duty Commercial Grade",
+    "seo_description": "Heavy-duty industrial equipment including cranes, forklifts, compressors, and material handling systems. Commercial grade reliability."
+  },
+  {
+    "handle": "professional-tools",
+    "title": "Professional Tools",
+    "description": "Professional-grade tools for industrial, commercial, and heavy-duty applications. Precision engineered for reliability and performance.",
+    "sort_order": "manual",
+    "template_suffix": "specifications",
+    "seo_title": "Professional Tools - Industrial Grade Power Tools",
+    "seo_description": "Professional tools including power tools, hand tools, and precision instruments. Industrial grade quality for demanding applications."
+  },
+  {
+    "handle": "safety-equipment",
+    "title": "Safety Equipment",
+    "description": "OSHA compliant safety equipment and personal protective equipment (PPE) for industrial workplaces. Certified for maximum protection.",
+    "sort_order": "manual",
+    "template_suffix": "specifications",
+    "seo_title": "Safety Equipment - OSHA Compliant PPE & Safety Gear",
+    "seo_description": "OSHA compliant safety equipment including PPE, safety storage, and workplace protection systems. Certified industrial safety gear."
+  },
+  {
+    "handle": "all-products",
+    "title": "All Products",
+    "description": "Complete catalog of industrial and manufacturing equipment, tools, and safety products. Professional grade solutions for every industrial need.",
+    "sort_order": "manual",
+    "template_suffix": "specifications",
+    "seo_title": "All Industrial Products - Complete Equipment Catalog",
+    "seo_description": "Complete catalog of industrial equipment, manufacturing tools, and safety products. Professional grade solutions for industrial applications."
+  }
+]

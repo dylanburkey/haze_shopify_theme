@@ -1,0 +1,94 @@
+{%- comment -%}
+  Individual attachment item renderer
+  
+  Usage: {% render 'attachment-item', file: file, open_behavior: 'new_tab', show_file_info: true %}
+{%- endcomment -%}
+
+{%- if file != blank -%}
+  {%- liquid
+    # Check access control
+    assign can_access = true
+    if file.access_level == 'customer' and customer == blank
+      assign can_access = false
+    elsif file.access_level == 'wholesale' and customer.tags contains 'wholesale' == false
+      assign can_access = false
+    endif
+
+    # Determine file icon based on type
+    assign icon_name = 'icon-file-generic'
+    case file.type
+      when 'pdf'
+        assign icon_name = 'icon-file-pdf'
+      when 'doc', 'docx'
+        assign icon_name = 'icon-file-doc'
+      when 'xls', 'xlsx'
+        assign icon_name = 'icon-file-xls'
+      when 'csv'
+        assign icon_name = 'icon-file-csv'
+      when 'dwg', 'step', 'stl', 'iges', 'igs'
+        assign icon_name = 'icon-file-cad'
+      when 'png', 'jpg', 'jpeg', 'gif', 'webp'
+        assign icon_name = 'icon-file-image'
+      when 'zip', 'rar', '7z'
+        assign icon_name = 'icon-file-archive'
+      when 'manual'
+        assign icon_name = 'icon-file-manual'
+      when 'safety'
+        assign icon_name = 'icon-file-safety'
+      when 'warranty'
+        assign icon_name = 'icon-file-warranty'
+    endcase
+
+    # Format file type for display
+    assign display_type = file.type | upcase
+  -%}
+
+  <li class="attachment-item{% if file.featured %} attachment-item--featured{% endif %}{% unless can_access %} attachment-item--restricted{% endunless %}">
+    {%- if can_access -%}
+      <a href="{{ file.url }}"
+         {% if open_behavior == 'new_tab' %}target="_blank" rel="noopener"{% endif %}
+         class="attachment-link"
+         {% if open_behavior == 'download' %}download{% endif %}
+         data-attachment-id="{{ file.id }}">
+    {%- else -%}
+      <span class="attachment-link attachment-link--restricted">
+    {%- endif -%}
+    
+        <span class="attachment-icon attachment-icon--{{ file.type }}">
+          {%- render icon_name -%}
+        </span>
+        
+        <div class="attachment-content">
+          <span class="attachment-name">{{ file.name }}</span>
+          
+          {%- if show_descriptions and file.description != blank -%}
+            <span class="attachment-description">{{ file.description }}</span>
+          {%- endif -%}
+          
+          {%- if show_file_info -%}
+            <div class="attachment-meta">
+              <span class="attachment-type">{{ display_type }}</span>
+              {%- if show_file_sizes and file.size != blank -%}
+                <span class="attachment-size">{{ file.size }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+        
+        {%- unless can_access -%}
+          <span class="attachment-restricted-notice">
+            {%- if file.access_level == 'customer' -%}
+              {{ 'products.attachments.login_required' | t | default: 'Login required' }}
+            {%- elsif file.access_level == 'wholesale' -%}
+              {{ 'products.attachments.wholesale_only' | t | default: 'Wholesale only' }}
+            {%- endif -%}
+          </span>
+        {%- endunless -%}
+    
+    {%- if can_access -%}
+      </a>
+    {%- else -%}
+      </span>
+    {%- endif -%}
+  </li>
+{%- endif -%}

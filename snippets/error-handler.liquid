@@ -1,0 +1,284 @@
+{%- comment -%}
+  Comprehensive Error Handler
+  Provides graceful degradation and user-friendly error messages
+  for the Product Specification System
+  
+  Usage:
+  {% render 'error-handler', 
+     error_type: 'metafield_parse|file_access|comparison_state|search_filter',
+     error_context: 'Additional context about the error',
+     fallback_content: 'Content to show when error occurs',
+     debug_mode: false
+  %}
+  
+  Parameters:
+  - error_type: Type of error being handled
+  - error_context: Additional context information
+  - fallback_content: Content to display as fallback
+  - debug_mode: Show debug information (default: false)
+{%- endcomment -%}
+
+{%- liquid
+  assign debug_mode = debug_mode | default: false
+  assign show_fallback = true
+  
+  # Define user-friendly error messages
+  case error_type
+    when 'metafield_parse'
+      assign error_title = 'Specifications Unavailable'
+      assign error_message = 'Product specifications are temporarily unavailable. Please check back later or contact support if this issue persists.'
+      assign error_icon = 'alert-circle'
+    when 'file_access'
+      assign error_title = 'File Temporarily Unavailable'
+      assign error_message = 'This file is temporarily unavailable for download. Please try again later or contact support for assistance.'
+      assign error_icon = 'file-x'
+    when 'comparison_state'
+      assign error_title = 'Comparison Error'
+      assign error_message = 'There was an issue loading the product comparison. The comparison has been reset.'
+      assign error_icon = 'refresh-cw'
+    when 'search_filter'
+      assign error_title = 'Search Error'
+      assign error_message = 'Invalid search criteria detected. Please adjust your filters and try again.'
+      assign error_icon = 'search-x'
+    when 'export_failed'
+      assign error_title = 'Export Failed'
+      assign error_message = 'Unable to export data at this time. Please try again or contact support if the issue persists.'
+      assign error_icon = 'download-cloud'
+    when 'network_error'
+      assign error_title = 'Connection Issue'
+      assign error_message = 'Unable to load content due to a connection issue. Please check your internet connection and try again.'
+      assign error_icon = 'wifi-off'
+    else
+      assign error_title = 'Something Went Wrong'
+      assign error_message = 'An unexpected error occurred. Please refresh the page or contact support if the issue continues.'
+      assign error_icon = 'alert-triangle'
+  endcase
+-%}
+
+{%- if show_fallback -%}
+  <div class="error-handler error-handler--{{ error_type | default: 'generic' }}" role="alert" aria-live="polite">
+    <div class="error-handler__content">
+      <div class="error-handler__icon">
+        {% render 'icon', name: error_icon, size: '24' %}
+      </div>
+      
+      <div class="error-handler__message">
+        <h3 class="error-handler__title">{{ error_title }}</h3>
+        <p class="error-handler__description">{{ error_message }}</p>
+        
+        {%- if error_context != blank -%}
+          <p class="error-handler__context">{{ error_context }}</p>
+        {%- endif -%}
+      </div>
+      
+      {%- if error_type == 'comparison_state' -%}
+        <div class="error-handler__actions">
+          <button type="button" class="error-handler__retry-btn" onclick="window.location.reload()">
+            Refresh Page
+          </button>
+        </div>
+      {%- elsif error_type == 'file_access' -%}
+        <div class="error-handler__actions">
+          <button type="button" class="error-handler__retry-btn" onclick="window.location.reload()">
+            Try Again
+          </button>
+        </div>
+      {%- elsif error_type == 'search_filter' -%}
+        <div class="error-handler__actions">
+          <button type="button" class="error-handler__clear-btn" onclick="clearSearchFilters()">
+            Clear Filters
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+    
+    {%- if fallback_content != blank -%}
+      <div class="error-handler__fallback">
+        {{ fallback_content }}
+      </div>
+    {%- endif -%}
+    
+    {%- if debug_mode -%}
+      <details class="error-handler__debug">
+        <summary>Debug Information</summary>
+        <div class="error-handler__debug-content">
+          <p><strong>Error Type:</strong> {{ error_type | default: 'unknown' }}</p>
+          <p><strong>Context:</strong> {{ error_context | default: 'none' }}</p>
+          <p><strong>Timestamp:</strong> {{ 'now' | date: '%Y-%m-%d %H:%M:%S' }}</p>
+          <p><strong>User Agent:</strong> <span id="debug-user-agent"></span></p>
+          <p><strong>URL:</strong> {{ request.url }}</p>
+        </div>
+      </details>
+      
+      <script>
+        document.getElementById('debug-user-agent').textContent = navigator.userAgent;
+      </script>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+<style>
+.error-handler {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #991b1b;
+}
+
+.error-handler__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.error-handler__icon {
+  flex-shrink: 0;
+  color: #dc2626;
+}
+
+.error-handler__message {
+  flex: 1;
+}
+
+.error-handler__title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #991b1b;
+}
+
+.error-handler__description {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #7f1d1d;
+}
+
+.error-handler__context {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #a91e22;
+  font-style: italic;
+}
+
+.error-handler__actions {
+  margin-top: 0.75rem;
+}
+
+.error-handler__retry-btn,
+.error-handler__clear-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.error-handler__retry-btn:hover,
+.error-handler__clear-btn:hover {
+  background: #b91c1c;
+}
+
+.error-handler__fallback {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #fecaca;
+}
+
+.error-handler__debug {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+}
+
+.error-handler__debug summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #7f1d1d;
+}
+
+.error-handler__debug-content {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #fff5f5;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.error-handler__debug-content p {
+  margin: 0.25rem 0;
+}
+
+/* Success variant for positive feedback */
+.error-handler--success {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.error-handler--success .error-handler__icon {
+  color: #16a34a;
+}
+
+.error-handler--success .error-handler__title {
+  color: #166534;
+}
+
+.error-handler--success .error-handler__description {
+  color: #15803d;
+}
+
+/* Warning variant */
+.error-handler--warning {
+  background: #fffbeb;
+  border-color: #fed7aa;
+  color: #92400e;
+}
+
+.error-handler--warning .error-handler__icon {
+  color: #f59e0b;
+}
+
+.error-handler--warning .error-handler__title {
+  color: #92400e;
+}
+
+.error-handler--warning .error-handler__description {
+  color: #b45309;
+}
+</style>
+
+<script>
+// Global error handling functions
+function clearSearchFilters() {
+  if (window.specificationSearch) {
+    window.specificationSearch.clearFilters();
+    window.location.reload();
+  }
+}
+
+// Log errors for debugging
+function logError(errorType, context, details) {
+  if (console && console.error) {
+    console.error('Specification System Error:', {
+      type: errorType,
+      context: context,
+      details: details,
+      timestamp: new Date().toISOString(),
+      url: window.location.href
+    });
+  }
+}
+
+// Export for use in other scripts
+if (typeof window !== 'undefined') {
+  window.specErrorHandler = {
+    logError: logError,
+    clearSearchFilters: clearSearchFilters
+  };
+}
+</script>

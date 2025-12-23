@@ -1,0 +1,395 @@
+{%- comment -%}
+  FAQ Demo Section
+  Demonstrates advanced FAQ system with search and categories
+  Shows $10-25/mo app value built into the theme
+{%- endcomment -%}
+
+{{ 'faq-demo.css' | asset_url | stylesheet_tag }}
+
+<div class="faq-demo" data-section-id="{{ section.id }}">
+  <div class="container">
+    
+    {%- comment -%} Section Header {%- endcomment -%}
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow">{{ section.settings.eyebrow_text | default: 'Built-In Feature' }}</span>
+      <h2 class="section-title">{{ section.settings.heading | default: 'Advanced FAQ System' }}</h2>
+      <p class="section-subtitle">{{ section.settings.subheading | default: 'Searchable FAQ with categories and smart filtering - no monthly app fees required.' }}</p>
+      <div class="value-indicator">
+        <span class="value-amount">${{ section.settings.app_value | default: '10-25' }}/mo value</span>
+        <span class="value-label">Typical app cost</span>
+      </div>
+    </div>
+
+    {%- comment -%} FAQ Search Interface {%- endcomment -%}
+    <div class="faq-search-demo">
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <input 
+            type="text" 
+            class="faq-search-input" 
+            placeholder="{{ section.settings.search_placeholder | default: 'Search frequently asked questions...' }}"
+            aria-label="Search FAQ"
+          >
+          <button class="search-button" type="button" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="search-filters">
+          <button class="filter-btn filter-btn--active" data-category="all">All Topics</button>
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'category' -%}
+                <button class="filter-btn" data-category="{{ block.settings.category_id }}">
+                  {{ block.settings.category_name }}
+                </button>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} FAQ Categories and Questions {%- endcomment -%}
+    <div class="faq-content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'category' -%}
+            <div class="faq-category" data-category="{{ block.settings.category_id }}" {{ block.shopify_attributes }}>
+              <div class="category-header">
+                <div class="category-icon">{{ block.settings.category_icon | default: '📋' }}</div>
+                <h3 class="category-title">{{ block.settings.category_name | default: 'General Questions' }}</h3>
+                <p class="category-description">{{ block.settings.category_description }}</p>
+              </div>
+              
+              <div class="faq-questions">
+                {%- assign questions = block.settings.questions | split: '||' -%}
+                {%- assign answers = block.settings.answers | split: '||' -%}
+                {%- for question in questions -%}
+                  {%- if question != blank -%}
+                    {%- assign question_index = forloop.index0 -%}
+                    <div class="faq-item">
+                      <button class="faq-question" type="button" aria-expanded="false">
+                        <span class="question-text">{{ question | strip }}</span>
+                        <span class="question-icon">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                          </svg>
+                        </span>
+                      </button>
+                      <div class="faq-answer">
+                        <div class="answer-content">
+                          {{ answers[question_index] | strip | newline_to_br }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} FAQ Features Showcase {%- endcomment -%}
+    <div class="faq-features">
+      <h3 class="features-title">{{ section.settings.features_title | default: 'Advanced Features' }}</h3>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🔍</div>
+          <h4 class="feature-name">Smart Search</h4>
+          <p class="feature-description">Instant search across all FAQ content with keyword highlighting</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📂</div>
+          <h4 class="feature-name">Category Filtering</h4>
+          <p class="feature-description">Organize questions by topic for easy navigation</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📱</div>
+          <h4 class="feature-name">Mobile Optimized</h4>
+          <p class="feature-description">Responsive design works perfectly on all devices</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <h4 class="feature-name">Fast Loading</h4>
+          <p class="feature-description">No external dependencies - loads instantly</p>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Implementation Note {%- endcomment -%}
+    <div class="implementation-note">
+      <div class="note-content">
+        <h4 class="note-title">💡 Implementation Note</h4>
+        <p class="note-text">
+          This FAQ system is built using native HTML, CSS, and JavaScript. 
+          No monthly app subscriptions required - saving you $10-25/month compared to third-party FAQ apps.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// FAQ Demo Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const faqDemo = document.querySelector('.faq-demo');
+  if (!faqDemo) return;
+
+  const searchInput = faqDemo.querySelector('.faq-search-input');
+  const filterButtons = faqDemo.querySelectorAll('.filter-btn');
+  const faqItems = faqDemo.querySelectorAll('.faq-item');
+  const faqQuestions = faqDemo.querySelectorAll('.faq-question');
+  const categories = faqDemo.querySelectorAll('.faq-category');
+
+  // FAQ Accordion Functionality
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      const answer = this.nextElementSibling;
+      
+      // Close all other questions
+      faqQuestions.forEach(q => {
+        if (q !== this) {
+          q.setAttribute('aria-expanded', 'false');
+          q.nextElementSibling.style.maxHeight = '0';
+        }
+      });
+      
+      // Toggle current question
+      this.setAttribute('aria-expanded', !isExpanded);
+      if (!isExpanded) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = '0';
+      }
+    });
+  });
+
+  // Category Filter Functionality
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.dataset.category;
+      
+      // Update active filter
+      filterButtons.forEach(btn => btn.classList.remove('filter-btn--active'));
+      this.classList.add('filter-btn--active');
+      
+      // Show/hide categories
+      categories.forEach(cat => {
+        if (category === 'all' || cat.dataset.category === category) {
+          cat.style.display = 'block';
+        } else {
+          cat.style.display = 'none';
+        }
+      });
+      
+      // Clear search when filtering
+      if (searchInput) {
+        searchInput.value = '';
+        clearSearch();
+      }
+    });
+  });
+
+  // Search Functionality
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase().trim();
+      
+      if (searchTerm === '') {
+        clearSearch();
+        return;
+      }
+      
+      // Show all categories when searching
+      categories.forEach(cat => cat.style.display = 'block');
+      
+      // Filter FAQ items
+      faqItems.forEach(item => {
+        const questionText = item.querySelector('.question-text').textContent.toLowerCase();
+        const answerText = item.querySelector('.answer-content').textContent.toLowerCase();
+        
+        if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+          item.style.display = 'block';
+          highlightSearchTerm(item, searchTerm);
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  function clearSearch() {
+    faqItems.forEach(item => {
+      item.style.display = 'block';
+      removeHighlights(item);
+    });
+  }
+
+  function highlightSearchTerm(item, term) {
+    const questionText = item.querySelector('.question-text');
+    const answerContent = item.querySelector('.answer-content');
+    
+    [questionText, answerContent].forEach(element => {
+      const originalText = element.textContent;
+      const regex = new RegExp(`(${term})`, 'gi');
+      const highlightedText = originalText.replace(regex, '<mark>$1</mark>');
+      element.innerHTML = highlightedText;
+    });
+  }
+
+  function removeHighlights(item) {
+    const marks = item.querySelectorAll('mark');
+    marks.forEach(mark => {
+      mark.outerHTML = mark.textContent;
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Demo",
+  "tag": "section",
+  "class": "section-faq-demo",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Text",
+      "default": "Built-In Feature"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Advanced FAQ System"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Section Subheading",
+      "default": "Searchable FAQ with categories and smart filtering - no monthly app fees required."
+    },
+    {
+      "type": "text",
+      "id": "app_value",
+      "label": "App Value (monthly cost)",
+      "default": "10-25",
+      "info": "Typical monthly cost of FAQ apps"
+    },
+    {
+      "type": "header",
+      "content": "Search Interface"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Placeholder Text",
+      "default": "Search frequently asked questions..."
+    },
+    {
+      "type": "header",
+      "content": "Features Section"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Features Title",
+      "default": "Advanced Features"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "FAQ Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_id",
+          "label": "Category ID",
+          "info": "Unique identifier for filtering (no spaces, lowercase)"
+        },
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "General Questions"
+        },
+        {
+          "type": "text",
+          "id": "category_icon",
+          "label": "Category Icon (emoji)",
+          "default": "📋"
+        },
+        {
+          "type": "textarea",
+          "id": "category_description",
+          "label": "Category Description"
+        },
+        {
+          "type": "textarea",
+          "id": "questions",
+          "label": "Questions (separate with ||)",
+          "info": "Separate each question with || characters"
+        },
+        {
+          "type": "textarea",
+          "id": "answers",
+          "label": "Answers (separate with ||)",
+          "info": "Separate each answer with || characters. Must match question order."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Demo",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_id": "products",
+            "category_name": "Products & Specifications",
+            "category_icon": "🔧",
+            "category_description": "Questions about our industrial products and technical specifications",
+            "questions": "What materials are your products made from?||Do you provide technical specifications for all products?||Can I get CAD files for your equipment?||What certifications do your products have?",
+            "answers": "Our products are manufactured using high-grade industrial materials including stainless steel, aluminum alloys, and specialized polymers depending on the application. All materials meet or exceed industry standards for durability and performance.||Yes, we provide comprehensive technical specifications for all products including dimensions, performance data, operating parameters, and compatibility information. These are available on each product page and as downloadable PDFs.||CAD files are available for most of our equipment. You can download them directly from the product pages or request specific formats through our technical support team.||Our products carry various industry certifications including ISO 9001, CE marking, UL listing, and OSHA compliance where applicable. Specific certifications are listed on each product page."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_id": "ordering",
+            "category_name": "Ordering & Shipping",
+            "category_icon": "📦",
+            "category_description": "Information about placing orders and shipping policies",
+            "questions": "What are your minimum order quantities?||How long does shipping take?||Do you ship internationally?||Can I track my order?",
+            "answers": "Minimum order quantities vary by product. Most standard items have no minimum, while custom or specialized equipment may require minimum quantities. Check individual product pages for specific requirements.||Standard shipping takes 3-5 business days within the continental US. Expedited shipping options are available. Large equipment may require freight shipping with longer lead times.||Yes, we ship to most international destinations. International shipping costs and delivery times vary by location. Contact us for a quote on international orders.||Yes, you'll receive a tracking number via email once your order ships. You can also track orders through your account dashboard on our website."
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_id": "support",
+            "category_name": "Technical Support",
+            "category_icon": "🛠️",
+            "category_description": "Technical support and troubleshooting assistance",
+            "questions": "Do you provide technical support?||What warranty do you offer?||Can you help with installation?||Do you offer training on your equipment?",
+            "answers": "Yes, we provide comprehensive technical support including phone, email, and remote assistance. Our technical team has extensive experience with all our products and can help with installation, troubleshooting, and optimization.||We offer a standard 2-year warranty on most products, with extended warranty options available. The warranty covers manufacturing defects and includes repair or replacement at our discretion.||We provide installation guidance and can recommend certified installers in your area. For complex systems, we offer on-site installation services for an additional fee.||Yes, we offer training programs for our equipment including on-site training, webinars, and detailed documentation. Training can be customized to your specific needs and applications."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

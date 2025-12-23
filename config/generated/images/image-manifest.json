@@ -1,0 +1,332 @@
+{
+  "industrial-oil-skimmer-zs-1000": {
+    "primary": "industrial-oil-skimmer-zs-1000-primary.svg",
+    "thumbnail": "industrial-oil-skimmer-zs-1000-thumb.svg",
+    "category": "manufacturing",
+    "title": "Industrial Oil Skimmer Zs 1000"
+  },
+  "coolant-management-system-cms-2000": {
+    "primary": "coolant-management-system-cms-2000-primary.svg",
+    "thumbnail": "coolant-management-system-cms-2000-thumb.svg",
+    "category": "manufacturing",
+    "title": "Coolant Management System Cms 2000"
+  },
+  "heavy-duty-conveyor-belt-system": {
+    "primary": "heavy-duty-conveyor-belt-system-primary.svg",
+    "thumbnail": "heavy-duty-conveyor-belt-system-thumb.svg",
+    "category": "industrial_equipment",
+    "title": "Heavy Duty Conveyor Belt System"
+  },
+  "professional-welding-station-ws-300": {
+    "primary": "professional-welding-station-ws-300-primary.svg",
+    "thumbnail": "professional-welding-station-ws-300-thumb.svg",
+    "category": "manufacturing",
+    "title": "Professional Welding Station Ws 300"
+  },
+  "industrial-safety-cabinet-sc-45": {
+    "primary": "industrial-safety-cabinet-sc-45-primary.svg",
+    "thumbnail": "industrial-safety-cabinet-sc-45-thumb.svg",
+    "category": "safety",
+    "title": "Industrial Safety Cabinet Sc 45"
+  },
+  "cnc-machining-center-mc-400": {
+    "primary": "cnc-machining-center-mc-400-primary.svg",
+    "thumbnail": "cnc-machining-center-mc-400-thumb.svg",
+    "category": "manufacturing",
+    "title": "Cnc Machining Center Mc 400"
+  },
+  "hydraulic-press-hp-50t": {
+    "primary": "hydraulic-press-hp-50t-primary.svg",
+    "thumbnail": "hydraulic-press-hp-50t-thumb.svg",
+    "category": "manufacturing",
+    "title": "Hydraulic Press Hp 50t"
+  },
+  "industrial-lathe-il-1640": {
+    "primary": "industrial-lathe-il-1640-primary.svg",
+    "thumbnail": "industrial-lathe-il-1640-thumb.svg",
+    "category": "manufacturing",
+    "title": "Industrial Lathe Il 1640"
+  },
+  "milling-machine-mm-3000": {
+    "primary": "milling-machine-mm-3000-primary.svg",
+    "thumbnail": "milling-machine-mm-3000-thumb.svg",
+    "category": "manufacturing",
+    "title": "Milling Machine Mm 3000"
+  },
+  "grinding-machine-gm-1200": {
+    "primary": "grinding-machine-gm-1200-primary.svg",
+    "thumbnail": "grinding-machine-gm-1200-thumb.svg",
+    "category": "manufacturing",
+    "title": "Grinding Machine Gm 1200"
+  },
+  "drill-press-dp-20": {
+    "primary": "drill-press-dp-20-primary.svg",
+    "thumbnail": "drill-press-dp-20-thumb.svg",
+    "category": "tools",
+    "title": "Drill Press Dp 20"
+  },
+  "band-saw-bs-14": {
+    "primary": "band-saw-bs-14-primary.svg",
+    "thumbnail": "band-saw-bs-14-thumb.svg",
+    "category": "manufacturing",
+    "title": "Band Saw Bs 14"
+  },
+  "surface-grinder-sg-818": {
+    "primary": "surface-grinder-sg-818-primary.svg",
+    "thumbnail": "surface-grinder-sg-818-thumb.svg",
+    "category": "manufacturing",
+    "title": "Surface Grinder Sg 818"
+  },
+  "boring-machine-bm-100": {
+    "primary": "boring-machine-bm-100-primary.svg",
+    "thumbnail": "boring-machine-bm-100-thumb.svg",
+    "category": "manufacturing",
+    "title": "Boring Machine Bm 100"
+  },
+  "plasma-cutter-pc-65": {
+    "primary": "plasma-cutter-pc-65-primary.svg",
+    "thumbnail": "plasma-cutter-pc-65-thumb.svg",
+    "category": "manufacturing",
+    "title": "Plasma Cutter Pc 65"
+  },
+  "waterjet-cutter-wj-3020": {
+    "primary": "waterjet-cutter-wj-3020-primary.svg",
+    "thumbnail": "waterjet-cutter-wj-3020-thumb.svg",
+    "category": "manufacturing",
+    "title": "Waterjet Cutter Wj 3020"
+  },
+  "laser-cutter-lc-1325": {
+    "primary": "laser-cutter-lc-1325-primary.svg",
+    "thumbnail": "laser-cutter-lc-1325-thumb.svg",
+    "category": "manufacturing",
+    "title": "Laser Cutter Lc 1325"
+  },
+  "punch-press-pp-30t": {
+    "primary": "punch-press-pp-30t-primary.svg",
+    "thumbnail": "punch-press-pp-30t-thumb.svg",
+    "category": "manufacturing",
+    "title": "Punch Press Pp 30t"
+  },
+  "shear-machine-sm-10": {
+    "primary": "shear-machine-sm-10-primary.svg",
+    "thumbnail": "shear-machine-sm-10-thumb.svg",
+    "category": "manufacturing",
+    "title": "Shear Machine Sm 10"
+  },
+  "roll-former-rf-24": {
+    "primary": "roll-former-rf-24-primary.svg",
+    "thumbnail": "roll-former-rf-24-thumb.svg",
+    "category": "manufacturing",
+    "title": "Roll Former Rf 24"
+  },
+  "air-compressor-ac-100hp": {
+    "primary": "air-compressor-ac-100hp-primary.svg",
+    "thumbnail": "air-compressor-ac-100hp-thumb.svg",
+    "category": "manufacturing",
+    "title": "Air Compressor Ac 100hp"
+  },
+  "industrial-generator-ig-250kw": {
+    "primary": "industrial-generator-ig-250kw-primary.svg",
+    "thumbnail": "industrial-generator-ig-250kw-thumb.svg",
+    "category": "manufacturing",
+    "title": "Industrial Generator Ig 250kw"
+  },
+  "forklift-electric-fe-5000": {
+    "primary": "forklift-electric-fe-5000-primary.svg",
+    "thumbnail": "forklift-electric-fe-5000-thumb.svg",
+    "category": "industrial_equipment",
+    "title": "Forklift Electric Fe 5000"
+  },
+  "overhead-crane-oc-10t": {
+    "primary": "overhead-crane-oc-10t-primary.svg",
+    "thumbnail": "overhead-crane-oc-10t-thumb.svg",
+    "category": "industrial_equipment",
+    "title": "Overhead Crane Oc 10t"
+  },
+  "pallet-jack-pj-5500": {
+    "primary": "pallet-jack-pj-5500-primary.svg",
+    "thumbnail": "pallet-jack-pj-5500-thumb.svg",
+    "category": "manufacturing",
+    "title": "Pallet Jack Pj 5500"
+  },
+  "industrial-vacuum-iv-3000": {
+    "primary": "industrial-vacuum-iv-3000-primary.svg",
+    "thumbnail": "industrial-vacuum-iv-3000-thumb.svg",
+    "category": "manufacturing",
+    "title": "Industrial Vacuum Iv 3000"
+  },
+  "pressure-washer-pw-4000psi": {
+    "primary": "pressure-washer-pw-4000psi-primary.svg",
+    "thumbnail": "pressure-washer-pw-4000psi-thumb.svg",
+    "category": "manufacturing",
+    "title": "Pressure Washer Pw 4000psi"
+  },
+  "material-lift-ml-2000": {
+    "primary": "material-lift-ml-2000-primary.svg",
+    "thumbnail": "material-lift-ml-2000-thumb.svg",
+    "category": "manufacturing",
+    "title": "Material Lift Ml 2000"
+  },
+  "dock-leveler-dl-8x6": {
+    "primary": "dock-leveler-dl-8x6-primary.svg",
+    "thumbnail": "dock-leveler-dl-8x6-thumb.svg",
+    "category": "manufacturing",
+    "title": "Dock Leveler Dl 8x6"
+  },
+  "loading-dock-seal-lds-9x10": {
+    "primary": "loading-dock-seal-lds-9x10-primary.svg",
+    "thumbnail": "loading-dock-seal-lds-9x10-thumb.svg",
+    "category": "manufacturing",
+    "title": "Loading Dock Seal Lds 9x10"
+  },
+  "angle-grinder-ag-9": {
+    "primary": "angle-grinder-ag-9-primary.svg",
+    "thumbnail": "angle-grinder-ag-9-thumb.svg",
+    "category": "manufacturing",
+    "title": "Angle Grinder Ag 9"
+  },
+  "impact-wrench-iw-1000": {
+    "primary": "impact-wrench-iw-1000-primary.svg",
+    "thumbnail": "impact-wrench-iw-1000-thumb.svg",
+    "category": "tools",
+    "title": "Impact Wrench Iw 1000"
+  },
+  "circular-saw-cs-7-25": {
+    "primary": "circular-saw-cs-7-25-primary.svg",
+    "thumbnail": "circular-saw-cs-7-25-thumb.svg",
+    "category": "manufacturing",
+    "title": "Circular Saw Cs 7 25"
+  },
+  "reciprocating-saw-rs-12a": {
+    "primary": "reciprocating-saw-rs-12a-primary.svg",
+    "thumbnail": "reciprocating-saw-rs-12a-thumb.svg",
+    "category": "manufacturing",
+    "title": "Reciprocating Saw Rs 12a"
+  },
+  "hammer-drill-hd-18v": {
+    "primary": "hammer-drill-hd-18v-primary.svg",
+    "thumbnail": "hammer-drill-hd-18v-thumb.svg",
+    "category": "tools",
+    "title": "Hammer Drill Hd 18v"
+  },
+  "rotary-hammer-rh-1-5": {
+    "primary": "rotary-hammer-rh-1-5-primary.svg",
+    "thumbnail": "rotary-hammer-rh-1-5-thumb.svg",
+    "category": "manufacturing",
+    "title": "Rotary Hammer Rh 1 5"
+  },
+  "belt-sander-bs-4x24": {
+    "primary": "belt-sander-bs-4x24-primary.svg",
+    "thumbnail": "belt-sander-bs-4x24-thumb.svg",
+    "category": "manufacturing",
+    "title": "Belt Sander Bs 4x24"
+  },
+  "orbital-sander-os-5": {
+    "primary": "orbital-sander-os-5-primary.svg",
+    "thumbnail": "orbital-sander-os-5-thumb.svg",
+    "category": "manufacturing",
+    "title": "Orbital Sander Os 5"
+  },
+  "router-rt-2-25hp": {
+    "primary": "router-rt-2-25hp-primary.svg",
+    "thumbnail": "router-rt-2-25hp-thumb.svg",
+    "category": "manufacturing",
+    "title": "Router Rt 2 25hp"
+  },
+  "jigsaw-js-6-5a": {
+    "primary": "jigsaw-js-6-5a-primary.svg",
+    "thumbnail": "jigsaw-js-6-5a-thumb.svg",
+    "category": "manufacturing",
+    "title": "Jigsaw Js 6 5a"
+  },
+  "planer-pl-6": {
+    "primary": "planer-pl-6-primary.svg",
+    "thumbnail": "planer-pl-6-thumb.svg",
+    "category": "manufacturing",
+    "title": "Planer Pl 6"
+  },
+  "multimeter-mm-600v": {
+    "primary": "multimeter-mm-600v-primary.svg",
+    "thumbnail": "multimeter-mm-600v-thumb.svg",
+    "category": "manufacturing",
+    "title": "Multimeter Mm 600v"
+  },
+  "torque-wrench-tw-250": {
+    "primary": "torque-wrench-tw-250-primary.svg",
+    "thumbnail": "torque-wrench-tw-250-thumb.svg",
+    "category": "tools",
+    "title": "Torque Wrench Tw 250"
+  },
+  "pipe-wrench-pw-24": {
+    "primary": "pipe-wrench-pw-24-primary.svg",
+    "thumbnail": "pipe-wrench-pw-24-thumb.svg",
+    "category": "tools",
+    "title": "Pipe Wrench Pw 24"
+  },
+  "tool-chest-tc-26": {
+    "primary": "tool-chest-tc-26-primary.svg",
+    "thumbnail": "tool-chest-tc-26-thumb.svg",
+    "category": "tools",
+    "title": "Tool Chest Tc 26"
+  },
+  "hard-hat-safety-helmet": {
+    "primary": "hard-hat-safety-helmet-primary.svg",
+    "thumbnail": "hard-hat-safety-helmet-thumb.svg",
+    "category": "safety",
+    "title": "Hard Hat Safety Helmet"
+  },
+  "safety-glasses-clear-lens": {
+    "primary": "safety-glasses-clear-lens-primary.svg",
+    "thumbnail": "safety-glasses-clear-lens-thumb.svg",
+    "category": "safety",
+    "title": "Safety Glasses Clear Lens"
+  },
+  "work-gloves-cut-resistant": {
+    "primary": "work-gloves-cut-resistant-primary.svg",
+    "thumbnail": "work-gloves-cut-resistant-thumb.svg",
+    "category": "manufacturing",
+    "title": "Work Gloves Cut Resistant"
+  },
+  "safety-boots-steel-toe": {
+    "primary": "safety-boots-steel-toe-primary.svg",
+    "thumbnail": "safety-boots-steel-toe-thumb.svg",
+    "category": "safety",
+    "title": "Safety Boots Steel Toe"
+  },
+  "high-vis-safety-vest": {
+    "primary": "high-vis-safety-vest-primary.svg",
+    "thumbnail": "high-vis-safety-vest-thumb.svg",
+    "category": "safety",
+    "title": "High Vis Safety Vest"
+  },
+  "respirator-half-face": {
+    "primary": "respirator-half-face-primary.svg",
+    "thumbnail": "respirator-half-face-thumb.svg",
+    "category": "manufacturing",
+    "title": "Respirator Half Face"
+  },
+  "fall-protection-harness": {
+    "primary": "fall-protection-harness-primary.svg",
+    "thumbnail": "fall-protection-harness-thumb.svg",
+    "category": "manufacturing",
+    "title": "Fall Protection Harness"
+  },
+  "safety-barrier-system": {
+    "primary": "safety-barrier-system-primary.svg",
+    "thumbnail": "safety-barrier-system-thumb.svg",
+    "category": "safety",
+    "title": "Safety Barrier System"
+  },
+  "emergency-eye-wash-station": {
+    "primary": "emergency-eye-wash-station-primary.svg",
+    "thumbnail": "emergency-eye-wash-station-thumb.svg",
+    "category": "manufacturing",
+    "title": "Emergency Eye Wash Station"
+  },
+  "first-aid-kit-industrial": {
+    "primary": "first-aid-kit-industrial-primary.svg",
+    "thumbnail": "first-aid-kit-industrial-thumb.svg",
+    "category": "manufacturing",
+    "title": "First Aid Kit Industrial"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "forge-industrial-theme",
+  "version": "1.0.0",
+  "description": "Premium Shopify theme for manufacturing and industrial B2B businesses",
+  "scripts": {
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:pbt": "vitest --run --reporter=verbose tests/property-based/"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "fast-check": "^3.15.0",
+    "jsdom": "^27.3.0",
+    "vitest": "^1.0.0"
+  },
+  "type": "module"
+}

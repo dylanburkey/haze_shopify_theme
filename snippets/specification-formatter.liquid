@@ -1,0 +1,53 @@
+{%- comment -%}
+  Specification Value Formatter
+  Formats specification values with units, tolerances, and ranges
+  
+  Usage:
+  {% render 'specification-formatter', spec: spec_object %}
+  
+  Parameters:
+  - spec: Specification object with value, unit, tolerance, range, min, max
+  
+  Output: Formatted specification value string
+{%- endcomment -%}
+
+{%- liquid
+  # Get specification data
+  assign spec_value = spec.value | default: ''
+  assign spec_unit = spec.unit | default: ''
+  assign spec_tolerance = spec.tolerance | default: ''
+  assign spec_range = spec.range | default: ''
+  assign spec_min = spec.min | default: ''
+  assign spec_max = spec.max | default: ''
+  assign spec_description = spec.description | default: ''
+
+  # Build formatted value
+  assign formatted_value = spec_value
+
+  # Handle range values (min/max)
+  if spec_min != blank and spec_max != blank
+    assign formatted_value = spec_min | append: ' - ' | append: spec_max
+  elsif spec_range != blank
+    assign formatted_value = spec_range
+  endif
+
+  # Add unit if present
+  if spec_unit != blank
+    assign formatted_value = formatted_value | append: ' ' | append: spec_unit
+  endif
+
+  # Add tolerance if present
+  if spec_tolerance != blank
+    assign formatted_value = formatted_value | append: ' ' | append: spec_tolerance
+  endif
+
+  # Clean up extra spaces
+  assign formatted_value = formatted_value | strip
+-%}
+
+<span class="specification-value">
+  <span class="specification-value__main">{{ formatted_value }}</span>
+  {%- if spec_description != blank -%}
+    <span class="specification-value__description">{{ spec_description }}</span>
+  {%- endif -%}
+</span>

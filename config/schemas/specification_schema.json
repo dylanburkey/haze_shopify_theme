@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Product Specification Schema",
+  "description": "Schema for structured product specification data",
+  "type": "object",
+  "properties": {
+    "specifications": {
+      "type": "object",
+      "description": "Specification data organized by category",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "description": "Category containing specifications",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "object",
+              "description": "Individual specification",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "Specification value"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of measurement"
+                },
+                "tolerance": {
+                  "type": "string",
+                  "description": "Tolerance specification (e.g., ±5)"
+                },
+                "range": {
+                  "type": "string",
+                  "description": "Range specification (e.g., 0-150)"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum value for ranges"
+                },
+                "max": {
+                  "type": "string",
+                  "description": "Maximum value for ranges"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Rich text description"
+                },
+                "display_name": {
+                  "type": "string",
+                  "description": "Custom display name (overrides key)"
+                }
+              },
+              "required": ["value"]
+            }
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "object",
+      "description": "Specification category definitions",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Display name for the category"
+            },
+            "order": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Display order for categories"
+            },
+            "collapsible": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether category can be collapsed"
+            }
+          }
+        }
+      }
+    }
+  }
+}

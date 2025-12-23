@@ -1,0 +1,344 @@
+{
+  "layout": "theme",
+  "name": "Demo Index Page",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "medium",
+        "overlay_opacity": 60,
+        "title": "Forge Industrial Demos",
+        "subtitle": "Explore Every Feature & Preset",
+        "description": "See why our theme eliminates the need for expensive apps",
+        "primary_button_text": "Calculate Savings",
+        "primary_button_link": "/pages/cost-calculator",
+        "text_alignment": "center",
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      }
+    },
+    "demo-grid": {
+      "type": "smart-grid",
+      "settings": {
+        "title": "Feature Demonstrations",
+        "subtitle": "See each built-in feature in action",
+        "layout": "cols-3",
+        "padding_top": 80,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "loyalty-demo": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Loyalty Program Demo",
+            "description": "Tier-based rewards system with progress tracking and discount codes",
+            "link": "/pages/loyalty-demo",
+            "button_text": "View Demo",
+            "app_replacement": "Replaces $50-200/mo apps"
+          }
+        },
+        "seo-demo": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Advanced SEO Demo",
+            "description": "JSON-LD structured data, rich snippets, and meta optimization",
+            "link": "/pages/seo-demo",
+            "button_text": "View Demo",
+            "app_replacement": "Replaces $20-50/mo apps"
+          }
+        },
+        "mega-menu-demo": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Mega Menu Demo",
+            "description": "Multi-column navigation with featured products and images",
+            "link": "/pages/mega-menu-demo",
+            "button_text": "View Demo",
+            "app_replacement": "Replaces $15-30/mo apps"
+          }
+        },
+        "faq-demo": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Advanced FAQ Demo",
+            "description": "Searchable FAQ with categories and collapsible sections",
+            "link": "/pages/faq-demo",
+            "button_text": "View Demo",
+            "app_replacement": "Replaces $10-25/mo apps"
+          }
+        },
+        "attachments-demo": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Product Attachments Demo",
+            "description": "Manuals, spec sheets, CAD files, and warranty documents",
+            "link": "/pages/attachments-demo",
+            "button_text": "View Demo",
+            "app_replacement": "Replaces $15-40/mo apps"
+          }
+        },
+        "pwa-demo": {
+          "type": "feature-card",
+          "settings": {
+            "title": "PWA Support Demo",
+            "description": "Installable app experience with offline capabilities",
+            "link": "/pages/pwa-demo",
+            "button_text": "View Demo",
+            "app_replacement": "Replaces $20-60/mo apps"
+          }
+        }
+      },
+      "block_order": ["loyalty-demo", "seo-demo", "mega-menu-demo", "faq-demo", "attachments-demo", "pwa-demo"]
+    },
+    "preset-demos": {
+      "type": "smart-grid",
+      "settings": {
+        "title": "Industry Preset Demos",
+        "subtitle": "12 professional designs ready to use",
+        "layout": "cols-4",
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "background_color": "#f8f9fa"
+      },
+      "blocks": {
+        "welder-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "The Welder",
+            "industry": "Welding & Fabrication",
+            "description": "Industrial red design for welding and metalwork businesses",
+            "demo_link": "/pages/demo-the-welder",
+            "preview_link": "/?preset=the-welder"
+          }
+        },
+        "zebra-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Zebra Skimmers",
+            "industry": "Industrial B2B",
+            "description": "Professional B2B with trust indicators and specs",
+            "demo_link": "/pages/demo-zebra-skimmers",
+            "preview_link": "/?preset=zebra-skimmers"
+          }
+        },
+        "tech-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Tech Forward",
+            "industry": "Technology",
+            "description": "Dark, futuristic design for tech companies",
+            "demo_link": "/pages/demo-tech-forward",
+            "preview_link": "/?preset=tech-forward"
+          }
+        },
+        "minimal-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Modern Minimal",
+            "industry": "Lifestyle",
+            "description": "Clean, sophisticated aesthetic",
+            "demo_link": "/pages/demo-modern-minimal",
+            "preview_link": "/?preset=modern-minimal"
+          }
+        },
+        "impact-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Bold Impact",
+            "industry": "Athletic",
+            "description": "High-energy design for sports brands",
+            "demo_link": "/pages/demo-bold-impact",
+            "preview_link": "/?preset=bold-impact"
+          }
+        },
+        "artisan-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Warm Artisan",
+            "industry": "Handmade",
+            "description": "Organic feel for artisan businesses",
+            "demo_link": "/pages/demo-warm-artisan",
+            "preview_link": "/?preset=warm-artisan"
+          }
+        },
+        "work-zone-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Work Zone",
+            "industry": "Construction",
+            "description": "Safety orange for construction companies",
+            "demo_link": "/pages/demo-work-zone",
+            "preview_link": "/?preset=work-zone"
+          }
+        },
+        "site-ops-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Site Ops",
+            "industry": "Project Management",
+            "description": "Construction yellow for project management",
+            "demo_link": "/pages/demo-site-ops",
+            "preview_link": "/?preset=site-ops"
+          }
+        },
+        "midnight-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Midnight Shift",
+            "industry": "Modern Tech",
+            "description": "Dark mode for modern tech companies",
+            "demo_link": "/pages/demo-midnight-shift",
+            "preview_link": "/?preset=midnight-shift"
+          }
+        },
+        "precision-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Precision",
+            "industry": "Professional Services",
+            "description": "Corporate blue for professional services",
+            "demo_link": "/pages/demo-precision",
+            "preview_link": "/?preset=precision"
+          }
+        },
+        "tactical-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Tactical",
+            "industry": "Outdoor/Military",
+            "description": "Military green for outdoor and tactical gear",
+            "demo_link": "/pages/demo-tactical",
+            "preview_link": "/?preset=tactical"
+          }
+        },
+        "monolith-demo": {
+          "type": "preset-card",
+          "settings": {
+            "title": "Monolith",
+            "industry": "Luxury/Premium",
+            "description": "Minimal black for luxury brands",
+            "demo_link": "/pages/demo-monolith",
+            "preview_link": "/?preset=monolith"
+          }
+        }
+      },
+      "block_order": ["welder-demo", "zebra-demo", "tech-demo", "minimal-demo", "impact-demo", "artisan-demo", "work-zone-demo", "site-ops-demo", "midnight-demo", "precision-demo", "tactical-demo", "monolith-demo"]
+    },
+    "header-footer-demos": {
+      "type": "smart-grid",
+      "settings": {
+        "title": "Header & Footer Combinations",
+        "subtitle": "4 headers × 3 footers = 12 combinations",
+        "layout": "cols-3",
+        "padding_top": 60,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "unified-header": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Unified Header Demo",
+            "description": "Flexible header with search bar options",
+            "link": "/pages/header-unified-demo",
+            "button_text": "View Demo"
+          }
+        },
+        "mega-header": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Mega Menu Header Demo",
+            "description": "Multi-column navigation with featured content",
+            "link": "/pages/header-mega-demo",
+            "button_text": "View Demo"
+          }
+        },
+        "industrial-header": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Industrial Header Demo",
+            "description": "Heavy industrial aesthetic",
+            "link": "/pages/header-industrial-demo",
+            "button_text": "View Demo"
+          }
+        },
+        "corporate-header": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Corporate Header Demo",
+            "description": "Enterprise B2B focused design",
+            "link": "/pages/header-corporate-demo",
+            "button_text": "View Demo"
+          }
+        },
+        "standard-footer": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Standard Footer Demo",
+            "description": "Default footer with newsletter signup",
+            "link": "/pages/footer-standard-demo",
+            "button_text": "View Demo"
+          }
+        },
+        "industrial-footer": {
+          "type": "feature-card",
+          "settings": {
+            "title": "Industrial Footer Demo",
+            "description": "Industrial brand styling with certifications",
+            "link": "/pages/footer-industrial-demo",
+            "button_text": "View Demo"
+          }
+        }
+      },
+      "block_order": ["unified-header", "mega-header", "industrial-header", "corporate-header", "standard-footer", "industrial-footer"]
+    },
+    "cta": {
+      "type": "builder-grid",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      },
+      "blocks": {
+        "cta-title": {
+          "type": "heading",
+          "settings": {
+            "text": "Convinced? Get Started Today",
+            "tag": "h2",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "cta-text": {
+          "type": "text",
+          "settings": {
+            "content": "<p>One theme, endless possibilities. Save $150-400/month in app costs with our all-in-one solution.</p>",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "cta-buttons": {
+          "type": "button-group",
+          "settings": {
+            "primary_text": "Purchase Theme - $320",
+            "primary_link": "#purchase",
+            "secondary_text": "Calculate Your Savings",
+            "secondary_link": "/pages/cost-calculator",
+            "align": "center",
+            "width": "100"
+          }
+        }
+      },
+      "block_order": ["cta-title", "cta-text", "cta-buttons"]
+    }
+  },
+  "order": [
+    "hero",
+    "demo-grid",
+    "preset-demos",
+    "header-footer-demos",
+    "cta"
+  ]
+}

@@ -6,8 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
+  {%- comment -%} Resource Hints for Performance {%- endcomment -%}
+  {%- render 'resource-hints' -%}
+
   {%- comment -%} PWA Support {%- endcomment -%}
   {%- render 'pwa-support' -%}
+
+  {%- comment -%} Meta Tags for SEO and Social Sharing {%- endcomment -%}
+  {%- render 'meta-tags' -%}
+
+  {%- comment -%} Structured Data for SEO {%- endcomment -%}
+  {%- render 'structured-data' -%}
 
   <title>
     {{ page_title }}
@@ -29,11 +38,14 @@
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
   {%- endif -%}
 
-  {%- comment -%} DNS Hints {%- endcomment -%}
-  {%- if settings.enable_dns_prefetch -%}
-    <link rel="dns-prefetch" href="https://cdn.shopify.com">
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  {%- comment -%} Critical CSS for Performance {%- endcomment -%}
+  {%- render 'critical-css' -%}
+
+  {%- comment -%} Load base CSS asynchronously if enabled {%- endcomment -%}
+  {%- if settings.enable_async_css -%}
+    {% render 'css-loader', css: 'base.css' %}
+  {%- else -%}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
   {%- comment -%} Google Fonts for all presets {%- endcomment -%}
@@ -47,112 +59,102 @@
 
   {{ content_for_header }}
 
-  {%- comment -%} JavaScript in Head (if setting enabled) {%- endcomment -%}
-  {%- if settings.js_load_location == 'head' -%}
-    {%- liquid
-      if settings.enable_optimized_js
-        assign js_strategy = settings.js_loading_strategy
-      else
-        assign js_strategy = 'blocking'
-      endif
-    -%}
+  {%- comment -%} Performance Monitor for testing and optimization {%- endcomment -%}
+  <script src="{{ 'performance-monitor.js' | asset_url }}" defer></script>
 
-    {%- if js_strategy == 'defer' -%}
-      <script src="{{ 'global.js' | asset_url }}" defer></script>
-    {%- elsif js_strategy == 'async' -%}
-      <script src="{{ 'global.js' | asset_url }}" async></script>
-    {%- else -%}
-      <script src="{{ 'global.js' | asset_url }}"></script>
+  {%- comment -%} Performance Optimization Script {%- endcomment -%}
+  <script>
+    // Add no-js class removal and lazy loading initialization
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+
+    // Initialize lazy loading if enabled
+    {%- if settings.enable_lazy_loading -%}
+    if ('IntersectionObserver' in window) {
+      const lazyImages = document.querySelectorAll('img[data-src], img[data-srcset]');
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+            }
+            if (img.dataset.srcset) {
+              img.srcset = img.dataset.srcset;
+              img.removeAttribute('data-srcset');
+            }
+            if (img.dataset.sizes) {
+              img.sizes = img.dataset.sizes;
+              img.removeAttribute('data-sizes');
+            }
+            img.classList.remove('lazy');
+            img.classList.add('loaded');
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '50px 0px',
+        threshold: 0.1
+      });
+      lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      const lazyImages = document.querySelectorAll('img[data-src], img[data-srcset]');
+      lazyImages.forEach(img => {
+        if (img.dataset.src) {
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+        }
+        if (img.dataset.srcset) {
+          img.srcset = img.dataset.srcset;
+          img.removeAttribute('data-srcset');
+        }
+        if (img.dataset.sizes) {
+          img.sizes = img.dataset.sizes;
+          img.removeAttribute('data-sizes');
+        }
+        img.classList.remove('lazy');
+        img.classList.add('loaded');
+      });
+    }
     {%- endif -%}
-  {%- endif -%}
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: var(--font-body);
-      font-size: var(--font-size-base);
-      line-height: 1.6;
-      color: var(--color-text);
-      background-color: var(--color-background);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-      transition: background 0.3s, color 0.3s;
+    // Performance monitoring
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach(entry => {
+          if (entry.entryType === 'largest-contentful-paint') {
+            console.log('LCP:', entry.startTime);
+          }
+        });
+      });
+      try {
+        observer.observe({ entryTypes: ['largest-contentful-paint'] });
+      } catch (e) {
+        // Ignore if not supported
+      }
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      line-height: 1.1;
-      margin: 0 0 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    // Service Worker registration for PWA
+    {%- if settings.enable_pwa -%}
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/apps/sw.js', { scope: '/' })
+          .then(registration => {
+            console.log('SW registered:', registration.scope);
+            // Mark service worker as available for performance tests
+            window.serviceWorkerRegistered = true;
+          })
+          .catch(error => {
+            console.log('SW registration failed:', error);
+            window.serviceWorkerRegistered = false;
+          });
+      });
     }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; height: auto; display: block; }
-    button { font-family: inherit; cursor: pointer; }
-
-    .container {
-      width: 100%;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .visually-hidden {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
-
-    /* Industrial Button */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background-color: var(--color-primary);
-      color: var(--color-button-text);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: filter 0.2s, transform 0.1s;
-    }
-    .btn:hover { filter: brightness(0.9); }
-    .btn:active { transform: translateY(1px); }
-    .btn--full { width: 100%; }
-    .btn--outline {
-      background: transparent;
-      border: 2px solid var(--color-text);
-      color: var(--color-text);
-    }
-    .btn--outline:hover {
-      background: var(--color-text);
-      color: var(--color-background);
-    }
-
-    /* Fade in animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    {%- endif -%}
+  </script>
 </head>
 
 <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">

@@ -1,0 +1,112 @@
+{
+  "specifications": {
+    "dimensions": {
+      "length": {
+        "value": "1200",
+        "unit": "mm",
+        "tolerance": "±5",
+        "display_name": "Length"
+      },
+      "width": {
+        "value": "800", 
+        "unit": "mm",
+        "tolerance": "±3",
+        "display_name": "Width"
+      },
+      "height": {
+        "value": "400",
+        "unit": "mm", 
+        "tolerance": "±2",
+        "display_name": "Height"
+      },
+      "weight": {
+        "value": "45",
+        "unit": "kg",
+        "tolerance": "±1",
+        "display_name": "Weight"
+      }
+    },
+    "performance": {
+      "max_pressure": {
+        "value": "150",
+        "unit": "PSI",
+        "range": "0-150",
+        "display_name": "Maximum Pressure"
+      },
+      "flow_rate": {
+        "value": "50",
+        "unit": "GPM",
+        "range": "10-50",
+        "display_name": "Flow Rate"
+      },
+      "temperature_range": {
+        "min": "-20",
+        "max": "80",
+        "unit": "°C",
+        "display_name": "Operating Temperature"
+      },
+      "efficiency": {
+        "value": "95",
+        "unit": "%",
+        "description": "Energy efficiency rating under standard conditions"
+      }
+    },
+    "materials": {
+      "housing": {
+        "value": "316 Stainless Steel",
+        "description": "Corrosion resistant marine-grade stainless steel"
+      },
+      "seals": {
+        "value": "Viton",
+        "description": "Chemical compatible fluoroelastomer seals"
+      },
+      "fasteners": {
+        "value": "A4 Stainless Steel",
+        "description": "Marine-grade stainless steel bolts and fasteners"
+      }
+    },
+    "electrical": {
+      "voltage": {
+        "value": "120/240",
+        "unit": "VAC",
+        "display_name": "Input Voltage"
+      },
+      "power": {
+        "value": "500",
+        "unit": "W",
+        "display_name": "Power Consumption"
+      },
+      "frequency": {
+        "value": "50/60",
+        "unit": "Hz",
+        "display_name": "Frequency"
+      }
+    }
+  },
+  "categories": {
+    "dimensions": {
+      "name": "Dimensions & Weight",
+      "order": 1,
+      "collapsible": true,
+      "description": "Physical specifications and measurements"
+    },
+    "performance": {
+      "name": "Performance Specifications", 
+      "order": 2,
+      "collapsible": true,
+      "description": "Operating performance and capacity"
+    },
+    "materials": {
+      "name": "Materials & Construction",
+      "order": 3,
+      "collapsible": false,
+      "description": "Material specifications and construction details"
+    },
+    "electrical": {
+      "name": "Electrical Requirements",
+      "order": 4,
+      "collapsible": true,
+      "description": "Power and electrical specifications"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "files": [
+    {
+      "id": "manual_001",
+      "name": "Installation Manual",
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/installation-manual.pdf",
+      "type": "pdf",
+      "size": "2.4 MB",
+      "category": "manuals",
+      "description": "Complete installation and setup guide with diagrams",
+      "access_level": "public",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "manual_002", 
+      "name": "Operation Manual",
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/operation-manual.pdf",
+      "type": "pdf",
+      "size": "3.1 MB",
+      "category": "manuals",
+      "description": "Operating procedures and maintenance instructions",
+      "access_level": "public",
+      "featured": false,
+      "order": 2
+    },
+    {
+      "id": "cad_001",
+      "name": "3D CAD Model",
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/model.step",
+      "type": "step",
+      "size": "15.2 MB", 
+      "category": "cad",
+      "description": "STEP format 3D model for CAD integration",
+      "access_level": "customer",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "cad_002",
+      "name": "2D Technical Drawing",
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/drawing.dwg",
+      "type": "dwg",
+      "size": "1.8 MB",
+      "category": "cad", 
+      "description": "AutoCAD technical drawing with dimensions",
+      "access_level": "customer",
+      "featured": false,
+      "order": 2
+    },
+    {
+      "id": "cert_001",
+      "name": "CE Certificate",
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/ce-certificate.pdf",
+      "type": "pdf",
+      "size": "0.8 MB",
+      "category": "certificates",
+      "description": "European Conformity certification",
+      "access_level": "public",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "cert_002",
+      "name": "ISO 9001 Certificate", 
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/iso-certificate.pdf",
+      "type": "pdf",
+      "size": "1.2 MB",
+      "category": "certificates",
+      "description": "Quality management system certification",
+      "access_level": "public",
+      "featured": false,
+      "order": 2
+    },
+    {
+      "id": "safety_001",
+      "name": "Safety Data Sheet",
+      "url": "https://cdn.shopify.com/s/files/1/0000/0000/files/sds.pdf",
+      "type": "pdf",
+      "size": "0.5 MB",
+      "category": "safety",
+      "description": "Material safety data sheet and handling instructions",
+      "access_level": "public",
+      "featured": true,
+      "order": 1
+    }
+  ],
+  "categories": {
+    "manuals": {
+      "name": "Manuals & Guides",
+      "icon": "file-manual",
+      "order": 1,
+      "description": "Installation, operation, and maintenance documentation",
+      "access_level": "public"
+    },
+    "cad": {
+      "name": "CAD Files",
+      "icon": "file-cad", 
+      "order": 2,
+      "description": "3D models and technical drawings for design integration",
+      "access_level": "customer"
+    },
+    "certificates": {
+      "name": "Certificates & Compliance",
+      "icon": "file-safety",
+      "order": 3,
+      "description": "Certifications, compliance documents, and test reports",
+      "access_level": "public"
+    },
+    "safety": {
+      "name": "Safety Documentation",
+      "icon": "file-safety",
+      "order": 4,
+      "description": "Safety data sheets and handling instructions",
+      "access_level": "public"
+    }
+  }
+}

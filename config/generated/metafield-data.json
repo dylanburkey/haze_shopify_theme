@@ -1,0 +1,6640 @@
+{
+  "industrial-oil-skimmer-zs-1000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "length": {
+            "value": "24",
+            "unit": "in",
+            "tolerance": "±0.5",
+            "display_name": "Length"
+          },
+          "width": {
+            "value": "18",
+            "unit": "in",
+            "tolerance": "±0.5",
+            "display_name": "Width"
+          },
+          "height": {
+            "value": "36",
+            "unit": "in",
+            "tolerance": "±1",
+            "display_name": "Height"
+          },
+          "weight": {
+            "value": "85",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "flow_rate": {
+            "value": "10",
+            "unit": "GPM",
+            "range": "5-15",
+            "display_name": "Flow Rate"
+          },
+          "removal_rate": {
+            "value": "95",
+            "unit": "%",
+            "description": "Oil removal efficiency",
+            "display_name": "Removal Efficiency"
+          },
+          "temperature_range": {
+            "min": "32",
+            "max": "180",
+            "unit": "°F",
+            "display_name": "Operating Temperature"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "0.5",
+            "unit": "HP",
+            "display_name": "Motor Power"
+          },
+          "frequency": {
+            "value": "60",
+            "unit": "Hz",
+            "display_name": "Frequency"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "materials": {
+          "name": "Materials & Construction",
+          "order": 4,
+          "collapsible": false
+        },
+        "welding": {
+          "name": "Welding Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 5,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "industrial-oil-skimmer-zs-1000_manual",
+        "name": "Installation Manual",
+        "url": "/files/industrial-oil-skimmer-zs-1000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-oil-skimmer-zs-1000_operation",
+        "name": "Operation Manual",
+        "url": "/files/industrial-oil-skimmer-zs-1000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-oil-skimmer-zs-1000_cad",
+        "name": "3D CAD Model",
+        "url": "/files/industrial-oil-skimmer-zs-1000-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-oil-skimmer-zs-1000_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/industrial-oil-skimmer-zs-1000-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-oil-skimmer-zs-1000_ce",
+        "name": "CE Certificate",
+        "url": "/files/industrial-oil-skimmer-zs-1000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-oil-skimmer-zs-1000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/industrial-oil-skimmer-zs-1000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "coolant-management-system-cms-2000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "length": {
+            "value": "72",
+            "unit": "in",
+            "tolerance": "±1",
+            "display_name": "Length"
+          },
+          "width": {
+            "value": "48",
+            "unit": "in",
+            "tolerance": "±1",
+            "display_name": "Width"
+          },
+          "height": {
+            "value": "84",
+            "unit": "in",
+            "tolerance": "±2",
+            "display_name": "Height"
+          },
+          "weight": {
+            "value": "450",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "flow_rate": {
+            "value": "100",
+            "unit": "GPM",
+            "range": "50-150",
+            "display_name": "Flow Rate"
+          },
+          "tank_capacity": {
+            "value": "500",
+            "unit": "gal",
+            "display_name": "Tank Capacity"
+          },
+          "filtration": {
+            "value": "5",
+            "unit": "micron",
+            "description": "Particle filtration rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "5",
+            "unit": "HP",
+            "display_name": "Total Power"
+          },
+          "control": {
+            "value": "PLC",
+            "description": "Programmable Logic Controller"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "materials": {
+          "name": "Materials & Construction",
+          "order": 4,
+          "collapsible": false
+        },
+        "welding": {
+          "name": "Welding Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 5,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "coolant-management-system-cms-2000_manual",
+        "name": "Installation Manual",
+        "url": "/files/coolant-management-system-cms-2000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "coolant-management-system-cms-2000_operation",
+        "name": "Operation Manual",
+        "url": "/files/coolant-management-system-cms-2000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "coolant-management-system-cms-2000_cad",
+        "name": "3D CAD Model",
+        "url": "/files/coolant-management-system-cms-2000-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "coolant-management-system-cms-2000_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/coolant-management-system-cms-2000-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "coolant-management-system-cms-2000_ce",
+        "name": "CE Certificate",
+        "url": "/files/coolant-management-system-cms-2000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "coolant-management-system-cms-2000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/coolant-management-system-cms-2000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "heavy-duty-conveyor-belt-system": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "length": {
+            "value": "100",
+            "unit": "ft",
+            "display_name": "Belt Length"
+          },
+          "width": {
+            "value": "24",
+            "unit": "in",
+            "display_name": "Belt Width"
+          },
+          "height": {
+            "value": "42",
+            "unit": "in",
+            "display_name": "Height"
+          },
+          "weight": {
+            "value": "320",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "1000",
+            "unit": "lbs/min",
+            "display_name": "Capacity"
+          },
+          "speed": {
+            "value": "0-200",
+            "unit": "ft/min",
+            "display_name": "Variable Speed"
+          },
+          "load_capacity": {
+            "value": "500",
+            "unit": "lbs/ft",
+            "display_name": "Load Capacity"
+          }
+        },
+        "materials": {
+          "frame": {
+            "value": "Carbon Steel",
+            "description": "Powder coated carbon steel frame"
+          },
+          "belt": {
+            "value": "Rubber",
+            "description": "Heavy duty rubber belt material"
+          },
+          "rollers": {
+            "value": "Steel",
+            "description": "Precision steel rollers"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "materials": {
+          "name": "Materials & Construction",
+          "order": 4,
+          "collapsible": false
+        },
+        "welding": {
+          "name": "Welding Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 5,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "heavy-duty-conveyor-belt-system_manual",
+        "name": "Installation Manual",
+        "url": "/files/heavy-duty-conveyor-belt-system-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "heavy-duty-conveyor-belt-system_operation",
+        "name": "Operation Manual",
+        "url": "/files/heavy-duty-conveyor-belt-system-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "heavy-duty-conveyor-belt-system_cad",
+        "name": "3D CAD Model",
+        "url": "/files/heavy-duty-conveyor-belt-system-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "heavy-duty-conveyor-belt-system_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/heavy-duty-conveyor-belt-system-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "heavy-duty-conveyor-belt-system_ce",
+        "name": "CE Certificate",
+        "url": "/files/heavy-duty-conveyor-belt-system-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "heavy-duty-conveyor-belt-system_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/heavy-duty-conveyor-belt-system-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "professional-welding-station-ws-300": {
+    "specifications": {
+      "specifications": {
+        "welding": {
+          "current_range": {
+            "min": "10",
+            "max": "300",
+            "unit": "A",
+            "display_name": "Current Range"
+          },
+          "duty_cycle": {
+            "value": "60",
+            "unit": "%",
+            "description": "At maximum current"
+          },
+          "processes": {
+            "value": "MIG/TIG/Stick",
+            "description": "Supported welding processes"
+          }
+        },
+        "electrical": {
+          "input_voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "15",
+            "unit": "kW",
+            "display_name": "Power Consumption"
+          },
+          "efficiency": {
+            "value": "85",
+            "unit": "%",
+            "display_name": "Efficiency"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "materials": {
+          "name": "Materials & Construction",
+          "order": 4,
+          "collapsible": false
+        },
+        "welding": {
+          "name": "Welding Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 5,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "professional-welding-station-ws-300_manual",
+        "name": "Installation Manual",
+        "url": "/files/professional-welding-station-ws-300-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "professional-welding-station-ws-300_operation",
+        "name": "Operation Manual",
+        "url": "/files/professional-welding-station-ws-300-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "professional-welding-station-ws-300_ce",
+        "name": "CE Certificate",
+        "url": "/files/professional-welding-station-ws-300-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "professional-welding-station-ws-300_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/professional-welding-station-ws-300-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "industrial-safety-cabinet-sc-45": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "width": {
+            "value": "43",
+            "unit": "in",
+            "display_name": "Width"
+          },
+          "depth": {
+            "value": "18",
+            "unit": "in",
+            "display_name": "Depth"
+          },
+          "height": {
+            "value": "65",
+            "unit": "in",
+            "display_name": "Height"
+          },
+          "capacity": {
+            "value": "45",
+            "unit": "gal",
+            "display_name": "Storage Capacity"
+          }
+        },
+        "safety": {
+          "fire_rating": {
+            "value": "10",
+            "unit": "min",
+            "description": "Fire resistance rating"
+          },
+          "compliance": {
+            "value": "OSHA/NFPA",
+            "description": "Regulatory compliance"
+          },
+          "construction": {
+            "value": "Double Wall",
+            "description": "18-gauge steel double wall"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "materials": {
+          "name": "Materials & Construction",
+          "order": 4,
+          "collapsible": false
+        },
+        "welding": {
+          "name": "Welding Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 5,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "industrial-safety-cabinet-sc-45_manual",
+        "name": "Installation Manual",
+        "url": "/files/industrial-safety-cabinet-sc-45-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-safety-cabinet-sc-45_operation",
+        "name": "Operation Manual",
+        "url": "/files/industrial-safety-cabinet-sc-45-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-safety-cabinet-sc-45_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/industrial-safety-cabinet-sc-45-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-safety-cabinet-sc-45_ce",
+        "name": "CE Certificate",
+        "url": "/files/industrial-safety-cabinet-sc-45-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-safety-cabinet-sc-45_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/industrial-safety-cabinet-sc-45-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "cnc-machining-center-mc-400": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "200",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "5",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "cnc-machining-center-mc-400_manual",
+        "name": "Installation Manual",
+        "url": "/files/cnc-machining-center-mc-400-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "cnc-machining-center-mc-400_operation",
+        "name": "Operation Manual",
+        "url": "/files/cnc-machining-center-mc-400-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "cnc-machining-center-mc-400_cad",
+        "name": "3D CAD Model",
+        "url": "/files/cnc-machining-center-mc-400-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "cnc-machining-center-mc-400_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/cnc-machining-center-mc-400-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "cnc-machining-center-mc-400_ce",
+        "name": "CE Certificate",
+        "url": "/files/cnc-machining-center-mc-400-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "cnc-machining-center-mc-400_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/cnc-machining-center-mc-400-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "hydraulic-press-hp-50t": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "250",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "6",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "hydraulic-press-hp-50t_manual",
+        "name": "Installation Manual",
+        "url": "/files/hydraulic-press-hp-50t-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hydraulic-press-hp-50t_operation",
+        "name": "Operation Manual",
+        "url": "/files/hydraulic-press-hp-50t-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "hydraulic-press-hp-50t_cad",
+        "name": "3D CAD Model",
+        "url": "/files/hydraulic-press-hp-50t-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hydraulic-press-hp-50t_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/hydraulic-press-hp-50t-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "hydraulic-press-hp-50t_ce",
+        "name": "CE Certificate",
+        "url": "/files/hydraulic-press-hp-50t-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hydraulic-press-hp-50t_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/hydraulic-press-hp-50t-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "industrial-lathe-il-1640": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "300",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "6",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "industrial-lathe-il-1640_manual",
+        "name": "Installation Manual",
+        "url": "/files/industrial-lathe-il-1640-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-lathe-il-1640_operation",
+        "name": "Operation Manual",
+        "url": "/files/industrial-lathe-il-1640-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-lathe-il-1640_cad",
+        "name": "3D CAD Model",
+        "url": "/files/industrial-lathe-il-1640-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-lathe-il-1640_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/industrial-lathe-il-1640-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-lathe-il-1640_ce",
+        "name": "CE Certificate",
+        "url": "/files/industrial-lathe-il-1640-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-lathe-il-1640_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/industrial-lathe-il-1640-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "milling-machine-mm-3000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "350",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "7",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "milling-machine-mm-3000_manual",
+        "name": "Installation Manual",
+        "url": "/files/milling-machine-mm-3000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "milling-machine-mm-3000_operation",
+        "name": "Operation Manual",
+        "url": "/files/milling-machine-mm-3000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "milling-machine-mm-3000_cad",
+        "name": "3D CAD Model",
+        "url": "/files/milling-machine-mm-3000-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "milling-machine-mm-3000_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/milling-machine-mm-3000-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "milling-machine-mm-3000_ce",
+        "name": "CE Certificate",
+        "url": "/files/milling-machine-mm-3000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "milling-machine-mm-3000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/milling-machine-mm-3000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "grinding-machine-gm-1200": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "400",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "7",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "grinding-machine-gm-1200_manual",
+        "name": "Installation Manual",
+        "url": "/files/grinding-machine-gm-1200-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "grinding-machine-gm-1200_operation",
+        "name": "Operation Manual",
+        "url": "/files/grinding-machine-gm-1200-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "grinding-machine-gm-1200_cad",
+        "name": "3D CAD Model",
+        "url": "/files/grinding-machine-gm-1200-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "grinding-machine-gm-1200_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/grinding-machine-gm-1200-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "grinding-machine-gm-1200_ce",
+        "name": "CE Certificate",
+        "url": "/files/grinding-machine-gm-1200-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "grinding-machine-gm-1200_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/grinding-machine-gm-1200-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "drill-press-dp-20": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "450",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "8",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "drill-press-dp-20_manual",
+        "name": "Installation Manual",
+        "url": "/files/drill-press-dp-20-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "drill-press-dp-20_operation",
+        "name": "Operation Manual",
+        "url": "/files/drill-press-dp-20-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "drill-press-dp-20_cad",
+        "name": "3D CAD Model",
+        "url": "/files/drill-press-dp-20-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "drill-press-dp-20_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/drill-press-dp-20-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "drill-press-dp-20_ce",
+        "name": "CE Certificate",
+        "url": "/files/drill-press-dp-20-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "drill-press-dp-20_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/drill-press-dp-20-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "band-saw-bs-14": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "500",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "8",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "band-saw-bs-14_manual",
+        "name": "Installation Manual",
+        "url": "/files/band-saw-bs-14-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "band-saw-bs-14_operation",
+        "name": "Operation Manual",
+        "url": "/files/band-saw-bs-14-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "band-saw-bs-14_cad",
+        "name": "3D CAD Model",
+        "url": "/files/band-saw-bs-14-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "band-saw-bs-14_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/band-saw-bs-14-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "band-saw-bs-14_ce",
+        "name": "CE Certificate",
+        "url": "/files/band-saw-bs-14-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "band-saw-bs-14_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/band-saw-bs-14-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "surface-grinder-sg-818": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "550",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "9",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "surface-grinder-sg-818_manual",
+        "name": "Installation Manual",
+        "url": "/files/surface-grinder-sg-818-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "surface-grinder-sg-818_operation",
+        "name": "Operation Manual",
+        "url": "/files/surface-grinder-sg-818-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "surface-grinder-sg-818_cad",
+        "name": "3D CAD Model",
+        "url": "/files/surface-grinder-sg-818-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "surface-grinder-sg-818_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/surface-grinder-sg-818-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "surface-grinder-sg-818_ce",
+        "name": "CE Certificate",
+        "url": "/files/surface-grinder-sg-818-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "surface-grinder-sg-818_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/surface-grinder-sg-818-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "boring-machine-bm-100": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "600",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "9",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "boring-machine-bm-100_manual",
+        "name": "Installation Manual",
+        "url": "/files/boring-machine-bm-100-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "boring-machine-bm-100_operation",
+        "name": "Operation Manual",
+        "url": "/files/boring-machine-bm-100-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "boring-machine-bm-100_cad",
+        "name": "3D CAD Model",
+        "url": "/files/boring-machine-bm-100-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "boring-machine-bm-100_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/boring-machine-bm-100-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "boring-machine-bm-100_ce",
+        "name": "CE Certificate",
+        "url": "/files/boring-machine-bm-100-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "boring-machine-bm-100_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/boring-machine-bm-100-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "plasma-cutter-pc-65": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "650",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "10",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "plasma-cutter-pc-65_manual",
+        "name": "Installation Manual",
+        "url": "/files/plasma-cutter-pc-65-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "plasma-cutter-pc-65_operation",
+        "name": "Operation Manual",
+        "url": "/files/plasma-cutter-pc-65-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "plasma-cutter-pc-65_cad",
+        "name": "3D CAD Model",
+        "url": "/files/plasma-cutter-pc-65-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "plasma-cutter-pc-65_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/plasma-cutter-pc-65-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "plasma-cutter-pc-65_ce",
+        "name": "CE Certificate",
+        "url": "/files/plasma-cutter-pc-65-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "plasma-cutter-pc-65_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/plasma-cutter-pc-65-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "waterjet-cutter-wj-3020": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "700",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "10",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "waterjet-cutter-wj-3020_manual",
+        "name": "Installation Manual",
+        "url": "/files/waterjet-cutter-wj-3020-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "waterjet-cutter-wj-3020_operation",
+        "name": "Operation Manual",
+        "url": "/files/waterjet-cutter-wj-3020-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "waterjet-cutter-wj-3020_cad",
+        "name": "3D CAD Model",
+        "url": "/files/waterjet-cutter-wj-3020-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "waterjet-cutter-wj-3020_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/waterjet-cutter-wj-3020-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "waterjet-cutter-wj-3020_ce",
+        "name": "CE Certificate",
+        "url": "/files/waterjet-cutter-wj-3020-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "waterjet-cutter-wj-3020_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/waterjet-cutter-wj-3020-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "laser-cutter-lc-1325": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "750",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "11",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "laser-cutter-lc-1325_manual",
+        "name": "Installation Manual",
+        "url": "/files/laser-cutter-lc-1325-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "laser-cutter-lc-1325_operation",
+        "name": "Operation Manual",
+        "url": "/files/laser-cutter-lc-1325-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "laser-cutter-lc-1325_cad",
+        "name": "3D CAD Model",
+        "url": "/files/laser-cutter-lc-1325-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "laser-cutter-lc-1325_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/laser-cutter-lc-1325-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "laser-cutter-lc-1325_ce",
+        "name": "CE Certificate",
+        "url": "/files/laser-cutter-lc-1325-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "laser-cutter-lc-1325_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/laser-cutter-lc-1325-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "punch-press-pp-30t": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "800",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "11",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "punch-press-pp-30t_manual",
+        "name": "Installation Manual",
+        "url": "/files/punch-press-pp-30t-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "punch-press-pp-30t_operation",
+        "name": "Operation Manual",
+        "url": "/files/punch-press-pp-30t-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "punch-press-pp-30t_cad",
+        "name": "3D CAD Model",
+        "url": "/files/punch-press-pp-30t-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "punch-press-pp-30t_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/punch-press-pp-30t-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "punch-press-pp-30t_ce",
+        "name": "CE Certificate",
+        "url": "/files/punch-press-pp-30t-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "punch-press-pp-30t_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/punch-press-pp-30t-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "shear-machine-sm-10": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "850",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "12",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "shear-machine-sm-10_manual",
+        "name": "Installation Manual",
+        "url": "/files/shear-machine-sm-10-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "shear-machine-sm-10_operation",
+        "name": "Operation Manual",
+        "url": "/files/shear-machine-sm-10-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "shear-machine-sm-10_cad",
+        "name": "3D CAD Model",
+        "url": "/files/shear-machine-sm-10-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "shear-machine-sm-10_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/shear-machine-sm-10-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "shear-machine-sm-10_ce",
+        "name": "CE Certificate",
+        "url": "/files/shear-machine-sm-10-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "shear-machine-sm-10_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/shear-machine-sm-10-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "roll-former-rf-24": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "900",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Industrial Grade",
+            "description": "Professional capacity rating"
+          },
+          "precision": {
+            "value": "±0.001",
+            "unit": "in",
+            "display_name": "Precision"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "230/460",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "12",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "roll-former-rf-24_manual",
+        "name": "Installation Manual",
+        "url": "/files/roll-former-rf-24-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "roll-former-rf-24_operation",
+        "name": "Operation Manual",
+        "url": "/files/roll-former-rf-24-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "roll-former-rf-24_cad",
+        "name": "3D CAD Model",
+        "url": "/files/roll-former-rf-24-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "roll-former-rf-24_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/roll-former-rf-24-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "roll-former-rf-24_ce",
+        "name": "CE Certificate",
+        "url": "/files/roll-former-rf-24-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "roll-former-rf-24_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/roll-former-rf-24-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "air-compressor-ac-100hp": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "500",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "4",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "air-compressor-ac-100hp_manual",
+        "name": "Installation Manual",
+        "url": "/files/air-compressor-ac-100hp-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "air-compressor-ac-100hp_operation",
+        "name": "Operation Manual",
+        "url": "/files/air-compressor-ac-100hp-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "air-compressor-ac-100hp_cad",
+        "name": "3D CAD Model",
+        "url": "/files/air-compressor-ac-100hp-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "air-compressor-ac-100hp_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/air-compressor-ac-100hp-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "air-compressor-ac-100hp_ce",
+        "name": "CE Certificate",
+        "url": "/files/air-compressor-ac-100hp-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "air-compressor-ac-100hp_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/air-compressor-ac-100hp-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "industrial-generator-ig-250kw": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "600",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "5",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "industrial-generator-ig-250kw_manual",
+        "name": "Installation Manual",
+        "url": "/files/industrial-generator-ig-250kw-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-generator-ig-250kw_operation",
+        "name": "Operation Manual",
+        "url": "/files/industrial-generator-ig-250kw-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-generator-ig-250kw_cad",
+        "name": "3D CAD Model",
+        "url": "/files/industrial-generator-ig-250kw-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-generator-ig-250kw_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/industrial-generator-ig-250kw-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-generator-ig-250kw_ce",
+        "name": "CE Certificate",
+        "url": "/files/industrial-generator-ig-250kw-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-generator-ig-250kw_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/industrial-generator-ig-250kw-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "forklift-electric-fe-5000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "700",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "5",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "forklift-electric-fe-5000_manual",
+        "name": "Installation Manual",
+        "url": "/files/forklift-electric-fe-5000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "forklift-electric-fe-5000_operation",
+        "name": "Operation Manual",
+        "url": "/files/forklift-electric-fe-5000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "forklift-electric-fe-5000_cad",
+        "name": "3D CAD Model",
+        "url": "/files/forklift-electric-fe-5000-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "forklift-electric-fe-5000_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/forklift-electric-fe-5000-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "forklift-electric-fe-5000_ce",
+        "name": "CE Certificate",
+        "url": "/files/forklift-electric-fe-5000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "forklift-electric-fe-5000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/forklift-electric-fe-5000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "overhead-crane-oc-10t": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "800",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "6",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "overhead-crane-oc-10t_manual",
+        "name": "Installation Manual",
+        "url": "/files/overhead-crane-oc-10t-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "overhead-crane-oc-10t_operation",
+        "name": "Operation Manual",
+        "url": "/files/overhead-crane-oc-10t-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "overhead-crane-oc-10t_cad",
+        "name": "3D CAD Model",
+        "url": "/files/overhead-crane-oc-10t-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "overhead-crane-oc-10t_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/overhead-crane-oc-10t-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "overhead-crane-oc-10t_ce",
+        "name": "CE Certificate",
+        "url": "/files/overhead-crane-oc-10t-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "overhead-crane-oc-10t_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/overhead-crane-oc-10t-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "pallet-jack-pj-5500": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "900",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "6",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "pallet-jack-pj-5500_manual",
+        "name": "Installation Manual",
+        "url": "/files/pallet-jack-pj-5500-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pallet-jack-pj-5500_operation",
+        "name": "Operation Manual",
+        "url": "/files/pallet-jack-pj-5500-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "pallet-jack-pj-5500_cad",
+        "name": "3D CAD Model",
+        "url": "/files/pallet-jack-pj-5500-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pallet-jack-pj-5500_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/pallet-jack-pj-5500-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "pallet-jack-pj-5500_ce",
+        "name": "CE Certificate",
+        "url": "/files/pallet-jack-pj-5500-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pallet-jack-pj-5500_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/pallet-jack-pj-5500-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "industrial-vacuum-iv-3000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1000",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "7",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "industrial-vacuum-iv-3000_manual",
+        "name": "Installation Manual",
+        "url": "/files/industrial-vacuum-iv-3000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-vacuum-iv-3000_operation",
+        "name": "Operation Manual",
+        "url": "/files/industrial-vacuum-iv-3000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-vacuum-iv-3000_cad",
+        "name": "3D CAD Model",
+        "url": "/files/industrial-vacuum-iv-3000-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-vacuum-iv-3000_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/industrial-vacuum-iv-3000-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "industrial-vacuum-iv-3000_ce",
+        "name": "CE Certificate",
+        "url": "/files/industrial-vacuum-iv-3000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "industrial-vacuum-iv-3000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/industrial-vacuum-iv-3000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "pressure-washer-pw-4000psi": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1100",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "7",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "pressure-washer-pw-4000psi_manual",
+        "name": "Installation Manual",
+        "url": "/files/pressure-washer-pw-4000psi-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pressure-washer-pw-4000psi_operation",
+        "name": "Operation Manual",
+        "url": "/files/pressure-washer-pw-4000psi-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "pressure-washer-pw-4000psi_cad",
+        "name": "3D CAD Model",
+        "url": "/files/pressure-washer-pw-4000psi-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pressure-washer-pw-4000psi_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/pressure-washer-pw-4000psi-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "pressure-washer-pw-4000psi_ce",
+        "name": "CE Certificate",
+        "url": "/files/pressure-washer-pw-4000psi-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pressure-washer-pw-4000psi_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/pressure-washer-pw-4000psi-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "material-lift-ml-2000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1200",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "8",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "material-lift-ml-2000_manual",
+        "name": "Installation Manual",
+        "url": "/files/material-lift-ml-2000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "material-lift-ml-2000_operation",
+        "name": "Operation Manual",
+        "url": "/files/material-lift-ml-2000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "material-lift-ml-2000_cad",
+        "name": "3D CAD Model",
+        "url": "/files/material-lift-ml-2000-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "material-lift-ml-2000_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/material-lift-ml-2000-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "material-lift-ml-2000_ce",
+        "name": "CE Certificate",
+        "url": "/files/material-lift-ml-2000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "material-lift-ml-2000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/material-lift-ml-2000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "dock-leveler-dl-8x6": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1300",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "8",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "dock-leveler-dl-8x6_manual",
+        "name": "Installation Manual",
+        "url": "/files/dock-leveler-dl-8x6-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "dock-leveler-dl-8x6_operation",
+        "name": "Operation Manual",
+        "url": "/files/dock-leveler-dl-8x6-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "dock-leveler-dl-8x6_cad",
+        "name": "3D CAD Model",
+        "url": "/files/dock-leveler-dl-8x6-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "dock-leveler-dl-8x6_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/dock-leveler-dl-8x6-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "dock-leveler-dl-8x6_ce",
+        "name": "CE Certificate",
+        "url": "/files/dock-leveler-dl-8x6-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "dock-leveler-dl-8x6_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/dock-leveler-dl-8x6-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "loading-dock-seal-lds-9x10": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1400",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "capacity": {
+            "value": "Heavy Duty",
+            "description": "Industrial capacity rating"
+          },
+          "duty_cycle": {
+            "value": "Continuous",
+            "description": "Operating duty cycle"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "480",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "9",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "loading-dock-seal-lds-9x10_manual",
+        "name": "Installation Manual",
+        "url": "/files/loading-dock-seal-lds-9x10-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "loading-dock-seal-lds-9x10_operation",
+        "name": "Operation Manual",
+        "url": "/files/loading-dock-seal-lds-9x10-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "loading-dock-seal-lds-9x10_cad",
+        "name": "3D CAD Model",
+        "url": "/files/loading-dock-seal-lds-9x10-model.step",
+        "type": "step",
+        "size": "15.2 MB",
+        "category": "cad",
+        "description": "STEP format 3D model",
+        "access_level": "customer",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "loading-dock-seal-lds-9x10_drawing",
+        "name": "Technical Drawing",
+        "url": "/files/loading-dock-seal-lds-9x10-drawing.dwg",
+        "type": "dwg",
+        "size": "1.8 MB",
+        "category": "cad",
+        "description": "AutoCAD technical drawing",
+        "access_level": "customer",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "loading-dock-seal-lds-9x10_ce",
+        "name": "CE Certificate",
+        "url": "/files/loading-dock-seal-lds-9x10-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "loading-dock-seal-lds-9x10_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/loading-dock-seal-lds-9x10-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "angle-grinder-ag-9": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "angle-grinder-ag-9_manual",
+        "name": "Installation Manual",
+        "url": "/files/angle-grinder-ag-9-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "angle-grinder-ag-9_operation",
+        "name": "Operation Manual",
+        "url": "/files/angle-grinder-ag-9-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "angle-grinder-ag-9_ce",
+        "name": "CE Certificate",
+        "url": "/files/angle-grinder-ag-9-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "angle-grinder-ag-9_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/angle-grinder-ag-9-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "impact-wrench-iw-1000": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "7",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "impact-wrench-iw-1000_manual",
+        "name": "Installation Manual",
+        "url": "/files/impact-wrench-iw-1000-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "impact-wrench-iw-1000_operation",
+        "name": "Operation Manual",
+        "url": "/files/impact-wrench-iw-1000-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "impact-wrench-iw-1000_ce",
+        "name": "CE Certificate",
+        "url": "/files/impact-wrench-iw-1000-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "impact-wrench-iw-1000_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/impact-wrench-iw-1000-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "circular-saw-cs-7-25": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "9",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "circular-saw-cs-7-25_manual",
+        "name": "Installation Manual",
+        "url": "/files/circular-saw-cs-7-25-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "circular-saw-cs-7-25_operation",
+        "name": "Operation Manual",
+        "url": "/files/circular-saw-cs-7-25-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "circular-saw-cs-7-25_ce",
+        "name": "CE Certificate",
+        "url": "/files/circular-saw-cs-7-25-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "circular-saw-cs-7-25_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/circular-saw-cs-7-25-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "reciprocating-saw-rs-12a": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "11",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "reciprocating-saw-rs-12a_manual",
+        "name": "Installation Manual",
+        "url": "/files/reciprocating-saw-rs-12a-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "reciprocating-saw-rs-12a_operation",
+        "name": "Operation Manual",
+        "url": "/files/reciprocating-saw-rs-12a-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "reciprocating-saw-rs-12a_ce",
+        "name": "CE Certificate",
+        "url": "/files/reciprocating-saw-rs-12a-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "reciprocating-saw-rs-12a_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/reciprocating-saw-rs-12a-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "hammer-drill-hd-18v": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "13",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "hammer-drill-hd-18v_manual",
+        "name": "Installation Manual",
+        "url": "/files/hammer-drill-hd-18v-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hammer-drill-hd-18v_operation",
+        "name": "Operation Manual",
+        "url": "/files/hammer-drill-hd-18v-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "hammer-drill-hd-18v_ce",
+        "name": "CE Certificate",
+        "url": "/files/hammer-drill-hd-18v-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hammer-drill-hd-18v_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/hammer-drill-hd-18v-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "rotary-hammer-rh-1-5": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "15",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "rotary-hammer-rh-1-5_manual",
+        "name": "Installation Manual",
+        "url": "/files/rotary-hammer-rh-1-5-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "rotary-hammer-rh-1-5_operation",
+        "name": "Operation Manual",
+        "url": "/files/rotary-hammer-rh-1-5-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "rotary-hammer-rh-1-5_ce",
+        "name": "CE Certificate",
+        "url": "/files/rotary-hammer-rh-1-5-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "rotary-hammer-rh-1-5_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/rotary-hammer-rh-1-5-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "belt-sander-bs-4x24": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "17",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "belt-sander-bs-4x24_manual",
+        "name": "Installation Manual",
+        "url": "/files/belt-sander-bs-4x24-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "belt-sander-bs-4x24_operation",
+        "name": "Operation Manual",
+        "url": "/files/belt-sander-bs-4x24-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "belt-sander-bs-4x24_ce",
+        "name": "CE Certificate",
+        "url": "/files/belt-sander-bs-4x24-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "belt-sander-bs-4x24_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/belt-sander-bs-4x24-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "orbital-sander-os-5": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "19",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "orbital-sander-os-5_manual",
+        "name": "Installation Manual",
+        "url": "/files/orbital-sander-os-5-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "orbital-sander-os-5_operation",
+        "name": "Operation Manual",
+        "url": "/files/orbital-sander-os-5-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "orbital-sander-os-5_ce",
+        "name": "CE Certificate",
+        "url": "/files/orbital-sander-os-5-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "orbital-sander-os-5_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/orbital-sander-os-5-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "router-rt-2-25hp": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "21",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "1.4",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "router-rt-2-25hp_manual",
+        "name": "Installation Manual",
+        "url": "/files/router-rt-2-25hp-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "router-rt-2-25hp_operation",
+        "name": "Operation Manual",
+        "url": "/files/router-rt-2-25hp-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "router-rt-2-25hp_ce",
+        "name": "CE Certificate",
+        "url": "/files/router-rt-2-25hp-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "router-rt-2-25hp_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/router-rt-2-25hp-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "jigsaw-js-6-5a": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "23",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "1.5",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "jigsaw-js-6-5a_manual",
+        "name": "Installation Manual",
+        "url": "/files/jigsaw-js-6-5a-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "jigsaw-js-6-5a_operation",
+        "name": "Operation Manual",
+        "url": "/files/jigsaw-js-6-5a-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "jigsaw-js-6-5a_ce",
+        "name": "CE Certificate",
+        "url": "/files/jigsaw-js-6-5a-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "jigsaw-js-6-5a_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/jigsaw-js-6-5a-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "planer-pl-6": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "25",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "1.6",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "planer-pl-6_manual",
+        "name": "Installation Manual",
+        "url": "/files/planer-pl-6-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "planer-pl-6_operation",
+        "name": "Operation Manual",
+        "url": "/files/planer-pl-6-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "planer-pl-6_ce",
+        "name": "CE Certificate",
+        "url": "/files/planer-pl-6-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "planer-pl-6_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/planer-pl-6-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "multimeter-mm-600v": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "27",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "1.8",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "multimeter-mm-600v_manual",
+        "name": "Installation Manual",
+        "url": "/files/multimeter-mm-600v-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "multimeter-mm-600v_operation",
+        "name": "Operation Manual",
+        "url": "/files/multimeter-mm-600v-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "multimeter-mm-600v_ce",
+        "name": "CE Certificate",
+        "url": "/files/multimeter-mm-600v-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "multimeter-mm-600v_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/multimeter-mm-600v-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "torque-wrench-tw-250": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "29",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "1.9",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "torque-wrench-tw-250_manual",
+        "name": "Installation Manual",
+        "url": "/files/torque-wrench-tw-250-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "torque-wrench-tw-250_operation",
+        "name": "Operation Manual",
+        "url": "/files/torque-wrench-tw-250-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "torque-wrench-tw-250_ce",
+        "name": "CE Certificate",
+        "url": "/files/torque-wrench-tw-250-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "torque-wrench-tw-250_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/torque-wrench-tw-250-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "pipe-wrench-pw-24": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "31",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "2.0",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "pipe-wrench-pw-24_manual",
+        "name": "Installation Manual",
+        "url": "/files/pipe-wrench-pw-24-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pipe-wrench-pw-24_operation",
+        "name": "Operation Manual",
+        "url": "/files/pipe-wrench-pw-24-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "pipe-wrench-pw-24_ce",
+        "name": "CE Certificate",
+        "url": "/files/pipe-wrench-pw-24-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "pipe-wrench-pw-24_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/pipe-wrench-pw-24-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "tool-chest-tc-26": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "33",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "performance": {
+          "rating": {
+            "value": "Professional Grade",
+            "description": "Tool rating"
+          },
+          "duty_cycle": {
+            "value": "Heavy Duty",
+            "description": "Usage rating"
+          }
+        },
+        "electrical": {
+          "voltage": {
+            "value": "120",
+            "unit": "VAC",
+            "display_name": "Input Voltage"
+          },
+          "power": {
+            "value": "2.1",
+            "unit": "HP",
+            "display_name": "Power"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "tool-chest-tc-26_manual",
+        "name": "Installation Manual",
+        "url": "/files/tool-chest-tc-26-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "tool-chest-tc-26_operation",
+        "name": "Operation Manual",
+        "url": "/files/tool-chest-tc-26-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "tool-chest-tc-26_ce",
+        "name": "CE Certificate",
+        "url": "/files/tool-chest-tc-26-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "tool-chest-tc-26_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/tool-chest-tc-26-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "hard-hat-safety-helmet": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "hard-hat-safety-helmet_manual",
+        "name": "Installation Manual",
+        "url": "/files/hard-hat-safety-helmet-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hard-hat-safety-helmet_operation",
+        "name": "Operation Manual",
+        "url": "/files/hard-hat-safety-helmet-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "hard-hat-safety-helmet_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/hard-hat-safety-helmet-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hard-hat-safety-helmet_ce",
+        "name": "CE Certificate",
+        "url": "/files/hard-hat-safety-helmet-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "hard-hat-safety-helmet_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/hard-hat-safety-helmet-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "safety-glasses-clear-lens": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "1.5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "safety-glasses-clear-lens_manual",
+        "name": "Installation Manual",
+        "url": "/files/safety-glasses-clear-lens-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-glasses-clear-lens_operation",
+        "name": "Operation Manual",
+        "url": "/files/safety-glasses-clear-lens-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "safety-glasses-clear-lens_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/safety-glasses-clear-lens-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-glasses-clear-lens_ce",
+        "name": "CE Certificate",
+        "url": "/files/safety-glasses-clear-lens-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-glasses-clear-lens_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/safety-glasses-clear-lens-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "work-gloves-cut-resistant": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "2",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "work-gloves-cut-resistant_manual",
+        "name": "Installation Manual",
+        "url": "/files/work-gloves-cut-resistant-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "work-gloves-cut-resistant_operation",
+        "name": "Operation Manual",
+        "url": "/files/work-gloves-cut-resistant-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "work-gloves-cut-resistant_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/work-gloves-cut-resistant-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "work-gloves-cut-resistant_ce",
+        "name": "CE Certificate",
+        "url": "/files/work-gloves-cut-resistant-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "work-gloves-cut-resistant_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/work-gloves-cut-resistant-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "safety-boots-steel-toe": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "2.5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "safety-boots-steel-toe_manual",
+        "name": "Installation Manual",
+        "url": "/files/safety-boots-steel-toe-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-boots-steel-toe_operation",
+        "name": "Operation Manual",
+        "url": "/files/safety-boots-steel-toe-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "safety-boots-steel-toe_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/safety-boots-steel-toe-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-boots-steel-toe_ce",
+        "name": "CE Certificate",
+        "url": "/files/safety-boots-steel-toe-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-boots-steel-toe_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/safety-boots-steel-toe-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "high-vis-safety-vest": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "3",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "high-vis-safety-vest_manual",
+        "name": "Installation Manual",
+        "url": "/files/high-vis-safety-vest-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "high-vis-safety-vest_operation",
+        "name": "Operation Manual",
+        "url": "/files/high-vis-safety-vest-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "high-vis-safety-vest_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/high-vis-safety-vest-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "high-vis-safety-vest_ce",
+        "name": "CE Certificate",
+        "url": "/files/high-vis-safety-vest-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "high-vis-safety-vest_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/high-vis-safety-vest-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "respirator-half-face": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "3.5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "respirator-half-face_manual",
+        "name": "Installation Manual",
+        "url": "/files/respirator-half-face-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "respirator-half-face_operation",
+        "name": "Operation Manual",
+        "url": "/files/respirator-half-face-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "respirator-half-face_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/respirator-half-face-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "respirator-half-face_ce",
+        "name": "CE Certificate",
+        "url": "/files/respirator-half-face-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "respirator-half-face_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/respirator-half-face-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "fall-protection-harness": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "4",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "fall-protection-harness_manual",
+        "name": "Installation Manual",
+        "url": "/files/fall-protection-harness-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "fall-protection-harness_operation",
+        "name": "Operation Manual",
+        "url": "/files/fall-protection-harness-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "fall-protection-harness_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/fall-protection-harness-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "fall-protection-harness_ce",
+        "name": "CE Certificate",
+        "url": "/files/fall-protection-harness-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "fall-protection-harness_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/fall-protection-harness-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "safety-barrier-system": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "4.5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "safety-barrier-system_manual",
+        "name": "Installation Manual",
+        "url": "/files/safety-barrier-system-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-barrier-system_operation",
+        "name": "Operation Manual",
+        "url": "/files/safety-barrier-system-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "safety-barrier-system_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/safety-barrier-system-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-barrier-system_ce",
+        "name": "CE Certificate",
+        "url": "/files/safety-barrier-system-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "safety-barrier-system_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/safety-barrier-system-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "emergency-eye-wash-station": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "emergency-eye-wash-station_manual",
+        "name": "Installation Manual",
+        "url": "/files/emergency-eye-wash-station-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "emergency-eye-wash-station_operation",
+        "name": "Operation Manual",
+        "url": "/files/emergency-eye-wash-station-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "emergency-eye-wash-station_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/emergency-eye-wash-station-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "emergency-eye-wash-station_ce",
+        "name": "CE Certificate",
+        "url": "/files/emergency-eye-wash-station-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "emergency-eye-wash-station_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/emergency-eye-wash-station-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  },
+  "first-aid-kit-industrial": {
+    "specifications": {
+      "specifications": {
+        "dimensions": {
+          "weight": {
+            "value": "5.5",
+            "unit": "lbs",
+            "display_name": "Weight"
+          }
+        },
+        "safety": {
+          "compliance": {
+            "value": "OSHA/ANSI",
+            "description": "Safety compliance standards"
+          },
+          "rating": {
+            "value": "Industrial Grade",
+            "description": "Safety rating"
+          }
+        }
+      },
+      "categories": {
+        "dimensions": {
+          "name": "Dimensions & Weight",
+          "order": 1,
+          "collapsible": true
+        },
+        "performance": {
+          "name": "Performance Specifications",
+          "order": 2,
+          "collapsible": true
+        },
+        "electrical": {
+          "name": "Electrical Requirements",
+          "order": 3,
+          "collapsible": true
+        },
+        "safety": {
+          "name": "Safety & Compliance",
+          "order": 4,
+          "collapsible": true
+        }
+      }
+    },
+    "attachments": [
+      {
+        "id": "first-aid-kit-industrial_manual",
+        "name": "Installation Manual",
+        "url": "/files/first-aid-kit-industrial-manual.pdf",
+        "type": "pdf",
+        "size": "2.4 MB",
+        "category": "manuals",
+        "description": "Complete installation and setup guide",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "first-aid-kit-industrial_operation",
+        "name": "Operation Manual",
+        "url": "/files/first-aid-kit-industrial-operation.pdf",
+        "type": "pdf",
+        "size": "3.1 MB",
+        "category": "manuals",
+        "description": "Operating procedures and maintenance",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      },
+      {
+        "id": "first-aid-kit-industrial_sds",
+        "name": "Safety Data Sheet",
+        "url": "/files/first-aid-kit-industrial-sds.pdf",
+        "type": "pdf",
+        "size": "0.8 MB",
+        "category": "safety",
+        "description": "Material safety data sheet",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "first-aid-kit-industrial_ce",
+        "name": "CE Certificate",
+        "url": "/files/first-aid-kit-industrial-ce.pdf",
+        "type": "pdf",
+        "size": "0.6 MB",
+        "category": "certificates",
+        "description": "European Conformity certification",
+        "access_level": "public",
+        "featured": true,
+        "order": 1
+      },
+      {
+        "id": "first-aid-kit-industrial_iso",
+        "name": "ISO 9001 Certificate",
+        "url": "/files/first-aid-kit-industrial-iso.pdf",
+        "type": "pdf",
+        "size": "1.0 MB",
+        "category": "certificates",
+        "description": "Quality management certification",
+        "access_level": "public",
+        "featured": false,
+        "order": 2
+      }
+    ]
+  }
+}

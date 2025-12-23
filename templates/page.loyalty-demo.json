@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "loyalty_program_demo": {
+      "type": "loyalty-program-demo",
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Starter",
+            "tier_icon": "🥉",
+            "tier_requirement": "$0 - $499",
+            "tier_class": "tier--bronze",
+            "discount_percentage": "2",
+            "benefits": "2% discount on orders|Standard shipping rates|Email support"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Professional",
+            "tier_icon": "🥈",
+            "tier_requirement": "$500 - $1,999",
+            "tier_class": "tier--silver",
+            "discount_percentage": "5",
+            "benefits": "5% discount on all orders|Free shipping on orders $500+|Priority email support|Product catalogs"
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Elite",
+            "tier_icon": "🥇",
+            "tier_requirement": "$2,000 - $4,999",
+            "tier_class": "tier--gold",
+            "discount_percentage": "8",
+            "benefits": "8% discount on all orders|Free shipping on all orders|Phone support|Early access to new products|Quarterly business reviews"
+          }
+        },
+        "tier_4": {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Enterprise",
+            "tier_icon": "💎",
+            "tier_requirement": "$5,000+",
+            "tier_class": "tier--platinum",
+            "discount_percentage": "12",
+            "benefits": "12% discount on all orders|Free expedited shipping|Dedicated account manager|Custom pricing|Volume discounts|Training sessions"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2", 
+        "tier_3",
+        "tier_4"
+      ],
+      "settings": {
+        "eyebrow_text": "Built-In Feature",
+        "heading": "Professional Rewards Program",
+        "subheading": "Tier-based loyalty system with progress tracking - no monthly app fees required.",
+        "app_value": "50-200",
+        "progress_title": "Your Progress",
+        "demo_current_tier": "Professional",
+        "demo_progress": 65,
+        "demo_current_spent": "1,300",
+        "demo_target_spent": "2,000",
+        "demo_remaining": "700",
+        "demo_next_tier": "Elite",
+        "features_title": "Advanced Features"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "loyalty_program_demo"
+  ]
+}

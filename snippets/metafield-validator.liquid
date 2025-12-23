@@ -1,0 +1,172 @@
+{%- comment -%}
+  Metafield Data Validator
+  Validates specification and attachment metafield data structure
+  
+  Usage:
+  {% render 'metafield-validator', product: product, debug: true %}
+  
+  Parameters:
+  - product: Product object to validate
+  - debug: Boolean to show debug output (default: false)
+  
+  Returns validation status and error messages
+{%- endcomment -%}
+
+{%- liquid
+  assign debug_mode = debug | default: false
+  assign validation_errors = ''
+  assign is_valid = true
+
+  # Validate specifications metafield
+  assign raw_specs = product.metafields.specifications.technical
+  if raw_specs != blank
+    assign spec_data = raw_specs | parse_json
+    
+    # Check required structure
+    unless spec_data.specifications
+      assign validation_errors = validation_errors | append: 'Missing specifications object; '
+      assign is_valid = false
+    endunless
+    
+    # Validate categories if present
+    if spec_data.categories
+      for category in spec_data.categories
+        assign cat_key = category[0]
+        assign cat_data = category[1]
+        
+        unless cat_data.name
+          assign validation_errors = validation_errors | append: 'Category ' | append: cat_key | append: ' missing name; '
+          assign is_valid = false
+        endunless
+        
+        unless cat_data.order
+          assign validation_errors = validation_errors | append: 'Category ' | append: cat_key | append: ' missing order; '
+          assign is_valid = false
+        endunless
+      endfor
+    endif
+    
+    # Validate specifications
+    if spec_data.specifications
+      for category in spec_data.specifications
+        assign cat_key = category[0]
+        assign cat_specs = category[1]
+        
+        for specification in cat_specs
+          assign spec_key = specification[0]
+          assign spec_data_item = specification[1]
+          
+          unless spec_data_item.value
+            assign validation_errors = validation_errors | append: 'Specification ' | append: cat_key | append: '.' | append: spec_key | append: ' missing value; '
+            assign is_valid = false
+          endunless
+        endfor
+      endfor
+    endif
+  endif
+
+  # Validate attachments metafield
+  assign raw_attachments = product.metafields.attachments.files
+  if raw_attachments != blank
+    assign attachment_data = raw_attachments | parse_json
+    
+    # Check if files is array
+    unless attachment_data.files
+      assign validation_errors = validation_errors | append: 'Missing files array; '
+      assign is_valid = false
+    else
+      # Validate each file
+      for file in attachment_data.files
+        unless file.id
+          assign validation_errors = validation_errors | append: 'File missing id; '
+          assign is_valid = false
+        endunless
+        
+        unless file.name
+          assign validation_errors = validation_errors | append: 'File ' | append: file.id | append: ' missing name; '
+          assign is_valid = false
+        endunless
+        
+        unless file.url
+          assign validation_errors = validation_errors | append: 'File ' | append: file.id | append: ' missing url; '
+          assign is_valid = false
+        endunless
+        
+        unless file.type
+          assign validation_errors = validation_errors | append: 'File ' | append: file.id | append: ' missing type; '
+          assign is_valid = false
+        endunless
+        
+        unless file.category
+          assign validation_errors = validation_errors | append: 'File ' | append: file.id | append: ' missing category; '
+          assign is_valid = false
+        endunless
+      endfor
+    endif
+    
+    # Validate categories
+    if attachment_data.categories
+      for category in attachment_data.categories
+        assign cat_key = category[0]
+        assign cat_data = category[1]
+        
+        unless cat_data.name
+          assign validation_errors = validation_errors | append: 'Attachment category ' | append: cat_key | append: ' missing name; '
+          assign is_valid = false
+        endunless
+        
+        unless cat_data.icon
+          assign validation_errors = validation_errors | append: 'Attachment category ' | append: cat_key | append: ' missing icon; '
+          assign is_valid = false
+        endunless
+        
+        unless cat_data.order
+          assign validation_errors = validation_errors | append: 'Attachment category ' | append: cat_key | append: ' missing order; '
+          assign is_valid = false
+        endunless
+      endfor
+    endif
+  endif
+-%}
+
+{%- if debug_mode -%}
+  <div class="metafield-validation-debug">
+    <h4>Metafield Validation Results</h4>
+    <p><strong>Status:</strong> 
+      {%- if is_valid -%}
+        <span style="color: green;">✓ Valid</span>
+      {%- else -%}
+        <span style="color: red;">✗ Invalid</span>
+      {%- endif -%}
+    </p>
+    
+    {%- if validation_errors != blank -%}
+      <p><strong>Errors:</strong></p>
+      <ul>
+        {%- assign error_list = validation_errors | split: '; ' -%}
+        {%- for error in error_list -%}
+          {%- if error != blank -%}
+            <li style="color: red;">{{ error }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    
+    <details>
+      <summary>Raw Metafield Data</summary>
+      <pre style="background: #f5f5f5; padding: 1rem; overflow: auto;">
+<strong>Specifications:</strong>
+{{ product.metafields.specifications.technical | escape }}
+
+<strong>Attachments:</strong>
+{{ product.metafields.attachments.files | escape }}
+      </pre>
+    </details>
+  </div>
+{%- endif -%}
+
+{%- comment -%}
+  Variables available after this snippet:
+  - is_valid: Boolean indicating if metafield data is valid
+  - validation_errors: String containing error messages
+{%- endcomment -%}

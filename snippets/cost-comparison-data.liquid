@@ -1,0 +1,247 @@
+{% comment %}
+  Cost Comparison Data Parser
+  
+  Parses cost comparison data and provides structured access
+  to app ecosystem costs and feature parity information.
+{% endcomment %}
+
+{%- liquid
+  # Load cost comparison data from settings or use defaults
+  assign cost_data = shop.metafields.cost_comparison.data.value
+  
+  # Default app categories with costs and features
+  unless cost_data
+    assign loyalty_features = 'Tier-based rewards system,Points for purchases,Progress tracking dashboard,Email integration,Referral programs' | split: ','
+    assign seo_features = 'Structured data markup,Rich snippets,Meta tag optimization,Image SEO,Speed optimization' | split: ','
+    assign menu_features = 'Multi-column layouts,Featured content blocks,Mobile responsive design,Image integration,Custom styling' | split: ','
+    assign faq_features = 'Searchable FAQ database,Category organization,Analytics tracking,Custom styling,Mobile optimization' | split: ','
+    assign attachment_features = 'File upload management,Category organization,Access control,Download tracking,Multiple file types' | split: ','
+    assign pwa_features = 'Installable app experience,Offline support,Push notifications,App icons,Service worker' | split: ','
+    
+    assign default_apps = 'loyalty:125:Smile.io|LoyaltyLion|Yotpo:' | append: loyalty_features | join: '|'
+    assign default_apps = default_apps | append: '||seo:35:TinyIMG|SearchPie|Booster:' | append: seo_features | join: '|'
+    assign default_apps = default_apps | append: '||mega_menu:22:HulkApps Menu|Globo Mega Menu|Smart Menu:' | append: menu_features | join: '|'
+    assign default_apps = default_apps | append: '||faq:17:HelpCenter|FAQ Page|Helpdesk:' | append: faq_features | join: '|'
+    assign default_apps = default_apps | append: '||attachments:27:Attachments|Digital Downloads|File Manager:' | append: attachment_features | join: '|'
+    assign default_apps = default_apps | append: '||pwa:40:TinyIMG|PWA Builder|App Maker:' | append: pwa_features | join: '|'
+    
+    assign cost_data = default_apps
+  endunless
+-%}
+
+{%- comment -%} Parse app categories {%- endcomment -%}
+{%- assign app_categories = cost_data | split: '||' -%}
+{%- assign parsed_categories = '' -%}
+
+{%- for category in app_categories -%}
+  {%- assign category_parts = category | split: ':' -%}
+  {%- if category_parts.size >= 4 -%}
+    {%- assign category_name = category_parts[0] -%}
+    {%- assign category_cost = category_parts[1] -%}
+    {%- assign popular_apps = category_parts[2] | split: '|' -%}
+    {%- assign features = category_parts[3] | split: '|' -%}
+    
+    {%- capture category_json -%}
+    {
+      "name": "{{ category_name | capitalize | replace: '_', ' ' }}",
+      "monthly_cost": {{ category_cost }},
+      "popular_apps": [{% for app in popular_apps %}"{{ app }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+      "features": [{% for feature in features %}"{{ feature }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+    }
+    {%- endcapture -%}
+    
+    {%- if parsed_categories != '' -%}
+      {%- assign parsed_categories = parsed_categories | append: ',' -%}
+    {%- endif -%}
+    {%- assign parsed_categories = parsed_categories | append: category_json -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} Theme comparison data {%- endcomment -%}
+{%- assign comparison_themes = shop.metafields.cost_comparison.themes.value | default: 'Popular Theme A:180:266|Popular Theme B:250:198|Forge Industrial:320:0:highlight|Popular Theme C:300:234' -%}
+{%- assign theme_comparisons = comparison_themes | split: '|' -%}
+{%- assign parsed_themes = '' -%}
+
+{%- for theme in theme_comparisons -%}
+  {%- assign theme_parts = theme | split: ':' -%}
+  {%- if theme_parts.size >= 3 -%}
+    {%- assign theme_name = theme_parts[0] -%}
+    {%- assign theme_price = theme_parts[1] -%}
+    {%- assign monthly_apps = theme_parts[2] -%}
+    {%- assign highlight = theme_parts[3] | default: '' -%}
+    {%- assign year_one_total = theme_price | plus: monthly_apps | times: 12 -%}
+    {%- assign three_year_total = theme_price | plus: monthly_apps | times: 36 -%}
+    
+    {%- capture theme_json -%}
+    {
+      "name": "{{ theme_name }}",
+      "price": {{ theme_price }},
+      "monthly_apps": {{ monthly_apps }},
+      "year_one_total": {{ year_one_total }},
+      "three_year_total": {{ three_year_total }},
+      "highlight": {% if highlight == 'highlight' %}true{% else %}false{% endif %}
+    }
+    {%- endcapture -%}
+    
+    {%- if parsed_themes != '' -%}
+      {%- assign parsed_themes = parsed_themes | append: ',' -%}
+    {%- endif -%}
+    {%- assign parsed_themes = parsed_themes | append: theme_json -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} Feature parity matrix {%- endcomment -%}
+{%- assign feature_matrix = 'loyalty_program:true:false:false:false:125|advanced_seo:true:false:true:false:35|mega_menu:true:false:true:true:22|advanced_faq:true:false:false:true:17|product_attachments:true:false:false:false:27|pwa_support:true:false:false:false:40' -%}
+{%- assign matrix_rows = feature_matrix | split: '|' -%}
+{%- assign parsed_matrix = '' -%}
+
+{%- for row in matrix_rows -%}
+  {%- assign row_parts = row | split: ':' -%}
+  {%- if row_parts.size >= 6 -%}
+    {%- assign feature_name = row_parts[0] -%}
+    {%- assign forge_support = row_parts[1] -%}
+    {%- assign theme_a_support = row_parts[2] -%}
+    {%- assign theme_b_support = row_parts[3] -%}
+    {%- assign theme_c_support = row_parts[4] -%}
+    {%- assign app_cost = row_parts[5] -%}
+    
+    {%- capture matrix_json -%}
+    {
+      "feature": "{{ feature_name | replace: '_', ' ' | capitalize }}",
+      "forge_industrial": {{ forge_support }},
+      "popular_theme_a": {{ theme_a_support }},
+      "popular_theme_b": {{ theme_b_support }},
+      "popular_theme_c": {{ theme_c_support }},
+      "typical_app_cost": {{ app_cost }}
+    }
+    {%- endcapture -%}
+    
+    {%- if parsed_matrix != '' -%}
+      {%- assign parsed_matrix = parsed_matrix | append: ',' -%}
+    {%- endif -%}
+    {%- assign parsed_matrix = parsed_matrix | append: matrix_json -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} Output structured data for JavaScript consumption {%- endcomment -%}
+<script type="application/json" id="cost-comparison-data">
+{
+  "app_categories": [{{ parsed_categories }}],
+  "theme_comparisons": [{{ parsed_themes }}],
+  "feature_matrix": [{{ parsed_matrix }}],
+  "theme_price": {{ section.settings.theme_price | default: 320 }},
+  "total_monthly_savings": {% assign total_savings = 0 %}{% for category in app_categories %}{% assign category_parts = category | split: ':' %}{% if category_parts.size >= 2 %}{% assign total_savings = total_savings | plus: category_parts[1] %}{% endif %}{% endfor %}{{ total_savings }},
+  "annual_savings": {{ total_savings | times: 12 | minus: section.settings.theme_price | default: 320 }},
+  "three_year_savings": {{ total_savings | times: 36 | minus: section.settings.theme_price | default: 320 }}
+}
+</script>
+
+{%- comment -%} CSS for enhanced comparison displays {%- endcomment -%}
+<style>
+  .app-ecosystem-comparison {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .app-ecosystem-comparison__title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .app-category {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 24px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    align-items: start;
+  }
+  
+  .app-category__info h3 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+    color: var(--color-text);
+  }
+  
+  .app-category__cost {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary, #d71920);
+    text-align: center;
+  }
+  
+  .app-category__cost-label {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+    margin-top: 4px;
+  }
+  
+  .app-category__apps {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+  .app-category__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .app-category__features li {
+    padding: 4px 0;
+    font-size: 0.875rem;
+    color: #666;
+    position: relative;
+    padding-left: 16px;
+  }
+  
+  .app-category__features li::before {
+    content: "•";
+    color: var(--color-primary, #d71920);
+    position: absolute;
+    left: 0;
+  }
+  
+  .app-category__equivalent {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 4px;
+    border-left: 4px solid var(--color-primary, #d71920);
+  }
+  
+  .app-category__equivalent-title {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 8px;
+    color: var(--color-primary, #d71920);
+  }
+  
+  .app-category__equivalent-desc {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .app-category {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .app-category__cost {
+      text-align: left;
+    }
+    
+    .app-category__cost-label {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+{%- comment -%}
+  Product Specifications Table Renderer
+  Renders a table of specifications with support for units, ranges, tolerances, and rich text
+  
+  Usage: {% render 'product-specs-table', specifications: category_specs %}
+  
+  Parameters:
+  - specifications: Object containing specification data for a category
+{%- endcomment -%}
+
+{%- if specifications != blank -%}
+  <div class="product-specs__table-container">
+    <table class="product-specs__table">
+      <tbody>
+        {%- for spec_data in specifications -%}
+          {%- assign spec_key = spec_data[0] -%}
+          {%- assign spec_info = spec_data[1] -%}
+          
+          {%- if spec_info.value != blank -%}
+            <tr class="product-specs__row">
+              <th class="product-specs__label">
+                {{ spec_info.display_name | default: spec_key | replace: '_', ' ' | capitalize }}
+              </th>
+              <td class="product-specs__value">
+                <div class="product-specs__value-content">
+                  {%- comment -%} Handle range values {%- endcomment -%}
+                  {%- if spec_info.min != blank and spec_info.max != blank -%}
+                    <span class="product-specs__range">
+                      {{ spec_info.min }} - {{ spec_info.max }}
+                      {%- if spec_info.unit != blank -%}
+                        <span class="product-specs__unit">{{ spec_info.unit }}</span>
+                      {%- endif -%}
+                    </span>
+                  {%- elsif spec_info.range != blank -%}
+                    <span class="product-specs__range">
+                      {{ spec_info.range }}
+                      {%- if spec_info.unit != blank -%}
+                        <span class="product-specs__unit">{{ spec_info.unit }}</span>
+                      {%- endif -%}
+                    </span>
+                  {%- else -%}
+                    {%- comment -%} Regular value {%- endcomment -%}
+                    <span class="product-specs__main-value">
+                      {{ spec_info.value }}
+                      {%- if spec_info.unit != blank -%}
+                        <span class="product-specs__unit">{{ spec_info.unit }}</span>
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                  
+                  {%- comment -%} Add tolerance if present {%- endcomment -%}
+                  {%- if spec_info.tolerance != blank -%}
+                    <span class="product-specs__tolerance">{{ spec_info.tolerance }}</span>
+                  {%- endif -%}
+                  
+                  {%- comment -%} Add description if present {%- endcomment -%}
+                  {%- if spec_info.description != blank -%}
+                    <div class="product-specs__description">
+                      {{ spec_info.description }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </td>
+            </tr>
+          {%- endif -%}
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+{%- endif -%}

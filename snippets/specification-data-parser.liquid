@@ -1,0 +1,148 @@
+{%- comment -%}
+  Specification Data Parser
+  Parses and validates specification metafield data
+  
+  Usage: 
+  {% render 'specification-data-parser', product: product %}
+  
+  Returns:
+  - spec_data: Parsed specification data object
+  - spec_categories: Sorted array of categories
+  - has_specifications: Boolean indicating if valid specs exist
+  - attachment_data: Parsed attachment data object  
+  - attachment_categories: Sorted array of attachment categories
+  - has_attachments: Boolean indicating if valid attachments exist
+{%- endcomment -%}
+
+{%- liquid
+  # Initialize variables
+  assign spec_data = null
+  assign spec_categories = null
+  assign has_specifications = false
+  assign attachment_data = null
+  assign attachment_categories = null
+  assign has_attachments = false
+  assign parse_error = false
+  assign parse_error_message = ''
+
+  # Parse specifications metafield with error handling
+  assign raw_specs = product.metafields.specifications.technical.value
+  if raw_specs != blank
+    # Validate that we have a proper object structure
+    if raw_specs.specifications != blank
+      assign spec_data = raw_specs
+      assign has_specifications = true
+      
+      # Sort categories by order with error handling
+      assign unsorted_categories = spec_data.categories | default: empty
+      if unsorted_categories != blank
+        assign spec_categories = unsorted_categories | sort: 'order'
+      else
+        # Create default category structure if missing
+        assign spec_categories = blank
+      endif
+    else
+      assign parse_error = true
+      assign parse_error_message = 'Invalid specification data structure'
+    endif
+  endif
+
+  # Parse attachments metafield with error handling
+  assign raw_attachments = product.metafields.attachments.files.value
+  if raw_attachments != blank
+    # Validate attachment data structure
+    if raw_attachments.files != blank and raw_attachments.files.size > 0
+      assign attachment_data = raw_attachments
+      assign has_attachments = true
+      
+      # Sort categories by order with error handling
+      assign unsorted_att_categories = attachment_data.categories | default: empty
+      if unsorted_att_categories != blank
+        assign attachment_categories = unsorted_att_categories | sort: 'order'
+      else
+        # Create default category structure if missing
+        assign attachment_categories = blank
+      endif
+      
+      # Validate each file has required fields
+      assign valid_files = blank | split: ','
+      for file in attachment_data.files
+        if file.url != blank and file.name != blank and file.type != blank
+          assign valid_files = valid_files | concat: file
+        endif
+      endfor
+      
+      # Update attachment data with only valid files
+      if valid_files.size == 0
+        assign has_attachments = false
+        assign parse_error = true
+        assign parse_error_message = 'No valid attachment files found'
+      endif
+    else
+      assign parse_error = true
+      assign parse_error_message = 'Invalid attachment data structure'
+    endif
+  endif
+
+  # Fallback to legacy metafields if new structure not found
+  unless has_specifications
+    # Check for legacy specs namespace
+    assign legacy_specs = product.metafields.specs
+    if legacy_specs != blank
+      # Create basic structure for legacy specs
+      assign spec_data = blank
+      assign spec_data_specs = blank
+      assign spec_data_categories = blank
+      
+      # Build legacy structure
+      assign has_legacy_specs = false
+      for metafield in legacy_specs
+        if metafield[1] != blank
+          assign has_legacy_specs = true
+          break
+        endif
+      endfor
+      
+      if has_legacy_specs
+        assign has_specifications = true
+        # Create a simple category structure for legacy specs
+        assign spec_categories = blank
+      endif
+    endif
+  endunless
+
+  # Fallback to legacy attachments if new structure not found
+  unless has_attachments
+    # Check for legacy attachment metafields
+    assign legacy_attachments = product.metafields.attachments
+    if legacy_attachments != blank
+      assign has_legacy_attachments = false
+      
+      # Check if we have any attachment metafields
+      for attachment in legacy_attachments
+        if attachment[1] != blank and attachment[1].url != blank
+          assign has_legacy_attachments = true
+          break
+        endif
+      endfor
+      
+      if has_legacy_attachments
+        assign has_attachments = true
+        # Create basic category structure for legacy attachments
+        assign attachment_categories = blank
+      endif
+    endif
+  endunless
+-%}
+
+{%- comment -%}
+  Variables available after this snippet:
+  - spec_data: Parsed specification data
+  - spec_categories: Sorted categories array
+  - has_specifications: Boolean
+  - attachment_data: Parsed attachment data
+  - attachment_categories: Sorted categories array  
+  - has_attachments: Boolean
+  - parse_error: Boolean indicating if parsing failed
+  - parse_error_message: Error message if parsing failed
+{%- endcomment -%}

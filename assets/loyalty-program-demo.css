@@ -1,0 +1,388 @@
+/*
+  Loyalty Program Demo Styles
+  Demonstrates tier-based rewards system with progress tracking
+*/
+
+.loyalty-program-demo {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.loyalty-program-demo .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Section Header */
+.loyalty-program-demo .section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.loyalty-program-demo .section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #0066cc;
+  background: rgba(0, 102, 204, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.loyalty-program-demo .section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.loyalty-program-demo .section-subtitle {
+  font-size: 1.125rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.loyalty-program-demo .value-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #28a745;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+}
+
+.loyalty-program-demo .value-amount {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.loyalty-program-demo .value-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* Loyalty Tiers */
+.loyalty-program-demo .loyalty-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.loyalty-program-demo .loyalty-tier {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.loyalty-program-demo .loyalty-tier:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.loyalty-program-demo .loyalty-tier::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--tier-color, #6c757d);
+}
+
+/* Tier Colors */
+.loyalty-program-demo .tier--bronze::before {
+  background: #cd7f32;
+}
+
+.loyalty-program-demo .tier--silver::before {
+  background: #c0c0c0;
+}
+
+.loyalty-program-demo .tier--gold::before {
+  background: #ffd700;
+}
+
+.loyalty-program-demo .tier--platinum::before {
+  background: #e5e4e2;
+}
+
+.loyalty-program-demo .tier-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.loyalty-program-demo .tier-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.loyalty-program-demo .tier-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.loyalty-program-demo .tier-requirement {
+  font-size: 0.875rem;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.loyalty-program-demo .tier-benefits {
+  margin-bottom: 1.5rem;
+}
+
+.loyalty-program-demo .benefits-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.loyalty-program-demo .benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.loyalty-program-demo .benefits-list li {
+  padding: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #495057;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.loyalty-program-demo .benefits-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: 700;
+}
+
+.loyalty-program-demo .tier-discount {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(0, 102, 204, 0.05);
+  border-radius: 8px;
+}
+
+.loyalty-program-demo .discount-amount {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0066cc;
+}
+
+.loyalty-program-demo .discount-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Progress Demo */
+.loyalty-program-demo .progress-demo {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.loyalty-program-demo .progress-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.loyalty-program-demo .progress-card {
+  text-align: center;
+}
+
+.loyalty-program-demo .current-tier {
+  margin-bottom: 1.5rem;
+}
+
+.loyalty-program-demo .current-tier-label {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-right: 0.5rem;
+}
+
+.loyalty-program-demo .current-tier-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0066cc;
+}
+
+.loyalty-program-demo .progress-bar-container {
+  margin-bottom: 1rem;
+}
+
+.loyalty-program-demo .progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.loyalty-program-demo .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0066cc 0%, #3385d6 100%);
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+.loyalty-program-demo .progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.loyalty-program-demo .next-tier-info {
+  padding: 1rem;
+  background: rgba(0, 102, 204, 0.05);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.loyalty-program-demo .next-tier-text {
+  font-size: 0.9375rem;
+  color: #495057;
+  margin: 0;
+}
+
+/* Features Showcase */
+.loyalty-program-demo .loyalty-features {
+  margin-bottom: 3rem;
+}
+
+.loyalty-program-demo .features-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.loyalty-program-demo .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.loyalty-program-demo .feature-item {
+  text-align: center;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.loyalty-program-demo .feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loyalty-program-demo .feature-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.loyalty-program-demo .feature-description {
+  font-size: 0.875rem;
+  color: #6c757d;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Implementation Note */
+.loyalty-program-demo .implementation-note {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.loyalty-program-demo .note-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.loyalty-program-demo .note-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #856404;
+  margin-bottom: 0.5rem;
+}
+
+.loyalty-program-demo .note-text {
+  font-size: 0.9375rem;
+  color: #856404;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .loyalty-program-demo {
+    padding: 3rem 0;
+  }
+  
+  .loyalty-program-demo .loyalty-tiers {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .loyalty-program-demo .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .loyalty-program-demo .progress-demo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loyalty-program-demo .loyalty-tier {
+    padding: 1.5rem;
+  }
+  
+  .loyalty-program-demo .progress-demo {
+    padding: 1.5rem;
+  }
+  
+  .loyalty-program-demo .value-indicator {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+}

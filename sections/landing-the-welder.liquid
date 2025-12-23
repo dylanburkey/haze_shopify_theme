@@ -1,0 +1,284 @@
+{%- comment -%}
+  The Welder Landing Page Section
+  Trades/fabrication theme with industrial strength and craftsmanship focus
+  Based on industrial B2B patterns with welding/fabrication industry focus
+{%- endcomment -%}
+
+{{ 'landing-the-welder.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-the-welder" data-section-id="{{ section.id }}">
+
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="welder-hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>{{ section.settings.hero_title | default: 'Professional Welding & Fabrication Solutions' }}</h1>
+          <p class="hero-subtitle">{{ section.settings.hero_subtitle | default: 'Built tough for the trades. Precision-engineered equipment and supplies for welders, fabricators, and metalworkers who demand excellence.' }}</p>
+          <div class="hero-cta">
+            {%- if section.settings.hero_button_text != blank -%}
+              <a href="{{ section.settings.hero_button_url | default: '/collections/all' }}" class="btn btn--primary btn--large">
+                {{ section.settings.hero_button_text }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.hero_button_secondary_text != blank -%}
+              <a href="{{ section.settings.hero_button_secondary_url | default: '/pages/about' }}" class="btn btn--outline btn--large">
+                {{ section.settings.hero_button_secondary_text }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="hero-visual">
+          {%- if section.settings.hero_image != blank -%}
+            <img src="{{ section.settings.hero_image | image_url: width: 600 }}" 
+                 alt="{{ section.settings.hero_image.alt | escape }}"
+                 width="600" height="400" loading="eager">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Features Section {%- endcomment -%}
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">{{ section.settings.features_eyebrow | default: 'Built for Professionals' }}</span>
+        <h2 class="section-title">{{ section.settings.features_title | default: 'Industrial-Grade Equipment' }}</h2>
+        <p class="section-subtitle">{{ section.settings.features_subtitle | default: 'Every tool and component is engineered to withstand the demands of professional welding and fabrication work.' }}</p>
+      </div>
+      
+      <div class="features-grid">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'feature' -%}
+              <div class="feature-card" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank -%}
+                  <div class="feature-icon">{{ block.settings.icon }}</div>
+                {%- endif -%}
+                <h3 class="feature-title">{{ block.settings.title | default: 'Feature Title' }}</h3>
+                <p class="feature-description">{{ block.settings.description | default: 'Feature description goes here.' }}</p>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Trust Indicators Section {%- endcomment -%}
+  <section class="trust-indicators">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <span class="trust-number">{{ section.settings.trust_stat_1_number | default: '25+' }}</span>
+          <span class="trust-label">{{ section.settings.trust_stat_1_label | default: 'Years Experience' }}</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-number">{{ section.settings.trust_stat_2_number | default: '10K+' }}</span>
+          <span class="trust-label">{{ section.settings.trust_stat_2_label | default: 'Projects Completed' }}</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-number">{{ section.settings.trust_stat_3_number | default: '99%' }}</span>
+          <span class="trust-label">{{ section.settings.trust_stat_3_label | default: 'Customer Satisfaction' }}</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-number">{{ section.settings.trust_stat_4_number | default: '24/7' }}</span>
+          <span class="trust-label">{{ section.settings.trust_stat_4_label | default: 'Support Available' }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Landing: The Welder",
+  "tag": "section",
+  "class": "section-landing-the-welder",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Professional Welding & Fabrication Solutions"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Built tough for the trades. Precision-engineered equipment and supplies for welders, fabricators, and metalworkers who demand excellence."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text",
+      "label": "Primary Button Text",
+      "default": "Shop Equipment"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_url",
+      "label": "Primary Button URL"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_secondary_text",
+      "label": "Secondary Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_secondary_url",
+      "label": "Secondary Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Features Section"
+    },
+    {
+      "type": "text",
+      "id": "features_eyebrow",
+      "label": "Features Eyebrow",
+      "default": "Built for Professionals"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Features Title",
+      "default": "Industrial-Grade Equipment"
+    },
+    {
+      "type": "textarea",
+      "id": "features_subtitle",
+      "label": "Features Subtitle",
+      "default": "Every tool and component is engineered to withstand the demands of professional welding and fabrication work."
+    },
+    {
+      "type": "header",
+      "content": "Trust Indicators"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_1_number",
+      "label": "Stat 1 Number",
+      "default": "25+"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "Years Experience"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_2_number",
+      "label": "Stat 2 Number",
+      "default": "10K+"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "Projects Completed"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_3_number",
+      "label": "Stat 3 Number",
+      "default": "99%"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Customer Satisfaction"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_4_number",
+      "label": "Stat 4 Number",
+      "default": "24/7"
+    },
+    {
+      "type": "text",
+      "id": "trust_stat_4_label",
+      "label": "Stat 4 Label",
+      "default": "Support Available"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "🔧"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "Professional Tools"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Feature Description",
+          "default": "Industrial-grade welding equipment built to last."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: The Welder",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🔧",
+            "title": "Professional Tools",
+            "description": "Industrial-grade welding equipment built to last."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "⚡",
+            "title": "High Performance",
+            "description": "Precision welding with consistent, reliable results."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🛡️",
+            "title": "Safety First",
+            "description": "Comprehensive safety equipment and protective gear."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🎯",
+            "title": "Precision Work",
+            "description": "Accurate measurements and perfect fabrication every time."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,8 @@
+{
+    "editor.allowVariableFontsInAccessibilityMode": true,
+    "editor.codeActionsOnSave": {
+        
+    },
+    "telemetry.editStats.details.enabled": true,
+    "application.experimental.rendererProfiling": true
+}

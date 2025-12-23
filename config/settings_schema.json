@@ -254,6 +254,189 @@
     ]
   },
   {
+    "name": "SEO & Performance",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search Engine Optimization"
+      },
+      {
+        "type": "paragraph",
+        "content": "Configure structured data and SEO settings to improve search engine visibility and performance."
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_organization_schema",
+        "label": "Enable Organization schema",
+        "default": true,
+        "info": "Helps search engines understand your business"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_website_schema",
+        "label": "Enable Website schema",
+        "default": true,
+        "info": "Enables sitelinks search box in Google"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_product_schema",
+        "label": "Enable Product schema",
+        "default": true,
+        "info": "Shows rich snippets for products in search results"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_enable_breadcrumb_schema",
+        "label": "Enable Breadcrumb schema",
+        "default": true,
+        "info": "Shows breadcrumb navigation in search results"
+      },
+      {
+        "type": "header",
+        "content": "Organization Information"
+      },
+      {
+        "type": "text",
+        "id": "seo_org_name",
+        "label": "Organization name",
+        "info": "Leave blank to use store name"
+      },
+      {
+        "type": "image_picker",
+        "id": "seo_org_logo",
+        "label": "Organization logo",
+        "info": "Recommended: 600x600 pixels"
+      },
+      {
+        "type": "text",
+        "id": "seo_org_phone",
+        "label": "Phone number",
+        "info": "Format: +1-555-123-4567"
+      },
+      {
+        "type": "email",
+        "id": "seo_org_email",
+        "label": "Contact email"
+      },
+      {
+        "type": "checkbox",
+        "id": "seo_local_business",
+        "label": "Local business",
+        "default": false,
+        "info": "Enable if you have a physical location"
+      },
+      {
+        "type": "text",
+        "id": "seo_address_street",
+        "label": "Street address",
+        "info": "Required for local business schema"
+      },
+      {
+        "type": "text",
+        "id": "seo_address_city",
+        "label": "City"
+      },
+      {
+        "type": "text",
+        "id": "seo_address_region",
+        "label": "State/Province"
+      },
+      {
+        "type": "text",
+        "id": "seo_address_postal",
+        "label": "Postal code"
+      },
+      {
+        "type": "text",
+        "id": "seo_address_country",
+        "label": "Country"
+      },
+      {
+        "type": "header",
+        "content": "Performance Optimization"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_lazy_loading",
+        "label": "Enable lazy loading",
+        "default": true,
+        "info": "Improves page load speed by loading images as needed"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_resource_hints",
+        "label": "Enable resource hints",
+        "default": true,
+        "info": "Preconnect to external domains and preload critical resources"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_async_css",
+        "label": "Enable non-blocking CSS",
+        "default": true,
+        "info": "Load CSS asynchronously to prevent render blocking"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_image_optimization",
+        "label": "Enable image optimization",
+        "default": true,
+        "info": "Automatically optimize images with responsive sizing and lazy loading"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_speculation_rules",
+        "label": "Enable speculation rules",
+        "default": true,
+        "info": "Prerender pages for instant navigation (modern browsers)"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_resource_hints",
+        "label": "Enable resource hints",
+        "default": true,
+        "info": "Preconnect to external resources for faster loading"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_speculation_rules",
+        "label": "Enable speculation rules",
+        "default": true,
+        "info": "Prerender pages for instant navigation (Chrome only)"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_critical_css",
+        "label": "Enable critical CSS",
+        "default": true,
+        "info": "Inline critical CSS for faster rendering"
+      },
+      {
+        "type": "range",
+        "id": "performance_budget_js",
+        "min": 50,
+        "max": 500,
+        "step": 25,
+        "unit": "kb",
+        "label": "JavaScript budget",
+        "default": 150,
+        "info": "Maximum JavaScript size for optimal performance"
+      },
+      {
+        "type": "range",
+        "id": "performance_budget_css",
+        "min": 25,
+        "max": 200,
+        "step": 25,
+        "unit": "kb",
+        "label": "CSS budget",
+        "default": 75,
+        "info": "Maximum CSS size for optimal performance"
+      }
+    ]
+  },
+  {
     "name": "Preset Showcase",
     "settings": [
       {

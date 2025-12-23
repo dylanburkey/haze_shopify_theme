@@ -1,110 +1,52 @@
 {%- comment -%}
-  BreadcrumbList Schema (JSON-LD)
-  Generates breadcrumb structured data based on current page
+  Breadcrumb Schema (JSON-LD)
+  Outputs BreadcrumbList structured data for navigation
+  Usage: {% render 'schema-breadcrumb' %}
 {%- endcomment -%}
 
 {%- liquid
-  assign breadcrumb_items = '' | split: ','
+  assign breadcrumbs = ''
+  assign position = 1
 
   case template.name
     when 'product'
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"Home","item":"' | append: shop.url | append: '"},'
+      assign position = position | plus: 1
+      
       if product.collections.size > 0
-        assign primary_collection = product.collections.first
-        assign breadcrumb_items = breadcrumb_items | concat: primary_collection.title | split: '|||'
+        assign collection = product.collections.first
+        assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"' | append: collection.title | append: '","item":"' | append: collection.url | prepend: shop.url | append: '"},'
+        assign position = position | plus: 1
       endif
-      assign breadcrumb_items = breadcrumb_items | concat: product.title | split: '|||'
-
+      
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"' | append: product.title | append: '","item":"' | append: product.url | prepend: shop.url | append: '"}'
+      
     when 'collection'
-      assign breadcrumb_items = breadcrumb_items | concat: collection.title | split: '|||'
-
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"Home","item":"' | append: shop.url | append: '"},'
+      assign position = position | plus: 1
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"' | append: collection.title | append: '","item":"' | append: collection.url | prepend: shop.url | append: '"}'
+      
     when 'article'
-      assign breadcrumb_items = breadcrumb_items | concat: blog.title | split: '|||'
-      assign breadcrumb_items = breadcrumb_items | concat: article.title | split: '|||'
-
-    when 'blog'
-      assign breadcrumb_items = breadcrumb_items | concat: blog.title | split: '|||'
-
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"Home","item":"' | append: shop.url | append: '"},'
+      assign position = position | plus: 1
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"' | append: blog.title | append: '","item":"' | append: blog.url | prepend: shop.url | append: '"},'
+      assign position = position | plus: 1
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"' | append: article.title | append: '","item":"' | append: article.url | prepend: shop.url | append: '"}'
+      
     when 'page'
-      assign breadcrumb_items = breadcrumb_items | concat: page.title | split: '|||'
-
-    when 'search'
-      assign breadcrumb_items = breadcrumb_items | concat: 'Search Results' | split: '|||'
-
-    when 'cart'
-      assign breadcrumb_items = breadcrumb_items | concat: 'Cart' | split: '|||'
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"Home","item":"' | append: shop.url | append: '"},'
+      assign position = position | plus: 1
+      assign breadcrumbs = breadcrumbs | append: '{"@type":"ListItem","position":' | append: position | append: ',"name":"' | append: page.title | append: '","item":"' | append: page.url | prepend: shop.url | append: '"}'
   endcase
 -%}
 
-{%- if breadcrumb_items.size > 0 -%}
+{%- if breadcrumbs != blank -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": {{ shop.url | json }}
-    }
-    {%- assign position = 2 -%}
-    {%- case template.name -%}
-      {%- when 'product' -%}
-        {%- if product.collections.size > 0 -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ product.collections.first.title | json }},
-          "item": {{ product.collections.first.url | prepend: shop.url | json }}
-        }
-        {%- assign position = position | plus: 1 -%}
-        {%- endif -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ product.title | json }},
-          "item": {{ product.url | prepend: shop.url | json }}
-        }
-
-      {%- when 'collection' -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ collection.title | json }},
-          "item": {{ collection.url | prepend: shop.url | json }}
-        }
-
-      {%- when 'article' -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ blog.title | json }},
-          "item": {{ blog.url | prepend: shop.url | json }}
-        }
-        {%- assign position = position | plus: 1 -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ article.title | json }},
-          "item": {{ article.url | prepend: shop.url | json }}
-        }
-
-      {%- when 'blog' -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ blog.title | json }},
-          "item": {{ blog.url | prepend: shop.url | json }}
-        }
-
-      {%- when 'page' -%}
-        ,{
-          "@type": "ListItem",
-          "position": {{ position }},
-          "name": {{ page.title | json }},
-          "item": {{ page.url | prepend: shop.url | json }}
-        }
-    {%- endcase -%}
+    {{ breadcrumbs }}
   ]
 }
 </script>

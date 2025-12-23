@@ -1,0 +1,276 @@
+{
+  "layout": "theme",
+  "name": "Feature Demo Page",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "medium",
+        "overlay_opacity": 50,
+        "title": "Feature Demo",
+        "subtitle": "See our built-in features in action",
+        "description": "No apps required - everything you need is included",
+        "text_alignment": "center",
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      }
+    },
+    "feature-tabs": {
+      "type": "builder-grid",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 40,
+        "background_color": "#ffffff"
+      },
+      "blocks": {
+        "tabs-title": {
+          "type": "heading",
+          "settings": {
+            "text": "Interactive Feature Demos",
+            "tag": "h2",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "tabs-subtitle": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Click each tab to see the feature in action. All features are built into the theme - no additional apps needed.</p>",
+            "align": "center",
+            "width": "100"
+          }
+        }
+      },
+      "block_order": ["tabs-title", "tabs-subtitle"]
+    },
+    "loyalty-demo": {
+      "type": "loyalty-program",
+      "settings": {
+        "title": "Loyalty Program Demo",
+        "subtitle": "Tier-based rewards system",
+        "show_demo_data": true,
+        "demo_customer_spent": 750,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#f8f9fa"
+      }
+    },
+    "faq-demo": {
+      "type": "faq",
+      "settings": {
+        "title": "Advanced FAQ System",
+        "subtitle": "Searchable, categorized, collapsible",
+        "enable_search": true,
+        "enable_categories": true,
+        "layout": "accordion",
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the loyalty program work?",
+            "answer": "<p>Our built-in loyalty program automatically tracks customer spending and assigns tiers. Customers see their progress and discount codes right in their account dashboard.</p>",
+            "category": "Loyalty Program"
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I customize the preset colors?",
+            "answer": "<p>Yes! Each preset is a starting point. You can modify colors, fonts, and layouts in the theme customizer while keeping the overall aesthetic.</p>",
+            "category": "Customization"
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "What file types are supported for product attachments?",
+            "answer": "<p>PDF, DOC, XLS, CAD files, images, and more. Perfect for manuals, spec sheets, warranty documents, and technical drawings.</p>",
+            "category": "Product Features"
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "Is the theme mobile-responsive?",
+            "answer": "<p>Absolutely! The theme uses modern CSS container queries to ensure perfect display on all devices, from phones to large desktop screens.</p>",
+            "category": "Technical"
+          }
+        }
+      },
+      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4"]
+    },
+    "attachments-demo": {
+      "type": "product-attachments",
+      "settings": {
+        "title": "Product Attachments Demo",
+        "subtitle": "Manuals, specs, CAD files, and more",
+        "show_demo_files": true,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#ffffff"
+      }
+    },
+    "seo-demo": {
+      "type": "builder-grid",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#f8f9fa"
+      },
+      "blocks": {
+        "seo-title": {
+          "type": "heading",
+          "settings": {
+            "text": "Advanced SEO Features",
+            "tag": "h2",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "seo-subtitle": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Built-in JSON-LD structured data, meta optimization, and rich snippets. No SEO apps needed.</p>",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "seo-feature-1": {
+          "type": "card",
+          "settings": {
+            "title": "JSON-LD Structured Data",
+            "content": "<p>Automatic schema markup for products, organizations, breadcrumbs, and more. Helps search engines understand your content.</p>",
+            "width": "33",
+            "card_style": true,
+            "new_line": true
+          }
+        },
+        "seo-feature-2": {
+          "type": "card",
+          "settings": {
+            "title": "Rich Snippets",
+            "content": "<p>Enhanced search results with ratings, prices, availability, and product details displayed directly in Google.</p>",
+            "width": "33",
+            "card_style": true
+          }
+        },
+        "seo-feature-3": {
+          "type": "card",
+          "settings": {
+            "title": "Meta Optimization",
+            "content": "<p>Automatic meta tags, Open Graph images, Twitter cards, and proper heading structure for maximum SEO impact.</p>",
+            "width": "33",
+            "card_style": true
+          }
+        }
+      },
+      "block_order": ["seo-title", "seo-subtitle", "seo-feature-1", "seo-feature-2", "seo-feature-3"]
+    },
+    "pwa-demo": {
+      "type": "pwa-install-banner",
+      "settings": {
+        "title": "Progressive Web App Demo",
+        "subtitle": "Installable app experience",
+        "show_demo": true,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      }
+    },
+    "cost-comparison": {
+      "type": "builder-grid",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#ffffff"
+      },
+      "blocks": {
+        "comparison-title": {
+          "type": "heading",
+          "settings": {
+            "text": "App Cost Comparison",
+            "tag": "h2",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "comparison-subtitle": {
+          "type": "text",
+          "settings": {
+            "content": "<p>See how much you save with our all-in-one theme vs. individual apps</p>",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "comparison-table": {
+          "type": "html",
+          "settings": {
+            "content": "<div style='overflow-x: auto; margin: 40px 0;'><table style='width: 100%; border-collapse: collapse; background: white; border: 1px solid #e5e5e5;'><thead><tr style='background: #f8f9fa;'><th style='padding: 16px; text-align: left; border-bottom: 1px solid #e5e5e5;'>Feature</th><th style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>Typical App Cost</th><th style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>Forge Industrial</th></tr></thead><tbody><tr><td style='padding: 16px; border-bottom: 1px solid #e5e5e5;'>Loyalty Program</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>$50-200/mo</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5; color: #22c55e; font-weight: 700;'>✓ Included</td></tr><tr><td style='padding: 16px; border-bottom: 1px solid #e5e5e5;'>Advanced SEO</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>$20-50/mo</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5; color: #22c55e; font-weight: 700;'>✓ Included</td></tr><tr><td style='padding: 16px; border-bottom: 1px solid #e5e5e5;'>Mega Menu</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>$15-30/mo</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5; color: #22c55e; font-weight: 700;'>✓ Included</td></tr><tr><td style='padding: 16px; border-bottom: 1px solid #e5e5e5;'>Product Attachments</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>$15-40/mo</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5; color: #22c55e; font-weight: 700;'>✓ Included</td></tr><tr><td style='padding: 16px; border-bottom: 1px solid #e5e5e5;'>PWA Support</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5;'>$20-60/mo</td><td style='padding: 16px; text-align: center; border-bottom: 1px solid #e5e5e5; color: #22c55e; font-weight: 700;'>✓ Included</td></tr><tr style='background: #f8f9fa; font-weight: 700;'><td style='padding: 16px;'>Total Monthly Cost</td><td style='padding: 16px; text-align: center; color: #dc2626;'>$120-380/mo</td><td style='padding: 16px; text-align: center; color: #22c55e;'>$0/mo</td></tr></tbody></table></div>",
+            "width": "100"
+          }
+        }
+      },
+      "block_order": ["comparison-title", "comparison-subtitle", "comparison-table"]
+    },
+    "cta": {
+      "type": "builder-grid",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      },
+      "blocks": {
+        "cta-title": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to Save Thousands?",
+            "tag": "h2",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "cta-text": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Get all these features for a one-time $320 purchase. No monthly fees, no app subscriptions.</p>",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "cta-button": {
+          "type": "button",
+          "settings": {
+            "text": "Purchase Theme - $320",
+            "link": "#purchase",
+            "style": "primary",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        }
+      },
+      "block_order": ["cta-title", "cta-text", "cta-button"]
+    }
+  },
+  "order": [
+    "hero",
+    "feature-tabs",
+    "loyalty-demo",
+    "faq-demo", 
+    "attachments-demo",
+    "seo-demo",
+    "pwa-demo",
+    "cost-comparison",
+    "cta"
+  ]
+}

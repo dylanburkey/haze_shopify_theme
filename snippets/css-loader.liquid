@@ -4,5 +4,20 @@
   Usage: {% render 'css-loader', css: 'section-smart-grid.css' %}
 {%- endcomment -%}
 
-<link rel="stylesheet" href="{{ css | asset_url }}" media="print" onload="this.media='all'">
-<noscript>{{ css | asset_url | stylesheet_tag }}</noscript>
+{%- liquid
+  assign css_url = css | asset_url
+  assign css_id = css | replace: '.css', '' | handleize
+-%}
+
+<link rel="preload" href="{{ css_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'" id="{{ css_id }}-preload">
+<noscript><link rel="stylesheet" href="{{ css_url }}" id="{{ css_id }}-noscript"></noscript>
+
+{%- comment -%} Fallback for browsers that don't support preload {%- endcomment -%}
+<script>
+  (function() {
+    var link = document.getElementById('{{ css_id }}-preload');
+    if (link && !link.relList.supports('preload')) {
+      link.rel = 'stylesheet';
+    }
+  })();
+</script>

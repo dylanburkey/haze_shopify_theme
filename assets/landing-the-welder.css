@@ -1,0 +1,271 @@
+/*
+  The Welder Landing Page Styles
+  Trades/fabrication theme with industrial strength and craftsmanship focus
+*/
+
+.landing-the-welder {
+  --welder-bg: #1a1a1a;
+  --welder-surface: #2d2d2d;
+  --welder-surface-light: #3a3a3a;
+  --welder-text: #ffffff;
+  --welder-text-muted: #b3b3b3;
+  --welder-accent: #ff6b35;
+  --welder-accent-dark: #e55a2b;
+  --welder-accent-light: #ff8c66;
+  --welder-warning: #ffd700;
+  --welder-success: #4caf50;
+  --welder-border: #404040;
+  --welder-shadow: rgba(0, 0, 0, 0.3);
+}
+
+.landing-the-welder .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Section Headers */
+.landing-the-welder .section-header {
+  margin-bottom: 3rem;
+}
+
+.landing-the-welder .section-header--center {
+  text-align: center;
+}
+
+.landing-the-welder .section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--welder-accent);
+  margin-bottom: 0.5rem;
+}
+
+.landing-the-welder .section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--welder-text);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px var(--welder-shadow);
+}
+
+.landing-the-welder .section-subtitle {
+  font-size: 1.125rem;
+  color: var(--welder-text-muted);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Buttons */
+.landing-the-welder .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.landing-the-welder .btn--primary {
+  background: var(--welder-accent);
+  color: #fff;
+  border-color: var(--welder-accent);
+}
+
+.landing-the-welder .btn--primary:hover {
+  background: var(--welder-accent-dark);
+  border-color: var(--welder-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.landing-the-welder .btn--outline {
+  background: transparent;
+  color: var(--welder-text);
+  border-color: var(--welder-border);
+}
+
+.landing-the-welder .btn--outline:hover {
+  background: var(--welder-accent);
+  color: #fff;
+  border-color: var(--welder-accent);
+}
+
+.landing-the-welder .btn--large {
+  padding: 1.25rem 2.5rem;
+  font-size: 1rem;
+}
+
+/* Hero Section */
+.landing-the-welder .welder-hero {
+  background: linear-gradient(135deg, var(--welder-bg) 0%, var(--welder-surface) 100%);
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-the-welder .welder-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.landing-the-welder .hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.landing-the-welder .hero-text h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--welder-text);
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px var(--welder-shadow);
+}
+
+.landing-the-welder .hero-text .hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--welder-text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.landing-the-welder .hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Features Grid */
+.landing-the-welder .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.landing-the-welder .feature-card {
+  background: var(--welder-surface);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--welder-border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.landing-the-welder .feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--welder-shadow);
+}
+
+.landing-the-welder .feature-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--welder-accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.landing-the-welder .feature-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--welder-text);
+  margin-bottom: 0.5rem;
+}
+
+.landing-the-welder .feature-description {
+  color: var(--welder-text-muted);
+  line-height: 1.6;
+}
+
+/* Trust Indicators */
+.landing-the-welder .trust-indicators {
+  background: var(--welder-surface);
+  padding: 3rem 0;
+  border-top: 1px solid var(--welder-border);
+  border-bottom: 1px solid var(--welder-border);
+}
+
+.landing-the-welder .trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.landing-the-welder .trust-item {
+  padding: 1.5rem;
+}
+
+.landing-the-welder .trust-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--welder-accent);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.landing-the-welder .trust-label {
+  font-size: 0.875rem;
+  color: var(--welder-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landing-the-welder .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .landing-the-welder .hero-cta {
+    justify-content: center;
+  }
+  
+  .landing-the-welder .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .landing-the-welder .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-the-welder .trust-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .landing-the-welder .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+}

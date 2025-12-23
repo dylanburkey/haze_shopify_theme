@@ -1,0 +1,406 @@
+{%- comment -%}
+  Precision Landing Page Section
+  Corporate/technical theme with clean, professional precision
+  Based on corporate B2B patterns with technical/engineering focus
+{%- endcomment -%}
+
+{{ 'landing-precision.css' | asset_url | stylesheet_tag }}
+
+<div class="landing-precision" data-section-id="{{ section.id }}">
+
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="precision-hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>{{ section.settings.hero_title | default: 'Precision Engineering Solutions' }}</h1>
+          <p class="hero-subtitle">{{ section.settings.hero_subtitle | default: 'Advanced technical solutions engineered for accuracy, reliability, and performance. Trusted by industry leaders worldwide.' }}</p>
+          <div class="hero-cta">
+            {%- if section.settings.hero_button_text != blank -%}
+              <a href="{{ section.settings.hero_button_url | default: '/collections/all' }}" class="btn btn--primary btn--large">
+                {{ section.settings.hero_button_text }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.hero_button_secondary_text != blank -%}
+              <a href="{{ section.settings.hero_button_secondary_url | default: '/pages/about' }}" class="btn btn--outline btn--large">
+                {{ section.settings.hero_button_secondary_text }}
+              </a>
+            {%- endif -%}
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">{{ section.settings.stat_1_number | default: '99.9%' }}</span>
+              <span class="stat-label">{{ section.settings.stat_1_label | default: 'Accuracy' }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ section.settings.stat_2_number | default: '50+' }}</span>
+              <span class="stat-label">{{ section.settings.stat_2_label | default: 'Industries' }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ section.settings.stat_3_number | default: '24/7' }}</span>
+              <span class="stat-label">{{ section.settings.stat_3_label | default: 'Support' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          {%- if section.settings.hero_image != blank -%}
+            <img src="{{ section.settings.hero_image | image_url: width: 600 }}" 
+                 alt="{{ section.settings.hero_image.alt | escape }}"
+                 width="600" height="400" loading="eager">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Features Section {%- endcomment -%}
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">{{ section.settings.features_eyebrow | default: 'Technical Excellence' }}</span>
+        <h2 class="section-title">{{ section.settings.features_title | default: 'Engineered for Precision' }}</h2>
+        <p class="section-subtitle">{{ section.settings.features_subtitle | default: 'Our solutions combine cutting-edge technology with proven engineering principles to deliver unmatched precision and reliability.' }}</p>
+      </div>
+      
+      <div class="features-grid">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'feature' -%}
+              <div class="feature-card" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank -%}
+                  <div class="feature-icon">{{ block.settings.icon }}</div>
+                {%- endif -%}
+                <h3 class="feature-title">{{ block.settings.title | default: 'Feature Title' }}</h3>
+                <p class="feature-description">{{ block.settings.description | default: 'Feature description goes here.' }}</p>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Process Section {%- endcomment -%}
+  <section class="process-section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">{{ section.settings.process_eyebrow | default: 'Our Approach' }}</span>
+        <h2 class="section-title">{{ section.settings.process_title | default: 'Precision Process' }}</h2>
+        <p class="section-subtitle">{{ section.settings.process_subtitle | default: 'A systematic approach to delivering exceptional results through proven methodologies and rigorous quality control.' }}</p>
+      </div>
+      
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">{{ section.settings.step_1_title | default: 'Analysis' }}</h3>
+          <p class="step-description">{{ section.settings.step_1_description | default: 'Comprehensive assessment of requirements and specifications.' }}</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">{{ section.settings.step_2_title | default: 'Design' }}</h3>
+          <p class="step-description">{{ section.settings.step_2_description | default: 'Precision engineering and technical design development.' }}</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">{{ section.settings.step_3_title | default: 'Implementation' }}</h3>
+          <p class="step-description">{{ section.settings.step_3_description | default: 'Expert execution with rigorous quality control.' }}</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3 class="step-title">{{ section.settings.step_4_title | default: 'Validation' }}</h3>
+          <p class="step-description">{{ section.settings.step_4_description | default: 'Thorough testing and performance verification.' }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} CTA Section {%- endcomment -%}
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="section-title">{{ section.settings.cta_title | default: 'Ready for Precision?' }}</h2>
+      <p class="section-subtitle">{{ section.settings.cta_subtitle | default: 'Experience the difference that precision engineering makes. Contact our technical team today.' }}</p>
+      {%- if section.settings.cta_button_text != blank -%}
+        <a href="{{ section.settings.cta_button_url | default: '/pages/contact' }}" class="btn btn--outline btn--large">
+          {{ section.settings.cta_button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Landing: Precision",
+  "tag": "section",
+  "class": "section-landing-precision",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Precision Engineering Solutions"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Advanced technical solutions engineered for accuracy, reliability, and performance. Trusted by industry leaders worldwide."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text",
+      "label": "Primary Button Text",
+      "default": "Explore Solutions"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_url",
+      "label": "Primary Button URL"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_secondary_text",
+      "label": "Secondary Button Text",
+      "default": "Technical Specs"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_secondary_url",
+      "label": "Secondary Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Hero Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "label": "Stat 1 Number",
+      "default": "99.9%"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "Accuracy"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "label": "Stat 2 Number",
+      "default": "50+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "Industries"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "label": "Stat 3 Number",
+      "default": "24/7"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Support"
+    },
+    {
+      "type": "header",
+      "content": "Features Section"
+    },
+    {
+      "type": "text",
+      "id": "features_eyebrow",
+      "label": "Features Eyebrow",
+      "default": "Technical Excellence"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Features Title",
+      "default": "Engineered for Precision"
+    },
+    {
+      "type": "textarea",
+      "id": "features_subtitle",
+      "label": "Features Subtitle",
+      "default": "Our solutions combine cutting-edge technology with proven engineering principles to deliver unmatched precision and reliability."
+    },
+    {
+      "type": "header",
+      "content": "Process Section"
+    },
+    {
+      "type": "text",
+      "id": "process_eyebrow",
+      "label": "Process Eyebrow",
+      "default": "Our Approach"
+    },
+    {
+      "type": "text",
+      "id": "process_title",
+      "label": "Process Title",
+      "default": "Precision Process"
+    },
+    {
+      "type": "textarea",
+      "id": "process_subtitle",
+      "label": "Process Subtitle",
+      "default": "A systematic approach to delivering exceptional results through proven methodologies and rigorous quality control."
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 Title",
+      "default": "Analysis"
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_description",
+      "label": "Step 1 Description",
+      "default": "Comprehensive assessment of requirements and specifications."
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 Title",
+      "default": "Design"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_description",
+      "label": "Step 2 Description",
+      "default": "Precision engineering and technical design development."
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 Title",
+      "default": "Implementation"
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_description",
+      "label": "Step 3 Description",
+      "default": "Expert execution with rigorous quality control."
+    },
+    {
+      "type": "text",
+      "id": "step_4_title",
+      "label": "Step 4 Title",
+      "default": "Validation"
+    },
+    {
+      "type": "textarea",
+      "id": "step_4_description",
+      "label": "Step 4 Description",
+      "default": "Thorough testing and performance verification."
+    },
+    {
+      "type": "header",
+      "content": "CTA Section"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Title",
+      "default": "Ready for Precision?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_subtitle",
+      "label": "CTA Subtitle",
+      "default": "Experience the difference that precision engineering makes. Contact our technical team today."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Get Started"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_url",
+      "label": "CTA Button URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "⚙️"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "Advanced Technology"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Feature Description",
+          "default": "State-of-the-art engineering solutions for complex technical challenges."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing: Precision",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "⚙️",
+            "title": "Advanced Technology",
+            "description": "State-of-the-art engineering solutions for complex technical challenges."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "📊",
+            "title": "Data-Driven",
+            "description": "Precision analytics and measurement for optimal performance."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🔬",
+            "title": "Quality Assurance",
+            "description": "Rigorous testing and validation processes ensure reliability."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🎯",
+            "title": "Precision Focus",
+            "description": "Engineered for accuracy and consistent, repeatable results."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

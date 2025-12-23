@@ -57,6 +57,38 @@
         "sold_out_text": "Sold Out"
       }
     },
+    "product-specs": {
+      "type": "product-specs",
+      "settings": {
+        "heading": "Technical Specifications",
+        "use_metafields": true,
+        "collapse_categories": false,
+        "blocks_heading": "Additional Specifications",
+        "open_by_default": true
+      }
+    },
+    "product-attachments": {
+      "type": "product-attachments",
+      "settings": {
+        "heading": "Downloads & Documentation",
+        "show_file_sizes": true,
+        "show_download_count": false,
+        "group_by_category": true,
+        "show_icons": true
+      }
+    },
+    "product-comparison": {
+      "type": "product-comparison",
+      "settings": {
+        "show_comparison_controls": true,
+        "title": "Product Comparison",
+        "show_comparison_table": true,
+        "max_products": 4,
+        "auto_show_comparison": true,
+        "persist_state": true,
+        "highlight_differences": true
+      }
+    },
     "related": {
       "type": "smart-grid",
       "blocks": {
@@ -426,6 +458,9 @@
   },
   "order": [
     "main",
+    "product-specs",
+    "product-attachments",
+    "product-comparison",
     "related",
     "side_menu_dVARMR",
     "landing_modern_minimal_YjRdVw",

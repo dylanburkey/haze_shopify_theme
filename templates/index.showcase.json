@@ -1,0 +1,221 @@
+{
+  "layout": "theme",
+  "name": "Theme Showcase Homepage",
+  "sections": {
+    "hero-showcase": {
+      "type": "hero",
+      "settings": {
+        "height": "large",
+        "overlay_opacity": 60,
+        "title": "Forge Industrial Theme",
+        "subtitle": "Everything You Need, No Apps Required",
+        "description": "Save $150-400/month with our all-in-one Shopify theme. Built-in loyalty program, advanced SEO, mega menu, FAQ system, and 12 industry presets.",
+        "primary_button_text": "View Cost Savings",
+        "primary_button_link": "#cost-calculator",
+        "secondary_button_text": "Explore Presets",
+        "secondary_button_link": "#preset-gallery",
+        "text_alignment": "center",
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      }
+    },
+    "cost-calculator": {
+      "type": "cost-savings-calculator",
+      "settings": {
+        "title": "Calculate Your Savings",
+        "subtitle": "See how much you'll save by choosing our theme over expensive apps",
+        "theme_price": 320,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#f8f9fa"
+      }
+    },
+    "feature-grid": {
+      "type": "smart-grid",
+      "settings": {
+        "title": "Built-In Features Worth $2,400+/Year",
+        "subtitle": "Every feature you need, included at no extra cost",
+        "layout": "cols-3",
+        "padding_top": 80,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "loyalty": {
+          "type": "feature-card",
+          "settings": {
+            "icon": "star",
+            "title": "Loyalty Program",
+            "description": "Tier-based rewards system with progress tracking and discount codes",
+            "app_cost": "$50-200/mo",
+            "link": "/pages/loyalty-demo"
+          }
+        },
+        "seo": {
+          "type": "feature-card",
+          "settings": {
+            "icon": "search",
+            "title": "Advanced SEO",
+            "description": "JSON-LD structured data, meta optimization, and rich snippets",
+            "app_cost": "$20-50/mo",
+            "link": "/pages/seo-demo"
+          }
+        },
+        "mega-menu": {
+          "type": "feature-card",
+          "settings": {
+            "icon": "menu",
+            "title": "Mega Menu",
+            "description": "Multi-column navigation with featured content and images",
+            "app_cost": "$15-30/mo",
+            "link": "/pages/mega-menu-demo"
+          }
+        },
+        "faq": {
+          "type": "feature-card",
+          "settings": {
+            "icon": "help-circle",
+            "title": "Advanced FAQ",
+            "description": "Searchable FAQ with categories and collapsible sections",
+            "app_cost": "$10-25/mo",
+            "link": "/pages/faq-demo"
+          }
+        },
+        "attachments": {
+          "type": "feature-card",
+          "settings": {
+            "icon": "paperclip",
+            "title": "Product Attachments",
+            "description": "Manuals, spec sheets, CAD files, and warranty documents",
+            "app_cost": "$15-40/mo",
+            "link": "/pages/attachments-demo"
+          }
+        },
+        "pwa": {
+          "type": "feature-card",
+          "settings": {
+            "icon": "smartphone",
+            "title": "PWA Support",
+            "description": "Installable app experience with offline capabilities",
+            "app_cost": "$20-60/mo",
+            "link": "/pages/pwa-demo"
+          }
+        }
+      },
+      "block_order": ["loyalty", "seo", "mega-menu", "faq", "attachments", "pwa"]
+    },
+    "preset-gallery": {
+      "type": "preset-gallery",
+      "settings": {
+        "title": "12 Industry Presets Included",
+        "subtitle": "Professional designs for every industry, ready to use",
+        "layout": "grid",
+        "show_cost_per_preset": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#ffffff"
+      }
+    },
+    "header-footer-showcase": {
+      "type": "header-footer-showcase",
+      "settings": {
+        "title": "Mix & Match Headers and Footers",
+        "subtitle": "4 header styles × 3 footer styles = 12 combinations",
+        "show_combinations": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#f8f9fa"
+      }
+    },
+    "testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "title": "What Store Owners Say",
+        "subtitle": "Real feedback from businesses using Forge Industrial",
+        "layout": "carousel",
+        "padding_top": 80,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Saved us over $300/month in app costs. The loyalty program alone was worth the purchase price.",
+            "author": "Mike Chen",
+            "company": "Industrial Supply Co.",
+            "rating": 5
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The preset system is genius. We launched with the Zebra Skimmers preset and it looked professional immediately.",
+            "author": "Sarah Martinez",
+            "company": "Precision Manufacturing",
+            "rating": 5
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Finally, a theme that understands B2B. The product attachments and spec display features are exactly what we needed.",
+            "author": "David Thompson",
+            "company": "Heavy Equipment Parts",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"]
+    },
+    "cta-section": {
+      "type": "builder-grid",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff"
+      },
+      "blocks": {
+        "cta-heading": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to Save Thousands?",
+            "tag": "h2",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "cta-text": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Join hundreds of industrial businesses who've eliminated expensive apps with Forge Industrial. One-time purchase, lifetime savings.</p>",
+            "size": "large",
+            "align": "center",
+            "width": "100"
+          }
+        },
+        "cta-buttons": {
+          "type": "button-group",
+          "settings": {
+            "primary_text": "Purchase Theme - $320",
+            "primary_link": "#purchase",
+            "secondary_text": "View Live Demo",
+            "secondary_link": "/pages/live-demo",
+            "align": "center",
+            "width": "100"
+          }
+        }
+      },
+      "block_order": ["cta-heading", "cta-text", "cta-buttons"]
+    }
+  },
+  "order": [
+    "hero-showcase",
+    "cost-calculator", 
+    "feature-grid",
+    "preset-gallery",
+    "header-footer-showcase",
+    "testimonials",
+    "cta-section"
+  ]
+}

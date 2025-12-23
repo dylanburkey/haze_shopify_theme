@@ -1,0 +1,119 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-industrial",
+      "settings": {
+        "show_breadcrumbs": true,
+        "enable_zoom": true,
+        "show_vendor": true,
+        "show_sku": true,
+        "show_short_description": true,
+        "show_stock_status": true,
+        "low_stock_threshold": 5,
+        "show_reviews": true,
+        "variant_style": "dropdown",
+        "show_quantity": true,
+        "show_specs": true,
+        "show_attachments": true,
+        "show_trust_badges": true,
+        "industrial_layout": true,
+        "add_to_cart_text": "Add to Cart",
+        "sold_out_text": "Sold Out"
+      },
+      "blocks": {
+        "trust-1": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "shield",
+            "text": "Made in USA"
+          }
+        },
+        "trust-2": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "certificate",
+            "text": "ISO 9001 Certified"
+          }
+        },
+        "trust-3": {
+          "type": "trust_badge",
+          "settings": {
+            "icon": "wrench",
+            "text": "Industrial Grade"
+          }
+        }
+      },
+      "block_order": ["trust-1", "trust-2", "trust-3"]
+    },
+    "product-specs": {
+      "type": "product-specs",
+      "settings": {
+        "heading": "Technical Specifications",
+        "use_metafields": true,
+        "collapse_categories": false,
+        "blocks_heading": "Additional Specifications",
+        "open_by_default": true
+      }
+    },
+    "product-attachments": {
+      "type": "product-attachments",
+      "settings": {
+        "show_heading": true,
+        "heading_text": "Technical Documentation",
+        "layout": "list",
+        "category_filter": "all",
+        "show_file_info": true,
+        "show_descriptions": true,
+        "show_file_sizes": true
+      }
+    },
+    "product-comparison": {
+      "type": "product-comparison",
+      "settings": {
+        "show_comparison_controls": true,
+        "title": "Compare Products",
+        "show_comparison_table": true,
+        "max_products": 4,
+        "auto_show_comparison": true,
+        "persist_state": true,
+        "highlight_differences": true
+      }
+    },
+    "related": {
+      "type": "smart-grid",
+      "settings": {
+        "heading": "Related Equipment",
+        "layout": "cols-4",
+        "use_surface_bg": false
+      },
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "heading": "Replacement Parts"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "heading": "Maintenance Kit"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "heading": "Accessories"
+          }
+        },
+        "card-4": {
+          "type": "card",
+          "settings": {
+            "heading": "Support Tools"
+          }
+        }
+      },
+      "block_order": ["card-1", "card-2", "card-3", "card-4"]
+    }
+  },
+  "order": ["main", "product-specs", "product-attachments", "product-comparison", "related"]
+}

@@ -1,0 +1,335 @@
+{%- comment -%}
+  Loyalty Program Demo Section
+  Demonstrates tier-based rewards system with progress tracking
+  Shows $50-200/mo app value built into the theme
+{%- endcomment -%}
+
+{{ 'loyalty-program-demo.css' | asset_url | stylesheet_tag }}
+
+<div class="loyalty-program-demo" data-section-id="{{ section.id }}">
+  <div class="container">
+    
+    {%- comment -%} Section Header {%- endcomment -%}
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow">{{ section.settings.eyebrow_text | default: 'Built-In Feature' }}</span>
+      <h2 class="section-title">{{ section.settings.heading | default: 'Professional Rewards Program' }}</h2>
+      <p class="section-subtitle">{{ section.settings.subheading | default: 'Tier-based loyalty system with progress tracking - no monthly app fees required.' }}</p>
+      <div class="value-indicator">
+        <span class="value-amount">${{ section.settings.app_value | default: '50-200' }}/mo value</span>
+        <span class="value-label">Typical app cost</span>
+      </div>
+    </div>
+
+    {%- comment -%} Loyalty Tiers Display {%- endcomment -%}
+    <div class="loyalty-tiers">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'tier' -%}
+            <div class="loyalty-tier {{ block.settings.tier_class }}" {{ block.shopify_attributes }}>
+              <div class="tier-header">
+                <div class="tier-icon">{{ block.settings.tier_icon | default: '🏆' }}</div>
+                <h3 class="tier-name">{{ block.settings.tier_name | default: 'Professional' }}</h3>
+                <div class="tier-requirement">{{ block.settings.tier_requirement | default: '$1,000+ spent' }}</div>
+              </div>
+              
+              <div class="tier-benefits">
+                <h4 class="benefits-title">Benefits Include:</h4>
+                <ul class="benefits-list">
+                  {%- assign benefits = block.settings.benefits | split: '|' -%}
+                  {%- for benefit in benefits -%}
+                    {%- if benefit != blank -%}
+                      <li>{{ benefit | strip }}</li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </div>
+              
+              <div class="tier-discount">
+                <span class="discount-amount">{{ block.settings.discount_percentage | default: '5' }}%</span>
+                <span class="discount-label">Discount</span>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Progress Tracking Demo {%- endcomment -%}
+    <div class="progress-demo">
+      <h3 class="progress-title">{{ section.settings.progress_title | default: 'Your Progress' }}</h3>
+      <div class="progress-card">
+        <div class="current-tier">
+          <span class="current-tier-label">Current Tier:</span>
+          <span class="current-tier-name">{{ section.settings.demo_current_tier | default: 'Professional' }}</span>
+        </div>
+        
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ section.settings.demo_progress | default: 65 }}%"></div>
+          </div>
+          <div class="progress-labels">
+            <span class="progress-current">${{ section.settings.demo_current_spent | default: '1,300' }}</span>
+            <span class="progress-target">${{ section.settings.demo_target_spent | default: '2,000' }}</span>
+          </div>
+        </div>
+        
+        <div class="next-tier-info">
+          <p class="next-tier-text">
+            Spend <strong>${{ section.settings.demo_remaining | default: '700' }} more</strong> 
+            to reach <strong>{{ section.settings.demo_next_tier | default: 'Elite' }}</strong> tier
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Features Showcase {%- endcomment -%}
+    <div class="loyalty-features">
+      <h3 class="features-title">{{ section.settings.features_title | default: 'Advanced Features' }}</h3>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <h4 class="feature-name">Progress Tracking</h4>
+          <p class="feature-description">Real-time spending progress and tier advancement tracking</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <h4 class="feature-name">Tier-Based Rewards</h4>
+          <p class="feature-description">Automatic discounts and benefits based on spending levels</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📧</div>
+          <h4 class="feature-name">Email Notifications</h4>
+          <p class="feature-description">Automated emails for tier upgrades and special offers</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏆</div>
+          <h4 class="feature-name">Exclusive Access</h4>
+          <p class="feature-description">Early access to new products and special promotions</p>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Implementation Note {%- endcomment -%}
+    <div class="implementation-note">
+      <div class="note-content">
+        <h4 class="note-title">💡 Implementation Note</h4>
+        <p class="note-text">
+          This loyalty program is built using native Shopify customer tags and metafields. 
+          No monthly app subscriptions required - saving you $50-200/month compared to third-party loyalty apps.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Loyalty Program Demo",
+  "tag": "section",
+  "class": "section-loyalty-program-demo",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Text",
+      "default": "Built-In Feature"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Professional Rewards Program"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Section Subheading",
+      "default": "Tier-based loyalty system with progress tracking - no monthly app fees required."
+    },
+    {
+      "type": "text",
+      "id": "app_value",
+      "label": "App Value (monthly cost)",
+      "default": "50-200",
+      "info": "Typical monthly cost of loyalty program apps"
+    },
+    {
+      "type": "header",
+      "content": "Progress Demo"
+    },
+    {
+      "type": "text",
+      "id": "progress_title",
+      "label": "Progress Section Title",
+      "default": "Your Progress"
+    },
+    {
+      "type": "text",
+      "id": "demo_current_tier",
+      "label": "Demo Current Tier",
+      "default": "Professional"
+    },
+    {
+      "type": "range",
+      "id": "demo_progress",
+      "label": "Demo Progress Percentage",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 65
+    },
+    {
+      "type": "text",
+      "id": "demo_current_spent",
+      "label": "Demo Current Spent",
+      "default": "1,300"
+    },
+    {
+      "type": "text",
+      "id": "demo_target_spent",
+      "label": "Demo Target Spent",
+      "default": "2,000"
+    },
+    {
+      "type": "text",
+      "id": "demo_remaining",
+      "label": "Demo Remaining Amount",
+      "default": "700"
+    },
+    {
+      "type": "text",
+      "id": "demo_next_tier",
+      "label": "Demo Next Tier",
+      "default": "Elite"
+    },
+    {
+      "type": "header",
+      "content": "Features Section"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Features Title",
+      "default": "Advanced Features"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Loyalty Tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tier_name",
+          "label": "Tier Name",
+          "default": "Professional"
+        },
+        {
+          "type": "text",
+          "id": "tier_icon",
+          "label": "Tier Icon (emoji)",
+          "default": "🏆"
+        },
+        {
+          "type": "text",
+          "id": "tier_requirement",
+          "label": "Tier Requirement",
+          "default": "$1,000+ spent"
+        },
+        {
+          "type": "select",
+          "id": "tier_class",
+          "label": "Tier Style",
+          "options": [
+            {
+              "value": "tier--bronze",
+              "label": "Bronze"
+            },
+            {
+              "value": "tier--silver",
+              "label": "Silver"
+            },
+            {
+              "value": "tier--gold",
+              "label": "Gold"
+            },
+            {
+              "value": "tier--platinum",
+              "label": "Platinum"
+            }
+          ],
+          "default": "tier--silver"
+        },
+        {
+          "type": "text",
+          "id": "discount_percentage",
+          "label": "Discount Percentage",
+          "default": "5"
+        },
+        {
+          "type": "textarea",
+          "id": "benefits",
+          "label": "Benefits (separate with |)",
+          "default": "5% discount on all orders|Free shipping on orders $500+|Priority customer support|Quarterly product updates",
+          "info": "Separate each benefit with a | character"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty Program Demo",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Starter",
+            "tier_icon": "🥉",
+            "tier_requirement": "$0 - $499",
+            "tier_class": "tier--bronze",
+            "discount_percentage": "2",
+            "benefits": "2% discount on orders|Standard shipping rates|Email support"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Professional",
+            "tier_icon": "🥈",
+            "tier_requirement": "$500 - $1,999",
+            "tier_class": "tier--silver",
+            "discount_percentage": "5",
+            "benefits": "5% discount on all orders|Free shipping on orders $500+|Priority email support|Product catalogs"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Elite",
+            "tier_icon": "🥇",
+            "tier_requirement": "$2,000 - $4,999",
+            "tier_class": "tier--gold",
+            "discount_percentage": "8",
+            "benefits": "8% discount on all orders|Free shipping on all orders|Phone support|Early access to new products|Quarterly business reviews"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "tier_name": "Enterprise",
+            "tier_icon": "💎",
+            "tier_requirement": "$5,000+",
+            "tier_class": "tier--platinum",
+            "discount_percentage": "12",
+            "benefits": "12% discount on all orders|Free expedited shipping|Dedicated account manager|Custom pricing|Volume discounts|Training sessions"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

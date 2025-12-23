@@ -1,0 +1,259 @@
+{
+  "sections": {
+    "landing_precision": {
+      "type": "landing-precision",
+      "settings": {
+        "hero_title": "Precision Engineering Solutions",
+        "hero_subtitle": "Advanced technical solutions engineered for accuracy, reliability, and performance. Trusted by industry leaders worldwide.",
+        "hero_button_text": "Explore Solutions",
+        "hero_button_url": "/collections/precision-instruments",
+        "hero_button_secondary_text": "Technical Specs",
+        "hero_button_secondary_url": "/pages/specifications",
+        "stat_1_number": "99.9%",
+        "stat_1_label": "Accuracy",
+        "stat_2_number": "50+",
+        "stat_2_label": "Industries",
+        "stat_3_number": "24/7",
+        "stat_3_label": "Support",
+        "features_eyebrow": "Technical Excellence",
+        "features_title": "Engineered for Precision",
+        "features_subtitle": "Our solutions combine cutting-edge technology with proven engineering principles to deliver unmatched precision and reliability.",
+        "process_eyebrow": "Our Approach",
+        "process_title": "Precision Process",
+        "process_subtitle": "A systematic approach to delivering exceptional results through proven methodologies and rigorous quality control.",
+        "step_1_title": "Analysis",
+        "step_1_description": "Comprehensive assessment of requirements and specifications.",
+        "step_2_title": "Design",
+        "step_2_description": "Precision engineering and technical design development.",
+        "step_3_title": "Implementation",
+        "step_3_description": "Expert execution with rigorous quality control.",
+        "step_4_title": "Validation",
+        "step_4_description": "Thorough testing and performance verification.",
+        "cta_title": "Ready for Precision?",
+        "cta_subtitle": "Experience the difference that precision engineering makes. Contact our technical team today.",
+        "cta_button_text": "Get Started",
+        "cta_button_url": "/pages/contact"
+      },
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "⚙️",
+            "title": "Advanced Technology",
+            "description": "State-of-the-art engineering solutions for complex technical challenges."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "📊",
+            "title": "Data-Driven",
+            "description": "Precision analytics and measurement for optimal performance and accuracy."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "🔬",
+            "title": "Quality Assurance",
+            "description": "Rigorous testing and validation processes ensure consistent reliability."
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "🎯",
+            "title": "Precision Focus",
+            "description": "Engineered for accuracy and consistent, repeatable results."
+          }
+        },
+        "feature_5": {
+          "type": "feature",
+          "settings": {
+            "icon": "🏆",
+            "title": "Industry Leading",
+            "description": "Recognized excellence in precision engineering and technical innovation."
+          }
+        },
+        "feature_6": {
+          "type": "feature",
+          "settings": {
+            "icon": "🔧",
+            "title": "Expert Support",
+            "description": "Technical expertise and professional support from certified engineers."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "feature_6"
+      ]
+    },
+    "preset_featured_product": {
+      "type": "preset-featured-product",
+      "settings": {
+        "eyebrow_text": "Featured Solution",
+        "heading": "Precision Measurement System",
+        "subheading": "Advanced metrology solutions for critical measurement applications",
+        "featured_product": "",
+        "show_vendor": true,
+        "show_rating": true,
+        "show_description": true,
+        "button_text": "View Specifications",
+        "button_style": "primary",
+        "layout": "image_left",
+        "image_aspect_ratio": "landscape",
+        "background_color": "#f8f9fa",
+        "text_color": "#212529"
+      }
+    },
+    "preset_product_categories": {
+      "type": "preset-product-categories",
+      "settings": {
+        "eyebrow_text": "Solutions by Category",
+        "heading": "Precision Engineering Products",
+        "subheading": "Advanced technical solutions for measurement, control, and automation",
+        "layout": "grid_3",
+        "image_aspect_ratio": "landscape",
+        "show_category_names": true,
+        "show_product_counts": true,
+        "button_text": "Explore Category",
+        "button_style": "outline"
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Measurement Systems",
+            "description": "Precision instruments and metrology solutions"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Control Systems",
+            "description": "Advanced automation and process control"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": "Testing Equipment",
+            "description": "Quality assurance and validation tools"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3"
+      ]
+    },
+    "preset_trust_badges": {
+      "type": "preset-trust-badges",
+      "settings": {
+        "eyebrow_text": "Quality Certifications",
+        "heading": "Industry Standards & Compliance",
+        "layout": "horizontal",
+        "background_color": "#ffffff",
+        "text_color": "#212529"
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "title": "ISO 9001",
+            "description": "Quality management system certified"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "title": "NIST Traceable",
+            "description": "Calibration standards and traceability"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "title": "CE Compliant",
+            "description": "European conformity standards met"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "title": "Technical Support",
+            "description": "Expert engineering assistance available"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ]
+    },
+    "preset_testimonials": {
+      "type": "preset-testimonials",
+      "settings": {
+        "eyebrow_text": "Client Testimonials",
+        "heading": "Trusted by Industry Leaders",
+        "subheading": "See how precision engineering solutions drive success across industries",
+        "layout": "grid",
+        "show_ratings": true,
+        "show_company": true,
+        "background_color": "#f8f9fa"
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The precision and reliability of their measurement systems have significantly improved our quality control processes.",
+            "author": "Dr. Jennifer Park",
+            "company": "Advanced Manufacturing Corp",
+            "rating": 5
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Outstanding technical support and engineering expertise. They understand our complex requirements perfectly.",
+            "author": "Robert Chen",
+            "company": "Precision Aerospace Systems",
+            "rating": 5
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Their solutions have enabled us to achieve accuracy levels we never thought possible in our production environment.",
+            "author": "Maria Gonzalez",
+            "company": "TechPrecision Industries",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3"
+      ]
+    }
+  },
+  "order": [
+    "landing_precision",
+    "preset_featured_product",
+    "preset_product_categories",
+    "preset_trust_badges",
+    "preset_testimonials"
+  ]
+}

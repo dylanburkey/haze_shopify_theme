@@ -1,0 +1,317 @@
+/**
+ * Product Specification System - Theme Integration
+ * Handles preset-specific styling and theme compatibility
+ * Requirements: 8.1, 8.2, 8.3
+ */
+
+/* ==========================================================================
+   Theme Preset Compatibility
+   ========================================================================== */
+
+/* Base theme integration - uses CSS custom properties from theme */
+.product-specs-section,
+.product-comparison,
+.product-attachments-section {
+  /* Inherit theme spacing and typography */
+  --spec-font-family: var(--font-body, var(--font-body-family, system-ui));
+  --spec-heading-font: var(--font-heading, var(--font-heading-family, system-ui));
+  --spec-font-size: var(--font-size-base, 1rem);
+  --spec-line-height: var(--font-body-line-height, 1.6);
+  
+  /* Theme color integration */
+  --spec-primary: var(--color-primary, var(--color-accent, #3b82f6));
+  --spec-text: var(--color-text, var(--color-foreground, #1a1a1a));
+  --spec-text-secondary: var(--color-text-secondary, var(--color-foreground-secondary, #6b7280));
+  --spec-background: var(--color-background, #ffffff);
+  --spec-surface: var(--color-background-secondary, var(--color-surface, #f8f8f8));
+  --spec-border: var(--color-border, var(--color-border-input, #e5e5e5));
+  
+  /* Theme spacing */
+  --spec-spacing: var(--spacing-sections, var(--section-padding, 3rem));
+  --spec-gap: var(--grid-gap, var(--space-4, 1rem));
+  
+  /* Theme radius */
+  --spec-radius: var(--radius-card, var(--card-border-radius, 0.5rem));
+  --spec-radius-sm: var(--radius-input, var(--input-border-radius, 0.25rem));
+  
+  /* Theme transitions */
+  --spec-transition: var(--duration-fast, var(--transition-duration, 0.15s)) var(--ease-default, ease);
+}
+
+/* ==========================================================================
+   Preset-Specific Overrides
+   ========================================================================== */
+
+/* Industrial Presets (Zebra Skimmers, The Welder, Work Zone, Site Ops) */
+[data-preset="zebra-skimmers"] .product-specs-section,
+[data-preset="the-welder"] .product-specs-section,
+[data-preset="work-zone"] .product-specs-section,
+[data-preset="site-ops"] .product-specs-section {
+  --spec-table-stripe: rgba(var(--color-primary-rgb, 0 61 121), 0.05);
+  --spec-accent-bg: rgba(var(--color-primary-rgb, 0 61 121), 0.1);
+}
+
+[data-preset="zebra-skimmers"] .product-specs__header,
+[data-preset="the-welder"] .product-specs__header,
+[data-preset="work-zone"] .product-specs__header,
+[data-preset="site-ops"] .product-specs__header {
+  background: linear-gradient(135deg, var(--spec-surface) 0%, var(--spec-accent-bg, var(--spec-surface)) 100%);
+}
+
+/* Modern/Tech Presets (Bold Impact, Tech Forward, Modern Minimal) */
+[data-preset="bold-impact"] .product-specs-section,
+[data-preset="tech-forward"] .product-specs-section,
+[data-preset="modern-minimal"] .product-specs-section {
+  --spec-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+}
+
+[data-preset="bold-impact"] .product-specs__category,
+[data-preset="tech-forward"] .product-specs__category,
+[data-preset="modern-minimal"] .product-specs__category {
+  box-shadow: var(--spec-shadow);
+  border: none;
+}
+
+[data-preset="tech-forward"] .product-specs__icon {
+  filter: drop-shadow(0 0 4px var(--spec-primary));
+}
+
+/* Warm/Artisan Presets (Warm Artisan) */
+[data-preset="warm-artisan"] .product-specs-section {
+  --spec-table-stripe: rgba(var(--color-primary-rgb, 120 53 15), 0.08);
+  --spec-warm-glow: rgba(var(--color-accent-rgb, 217 119 6), 0.15);
+}
+
+[data-preset="warm-artisan"] .product-specs__header {
+  background: linear-gradient(135deg, var(--spec-surface) 0%, var(--spec-warm-glow, var(--spec-surface)) 100%);
+}
+
+[data-preset="warm-artisan"] .product-specs__tolerance {
+  color: var(--color-accent, var(--spec-primary));
+}
+
+/* Dark Presets (Midnight Shift, Tactical, Monolith) */
+[data-preset="midnight-shift"] .product-specs-section,
+[data-preset="tactical"] .product-specs-section,
+[data-preset="monolith"] .product-specs-section {
+  --spec-table-stripe: rgba(255, 255, 255, 0.05);
+  --spec-glow: rgba(var(--color-primary-rgb, 255 87 34), 0.2);
+}
+
+[data-preset="midnight-shift"] .product-specs__row:nth-child(even),
+[data-preset="tactical"] .product-specs__row:nth-child(even),
+[data-preset="monolith"] .product-specs__row:nth-child(even) {
+  background: var(--spec-table-stripe);
+}
+
+[data-preset="midnight-shift"] .product-specs__icon,
+[data-preset="tactical"] .product-specs__icon,
+[data-preset="monolith"] .product-specs__icon {
+  filter: drop-shadow(0 0 2px var(--spec-primary));
+}
+
+/* Corporate Preset (Precision) */
+[data-preset="precision"] .product-specs-section {
+  --spec-corporate-blue: rgba(var(--color-primary-rgb, 0 122 201), 0.08);
+}
+
+[data-preset="precision"] .product-specs__header {
+  background: var(--spec-corporate-blue);
+  border-bottom: 2px solid var(--spec-primary);
+}
+
+[data-preset="precision"] .product-specs__table {
+  border: 1px solid var(--spec-border);
+}
+
+/* ==========================================================================
+   Variant-Specific Styling
+   ========================================================================== */
+
+/* Variant indicator styling */
+.product-specs__variant-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  background: var(--spec-primary);
+  color: white;
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 500;
+  border-radius: var(--spec-radius-sm);
+  margin-left: var(--space-2, 0.5rem);
+}
+
+.product-specs__variant-indicator::before {
+  content: '●';
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Variant-specific value highlighting */
+.product-specs__value--variant-specific {
+  position: relative;
+}
+
+.product-specs__value--variant-specific::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--spec-primary);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Empty State Handling
+   ========================================================================== */
+
+.product-specs-section:empty,
+.product-specs-section[data-empty="true"] {
+  display: none !important;
+}
+
+.product-comparison:empty,
+.product-comparison[data-empty="true"] {
+  display: none !important;
+}
+
+.product-attachments-section:empty,
+.product-attachments-section[data-empty="true"] {
+  display: none !important;
+}
+
+/* Graceful degradation for missing data */
+.product-specs__category:has(.product-specs__table:empty) {
+  display: none;
+}
+
+.product-specs__structured:empty + .product-specs__blocks:empty {
+  display: none;
+}
+
+/* ==========================================================================
+   Section Group Integration
+   ========================================================================== */
+
+/* Ensure proper spacing when used in section groups */
+.shopify-section-group-header-group + .product-specs-section {
+  padding-top: calc(var(--spec-spacing) * 0.75);
+}
+
+.product-specs-section + .shopify-section-group-footer-group {
+  margin-top: calc(var(--spec-spacing) * 0.75);
+}
+
+/* Template compatibility */
+.template-product .product-specs-section {
+  margin-top: var(--spec-gap);
+}
+
+.template-collection .product-specs-section {
+  margin-top: calc(var(--spec-gap) * 2);
+}
+
+/* ==========================================================================
+   Responsive Preset Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Adjust spacing for mobile on all presets */
+  .product-specs-section {
+    --spec-spacing: calc(var(--spec-spacing) * 0.75);
+    --spec-gap: calc(var(--spec-gap) * 0.75);
+  }
+  
+  /* Simplify shadows on mobile for performance */
+  [data-preset="bold-impact"] .product-specs__category,
+  [data-preset="tech-forward"] .product-specs__category,
+  [data-preset="modern-minimal"] .product-specs__category {
+    box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+  }
+  
+  /* Remove glows on mobile for better readability */
+  [data-preset="tech-forward"] .product-specs__icon,
+  [data-preset="midnight-shift"] .product-specs__icon,
+  [data-preset="tactical"] .product-specs__icon,
+  [data-preset="monolith"] .product-specs__icon {
+    filter: none;
+  }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .product-specs-section {
+    --spec-border: #000000;
+    --spec-text-secondary: #000000;
+  }
+  
+  .product-specs__cell--different {
+    background: #ffff00 !important;
+    color: #000000 !important;
+  }
+  
+  .product-specs__variant-indicator {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-specs__variant-indicator::before {
+    animation: none;
+  }
+  
+  .product-specs-section {
+    --spec-transition: none;
+  }
+  
+  .spec-export-btn:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Print Optimization for All Presets
+   ========================================================================== */
+
+@media print {
+  .product-specs-section {
+    --spec-primary: #000000 !important;
+    --spec-text: #000000 !important;
+    --spec-text-secondary: #333333 !important;
+    --spec-background: #ffffff !important;
+    --spec-surface: #f5f5f5 !important;
+    --spec-border: #000000 !important;
+  }
+  
+  /* Remove all preset-specific effects for print */
+  [data-preset] .product-specs__category {
+    box-shadow: none !important;
+    border: 1px solid #000000 !important;
+  }
+  
+  [data-preset] .product-specs__icon {
+    filter: none !important;
+  }
+  
+  [data-preset] .product-specs__header {
+    background: #f5f5f5 !important;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}

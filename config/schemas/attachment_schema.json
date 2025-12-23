@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Product Attachment Schema",
+  "description": "Schema for structured product attachment data",
+  "type": "object",
+  "properties": {
+    "files": {
+      "type": "array",
+      "description": "Array of file attachments",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the file"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name for the file"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "File URL (Shopify CDN or external)"
+          },
+          "type": {
+            "type": "string",
+            "description": "File type/extension (pdf, dwg, step, etc.)"
+          },
+          "size": {
+            "type": "string",
+            "description": "Human-readable file size (e.g., '2.4 MB')"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category key for grouping files"
+          },
+          "description": {
+            "type": "string",
+            "description": "File description or purpose"
+          },
+          "access_level": {
+            "type": "string",
+            "enum": ["public", "customer", "wholesale"],
+            "default": "public",
+            "description": "Access control level"
+          },
+          "featured": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether to highlight this file"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Display order within category"
+          }
+        },
+        "required": ["id", "name", "url", "type", "category"]
+      }
+    },
+    "categories": {
+      "type": "object",
+      "description": "Attachment category definitions",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Display name for the category"
+            },
+            "icon": {
+              "type": "string",
+              "description": "Icon identifier for file type"
+            },
+            "order": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Display order for categories"
+            }
+          }
+        }
+      }
+    }
+  }
+}

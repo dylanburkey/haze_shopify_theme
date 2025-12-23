@@ -1,0 +1,359 @@
+{% comment %}
+  Comparison Widget Snippet
+  Renders a small comparison control for product cards
+  
+  Parameters:
+  - product: Product object
+  - size: 'small' | 'medium' | 'large' (default: 'medium')
+  - style: 'button' | 'checkbox' | 'icon' (default: 'button')
+  - position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' (default: 'top-right')
+{% endcomment %}
+
+{%- liquid
+  assign widget_size = size | default: 'medium'
+  assign widget_style = style | default: 'button'
+  assign widget_position = position | default: 'top-right'
+  assign product_id = product.id | default: ''
+  assign product_handle = product.handle | default: ''
+  assign product_title = product.title | default: 'Product'
+-%}
+
+<div class="comparison-widget comparison-widget--{{ widget_size }} comparison-widget--{{ widget_style }} comparison-widget--{{ widget_position }}" 
+     data-comparison-widget
+     data-product-id="{{ product_id }}"
+     data-product-handle="{{ product_handle }}">
+  
+  {%- case widget_style -%}
+    {%- when 'checkbox' -%}
+      <label class="comparison-widget__checkbox">
+        <input 
+          type="checkbox" 
+          class="comparison-widget__input" 
+          data-comparison-checkbox
+          data-product-id="{{ product_id }}"
+          aria-label="Add {{ product_title }} to comparison"
+        >
+        <span class="comparison-widget__checkmark">
+          <svg class="comparison-widget__check-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </span>
+        <span class="comparison-widget__label">Compare</span>
+      </label>
+
+    {%- when 'icon' -%}
+      <button 
+        type="button" 
+        class="comparison-widget__icon-btn" 
+        data-comparison-toggle
+        data-product-id="{{ product_id }}"
+        aria-label="Add {{ product_title }} to comparison"
+        title="Add to comparison"
+      >
+        <svg class="comparison-widget__icon comparison-widget__icon--add" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        <svg class="comparison-widget__icon comparison-widget__icon--remove" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="9" y1="9" x2="15" y2="15"/>
+          <line x1="15" y1="9" x2="9" y2="15"/>
+        </svg>
+      </button>
+
+    {%- else -%}
+      <button 
+        type="button" 
+        class="comparison-widget__btn comparison-widget__btn--add" 
+        data-comparison-add
+        data-product-id="{{ product_id }}"
+        aria-label="Add {{ product_title }} to comparison"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span class="comparison-widget__text">Compare</span>
+      </button>
+
+      <button 
+        type="button" 
+        class="comparison-widget__btn comparison-widget__btn--remove" 
+        data-comparison-remove
+        data-product-id="{{ product_id }}"
+        aria-label="Remove {{ product_title }} from comparison"
+        style="display: none;"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+        <span class="comparison-widget__text">Remove</span>
+      </button>
+  {%- endcase -%}
+</div>
+
+<style>
+  .comparison-widget {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    z-index: 10;
+  }
+
+  /* Positioning */
+  .comparison-widget--top-left { 
+    position: absolute; 
+    top: 0.5rem; 
+    left: 0.5rem; 
+  }
+  
+  .comparison-widget--top-right { 
+    position: absolute; 
+    top: 0.5rem; 
+    right: 0.5rem; 
+  }
+  
+  .comparison-widget--bottom-left { 
+    position: absolute; 
+    bottom: 0.5rem; 
+    left: 0.5rem; 
+  }
+  
+  .comparison-widget--bottom-right { 
+    position: absolute; 
+    bottom: 0.5rem; 
+    right: 0.5rem; 
+  }
+
+  /* Button Style */
+  .comparison-widget__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: var(--border-radius, 0.25rem);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .comparison-widget__btn:hover {
+    background: var(--color-accent, #d71920);
+    color: white;
+    border-color: var(--color-accent, #d71920);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comparison-widget__btn--remove {
+    background: rgba(239, 68, 68, 0.95);
+    color: white;
+    border-color: #ef4444;
+  }
+
+  .comparison-widget__btn--remove:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+  }
+
+  /* Small size */
+  .comparison-widget--small .comparison-widget__btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.625rem;
+  }
+
+  .comparison-widget--small .comparison-widget__btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Large size */
+  .comparison-widget--large .comparison-widget__btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .comparison-widget--large .comparison-widget__btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Checkbox Style */
+  .comparison-widget__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: var(--border-radius, 0.25rem);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .comparison-widget__checkbox:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--color-accent, #d71920);
+  }
+
+  .comparison-widget__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .comparison-widget__checkmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: 0.125rem;
+    background: white;
+    transition: all 0.2s ease;
+  }
+
+  .comparison-widget__input:checked + .comparison-widget__checkmark {
+    background: var(--color-accent, #d71920);
+    border-color: var(--color-accent, #d71920);
+  }
+
+  .comparison-widget__check-icon {
+    opacity: 0;
+    color: white;
+    transition: opacity 0.2s ease;
+  }
+
+  .comparison-widget__input:checked + .comparison-widget__checkmark .comparison-widget__check-icon {
+    opacity: 1;
+  }
+
+  /* Icon Style */
+  .comparison-widget__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: 50%;
+    color: var(--color-foreground);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .comparison-widget__icon-btn:hover {
+    background: var(--color-accent, #d71920);
+    color: white;
+    border-color: var(--color-accent, #d71920);
+    transform: scale(1.1);
+  }
+
+  .comparison-widget__icon--remove {
+    display: none;
+  }
+
+  .comparison-widget__icon-btn.is-active .comparison-widget__icon--add {
+    display: none;
+  }
+
+  .comparison-widget__icon-btn.is-active .comparison-widget__icon--remove {
+    display: block;
+  }
+
+  .comparison-widget__icon-btn.is-active {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+  }
+
+  .comparison-widget__icon-btn.is-active:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+  }
+
+  /* Small icon size */
+  .comparison-widget--small .comparison-widget__icon-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .comparison-widget--small .comparison-widget__icon-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Large icon size */
+  .comparison-widget--large .comparison-widget__icon-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .comparison-widget--large .comparison-widget__icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .comparison-widget--top-left,
+    .comparison-widget--top-right {
+      top: 0.25rem;
+    }
+
+    .comparison-widget--top-left {
+      left: 0.25rem;
+    }
+
+    .comparison-widget--top-right {
+      right: 0.25rem;
+    }
+
+    .comparison-widget--bottom-left,
+    .comparison-widget--bottom-right {
+      bottom: 0.25rem;
+    }
+
+    .comparison-widget--bottom-left {
+      left: 0.25rem;
+    }
+
+    .comparison-widget--bottom-right {
+      right: 0.25rem;
+    }
+
+    .comparison-widget__btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.625rem;
+    }
+
+    .comparison-widget__text {
+      display: none;
+    }
+  }
+
+  /* Loading state */
+  .comparison-widget--loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Hidden state */
+  .comparison-widget--hidden {
+    display: none;
+  }
+</style>

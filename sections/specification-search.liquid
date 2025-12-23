@@ -1,0 +1,813 @@
+{%- comment -%}
+  Specification Search Section
+  Provides search and filtering interface for product specifications
+  Requirements: 6.4, 6.5
+{%- endcomment -%}
+
+{%- liquid
+  # Get products with specifications for search
+  assign search_products = collections.all.products | where: 'metafields.specifications.technical', != blank
+  
+  # Limit to reasonable number for performance
+  if search_products.size > 50
+    assign search_products = search_products | slice: 0, 50
+  endif
+-%}
+
+<div class="specification-search-section section" {{ section.shopify_attributes }}>
+  <div class="container">
+    <div class="specification-search">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="specification-search__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="specification-search__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      <div class="specification-search__interface">
+        <!-- Search Input -->
+        <div class="specification-search__input-group">
+          <label for="spec-search-input" class="specification-search__label">
+            {{ section.settings.search_label | default: 'Search specifications' }}
+          </label>
+          <div class="specification-search__input-wrapper">
+            <input 
+              type="text" 
+              id="spec-search-input"
+              class="specification-search__input"
+              placeholder="{{ section.settings.search_placeholder | default: 'Enter specification name or value...' }}"
+              autocomplete="off"
+            >
+            <svg class="specification-search__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <button type="button" class="specification-search__clear-btn" aria-label="Clear search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="specification-search__filters">
+          <div class="specification-search__filter-group">
+            <label for="spec-category-filter" class="specification-search__filter-label">
+              {{ section.settings.category_label | default: 'Category' }}
+            </label>
+            <select id="spec-category-filter" class="specification-search__select">
+              <option value="">{{ section.settings.all_categories_label | default: 'All Categories' }}</option>
+            </select>
+          </div>
+
+          <div class="specification-search__filter-group">
+            <label for="spec-range-filter" class="specification-search__filter-label">
+              {{ section.settings.range_label | default: 'Numeric Range' }}
+            </label>
+            <select id="spec-range-filter" class="specification-search__select">
+              <option value="">{{ section.settings.no_range_label | default: 'No Range Filter' }}</option>
+            </select>
+          </div>
+
+          <div class="specification-search__range-inputs" style="display: none;">
+            <input 
+              type="number" 
+              id="spec-range-min" 
+              class="specification-search__range-input"
+              placeholder="Min"
+            >
+            <span class="specification-search__range-separator">-</span>
+            <input 
+              type="number" 
+              id="spec-range-max" 
+              class="specification-search__range-input"
+              placeholder="Max"
+            >
+            <span class="specification-search__range-unit"></span>
+          </div>
+
+          <button type="button" class="specification-search__clear-filters">
+            {{ section.settings.clear_filters_label | default: 'Clear Filters' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="specification-search__results">
+        <!-- Loading State -->
+        <div class="specification-search__loading" style="display: none;">
+          <div class="specification-search__spinner"></div>
+          <p>{{ section.settings.loading_text | default: 'Searching specifications...' }}</p>
+        </div>
+
+        <!-- Empty State -->
+        <div class="specification-search__empty" style="display: none;">
+          <svg class="specification-search__empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+            <line x1="11" y1="8" x2="11" y2="14"/>
+            <line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+          <h3 class="specification-search__empty-title">
+            {{ section.settings.no_results_title | default: 'No specifications found' }}
+          </h3>
+          <p class="specification-search__empty-description">
+            {{ section.settings.no_results_description | default: 'Try adjusting your search terms or filters to find what you\'re looking for.' }}
+          </p>
+          <div class="specification-search__suggestions">
+            <p class="specification-search__suggestions-title">
+              {{ section.settings.suggestions_title | default: 'Suggestions:' }}
+            </p>
+            <ul class="specification-search__suggestions-list">
+              <li>{{ section.settings.suggestion_1 | default: 'Check your spelling' }}</li>
+              <li>{{ section.settings.suggestion_2 | default: 'Try broader search terms' }}</li>
+              <li>{{ section.settings.suggestion_3 | default: 'Remove some filters' }}</li>
+              <li>{{ section.settings.suggestion_4 | default: 'Search for common specifications like "dimensions" or "weight"' }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Results List -->
+        <div class="specification-search__results-list">
+          <div class="specification-search__results-header">
+            <p class="specification-search__results-count">
+              <span class="specification-search__count">0</span> 
+              {{ section.settings.results_text | default: 'products found' }}
+            </p>
+            <div class="specification-search__sort">
+              <label for="spec-sort" class="specification-search__sort-label">
+                {{ section.settings.sort_label | default: 'Sort by:' }}
+              </label>
+              <select id="spec-sort" class="specification-search__sort-select">
+                <option value="relevance">{{ section.settings.sort_relevance | default: 'Relevance' }}</option>
+                <option value="title">{{ section.settings.sort_title | default: 'Product Name' }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="specification-search__products">
+            <!-- Products will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product data for JavaScript -->
+<script type="application/json" id="spec-search-data">
+{
+  "products": [
+    {%- for product in search_products -%}
+      {
+        "id": {{ product.id }},
+        "title": {{ product.title | json }},
+        "handle": {{ product.handle | json }},
+        "url": {{ product.url | json }},
+        "featured_image": {
+          {%- if product.featured_image -%}
+            "url": {{ product.featured_image | image_url: width: 300 | json }},
+            "alt": {{ product.featured_image.alt | json }}
+          {%- else -%}
+            "url": null,
+            "alt": null
+          {%- endif -%}
+        },
+        "price": {{ product.price | json }},
+        "compare_at_price": {{ product.compare_at_price | json }},
+        "available": {{ product.available | json }},
+        "metafields": {
+          "specifications": {
+            "technical": {{ product.metafields.specifications.technical | json }}
+          }
+        }
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "settings": {
+    "highlightClass": "spec-search-highlight",
+    "fuzzyThreshold": 0.6,
+    "maxResults": {{ section.settings.max_results | default: 20 }},
+    "showPrices": {{ section.settings.show_prices | default: true }},
+    "showImages": {{ section.settings.show_images | default: true }}
+  }
+}
+</script>
+
+{% stylesheet %}
+  .specification-search-section {
+    padding-block: var(--spacing-sections);
+  }
+
+  .specification-search__title {
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .specification-search__description {
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .specification-search__interface {
+    margin-bottom: var(--space-8);
+    padding: var(--space-6);
+    background: var(--color-background-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .specification-search__input-group {
+    margin-bottom: var(--space-4);
+  }
+
+  .specification-search__label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .specification-search__input-wrapper {
+    position: relative;
+  }
+
+  .specification-search__input {
+    width: 100%;
+    padding: var(--space-3) var(--space-12) var(--space-3) var(--space-4);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast) var(--ease-default);
+  }
+
+  .specification-search__input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-20);
+  }
+
+  .specification-search__search-icon {
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+    pointer-events: none;
+  }
+
+  .specification-search__clear-btn {
+    position: absolute;
+    right: var(--space-10);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: var(--space-1);
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-default);
+  }
+
+  .specification-search__clear-btn:hover {
+    color: var(--color-text);
+    background: var(--color-background-secondary);
+  }
+
+  .specification-search__input:not(:placeholder-shown) + .specification-search__search-icon + .specification-search__clear-btn {
+    opacity: 1;
+  }
+
+  .specification-search__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: end;
+  }
+
+  .specification-search__filter-group {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .specification-search__filter-label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .specification-search__select {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .specification-search__select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-alpha-20);
+  }
+
+  .specification-search__range-inputs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .specification-search__range-input {
+    width: 100px;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-background);
+    color: var(--color-text);
+  }
+
+  .specification-search__range-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .specification-search__range-separator {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .specification-search__range-unit {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+
+  .specification-search__clear-filters {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-default);
+  }
+
+  .specification-search__clear-filters:hover {
+    background: var(--color-background-secondary);
+    color: var(--color-text);
+  }
+
+  .specification-search__results {
+    min-height: 200px;
+  }
+
+  .specification-search__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+    color: var(--color-text-secondary);
+  }
+
+  .specification-search__spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--color-border);
+    border-top: 3px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--space-4);
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .specification-search__empty {
+    text-align: center;
+    padding: var(--space-8);
+    color: var(--color-text-secondary);
+  }
+
+  .specification-search__empty-icon {
+    margin-bottom: var(--space-4);
+    color: var(--color-text-tertiary);
+  }
+
+  .specification-search__empty-title {
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .specification-search__empty-description {
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-base);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .specification-search__suggestions {
+    text-align: left;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .specification-search__suggestions-title {
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    color: var(--color-text);
+  }
+
+  .specification-search__suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .specification-search__suggestions-list li {
+    padding: var(--space-1) 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .specification-search__suggestions-list li::before {
+    content: "•";
+    color: var(--color-primary);
+    margin-right: var(--space-2);
+  }
+
+  .specification-search__results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .specification-search__results-count {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .specification-search__count {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .specification-search__sort {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .specification-search__sort-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .specification-search__sort-select {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-background);
+    color: var(--color-text);
+  }
+
+  .specification-search__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .specification-search__product {
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    transition: border-color var(--duration-fast) var(--ease-default);
+  }
+
+  .specification-search__product:hover {
+    border-color: var(--color-primary);
+  }
+
+  .specification-search__product-header {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .specification-search__product-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    background: var(--color-background-secondary);
+  }
+
+  .specification-search__product-info {
+    flex: 1;
+  }
+
+  .specification-search__product-title {
+    margin: 0 0 var(--space-1) 0;
+    font-size: var(--font-size-base);
+    font-weight: 600;
+  }
+
+  .specification-search__product-title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .specification-search__product-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .specification-search__product-price {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .specification-search__product-specs {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-3);
+  }
+
+  .specification-search__spec-matches {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .specification-search__spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-1) 0;
+    font-size: var(--font-size-xs);
+  }
+
+  .specification-search__spec-label {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .specification-search__spec-value {
+    color: var(--color-text-secondary);
+  }
+
+  /* Highlighting styles */
+  .spec-search-highlight {
+    background: var(--color-primary-alpha-20);
+    color: var(--color-primary);
+    font-weight: 600;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .specification-search__filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .specification-search__filter-group {
+      min-width: auto;
+    }
+
+    .specification-search__results-header {
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: stretch;
+    }
+
+    .specification-search__products {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+<script src="{{ 'spec-search.js' | asset_url }}" defer></script>
+<script src="{{ 'specification-search-interface.js' | asset_url }}" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize specification search
+    const searchData = JSON.parse(document.getElementById('spec-search-data').textContent);
+    const searchInterface = new SpecificationSearchInterface(searchData);
+    searchInterface.initialize();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Specification Search",
+  "tag": "section",
+  "class": "section-specification-search",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Search Product Specifications"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Find products by searching their technical specifications and features."
+    },
+    {
+      "type": "header",
+      "content": "Search Interface"
+    },
+    {
+      "type": "text",
+      "id": "search_label",
+      "label": "Search input label",
+      "default": "Search specifications"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder text",
+      "default": "Enter specification name or value..."
+    },
+    {
+      "type": "text",
+      "id": "category_label",
+      "label": "Category filter label",
+      "default": "Category"
+    },
+    {
+      "type": "text",
+      "id": "all_categories_label",
+      "label": "All categories option text",
+      "default": "All Categories"
+    },
+    {
+      "type": "text",
+      "id": "range_label",
+      "label": "Range filter label",
+      "default": "Numeric Range"
+    },
+    {
+      "type": "text",
+      "id": "no_range_label",
+      "label": "No range filter option text",
+      "default": "No Range Filter"
+    },
+    {
+      "type": "text",
+      "id": "clear_filters_label",
+      "label": "Clear filters button text",
+      "default": "Clear Filters"
+    },
+    {
+      "type": "header",
+      "content": "Results"
+    },
+    {
+      "type": "text",
+      "id": "loading_text",
+      "label": "Loading text",
+      "default": "Searching specifications..."
+    },
+    {
+      "type": "text",
+      "id": "results_text",
+      "label": "Results count text",
+      "default": "products found"
+    },
+    {
+      "type": "text",
+      "id": "sort_label",
+      "label": "Sort label",
+      "default": "Sort by:"
+    },
+    {
+      "type": "text",
+      "id": "sort_relevance",
+      "label": "Sort by relevance text",
+      "default": "Relevance"
+    },
+    {
+      "type": "text",
+      "id": "sort_title",
+      "label": "Sort by title text",
+      "default": "Product Name"
+    },
+    {
+      "type": "header",
+      "content": "Empty State"
+    },
+    {
+      "type": "text",
+      "id": "no_results_title",
+      "label": "No results title",
+      "default": "No specifications found"
+    },
+    {
+      "type": "textarea",
+      "id": "no_results_description",
+      "label": "No results description",
+      "default": "Try adjusting your search terms or filters to find what you're looking for."
+    },
+    {
+      "type": "text",
+      "id": "suggestions_title",
+      "label": "Suggestions title",
+      "default": "Suggestions:"
+    },
+    {
+      "type": "text",
+      "id": "suggestion_1",
+      "label": "Suggestion 1",
+      "default": "Check your spelling"
+    },
+    {
+      "type": "text",
+      "id": "suggestion_2",
+      "label": "Suggestion 2",
+      "default": "Try broader search terms"
+    },
+    {
+      "type": "text",
+      "id": "suggestion_3",
+      "label": "Suggestion 3",
+      "default": "Remove some filters"
+    },
+    {
+      "type": "text",
+      "id": "suggestion_4",
+      "label": "Suggestion 4",
+      "default": "Search for common specifications like \"dimensions\" or \"weight\""
+    },
+    {
+      "type": "header",
+      "content": "Display Options"
+    },
+    {
+      "type": "range",
+      "id": "max_results",
+      "label": "Maximum results to show",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_prices",
+      "label": "Show product prices",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_images",
+      "label": "Show product images",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Specification Search"
+    }
+  ]
+}
+{% endschema %}

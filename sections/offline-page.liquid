@@ -1,0 +1,161 @@
+{%- comment -%}
+  Offline Page Section
+  Displays when users are offline in PWA mode
+{%- endcomment -%}
+
+<div class="offline-page section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="offline-page__content">
+      <div class="offline-page__icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+          <path d="M16 8L2 22"/>
+          <path d="M17.5 15H9"/>
+        </svg>
+      </div>
+      
+      <h1 class="offline-page__title">{{ section.settings.title | default: "You're offline" }}</h1>
+      
+      <p class="offline-page__message">
+        {{ section.settings.message | default: "It looks like you're not connected to the internet. Check your connection and try again." }}
+      </p>
+
+      {%- if section.settings.show_retry_button -%}
+        <button type="button" class="btn btn--primary offline-page__retry" onclick="window.location.reload()">
+          Try Again
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.show_cached_pages -%}
+        <div class="offline-page__cached">
+          <h2>Available Pages</h2>
+          <ul class="offline-page__links">
+            <li><a href="/">Homepage</a></li>
+            <li><a href="/collections/all">All Products</a></li>
+            <li><a href="/cart">Shopping Cart</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .offline-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .offline-page__content {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .offline-page__icon {
+    margin-bottom: 2rem;
+    color: var(--color-text-secondary, #666);
+  }
+
+  .offline-page__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .offline-page__message {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary, #666);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .offline-page__retry {
+    margin-bottom: 3rem;
+  }
+
+  .offline-page__cached h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--color-text, #1a1a1a);
+  }
+
+  .offline-page__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .offline-page__links li {
+    margin-bottom: 0.5rem;
+  }
+
+  .offline-page__links a {
+    color: var(--color-primary, #d71920);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .offline-page__links a:hover {
+    text-decoration: none;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Offline Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "You're offline"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Message",
+      "default": "It looks like you're not connected to the internet. Check your connection and try again."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_retry_button",
+      "label": "Show retry button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cached_pages",
+      "label": "Show cached pages",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ]
+}
+{% endschema %}

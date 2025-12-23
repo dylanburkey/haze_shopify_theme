@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "faq_demo": {
+      "type": "faq-demo",
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "category_id": "products",
+            "category_name": "Products & Specifications",
+            "category_icon": "🔧",
+            "category_description": "Questions about our industrial products and technical specifications",
+            "questions": "What materials are your products made from?||Do you provide technical specifications for all products?||Can I get CAD files for your equipment?||What certifications do your products have?",
+            "answers": "Our products are manufactured using high-grade industrial materials including stainless steel, aluminum alloys, and specialized polymers depending on the application. All materials meet or exceed industry standards for durability and performance.||Yes, we provide comprehensive technical specifications for all products including dimensions, performance data, operating parameters, and compatibility information. These are available on each product page and as downloadable PDFs.||CAD files are available for most of our equipment. You can download them directly from the product pages or request specific formats through our technical support team.||Our products carry various industry certifications including ISO 9001, CE marking, UL listing, and OSHA compliance where applicable. Specific certifications are listed on each product page."
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "category_id": "ordering",
+            "category_name": "Ordering & Shipping",
+            "category_icon": "📦",
+            "category_description": "Information about placing orders and shipping policies",
+            "questions": "What are your minimum order quantities?||How long does shipping take?||Do you ship internationally?||Can I track my order?",
+            "answers": "Minimum order quantities vary by product. Most standard items have no minimum, while custom or specialized equipment may require minimum quantities. Check individual product pages for specific requirements.||Standard shipping takes 3-5 business days within the continental US. Expedited shipping options are available. Large equipment may require freight shipping with longer lead times.||Yes, we ship to most international destinations. International shipping costs and delivery times vary by location. Contact us for a quote on international orders.||Yes, you'll receive a tracking number via email once your order ships. You can also track orders through your account dashboard on our website."
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "category_id": "support",
+            "category_name": "Technical Support",
+            "category_icon": "🛠️",
+            "category_description": "Technical support and troubleshooting assistance",
+            "questions": "Do you provide technical support?||What warranty do you offer?||Can you help with installation?||Do you offer training on your equipment?",
+            "answers": "Yes, we provide comprehensive technical support including phone, email, and remote assistance. Our technical team has extensive experience with all our products and can help with installation, troubleshooting, and optimization.||We offer a standard 2-year warranty on most products, with extended warranty options available. The warranty covers manufacturing defects and includes repair or replacement at our discretion.||We provide installation guidance and can recommend certified installers in your area. For complex systems, we offer on-site installation services for an additional fee.||Yes, we offer training programs for our equipment including on-site training, webinars, and detailed documentation. Training can be customized to your specific needs and applications."
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3"
+      ],
+      "settings": {
+        "eyebrow_text": "Built-In Feature",
+        "heading": "Advanced FAQ System",
+        "subheading": "Searchable FAQ with categories and smart filtering - no monthly app fees required.",
+        "app_value": "10-25",
+        "search_placeholder": "Search frequently asked questions...",
+        "features_title": "Advanced Features"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_demo"
+  ]
+}

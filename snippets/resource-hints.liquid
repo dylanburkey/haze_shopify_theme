@@ -46,11 +46,15 @@
 ============================================ {%- endcomment -%}
 
 {%- comment -%} Preload critical CSS files {%- endcomment -%}
-<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style">
+<link rel="preload" href="{{ 'base.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ 'base.css' | asset_url }}"></noscript>
+
+{%- comment -%} Preload critical JavaScript {%- endcomment -%}
+<link rel="preload" href="{{ 'global.js' | asset_url }}" as="script">
 
 {%- comment -%} Preload logo if it exists {%- endcomment -%}
 {%- if settings.logo != blank -%}
-  <link rel="preload" href="{{ settings.logo | image_url: width: 500 }}" as="image" type="image/{{ settings.logo.src | split: '.' | last }}">
+  <link rel="preload" href="{{ settings.logo | image_url: width: 500 }}" as="image" type="image/{{ settings.logo.src | split: '.' | last }}" fetchpriority="high">
 {%- endif -%}
 
 {%- comment -%} Preload hero image on homepage {%- endcomment -%}

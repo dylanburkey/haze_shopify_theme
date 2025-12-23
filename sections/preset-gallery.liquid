@@ -1,0 +1,484 @@
+{% comment %}
+  Preset Gallery Section
+  
+  Showcases all 12 industry presets with live previews,
+  cost per preset calculations, and direct links to demos.
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  
+  .preset-gallery {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .preset-gallery__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .preset-gallery__title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    color: var(--color-text);
+  }
+  
+  .preset-gallery__subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #666);
+    margin-bottom: 30px;
+  }
+  
+  .preset-gallery__value {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-primary, #d71920);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+  
+  .preset-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+  }
+  
+  .preset-card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .preset-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-color: var(--color-primary, #d71920);
+  }
+  
+  .preset-card__preview {
+    height: 200px;
+    background: linear-gradient(135deg, var(--preset-primary, #1a1a1a) 0%, var(--preset-secondary, #2d2d2d) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .preset-card__preview::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+  }
+  
+  .preset-card__preview::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    height: 80px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+  }
+  
+  .preset-card__badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--preset-accent, #d71920);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .preset-card__content {
+    padding: 30px;
+  }
+  
+  .preset-card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--color-text);
+  }
+  
+  .preset-card__industry {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary, #666);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+  
+  .preset-card__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 24px;
+  }
+  
+  .preset-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+  }
+  
+  .preset-card__features li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary, #666);
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .preset-card__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary, #d71920);
+    font-weight: 700;
+  }
+  
+  .preset-card__actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .preset-card__button {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid var(--color-primary, #d71920);
+    background: var(--color-primary, #d71920);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  
+  .preset-card__button:hover {
+    background: transparent;
+    color: var(--color-primary, #d71920);
+  }
+  
+  .preset-card__button--secondary {
+    background: transparent;
+    color: var(--color-primary, #d71920);
+  }
+  
+  .preset-card__button--secondary:hover {
+    background: var(--color-primary, #d71920);
+    color: white;
+  }
+  
+  .preset-card__value {
+    position: absolute;
+    top: -10px;
+    left: 30px;
+    background: #4ade80;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Preset-specific color schemes */
+  .preset-card[data-preset="the-welder"] {
+    --preset-primary: #d71920;
+    --preset-secondary: #b91c1c;
+    --preset-accent: #dc2626;
+  }
+  
+  .preset-card[data-preset="work-zone"] {
+    --preset-primary: #ea580c;
+    --preset-secondary: #c2410c;
+    --preset-accent: #f97316;
+  }
+  
+  .preset-card[data-preset="site-ops"] {
+    --preset-primary: #ca8a04;
+    --preset-secondary: #a16207;
+    --preset-accent: #eab308;
+  }
+  
+  .preset-card[data-preset="midnight-shift"] {
+    --preset-primary: #1f2937;
+    --preset-secondary: #111827;
+    --preset-accent: #6366f1;
+  }
+  
+  .preset-card[data-preset="precision"] {
+    --preset-primary: #1d4ed8;
+    --preset-secondary: #1e40af;
+    --preset-accent: #3b82f6;
+  }
+  
+  .preset-card[data-preset="tactical"] {
+    --preset-primary: #166534;
+    --preset-secondary: #14532d;
+    --preset-accent: #22c55e;
+  }
+  
+  @media (max-width: 768px) {
+    .preset-gallery__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .preset-card__actions {
+      flex-direction: column;
+    }
+  }
+{%- endstyle -%}
+
+<div class="preset-gallery">
+  <div class="preset-gallery__header">
+    <h2 class="preset-gallery__title">{{ section.settings.title }}</h2>
+    {% if section.settings.subtitle != blank %}
+      <p class="preset-gallery__subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+    {% if section.settings.show_cost_per_preset %}
+      <div class="preset-gallery__value">
+        Each preset worth $200+ in design work
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="preset-gallery__grid">
+    {% for block in section.blocks %}
+      <div class="preset-card" data-preset="{{ block.settings.preset_id }}">
+        {% if section.settings.show_cost_per_preset %}
+          <div class="preset-card__value">$200+ Value</div>
+        {% endif %}
+        
+        <div class="preset-card__preview">
+          <div class="preset-card__badge">{{ block.settings.badge_text }}</div>
+        </div>
+        
+        <div class="preset-card__content">
+          <h3 class="preset-card__title">{{ block.settings.title }}</h3>
+          <div class="preset-card__industry">{{ block.settings.industry }}</div>
+          <p class="preset-card__description">{{ block.settings.description }}</p>
+          
+          <ul class="preset-card__features">
+            {% if block.settings.feature_1 != blank %}
+              <li>{{ block.settings.feature_1 }}</li>
+            {% endif %}
+            {% if block.settings.feature_2 != blank %}
+              <li>{{ block.settings.feature_2 }}</li>
+            {% endif %}
+            {% if block.settings.feature_3 != blank %}
+              <li>{{ block.settings.feature_3 }}</li>
+            {% endif %}
+          </ul>
+          
+          <div class="preset-card__actions">
+            <a href="{{ block.settings.demo_link }}" class="preset-card__button">
+              View Demo
+            </a>
+            <a href="{{ block.settings.preview_link }}" class="preset-card__button preset-card__button--secondary">
+              Quick Preview
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Preset Gallery",
+  "tag": "section",
+  "class": "section-preset-gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "12 Industry Presets Included"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Professional designs for every industry, ready to use"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cost_per_preset",
+      "label": "Show cost per preset",
+      "default": true,
+      "info": "Displays the value of each preset"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "preset",
+      "name": "Preset",
+      "settings": [
+        {
+          "type": "text",
+          "id": "preset_id",
+          "label": "Preset ID",
+          "info": "Used for styling (e.g., 'the-welder')"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Preset name",
+          "default": "Preset Name"
+        },
+        {
+          "type": "text",
+          "id": "industry",
+          "label": "Industry",
+          "default": "Industry Type"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "Popular"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Perfect for [industry] businesses"
+        },
+        {
+          "type": "text",
+          "id": "feature_1",
+          "label": "Feature 1",
+          "default": "Custom color scheme"
+        },
+        {
+          "type": "text",
+          "id": "feature_2",
+          "label": "Feature 2",
+          "default": "Industry-specific typography"
+        },
+        {
+          "type": "text",
+          "id": "feature_3",
+          "label": "Feature 3",
+          "default": "Optimized layouts"
+        },
+        {
+          "type": "url",
+          "id": "demo_link",
+          "label": "Demo page link",
+          "info": "Link to full demo page"
+        },
+        {
+          "type": "url",
+          "id": "preview_link",
+          "label": "Quick preview link",
+          "info": "Link to quick preview (e.g., ?preset=preset-name)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preset Gallery",
+      "blocks": [
+        {
+          "type": "preset",
+          "settings": {
+            "preset_id": "the-welder",
+            "title": "The Welder",
+            "industry": "Welding & Fabrication",
+            "badge_text": "Most Popular",
+            "description": "Industrial red design perfect for welding, metalwork, and heavy fabrication businesses.",
+            "feature_1": "Bold industrial red color scheme",
+            "feature_2": "Heavy-duty typography",
+            "feature_3": "Equipment-focused layouts",
+            "demo_link": "/pages/demo-the-welder",
+            "preview_link": "/?preset=the-welder"
+          }
+        },
+        {
+          "type": "preset",
+          "settings": {
+            "preset_id": "zebra-skimmers",
+            "title": "Zebra Skimmers",
+            "industry": "Industrial B2B",
+            "badge_text": "B2B Focused",
+            "description": "Professional B2B design with trust indicators and technical specification displays.",
+            "feature_1": "Trust badges and certifications",
+            "feature_2": "Technical spec layouts",
+            "feature_3": "B2B conversion optimization",
+            "demo_link": "/pages/demo-zebra-skimmers",
+            "preview_link": "/?preset=zebra-skimmers"
+          }
+        },
+        {
+          "type": "preset",
+          "settings": {
+            "preset_id": "tech-forward",
+            "title": "Tech Forward",
+            "industry": "Technology & Electronics",
+            "badge_text": "Futuristic",
+            "description": "Dark, modern design perfect for tech companies, electronics, and SaaS businesses.",
+            "feature_1": "Dark mode aesthetic",
+            "feature_2": "Futuristic animations",
+            "feature_3": "Tech-focused layouts",
+            "demo_link": "/pages/demo-tech-forward",
+            "preview_link": "/?preset=tech-forward"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

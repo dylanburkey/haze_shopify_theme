@@ -1,0 +1,436 @@
+{% comment %}
+  Product Specification Admin Page Template
+  
+  This template provides an admin interface for managing product specifications
+  and attachments. It can be used by creating a page with the handle "metafield-admin"
+  in the Shopify admin.
+  
+  Usage:
+  1. Create a new page in Shopify admin
+  2. Set the handle to "metafield-admin"
+  3. Assign this template to the page
+  4. Access via: yourstore.com/pages/metafield-admin
+{% endcomment %}
+
+<div class="page-width">
+  <div class="page-header">
+    <h1 class="page-title">{{ page.title | default: 'Product Specification Admin' }}</h1>
+    {% if page.content != blank %}
+      <div class="page-content rte">
+        {{ page.content }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="admin-instructions">
+    <div class="admin-notice">
+      <h3>Getting Started</h3>
+      <p>This admin interface allows you to create and manage product specifications and attachments. Use the tabs below to organize your technical data.</p>
+      
+      <div class="quick-start-section">
+        <h4>Quick Start Options</h4>
+        <div class="quick-start-buttons">
+          <button class="btn btn-primary" onclick="loadSampleSpecifications()">Load Sample Specifications</button>
+          <button class="btn btn-primary" onclick="loadSampleAttachments()">Load Sample Attachments</button>
+          <button class="btn btn-primary" onclick="loadCompleteExample()">Load Complete Example</button>
+        </div>
+      </div>
+
+      <ul class="admin-help-list">
+        <li><strong>Specifications Tab:</strong> Create technical specifications organized by categories (dimensions, performance, materials, etc.)</li>
+        <li><strong>Attachments Tab:</strong> Manage downloadable files like manuals, CAD files, certificates, and safety documents</li>
+        <li><strong>Categories Tab:</strong> Define and organize categories for both specifications and attachments</li>
+        <li><strong>Export/Import:</strong> Backup and transfer data between products using JSON format</li>
+        <li><strong>Integration:</strong> Data integrates seamlessly with product pages using the specification display sections</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Admin interface container - populated by JavaScript -->
+  <div id="metafield-admin-container"></div>
+</div>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: var(--color-foreground);
+  }
+
+  .admin-instructions {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 0.8rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .admin-notice h3 {
+    margin: 0 0 1rem 0;
+    color: var(--color-foreground);
+    font-size: 1.8rem;
+  }
+
+  .admin-notice p {
+    margin-bottom: 1.5rem;
+    color: var(--color-foreground-75);
+    line-height: 1.6;
+  }
+
+  .quick-start-section {
+    background: rgba(var(--color-accent), 0.05);
+    border: 1px solid rgba(var(--color-accent), 0.2);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quick-start-section h4 {
+    margin: 0 0 1rem 0;
+    color: rgb(var(--color-accent));
+    font-size: 1.6rem;
+  }
+
+  .quick-start-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .quick-start-buttons .btn {
+    background: rgb(var(--color-accent));
+    color: rgb(var(--color-background));
+    padding: 1rem 1.6rem;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+  }
+
+  .quick-start-buttons .btn:hover {
+    background: rgba(var(--color-accent), 0.8);
+    transform: translateY(-1px);
+  }
+
+  .admin-help-list {
+    margin: 0;
+    padding-left: 2rem;
+  }
+
+  .admin-help-list li {
+    margin-bottom: 0.8rem;
+    color: var(--color-foreground-75);
+    line-height: 1.5;
+  }
+
+  .admin-help-list strong {
+    color: var(--color-foreground);
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 749px) {
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .admin-instructions {
+      padding: 1.5rem;
+    }
+
+    .quick-start-buttons {
+      flex-direction: column;
+    }
+
+    .quick-start-buttons .btn {
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  // Sample data for quick start functionality
+  const sampleSpecifications = {
+    specifications: {
+      dimensions: {
+        length: {
+          value: "1200",
+          unit: "mm",
+          tolerance: "±5",
+          display_name: "Length"
+        },
+        width: {
+          value: "800", 
+          unit: "mm",
+          tolerance: "±3",
+          display_name: "Width"
+        },
+        height: {
+          value: "400",
+          unit: "mm", 
+          tolerance: "±2",
+          display_name: "Height"
+        },
+        weight: {
+          value: "45",
+          unit: "kg",
+          tolerance: "±1",
+          display_name: "Weight"
+        }
+      },
+      performance: {
+        max_pressure: {
+          value: "150",
+          unit: "PSI",
+          range: "0-150",
+          display_name: "Maximum Pressure"
+        },
+        flow_rate: {
+          value: "50",
+          unit: "GPM",
+          range: "10-50",
+          display_name: "Flow Rate"
+        },
+        temperature_range: {
+          min: "-20",
+          max: "80",
+          unit: "°C",
+          display_name: "Operating Temperature"
+        },
+        efficiency: {
+          value: "95",
+          unit: "%",
+          description: "Energy efficiency rating under standard conditions"
+        }
+      },
+      materials: {
+        housing: {
+          value: "316 Stainless Steel",
+          description: "Corrosion resistant marine-grade stainless steel"
+        },
+        seals: {
+          value: "Viton",
+          description: "Chemical compatible fluoroelastomer seals"
+        }
+      }
+    },
+    categories: {
+      dimensions: {
+        name: "Dimensions & Weight",
+        order: 1,
+        collapsible: true,
+        description: "Physical specifications and measurements"
+      },
+      performance: {
+        name: "Performance Specifications", 
+        order: 2,
+        collapsible: true,
+        description: "Operating performance and capacity"
+      },
+      materials: {
+        name: "Materials & Construction",
+        order: 3,
+        collapsible: false,
+        description: "Material specifications and construction details"
+      }
+    }
+  };
+
+  const sampleAttachments = {
+    files: [
+      {
+        id: "manual_001",
+        name: "Installation Manual",
+        url: "https://cdn.shopify.com/s/files/1/0000/0000/files/installation-manual.pdf",
+        type: "pdf",
+        size: "2.4 MB",
+        category: "manuals",
+        description: "Complete installation and setup guide with diagrams",
+        access_level: "public",
+        featured: true,
+        order: 1
+      },
+      {
+        id: "manual_002", 
+        name: "Operation Manual",
+        url: "https://cdn.shopify.com/s/files/1/0000/0000/files/operation-manual.pdf",
+        type: "pdf",
+        size: "3.1 MB",
+        category: "manuals",
+        description: "Operating procedures and maintenance instructions",
+        access_level: "public",
+        featured: false,
+        order: 2
+      },
+      {
+        id: "cad_001",
+        name: "3D CAD Model",
+        url: "https://cdn.shopify.com/s/files/1/0000/0000/files/model.step",
+        type: "step",
+        size: "15.2 MB", 
+        category: "cad",
+        description: "STEP format 3D model for CAD integration",
+        access_level: "customer",
+        featured: true,
+        order: 1
+      },
+      {
+        id: "cert_001",
+        name: "CE Certificate",
+        url: "https://cdn.shopify.com/s/files/1/0000/0000/files/ce-certificate.pdf",
+        type: "pdf",
+        size: "0.8 MB",
+        category: "certificates",
+        description: "European Conformity certification",
+        access_level: "public",
+        featured: true,
+        order: 1
+      }
+    ],
+    categories: {
+      manuals: {
+        name: "Manuals & Guides",
+        icon: "file-manual",
+        order: 1,
+        description: "Installation, operation, and maintenance documentation",
+        access_level: "public"
+      },
+      cad: {
+        name: "CAD Files",
+        icon: "file-cad", 
+        order: 2,
+        description: "3D models and technical drawings for design integration",
+        access_level: "customer"
+      },
+      certificates: {
+        name: "Certificates & Compliance",
+        icon: "file-safety",
+        order: 3,
+        description: "Certifications, compliance documents, and test reports",
+        access_level: "public"
+      }
+    }
+  };
+
+  // Quick start functions
+  function loadSampleSpecifications() {
+    const existingData = JSON.parse(localStorage.getItem('metafield-admin-data') || '{}');
+    existingData.specifications = sampleSpecifications;
+    localStorage.setItem('metafield-admin-data', JSON.stringify(existingData));
+    
+    // Show success message
+    showNotification('Sample specifications loaded successfully!', 'success');
+    
+    // Reload admin interface if it exists
+    if (window.metafieldAdminInstance) {
+      window.metafieldAdminInstance.loadProductData();
+    }
+  }
+
+  function loadSampleAttachments() {
+    const existingData = JSON.parse(localStorage.getItem('metafield-admin-data') || '{}');
+    existingData.attachments = sampleAttachments;
+    localStorage.setItem('metafield-admin-data', JSON.stringify(existingData));
+    
+    // Show success message
+    showNotification('Sample attachments loaded successfully!', 'success');
+    
+    // Reload admin interface if it exists
+    if (window.metafieldAdminInstance) {
+      window.metafieldAdminInstance.loadProductData();
+    }
+  }
+
+  function loadCompleteExample() {
+    const completeData = {
+      specifications: sampleSpecifications,
+      attachments: sampleAttachments
+    };
+    localStorage.setItem('metafield-admin-data', JSON.stringify(completeData));
+    
+    // Show success message
+    showNotification('Complete example data loaded successfully!', 'success');
+    
+    // Reload admin interface if it exists
+    if (window.metafieldAdminInstance) {
+      window.metafieldAdminInstance.loadProductData();
+    }
+  }
+
+  function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${type === 'success' ? '#d4edda' : '#f8d7da'};
+      color: ${type === 'success' ? '#155724' : '#721c24'};
+      padding: 12px 20px;
+      border-radius: 4px;
+      border: 1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'};
+      z-index: 1000;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+
+  // Initialize admin interface when page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    // Load admin CSS and JS
+    const adminCSS = document.createElement('link');
+    adminCSS.rel = 'stylesheet';
+    adminCSS.href = '{{ "metafield-admin.css" | asset_url }}';
+    document.head.appendChild(adminCSS);
+
+    const adminJS = document.createElement('script');
+    adminJS.src = '{{ "metafield-admin.js" | asset_url }}';
+    adminJS.onload = () => {
+      // Initialize admin interface
+      window.metafieldAdminInstance = new MetafieldAdmin();
+    };
+    document.head.appendChild(adminJS);
+  });
+
+  // Add CSS animations
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+{{ 'metafield-admin.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'metafield-sync.js' | asset_url }}" defer></script>
+<script src="{{ 'metafield-bulk-operations.js' | asset_url }}" defer></script>
+<script src="{{ 'metafield-admin.js' | asset_url }}" defer></script>

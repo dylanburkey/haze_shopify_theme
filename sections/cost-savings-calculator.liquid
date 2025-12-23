@@ -1,0 +1,918 @@
+{% comment %}
+  Cost Savings Calculator Section
+  
+  Interactive calculator showing how much merchants save by using
+  built-in theme features instead of expensive apps.
+  
+  Demonstrates ROI and payback period for the theme purchase.
+  Includes visual comparison charts and app ecosystem cost analysis.
+{% endcomment %}
+
+{%- liquid
+  assign theme_price = section.settings.theme_price | default: 320
+  
+  # App ecosystem cost comparison data
+  assign comparison_themes = section.settings.comparison_themes | default: 'Popular Theme A:180:266|Popular Theme B:250:198|Popular Theme C:300:234' | split: '|'
+  
+  # Feature parity data for demonstrations
+  assign feature_categories = 'loyalty:125:tier_system,rewards,progress_tracking|seo:35:structured_data,rich_snippets,meta_optimization|mega_menu:22:multi_column,featured_content,mobile_responsive|faq:17:searchable,categories,analytics|attachments:27:file_management,categories,access_control|pwa:40:installable,offline_support,push_notifications' | split: '|'
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  
+  .cost-calculator {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .cost-calculator__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .cost-calculator__title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    color: var(--color-text);
+  }
+  
+  .cost-calculator__subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary, #666);
+  }
+  
+  .cost-calculator__tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .cost-calculator__tab {
+    padding: 16px 32px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .cost-calculator__tab.active {
+    border-bottom-color: var(--color-primary, #d71920);
+    color: var(--color-primary, #d71920);
+  }
+  
+  .cost-calculator__content {
+    display: none;
+  }
+  
+  .cost-calculator__content.active {
+    display: block;
+  }
+  
+  .cost-calculator__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+  
+  @media (max-width: 768px) {
+    .cost-calculator__grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .cost-calculator__tabs {
+      flex-direction: column;
+    }
+    
+    .cost-calculator__tab {
+      padding: 12px 16px;
+    }
+  }
+  
+  .cost-calculator__features {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 40px;
+  }
+  
+  .feature-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .feature-item:last-child {
+    border-bottom: none;
+  }
+  
+  .feature-item__info h3 {
+    font-size: 1.125rem;
+    margin-bottom: 4px;
+  }
+  
+  .feature-item__info p {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  .feature-item__cost {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary, #d71920);
+    white-space: nowrap;
+    margin-left: 20px;
+  }
+  
+  .feature-item__checkbox {
+    margin-right: 16px;
+  }
+  
+  .cost-calculator__results {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 40px;
+    position: sticky;
+    top: 100px;
+  }
+  
+  .results__title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .results__stat {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .results__stat:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  
+  .results__label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  
+  .results__value {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary, #d71920);
+  }
+  
+  .results__value--large {
+    font-size: 4rem;
+  }
+  
+  .results__description {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-top: 8px;
+  }
+  
+  .results__payback {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .results__payback-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4ade80;
+  }
+  
+  .cost-calculator__disclaimer {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 40px;
+  }
+  
+  /* Chart Styles */
+  .cost-chart {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .cost-chart__title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .cost-chart__canvas {
+    width: 100%;
+    height: 400px;
+    position: relative;
+  }
+  
+  .cost-chart__bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+  
+  .cost-chart__bar-label {
+    width: 150px;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+  
+  .cost-chart__bar-visual {
+    flex: 1;
+    height: 30px;
+    background: linear-gradient(90deg, var(--color-primary, #d71920) 0%, #ff4757 100%);
+    border-radius: 4px;
+    margin: 0 16px;
+    position: relative;
+  }
+  
+  .cost-chart__bar-value {
+    font-weight: 700;
+    font-size: 0.875rem;
+    min-width: 80px;
+    text-align: right;
+  }
+  
+  /* Theme Comparison Styles */
+  .theme-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .theme-comparison__card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .theme-comparison__card--highlight {
+    border-color: var(--color-primary, #d71920);
+    box-shadow: 0 4px 20px rgba(215, 25, 32, 0.1);
+  }
+  
+  .theme-comparison__card--highlight::before {
+    content: "Best Value";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary, #d71920);
+    color: white;
+    padding: 4px 16px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .theme-comparison__name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  
+  .theme-comparison__price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary, #d71920);
+    margin-bottom: 8px;
+  }
+  
+  .theme-comparison__price-label {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .theme-comparison__apps {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .theme-comparison__apps-label {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .theme-comparison__total {
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+  
+  /* Feature Parity Styles */
+  .feature-parity {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .feature-parity__title {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .feature-parity__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .feature-parity__item {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 24px;
+  }
+  
+  .feature-parity__item-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .feature-parity__cost {
+    color: var(--color-primary, #d71920);
+    font-size: 0.875rem;
+  }
+  
+  .feature-parity__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .feature-parity__features li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .feature-parity__features li:last-child {
+    border-bottom: none;
+  }
+  
+  .feature-parity__features li::before {
+    content: "✓";
+    color: #4ade80;
+    font-weight: 700;
+    margin-right: 12px;
+  }
+{%- endstyle -%}
+
+<div class="cost-calculator" id="cost-calculator">
+  <div class="cost-calculator__header">
+    <h2 class="cost-calculator__title">{{ section.settings.title }}</h2>
+    {% if section.settings.subtitle != blank %}
+      <p class="cost-calculator__subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+  </div>
+  
+  <!-- Tab Navigation -->
+  <div class="cost-calculator__tabs">
+    <button class="cost-calculator__tab active" data-tab="calculator">Calculator</button>
+    <button class="cost-calculator__tab" data-tab="comparison">Theme Comparison</button>
+    <button class="cost-calculator__tab" data-tab="features">Feature Parity</button>
+  </div>
+  
+  <!-- Calculator Tab -->
+  <div class="cost-calculator__content active" id="calculator-content">
+    <div class="cost-calculator__grid">
+      <div class="cost-calculator__features">
+        <h3 style="margin-bottom: 30px; font-size: 1.5rem;">Select Features You Need</h3>
+        
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="feature-item">
+              <input 
+                type="checkbox" 
+                id="feature-{{ block.id }}" 
+                class="feature-item__checkbox"
+                data-monthly-cost="{{ block.settings.monthly_cost }}"
+                checked
+              >
+              <label for="feature-{{ block.id }}" class="feature-item__info" style="flex: 1; cursor: pointer;">
+                <h3>{{ block.settings.title }}</h3>
+                <p>{{ block.settings.description }}</p>
+              </label>
+              <div class="feature-item__cost">${{ block.settings.monthly_cost }}/mo</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="cost-calculator__results">
+        <h3 class="results__title">Your Savings</h3>
+        
+        <div class="results__stat">
+          <div class="results__label">Monthly App Costs</div>
+          <div class="results__value" id="monthly-cost">$0</div>
+          <div class="results__description">What you'd pay for apps</div>
+        </div>
+        
+        <div class="results__stat">
+          <div class="results__label">Annual Savings</div>
+          <div class="results__value results__value--large" id="annual-savings">$0</div>
+          <div class="results__description">First year savings after theme purchase</div>
+        </div>
+        
+        <div class="results__stat">
+          <div class="results__label">3-Year Savings</div>
+          <div class="results__value" id="three-year-savings">$0</div>
+          <div class="results__description">Total savings over 3 years</div>
+        </div>
+        
+        <div class="results__payback">
+          <div class="results__label">Theme Pays For Itself In</div>
+          <div class="results__payback-value" id="payback-period">0 days</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cost Comparison Chart -->
+    <div class="cost-chart">
+      <h3 class="cost-chart__title">Cost Over Time Comparison</h3>
+      <div class="cost-chart__canvas" id="cost-chart-canvas">
+        <!-- Chart will be generated by JavaScript -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Theme Comparison Tab -->
+  <div class="cost-calculator__content" id="comparison-content">
+    <div class="theme-comparison">
+      {% for block in section.blocks %}
+        {% if block.type == 'theme_comparison' %}
+          <div class="theme-comparison__card {% if block.settings.highlight %}theme-comparison__card--highlight{% endif %}">
+            <h3 class="theme-comparison__name">{{ block.settings.name }}</h3>
+            <div class="theme-comparison__price">${{ block.settings.theme_price }}</div>
+            <div class="theme-comparison__price-label">One-time theme cost</div>
+            <div class="theme-comparison__apps">${{ block.settings.monthly_apps }}/mo</div>
+            <div class="theme-comparison__apps-label">Monthly app costs</div>
+            <div class="theme-comparison__total">
+              Year 1 Total: ${{ block.settings.theme_price | plus: block.settings.monthly_apps | times: 12 }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  
+  <!-- Feature Parity Tab -->
+  <div class="cost-calculator__content" id="features-content">
+    {% render 'cost-comparison-data' %}
+    
+    <div class="app-ecosystem-comparison">
+      <h3 class="app-ecosystem-comparison__title">App Ecosystem Cost Analysis</h3>
+      
+      {% for category in app_categories %}
+        {% assign category_parts = category | split: ':' %}
+        {% if category_parts.size >= 4 %}
+          {% assign category_name = category_parts[0] %}
+          {% assign category_cost = category_parts[1] %}
+          {% assign popular_apps = category_parts[2] | split: '|' %}
+          {% assign features = category_parts[3] | split: '|' %}
+          
+          <div class="app-category">
+            <div class="app-category__info">
+              <h3>{{ category_name | capitalize | replace: '_', ' ' }}</h3>
+              <div class="app-category__apps">
+                <strong>Popular Apps:</strong> {{ popular_apps | join: ', ' }}
+              </div>
+              <ul class="app-category__features">
+                {% for feature in features %}
+                  <li>{{ feature }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            
+            <div class="app-category__equivalent">
+              <div class="app-category__equivalent-title">Built into Forge Industrial</div>
+              <p class="app-category__equivalent-desc">
+                {% case category_name %}
+                  {% when 'loyalty' %}
+                    Complete loyalty engine with tier system, progress tracking, and rewards
+                  {% when 'seo' %}
+                    Full JSON-LD structured data, rich snippets, and meta optimization
+                  {% when 'mega_menu' %}
+                    Native mega menu with multi-column support and featured content
+                  {% when 'faq' %}
+                    Built-in searchable FAQ system with categories and analytics
+                  {% when 'attachments' %}
+                    Native attachment system with categories and access control
+                  {% when 'pwa' %}
+                    Complete PWA implementation with offline support and notifications
+                  {% else %}
+                    Built-in equivalent functionality included in theme
+                {% endcase %}
+              </p>
+            </div>
+            
+            <div>
+              <div class="app-category__cost">${{ category_cost }}</div>
+              <div class="app-category__cost-label">per month saved</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <div class="feature-parity">
+      <h3 class="feature-parity__title">Feature Parity Matrix</h3>
+      <div class="feature-parity__grid">
+        {% for category in feature_categories %}
+          {% assign category_data = category | split: ':' %}
+          {% assign category_name = category_data[0] %}
+          {% assign category_cost = category_data[1] %}
+          {% assign category_features = category_data[2] | split: ',' %}
+          
+          <div class="feature-parity__item">
+            <div class="feature-parity__item-title">
+              {{ category_name | capitalize | replace: '_', ' ' }}
+              <span class="feature-parity__cost">${{ category_cost }}/mo saved</span>
+            </div>
+            <ul class="feature-parity__features">
+              {% for feature in category_features %}
+                <li>{{ feature | replace: '_', ' ' | capitalize }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <div class="cost-calculator__disclaimer">
+    <p>* App costs based on average pricing from Shopify App Store. Theme price: ${{ theme_price }} one-time purchase.</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  const themePrice = {{ theme_price }};
+  const checkboxes = document.querySelectorAll('.feature-item__checkbox');
+  const monthlyCostEl = document.getElementById('monthly-cost');
+  const annualSavingsEl = document.getElementById('annual-savings');
+  const threeYearSavingsEl = document.getElementById('three-year-savings');
+  const paybackPeriodEl = document.getElementById('payback-period');
+  const chartCanvas = document.getElementById('cost-chart-canvas');
+  
+  // Tab functionality
+  const tabs = document.querySelectorAll('.cost-calculator__tab');
+  const contents = document.querySelectorAll('.cost-calculator__content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.dataset.tab;
+      
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Update active content
+      contents.forEach(content => {
+        content.classList.remove('active');
+        if (content.id === targetTab + '-content') {
+          content.classList.add('active');
+        }
+      });
+    });
+  });
+  
+  function calculateSavings() {
+    let monthlyTotal = 0;
+    
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        monthlyTotal += parseFloat(checkbox.dataset.monthlyCost);
+      }
+    });
+    
+    const annualCost = monthlyTotal * 12;
+    const annualSavings = annualCost - themePrice;
+    const threeYearSavings = (annualCost * 3) - themePrice;
+    const paybackDays = monthlyTotal > 0 ? Math.ceil((themePrice / monthlyTotal) * 30) : 0;
+    
+    monthlyCostEl.textContent = '$' + monthlyTotal.toFixed(0);
+    annualSavingsEl.textContent = '$' + Math.max(0, annualSavings).toFixed(0);
+    threeYearSavingsEl.textContent = '$' + Math.max(0, threeYearSavings).toFixed(0);
+    paybackPeriodEl.textContent = paybackDays + ' days';
+    
+    // Update chart
+    updateCostChart(monthlyTotal, annualCost, threeYearSavings);
+  }
+  
+  function updateCostChart(monthlyTotal, annualCost, threeYearSavings) {
+    if (!chartCanvas) return;
+    
+    const maxValue = Math.max(themePrice, annualCost, threeYearSavings + themePrice);
+    
+    chartCanvas.innerHTML = `
+      <div class="cost-chart__bar">
+        <div class="cost-chart__bar-label">Theme Cost</div>
+        <div class="cost-chart__bar-visual" style="width: ${(themePrice / maxValue) * 100}%"></div>
+        <div class="cost-chart__bar-value">$${themePrice}</div>
+      </div>
+      <div class="cost-chart__bar">
+        <div class="cost-chart__bar-label">Year 1 Apps</div>
+        <div class="cost-chart__bar-visual" style="width: ${(annualCost / maxValue) * 100}%; background: linear-gradient(90deg, #ff6b6b 0%, #ff8e8e 100%)"></div>
+        <div class="cost-chart__bar-value">$${annualCost.toFixed(0)}</div>
+      </div>
+      <div class="cost-chart__bar">
+        <div class="cost-chart__bar-label">Year 2 Apps</div>
+        <div class="cost-chart__bar-visual" style="width: ${(annualCost / maxValue) * 100}%; background: linear-gradient(90deg, #ff6b6b 0%, #ff8e8e 100%)"></div>
+        <div class="cost-chart__bar-value">$${annualCost.toFixed(0)}</div>
+      </div>
+      <div class="cost-chart__bar">
+        <div class="cost-chart__bar-label">Year 3 Apps</div>
+        <div class="cost-chart__bar-visual" style="width: ${(annualCost / maxValue) * 100}%; background: linear-gradient(90deg, #ff6b6b 0%, #ff8e8e 100%)"></div>
+        <div class="cost-chart__bar-value">$${annualCost.toFixed(0)}</div>
+      </div>
+      <div class="cost-chart__bar">
+        <div class="cost-chart__bar-label">3-Year Total</div>
+        <div class="cost-chart__bar-visual" style="width: ${((annualCost * 3) / maxValue) * 100}%; background: linear-gradient(90deg, #ff4757 0%, #ff6b6b 100%)"></div>
+        <div class="cost-chart__bar-value">$${(annualCost * 3).toFixed(0)}</div>
+      </div>
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--color-primary, #d71920); text-align: center;">
+        <strong>Total Savings: $${Math.max(0, threeYearSavings).toFixed(0)} over 3 years</strong>
+      </div>
+    `;
+  }
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', calculateSavings);
+  });
+  
+  // Initial calculation
+  calculateSavings();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Cost Savings Calculator",
+  "tag": "section",
+  "class": "section-cost-calculator",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Calculate Your Savings"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See how much you'll save by choosing our theme over expensive apps"
+    },
+    {
+      "type": "range",
+      "id": "theme_price",
+      "label": "Theme price",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "default": 320,
+      "unit": "$"
+    },
+    {
+      "type": "text",
+      "id": "comparison_themes",
+      "label": "Theme comparison data",
+      "info": "Format: Name:ThemePrice:MonthlyApps|Name:ThemePrice:MonthlyApps",
+      "default": "Popular Theme A:180:266|Popular Theme B:250:198|Popular Theme C:300:234"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f9fa"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature name",
+          "default": "Feature Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Feature description"
+        },
+        {
+          "type": "range",
+          "id": "monthly_cost",
+          "label": "Average monthly app cost",
+          "min": 5,
+          "max": 200,
+          "step": 5,
+          "default": 20,
+          "unit": "$"
+        }
+      ]
+    },
+    {
+      "type": "theme_comparison",
+      "name": "Theme Comparison",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Theme name",
+          "default": "Theme Name"
+        },
+        {
+          "type": "range",
+          "id": "theme_price",
+          "label": "Theme price",
+          "min": 100,
+          "max": 500,
+          "step": 10,
+          "default": 250,
+          "unit": "$"
+        },
+        {
+          "type": "range",
+          "id": "monthly_apps",
+          "label": "Monthly app costs",
+          "min": 50,
+          "max": 400,
+          "step": 10,
+          "default": 200,
+          "unit": "$"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Highlight as best value",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cost Savings Calculator",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Loyalty Program",
+            "description": "Tier-based rewards with progress tracking",
+            "monthly_cost": 100
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Advanced SEO",
+            "description": "JSON-LD structured data and rich snippets",
+            "monthly_cost": 35
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Mega Menu",
+            "description": "Multi-column navigation with images",
+            "monthly_cost": 20
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Advanced FAQ",
+            "description": "Searchable FAQ with categories",
+            "monthly_cost": 15
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Product Attachments",
+            "description": "Manuals, specs, CAD files",
+            "monthly_cost": 25
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "PWA Support",
+            "description": "Installable app experience",
+            "monthly_cost": 40
+          }
+        },
+        {
+          "type": "theme_comparison",
+          "settings": {
+            "name": "Popular Theme A",
+            "theme_price": 180,
+            "monthly_apps": 266,
+            "highlight": false
+          }
+        },
+        {
+          "type": "theme_comparison",
+          "settings": {
+            "name": "Popular Theme B",
+            "theme_price": 250,
+            "monthly_apps": 198,
+            "highlight": false
+          }
+        },
+        {
+          "type": "theme_comparison",
+          "settings": {
+            "name": "Forge Industrial",
+            "theme_price": 320,
+            "monthly_apps": 0,
+            "highlight": true
+          }
+        },
+        {
+          "type": "theme_comparison",
+          "settings": {
+            "name": "Popular Theme C",
+            "theme_price": 300,
+            "monthly_apps": 234,
+            "highlight": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

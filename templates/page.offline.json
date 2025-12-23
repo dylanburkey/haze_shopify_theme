@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "offline-content": {
+      "type": "offline-page",
+      "settings": {
+        "title": "You're offline",
+        "message": "It looks like you're not connected to the internet. Check your connection and try again.",
+        "show_retry_button": true,
+        "show_cached_pages": true
+      }
+    }
+  },
+  "order": ["main", "offline-content"]
+}

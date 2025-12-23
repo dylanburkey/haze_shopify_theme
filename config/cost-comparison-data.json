@@ -1,0 +1,180 @@
+{
+  "theme_price": 320,
+  "app_categories": {
+    "loyalty": {
+      "name": "Loyalty Program",
+      "monthly_cost": 125,
+      "popular_apps": ["Smile.io", "LoyaltyLion", "Yotpo"],
+      "features": [
+        "Tier-based rewards system",
+        "Points for purchases",
+        "Progress tracking dashboard",
+        "Email integration",
+        "Referral programs"
+      ],
+      "theme_equivalent": "Built-in loyalty engine with tier system, progress tracking, and rewards"
+    },
+    "seo": {
+      "name": "Advanced SEO",
+      "monthly_cost": 35,
+      "popular_apps": ["TinyIMG", "SearchPie", "Booster"],
+      "features": [
+        "Structured data markup",
+        "Rich snippets",
+        "Meta tag optimization",
+        "Image SEO",
+        "Speed optimization"
+      ],
+      "theme_equivalent": "Complete JSON-LD structured data, rich snippets, and meta optimization"
+    },
+    "mega_menu": {
+      "name": "Mega Menu",
+      "monthly_cost": 22,
+      "popular_apps": ["HulkApps Menu", "Globo Mega Menu", "Smart Menu"],
+      "features": [
+        "Multi-column layouts",
+        "Featured content blocks",
+        "Mobile responsive design",
+        "Image integration",
+        "Custom styling"
+      ],
+      "theme_equivalent": "Native mega menu with multi-column support and featured content"
+    },
+    "faq": {
+      "name": "Advanced FAQ",
+      "monthly_cost": 17,
+      "popular_apps": ["HelpCenter", "FAQ Page", "Helpdesk"],
+      "features": [
+        "Searchable FAQ database",
+        "Category organization",
+        "Analytics tracking",
+        "Custom styling",
+        "Mobile optimization"
+      ],
+      "theme_equivalent": "Built-in searchable FAQ system with categories and analytics"
+    },
+    "attachments": {
+      "name": "Product Attachments",
+      "monthly_cost": 27,
+      "popular_apps": ["Attachments", "Digital Downloads", "File Manager"],
+      "features": [
+        "File upload management",
+        "Category organization",
+        "Access control",
+        "Download tracking",
+        "Multiple file types"
+      ],
+      "theme_equivalent": "Native attachment system with categories and access control"
+    },
+    "pwa": {
+      "name": "PWA Support",
+      "monthly_cost": 40,
+      "popular_apps": ["TinyIMG", "PWA Builder", "App Maker"],
+      "features": [
+        "Installable app experience",
+        "Offline support",
+        "Push notifications",
+        "App icons",
+        "Service worker"
+      ],
+      "theme_equivalent": "Complete PWA implementation with offline support and notifications"
+    }
+  },
+  "comparison_themes": [
+    {
+      "name": "Popular Theme A",
+      "price": 180,
+      "monthly_apps": 266,
+      "description": "Basic industrial theme requiring multiple apps",
+      "missing_features": ["loyalty", "mega_menu", "attachments", "pwa"],
+      "year_one_total": 3372,
+      "three_year_total": 9756
+    },
+    {
+      "name": "Popular Theme B", 
+      "price": 250,
+      "monthly_apps": 198,
+      "description": "Mid-range theme with some built-in features",
+      "missing_features": ["loyalty", "attachments", "pwa"],
+      "year_one_total": 2626,
+      "three_year_total": 7394
+    },
+    {
+      "name": "Forge Industrial",
+      "price": 320,
+      "monthly_apps": 0,
+      "description": "Complete solution with all features built-in",
+      "missing_features": [],
+      "year_one_total": 320,
+      "three_year_total": 320,
+      "highlight": true
+    },
+    {
+      "name": "Popular Theme C",
+      "price": 300,
+      "monthly_apps": 234,
+      "description": "Premium theme still requiring app ecosystem",
+      "missing_features": ["loyalty", "seo", "attachments"],
+      "year_one_total": 3108,
+      "three_year_total": 8736
+    }
+  ],
+  "roi_analysis": {
+    "payback_periods": {
+      "vs_theme_a": "1.4 months",
+      "vs_theme_b": "0.9 months", 
+      "vs_theme_c": "0.8 months"
+    },
+    "three_year_savings": {
+      "vs_theme_a": 9436,
+      "vs_theme_b": 7074,
+      "vs_theme_c": 8416
+    },
+    "average_monthly_savings": 220,
+    "average_annual_savings": 2640
+  },
+  "feature_parity_matrix": {
+    "loyalty_program": {
+      "forge_industrial": true,
+      "popular_theme_a": false,
+      "popular_theme_b": false,
+      "popular_theme_c": false,
+      "typical_app_cost": 125
+    },
+    "advanced_seo": {
+      "forge_industrial": true,
+      "popular_theme_a": false,
+      "popular_theme_b": true,
+      "popular_theme_c": false,
+      "typical_app_cost": 35
+    },
+    "mega_menu": {
+      "forge_industrial": true,
+      "popular_theme_a": false,
+      "popular_theme_b": true,
+      "popular_theme_c": true,
+      "typical_app_cost": 22
+    },
+    "advanced_faq": {
+      "forge_industrial": true,
+      "popular_theme_a": false,
+      "popular_theme_b": false,
+      "popular_theme_c": true,
+      "typical_app_cost": 17
+    },
+    "product_attachments": {
+      "forge_industrial": true,
+      "popular_theme_a": false,
+      "popular_theme_b": false,
+      "popular_theme_c": false,
+      "typical_app_cost": 27
+    },
+    "pwa_support": {
+      "forge_industrial": true,
+      "popular_theme_a": false,
+      "popular_theme_b": false,
+      "popular_theme_c": false,
+      "typical_app_cost": 40
+    }
+  }
+}

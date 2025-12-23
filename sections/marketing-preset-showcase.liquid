@@ -1,0 +1,730 @@
+{% comment %}
+  Marketing Preset Showcase Section
+  
+  A marketing-focused preset showcase designed specifically for theme sales and conversion optimization.
+  Displays preset tiles in a responsive mosaic layout with enhanced marketing features, editable content,
+  use case descriptions, and direct links to preset template pages.
+  
+  Features:
+  - Responsive grid layout (1-4 columns based on screen size)
+  - Editable marketing content per preset
+  - Use case lists (up to 5 per preset)
+  - Visual preview system with custom colors
+  - Badge system for marketing highlights
+  - Template page navigation
+  - Conversion-focused design elements
+  
+  Integration:
+  - Links to existing showcase template pages (page.showcase-*.json)
+  - Compatible with existing navigation patterns
+  - Follows established theme structure and conventions
+  - Uses consistent URL patterns (/pages/showcase-[preset-name])
+{% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  
+  .marketing-preset-showcase {
+    max-width: var(--page-width, 1400px);
+    margin: 0 auto;
+    padding: 0 var(--grid-gap, 20px);
+  }
+  
+  .marketing-preset-showcase__header {
+    text-align: center;
+    margin-bottom: var(--space-16, 60px);
+  }
+  
+  .marketing-preset-showcase__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-4, 16px);
+    color: var(--color-text);
+    line-height: 1.2;
+    font-family: var(--font-heading);
+  }
+  
+  .marketing-preset-showcase__subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--color-text-secondary);
+    margin-bottom: 0;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: var(--font-body);
+  }
+  
+  .marketing-preset-showcase__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--grid-gap, 24px);
+    margin-top: var(--space-10, 40px);
+    container-type: inline-size;
+  }
+  
+  .preset-marketing-tile {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card, 16px);
+    overflow: hidden;
+    transition: transform var(--duration-normal) var(--ease-default), 
+                box-shadow var(--duration-normal) var(--ease-default),
+                border-color var(--duration-normal) var(--ease-default);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    will-change: transform; /* Optimize for animations */
+  }
+  
+  .preset-marketing-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary);
+  }
+  
+  .preset-marketing-tile__preview {
+    height: 180px;
+    background: linear-gradient(135deg, var(--preview-primary, #1a1a1a) 0%, var(--preview-secondary, #2d2d2d) 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .preset-marketing-tile__preview::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+  
+  .preset-marketing-tile__preview::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+  }
+  
+  .preset-marketing-tile__badge {
+    position: absolute;
+    top: var(--space-3, 12px);
+    right: var(--space-3, 12px);
+    background: var(--color-primary);
+    color: var(--color-button-text);
+    padding: var(--space-2, 6px) var(--space-3, 12px);
+    border-radius: var(--radius-full, 20px);
+    font-size: var(--font-size-xs, 0.75rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    z-index: 2;
+    display: inline-block;
+  }
+  
+  .preset-marketing-tile__content {
+    padding: var(--space-6, 24px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .preset-marketing-tile__title {
+    font-size: var(--font-size-xl, 1.375rem);
+    font-weight: 700;
+    margin-bottom: var(--space-2, 6px);
+    color: var(--color-text);
+    line-height: 1.3;
+    font-family: var(--font-heading);
+  }
+  
+  .preset-marketing-tile__industry {
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: var(--space-3, 12px);
+    font-family: var(--font-body);
+    display: block;
+  }
+  
+  .preset-marketing-tile__description {
+    font-size: var(--font-size-base, 0.9375rem);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-5, 20px);
+    flex: 1;
+    font-family: var(--font-body);
+  }
+  
+  .preset-marketing-tile__value-proposition {
+    background: linear-gradient(135deg, var(--color-primary) 0%, rgba(215, 25, 32, 0.8) 100%);
+    color: var(--color-button-text);
+    padding: var(--space-3, 12px) var(--space-4, 16px);
+    border-radius: var(--radius-md, 8px);
+    font-size: var(--font-size-sm, 0.875rem); /* 14px - meets minimum */
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-5, 20px);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--duration-normal) var(--ease-default);
+    font-family: var(--font-body);
+  }
+  
+  .preset-marketing-tile__value-proposition::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left var(--duration-slow, 0.6s) ease;
+  }
+  
+  .preset-marketing-tile:hover .preset-marketing-tile__value-proposition::before {
+    left: 100%;
+  }
+  
+  .preset-marketing-tile__use-cases {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6, 24px);
+  }
+  
+  .preset-marketing-tile__use-cases li {
+    font-size: var(--font-size-sm, 0.875rem); /* 14px - meets minimum */
+    color: var(--color-text);
+    margin-bottom: var(--space-2, 8px);
+    padding-left: var(--space-5, 20px);
+    position: relative;
+    line-height: 1.4;
+    font-family: var(--font-body);
+  }
+  
+  .preset-marketing-tile__use-cases li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: var(--font-size-sm, 0.875rem); /* 14px - meets minimum */
+  }
+  
+  .preset-marketing-tile__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--space-4, 14px) var(--space-6, 24px);
+    background: var(--color-button-bg);
+    color: var(--color-button-text);
+    text-decoration: none;
+    border-radius: var(--radius-md, 8px);
+    font-weight: 600;
+    font-size: var(--font-size-base, 0.9375rem); /* 15px - meets 14px minimum */
+    transition: all var(--duration-fast) ease;
+    min-height: 44px; /* Meets WCAG touch target minimum */
+    min-width: 44px; /* Ensures minimum touch target width */
+    border: 2px solid var(--color-button-bg);
+    cursor: pointer;
+    font-family: var(--font-body);
+    margin-top: auto; /* Push button to bottom of flex container */
+  }
+  
+  .preset-marketing-tile__button:hover {
+    background: transparent;
+    color: var(--color-button-bg);
+    transform: translateY(-1px);
+  }
+  
+  .preset-marketing-tile__button:focus {
+    outline: 2px solid var(--color-button-bg);
+    outline-offset: 2px;
+  }
+  
+  .preset-marketing-tile__button:focus-visible {
+    outline: 2px solid var(--color-button-bg);
+    outline-offset: 2px;
+  }
+  
+  .preset-marketing-tile__button--disabled {
+    background: var(--color-border);
+    color: var(--color-text-secondary);
+    border-color: var(--color-border);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .preset-marketing-tile__button--disabled:hover {
+    background: var(--color-border);
+    color: var(--color-text-secondary);
+    transform: none;
+    border-color: var(--color-border);
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .preset-marketing-tile {
+      transition: none;
+    }
+    
+    .preset-marketing-tile:hover {
+      transform: none;
+    }
+    
+    .preset-marketing-tile__button {
+      transition: none;
+    }
+    
+    .preset-marketing-tile__button:hover {
+      transform: none;
+    }
+    
+    .preset-marketing-tile__value-proposition {
+      transition: none;
+    }
+    
+    .preset-marketing-tile__value-proposition::before {
+      transition: none;
+    }
+  }
+  
+  /* Mobile-First Responsive Design */
+  /* Tablet: 2 columns */
+  @media (min-width: 768px) {
+    .marketing-preset-showcase__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: calc(var(--grid-gap, 24px) + 4px);
+    }
+  }
+  
+  /* Desktop: 3 columns */
+  @media (min-width: 1024px) {
+    .marketing-preset-showcase__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: calc(var(--grid-gap, 24px) + 6px);
+    }
+  }
+  
+  /* Large Desktop: 4 columns with auto-fit for flexibility */
+  @media (min-width: 1400px) {
+    .marketing-preset-showcase__grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: calc(var(--grid-gap, 24px) + 8px);
+    }
+  }
+  
+  /* Mobile-specific adjustments */
+  @media (max-width: 767px) {
+    .marketing-preset-showcase__header {
+      margin-bottom: var(--space-10, 40px);
+    }
+    
+    .preset-marketing-tile__content {
+      padding: var(--space-5, 20px);
+    }
+    
+    .preset-marketing-tile__preview {
+      height: 160px;
+    }
+  }
+  
+  /* Container queries for tile-level responsive behavior */
+  @container (max-width: 350px) {
+    .preset-marketing-tile__content {
+      padding: var(--space-4, 16px);
+    }
+    
+    .preset-marketing-tile__title {
+      font-size: var(--font-size-lg, 1.25rem);
+    }
+  }
+{%- endstyle -%}
+
+<div class="marketing-preset-showcase">
+  {% if section.settings.title != blank or section.settings.subtitle != blank %}
+    <div class="marketing-preset-showcase__header">
+      {% if section.settings.title != blank %}
+        <h2 class="marketing-preset-showcase__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="marketing-preset-showcase__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+  
+  <div class="marketing-preset-showcase__grid">
+    {% for block in section.blocks %}
+      <article class="preset-marketing-tile" 
+               style="--preview-primary: {{ block.settings.preview_primary_color | default: '#1a1a1a' }}; --preview-secondary: {{ block.settings.preview_secondary_color | default: '#2d2d2d' }};"
+               {{ block.shopify_attributes }}>
+        
+        <div class="preset-marketing-tile__preview">
+          {% if section.settings.show_value_indicators and block.settings.badge_text != blank %}
+            <span class="preset-marketing-tile__badge">{{ block.settings.badge_text }}</span>
+          {% endif %}
+        </div>
+        
+        <div class="preset-marketing-tile__content">
+          {% if block.settings.preset_name != blank %}
+            <h3 class="preset-marketing-tile__title">{{ block.settings.preset_name }}</h3>
+          {% endif %}
+          
+          {% if block.settings.industry_focus != blank %}
+            <span class="preset-marketing-tile__industry">{{ block.settings.industry_focus }}</span>
+          {% endif %}
+          
+          {% if block.settings.description != blank %}
+            <p class="preset-marketing-tile__description">{{ block.settings.description }}</p>
+          {% endif %}
+          
+          {% if section.settings.show_value_indicators and block.settings.value_proposition != blank %}
+            <div class="preset-marketing-tile__value-proposition">{{ block.settings.value_proposition }}</div>
+          {% endif %}
+          
+          {% comment %}Optimized use case rendering - single loop with array{% endcomment %}
+          {% assign use_cases = block.settings.use_case_1 | append: '|' | append: block.settings.use_case_2 | append: '|' | append: block.settings.use_case_3 | append: '|' | append: block.settings.use_case_4 | append: '|' | append: block.settings.use_case_5 | split: '|' %}
+          {% assign filtered_use_cases = '' %}
+          {% for use_case in use_cases %}
+            {% if use_case != blank %}
+              {% unless forloop.first %}{% assign filtered_use_cases = filtered_use_cases | append: '|' %}{% endunless %}
+              {% assign filtered_use_cases = filtered_use_cases | append: use_case %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if filtered_use_cases != blank %}
+            {% assign use_case_array = filtered_use_cases | split: '|' %}
+            <ul class="preset-marketing-tile__use-cases">
+              {% for use_case in use_case_array %}<li>{{ use_case }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+          
+          {% comment %}
+            Template Navigation System:
+            - Configurable URLs per preset via block settings
+            - Opens in same window by default (no target="_blank")
+            - Fallback to disabled state when no URL provided
+            - Supports different URLs for different presets
+          {% endcomment %}
+          {% if block.settings.template_page_url != blank %}
+            <a href="{{ block.settings.template_page_url }}" 
+               class="preset-marketing-tile__button"
+               aria-label="View {{ block.settings.preset_name | default: 'preset' }} template">
+              View Template
+            </a>
+          {% else %}
+            <button type="button" 
+                    class="preset-marketing-tile__button preset-marketing-tile__button--disabled"
+                    disabled
+                    aria-label="Template link not configured">
+              View Template
+            </button>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marketing Preset Showcase",
+  "tag": "section",
+  "class": "section-marketing-preset-showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Choose Your Perfect Design"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Professional preset designs tailored for your industry, ready to customize and launch."
+    },
+    {
+      "type": "header",
+      "content": "Layout & Styling"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_value_indicators",
+      "label": "Show Value Indicators",
+      "default": true,
+      "info": "Display marketing elements like badges and value propositions"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "preset_tile",
+      "name": "Preset Tile",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Preset Information"
+        },
+        {
+          "type": "text",
+          "id": "preset_name",
+          "label": "Preset Name",
+          "default": "Preset Name"
+        },
+        {
+          "type": "text",
+          "id": "industry_focus",
+          "label": "Industry Focus",
+          "default": "Industry Type"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Marketing Description",
+          "default": "Perfect for businesses in this industry with professional design and optimized layouts."
+        },
+        {
+          "type": "header",
+          "content": "Use Cases"
+        },
+        {
+          "type": "text",
+          "id": "use_case_1",
+          "label": "Use Case 1",
+          "default": "Professional service businesses"
+        },
+        {
+          "type": "text",
+          "id": "use_case_2",
+          "label": "Use Case 2",
+          "default": "Product-focused companies"
+        },
+        {
+          "type": "text",
+          "id": "use_case_3",
+          "label": "Use Case 3",
+          "default": "B2B organizations"
+        },
+        {
+          "type": "text",
+          "id": "use_case_4",
+          "label": "Use Case 4"
+        },
+        {
+          "type": "text",
+          "id": "use_case_5",
+          "label": "Use Case 5"
+        },
+        {
+          "type": "header",
+          "content": "Marketing Elements"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "Popular",
+          "info": "Optional badge text (e.g., 'Popular', 'Best Seller', 'New')"
+        },
+        {
+          "type": "textarea",
+          "id": "value_proposition",
+          "label": "Value Proposition",
+          "info": "Industry-specific value proposition or key selling point",
+          "default": "Optimized for conversion and professional results"
+        },
+        {
+          "type": "header",
+          "content": "Visual Preview"
+        },
+        {
+          "type": "color",
+          "id": "preview_primary_color",
+          "label": "Preview Primary Color",
+          "default": "#1a1a1a"
+        },
+        {
+          "type": "color",
+          "id": "preview_secondary_color",
+          "label": "Preview Secondary Color",
+          "default": "#2d2d2d"
+        },
+        {
+          "type": "header",
+          "content": "Navigation"
+        },
+        {
+          "type": "url",
+          "id": "template_page_url",
+          "label": "Template Page URL",
+          "info": "Link to the preset's showcase template page"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marketing Preset Showcase",
+      "blocks": [
+        {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Bold Impact",
+            "industry_focus": "Athletic & Performance",
+            "description": "High-energy design perfect for sports brands, fitness companies, and performance-focused businesses. Features dynamic layouts and conversion-optimized elements.",
+            "badge_text": "Most Popular",
+            "value_proposition": "Increase conversions by 35% with performance-optimized design",
+            "use_case_1": "Athletic equipment retailers",
+            "use_case_2": "Fitness and wellness brands",
+            "use_case_3": "Sports performance companies",
+            "use_case_4": "Active lifestyle brands",
+            "use_case_5": "Training and coaching services",
+            "preview_primary_color": "#7c3aed",
+            "preview_secondary_color": "#dc2626",
+            "template_page_url": "/pages/showcase-bold-impact"
+          }
+        },
+        {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Tech Forward",
+            "industry_focus": "Gaming & Electronics",
+            "description": "Futuristic dark design ideal for gaming companies, tech startups, and electronics retailers. Built with cutting-edge UX patterns and modern aesthetics.",
+            "badge_text": "Trending",
+            "value_proposition": "Built for tech-savvy customers with cutting-edge UX",
+            "use_case_1": "Gaming hardware companies",
+            "use_case_2": "Electronics retailers",
+            "use_case_3": "Tech startups and SaaS",
+            "use_case_4": "Software development firms",
+            "use_case_5": "Digital agencies",
+            "preview_primary_color": "#00d4ff",
+            "preview_secondary_color": "#7c3aed",
+            "template_page_url": "/pages/showcase-tech-forward"
+          }
+        },
+        {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Zebra Skimmers",
+            "industry_focus": "Industrial B2B",
+            "description": "Professional B2B design with trust indicators, technical specifications, and conversion optimization. Perfect for complex industrial products and services.",
+            "badge_text": "B2B Focused",
+            "value_proposition": "Proven to increase B2B lead generation by 40%",
+            "use_case_1": "Manufacturing companies",
+            "use_case_2": "Industrial equipment suppliers",
+            "use_case_3": "Technical service providers",
+            "use_case_4": "B2B distributors",
+            "use_case_5": "Engineering firms",
+            "preview_primary_color": "#f59e0b",
+            "preview_secondary_color": "#1f2937",
+            "template_page_url": "/pages/showcase-zebra-skimmers"
+          }
+        },
+        {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Modern Minimal",
+            "industry_focus": "Luxury & Lifestyle",
+            "description": "Clean, sophisticated design perfect for luxury brands, lifestyle companies, and premium products. Emphasizes elegance and premium positioning.",
+            "badge_text": "Premium",
+            "value_proposition": "Elevate your brand with luxury-focused design",
+            "use_case_1": "Luxury fashion brands",
+            "use_case_2": "High-end lifestyle products",
+            "use_case_3": "Premium service providers",
+            "use_case_4": "Boutique retailers",
+            "use_case_5": "Design agencies",
+            "preview_primary_color": "#1a1a1a",
+            "preview_secondary_color": "#f5f5f5",
+            "template_page_url": "/pages/showcase-modern-minimal"
+          }
+        },
+        {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Warm Artisan",
+            "industry_focus": "Food & Craft",
+            "description": "Warm, inviting design ideal for artisan brands, food companies, and handcrafted products. Features authentic storytelling and community-focused elements.",
+            "badge_text": "Artisan",
+            "value_proposition": "Connect with customers through authentic storytelling",
+            "use_case_1": "Artisan food producers",
+            "use_case_2": "Craft breweries and distilleries",
+            "use_case_3": "Handmade product retailers",
+            "use_case_4": "Local farm-to-table businesses",
+            "use_case_5": "Creative workshops and studios",
+            "preview_primary_color": "#d97706",
+            "preview_secondary_color": "#92400e",
+            "template_page_url": "/pages/showcase-warm-artisan"
+          }
+        },
+        {
+          "type": "preset_tile",
+          "settings": {
+            "preset_name": "Forge Industrial",
+            "industry_focus": "Manufacturing & Trades",
+            "description": "Robust industrial design perfect for manufacturing, trades, and heavy industry businesses. Built for durability and professional B2B interactions.",
+            "badge_text": "Industrial",
+            "value_proposition": "Built tough for industrial-strength performance",
+            "use_case_1": "Manufacturing companies",
+            "use_case_2": "Construction and trades",
+            "use_case_3": "Industrial equipment suppliers",
+            "use_case_4": "Heavy machinery dealers",
+            "use_case_5": "Fabrication services",
+            "preview_primary_color": "#374151",
+            "preview_secondary_color": "#f59e0b",
+            "template_page_url": "/pages/showcase-forge-industrial"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
