@@ -24,7 +24,7 @@ shopify theme package          # Package for Theme Store submission
 ## Architecture
 
 ```
-sections/       # Full-width page components with embedded CSS/JS (72 files)
+sections/       # Full-width page components with embedded CSS/JS (95 sections - see SECTIONS.md)
 blocks/         # Reusable, nestable components (button, heading, richtext, text, spacer)
 snippets/       # Liquid template fragments (css-variables, icons, structured-data, loyalty-*)
 assets/         # Static CSS, JS, SVG - no bundling, loaded directly
@@ -33,6 +33,8 @@ locales/        # en.default.json (customer text), en.default.schema.json (setti
 templates/      # JSON templates defining page structure + preset variations
 listings/       # Theme Store submission assets with preset demos
 ```
+
+**Section Organization:** See [SECTIONS.md](SECTIONS.md) for complete categorization of all 95 sections grouped by functionality (Product, Collection, Landing Pages, Features, etc.)
 
 ## Coding Conventions
 

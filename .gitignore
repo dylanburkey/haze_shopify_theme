@@ -299,3 +299,6 @@ junit.xml
 .history/
 *.orig
 .claude/settings.local.json
+
+# Client invoices (private)
+docs/invoices/
