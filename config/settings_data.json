@@ -81,7 +81,14 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "7924418359578431505": {
+        "type": "shopify://apps/seoant-ai-seo/blocks/seoant-core/8e57283b-dcb0-4f7b-a947-fb5c57a0d59d",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Bold Impact": {
@@ -115,19 +122,7 @@
       "card_image_ratio": "square",
       "card_show_secondary_image": true,
       "logo_text": "BOLD",
-      "logo_suffix": ".IMP",
-      "sections": {
-        "header-group": {
-          "type": "header",
-          "name": "Header group",
-          "settings": {}
-        },
-        "footer-group": {
-          "type": "footer",
-          "name": "Footer group",
-          "settings": {}
-        }
-      }
+      "logo_suffix": ".IMP"
     },
     "Modern Minimal": {
       "color_primary": "#18181b",
@@ -160,19 +155,7 @@
       "card_image_ratio": "portrait",
       "card_show_secondary_image": false,
       "logo_text": "MINIMAL",
-      "logo_suffix": "",
-      "sections": {
-        "header-group": {
-          "type": "header",
-          "name": "Header group",
-          "settings": {}
-        },
-        "footer-group": {
-          "type": "footer",
-          "name": "Footer group",
-          "settings": {}
-        }
-      }
+      "logo_suffix": ""
     },
     "Tech Forward": {
       "color_primary": "#0ea5e9",
@@ -205,19 +188,7 @@
       "card_image_ratio": "landscape",
       "card_show_secondary_image": true,
       "logo_text": "TECH",
-      "logo_suffix": ".FWD",
-      "sections": {
-        "header-group": {
-          "type": "header",
-          "name": "Header group",
-          "settings": {}
-        },
-        "footer-group": {
-          "type": "footer",
-          "name": "Footer group",
-          "settings": {}
-        }
-      }
+      "logo_suffix": ".FWD"
     },
     "Warm Artisan": {
       "color_primary": "#78350f",
@@ -250,19 +221,7 @@
       "card_image_ratio": "portrait",
       "card_show_secondary_image": true,
       "logo_text": "ARTISAN",
-      "logo_suffix": "",
-      "sections": {
-        "header-group": {
-          "type": "header",
-          "name": "Header group",
-          "settings": {}
-        },
-        "footer-group": {
-          "type": "footer",
-          "name": "Footer group",
-          "settings": {}
-        }
-      }
+      "logo_suffix": ""
     },
     "Zebra Skimmers": {
       "color_primary": "#003d79",
@@ -295,19 +254,7 @@
       "card_image_ratio": "portrait",
       "card_show_secondary_image": true,
       "logo_text": "ZEBRA",
-      "logo_suffix": ".SKIM",
-      "sections": {
-        "header-group": {
-          "type": "header",
-          "name": "Header group",
-          "settings": {}
-        },
-        "footer-group": {
-          "type": "footer",
-          "name": "Footer group",
-          "settings": {}
-        }
-      }
+      "logo_suffix": ".SKIM"
     },
     "The Welder": {
       "color_primary": "#d71920",
@@ -341,23 +288,7 @@
       "card_show_secondary_image": true,
       "logo_text": "FORGE",
       "logo_suffix": ".IND",
-      "sections": {
-        "header": {
-          "type": "header-industrial",
-          "settings": {
-            "logo_text": "WELDER",
-            "logo_suffix": "PRO"
-          }
-        },
-        "footer": {
-          "type": "footer-industrial",
-          "settings": {}
-        }
-      },
-      "content_for_index": [
-        "header",
-        "footer"
-      ]
+      "content_for_index": []
     },
     "Precision": {
       "color_primary": "#007ac9",
@@ -391,20 +322,7 @@
       "card_show_secondary_image": false,
       "logo_text": "PRECISION",
       "logo_suffix": ".LAB",
-      "sections": {
-        "header": {
-          "type": "header",
-          "settings": {}
-        },
-        "footer": {
-          "type": "footer",
-          "settings": {}
-        }
-      },
-      "content_for_index": [
-        "header",
-        "footer"
-      ]
+      "content_for_index": []
     }
   }
 }
