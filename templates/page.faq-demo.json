@@ -27,6 +27,28 @@
             "answers": "Our products are manufactured using high-grade industrial materials including stainless steel, aluminum alloys, and specialized polymers depending on the application. All materials meet or exceed industry standards for durability and performance.||Yes, we provide comprehensive technical specifications for all products including dimensions, performance data, operating parameters, and compatibility information. These are available on each product page and as downloadable PDFs.||CAD files are available for most of our equipment. You can download them directly from the product pages or request specific formats through our technical support team.||Our products carry various industry certifications including ISO 9001, CE marking, UL listing, and OSHA compliance where applicable. Specific certifications are listed on each product page."
           }
         },
+        "category_CbJWRq": {
+          "type": "category",
+          "settings": {
+            "category_id": "",
+            "category_name": "General Questions",
+            "category_icon": "📋",
+            "category_description": "",
+            "questions": "",
+            "answers": ""
+          }
+        },
+        "category_jfqwXQ": {
+          "type": "category",
+          "settings": {
+            "category_id": "",
+            "category_name": "General Questions",
+            "category_icon": "📋",
+            "category_description": "",
+            "questions": "",
+            "answers": ""
+          }
+        },
         "category_2": {
           "type": "category",
           "settings": {
@@ -52,6 +74,8 @@
       },
       "block_order": [
         "category_1",
+        "category_CbJWRq",
+        "category_jfqwXQ",
         "category_2",
         "category_3"
       ],
