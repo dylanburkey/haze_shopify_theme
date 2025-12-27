@@ -48,26 +48,46 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
-  {%- comment -%} Shopify Font Loading for all presets {%- endcomment -%}
+  {%- comment -%} Shopify Font Loading - Load only fonts used by current preset {%- endcomment -%}
   {%- liquid
-    assign font_families = 'Archivo Black,Barlow Condensed:600;700,Barlow:400;500;600,Bitter:700;800,IBM Plex Sans Condensed:600;700,IBM Plex Sans:400;500;600,Inter:400;500;600,Lato:400;700,Oswald:500;700,Roboto:400;500;700,Source Code Pro:400;500,Teko:500;600;700,Work Sans:400;600;700' | split: ','
-    for font_family in font_families
-      assign font_parts = font_family | split: ':'
-      assign font_name = font_parts[0]
-      assign font_weights = font_parts[1] | default: '400'
-      assign font_weights_array = font_weights | split: ';'
-      for weight in font_weights_array
-        assign font_face = font_name | font_face: weight: weight
-        if font_face
-          echo font_face | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true
-        endif
-      endfor
-    endfor
-  -%}
+    # Get current preset
+    assign preset = settings.theme_preset | default: 'the-welder'
 
-  {%- comment -%} Font CSS Declarations {%- endcomment -%}
-  <style>
-    {%- liquid
+    # Define fonts for each preset (heading:weights;body:weights)
+    assign preset_fonts = ''
+    case preset
+      when 'the-welder', 'work-zone', 'bold-impact'
+        assign preset_fonts = 'Oswald:500;700,Roboto:400;500;700'
+      when 'site-ops'
+        assign preset_fonts = 'Oswald:500;700,Work Sans:400;600;700'
+      when 'midnight-shift'
+        assign preset_fonts = 'Teko:500;600;700,Roboto:400;500;700'
+      when 'precision'
+        assign preset_fonts = 'IBM Plex Sans:400;500;600'
+      when 'tactical'
+        assign preset_fonts = 'Archivo Black:400,Roboto:400;500;700'
+      when 'monolith', 'zebra-skimmers', 'tech-forward'
+        assign preset_fonts = 'Inter:400;500;600'
+      when 'modern-minimal'
+        assign preset_fonts = 'Bitter:700;800,Roboto:400;500;700'
+      when 'warm-artisan'
+        assign preset_fonts = 'Bitter:700;800,Lato:400;700'
+      when 'custom'
+        if settings.font_heading.family
+          assign preset_fonts = settings.font_heading.family | append: ':400;500;600;700'
+        endif
+        if settings.font_body.family
+          if preset_fonts != blank
+            assign preset_fonts = preset_fonts | append: ',' | append: settings.font_body.family | append: ':400;500;700'
+          else
+            assign preset_fonts = settings.font_body.family | append: ':400;500;700'
+          endif
+        endif
+    endcase
+
+    # Load fonts if available
+    if preset_fonts != blank
+      assign font_families = preset_fonts | split: ','
       for font_family in font_families
         assign font_parts = font_family | split: ':'
         assign font_name = font_parts[0]
@@ -76,11 +96,40 @@
         for weight in font_weights_array
           assign font_face = font_name | font_face: weight: weight
           if font_face
-            echo font_face | font_face_tag
+            echo font_face | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true
           endif
         endfor
       endfor
-    -%}
+    endif
+  -%}
+
+  {%- comment -%} Font CSS Declarations {%- endcomment -%}
+  <style>
+    {%- if preset_fonts != blank -%}
+      {%- assign font_families = preset_fonts | split: ',' -%}
+      {%- for font_family in font_families -%}
+        {%- assign font_parts = font_family | split: ':' -%}
+        {%- assign font_name = font_parts[0] -%}
+        {%- assign font_weights = font_parts[1] | default: '400' -%}
+        {%- assign font_weights_array = font_weights | split: ';' -%}
+        {%- for weight in font_weights_array -%}
+          {%- assign font_face = font_name | font_face: weight: weight -%}
+          {%- if font_face -%}
+            {%- assign font_url_woff2 = font_face | font_url: font_format: 'woff2' -%}
+            {%- assign font_url_woff = font_face | font_url: font_format: 'woff' -%}
+            {%- assign font_style = font_face.style | default: 'normal' -%}
+    @font-face {
+      font-family: "{{ font_name }}";
+      font-weight: {{ weight }};
+      font-style: {{ font_style }};
+      font-display: swap;
+      src: url("{{ font_url_woff2 }}") format("woff2"),
+           url("{{ font_url_woff }}") format("woff");
+    }
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
   </style>
 
   {% render 'css-variables' %}
