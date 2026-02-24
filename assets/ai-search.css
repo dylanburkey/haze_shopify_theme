@@ -1,0 +1,557 @@
+/* ==========================================================================
+   AI Search Section
+   ========================================================================== */
+
+.ai-search-wrapper {
+  padding: 60px 20px;
+  min-height: 60vh;
+  background: linear-gradient(135deg, var(--ai-search-bg-start, #667eea) 0%, var(--ai-search-bg-end, #764ba2) 100%);
+  position: relative;
+}
+
+.ai-search-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 50px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 50px
+  );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.ai-search-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
+
+.ai-search-heading {
+  font-size: var(--ai-search-heading-size, 3rem);
+  font-weight: 700;
+  color: var(--ai-search-text-color, #ffffff);
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ai-search-subheading {
+  font-size: var(--ai-search-body-size, 1.25rem);
+  color: var(--ai-search-text-color, rgba(255, 255, 255, 0.9));
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .ai-search-heading {
+    font-size: 2rem;
+  }
+  .ai-search-subheading {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Form
+   -------------------------------------------------------------------------- */
+
+.ai-search-form-wrapper {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+}
+
+.ai-search-input-group {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.ai-search-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  font-size: var(--ai-search-body-size, 1rem);
+  border: 2px solid #e0e0e0;
+  border-radius: var(--ai-search-border-radius, 12px);
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background-color: var(--ai-search-input-bg, #ffffff);
+  color: var(--ai-search-input-text, #333333);
+}
+
+.ai-search-input:focus {
+  outline: none;
+  border-color: var(--ai-search-button-bg, #667eea);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.ai-search-input::placeholder {
+  color: #999;
+}
+
+.ai-search-submit {
+  padding: 1rem 2rem;
+  background: var(--ai-search-button-bg, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+  color: var(--ai-search-button-text, #ffffff);
+  border: none;
+  border-radius: var(--ai-search-border-radius, 12px);
+  font-size: var(--ai-search-body-size, 1rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.ai-search-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.ai-search-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ai-search-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-search-submit-icon {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .ai-search-input-group {
+    flex-direction: column;
+  }
+  .ai-search-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  .ai-search-form-wrapper {
+    padding: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Status & Loading
+   -------------------------------------------------------------------------- */
+
+.ai-search-status {
+  margin-bottom: 1rem;
+  min-height: 24px;
+}
+
+.ai-search-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  color: #c33;
+  font-size: 0.95rem;
+}
+
+.ai-search-error svg {
+  flex-shrink: 0;
+  color: #c33;
+}
+
+.ai-search-fallback {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.ai-search-fallback p {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.ai-search-fallback-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--ai-search-button-bg, #667eea);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.ai-search-fallback-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ai-search-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+  background: linear-gradient(135deg, #f5f7ff, #f0f3ff);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  border: 2px solid #667eea;
+}
+
+.ai-search-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e0e0e0;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: ai-search-spin 0.8s linear infinite;
+}
+
+@keyframes ai-search-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ai-search-loading-text {
+  color: #667eea;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Results
+   -------------------------------------------------------------------------- */
+
+.ai-search-results {
+  min-height: 0;
+}
+
+.ai-search-results-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+.ai-search-exchange {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.ai-search-exchange:last-child {
+  border-bottom: none;
+}
+
+/* User Message */
+.ai-search-user-message {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  border-radius: var(--ai-search-border-radius, 12px);
+  border-left: 4px solid #667eea;
+}
+
+.ai-search-user-message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ai-search-user-message-header svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ai-search-user-message-content {
+  color: #374151;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ai-search-user-message-content p {
+  margin: 0;
+}
+
+/* AI Answer */
+.ai-search-answer {
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  background: var(--ai-search-answer-bg, linear-gradient(135deg, #f5f7ff 0%, #f0f3ff 100%));
+  border-radius: var(--ai-search-border-radius, 12px);
+  border: 1px solid #e0e7ff;
+}
+
+.ai-search-answer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ai-search-answer-header svg {
+  color: #667eea;
+  flex-shrink: 0;
+}
+
+.ai-search-answer-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ai-search-answer-text, #333);
+  margin: 0;
+}
+
+.ai-search-answer-content {
+  color: var(--ai-search-answer-text, #444);
+  line-height: 1.7;
+}
+
+.ai-search-answer-content p {
+  margin: 0;
+  font-size: var(--ai-search-body-size, 1rem);
+}
+
+.ai-search-product-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.ai-search-product-link:hover {
+  color: #764ba2;
+  border-bottom-color: #764ba2;
+}
+
+/* --------------------------------------------------------------------------
+   Example Questions
+   -------------------------------------------------------------------------- */
+
+.ai-search-examples {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.ai-search-examples-label {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  display: block;
+  font-weight: 600;
+}
+
+.ai-search-examples-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.ai-search-example-button {
+  padding: 0.6rem 1.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-family: inherit;
+}
+
+.ai-search-example-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.ai-search-example-button:active {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Products Grid
+   -------------------------------------------------------------------------- */
+
+.ai-search-products {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+}
+
+.ai-search-products-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.ai-search-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.ai-search-product-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-search-product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.ai-search-product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.ai-search-product-info {
+  flex: 1;
+}
+
+.ai-search-product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.5rem;
+  line-height: 1.4;
+}
+
+.ai-search-product-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 0.5rem;
+}
+
+.ai-search-product-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.ai-search-product-view-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-decoration: none;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.ai-search-product-view-btn:hover {
+  background: #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .ai-search-products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility
+   -------------------------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Animations
+   -------------------------------------------------------------------------- */
+
+@keyframes ai-search-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ai-search-answer,
+.ai-search-product-card {
+  animation: ai-search-fade-in 0.4s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   NoScript Fallback
+   -------------------------------------------------------------------------- */
+
+.ai-search-noscript {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.ai-search-noscript p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
