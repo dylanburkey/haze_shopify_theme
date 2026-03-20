@@ -551,6 +551,130 @@
           "name": "Spacer"
         }
       }
+    },
+    "ai_search": {
+      "name": "AI Search",
+      "settings": {
+        "header_content": {
+          "content": "Content"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "subheading": {
+          "label": "Subheading"
+        },
+        "placeholder": {
+          "label": "Input placeholder"
+        },
+        "button_text": {
+          "label": "Button text"
+        },
+        "header_ai": {
+          "content": "AI Configuration"
+        },
+        "worker_url": {
+          "label": "Cloudflare Worker URL",
+          "info": "The AI search API endpoint. Leave empty to use standard search."
+        },
+        "fallback_to_search": {
+          "label": "Fall back to standard search on error",
+          "info": "When AI search fails, redirect to native Shopify search"
+        },
+        "header_examples": {
+          "content": "Examples"
+        },
+        "show_examples": {
+          "label": "Show example questions"
+        },
+        "examples_label": {
+          "label": "Examples label"
+        },
+        "header_colors": {
+          "content": "Colors"
+        },
+        "background_style": {
+          "label": "Background style",
+          "options__1": "Linear Gradient",
+          "options__2": "Radial Gradient",
+          "options__3": "Solid Color"
+        },
+        "bg_color_start": {
+          "label": "Background color (start)"
+        },
+        "bg_color_end": {
+          "label": "Background color (end)"
+        },
+        "text_color": {
+          "label": "Text color"
+        },
+        "button_bg": {
+          "label": "Button background"
+        },
+        "button_text_color": {
+          "label": "Button text color"
+        },
+        "input_bg": {
+          "label": "Input background"
+        },
+        "input_text": {
+          "label": "Input text color"
+        },
+        "answer_bg": {
+          "label": "Answer background"
+        },
+        "answer_text": {
+          "label": "Answer text color"
+        },
+        "header_typography": {
+          "content": "Typography"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "body_size": {
+          "label": "Body text size"
+        },
+        "header_accessibility": {
+          "content": "Accessibility"
+        },
+        "input_label": {
+          "label": "Input accessibility label"
+        },
+        "noscript_message": {
+          "label": "No JavaScript message"
+        },
+        "header_spacing": {
+          "content": "Spacing"
+        },
+        "padding_top": {
+          "label": "Padding top"
+        },
+        "padding_bottom": {
+          "label": "Padding bottom"
+        },
+        "border_radius": {
+          "label": "Border radius"
+        }
+      },
+      "blocks": {
+        "example": {
+          "name": "Example Question",
+          "settings": {
+            "label": {
+              "label": "Button label"
+            },
+            "query": {
+              "label": "Search query"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "AI Search"
+        }
+      }
     }
   },
   "labels": {

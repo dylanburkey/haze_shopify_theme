@@ -115,16 +115,14 @@
         {%- for weight in font_weights_array -%}
           {%- assign font_face = font_name | font_face: weight: weight -%}
           {%- if font_face -%}
-            {%- assign font_url_woff2 = font_face | font_url: font_format: 'woff2' -%}
-            {%- assign font_url_woff = font_face | font_url: font_format: 'woff' -%}
+            {%- assign font_url_woff2 = font_face | font_url -%}
             {%- assign font_style = font_face.style | default: 'normal' -%}
     @font-face {
       font-family: "{{ font_name }}";
       font-weight: {{ weight }};
       font-style: {{ font_style }};
       font-display: swap;
-      src: url("{{ font_url_woff2 }}") format("woff2"),
-           url("{{ font_url_woff }}") format("woff");
+      src: url("{{ font_url_woff2 }}") format("woff2");
     }
           {%- endif -%}
         {%- endfor -%}

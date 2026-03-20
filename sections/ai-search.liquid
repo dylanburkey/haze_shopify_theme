@@ -7,11 +7,21 @@
 
 {{ 'ai-search.css' | asset_url | stylesheet_tag }}
 
-<div 
-  class="ai-search-wrapper" 
+<div
+  class="ai-search-wrapper"
   id="ai-search-section-{{ section.id }}"
   data-section-id="{{ section.id }}"
   data-worker-url="{{ section.settings.worker_url }}"
+  data-i18n-thinking="{{ 'sections.ai_search.thinking' | t }}"
+  data-i18n-fallback="{{ 'sections.ai_search.fallback' | t }}"
+  data-i18n-search-for="{{ 'sections.ai_search.search_for' | t }}"
+  data-i18n-you-asked="{{ 'sections.ai_search.you_asked' | t }}"
+  data-i18n-ai-response="{{ 'sections.ai_search.ai_response' | t }}"
+  data-i18n-unavailable="{{ 'sections.ai_search.unavailable' | t }}"
+  data-i18n-error="{{ 'sections.ai_search.error' | t }}"
+  data-i18n-related-products="{{ 'sections.ai_search.related_products' | t }}"
+  data-i18n-view-details="{{ 'sections.ai_search.view_details' | t }}"
+  data-i18n-not-configured="{{ 'sections.ai_search.not_configured' | t }}"
 >
   <div class="container ai-search-content">
     {%- if section.settings.heading != blank -%}
@@ -128,7 +138,20 @@
   // DOM Elements
   const section = document.getElementById('ai-search-section-' + sectionId);
   if (!section) return;
-  
+
+  const i18n = {
+    thinking: section.dataset.i18nThinking || 'Thinking...',
+    fallback: section.dataset.i18nFallback || 'Try our standard search instead:',
+    searchFor: section.dataset.i18nSearchFor || 'Search for',
+    youAsked: section.dataset.i18nYouAsked || 'You asked',
+    aiResponse: section.dataset.i18nAiResponse || 'AI Response',
+    unavailable: section.dataset.i18nUnavailable || 'AI service temporarily unavailable. Please try again later.',
+    error: section.dataset.i18nError || 'An error occurred. Please try again.',
+    relatedProducts: section.dataset.i18nRelatedProducts || 'Related Products',
+    viewDetails: section.dataset.i18nViewDetails || 'View Details',
+    notConfigured: section.dataset.i18nNotConfigured || 'AI Search is not configured. Please contact support.'
+  };
+
   const form = section.querySelector('.ai-search-form');
   const input = section.querySelector('.ai-search-input');
   const statusEl = section.querySelector('.ai-search-status');
@@ -145,7 +168,7 @@
     statusEl.innerHTML = `
       <div class="ai-search-loading">
         <div class="ai-search-loading-spinner"></div>
-        <span class="ai-search-loading-text">Thinking...</span>
+        <span class="ai-search-loading-text">${i18n.thinking}</span>
       </div>
     `;
   }
@@ -172,9 +195,9 @@
       const query = input.value.trim();
       html += `
         <div class="ai-search-fallback">
-          <p>Try our standard search instead:</p>
+          <p>${i18n.fallback}</p>
           <a href="/search?q=${encodeURIComponent(query)}" class="ai-search-fallback-link">
-            Search for "${escapeHtml(query)}"
+            ${i18n.searchFor} "${escapeHtml(query)}"
           </a>
         </div>
       `;
@@ -188,6 +211,17 @@
     div.textContent = text;
     return div.innerHTML;
   }
+
+  function sanitizeUrl(url) {
+    if (!url) return '#';
+    try {
+      const parsed = new URL(url, window.location.origin);
+      if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return '#';
+      return parsed.href;
+    } catch (e) {
+      return url.startsWith('/') ? url : '#';
+    }
+  }
   
   function convertMarkdownToHtml(text) {
     if (!text) return '';
@@ -199,8 +233,10 @@
     // Italic
     html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
     
-    // Links
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="ai-search-product-link" target="_blank">$1</a>');
+    // Links (validate URLs to prevent javascript: injection)
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(_, text, url) {
+      return '<a href="' + sanitizeUrl(decodeURIComponent(url)) + '" class="ai-search-product-link" target="_blank" rel="noopener noreferrer">' + text + '</a>';
+    });
     
     // Line breaks
     html = html.replace(/\n/g, '<br>');
@@ -218,7 +254,7 @@
       if (FALLBACK_TO_SEARCH) {
         window.location.href = '/search?q=' + encodeURIComponent(query);
       } else {
-        showError('AI Search is not configured. Please contact support.');
+        showError(i18n.notConfigured);
       }
       return;
     }
@@ -247,7 +283,7 @@
           const errorMessage = errorData.details[0].message;
           
           if (errorCode === 10000 || errorMessage === 'Authentication error') {
-            throw new Error('AI service temporarily unavailable. Please try again later.');
+            throw new Error(i18n.unavailable);
           }
         }
         
@@ -271,7 +307,7 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              You asked
+              ${i18n.youAsked}
             </div>
             <div class="ai-search-user-message-content"><p>${escapeHtml(query)}</p></div>
           </div>
@@ -281,7 +317,7 @@
                 <path d="M12 2a10 10 0 1 0 10 10H12V2Z"></path>
                 <path d="M12 12 2 12"></path>
               </svg>
-              <h3>AI Response</h3>
+              <h3>${i18n.aiResponse}</h3>
             </div>
             <div class="ai-search-answer-content" id="ai-answer-content-${sectionId}"></div>
           </div>
@@ -338,7 +374,7 @@
         return;
       }
       
-      showError(error.message || 'An error occurred. Please try again.');
+      showError(error.message || i18n.error);
     }
   }
   
@@ -347,20 +383,20 @@
     
     let html = `
       <div class="ai-search-products">
-        <h4 class="ai-search-products-heading">Related Products</h4>
+        <h4 class="ai-search-products-heading">${i18n.relatedProducts}</h4>
         <div class="ai-search-products-grid">
     `;
     
     products.forEach(product => {
       html += `
         <div class="ai-search-product-card">
-          ${product.image ? `<img src="${product.image}" alt="${escapeHtml(product.title)}" class="ai-search-product-image" loading="lazy">` : ''}
+          ${product.image ? `<img src="${sanitizeUrl(product.image)}" alt="${escapeHtml(product.title)}" class="ai-search-product-image" loading="lazy">` : ''}
           <div class="ai-search-product-info">
             <h5 class="ai-search-product-title">${escapeHtml(product.title)}</h5>
-            ${product.price ? `<div class="ai-search-product-price">${product.price}</div>` : ''}
+            ${product.price ? `<div class="ai-search-product-price">${escapeHtml(String(product.price))}</div>` : ''}
           </div>
           <div class="ai-search-product-actions">
-            <a href="${product.url}" class="ai-search-product-view-btn">View Details</a>
+            <a href="${sanitizeUrl(product.url)}" class="ai-search-product-view-btn" rel="noopener noreferrer">${i18n.viewDetails}</a>
           </div>
         </div>
       `;
@@ -389,124 +425,188 @@
 
 {% schema %}
 {
-  "name": "AI Search",
+  "name": "t:sections.ai_search.name",
   "tag": "section",
   "class": "section-ai-search",
   "settings": [
     {
       "type": "header",
-      "content": "Content"
+      "content": "t:sections.ai_search.settings.header_content.content"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "t:sections.ai_search.settings.heading.label",
       "default": "Serving the Metalworking Industry Since 1994."
     },
     {
       "type": "text",
       "id": "subheading",
-      "label": "Subheading",
+      "label": "t:sections.ai_search.settings.subheading.label",
       "default": "How can I assist you today?"
     },
     {
       "type": "text",
       "id": "placeholder",
-      "label": "Input placeholder",
+      "label": "t:sections.ai_search.settings.placeholder.label",
       "default": "Ask me anything about oil skimmers..."
     },
     {
       "type": "text",
       "id": "button_text",
-      "label": "Button text",
+      "label": "t:sections.ai_search.settings.button_text.label",
       "default": "Ask AI"
     },
     {
       "type": "header",
-      "content": "AI Configuration"
+      "content": "t:sections.ai_search.settings.header_ai.content"
     },
     {
       "type": "text",
       "id": "worker_url",
-      "label": "Cloudflare Worker URL",
-      "info": "The AI search API endpoint. Leave empty to use standard search."
+      "label": "t:sections.ai_search.settings.worker_url.label",
+      "info": "t:sections.ai_search.settings.worker_url.info"
     },
     {
       "type": "checkbox",
       "id": "fallback_to_search",
-      "label": "Fall back to standard search on error",
+      "label": "t:sections.ai_search.settings.fallback_to_search.label",
       "default": true,
-      "info": "When AI search fails, redirect to native Shopify search"
+      "info": "t:sections.ai_search.settings.fallback_to_search.info"
     },
     {
       "type": "header",
-      "content": "Examples"
+      "content": "t:sections.ai_search.settings.header_examples.content"
     },
     {
       "type": "checkbox",
       "id": "show_examples",
-      "label": "Show example questions",
+      "label": "t:sections.ai_search.settings.show_examples.label",
       "default": true
     },
     {
       "type": "text",
       "id": "examples_label",
-      "label": "Examples label",
+      "label": "t:sections.ai_search.settings.examples_label.label",
       "default": "Try asking:"
     },
     {
       "type": "header",
-      "content": "Colors"
+      "content": "t:sections.ai_search.settings.header_colors.content"
     },
     {
       "type": "select",
       "id": "background_style",
-      "label": "Background style",
+      "label": "t:sections.ai_search.settings.background_style.label",
       "options": [
-        { "value": "gradient", "label": "Linear Gradient" },
-        { "value": "radial", "label": "Radial Gradient" },
-        { "value": "solid", "label": "Solid Color" }
+        { "value": "gradient", "label": "t:sections.ai_search.settings.background_style.options__1" },
+        { "value": "radial", "label": "t:sections.ai_search.settings.background_style.options__2" },
+        { "value": "solid", "label": "t:sections.ai_search.settings.background_style.options__3" }
       ],
       "default": "radial"
     },
     {
       "type": "color",
       "id": "bg_color_start",
-      "label": "Background color (start)",
+      "label": "t:sections.ai_search.settings.bg_color_start.label",
       "default": "#005b8c"
     },
     {
       "type": "color",
       "id": "bg_color_end",
-      "label": "Background color (end)",
+      "label": "t:sections.ai_search.settings.bg_color_end.label",
       "default": "#c5c4c4"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text color",
+      "label": "t:sections.ai_search.settings.text_color.label",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "button_bg",
-      "label": "Button background",
+      "label": "t:sections.ai_search.settings.button_bg.label",
       "default": "#005b8c"
     },
     {
       "type": "color",
       "id": "button_text_color",
-      "label": "Button text color",
+      "label": "t:sections.ai_search.settings.button_text_color.label",
       "default": "#ffffff"
     },
     {
+      "type": "color",
+      "id": "input_bg",
+      "label": "t:sections.ai_search.settings.input_bg.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text",
+      "label": "t:sections.ai_search.settings.input_text.label",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "answer_bg",
+      "label": "t:sections.ai_search.settings.answer_bg.label",
+      "default": "#f5f7ff"
+    },
+    {
+      "type": "color",
+      "id": "answer_text",
+      "label": "t:sections.ai_search.settings.answer_text.label",
+      "default": "#333333"
+    },
+    {
       "type": "header",
-      "content": "Spacing"
+      "content": "t:sections.ai_search.settings.header_typography.content"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "t:sections.ai_search.settings.heading_size.label",
+      "min": 24,
+      "max": 72,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "t:sections.ai_search.settings.body_size.label",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.ai_search.settings.header_accessibility.content"
+    },
+    {
+      "type": "text",
+      "id": "input_label",
+      "label": "t:sections.ai_search.settings.input_label.label",
+      "default": "Search"
+    },
+    {
+      "type": "textarea",
+      "id": "noscript_message",
+      "label": "t:sections.ai_search.settings.noscript_message.label",
+      "default": "JavaScript is required for AI search. Use the form above for standard search."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.ai_search.settings.header_spacing.content"
     },
     {
       "type": "range",
       "id": "padding_top",
-      "label": "Padding top",
+      "label": "t:sections.ai_search.settings.padding_top.label",
       "min": 0,
       "max": 120,
       "step": 4,
@@ -516,7 +616,7 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Padding bottom",
+      "label": "t:sections.ai_search.settings.padding_bottom.label",
       "min": 0,
       "max": 120,
       "step": 4,
@@ -526,7 +626,7 @@
     {
       "type": "range",
       "id": "border_radius",
-      "label": "Border radius",
+      "label": "t:sections.ai_search.settings.border_radius.label",
       "min": 0,
       "max": 24,
       "step": 2,
@@ -537,24 +637,24 @@
   "blocks": [
     {
       "type": "example",
-      "name": "Example Question",
+      "name": "t:sections.ai_search.blocks.example.name",
       "settings": [
         {
           "type": "text",
           "id": "label",
-          "label": "Button label"
+          "label": "t:sections.ai_search.blocks.example.settings.label.label"
         },
         {
           "type": "text",
           "id": "query",
-          "label": "Search query"
+          "label": "t:sections.ai_search.blocks.example.settings.query.label"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "AI Search",
+      "name": "t:sections.ai_search.presets.default.name",
       "blocks": [
         {
           "type": "example",

@@ -202,5 +202,19 @@
     "comments": {
       "title": "Leave a comment"
     }
+  },
+  "sections": {
+    "ai_search": {
+      "thinking": "Thinking...",
+      "fallback": "Try our standard search instead:",
+      "search_for": "Search for",
+      "you_asked": "You asked",
+      "ai_response": "AI Response",
+      "unavailable": "AI service temporarily unavailable. Please try again later.",
+      "error": "An error occurred. Please try again.",
+      "related_products": "Related Products",
+      "view_details": "View Details",
+      "not_configured": "AI Search is not configured. Please contact support."
+    }
   }
 }
